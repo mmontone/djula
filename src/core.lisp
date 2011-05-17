@@ -25,11 +25,9 @@
 
 ; special
 
-(defvar *current-template-root-folder*)
+(defvar *current-template-path* nil)
 
-(defvar *current-template-relative-path*)
-
-(defvar *current-template-path*)
+(defvar *template-search-path* nil)
 
 (defvar *template-arguments*)
 
@@ -57,17 +55,15 @@
 
 ; template paths
 
-(defun .template-path (path)
-  (let ((string (namestring path)))
-    (ecase (mismatch "/" string :test 'string=)
-      ((nil) *current-template-root-folder*)
-      ((0) (merge-pathnames string (directory-namestring *current-template-path*)))
-      ((1) (merge-pathnames (subseq string 1) *current-template-root-folder*)))))
-
-(defun template-path (path &key dont-check)
-  (if dont-check
-      #1=(.template-path path)
-      (cl-fad:file-exists-p #1#)))
+(defun template-path (path)
+  (if (char= (char path 0) #\/)
+      (fad:file-exists-p path)
+      (dolist (dir
+                (if *current-template-path*
+                    (cons (directory-namestring *current-template-path*) *template-search-path*)
+                    *template-search-path*))
+        (aif (fad:file-exists-p (merge-pathnames path dir))
+             (return it)))))
 
 ; error
 
@@ -187,14 +183,13 @@
 
 ; API
 
-(defun compile-template (template-root-folder relative-path
+(defun compile-template (path
 			 &key (return-format :string) ;or :OCTETS
 			      ffc)
-  (compile-template-string template-root-folder
-			   (cl-ffc:slurp-utf-8-file (merge-pathnames relative-path template-root-folder))
-			   :return-format return-format
-			   :ffc ffc
-			   :relative-path relative-path))
+  (let ((*current-template-path* (template-path path)))
+    (compile-template-string (cl-ffc:slurp-utf-8-file *current-template-path*)
+          :return-format return-format
+          :ffc ffc)))
 
 (defun .compile-template-string (string &key return-bytes)
   (if return-bytes
@@ -203,24 +198,16 @@
       (let* ((fs (mapcar 'compile-token (process-tokens (parse-template-string string)))))
 	(f0 (.funcall-and-concatenate fs)))))
 
-(defun compile-template-string (template-root-folder template-string
+(defun compile-template-string (string
 				&key (return-format :string) ; or :OCTETS
-				     ffc
-				     relative-path)
-  (let* ((*current-template-root-folder* template-root-folder)
-	 (*current-template-relative-path* relative-path)
-	 (%template-path (merge-pathnames relative-path template-root-folder))
-	 (*current-template-path* %template-path)
-	 *block-alist*
+				     ffc)
+  (let* (*block-alist*
 	 *linked-files*
 	 (*template-ffc* ffc)
-	 (fn (.compile-template-string template-string
+	 (fn (.compile-template-string string
 				       :return-bytes (eql return-format :octets))))
     (values (f (&rest *template-arguments* &key &allow-other-keys)
-	      (let ((*current-template-root-folder* template-root-folder)
-		    (*current-template-relative-path* relative-path)
-		    (*current-template-path* %template-path)
-		    *known-translation-tables*
+	      (let (*known-translation-tables*
 		    *known-example-tables*
 		    *accumulated-javascript-strings*
 		    (*template-ffc* ffc)
