@@ -217,22 +217,21 @@
 	    (mapcar 'namestring *linked-files*))))
 
 (defmacro def-template (name
-			template-root-folder
 			relative-path
 			template-kwd-args
 			&rest compile-template-kwd-args
 			&key return-format
-			     ffc
-			     template-path)
+                          ffc
+                          template-path)
   (declare (ignore return-format ffc template-path))
   (let ((<fn> (gensym "fn-")))
-    `(let ((,<fn> (compile-template ,template-root-folder ,relative-path
-				    ,@compile-template-kwd-args)))
-       (defun ,name ,(if template-kwd-args
-			 `(&key ,@template-kwd-args))
-	 (apply ,<fn>
-		,@(or (mapcar (f_ (if (listp _)
-				      (first _)
-				      _))
-			      template-kwd-args)
-		      (list nil)))))))
+    `(defun ,name ,(if template-kwd-args
+                       `(&key ,@template-kwd-args))
+       (let ((,<fn> (compile-template ,relative-path
+                                      ,@compile-template-kwd-args)))
+         (apply ,<fn>
+                ,@(or (mapcar (f_ (if (listp _)
+                                      (first _)
+                                      _))
+                              template-kwd-args)
+                      (list nil)))))))
