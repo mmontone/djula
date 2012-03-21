@@ -225,13 +225,7 @@
                           template-path)
   (declare (ignore return-format ffc template-path))
   (let ((<fn> (gensym "fn-")))
-    `(defun ,name ,(if template-kwd-args
-                       `(&key ,@template-kwd-args))
+    `(defun ,name ()
        (let ((,<fn> (compile-template ,relative-path
                                       ,@compile-template-kwd-args)))
-         (apply ,<fn>
-                ,@(or (mapcar (f_ (if (listp _)
-                                      (first _)
-                                      _))
-                              template-kwd-args)
-                      (list nil)))))))
+         (apply ,<fn> (or ,template-kwd-args '()))))))
