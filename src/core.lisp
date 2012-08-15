@@ -25,10 +25,6 @@
 
 ; special
 
-(defvar *current-template-path* nil)
-
-(defvar *template-search-path* nil)
-
 (defvar *template-arguments*)
 
 (defvar *known-translation-tables*)
@@ -52,18 +48,6 @@
 
 (defparameter *djula-template-api-documentation-template*
   (merge-pathnames "template-api-documentation.html" *djula-documentation-template-source-folder*))
-
-; template paths
-
-(defun template-path (path)
-  (if (char= (char path 0) #\/)
-      (fad:file-exists-p path)
-      (dolist (dir
-                (if *current-template-path*
-                    (cons (directory-namestring *current-template-path*) *template-search-path*)
-                    *template-search-path*))
-        (aif (fad:file-exists-p (merge-pathnames path dir))
-             (return it)))))
 
 ; error
 
@@ -186,10 +170,9 @@
 (defun compile-template (path
 			 &key (return-format :string) ;or :OCTETS
 			      ffc)
-  (let ((*current-template-path* (template-path path)))
-    (compile-template-string (cl-ffc:slurp-utf-8-file *current-template-path*)
-          :return-format return-format
-          :ffc ffc)))
+  (let ((key (find-template* path)))
+    (when key
+      (compile-template-string (fetch-template* key) :return-format return-format :ffc ffc))))
 
 (defun .compile-template-string (string &key return-bytes)
   (if return-bytes
@@ -214,7 +197,7 @@
 		    (*current-language* *current-language*)) ;; this is rebound so that
 		                                             ;; {% set-language %} can SETF *CURRENT-LANGUAGE*
 		(funcall fn)))
-	    (mapcar 'namestring *linked-files*))))
+	    *linked-files*)))
 
 (defmacro def-template (name
 			relative-path

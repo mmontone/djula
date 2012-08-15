@@ -1,12 +1,11 @@
-;;;; -*- Mode: Lisp; Syntax: ANSI-Common-Lisp; Base: 10 -*-
-
 (defpackage #:djula-system
   (:use :cl))
 
 (in-package #:djula-system)
 
 (asdf:defsystem :djula
-  :depends-on (:cl-ppcre
+  :depends-on (:anaphora
+	       :cl-ppcre
 	       :cl-ffc
 	       :cl-fad
 	       :trivial-utf-8
@@ -20,6 +19,7 @@
   ((:module :src
 	    :components ((:file "package")
 			 (:file "util")
+			 (:file "template-store")
 			 (:file "core")
 			 (:file "table")
 			 (:file "variable")

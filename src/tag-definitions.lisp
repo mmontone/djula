@@ -17,11 +17,11 @@ form that returns some debugging info."
   (let ((path (gensym "template-path"))
 	(real-path (gensym "real-path")))
     `(let* ((,path ,template-path)
-	    (,real-path (template-path ,path)))
+	    (,real-path (find-template* ,path)))
        (if (null ,real-path)
 	   (constantly (template-error-string "The file ~S does not exist" ,path))
 	   (with-template-error (constantly (template-error-string "There was an error opening the file ~A. Perhaps an encoding error?" ,real-path))
-	     (let ((,string-var (cl-ffc:slurp-utf-8-file ,real-path)))
+	     (let ((,string-var (fetch-template* ,real-path)))
 	       ,@body))))))
 
 ; definitions:
@@ -55,16 +55,16 @@ form that returns some debugging info."
     (f0 (.funcall-and-concatenate fs))))
 
 (def-tag-processor :extends (template-path) rest-tokens
-  (let ((real-path (template-path template-path)))
+  (let ((real-path (find-template* template-path)))
     (pushnew real-path *linked-files* :test 'equal)
     (if (null real-path)
 	`((:string ,(template-error-string "Cannot extend the template ~A because the file ~A does not exists"
 					   template-path
-					   (template-path template-path :dont-check t))))
+					   real-path)))
 	(with-template-error `((:string ,(template-error-string "Cannot extend the template ~A because there was an error opening the file ~A. Perhaps an encoding error?"
 								template-path
 								real-path)))
-	  (let ((string (cl-ffc:slurp-utf-8-file real-path)))
+	  (let ((string (fetch-template* real-path)))
 	    (with-template-error `((:string ,(template-error-string "Cannot extend the template ~A because there was an error parsing the template file ~A"
 								    template-path
 								    real-path)))
@@ -137,9 +137,6 @@ form that returns some debugging info."
 
 	    (with-safe "the current template root folder"
 	      (% "Template folder: ~A" *current-template-root-folder*))
-
-	    (with-safe "the current tempalate path"
-	      (% "Template path: ~A" *current-template-path*))
 
 	    (with-safe "the arguments given to the template"
 	      (if (null *template-arguments*)
@@ -238,7 +235,7 @@ about the variable definitions contained in the translation table indicated by
 					  template-path
 					  *translation-table-regexps*)))
 
-	(aif (cl-fad:file-exists-p (template-path template-path :dont-check t))
+	(aif (find-template* template-path)
 	     (progn
 	       
 	       (pushnew it *linked-files* :test 'equal)
@@ -284,7 +281,7 @@ it doesn't"
 					  template-path
 					  *example-table-regexps*)))
 
-	(aif (cl-fad:file-exists-p (template-path template-path :dont-check t))
+	(aif (find-template* template-path)
 
 	     (if (not (evenp (length (.read-table it))))
 
@@ -604,13 +601,13 @@ it treats it as a template error string. see #'%"
 (def-tag-compiler :include (path)
   "when compiled, :INCLUDE tags first compile the template pointed to by `PATH' then
 they compile into a function that simply calls this function with *TEMPLATE-ARGUMENTS*"
-  (aif (template-path path)
+  (aif (find-template* path)
        (progn
-	 (pushnew (namestring it) *linked-files* :test 'equal)
+	 (pushnew it *linked-files* :test 'equal)
 	 (with-template-error (constantly (template-error-string "TThere was an error including the template ~A" it))
 	   (if *template-ffc*
 	       (f0 (apply 'cl-ffc:ffc-call *template-ffc* it *template-arguments*))
-	       (.compile-template-string (cl-ffc:slurp-utf-8-file it)))))
+	       (.compile-template-string (fetch-template* it)))))
        (constantly (template-error-string "Cannot include the template ~A because it does not exist." path))))
 
 ; js / js-script / emit-js

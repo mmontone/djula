@@ -1,19 +1,12 @@
-
-(in-package :djula)
-
-; util
-
-(defmacro aif (test &optional (then 'it) else)
-  `(let ((it ,test))
-     (if it
-	 ,then
-	 ,else)))
+(in-package #:djula)
 
 (defun .keyword (thing)
   (values (intern (string-upcase (string thing)) :keyword)))
 
 (defun .funcall-and-concatenate (thunks)
-  (apply 'concatenate 'string (mapcar 'princ-to-string (mapcar 'funcall thunks))))
+  (with-output-to-string (s)
+    (dolist (thunk thunks)
+      (princ (funcall thunk) s))))
 
 (defun .getf (place indicator)
   "like GETF but returns a second value indicating the lookup's success or failure (like GETHASH's PRESENT-P)"

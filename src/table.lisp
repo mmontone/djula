@@ -27,7 +27,7 @@
     (values (read-from-string (format nil "(~A)" unparsed-string)))))
 
 (defun .read-table (path)
-  (.read-table-string (cl-ffc:slurp-utf-8-file path)))
+  (.read-table-string (fetch-template* path)))
 
 (defun .compile-translation-table-variable (list)
   (destructuring-bind (variable &rest language-plist &key &allow-other-keys)

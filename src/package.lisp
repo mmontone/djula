@@ -1,9 +1,18 @@
+(in-package #:common-lisp-user)
 
-(defpackage :djula
-  (:use :cl :logv :f-underscore)
+(defpackage #:djula
+  (:use #:anaphora #:cl #:logv #:f-underscore)
   (:export ; lisp api
            :def-template
            :compile-template
+
+	   #:*current-store*
+	   #:file-store
+	   #:find-template
+	   #:find-template*
+	   #:fetch-template
+	   #:fetch-template*
+	   #:compile-template-string
 
 	   ; runtime options
 	   :*current-language*
