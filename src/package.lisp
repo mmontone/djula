@@ -14,6 +14,8 @@
 	   #:fetch-template*
 	   #:compile-template-string
 
+	   #:def-tag-compiler
+
 	   ; runtime options
 	   :*current-language*
 	   :*default-language*

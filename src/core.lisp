@@ -31,7 +31,7 @@
 
 (defvar *known-example-tables*)
 
-(defvar *block-alist*)
+(defvar *block-alist* nil)
 
 (defvar *linked-files*)
 
@@ -184,15 +184,14 @@
 (defun compile-template-string (string
 				&key (return-format :string) ; or :OCTETS
 				     ffc)
-  (let* (*block-alist*
-	 *linked-files*
+  (let* ((*block-alist* nil)
+	 (*linked-files* nil)
 	 (*template-ffc* ffc)
-	 (fn (.compile-template-string string
-				       :return-bytes (eql return-format :octets))))
+	 (fn (.compile-template-string string :return-bytes (eq return-format :octets))))
     (values (f (&rest *template-arguments* &key &allow-other-keys)
-	      (let (*known-translation-tables*
-		    *known-example-tables*
-		    *accumulated-javascript-strings*
+	      (let ((*known-translation-tables* nil)
+		    (*known-example-tables* nil)
+		    (*accumulated-javascript-strings* nil)
 		    (*template-ffc* ffc)
 		    (*current-language* *current-language*)) ;; this is rebound so that
 		                                             ;; {% set-language %} can SETF *CURRENT-LANGUAGE*

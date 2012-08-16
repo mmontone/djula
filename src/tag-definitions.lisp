@@ -48,11 +48,19 @@ form that returns some debugging info."
 (def-delimited-tag :block :endblock :parsed-block)
 
 (def-token-compiler :parsed-block ((name) . block-tokens)
-  (let ((fs (mapcar 'compile-token
-		    (if #1=(assoc name *block-alist*)
-			(rest #1#)
-			block-tokens))))
-    (f0 (.funcall-and-concatenate fs))))
+  ;; Pay attention to scoping here.  *BLOCK-ALIST* is dynamic and cannot be
+  ;; refactored to inside the lambda.  Well, not with the desired results, anyway,
+  (let* ((target (member name *block-alist* :key #'first :test #'eq))
+	 (*block-alist* (if target (rest target) *block-alist*))
+	 (fs (mapcar #'compile-token (if target (rest (first target)) block-tokens))))
+    (lambda () (.funcall-and-concatenate fs))))
+
+(def-tag-compiler :super (name)
+  ;; See comments for :PARSED-BLOCK.
+  (let* ((target (member name *block-alist* :key #'first :test #'eq))
+	 (*block-alist* (if target (rest target) *block-alist*))
+	 (fs (mapcar #'compile-token (if target (rest (first target)) nil))))
+    (lambda () (.funcall-and-concatenate fs))))
 
 (def-tag-processor :extends (template-path) rest-tokens
   (let ((real-path (find-template* template-path)))
@@ -68,7 +76,7 @@ form that returns some debugging info."
 	    (with-template-error `((:string ,(template-error-string "Cannot extend the template ~A because there was an error parsing the template file ~A"
 								    template-path
 								    real-path)))
-	      (let ((processed     (process-tokens (parse-template-string string))))
+	      (let ((processed (process-tokens (parse-template-string string))))
 		(with-template-error `((:string ,(template-error-string "Cannot extend the template ~A because there was an error parsing this template file"
 									template-path)))
 		  (let ((extend-blocks (mapcar (f_ (destructuring-bind (<parsed-block> (name) . tokens) _
@@ -76,10 +84,10 @@ form that returns some debugging info."
 						     `(,name ,@tokens)))
 					       (remove :parsed-block
 						       (process-tokens rest-tokens)
-						       :key 'first
-						       :test-not 'eql))))
+						       :key #'first
+						       :test-not #'eq))))
 		    (setf *block-alist* (append extend-blocks *block-alist*))
-		    processed )))))))))
+		    processed)))))))))
 
 ; comment / endcomment
 
