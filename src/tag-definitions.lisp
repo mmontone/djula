@@ -48,15 +48,13 @@ form that returns some debugging info."
 (def-delimited-tag :block :endblock :parsed-block)
 
 (def-token-compiler :parsed-block ((name) . block-tokens)
-  ;; Pay attention to scoping here.  *BLOCK-ALIST* is dynamic and cannot be
-  ;; refactored to inside the lambda.  Well, not with the desired results, anyway,
   (let* ((target (member name *block-alist* :key #'first :test #'eq))
-	 (*block-alist* (if target (rest target) *block-alist*))
 	 (fs (mapcar #'compile-token (if target (rest (first target)) block-tokens))))
     (lambda () (.funcall-and-concatenate fs))))
 
 (def-tag-compiler :super (name)
-  ;; See comments for :PARSED-BLOCK.
+  ;; Pay attention to scoping here.  *BLOCK-ALIST* is dynamic and cannot be
+  ;; refactored to inside the lambda.  Well, not with the desired results, anyway,
   (let* ((target (member name *block-alist* :key #'first :test #'eq))
 	 (*block-alist* (if target (rest target) *block-alist*))
 	 (fs (mapcar #'compile-token (if target (rest (first target)) nil))))
