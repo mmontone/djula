@@ -24,6 +24,7 @@
 	   :*template-string-if-invalid*
 	   :*use-example-values-p*
 	   :*template-eval*
+           :*template-search-path*
 
 	   ; compile-time option
 	   :*template-root-folder*
