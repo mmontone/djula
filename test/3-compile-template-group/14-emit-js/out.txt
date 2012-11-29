@@ -1,9 +1,0 @@
-
-
-
-before
-
-<script type='text/javascript' src='foo.com' ></script>
-<script type='text/javascript' src='bar.com' other='attribute' ></script>
-<script type='text/javascript'>foo.stuff('now');</script>
-after.eof

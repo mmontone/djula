@@ -1,1 +1,0 @@
-(:foo "The Foo" :bar "The Bar")

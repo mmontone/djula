@@ -1,1 +1,0 @@
-((:string "foo")(:string "bar")(:string "baz"))

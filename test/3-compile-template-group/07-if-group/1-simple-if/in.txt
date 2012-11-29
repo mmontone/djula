@@ -1,1 +1,0 @@
-To Be {% if foo %}FOO {% endif %}or Not To Be{% if not foo %}FOO{% endif %}.

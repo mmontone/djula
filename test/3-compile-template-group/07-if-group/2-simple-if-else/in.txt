@@ -1,1 +1,0 @@
-Either {% if foo %}FOO{% else %}BAR{% endif %} or get off the {% if not foo %}FOO{% else %}BAR{% endif %}.

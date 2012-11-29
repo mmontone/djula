@@ -1,2 +1,0 @@
-{{foo|lisp:"reverse"}}
-{{foo|lisp:"(lambda (x) (concatenate 'string x " and The Bar"))"}}.eof

@@ -1,2 +1,0 @@
-the_method1_url
-/method2/1/2/3

@@ -1,4 +1,0 @@
-
-
-A is: DEVEL A
-B is: DEVEL B

@@ -1,1 +1,0 @@
-{% filter upper|urlencode %} foo bar baz {% endfilter %}.eof

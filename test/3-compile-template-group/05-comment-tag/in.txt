@@ -1,1 +1,0 @@
-This is{% comment %} ignored comment text {% endcomment %}.eof.

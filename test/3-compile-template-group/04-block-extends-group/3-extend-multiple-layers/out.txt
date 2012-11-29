@@ -1,9 +1,0 @@
-Text from grandparent.html
-
-_grandparent_ b1 content
-between
-_parent_ b2 content
-between
-in.txt b3 content
-between
-in.txt b4 content.eof

@@ -1,31 +1,35 @@
-(defpackage #:djula-system
-  (:use :cl))
-
-(in-package #:djula-system)
-
-(asdf:defsystem :djula
-  :depends-on (:anaphora
-	       :cl-ppcre
-	       :cl-ffc
-	       :cl-fad
-	       :trivial-utf-8
-	       :logv
-	       :split-sequence
-	       :f-underscore)
-  :description "spork of django templating engine for julia"
-  :version "0.1"
-  :author "Nick Allen <nallen05@gmail.com"
+(asdf:defsystem #:djula
+  :description "An implementation of Django templates for Common Lisp."
+  :version "0.2"
+  :maintainer "Eric Sessoms <eric@nubgames.com>"
+  :author "Nick Allen <nallen05@gmail.com>"
+  :license "MIT"
+  :depends-on (#:access
+               #:alexandria
+               #:arnesi
+               #:babel
+	       #:cl-ppcre
+	       #:cl-fad
+	       #:split-sequence)
   :components
-  ((:module :src
-	    :components ((:file "package")
-			 (:file "util")
-			 (:file "template-store")
-			 (:file "core")
-			 (:file "table")
-			 (:file "variable")
-			 (:file "filter-definitions")
-			 (:file "tag")
-			 (:file "tag-definitions")
-			 (:file "tag-documentation")
-			 (:file "build-documentation"))
-	    :serial t)))
+  ((:module :main
+            :pathname "src/main/common-lisp"
+	    :components
+            ((:file "compiler"       :depends-on ("lexer" "parser" "template-store"))
+             (:file "conditions"     :depends-on ("specials"))
+             (:file "filters"        :depends-on ("pipeline"))
+             (:file "lexer"          :depends-on ("pipeline"))
+             (:file "packages")
+             (:file "parser"         :depends-on ("pipeline"))
+             (:file "pipeline"       :depends-on ("conditions"))
+             (:file "specials"       :depends-on ("packages"))
+             #+nil
+             (:file "table"          :depends-on ("pipeline"))
+             (:file "tags"           :depends-on ("tag"))
+             (:file "tag"            :depends-on ("pipeline"))
+             (:file "template-store" :depends-on ("specials"))
+             (:file "util"           :depends-on ("packages"))
+             (:file "variables"      :depends-on ("specials" "util")))))
+  :in-order-to ((test-op (load-op djula-test)))
+  :perform (test-op :after (op c)
+                    (funcall (intern "RUN-ALL-TESTS" :djula-test))))

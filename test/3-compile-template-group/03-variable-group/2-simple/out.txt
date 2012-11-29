@@ -1,1 +1,0 @@
-variables The Foo and The Bar. eof

@@ -1,5 +1,0 @@
-{% extends "parent.html" %}
-
-{% block b3 %}in.txt b3 content{% endblock %}
-
-{% block b4 %}in.txt b4 content{% endblock %}.eof

@@ -1,0 +1,39 @@
+.apiref-row {
+    padding-bottom: 1em;
+    display: block;
+    float: none;
+}
+
+.apiref-spec {
+    display: inline;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.apiref-lambda {
+    display: inline;
+    font-family: monospace;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.apiref-result {
+    display: block;
+    font-family: monospace;
+    font-style: italic;
+    margin-left: 20px;
+}
+
+.apiref-doc {
+    display: block;
+    float: none;
+    margin-left: 30px;
+}
+
+pre {
+    display: block;
+    background: lightgrey;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 20px 5px 20px 5px;
+}

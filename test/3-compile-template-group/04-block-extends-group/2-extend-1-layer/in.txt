@@ -1,3 +1,0 @@
-{% extends "parent.html" %}
-
-{% block b1 %}b1 content {% endblock %}DONT SEE ME {% block b2 %}b2 content{% endblock %}

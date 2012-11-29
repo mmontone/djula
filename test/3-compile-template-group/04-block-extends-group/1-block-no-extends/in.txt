@@ -1,1 +1,0 @@
-{% block foo %}this is the text.{% endblock %}eof

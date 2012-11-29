@@ -1,2 +1,0 @@
-{% lisp (+ 4 5) %}
-{% lisp (djula:djula-html-escape "<html>") %}.eof

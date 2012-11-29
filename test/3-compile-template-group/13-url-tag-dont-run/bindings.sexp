@@ -1,1 +1,0 @@
-`(djula:*url-method-plist* (:method1 ,(lambda () "the_method1_url") :method2 ,(lambda (a b c) (format nil "/method2/~A/~A/~A" a b c))))

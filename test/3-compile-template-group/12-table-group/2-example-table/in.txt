@@ -1,4 +1,0 @@
-{% example-table "/example.test.lisp" %}
-
-A is: {{a}}
-B is: {{container.b}}

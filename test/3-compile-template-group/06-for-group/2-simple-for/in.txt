@@ -1,5 +1,0 @@
-<li>
-  {% for x in xs %}
-  <li>{{x}}</li>
-  {% endfor %}
-</li>

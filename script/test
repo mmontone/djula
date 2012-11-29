@@ -1,0 +1,11 @@
+#!/bin/dash
+
+exec rlwrap sbcl \
+     --noinform \
+     --disable-ldb \
+     --lose-on-corruption \
+     --end-runtime-options \
+     --noprint \
+     --non-interactive \
+     --eval '(asdf:test-system :djula)' \
+     --end-toplevel-options
