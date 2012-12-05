@@ -11,6 +11,7 @@
                 #:it)
   (:export #:*allow-include-roots*
            #:*catch-template-errors-p*
+           #:*current-compiler*
            #:*current-language*
            #:*current-store*
            #:*default-language*
@@ -21,8 +22,9 @@
            #:*use-example-values-p*
            #:compile-example-table-p
            #:compile-template
-           #:compile-template-string
+           #:compile-template*
            #:compile-translation-table
+           #:compiler
            #:def-tag-compiler
            #:example-table-p
            #:fetch-template
@@ -30,7 +32,10 @@
            #:file-store
            #:find-template
            #:find-template*
+           #:fragment-compiler
            #:html-escape
+           #:render-template*
+           #:toplevel-compiler
            #:translation-table-p
            #:url-decode
            #:url-encode

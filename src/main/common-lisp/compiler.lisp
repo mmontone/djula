@@ -10,17 +10,17 @@
   (when-let ((key (find-template* name)))
     (compile-string (fetch-template* key))))
 
-(defclass toplevel-compiler ()
+(defclass toplevel-compiler (compiler)
   ((fragment-compiler
     :reader fragment-compiler
     :initarg :fragment-compiler
     :initform (make-instance 'compiler))))
 
-(defmethod compile-template ((compiler toplevel-compiler) name)
+(defmethod compile-template :around ((compiler toplevel-compiler) name)
   (let ((*block-alist* nil)
         (*linked-files* nil))
     (let ((*current-compiler* (fragment-compiler compiler)))
-      (call-next-method))))
+      (call-next-method *current-compiler* name))))
 
 (defvar *current-compiler* (make-instance 'toplevel-compiler))
 
