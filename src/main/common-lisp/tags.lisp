@@ -553,7 +553,7 @@ they compile into a function that simply calls this function with *TEMPLATE-ARGU
        (progn
 	 (pushnew it *linked-files* :test 'equal)
 	 (handler-case
-             (.compile-template-string (fetch-template* it))
+             (compile-template* it)
            (error ()
              (template-error "There was an error including the template ~A" it))))
        (template-error "Cannot include the template ~A because it does not exist." path)))
