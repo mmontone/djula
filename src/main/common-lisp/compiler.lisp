@@ -1,5 +1,54 @@
 (in-package #:djula)
 
+(defgeneric compile-template (compiler name)
+  (:documentation "Provides a hook to customize template compilation."))
+
+(defclass compiler ()
+  ())
+
+(defmethod compile-template ((compiler compiler) name)
+  (when-let ((key (find-template* name)))
+    (compile-string (fetch-template* key))))
+
+(defclass toplevel-compiler ()
+  ((fragment-compiler
+    :reader fragment-compiler
+    :initarg :fragment-compiler
+    :initform (make-instance 'compiler))))
+
+(defmethod compile-template ((compiler toplevel-compiler) name)
+  (let ((*block-alist* nil)
+        (*linked-files* nil))
+    (let ((*current-compiler* (fragment-compiler compiler)))
+      (call-next-method))))
+
+(defvar *current-compiler* (make-instance 'toplevel-compiler))
+
+(defun compile-template* (name)
+  (compile-template *current-compiler* name))
+
+(defun render-template* (template stream &rest *template-arguments*)
+  (cond
+    ((or (pathnamep template)
+         (stringp template))
+     ;; Accept strings and pathnames as template designators.
+     (apply #'render-template* (compile-template* template) stream *template-arguments*))
+    ((functionp template)
+     (let ((*known-translation-tables* nil)
+           (*known-example-tables* nil)
+           (*accumulated-javascript-strings* nil)
+           (*current-language* *current-language*))
+       (if stream
+           (funcall template stream)
+           (with-output-to-string (s)
+             (funcall template s)))))))
+
+(defun compile-string (string)
+  (let ((fs (mapcar #'compile-token (process-tokens (parse-template-string string)))))
+    (lambda (stream)
+      (dolist (f fs)
+        (funcall f stream)))))
+
 (defun compile-token (token)
   (destructuring-bind (name . args) token
     (let ((compiler (get name 'token-compiler)))
@@ -42,28 +91,3 @@
   ":STRING tokens compile into a function that simply returns the string"
   (lambda (stream)
     (princ string stream)))
-
-(defun .compile-template-string (string)
-  (let ((fs (mapcar #'compile-token (process-tokens (parse-template-string string)))))
-    (lambda (stream)
-      (dolist (f fs)
-        (funcall f stream)))))
-
-(defun compile-template-string (string)
-  (let* ((*block-alist* nil)
-	 (*linked-files* nil)
-	 (fn (.compile-template-string string)))
-    (values (lambda (stream &rest *template-arguments* &key &allow-other-keys)
-	      (let ((*known-translation-tables* nil)
-		    (*known-example-tables* nil)
-		    (*accumulated-javascript-strings* nil)
-		    (*current-language* *current-language*))
-		(if stream
-                    (funcall fn stream)
-                    (with-output-to-string (s)
-                      (funcall fn s)))))
-	    *linked-files*)))
-
-(defun compile-template (path)
-  (when-let ((key (find-template* path)))
-    (compile-template-string (fetch-template* key))))
