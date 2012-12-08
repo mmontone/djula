@@ -16,13 +16,13 @@
     :initarg :fragment-compiler
     :initform (make-instance 'compiler))))
 
+(defvar *current-compiler* (make-instance 'toplevel-compiler))
+
 (defmethod compile-template :around ((compiler toplevel-compiler) name)
   (let ((*block-alist* nil)
         (*linked-files* nil))
     (let ((*current-compiler* (fragment-compiler compiler)))
       (call-next-method *current-compiler* name))))
-
-(defvar *current-compiler* (make-instance 'toplevel-compiler))
 
 (defun compile-template* (name)
   (compile-template *current-compiler* name))
