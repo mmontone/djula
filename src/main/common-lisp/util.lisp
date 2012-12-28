@@ -54,7 +54,7 @@
 the external format EXTERNAL-FORMAT."
   (when (zerop (length string))
     (return-from url-decode ""))
-  (let ((vector (make-array (length string) :element-type 'octet :fill-pointer 0))
+  (let ((vector (make-array (length string) :element-type '(unsigned-byte 8) :fill-pointer 0))
         (i 0)
         unicodep)
     (loop
