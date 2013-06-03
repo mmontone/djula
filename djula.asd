@@ -32,4 +32,4 @@
              (:file "variables"      :depends-on ("specials" "util")))))
   :in-order-to ((test-op (load-op djula-test)))
   :perform (test-op :after (op c)
-                    (funcall (intern "RUN-ALL-TESTS" :djula-test))))
+                    (funcall (intern "RUN-DJULA-TESTS" :djula-test))))

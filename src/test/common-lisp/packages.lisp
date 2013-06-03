@@ -4,11 +4,11 @@
   (:use #:common-lisp
         #:djula
         #:fiveam)
-  (:export #:run-all-tests))
+  (:export #:run-djula-tests))
 
 (in-package #:djula-test)
 
 (def-suite djula-test)
 
-(defun run-all-tests ()
+(defun run-djula-tests ()
   (run! 'djula-test))
