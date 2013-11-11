@@ -609,7 +609,10 @@ they compile into a function that simply calls this function with *TEMPLATE-ARGU
         (lambda (stream)
           (if (not *eval-lisp-tags*)
               (template-error "I can't evaulate the {% lisp %} tag ~A because *EVAL-LISP-STRINGS* is NIL" sexp)
-              (princ (funcall fn) stream))))
+              (handler-case
+		  (princ (funcall fn) stream)
+		(error ()
+		  (template-error "There was an error executing the lisp form ~A" sexp))))))
     (error ()
       (template-error "There was an error executing the lisp form ~A" sexp))))
 
