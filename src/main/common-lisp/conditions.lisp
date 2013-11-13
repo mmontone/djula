@@ -2,7 +2,7 @@
 
 (define-condition template-error (error)
   ((message
-    :reader template-error-messoge
+    :reader template-error-message
     :initarg :message))
   (:report
    (lambda (e stream)
