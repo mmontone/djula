@@ -165,6 +165,20 @@ keyword version of `NAME' [or NIL if `NAME' is not supplied]"
     (declare (ignore stream))
     (setf *current-language* name)))
 
+
+(def-tag-compiler :set-package (package-name)
+  ":SET-PACKAGE tags are compiled into a function that set *DJULA-EXeCUTE-PACKAGE*
+to the the package value of find package on the keyword `PACKAGE-NAME' or the 
+package `common-lisp-user' if the package for `PACKAGE-NAME' is not found. This
+is useful to determine the package in which :LISP tags are executed"
+  (lambda (stream)
+    (declare (ignore stream))
+    (let ((temp-package (find-package package-name)))
+      (if (packagep temp-package)
+	  (setf *djula-execute-pacakge* temp-package)
+	  (setf *djula-execute-pacakge* (find-package :common-lisp-user))))))
+
+
 (def-tag-compiler :show-language ()
   ":SHOW-LANGUAGE tags are compiled into a function that just shows the values of
 *CURRENT-LANGUAGE* or *DEFAULT-LANGUAGE* if there is no current language"
@@ -597,7 +611,7 @@ they compile into a function that simply calls this function with *TEMPLATE-ARGU
   (handler-case
       (process-tokens
        (cons (list :parsed-lisp
-                   (let ((*package* (find-package :common-lisp-user)))
+                   (let ((*package* *djula-execute-pacakge*))
                      (read-from-string unparsed-string)))
              rest))
     (error ()
