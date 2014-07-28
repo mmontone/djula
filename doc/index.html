@@ -1,0 +1,249 @@
+<!doctype html>
+
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+<title>GenDoc Documentation
+</title>
+<link rel='stylesheet' href='simple.css' />
+  </head>
+  <body>
+<article id='reference-djula' class='apiref-article'>
+  <h1>Reference: DJULA
+  </h1>
+<section id='djula-specials' class='section-specials'>
+  <h2>Special Variables
+  </h2>
+<section id='apiref-*allow-include-roots*' class='section-apiref-item'>
+  <div class='apiref-spec'>*ALLOW-INCLUDE-ROOTS*
+  </div>
+  <div class='apiref-lambda'>
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p><em>Undocumented!</em></p>
+
+  </div>
+</section>
+<section id='apiref-*catch-template-errors-p*' class='section-apiref-item'>
+  <div class='apiref-spec'>*CATCH-TEMPLATE-ERRORS-P*
+  </div>
+  <div class='apiref-lambda'>
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p><em>Undocumented!</em></p>
+
+  </div>
+</section>
+<section id='apiref-*current-compiler*' class='section-apiref-item'>
+  <div class='apiref-spec'>*CURRENT-COMPILER*
+  </div>
+  <div class='apiref-lambda'>
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p><em>Undocumented!</em></p>
+
+  </div>
+</section>
+<section id='apiref-*current-language*' class='section-apiref-item'>
+  <div class='apiref-spec'>*CURRENT-LANGUAGE*
+  </div>
+  <div class='apiref-lambda'>
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p><em>Undocumented!</em></p>
+
+  </div>
+</section>
+<section id='apiref-*current-store*' class='section-apiref-item'>
+  <div class='apiref-spec'>*CURRENT-STORE*
+  </div>
+  <div class='apiref-lambda'>
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p>The currently in-use template store.  Defaults to a FILE-STORE.</p>
+
+  </div>
+</section>
+<section id='apiref-*default-language*' class='section-apiref-item'>
+  <div class='apiref-spec'>*DEFAULT-LANGUAGE*
+  </div>
+  <div class='apiref-lambda'>
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p><em>Undocumented!</em></p>
+
+  </div>
+</section>
+<section id='apiref-*template-string-if-invalid*' class='section-apiref-item'>
+  <div class='apiref-spec'>*TEMPLATE-STRING-IF-INVALID*
+  </div>
+  <div class='apiref-lambda'>
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p><em>Undocumented!</em></p>
+
+  </div>
+</section>
+<section id='apiref-*use-example-values-p*' class='section-apiref-item'>
+  <div class='apiref-spec'>*USE-EXAMPLE-VALUES-P*
+  </div>
+  <div class='apiref-lambda'>
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p><em>Undocumented!</em></p>
+
+  </div>
+</section>
+</section>
+<section id='djula-functions' class='section-functions'>
+  <h2>Functions
+  </h2>
+<section id='apiref-compile-template' class='section-apiref-item'>
+  <div class='apiref-spec'>COMPILE-TEMPLATE
+  </div>
+  <div class='apiref-lambda'>(COMPILER NAME)
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p>Provides a hook to customize template compilation.</p>
+
+  </div>
+</section>
+<section id='apiref-compile-template*' class='section-apiref-item'>
+  <div class='apiref-spec'>COMPILE-TEMPLATE*
+  </div>
+  <div class='apiref-lambda'>(NAME)
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p><em>Undocumented!</em></p>
+
+  </div>
+</section>
+<section id='apiref-fetch-template' class='section-apiref-item'>
+  <div class='apiref-spec'>FETCH-TEMPLATE
+  </div>
+  <div class='apiref-lambda'>(STORE KEY)
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p>Return the text of the template identified by the given key.</p>
+
+  </div>
+</section>
+<section id='apiref-fetch-template*' class='section-apiref-item'>
+  <div class='apiref-spec'>FETCH-TEMPLATE*
+  </div>
+  <div class='apiref-lambda'>(KEY)
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p>Return the text of a template fetched from the <em>CURRENT-STORE</em>.</p>
+
+  </div>
+</section>
+<section id='apiref-find-template' class='section-apiref-item'>
+  <div class='apiref-spec'>FIND-TEMPLATE
+  </div>
+  <div class='apiref-lambda'>(STORE NAME)
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p>Return a hashable key that uniquely identifies the named template.</p>
+
+  </div>
+</section>
+<section id='apiref-find-template*' class='section-apiref-item'>
+  <div class='apiref-spec'>FIND-TEMPLATE*
+  </div>
+  <div class='apiref-lambda'>(NAME)
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p><em>Undocumented!</em></p>
+
+  </div>
+</section>
+<section id='apiref-fragment-compiler' class='section-apiref-item'>
+  <div class='apiref-spec'>FRAGMENT-COMPILER
+  </div>
+  <div class='apiref-lambda'>(SB-PCL::OBJECT)
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p><em>Undocumented!</em></p>
+
+  </div>
+</section>
+<section id='apiref-render-template*' class='section-apiref-item'>
+  <div class='apiref-spec'>RENDER-TEMPLATE*
+  </div>
+  <div class='apiref-lambda'>(TEMPLATE STREAM &amp;REST *TEMPLATE-ARGUMENTS*)
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p><em>Undocumented!</em></p>
+
+  </div>
+</section>
+<section id='apiref-url-decode' class='section-apiref-item'>
+  <div class='apiref-spec'>URL-DECODE
+  </div>
+  <div class='apiref-lambda'>(STRING)
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p>Decodes a URL-encoded STRING which is assumed to be encoded using
+the external format EXTERNAL-FORMAT.</p>
+
+  </div>
+</section>
+<section id='apiref-url-encode' class='section-apiref-item'>
+  <div class='apiref-spec'>URL-ENCODE
+  </div>
+  <div class='apiref-lambda'>(STRING)
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p>URL-encodes a string using the external format EXTERNAL-FORMAT.</p>
+
+  </div>
+</section>
+<section id='apiref-url-encode-path' class='section-apiref-item'>
+  <div class='apiref-spec'>URL-ENCODE-PATH
+  </div>
+  <div class='apiref-lambda'>(PATH)
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p><em>Undocumented!</em></p>
+
+  </div>
+</section>
+</section>
+<section id='djula-macros' class='section-macros'>
+  <h2>Macros
+  </h2>
+<section id='apiref-def-tag-compiler' class='section-apiref-item'>
+  <div class='apiref-spec'>DEF-TAG-COMPILER
+  </div>
+  <div class='apiref-lambda'>(NAME ARGS &amp;BODY BODY)
+  </div>
+  <div class='apiref-result'>
+  </div>
+  <div class='apiref-doc'><p><em>Undocumented!</em></p>
+
+  </div>
+</section>
+</section>
+</article>
+  </body>
+</html>
