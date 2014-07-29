@@ -3,7 +3,7 @@
 (in-suite djula-test)
 
 (test compiler
-  (let ((fn (djula::compile-template-string
+  (let ((fn (djula::compile-string
              "{% ifequal day \"Thursday\" %}
 I never could get the hang of {{ day }}s.
 {% endifequal %}")
@@ -11,5 +11,4 @@ I never could get the hang of {{ day }}s.
     (is (string= "
 I never could get the hang of Thursdays.
 "
-                 (funcall fn nil :day "Thursday")))))
-
+                 (djula::render-template* fn nil :day "Thursday")))))
