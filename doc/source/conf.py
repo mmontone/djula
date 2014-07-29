@@ -29,10 +29,17 @@ import sphinx_bootstrap_theme
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinxcontrib.cldomain',
-              'sphinxcontrib.hyperspec']
 
-from os.path import join, dirname, realpath
+from os.path import join, dirname, realpath, abspath
+
+sys.path.append(abspath(join(dirname(__file__), "../_ext")))
+
+extensions = ['sphinxcontrib.cldomain',
+              'sphinxcontrib.hyperspec',
+              "djangodocs",
+              "sphinx.ext.intersphinx",
+              "sphinx.ext.viewcode"]
+
 cl_packages = {"djula": join(dirname(realpath(__file__)), "../../")}
 
 from os.path import expandvars
@@ -269,3 +276,10 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+# If true, SmartyPants will be used to convert quotes and dashes to
+# typographically correct entities.
+html_use_smartypants = True
+
+# HTML translator class for the builder
+html_translator_class = "djangodocs.DjangoHTMLTranslator"
