@@ -65,6 +65,9 @@ tags:
 List of tags
 ------------
 
+.. contents:: Tags
+   :local:
+
 .. templatetag:: block
 		 
 block
@@ -571,6 +574,236 @@ You can also use filters in the :ttag:`if` expression. For example::
     {% if messages|length >= 100 %}
        You have lots of messages today!
     {% endif %}
+
+.. templatetag:: ifchanged
+
+ifchanged
+^^^^^^^^^
+
+Check if a value has changed from the last iteration of a loop.
+
+The ``{% ifchanged %}`` block tag is used within a loop. It has two possible
+uses.
+
+1. Checks its own rendered contents against its previous state and only
+   displays the content if it has changed. For example, this displays a list of
+   days, only displaying the month if it changes::
+
+        <h1>Archive for {{ year }}</h1>
+
+        {% for date in days %}
+            {% ifchanged %}<h3>{{ date|date:"F" }}</h3>{% endifchanged %}
+            <a href="{{ date|date:"M/d"|lower }}/">{{ date|date:"j" }}</a>
+        {% endfor %}
+
+2. If given one or more variables, check whether any variable has changed.
+   For example, the following shows the date every time it changes, while
+   showing the hour if either the hour or the date has changed::
+
+        {% for date in days %}
+            {% ifchanged date.date %} {{ date.date }} {% endifchanged %}
+            {% ifchanged date.hour date.date %}
+                {{ date.hour }}
+            {% endifchanged %}
+        {% endfor %}
+
+The ``ifchanged`` tag can also take an optional ``{% else %}`` clause that
+will be displayed if the value has not changed::
+
+        {% for match in matches %}
+            <div style="background-color:
+                {% ifchanged match.ballot_id %}
+                    {% cycle "red" "blue" %}
+                {% else %}
+                    gray
+                {% endifchanged %}
+            ">{{ match }}</div>
+        {% endfor %}
+
+.. templatetag:: ifequal
+
+ifequal
+^^^^^^^
+
+Output the contents of the block if the two arguments equal each other.
+
+Example::
+
+    {% ifequal user.pk comment.user_id %}
+        ...
+    {% endifequal %}
+
+As in the :ttag:`if` tag, an ``{% else %}`` clause is optional.
+
+The arguments can be hard-coded strings, so the following is valid::
+
+    {% ifequal user.username "adrian" %}
+        ...
+    {% endifequal %}
+
+An alternative to the ``ifequal`` tag is to use the :ttag:`if` tag and the
+``==`` operator.
+
+.. templatetag:: ifnotequal
+
+ifnotequal
+^^^^^^^^^^
+
+Just like :ttag:`ifequal`, except it tests that the two arguments are not
+equal.
+
+An alternative to the ``ifnotequal`` tag is to use the :ttag:`if` tag and
+the ``!=`` operator.
+
+.. templatetag:: include
+
+include
+^^^^^^^
+
+Loads a template and renders it with the current context. This is a way of
+"including" other templates within a template.
+
+The template name can either be a variable or a hard-coded (quoted) string,
+in either single or double quotes.
+
+This example includes the contents of the template ``"foo/bar.html"``::
+
+    {% include "foo/bar.html" %}
+
+This example includes the contents of the template whose name is contained in
+the variable ``template_name``::
+
+    {% include template_name %}
+
+.. versionchanged:: 1.7
+
+    The variable may also be any object with a ``render()`` method that
+    accepts a context. This allows you to reference a compiled ``Template`` in
+    your context.
+
+An included template is rendered within the context of the template that
+includes it. This example produces the output ``"Hello, John"``:
+
+* Context: variable ``person`` is set to ``"john"``.
+* Template::
+
+    {% include "name_snippet.html" %}
+
+* The ``name_snippet.html`` template::
+
+    {{ greeting }}, {{ person|default:"friend" }}!
+
+You can pass additional context to the template using keyword arguments::
+
+    {% include "name_snippet.html" with person="Jane" greeting="Hello" %}
+
+If you want to render the context only with the variables provided (or even
+no variables at all), use the ``only`` option. No other variables are
+available to the included template::
+
+    {% include "name_snippet.html" with greeting="Hi" only %}
+
+.. note::
+    The :ttag:`include` tag should be considered as an implementation of
+    "render this subtemplate and include the HTML", not as "parse this
+    subtemplate and include its contents as if it were part of the parent".
+    This means that there is no shared state between included templates --
+    each include is a completely independent rendering process.
+
+See also: :ttag:`{% ssi %}<ssi>`.
+
+..
+   .. templatetag:: load
+
+   load
+   ^^^^
+
+   Loads a custom template tag set.
+
+   For example, the following template would load all the tags and filters
+   registered in ``somelibrary`` and ``otherlibrary`` located in package
+   ``package``::
+
+       {% load somelibrary package.otherlibrary %}
+
+   You can also selectively load individual filters or tags from a library, using
+   the ``from`` argument. In this example, the template tags/filters named ``foo``
+   and ``bar`` will be loaded from ``somelibrary``::
+
+       {% load foo bar from somelibrary %}
+
+   See :doc:`Custom tag and filter libraries </howto/custom-template-tags>` for
+   more information.
+
+   .. templatetag:: lorem
+
+   lorem
+   ^^^^^
+
+   .. versionadded:: 1.8
+
+       The tag was previously located in :mod:`django.contrib.webdesign`.
+
+   Displays random "lorem ipsum" Latin text. This is useful for providing sample
+   data in templates.
+
+   Usage::
+
+       {% lorem [count] [method] [random] %}
+
+   The ``{% lorem %}`` tag can be used with zero, one, two or three arguments.
+   The arguments are:
+
+   ===========  =============================================================
+   Argument     Description
+   ===========  =============================================================
+   ``count``    A number (or variable) containing the number of paragraphs or
+		words to generate (default is 1).
+   ``method``   Either ``w`` for words, ``p`` for HTML paragraphs or ``b``
+		for plain-text paragraph blocks (default is ``b``).
+   ``random``   The word ``random``, which if given, does not use the common
+		paragraph ("Lorem ipsum dolor sit amet...") when generating
+		text.
+   ===========  =============================================================
+
+   Examples:
+
+   * ``{% lorem %}`` will output the common "lorem ipsum" paragraph.
+   * ``{% lorem 3 p %}`` will output the common "lorem ipsum" paragraph
+     and two random paragraphs each wrapped in HTML ``<p>`` tags.
+   * ``{% lorem 2 w random %}`` will output two random Latin words.
+
+   .. templatetag:: now
+
+   now
+   ^^^
+
+   Displays the current date and/or time, using a format according to the given
+   string. Such string can contain format specifiers characters as described
+   in the :tfilter:`date` filter section.
+
+   Example::
+
+       It is {% now "jS F Y H:i" %}
+
+   Note that you can backslash-escape a format string if you want to use the
+   "raw" value. In this example, "f" is backslash-escaped, because otherwise
+   "f" is a format string that displays the time. The "o" doesn't need to be
+   escaped, because it's not a format character::
+
+       It is the {% now "jS o\f F" %}
+
+   This would display as "It is the 4th of September".
+
+   .. note::
+
+       The format passed can also be one of the predefined ones
+       :setting:`DATE_FORMAT`, :setting:`DATETIME_FORMAT`,
+       :setting:`SHORT_DATE_FORMAT` or :setting:`SHORT_DATETIME_FORMAT`.
+       The predefined formats may vary depending on the current locale and
+       if :ref:`format-localization` is enabled, e.g.::
+
+	   It is {% now "SHORT_DATETIME_FORMAT" %}    
       
 Custom tags
 -----------
