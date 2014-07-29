@@ -1,0 +1,7 @@
+{% block all %}
+   before
+   {% block header %}
+      Hello
+   {% endblock %}
+   after
+{% endblock %}

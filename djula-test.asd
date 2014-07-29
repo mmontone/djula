@@ -12,4 +12,5 @@
              (:file "packages")
              (:file "parser"    :depends-on ("packages"))
              (:file "tags"      :depends-on ("packages"))
-             (:file "variables" :depends-on ("packages"))))))
+             (:file "variables" :depends-on ("packages"))
+	     (:file "inheritance" :depends-on ("packages"))))))

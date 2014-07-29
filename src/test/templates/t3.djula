@@ -1,0 +1,5 @@
+{% extends "t2.djula" %}
+
+{% block header %}
+Foo
+{% endblock %}
