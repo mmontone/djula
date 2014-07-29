@@ -175,8 +175,8 @@ is useful to determine the package in which :LISP tags are executed"
     (declare (ignore stream))
     (let ((temp-package (find-package package-name)))
       (if (packagep temp-package)
-	  (setf *djula-execute-pacakge* temp-package)
-	  (setf *djula-execute-pacakge* (find-package :common-lisp-user))))))
+	  (setf *djula-execute-package* temp-package)
+	  (setf *djula-execute-package* (find-package :common-lisp-user))))))
 
 
 (def-tag-compiler :show-language ()
@@ -611,7 +611,7 @@ they compile into a function that simply calls this function with *TEMPLATE-ARGU
   (handler-case
       (process-tokens
        (cons (list :parsed-lisp
-                   (let ((*package* *djula-execute-pacakge*))
+                   (let ((*package* *djula-execute-package*))
                      (read-from-string unparsed-string)))
              rest))
     (error ()

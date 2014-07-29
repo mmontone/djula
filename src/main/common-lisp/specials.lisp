@@ -4,7 +4,7 @@
 
 (defvar *current-language* nil)
 
-(defvar *djula-execute-pacakge* (find-package :common-lisp-user))
+(defvar *djula-execute-package* (find-package :common-lisp-user))
 
 (defvar *default-language* :english)
 

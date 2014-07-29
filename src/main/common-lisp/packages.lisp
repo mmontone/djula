@@ -20,6 +20,7 @@
            #:*template-search-path*
            #:*template-string-if-invalid*
            #:*use-example-values-p*
+	   #:*djula-execute-package*
            #:compile-example-table-p
            #:compile-template
            #:compile-template*
