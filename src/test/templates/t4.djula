@@ -1,0 +1,6 @@
+{% extends "t1.djula" %}
+
+{% block header %}
+  {% super header %}
+  Bye
+{% endblock %}
