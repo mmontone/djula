@@ -26,6 +26,8 @@ Contents:
    tags
    filters
    inheritance
+   escaping
+   custom
 
 Indices and tables
 ==================
