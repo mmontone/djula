@@ -21,7 +21,7 @@ Contents:
    templates
    download
    example
-   using
+   usage
    variables
    tags
    filters

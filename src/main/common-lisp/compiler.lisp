@@ -25,9 +25,11 @@
       (call-next-method *current-compiler* name))))
 
 (defun compile-template* (name)
+  "Compiles template NAME with compiler in *CURRENT-COMPILER*"
   (compile-template *current-compiler* name))
 
 (defun render-template* (template stream &rest *template-arguments*)
+  "Render TEMPLATE into STREAM passing *TEMPLATE-ARGUMENTS*"
   (cond
     ((or (pathnamep template)
          (stringp template))
