@@ -1,26 +1,44 @@
+.. highlightlang:: html+django
+		   
 Basics
 ======
 
-A template is a text document that is marked-up using Djula template language. A template can contain block tags or variables.
+.. highlightlang:: html+django
 
-A block tag is a symbol within a template that does something.
+A template is simply a text file. It can generate any text-based format (HTML,
+XML, CSV, etc.).
 
-This definition is deliberately vague. For example, a block tag can output content, serve as a control structure (an “if” statement or “for” loop), grab content from a database or enable access to other template tags.
+A template contains **variables**, which get replaced with values when the
+template is evaluated, and **tags**, which control the logic of the template.
 
-Block tags are surrounded by "{%" and "%}".
+Below is a minimal template that illustrates a few basics. Each element will be
+explained later in this document.
 
-Example template with block tags:
+.. code-block:: html+django
 
-{% if is_logged_in %}Thanks for logging in!{% else %}Please log in.{% endif %}
+    {% extends "base_generic.html" %}
 
-A variable is a symbol within a template that outputs a value.
+    {% block title %}{{ section.title }}{% endblock %}
 
-Variable tags are surrounded by "{{" and "}}".
+    {% block content %}
+    <h1>{{ section.title }}</h1>
 
-Example template with variables:
+    {% for story in story_list %}
+    <h2>
+      <a href="{{ story.get_absolute_url }}">
+        {{ story.headline|upper }}
+      </a>
+    </h2>
+    <p>{{ story.tease|truncatewords:"100" }}</p>
+    {% endfor %}
+    {% endblock %}
 
-My first name is {{ first_name }}. My last name is {{ last_name }}.
+.. admonition:: Philosophy
 
-A context is a “variable name” -> “variable value” mapping that is passed to a template.
+    Why use a text-based template instead of an XML-based one (like Zope's
+    TAL)? We wanted Django's template language to be usable for more than
+    just XML/HTML templates. At World Online, we use it for emails,
+    JavaScript and CSV. You can use the template language for any text-based
+    format.
 
-A template renders a context by replacing the variable “holes” with values from the context and executing all block tags.
+    Oh, and one more thing: Making humans edit XML is sadistic!

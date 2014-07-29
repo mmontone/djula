@@ -3,6 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. highlightlang:: html+django
+
 Welcome to Djula HTML templating system's documentation!
 ========================================================
 
@@ -22,7 +24,8 @@ Contents:
    using
    variables
    tags
-   blocks
+   filters
+   inheritance
 
 Indices and tables
 ==================
