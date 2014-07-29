@@ -24,6 +24,7 @@ Contents:
    usage
    variables
    tags
+   comments
    filters
    inheritance
    escaping

@@ -32,13 +32,3 @@ explained later in this document.
     <p>{{ story.tease|truncatewords:"100" }}</p>
     {% endfor %}
     {% endblock %}
-
-.. admonition:: Philosophy
-
-    Why use a text-based template instead of an XML-based one (like Zope's
-    TAL)? We wanted Django's template language to be usable for more than
-    just XML/HTML templates. At World Online, we use it for emails,
-    JavaScript and CSV. You can use the template language for any text-based
-    format.
-
-    Oh, and one more thing: Making humans edit XML is sadistic!
