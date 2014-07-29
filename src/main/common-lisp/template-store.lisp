@@ -1,6 +1,6 @@
 (in-package #:djula)
 
-(defgeneric find-template (store name)
+(defgeneric find-template (store name &optional error-p)
   (:documentation "Return a hashable key that uniquely identifies the named template."))
 
 (defgeneric fetch-template (store key)
@@ -19,15 +19,23 @@
     :documentation "User-provided list of template locations."))
   (:documentation "Searches for template files on disk according to the given search path."))
 
-(defmethod find-template ((store file-store) name)
+(defmethod find-template ((store file-store) name &optional (error-p t))
   (with-slots (current-path search-path)
       store
-    (if (char= (char name 0) #\/)
-	(fad:file-exists-p name)
-	(loop
-	   with path = (if current-path (cons (directory-namestring current-path) search-path) search-path)
-	   for dir in path
-	   thereis (fad:file-exists-p (merge-pathnames name dir))))))
+    (or
+     (cond
+       ((pathnamep name)
+	(fad:file-exists-p name))
+       ((char= (char name 0) #\/)
+	(fad:file-exists-p name))
+       (t (loop
+	     with path = (if current-path
+			     (cons (directory-namestring current-path) search-path)
+			     search-path)
+	     for dir in path
+	     thereis (fad:file-exists-p (merge-pathnames name dir)))))
+     (when error-p
+       (error "Template ~A not found" name)))))
 
 (defmethod fetch-template ((store file-store) key)
   (with-slots (current-path)
@@ -37,8 +45,8 @@
 (defvar *current-store* (make-instance 'file-store)
   "The currently in-use template store.  Defaults to a FILE-STORE.")
 
-(defun find-template* (name)
-  (find-template *current-store* name))
+(defun find-template* (name &optional (error-p t))
+  (find-template *current-store* name error-p))
 
 (defun fetch-template* (key)
   "Return the text of a template fetched from the *CURRENT-STORE*."

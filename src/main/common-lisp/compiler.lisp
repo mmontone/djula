@@ -1,13 +1,13 @@
 (in-package #:djula)
 
-(defgeneric compile-template (compiler name)
+(defgeneric compile-template (compiler name &optional error-p)
   (:documentation "Provides a hook to customize template compilation."))
 
 (defclass compiler ()
   ())
 
-(defmethod compile-template ((compiler compiler) name)
-  (when-let ((key (find-template* name)))
+(defmethod compile-template ((compiler compiler) name &optional (error-p t))
+  (when-let ((key (find-template* name error-p)))
     (compile-string (fetch-template* key))))
 
 (defclass toplevel-compiler (compiler)
@@ -18,7 +18,7 @@
 
 (defvar *current-compiler* (make-instance 'toplevel-compiler))
 
-(defmethod compile-template :around ((compiler toplevel-compiler) name)
+(defmethod compile-template :around ((compiler toplevel-compiler) name &optional (error-p t))
   (let ((*block-alist* nil)
         (*linked-files* nil))
     (let ((*current-compiler* (fragment-compiler compiler)))
