@@ -4,8 +4,7 @@
                #:fiveam)
   :components
   ((:module :test
-            :pathname "src/test/common-lisp"
-            :components
+	    :components
             ((:file "compiler"  :depends-on ("packages"))
              (:file "filters"   :depends-on ("packages"))
              (:file "lexer"     :depends-on ("packages"))

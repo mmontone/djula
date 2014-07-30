@@ -1,5 +1,0 @@
-{% extends "t1.djula" %}
-
-{% block header %}
-Bye
-{% endblock %}

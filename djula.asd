@@ -12,8 +12,7 @@
 	       #:cl-fad
 	       #:split-sequence)
   :components
-  ((:module :main
-            :pathname "src/main/common-lisp"
+  ((:module :src
 	    :components
             ((:file "compiler"       :depends-on ("lexer" "parser" "template-store"))
              (:file "conditions"     :depends-on ("specials"))
