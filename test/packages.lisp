@@ -11,4 +11,4 @@
 (def-suite djula-test)
 
 (defun run-djula-tests ()
-  (run! 'djula-test))
+  (debug! 'djula-test))
