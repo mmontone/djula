@@ -27,7 +27,7 @@
   (if (zerop (length it)) default it))
 
 (def-filter :force_escape (it)
-  (html-escape (princ-to-string it)))
+  (escape-for-html (princ-to-string it)))
 
 (def-filter :length (it)
   (length (princ-to-string it)))
@@ -49,8 +49,8 @@
              (sexp (read-from-string lisp-string))
              (fn (coerce sexp 'function)))
         (funcall fn it))
-    (condition ()
-      (template-error "There was an error executing the lisp tag ~S" lisp-string))))
+    (condition (e)
+      (template-error "There was an error executing the lisp tag ~S: ~A" lisp-string e))))
 
 (def-filter :lower (it)
   (string-downcase (princ-to-string it)))
