@@ -17,26 +17,50 @@ form that returns some debugging info."
 	       ,@body))))))
 
 (def-tag-processor :extends (template-path) rest-tokens
-  (let ((real-path (find-template* template-path)))
-    (pushnew real-path *linked-files* :test 'equal)
-    (handler-case
-        (when real-path
-          (let* ((string (fetch-template* real-path))
-                 (processed (process-tokens (parse-template-string string)))
-                 (extend-blocks
-                  (mapcar (lambda (x)
-                            (destructuring-bind (<parsed-block> (name) . tokens)
-                                x
-                              (declare (ignore <parsed-block>))
-                              (list* name tokens)))
-                          (remove :parsed-block
-                                  (process-tokens rest-tokens)
-                                  :key #'first
-                                  :test-not #'eq))))
-            (setf *block-alist* (append extend-blocks *block-alist*))
-            processed))
-      (condition ()
-        (template-error "Cannot extend the template ~A because there was an error parsing the template file ~A" template-path real-path)))))
+  (labels ((blocks-list (tokens)
+	     (mapcar (lambda (x)
+		       (destructuring-bind (<parsed-block> (name) . tokens)
+			   x
+			 (declare (ignore <parsed-block>))
+			 (list* name tokens)))
+		     (remove :parsed-block
+			     tokens
+			     :key #'first
+			     :test-not #'eq)))
+	   (flattened-blocks-list (tokens)
+	     (flet ((block-children (x)
+		      (remove :parsed-block
+			      (destructuring-bind (<parsed-block> (name) . tokens)
+				  x
+				(declare (ignore name <parsed-block>))
+				tokens)
+			      :key #'first
+			      :test-not #'eq)))
+	       (when tokens
+		 (let ((top-level-blocks (remove :parsed-block
+						 tokens
+						 :key #'first
+						 :test-not #'eq)))
+		   (append
+			  (blocks-list tokens)
+			  (flattened-blocks-list
+			   (apply #'append
+				  (mapcar #'block-children
+					  top-level-blocks)))))))))
+    (let ((real-path (find-template* template-path)))
+      (pushnew real-path *linked-files* :test 'equal)
+      (handler-case
+	  (when real-path
+	    (let* ((string (fetch-template* real-path))
+		   (processed (process-tokens (parse-template-string string)))
+		   (super-blocks (flattened-blocks-list processed))
+		   (extend-blocks (blocks-list (process-tokens rest-tokens))))
+	      (setf *block-alist* (if *block-alist*
+				      (append extend-blocks *block-alist*)
+				      (append extend-blocks super-blocks)))
+	      processed))
+	(condition (e)
+	  (template-error "Cannot extend the template ~A because there was an error parsing the template file ~A: ~A" template-path real-path e))))))
 
 (def-delimited-tag :block :endblock :parsed-block)
 
@@ -51,15 +75,16 @@ form that returns some debugging info."
 (def-tag-compiler :super (&optional name)
   ;; Pay attention to scoping here.  *BLOCK-ALIST* is dynamic and cannot be
   ;; refactored to inside the lambda.  Well, not with the desired results, anyway.
-  (let* ((target (member (or name *current-block*)
-			 *block-alist*
-			 :key #'first
-			 :test #'eq))
+  (let* ((super-block-name (or name *current-block*))
+	 (target (second (remove-if-not (lambda (block)
+					  (equalp super-block-name (first block)))
+					*block-alist*)))
 	 (*block-alist* (if target (rest target) *block-alist*))
-	 (fs (mapcar #'compile-token (if target (rest (first target)) nil))))
+	 (fs (when target
+	       (mapcar #'compile-token (rest target)))))
     (lambda (stream)
       (dolist (f fs)
-        (funcall f stream)))))
+	(funcall f stream)))))
 
 (def-delimited-tag :comment :endcomment :comment-tag)
 
