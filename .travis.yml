@@ -13,4 +13,4 @@ install:
   - curl https://raw2.github.com/luismbo/cl-travis/master/install.sh | bash
 
 script:
-  - cl-launch -i "(require :djula-test)(djula-test:run-djula-tests)"
+  - cl-launch -i "(ql:quickload :fiveam)(require :djula-test)(djula-test:run-djula-tests)"
