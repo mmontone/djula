@@ -73,8 +73,6 @@ form that returns some debugging info."
 	  (funcall f stream))))))
 
 (def-tag-compiler :super (&optional name)
-  ;; Pay attention to scoping here.  *BLOCK-ALIST* is dynamic and cannot be
-  ;; refactored to inside the lambda.  Well, not with the desired results, anyway.
   (let* ((super-block-name (or name *current-block*
 			       (template-error "No parent block")))
 	 (target (or
