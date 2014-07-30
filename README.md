@@ -1,12 +1,15 @@
-Djula
-~~~~~~
+# Djula
 
-Djula is a port of Python's `Django`_ template engine to Common Lisp. 
+[![Build Status](https://travis-ci.org/mmontone/djula.svg?branch=master)](https://travis-ci.org/mmontone/djula)
 
-Nutshell
---------
+Djula is a port of Python's [Django](http://www.djangoproject.com) template engine to Common Lisp. 
+
+## Nutshell
+
 
 Here a small example of a template::
+
+```HTML+Django
 
     {% extends "base.html" %}
     {% block title %}Memberlist{% endblock %}
@@ -17,15 +20,11 @@ Here a small example of a template::
       {% endfor %}
       </ul>
     {% endblock %}
+```
 
-Philosophy
-----------
+## Philosophy
 
 Application logic is for the controller but don't try to make the life
 for the template designer too hard by giving him too few functionality.
 
-For more information visit the new `Djula webpage`_ and `documentation`_.
-
-.. _Django: http://www.djangoproject.com/
-.. _Djula webpage: http://mmontone.github.io/djula
-.. _documentation: http://mmontone.github.io/djula/doc/build/html/index.html
+For more information visit the new [Djula webpage](http://mmontone.github.io/djula) and [documentation](http://mmontone.github.io/djula/doc/build/html/index.html).
