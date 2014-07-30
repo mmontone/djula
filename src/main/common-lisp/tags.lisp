@@ -16,17 +16,6 @@ form that returns some debugging info."
 	     (let ((,string-var (fetch-template* ,real-path)))
 	       ,@body))))))
 
-(defun replace-blocks (blocks-alist extend-blocks)
-  (let ((extended-blocks-alist (copy-list blocks-alist)))
-    (loop for extend-block in extend-blocks
-       do
-	 (if (assoc (car extend-block) blocks-alist)
-	     (setf (cdr (assoc (car extend-block) extended-blocks-alist))
-		 (cdr extend-block))
-	   ;else
-	   (push extend-block extended-blocks-alist)))
-    extended-blocks-alist))
-
 (def-tag-processor :extends (template-path) rest-tokens
   (let ((real-path (find-template* template-path)))
     (pushnew real-path *linked-files* :test 'equal)
@@ -44,7 +33,7 @@ form that returns some debugging info."
                                   (process-tokens rest-tokens)
                                   :key #'first
                                   :test-not #'eq))))
-	    (setf *block-alist* (replace-blocks *block-alist* extend-blocks))
+            (setf *block-alist* (append extend-blocks *block-alist*))
             processed))
       (condition ()
         (template-error "Cannot extend the template ~A because there was an error parsing the template file ~A" template-path real-path)))))
