@@ -62,7 +62,7 @@
 	   (djula::render-template* 
 	    template nil
 	    :foo "foo" :bar "bar")
-	   "")))  
+	   "foobar")))  
 
     (let ((template (djula::compile-string "{{foo.bar}}")))
       (is (equalp
