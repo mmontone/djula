@@ -30,4 +30,6 @@
 
 (defvar *block-alist* nil)
 
+(defvar *current-block* nil)
+
 (defvar *linked-files*)
