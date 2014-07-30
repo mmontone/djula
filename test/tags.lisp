@@ -36,3 +36,21 @@
       (is (funcall fn)))
     (let ((djula::*template-arguments* '((:thursday . nil))))
       (is (not (funcall fn))))))
+
+(test conditional-test
+  (let ((template (djula::compile-string "{% if foo %}foo{% else %}bar{% endif %}")))
+    (is (equalp
+	 (djula:render-template* template nil)
+	 "bar"))
+    (is (equalp
+	 (djula:render-template* template nil :foo t)
+	 "foo"))))
+
+(test loop-test
+  (let ((template (djula::compile-string "<ul>{% for elem in list %}<li>{{elem}}</li>{% endfor %}</ul>")))
+    (is (equalp
+	 (djula:render-template* template nil)
+	 "<ul></ul>"))
+    (is (equalp
+	 (djula:render-template* template nil :list (list "foo" "bar"))
+	 "<ul><li>foo</li><li>bar</li></ul>"))))

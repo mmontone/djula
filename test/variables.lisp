@@ -73,5 +73,6 @@
       (is (equalp
 	   (djula::render-template*
 	    template
+	    nil
 	    :foo (list :bar "bar"))
 	   "bar")))))
