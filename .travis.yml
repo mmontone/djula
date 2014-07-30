@@ -13,4 +13,4 @@ install:
   - curl https://raw2.github.com/luismbo/cl-travis/master/install.sh | bash
 
 script:
-  - cl-launch -i "(let ((deps (list :fiveam :access :alexandria :arnesi :babel :cl-ppcre :cl-fad :split-sequence)))(mapcar #'ql:quickload deps))(require :djula-test)(djula-test:run-djula-tests)"
+  - cl-launch -i "(ql:quickload :djula-test)(djula-test:run-djula-tests)"
