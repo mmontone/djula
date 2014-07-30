@@ -2,7 +2,7 @@ language: lisp
 
 branches:
   only:
-    - travis
+    - master
 
 env:
   matrix:
