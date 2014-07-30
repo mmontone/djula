@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Djula by mmontone</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Djula</h1>
+        <p class="header">Common Lisp port of the Django templating language</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/mmontone/djula/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/mmontone/djula/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/mmontone/djula">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/mmontone">mmontone</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a name="djula" class="anchor" href="#djula"><span class="octicon octicon-link"></span></a>Djula</h1>
+
+<p>Djula is a port of Python's Django template engine to Common Lisp. </p>
+
+<h2>
+<a name="nutshell" class="anchor" href="#nutshell"><span class="octicon octicon-link"></span></a>Nutshell</h2>
+
+<p>Here a small example of a template:</p>
+
+<div class="highlight highlight-HTML+Django"><pre>    <span class="cp">{%</span> <span class="k">extends</span> <span class="s2">"base.html"</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>Memberlist<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+      <span class="nt">&lt;ul&gt;</span>
+      <span class="cp">{%</span> <span class="k">for</span> <span class="nv">user</span> <span class="k">in</span> <span class="nv">users</span> <span class="cp">%}</span>
+        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"</span><span class="cp">{{</span> <span class="nv">user.url</span> <span class="cp">}}</span><span class="s">"</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">user.username</span> <span class="cp">}}</span><span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+
+<h2>
+<a name="philosophy" class="anchor" href="#philosophy"><span class="octicon octicon-link"></span></a>Philosophy</h2>
+
+<p>Application logic is for the controller but don't try to make the life
+for the template designer too hard by giving him too few functionality.</p>
+
+<h2>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h2>
+
+<ul>
+<li><a href="http://mmontone.github.io/djula/doc/build/html/index.html">HTML</a></li>
+<li><a href="http://mmontone.github.io/djula/doc/build/latex/djula.pdf">PDF</a></li>
+</ul>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("lisp html template");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
