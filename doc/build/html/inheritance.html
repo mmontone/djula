@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Template inheritance &mdash; Djula HTML templating system 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.1.0/yeti/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Djula HTML templating system 0.2 documentation" href="index.html" />
+    <link rel="next" title="Automatic HTML escaping" href="escaping.html" />
+    <link rel="prev" title="Filters" href="filters.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          Djula HTML templating system</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.2</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tags.html">Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comments.html">Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Template inheritance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="escaping.html">Automatic HTML escaping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom.html">Custom tag and filter libraries</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Template inheritance</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="filters.html" title="Previous Chapter: Filters"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Filters</span>
+    </a>
+  </li>
+  <li>
+    <a href="escaping.html" title="Next Chapter: Automatic HTML escaping"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Automatic HTML e... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/inheritance.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="s-template-inheritance">
+<span id="template-inheritance"></span><h1>Template inheritance<a class="headerlink" href="#template-inheritance" title="Permalink to this headline">¶</a></h1>
+<p>The most powerful &#8211; and thus the most complex &#8211; part of Djula&#8217;s template
+engine is template inheritance. Template inheritance allows you to build a base
+&#8220;skeleton&#8221; template that contains all the common elements of your site and
+defines <strong>blocks</strong> that child templates can override.</p>
+<p>It&#8217;s easiest to understand template inheritance by starting with an example:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;style.css&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;title&gt;</span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>My amazing site<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;sidebar&quot;</span><span class="nt">&gt;</span>
+        <span class="cp">{%</span> <span class="k">block</span> <span class="nv">sidebar</span> <span class="cp">%}</span>
+        <span class="nt">&lt;ul&gt;</span>
+            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/blog/&quot;</span><span class="nt">&gt;</span>Blog<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;/ul&gt;</span>
+        <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
+        <span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<p>This template, which we&#8217;ll call <tt class="docutils literal"><span class="pre">base.html</span></tt>, defines a simple HTML skeleton
+document that you might use for a simple two-column page. It&#8217;s the job of
+&#8220;child&#8221; templates to fill the empty blocks with content.</p>
+<p>In this example, the <a class="reference internal" href="tags.html#std:templatetag-block"><tt class="xref std std-ttag docutils literal"><span class="pre">block</span></tt></a> tag defines three blocks that child
+templates can fill in. All the <a class="reference internal" href="tags.html#std:templatetag-block"><tt class="xref std std-ttag docutils literal"><span class="pre">block</span></tt></a> tag does is to tell the template
+engine that a child template may override those portions of the template.</p>
+<p>A child template might look like this:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>My amazing blog<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">entry</span> <span class="k">in</span> <span class="nv">blog_entries</span> <span class="cp">%}</span>
+    <span class="nt">&lt;h2&gt;</span><span class="cp">{{</span> <span class="nv">entry.title</span> <span class="cp">}}</span><span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;p&gt;</span><span class="cp">{{</span> <span class="nv">entry.body</span> <span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="tags.html#std:templatetag-extends"><tt class="xref std std-ttag docutils literal"><span class="pre">extends</span></tt></a> tag is the key here. It tells the template engine that
+this template &#8220;extends&#8221; another template. When the template system evaluates
+this template, first it locates the parent &#8211; in this case, &#8220;base.html&#8221;.</p>
+<p>At that point, the template engine will notice the three <a class="reference internal" href="tags.html#std:templatetag-block"><tt class="xref std std-ttag docutils literal"><span class="pre">block</span></tt></a> tags
+in <tt class="docutils literal"><span class="pre">base.html</span></tt> and replace those blocks with the contents of the child
+template. Depending on the value of <tt class="docutils literal"><span class="pre">blog_entries</span></tt>, the output might look
+like:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;style.css&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;title&gt;</span>My amazing blog<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;sidebar&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;ul&gt;</span>
+            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/blog/&quot;</span><span class="nt">&gt;</span>Blog<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h2&gt;</span>Entry one<span class="nt">&lt;/h2&gt;</span>
+        <span class="nt">&lt;p&gt;</span>This is my first entry.<span class="nt">&lt;/p&gt;</span>
+
+        <span class="nt">&lt;h2&gt;</span>Entry two<span class="nt">&lt;/h2&gt;</span>
+        <span class="nt">&lt;p&gt;</span>This is my second entry.<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+<p>Note that since the child template didn&#8217;t define the <tt class="docutils literal"><span class="pre">sidebar</span></tt> block, the
+value from the parent template is used instead. Content within a <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt>
+tag in a parent template is always used as a fallback.</p>
+<p>You can use as many levels of inheritance as needed. One common way of using
+inheritance is the following three-level approach:</p>
+<ul class="simple">
+<li>Create a <tt class="docutils literal"><span class="pre">base.html</span></tt> template that holds the main look-and-feel of your
+site.</li>
+<li>Create a <tt class="docutils literal"><span class="pre">base_SECTIONNAME.html</span></tt> template for each &#8220;section&#8221; of your
+site. For example, <tt class="docutils literal"><span class="pre">base_news.html</span></tt>, <tt class="docutils literal"><span class="pre">base_sports.html</span></tt>. These
+templates all extend <tt class="docutils literal"><span class="pre">base.html</span></tt> and include section-specific
+styles/design.</li>
+<li>Create individual templates for each type of page, such as a news
+article or blog entry. These templates extend the appropriate section
+template.</li>
+</ul>
+<p>This approach maximizes code reuse and makes it easy to add items to shared
+content areas, such as section-wide navigation.</p>
+<p>Here are some tips for working with inheritance:</p>
+<ul>
+<li><p class="first">If you use <a class="reference internal" href="tags.html#std:templatetag-extends"><tt class="xref std std-ttag docutils literal"><span class="pre">{%</span> <span class="pre">extends</span> <span class="pre">%}</span></tt></a> in a template, it must be the first template
+tag in that template. Template inheritance won&#8217;t work, otherwise.</p>
+</li>
+<li><p class="first">More <a class="reference internal" href="tags.html#std:templatetag-block"><tt class="xref std std-ttag docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt></a> tags in your base templates are better. Remember,
+child templates don&#8217;t have to define all parent blocks, so you can fill
+in reasonable defaults in a number of blocks, then only define the ones
+you need later. It&#8217;s better to have more hooks than fewer hooks.</p>
+</li>
+<li><p class="first">If you find yourself duplicating content in a number of templates, it
+probably means you should move that content to a <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt> in a
+parent template.</p>
+</li>
+<li><p class="first">If you need to get the content of the block from the parent template,
+the <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">block.super</span> <span class="pre">}}</span></tt> variable will do the trick. This is useful
+if you want to add to the contents of a parent block instead of
+completely overriding it. Data inserted using <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">block.super</span> <span class="pre">}}</span></tt> will
+not be automatically escaped (see the <a href="#id1"><span class="problematic" id="id2">`next section`_</span></a>), since it was
+already escaped, if necessary, in the parent template.</p>
+</li>
+<li><p class="first">For extra readability, you can optionally give a <em>name</em> to your
+<tt class="docutils literal"><span class="pre">{%</span> <span class="pre">endblock</span> <span class="pre">%}</span></tt> tag. For example:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+...
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="nv">content</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>In larger templates, this technique helps you see which <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt>
+tags are being closed.</p>
+</li>
+</ul>
+<p>Finally, note that you can&#8217;t define multiple <a class="reference internal" href="tags.html#std:templatetag-block"><tt class="xref std std-ttag docutils literal"><span class="pre">block</span></tt></a> tags with the same
+name in the same template. This limitation exists because a block tag works in
+&#8220;both&#8221; directions. That is, a block tag doesn&#8217;t just provide a hole to fill &#8211;
+it also defines the content that fills the hole in the <em>parent</em>. If there were
+two similarly-named <a class="reference internal" href="tags.html#std:templatetag-block"><tt class="xref std std-ttag docutils literal"><span class="pre">block</span></tt></a> tags in a template, that template&#8217;s parent
+wouldn&#8217;t know which one of the blocks&#8217; content to use.</p>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, Nick Allen.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
