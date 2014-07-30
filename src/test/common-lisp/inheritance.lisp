@@ -9,6 +9,7 @@
 (defparameter +t2+ (djula:compile-template* "t2.djula"))
 (defparameter +t3+ (djula:compile-template* "t3.djula"))
 (defparameter +t4+ (djula:compile-template* "t4.djula"))
+(defparameter +t5+ (djula:compile-template* "t5.djula"))
 
 (test simple-block-test
   (let ((output (djula:render-template* +t1+ nil)))
@@ -40,6 +41,13 @@
 ;; This test fails, needs a fix
 (test simple-super-test
   (let ((output (djula:render-template* +t4+ nil)))
+    (is (equalp (remove-if (lambda (char)
+			     (member char (list #\  #\Newline)))
+			   output)
+		"beforeHelloByeafter"))))
+
+(test simple-annon-super-test
+  (let ((output (djula:render-template* +t5+ nil)))
     (is (equalp (remove-if (lambda (char)
 			     (member char (list #\  #\Newline)))
 			   output)

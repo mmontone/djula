@@ -52,16 +52,20 @@ form that returns some debugging info."
 (def-delimited-tag :block :endblock :parsed-block)
 
 (def-token-compiler :parsed-block ((name) . block-tokens)
-  (let* ((target (member name *block-alist* :key #'first :test #'eq))
-	 (fs (mapcar #'compile-token (if target (rest (first target)) block-tokens))))
-    (lambda (stream)
-      (dolist (f fs)
-        (funcall f stream)))))
+  (let ((*current-block* name))
+    (let* ((target (member name *block-alist* :key #'first :test #'eq))
+	   (fs (mapcar #'compile-token (if target (rest (first target)) block-tokens))))
+      (lambda (stream)
+	(dolist (f fs)
+	  (funcall f stream))))))
 
-(def-tag-compiler :super (name)
+(def-tag-compiler :super (&optional name)
   ;; Pay attention to scoping here.  *BLOCK-ALIST* is dynamic and cannot be
-  ;; refactored to inside the lambda.  Well, not with the desired results, anyway,
-  (let* ((target (member name *block-alist* :key #'first :test #'eq))
+  ;; refactored to inside the lambda.  Well, not with the desired results, anyway.
+  (let* ((target (member (or name *current-block*)
+			 *block-alist*
+			 :key #'first
+			 :test #'eq))
 	 (*block-alist* (if target (rest target) *block-alist*))
 	 (fs (mapcar #'compile-token (if target (rest (first target)) nil))))
     (lambda (stream)
