@@ -25,7 +25,6 @@
 			   output)
 		"beforeByeafter"))))
 
-;; Two levels inheritance doesn't work. Needs to be fixed.
 (test two-levels-block-inheritance-test
   (let ((output (djula:render-template* +t3+ nil)))
     (is (equalp (remove-if (lambda (char)
@@ -38,7 +37,6 @@
     (let ((djula:*catch-template-errors-p* nil))
       (djula::compile-string "{% extends \"foo.djula\" %}"))))
 
-;; This test fails, needs a fix
 (test simple-super-test
   (let ((output (djula:render-template* +t4+ nil)))
     (is (equalp (remove-if (lambda (char)
@@ -52,3 +50,11 @@
 			     (member char (list #\  #\Newline)))
 			   output)
 		"beforeHelloByeafter"))))
+
+(test super-error
+  (signals djula::template-error
+    (let ((djula:*catch-template-errors-p* nil))
+      (djula::compile-string "{% super %}")))
+  (signals djula::template-error
+    (let ((djula:*catch-template-errors-p* nil))
+      (djula::compile-string "{% super foo %}"))))

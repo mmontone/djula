@@ -75,10 +75,13 @@ form that returns some debugging info."
 (def-tag-compiler :super (&optional name)
   ;; Pay attention to scoping here.  *BLOCK-ALIST* is dynamic and cannot be
   ;; refactored to inside the lambda.  Well, not with the desired results, anyway.
-  (let* ((super-block-name (or name *current-block*))
-	 (target (second (remove-if-not (lambda (block)
-					  (equalp super-block-name (first block)))
-					*block-alist*)))
+  (let* ((super-block-name (or name *current-block*
+			       (template-error "No parent block")))
+	 (target (or
+		  (second (remove-if-not (lambda (block)
+					   (equalp super-block-name (first block)))
+					 *block-alist*))
+		  (template-error "Parent block ~A not found" (or name *current-block*))))
 	 (*block-alist* (if target (rest target) *block-alist*))
 	 (fs (when target
 	       (mapcar #'compile-token (rest target)))))
