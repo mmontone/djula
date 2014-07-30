@@ -54,3 +54,52 @@
     (is (equalp
 	 (djula:render-template* template nil :list (list "foo" "bar"))
 	 "<ul><li>foo</li><li>bar</li></ul>"))))
+
+(test logical-statements-test
+  (let ((template (djula::compile-string "{% if foo and baz %}yes{% else %}no{% endif %}")))
+    (is (equalp 
+	 (djula:render-template* template nil)
+	 "no"))
+    (is (equalp 
+	 (djula:render-template* template nil :foo "foo")
+	 "no"))
+    (is (equalp 
+	 (djula:render-template* template nil :foo "foo" :baz "baz")
+	 "yes")))
+  (let ((template (djula::compile-string "{% if foo and not baz %}yes{% else %}no{% endif %}")))
+    (is (equalp 
+	 (djula:render-template* template nil)
+	 "no"))
+    (is (equalp 
+	 (djula:render-template* template nil :foo "foo")
+	 "yes"))
+    (is (equalp 
+	 (djula:render-template* template nil :foo "foo" :baz "baz")
+	 "no")))
+  ;; association doesnt work for now:
+  #+nil(let ((template (djula::compile-string "{% if foo and (not baz) %}yes{% else %}no{% endif %}")))
+	 (is (equalp 
+	      (djula:render-template* template nil)
+	      "no"))
+	 (is (equalp 
+	      (djula:render-template* template nil :foo "foo")
+	      "yes"))
+	 (is (equalp 
+	      (djula:render-template* template nil :foo "foo" :baz "baz")
+	      "no")))
+  ;; numeric comparison operators are not supported (<,>,=,/=)
+  #+nil(let ((template (djula::compile-string "{% if foo > baz %}yes{% else %}no{% endif %}")))
+    (is (equalp 
+	 (djula:render-template* template nil :foo 3 :baz 2)
+	 "yes"))
+    (is (equalp 
+	 (djula:render-template* template nil :foo 2 :baz 3)
+	 "no")))
+  ;; Lisp evaluation in ifs doesn't work, could be nice...
+  #+nil(let ((template (djula::compile-string "{% if (> foo baz) | lisp %}yes{% else %}no{% endif %}")))
+    (is (equalp 
+	 (djula:render-template* template nil :foo 3 :baz 2)
+	 "yes"))
+    (is (equalp 
+	 (djula:render-template* template nil :foo 2 :baz 3)
+	 "no"))))
