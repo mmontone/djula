@@ -196,7 +196,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'DjulaHTMLtemplatingsystemdoc'
+htmlhelp_basename = 'Djula'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -216,7 +216,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'DjulaHTMLtemplatingsystem.tex', u'Djula HTML templating system Documentation',
+  ('index', 'Djula.tex', u'Djula HTML templating system Documentation',
    u'Nick Allen', 'manual'),
 ]
 
