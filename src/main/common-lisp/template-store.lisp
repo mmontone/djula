@@ -37,10 +37,11 @@
      (when error-p
        (error "Template ~A not found" name)))))
 
-(defmethod fetch-template ((store file-store) key)
+(defmethod fetch-template ((store file-store) name)
   (with-slots (current-path)
       store
-    (and key (slurp (setf current-path key)))))
+    (setf current-path name)
+    (and name (slurp (find-template store name)))))
 
 (defvar *current-store* (make-instance 'file-store)
   "The currently in-use template store.  Defaults to a FILE-STORE.")

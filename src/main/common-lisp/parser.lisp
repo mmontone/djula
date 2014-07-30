@@ -4,7 +4,9 @@
   (destructuring-bind (name . args) token
     (let ((f (get name 'token-processor)))
       (if (null f)
+	  ;; If it is not a processor, then just collect the token
 	  (cons token (process-tokens rest-token-list))
+	  ;; else, we apply the processor
 	  (progn
             (handler-case
                 (apply f rest-token-list args)
@@ -24,7 +26,7 @@
                        (list :string
                              msg)
                        (process-tokens rest-token-list))
-                      (error 'template-error msg))))))))))
+                      (error 'template-error :message msg))))))))))
 
 (defun process-tokens (tokens)
   (when tokens

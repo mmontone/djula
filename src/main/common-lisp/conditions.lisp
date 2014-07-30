@@ -3,7 +3,8 @@
 (define-condition template-error (error)
   ((message
     :reader template-error-message
-    :initarg :message))
+    :initarg :message
+    :initform (error "Provide the error message")))
   (:report
    (lambda (e stream)
      (princ (template-error-message e) stream))))
