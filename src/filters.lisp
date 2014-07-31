@@ -52,6 +52,61 @@
     (condition (e)
       (template-error "There was an error executing the lisp tag ~S: ~A" lisp-string e))))
 
+(def-filter :add (it n)
+  (+ it n))
+
+(def-filter :first (it)
+  (first it))
+
+(def-filter :last (it)
+  (car (last it)))
+
+(def-filter :addslashes (it)
+  (cl-ppcre:regex-replace-all "'" it "\\\\'"))
+
+(def-filter :date (it &optional format)
+  (let ((timestamp (cond
+		     ((integerp it)
+		      (local-time:universal-to-timestamp it))
+		     ((stringp it)
+		      (local-time:universal-to-timestamp (parse-integer it)))
+		     (t it))))
+    (local-time:format-timestring
+     nil
+     timestamp
+     :format
+     (or (and format
+	      (read-from-string format))
+	 local-time:+iso-8601-date-format+))))
+
+(def-filter :time (it &optional format)
+  (let ((timestamp (cond
+		     ((integerp it)
+		      (local-time:universal-to-timestamp it))
+		     ((stringp it)
+		      (local-time:universal-to-timestamp (parse-integer it)))
+		     (t it))))
+    (local-time:format-timestring
+     nil
+     timestamp
+     :format
+     (or (and format (read-from-string format))
+	 '((:HOUR 2) #\: (:MIN 2) #\: (:SEC 2))))))
+
+(def-filter :datetime (it &optional format)
+  (let ((timestamp (cond
+		     ((integerp it)
+		      (local-time:universal-to-timestamp it))
+		     ((stringp it)
+		      (local-time:universal-to-timestamp (parse-integer it)))
+		     (t it))))
+    (local-time:format-timestring
+     nil
+     timestamp
+     :format
+     (or (and format (read-from-string format))
+	 local-time:+iso-8601-format+))))
+
 (def-filter :lower (it)
   (string-downcase (princ-to-string it)))
 

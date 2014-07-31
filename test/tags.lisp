@@ -164,4 +164,6 @@
 
 #+nil(test translation-test
   (let ((template (djula::compile-string "{% translation hello %}")))
+    (djula:render-template* template))
+  (let ((template (djula::compile-string "{_hello_}")))
     (djula:render-template* template)))

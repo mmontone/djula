@@ -18,7 +18,23 @@
 asdf")))
   (is (string= "LALA" (filter :lisp "lala" "string-upcase")))
   (is (string= (filter :urlencode "http://www.google.com")
-	       "http%3A%2F%2Fwww.google.com")))
+	       "http%3A%2F%2Fwww.google.com"))
+  (is (= (filter :add 2 2) 4))
+  (is (string= (filter :addslashes "I'm using Djula")
+	       "I\\'m using Djula"))
+  (is (string=
+       (filter :date (encode-universal-time 0 0 0 1 1 2014))
+       "2014-01-01"))
+  (is (string=
+       (filter :time (encode-universal-time 17 17 18 1 1 2014))
+       "18:17:17"))
+  (is (string=
+       (filter :datetime (encode-universal-time 17 17 18 1 1 2014))
+       "2014-01-01T18:17:17.000000-03:00"))
+  (is (equalp (filter :first (list "a" "b" "c" "d"))
+	      "a"))
+  (is (equalp (filter :last (list "a" "b" "c" "d"))
+	      "d")))
 
 (test apply-filters
   (is (string= "SHORT..."
