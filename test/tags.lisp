@@ -126,3 +126,13 @@
 	(is (equalp
 	     (djula:render-template* template nil)
 	     (print-hello)))))))
+
+(test comment-test
+  (let ((template (djula::compile-string "Hello{% comment %}This is a comment {% endcomment %}")))
+    (is (equalp
+	 (djula:render-template* template nil)
+	 "Hello")))
+  (let ((template (djula::compile-string "{# This is a comment #}Hello")))
+    (is (equalp
+	 (djula:render-template* template nil)
+	 "Hello"))))
