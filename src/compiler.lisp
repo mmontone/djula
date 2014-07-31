@@ -28,7 +28,7 @@
   "Compiles template NAME with compiler in *CURRENT-COMPILER*"
   (compile-template *current-compiler* name))
 
-(defun render-template* (template stream &rest *template-arguments*)
+(defun render-template* (template &optional stream &rest *template-arguments*)
   "Render TEMPLATE into STREAM passing *TEMPLATE-ARGUMENTS*"
   (cond
     ((or (pathnamep template)
