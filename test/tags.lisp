@@ -103,3 +103,26 @@
     (is (equalp 
 	 (djula:render-template* template nil :foo 2 :baz 3)
 	 "no"))))
+
+(defun print-hello ()
+  "Hello!!")
+
+(test lisp-tag-test
+  (let ((djula:*catch-template-errors-p* nil))
+    ;; Simple lisp expression
+    (let ((template (djula::compile-string "{% lisp (+ 33 44)%}")))
+      (is (equalp
+	   (djula:render-template* template nil)
+	   "77")))
+    ;; Function not in the correct package
+    (signals djula::template-error
+      (let ((djula:*djula-execute-package* :cl-user))
+	(let ((template (djula::compile-string "{% lisp (print-hello)%}")))
+	  (is (equalp
+	       (djula:render-template* template nil)
+	       (print-hello)))))
+      ;; Set the lisp package for accessing the function
+      (let ((template (djula::compile-string "{% set-package djula-test %}{% lisp (print-hello)%}")))
+	(is (equalp
+	     (djula:render-template* template nil)
+	     (print-hello)))))))

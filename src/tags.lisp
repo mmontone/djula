@@ -197,7 +197,7 @@ keyword version of `NAME' [or NIL if `NAME' is not supplied]"
 
 
 (def-tag-compiler :set-package (package-name)
-  ":SET-PACKAGE tags are compiled into a function that set *DJULA-EXeCUTE-PACKAGE*
+  ":SET-PACKAGE tags are compiled into a function that set *DJULA-EXECUTE-PACKAGE*
 to the the package value of find package on the keyword `PACKAGE-NAME' or the 
 package `common-lisp-user' if the package for `PACKAGE-NAME' is not found. This
 is useful to determine the package in which :LISP tags are executed"
