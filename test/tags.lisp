@@ -136,3 +136,32 @@
     (is (equalp
 	 (djula:render-template* template nil)
 	 "Hello"))))
+
+(test ifequal-test
+  (let ((template (djula::compile-string "{% ifequal foo bar %}yes{% else %}no{% endifequal %}")))
+    (is (equalp
+	 (djula:render-template* template nil :foo "foo" :bar "bar")
+	 "no"))
+    (is (equalp
+	 (djula:render-template* template nil :foo "foo" :bar "foo")
+	 "yes"))
+    (is (equalp
+	 (djula:render-template* template nil :foo 4 :bar 4)
+	"yes"))))
+
+(test ifnotequal-test
+  (let ((template (djula::compile-string "{% ifnotequal foo bar %}yes{% else %}no{% endifnotequal %}")))
+    (is (equalp
+	 (djula:render-template* template nil :foo "foo" :bar "bar")
+	 "yes"))
+    (is (equalp
+	 (djula:render-template* template nil :foo "foo" :bar "foo")
+	 "no"))
+    (is (equalp
+	 (djula:render-template* template nil :foo 4 :bar 4)
+	"no"))))
+
+
+#+nil(test translation-test
+  (let ((template (djula::compile-string "{% translation hello %}")))
+    (djula:render-template* template)))
