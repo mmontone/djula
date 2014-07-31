@@ -1,0 +1,2 @@
+{% include "t1.djula" %}
+{% include "t2.djula" %}
