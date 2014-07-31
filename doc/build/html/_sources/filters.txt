@@ -43,26 +43,9 @@ Adds the argument to the value.
 
 For example::
 
-    {{ value|add:"2" }}
+    {{ value|add "2" }}
 
 If ``value`` is ``4``, then the output will be ``6``.
-
-This filter will first try to coerce both values to integers. If this fails,
-it'll attempt to add the values together anyway. This will work on some data
-types (strings, list, etc.) and fail on others. If it fails, the result will
-be an empty string.
-
-For example, if we have::
-
-    {{ first|add:second }}
-
-and ``first`` is ``[1, 2, 3]`` and ``second`` is ``[4, 5, 6]``, then the
-output will be ``[1, 2, 3, 4, 5, 6]``.
-
-.. warning::
-
-    Strings that can be coerced to integers will be **summed**, not
-    concatenated, as in the first example above.
 
 .. templatefilter:: addslashes
 
@@ -75,8 +58,8 @@ For example::
 
     {{ value|addslashes }}
 
-If ``value`` is ``"I'm using Django"``, the output will be
-``"I\'m using Django"``.
+If ``value`` is ``"I'm using Djula"``, the output will be
+``"I\'m using Djula"``.
 
 .. templatefilter:: capfirst
 
@@ -90,20 +73,21 @@ For example::
 
     {{ value|capfirst }}
 
-If ``value`` is ``"django"``, the output will be ``"Django"``.
+If ``value`` is ``"djula"``, the output will be ``"Djula"``.
 
 .. templatefilter:: center
 
-center
-^^^^^^
+..
+   center
+   ^^^^^^
 
-Centers the value in a field of a given width.
+   Centers the value in a field of a given width.
 
-For example::
+   For example::
 
-    "{{ value|center:"15" }}"
+       "{{ value|center:"15" }}"
 
-If ``value`` is ``"Django"``, the output will be ``"     Django    "``.
+   If ``value`` is ``"Djula"``, the output will be ``"     Djula    "``.
 
 .. templatefilter:: cut
 
@@ -124,129 +108,37 @@ If ``value`` is ``"String with spaces"``, the output will be
 date
 ^^^^
 
-Formats a date according to the given format.
+Formats a date
 
-Uses a similar format as PHP's ``date()`` function (http://php.net/date)
-with some differences.
+Example::
+  {{ date-today | date }}
 
-.. note::
-    These format characters are not used in Django outside of templates. They
-    were designed to be compatible with PHP to ease transitioning for designers.
+A LOCAL-TIME format spec can be provided::
 
-.. _date-and-time-formatting-specifiers:
+  {{ date-today | date ()
 
-Available format strings:
+.. templatefilter:: time
 
-================  ========================================  =====================
-Format character  Description                               Example output
-================  ========================================  =====================
-a                 ``'a.m.'`` or ``'p.m.'`` (Note that       ``'a.m.'``
-                  this is slightly different than PHP's
-                  output, because this includes periods
-                  to match Associated Press style.)
-A                 ``'AM'`` or ``'PM'``.                     ``'AM'``
-b                 Month, textual, 3 letters, lowercase.     ``'jan'``
-B                 Not implemented.
-c                 ISO 8601 format. (Note: unlike others     ``2008-01-02T10:30:00.000123+02:00``,
-                  formatters, such as "Z", "O" or "r",      or ``2008-01-02T10:30:00.000123`` if the datetime is naive
-                  the "c" formatter will not add timezone
-                  offset if value is a naive datetime
-                  (see :class:`datetime.tzinfo`).
-d                 Day of the month, 2 digits with           ``'01'`` to ``'31'``
-                  leading zeros.
-D                 Day of the week, textual, 3 letters.      ``'Fri'``
-e                 Timezone name. Could be in any format,
-                  or might return an empty string,          ``''``, ``'GMT'``, ``'-500'``, ``'US/Eastern'``, etc.
-                  depending on the datetime.
-E                 Month, locale specific alternative
-                  representation usually used for long
-                  date representation.                      ``'listopada'`` (for Polish locale, as opposed to ``'Listopad'``)
-f                 Time, in 12-hour hours and minutes,       ``'1'``, ``'1:30'``
-                  with minutes left off if they're zero.
-                  Proprietary extension.
-F                 Month, textual, long.                     ``'January'``
-g                 Hour, 12-hour format without leading      ``'1'`` to ``'12'``
-                  zeros.
-G                 Hour, 24-hour format without leading      ``'0'`` to ``'23'``
-                  zeros.
-h                 Hour, 12-hour format.                     ``'01'`` to ``'12'``
-H                 Hour, 24-hour format.                     ``'00'`` to ``'23'``
-i                 Minutes.                                  ``'00'`` to ``'59'``
-I                 Daylight Savings Time, whether it's       ``'1'`` or ``'0'``
-                  in effect or not.
-j                 Day of the month without leading          ``'1'`` to ``'31'``
-                  zeros.
-l                 Day of the week, textual, long.           ``'Friday'``
-L                 Boolean for whether it's a leap year.     ``True`` or ``False``
-m                 Month, 2 digits with leading zeros.       ``'01'`` to ``'12'``
-M                 Month, textual, 3 letters.                ``'Jan'``
-n                 Month without leading zeros.              ``'1'`` to ``'12'``
-N                 Month abbreviation in Associated Press    ``'Jan.'``, ``'Feb.'``, ``'March'``, ``'May'``
-                  style. Proprietary extension.
-o                 ISO-8601 week-numbering year,             ``'1999'``
-                  corresponding to
-                  the ISO-8601 week number (W)
-O                 Difference to Greenwich time in hours.    ``'+0200'``
-P                 Time, in 12-hour hours, minutes and       ``'1 a.m.'``, ``'1:30 p.m.'``, ``'midnight'``, ``'noon'``, ``'12:30 p.m.'``
-                  'a.m.'/'p.m.', with minutes left off
-                  if they're zero and the special-case
-                  strings 'midnight' and 'noon' if
-                  appropriate. Proprietary extension.
-r                 :rfc:`2822` formatted date.               ``'Thu, 21 Dec 2000 16:01:07 +0200'``
-s                 Seconds, 2 digits with leading zeros.     ``'00'`` to ``'59'``
-S                 English ordinal suffix for day of the     ``'st'``, ``'nd'``, ``'rd'`` or ``'th'``
-                  month, 2 characters.
-t                 Number of days in the given month.        ``28`` to ``31``
-T                 Time zone of this machine.                ``'EST'``, ``'MDT'``
-u                 Microseconds.                             ``000000`` to ``999999``
-U                 Seconds since the Unix Epoch
-                  (January 1 1970 00:00:00 UTC).
-w                 Day of the week, digits without           ``'0'`` (Sunday) to ``'6'`` (Saturday)
-                  leading zeros.
-W                 ISO-8601 week number of year, with        ``1``, ``53``
-                  weeks starting on Monday.
-y                 Year, 2 digits.                           ``'99'``
-Y                 Year, 4 digits.                           ``'1999'``
-z                 Day of the year.                          ``0`` to ``365``
-Z                 Time zone offset in seconds. The          ``-43200`` to ``43200``
-                  offset for timezones west of UTC is
-                  always negative, and for those east of
-                  UTC is always positive.
-================  ========================================  =====================
+time		    
+^^^^
 
-For example::
+Formats a time
 
-    {{ value|date:"D d M Y" }}
+Example::
 
-If ``value`` is a :py:class:`~datetime.datetime` object (e.g., the result of
-``datetime.datetime.now()``), the output will be the string
-``'Wed 09 Jan 2008'``.
+  {{ time-now | time }}
 
-The format passed can be one of the predefined ones :setting:`DATE_FORMAT`,
-:setting:`DATETIME_FORMAT`, :setting:`SHORT_DATE_FORMAT` or
-:setting:`SHORT_DATETIME_FORMAT`, or a custom format that uses the format
-specifiers shown in the table above. Note that predefined formats may vary
-depending on the current locale.
+.. templatefilter:: datetime  
 
-Assuming that :setting:`USE_L10N` is ``True`` and :setting:`LANGUAGE_CODE` is,
-for example, ``"es"``, then for::
+datetime		    
+^^^^^^^^
 
-    {{ value|date:"SHORT_DATE_FORMAT" }}
+Formats a date and time
 
-the output would be the string ``"09/01/2008"`` (the ``"SHORT_DATE_FORMAT"``
-format specifier for the ``es`` locale as shipped with Django is ``"d/m/Y"``).
+Example::
 
-When used without a format string::
+  {{ time-now | datetime }}
 
-    {{ value|date }}
-
-...the formatting string defined in the :setting:`DATE_FORMAT` setting will be
-used, without applying any localization.
-
-You can combine ``date`` with the :tfilter:`time` filter to render a full
-representation of a ``datetime`` value. E.g.::
-
-    {{ value|date:"D d M Y" }} {{ value|time:"H:i" }}
 
 .. templatefilter:: default
 
@@ -258,169 +150,103 @@ value.
 
 For example::
 
-    {{ value|default:"nothing" }}
+    {{ value|default "nothing" }}
 
 If ``value`` is ``""`` (the empty string), the output will be ``nothing``.
 
 .. templatefilter:: default_if_none
 
-default_if_none
-^^^^^^^^^^^^^^^
+.. templatefilter:: sort
 
-If (and only if) value is ``None``, uses the given default. Otherwise, uses the
-value.
+sort
+^^^^
 
-Note that if an empty string is given, the default value will *not* be used.
-Use the :tfilter:`default` filter if you want to fallback for empty strings.
-
-For example::
-
-    {{ value|default_if_none:"nothing" }}
-
-If ``value`` is ``None``, the output will be the string ``"nothing"``.
-
-.. templatefilter:: dictsort
-
-dictsort
-^^^^^^^^
-
-Takes a list of dictionaries and returns that list sorted by the key given in
+Takes a list and returns that list sorted by the key given in
 the argument.
 
 For example::
 
-    {{ value|dictsort:"name" }}
+    {{ value | sort }}
 
-If ``value`` is:
+..
+   divisibleby
+   ^^^^^^^^^^^
 
-.. code-block:: python
+   Returns ``True`` if the value is divisible by the argument.
 
-    [
-        {'name': 'zed', 'age': 19},
-        {'name': 'amy', 'age': 22},
-        {'name': 'joe', 'age': 31},
-    ]
+   For example::
 
-then the output would be:
+       {{ value|divisibleby:"3" }}
 
-.. code-block:: python
+   If ``value`` is ``21``, the output would be ``True``.
 
-    [
-        {'name': 'amy', 'age': 22},
-        {'name': 'joe', 'age': 31},
-        {'name': 'zed', 'age': 19},
-    ]
+..
+   .. templatefilter:: escape
 
-You can also do more complicated things like::
+   escape
+   ^^^^^^
 
-    {% for book in books|dictsort:"author.age" %}
-        * {{ book.title }} ({{ book.author.name }})
-    {% endfor %}
+   Escapes a string's HTML. Specifically, it makes these replacements:
 
-If ``books`` is:
+   * ``<`` is converted to ``&lt;``
+   * ``>`` is converted to ``&gt;``
+   * ``'`` (single quote) is converted to ``&#39;``
+   * ``"`` (double quote) is converted to ``&quot;``
+   * ``&`` is converted to ``&amp;``
 
-.. code-block:: python
+   The escaping is only applied when the string is output, so it does not matter
+   where in a chained sequence of filters you put ``escape``: it will always be
+   applied as though it were the last filter. If you want escaping to be applied
+   immediately, use the :tfilter:`force_escape` filter.
 
-    [
-        {'title': '1984', 'author': {'name': 'George', 'age': 45}},
-        {'title': 'Timequake', 'author': {'name': 'Kurt', 'age': 75}},
-        {'title': 'Alice', 'author': {'name': 'Lewis', 'age': 33}},
-    ]
+   Applying ``escape`` to a variable that would normally have auto-escaping
+   applied to the result will only result in one round of escaping being done. So
+   it is safe to use this function even in auto-escaping environments. If you want
+   multiple escaping passes to be applied, use the :tfilter:`force_escape` filter.
 
-then the output would be::
+   For example, you can apply ``escape`` to fields when :ttag:`autoescape` is off::
 
-    * Alice (Lewis)
-    * 1984 (George)
-    * Timequake (Kurt)
+       {% autoescape off %}
+	   {{ title|escape }}
+       {% endautoescape %}
 
-.. templatefilter:: dictsortreversed
+   .. templatefilter:: escapejs
 
-dictsortreversed
-^^^^^^^^^^^^^^^^
+   escapejs
+   ^^^^^^^^
 
-Takes a list of dictionaries and returns that list sorted in reverse order by
-the key given in the argument. This works exactly the same as the above filter,
-but the returned value will be in reverse order.
+   Escapes characters for use in JavaScript strings. This does *not* make the
+   string safe for use in HTML, but does protect you from syntax errors when using
+   templates to generate JavaScript/JSON.
 
-.. templatefilter:: divisibleby
+   For example::
 
-divisibleby
-^^^^^^^^^^^
+       {{ value|escapejs }}
 
-Returns ``True`` if the value is divisible by the argument.
+   If ``value`` is ``"testing\r\njavascript \'string" <b>escaping</b>"``,
+   the output will be ``"testing\\u000D\\u000Ajavascript \\u0027string\\u0022 \\u003Cb\\u003Eescaping\\u003C/b\\u003E"``.
 
-For example::
+   .. templatefilter:: filesizeformat
 
-    {{ value|divisibleby:"3" }}
+   filesizeformat
+   ^^^^^^^^^^^^^^
 
-If ``value`` is ``21``, the output would be ``True``.
+   Formats the value like a 'human-readable' file size (i.e. ``'13 KB'``,
+   ``'4.1 MB'``, ``'102 bytes'``, etc).
 
-.. templatefilter:: escape
+   For example::
 
-escape
-^^^^^^
+       {{ value|filesizeformat }}
 
-Escapes a string's HTML. Specifically, it makes these replacements:
+   If ``value`` is 123456789, the output would be ``117.7 MB``.
 
-* ``<`` is converted to ``&lt;``
-* ``>`` is converted to ``&gt;``
-* ``'`` (single quote) is converted to ``&#39;``
-* ``"`` (double quote) is converted to ``&quot;``
-* ``&`` is converted to ``&amp;``
+   .. admonition:: File sizes and SI units
 
-The escaping is only applied when the string is output, so it does not matter
-where in a chained sequence of filters you put ``escape``: it will always be
-applied as though it were the last filter. If you want escaping to be applied
-immediately, use the :tfilter:`force_escape` filter.
-
-Applying ``escape`` to a variable that would normally have auto-escaping
-applied to the result will only result in one round of escaping being done. So
-it is safe to use this function even in auto-escaping environments. If you want
-multiple escaping passes to be applied, use the :tfilter:`force_escape` filter.
-
-For example, you can apply ``escape`` to fields when :ttag:`autoescape` is off::
-
-    {% autoescape off %}
-        {{ title|escape }}
-    {% endautoescape %}
-
-.. templatefilter:: escapejs
-
-escapejs
-^^^^^^^^
-
-Escapes characters for use in JavaScript strings. This does *not* make the
-string safe for use in HTML, but does protect you from syntax errors when using
-templates to generate JavaScript/JSON.
-
-For example::
-
-    {{ value|escapejs }}
-
-If ``value`` is ``"testing\r\njavascript \'string" <b>escaping</b>"``,
-the output will be ``"testing\\u000D\\u000Ajavascript \\u0027string\\u0022 \\u003Cb\\u003Eescaping\\u003C/b\\u003E"``.
-
-.. templatefilter:: filesizeformat
-
-filesizeformat
-^^^^^^^^^^^^^^
-
-Formats the value like a 'human-readable' file size (i.e. ``'13 KB'``,
-``'4.1 MB'``, ``'102 bytes'``, etc).
-
-For example::
-
-    {{ value|filesizeformat }}
-
-If ``value`` is 123456789, the output would be ``117.7 MB``.
-
-.. admonition:: File sizes and SI units
-
-    Strictly speaking, ``filesizeformat`` does not conform to the International
-    System of Units which recommends using KiB, MiB, GiB, etc. when byte sizes
-    are calculated in powers of 1024 (which is the case here). Instead, Django
-    uses traditional unit names (KB, MB, GB, etc.) corresponding to names that
-    are more commonly used.
+       Strictly speaking, ``filesizeformat`` does not conform to the International
+       System of Units which recommends using KiB, MiB, GiB, etc. when byte sizes
+       are calculated in powers of 1024 (which is the case here). Instead, Djula
+       uses traditional unit names (KB, MB, GB, etc.) corresponding to names that
+       are more commonly used.
 
 .. templatefilter:: first
 
@@ -433,112 +259,7 @@ For example::
 
     {{ value|first }}
 
-If ``value`` is the list ``['a', 'b', 'c']``, the output will be ``'a'``.
-
-.. templatefilter:: floatformat
-
-floatformat
-^^^^^^^^^^^
-
-When used without an argument, rounds a floating-point number to one decimal
-place -- but only if there's a decimal part to be displayed. For example:
-
-============  ===========================  ========
-``value``     Template                     Output
-============  ===========================  ========
-``34.23234``  ``{{ value|floatformat }}``  ``34.2``
-``34.00000``  ``{{ value|floatformat }}``  ``34``
-``34.26000``  ``{{ value|floatformat }}``  ``34.3``
-============  ===========================  ========
-
-If used with a numeric integer argument, ``floatformat`` rounds a number to
-that many decimal places. For example:
-
-============  =============================  ==========
-``value``     Template                       Output
-============  =============================  ==========
-``34.23234``  ``{{ value|floatformat:3 }}``  ``34.232``
-``34.00000``  ``{{ value|floatformat:3 }}``  ``34.000``
-``34.26000``  ``{{ value|floatformat:3 }}``  ``34.260``
-============  =============================  ==========
-
-Particularly useful is passing 0 (zero) as the argument which will round the
-float to the nearest integer.
-
-============  ================================  ==========
-``value``     Template                          Output
-============  ================================  ==========
-``34.23234``  ``{{ value|floatformat:"0" }}``   ``34``
-``34.00000``  ``{{ value|floatformat:"0" }}``   ``34``
-``39.56000``  ``{{ value|floatformat:"0" }}``   ``40``
-============  ================================  ==========
-
-If the argument passed to ``floatformat`` is negative, it will round a number
-to that many decimal places -- but only if there's a decimal part to be
-displayed. For example:
-
-============  ================================  ==========
-``value``     Template                          Output
-============  ================================  ==========
-``34.23234``  ``{{ value|floatformat:"-3" }}``  ``34.232``
-``34.00000``  ``{{ value|floatformat:"-3" }}``  ``34``
-``34.26000``  ``{{ value|floatformat:"-3" }}``  ``34.260``
-============  ================================  ==========
-
-Using ``floatformat`` with no argument is equivalent to using ``floatformat``
-with an argument of ``-1``.
-
-.. templatefilter:: force_escape
-
-force_escape
-^^^^^^^^^^^^
-
-Applies HTML escaping to a string (see the :tfilter:`escape` filter for
-details). This filter is applied *immediately* and returns a new, escaped
-string. This is useful in the rare cases where you need multiple escaping or
-want to apply other filters to the escaped results. Normally, you want to use
-the :tfilter:`escape` filter.
-
-For example, if you want to catch the ``<p>`` HTML elements created by
-the :tfilter:`linebreaks` filter::
-
-    {% autoescape off %}
-        {{ body|linebreaks|force_escape }}
-    {% endautoescape %}
-
-.. templatefilter:: get_digit
-
-get_digit
-^^^^^^^^^
-
-Given a whole number, returns the requested digit, where 1 is the right-most
-digit, 2 is the second-right-most digit, etc. Returns the original value for
-invalid input (if input or argument is not an integer, or if argument is less
-than 1). Otherwise, output is always an integer.
-
-For example::
-
-    {{ value|get_digit:"2" }}
-
-If ``value`` is ``123456789``, the output will be ``8``.
-
-.. templatefilter:: iriencode
-
-iriencode
-^^^^^^^^^
-
-Converts an IRI (Internationalized Resource Identifier) to a string that is
-suitable for including in a URL. This is necessary if you're trying to use
-strings containing non-ASCII characters in a URL.
-
-It's safe to use this filter on a string that has already gone through the
-:tfilter:`urlencode` filter.
-
-For example::
-
-    {{ value|iriencode }}
-
-If ``value`` is ``"?test=1&me=2"``, the output will be ``"?test=1&amp;me=2"``.
+If ``value`` is the list ``("a" "b" "c")``, the output will be ``"a"``.
 
 .. templatefilter:: join
 
@@ -565,7 +286,7 @@ For example::
 
     {{ value|last }}
 
-If ``value`` is the list ``['a', 'b', 'c', 'd']``, the output will be the
+If ``value`` is the list ``("a" "b" "c" "d")``, the output will be the
 string ``"d"``.
 
 .. templatefilter:: length
@@ -668,7 +389,7 @@ For example::
 
     "{{ value|ljust:"10" }}"
 
-If ``value`` is ``Django``, the output will be ``"Django    "``.
+If ``value`` is ``Djula``, the output will be ``"Djula    "``.
 
 .. templatefilter:: lower
 
@@ -801,7 +522,7 @@ For example::
 
     "{{ value|rjust:"10" }}"
 
-If ``value`` is ``Django``, the output will be ``"    Django"``.
+If ``value`` is ``Djula``, the output will be ``"    Djula"``.
 
 .. templatefilter:: safe
 
@@ -936,7 +657,7 @@ for example, ``"de"``, then for::
     {{ value|time:"TIME_FORMAT" }}
 
 the output will be the string ``"01:23:00"`` (The ``"TIME_FORMAT"`` format
-specifier for the ``de`` locale as shipped with Django is ``"H:i:s"``).
+specifier for the ``de`` locale as shipped with Djula is ``"H:i:s"``).
 
 The ``time`` filter will only accept parameters in the format string that
 relate to the time of day, not the date (for obvious reasons). If you need to
@@ -959,7 +680,7 @@ used, without applying any localization.
 .. versionchanged:: 1.7
 
     The ability to receive and act on values with attached timezone
-    information was added in Django 1.7.
+    information was added in Djula 1.7.
 
 .. templatefilter:: timesince
 
@@ -1169,12 +890,12 @@ This template tag works on links prefixed with ``http://``, ``https://``, or
 
 It also supports domain-only links ending in one of the original top level
 domains (``.com``, ``.edu``, ``.gov``, ``.int``, ``.mil``, ``.net``, and
-``.org``). For example, ``djangoproject.com`` gets converted.
+``.org``). For example, ``djulaproject.com`` gets converted.
 
 .. versionchanged:: 1.8
 
     Support for domain-only links that include characters after the top-level
-    domain (e.g. ``djangoproject.com/`` and ``djangoproject.com/download/``)
+    domain (e.g. ``djulaproject.com/`` and ``djulaproject.com/download/``)
     was added.
 
 Links can have trailing punctuation (periods, commas, close-parens) and leading
@@ -1187,9 +908,9 @@ For example::
 
     {{ value|urlize }}
 
-If ``value`` is ``"Check out www.djangoproject.com"``, the output will be
-``"Check out <a href="http://www.djangoproject.com"
-rel="nofollow">www.djangoproject.com</a>"``.
+If ``value`` is ``"Check out www.djulaproject.com"``, the output will be
+``"Check out <a href="http://www.djulaproject.com"
+rel="nofollow">www.djulaproject.com</a>"``.
 
 In addition to web links, ``urlize`` also converts email addresses into
 ``mailto:`` links. If ``value`` is
@@ -1198,7 +919,7 @@ In addition to web links, ``urlize`` also converts email addresses into
 
 The ``urlize`` filter also takes an optional parameter ``autoescape``. If
 ``autoescape`` is ``True``, the link text and URLs will be escaped using
-Django's built-in :tfilter:`escape` filter. The default value for
+Djula's built-in :tfilter:`escape` filter. The default value for
 ``autoescape`` is ``True``.
 
 .. note::
@@ -1221,9 +942,9 @@ For example::
 
     {{ value|urlizetrunc:15 }}
 
-If ``value`` is ``"Check out www.djangoproject.com"``, the output would be
-``'Check out <a href="http://www.djangoproject.com"
-rel="nofollow">www.djangopr...</a>'``.
+If ``value`` is ``"Check out www.djulaproject.com"``, the output would be
+``'Check out <a href="http://www.djulaproject.com"
+rel="nofollow">www.djulapr...</a>'``.
 
 As with urlize_, this filter should only be applied to plain text.
 
@@ -1286,7 +1007,7 @@ Value       Argument                Outputs
 Internationalization tags and filters
 -------------------------------------
 
-Django provides template tags and filters to control each aspect of
+Djula provides template tags and filters to control each aspect of
 :doc:`internationalization </topics/i18n/index>` in templates. They allow for
 granular control of translations, formatting, and time zone conversions.
 

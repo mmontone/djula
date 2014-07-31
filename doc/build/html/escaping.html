@@ -181,7 +181,7 @@ do potentially bad things. This type of security exploit is called a
 <p>To avoid this problem, you have two options:</p>
 <ul class="simple">
 <li>One, you can make sure to run each untrusted variable through the
-<a class="reference internal" href="filters.html#std:templatefilter-escape"><tt class="xref std std-tfilter docutils literal"><span class="pre">escape</span></tt></a> filter (documented below), which converts potentially
+<tt class="xref std std-tfilter docutils literal"><span class="pre">escape</span></tt> filter (documented below), which converts potentially
 harmful HTML characters to unharmful ones. This was the default solution
 in Django for its first few years, but the problem is that it puts the
 onus on <em>you</em>, the developer / template author, to ensure you&#8217;re escaping
@@ -286,10 +286,10 @@ Developers on the Python side (people writing views and custom filters) need to
 think about the cases in which data shouldn&#8217;t be escaped, and mark data
 appropriately, so things Just Work in the template.</p>
 <p>If you&#8217;re creating a template that might be used in situations where you&#8217;re
-not sure whether auto-escaping is enabled, then add an <a class="reference internal" href="filters.html#std:templatefilter-escape"><tt class="xref std std-tfilter docutils literal"><span class="pre">escape</span></tt></a> filter
+not sure whether auto-escaping is enabled, then add an <tt class="xref std std-tfilter docutils literal"><span class="pre">escape</span></tt> filter
 to any variable that needs escaping. When auto-escaping is on, there&#8217;s no
-danger of the <a class="reference internal" href="filters.html#std:templatefilter-escape"><tt class="xref std std-tfilter docutils literal"><span class="pre">escape</span></tt></a> filter <em>double-escaping</em> data &#8211; the
-<a class="reference internal" href="filters.html#std:templatefilter-escape"><tt class="xref std std-tfilter docutils literal"><span class="pre">escape</span></tt></a> filter does not affect auto-escaped variables.</p>
+danger of the <tt class="xref std std-tfilter docutils literal"><span class="pre">escape</span></tt> filter <em>double-escaping</em> data &#8211; the
+<tt class="xref std std-tfilter docutils literal"><span class="pre">escape</span></tt> filter does not affect auto-escaped variables.</p>
 </div>
 <div class="section" id="s-string-literals-and-automatic-escaping">
 <span id="s-id1"></span><span id="string-literals-and-automatic-escaping"></span><span id="id1"></span><h2>String literals and automatic escaping<a class="headerlink" href="#string-literals-and-automatic-escaping" title="Permalink to this headline">¶</a></h2>
