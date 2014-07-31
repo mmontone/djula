@@ -107,6 +107,9 @@
      (or (and format (read-from-string format))
 	 local-time:+iso-8601-format+))))
 
+(def-filter :join (it sep)
+  (join sep (mapcar #'princ-to-string it)))
+
 (def-filter :lower (it)
   (string-downcase (princ-to-string it)))
 

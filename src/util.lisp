@@ -92,3 +92,28 @@ the external format EXTERNAL-FORMAT."
     (cond (unicodep
            (upgrade-vector vector 'character :converter #'code-char))
           (t (babel:octets-to-string vector)))))
+
+(defun join (str lst &optional (jstr ""))
+  (cond
+    ((null lst) jstr)
+    (t (let ((news (concatenate 'string
+				jstr
+				(first lst)
+				(if (null (rest lst))
+				    ""
+				    str))))
+	 (join str (rest lst) news)))))
+
+(defun split (chars str &optional (lst nil) (accm ""))
+  (cond
+    ((= (length str) 0) (reverse (cons accm lst)))
+    (t
+     (let ((c (char str 0)))
+       (if (member c chars)
+	   (split chars (subseq str 1) (cons accm lst) "")
+	   (split chars (subseq str 1) 
+		  lst 
+		  (concatenate 'string
+			       accm
+			       (string c))))
+       ))))
