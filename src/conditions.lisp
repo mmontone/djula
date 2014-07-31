@@ -18,6 +18,16 @@
                       (apply #'template-error-string msg args)
                       msg)))
 
+(defun template-error* (error msg &rest args)
+  (if *verbose-errors-p*
+      (error 'template-error
+	     :message (format nil "~A: ~A"
+			      (if args
+				  (apply #'template-error-string args)
+				  msg)
+			      error))
+      (apply #'template-error msg args)))	 
+
 (defmacro with-template-error (recovery-form &body body)
   (with-unique-names (e)
     `(handler-case

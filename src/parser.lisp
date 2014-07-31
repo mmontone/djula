@@ -20,13 +20,13 @@
                     (error e1)))
               (error (e2)
                 ;; Parse errors can be reported by substituting a simple string token.
-                (let ((msg (template-error-string "There was an error processing the token ~A: ~A" token e2)))
+                (let ((msg (template-error-string "There was an error processing the token ~A" token)))
                   (if *catch-template-errors-p*
                       (cons
                        (list :string
                              msg)
                        (process-tokens rest-token-list))
-                      (error 'template-error :message msg))))))))))
+                      (template-error* e2 msg))))))))))
 
 (defun process-tokens (tokens)
   (when tokens

@@ -60,7 +60,7 @@ form that returns some debugging info."
 				      (append extend-blocks super-blocks)))
 	      processed))
 	(condition (e)
-	  (template-error "Cannot extend the template ~A because there was an error parsing the template file ~A: ~A" template-path real-path e))))))
+	  (template-error* "Cannot extend the template ~A because there was an error parsing the template file ~A" e template-path real-path))))))
 
 (def-delimited-tag :block :endblock :parsed-block)
 
@@ -655,10 +655,10 @@ they compile into a function that simply calls this function with *TEMPLATE-ARGU
               (template-error "I can't evaulate the {% lisp %} tag ~A because *EVAL-LISP-STRINGS* is NIL" sexp)
               (handler-case
 		  (princ (funcall fn) stream)
-		(error ()
-		  (template-error "There was an error executing the lisp form ~A" sexp))))))
-    (error ()
-      (template-error "There was an error executing the lisp form ~A" sexp))))
+		(error (e)
+		  (template-error* e "There was an error executing the lisp form ~A" sexp))))))
+    (error (e)
+      (template-error* e "There was an error executing the lisp form ~A" sexp))))
 
 (def-tag-compiler :show-table (path)
   ":SHOW-TABLE tags compile into a function that return the html-escaped contents of

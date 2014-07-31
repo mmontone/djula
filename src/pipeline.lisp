@@ -90,7 +90,7 @@
                      (princ-to-string ,e)
                      (error ,e)))
                (error (,e)
-                 (let ((,msg (template-error-string "There was an error running filter ~A: ~A" ,name ,e)))
+                 (let ((,msg (template-error-string "There was an error running filter ~A" ,name)))
                    (if *catch-template-errors-p*
                        (princ-to-string ,msg)
-                       (template-error ,msg)))))))))
+                       (template-error* ,e ,msg)))))))))

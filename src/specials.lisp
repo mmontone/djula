@@ -12,6 +12,8 @@
 
 (defvar *catch-template-errors-p* t)
 
+(defvar *verbose-errors-p* t)
+
 (defvar *allow-include-roots* ())
 
 (defvar *template-string-if-invalid* nil)
