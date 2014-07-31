@@ -38,8 +38,8 @@
                 (if (numberp key)
                     (elt thing key)
                     (access thing key))
-              (error ()
-                (template-error-string
+              (error (e)
+                (template-error-string* e 
                  "There was an error while accessing the ~A ~S of the object ~S"
                  (if (numberp key)
                      "index"

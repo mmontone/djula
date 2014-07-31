@@ -12,6 +12,13 @@
 (defun template-error-string (fmt &rest args)
   (format nil "{# Error: ~? #}" fmt args))
 
+(defun template-error-string* (error fmt &rest args)
+  (if *verbose-errors-p*
+      (format nil "{# Error: ~A : ~A #}"
+	      (format nil fmt args)
+	      error)
+      (apply #'template-error-string fmt args)))
+
 (defun template-error (msg &rest args)
   (error 'template-error
          :message (if args

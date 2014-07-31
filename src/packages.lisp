@@ -11,6 +11,7 @@
                 #:it)
   (:export #:*allow-include-roots*
            #:*catch-template-errors-p*
+	   #:*verbose-errors-p*
            #:*current-compiler*
            #:*current-language*
            #:*current-store*

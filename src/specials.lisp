@@ -10,9 +10,9 @@
 
 (defvar *use-example-values-p* nil)
 
-(defvar *catch-template-errors-p* t)
+(defvar *catch-template-errors-p* t "When enabled, caught errors during the rendering of the template are written to the output instead of being handled by the lisp listener")
 
-(defvar *verbose-errors-p* t)
+(defvar *verbose-errors-p* t "When enabled, errors are displayed more verbosely. Good for debugging")
 
 (defvar *allow-include-roots* ())
 

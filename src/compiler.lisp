@@ -73,21 +73,21 @@
                           (princ e1 stream)
                           (error e1)))
                     (error (e2)
-                      (let ((msg (template-error-string "There was an error rendering the token ~A" token)))
+                      (let ((msg (template-error-string* e2 "There was an error rendering the token ~A" token)))
                         (if *catch-template-errors-p*
                             (princ msg stream)
-                            (template-error* e2 msg)))))))
+                            (template-error msg)))))))
             (template-error (e1)
               (if *catch-template-errors-p*
                   (lambda (stream)
                     (princ e1 stream))
                   (error e1)))
             (error (e2)
-              (let ((msg (template-error-string "There was an error compiling the token ~A" token)))
+              (let ((msg (template-error-string* e2 "There was an error compiling the token ~A" token)))
                 (if *catch-template-errors-p*
                     (lambda (stream)
                       (princ msg stream))
-                    (template-error e2 msg)))))))))
+                    (template-error msg)))))))))
 
 (def-token-compiler :string (string)
   ":STRING tokens compile into a function that simply returns the string"

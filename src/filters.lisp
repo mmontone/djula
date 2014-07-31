@@ -10,8 +10,8 @@
                     (template-error-string "Unknown filter ~A" name))
                 (template-error (e1)
                   (princ-to-string e1))
-                (error ()
-                  (template-error-string "There was an error applying the filter ~A" name)))))
+                (error (e)
+                  (template-error-string* e "There was an error applying the filter ~A" name)))))
           filters
           :initial-value string))
 
