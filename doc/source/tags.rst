@@ -20,10 +20,10 @@ tags:
 
 :ttag:`for`
     Loop over each item in an array. For example, to display a list of athletes
-    provided in ``athlete_list``::
+    provided in ``athlete-list``::
 
         <ul>
-        {% for athlete in athlete_list %}
+        {% for athlete in athlete-list %}
             <li>{{ athlete.name }}</li>
         {% endfor %}
         </ul>
@@ -32,26 +32,26 @@ tags:
     Evaluates a variable, and if that variable is "true" the contents of the
     block are displayed::
 
-        {% if athlete_list %}
-            Number of athletes: {{ athlete_list|length }}
-        {% elif athlete_in_locker_room_list %}
+        {% if athlete-list %}
+            Number of athletes: {{ athlete-list|length }}
+        {% elif athlete-in-locker-room-list %}
             Athletes should be out of the locker room soon!
         {% else %}
             No athletes.
         {% endif %}
 
-    In the above, if ``athlete_list`` is not empty, the number of athletes
-    will be displayed by the ``{{ athlete_list|length }}`` variable. Otherwise,
-    if ``athlete_in_locker_room_list`` is not empty, the message "Athletes
+    In the above, if ``athlete-list`` is not empty, the number of athletes
+    will be displayed by the ``{{ athlete-list|length }}`` variable. Otherwise,
+    if ``athlete-in-locker-room-list`` is not empty, the message "Athletes
     should be out..." will be displayed. If both lists are empty,
     "No athletes." will be displayed.
 
     You can also use filters and various operators in the :ttag:`if` tag::
 
-        {% if athlete_list|length > 1 %}
-           Team: {% for athlete in athlete_list %} ... {% endfor %}
+        {% if athlete-list|length > 1 %}
+           Team: {% for athlete in athlete-list %} ... {% endfor %}
         {% else %}
-           Athlete: {{ athlete_list.0.name }}
+           Athlete: {{ athlete-list.0.name }}
         {% endif %}
 
     While the above example works, be aware that most template filters return
@@ -116,20 +116,21 @@ useful when commenting out code for documenting why the code was disabled.
 
 Sample usage::
 
-    <p>Rendered text with {{ pub_date|date:"c" }}</p>
+    <p>Rendered text with {{ pub-date|date:"c" }}</p>
     {% comment "Optional note" %}
-        <p>Commented out text with {{ create_date|date:"c" }}</p>
+        <p>Commented out text with {{ create-date|date:"c" }}</p>
     {% endcomment %}
 
 ``comment`` tags cannot be nested.
 
-.. templatetag:: csrf_token
+..
+   .. templatetag:: csrf-token
 
-csrf_token
-^^^^^^^^^^
+   csrf-token
+   ^^^^^^^^^^
 
-This tag is used for CSRF protection, as described in the documentation for
-:doc:`Cross Site Request Forgeries </ref/contrib/csrf>`.
+   This tag is used for CSRF protection, as described in the documentation for
+   :doc:`Cross Site Request Forgeries </ref/contrib/csrf>`.
 
 .. templatetag:: cycle
 
@@ -143,7 +144,7 @@ the first argument and produces it again.
 
 This tag is particularly useful in a loop::
 
-    {% for o in some_list %}
+    {% for o in some-list %}
         <tr class="{% cycle 'row1' 'row2' %}">
             ...
         </tr>
@@ -157,7 +158,7 @@ You can use variables, too. For example, if you have two template variables,
 ``rowvalue1`` and ``rowvalue2``, you can alternate between their values like
 this::
 
-    {% for o in some_list %}
+    {% for o in some-list %}
         <tr class="{% cycle rowvalue1 rowvalue2 %}">
             ...
         </tr>
@@ -166,7 +167,7 @@ this::
 Variables included in the cycle will be escaped.  You can disable auto-escaping
 with::
 
-    {% for o in some_list %}
+    {% for o in some-list %}
         <tr class="{% autoescape off %}{% cycle rowvalue1 rowvalue2 %}{% endautoescape %}
             ...
         </tr>
@@ -174,7 +175,7 @@ with::
 
 You can mix variables and strings::
 
-    {% for o in some_list %}
+    {% for o in some-list %}
         <tr class="{% cycle 'row1' rowvalue2 'row3' %}">
             ...
         </tr>
@@ -224,7 +225,7 @@ use the value in a nested loop or an included template. If you only want
 to declare the cycle but not produce the first value, you can add a
 ``silent`` keyword as the last keyword in the tag. For example::
 
-    {% for obj in some_list %}
+    {% for obj in some-list %}
         {% cycle 'row1' 'row2' as rowcolors silent %}
         <tr class="{{ rowcolors }}">{% include "subtemplate.html" %}</tr>
     {% endfor %}
@@ -278,7 +279,7 @@ Note that the block includes *all* the text between the ``filter`` and
 
 Sample usage::
 
-    {% filter force_escape|lower %}
+    {% filter force-escape|lower %}
         This text will be HTML-escaped, and will appear in all lowercase.
     {% endfilter %}
 
@@ -332,10 +333,10 @@ for
 
 Loops over each item in an array, making the item available in a context
 variable. For example, to display a list of athletes provided in
-``athlete_list``::
+``athlete-list``::
 
     <ul>
-    {% for athlete in athlete_list %}
+    {% for athlete in athlete-list %}
         <li>{{ athlete.name }}</li>
     {% endfor %}
     </ul>
@@ -384,7 +385,7 @@ The ``for`` tag can take an optional ``{% empty %}`` clause whose text is
 displayed if the given array is empty or could not be found::
 
     <ul>
-    {% for athlete in athlete_list %}
+    {% for athlete in athlete-list %}
         <li>{{ athlete.name }}</li>
     {% empty %}
         <li>Sorry, no athletes in this list.</li>
@@ -395,8 +396,8 @@ The above is equivalent to -- but shorter, cleaner, and possibly faster
 than -- the following::
 
     <ul>
-      {% if athlete_list %}
-        {% for athlete in athlete_list %}
+      {% if athlete-list %}
+        {% for athlete in athlete-list %}
           <li>{{ athlete.name }}</li>
         {% endfor %}
       {% else %}
@@ -413,16 +414,16 @@ The ``{% if %}`` tag evaluates a variable, and if that variable is "true" (i.e.
 exists, is not empty, and is not a false boolean value) the contents of the
 block are output::
 
-    {% if athlete_list %}
-        Number of athletes: {{ athlete_list|length }}
-    {% elif athlete_in_locker_room_list %}
+    {% if athlete-list %}
+        Number of athletes: {{ athlete-list|length }}
+    {% elif athlete-in-locker-room-list %}
         Athletes should be out of the locker room soon!
     {% else %}
         No athletes.
     {% endif %}
 
-In the above, if ``athlete_list`` is not empty, the number of athletes will be
-displayed by the ``{{ athlete_list|length }}`` variable.
+In the above, if ``athlete-list`` is not empty, the number of athletes will be
+displayed by the ``{{ athlete-list|length }}`` variable.
 
 As you can see, the ``if`` tag may take one or several ``{% elif %}``
 clauses, as well as an ``{% else %}`` clause that will be displayed if all
@@ -434,38 +435,38 @@ Boolean operators
 :ttag:`if` tags may use ``and``, ``or`` or ``not`` to test a number of
 variables or to negate a given variable::
 
-    {% if athlete_list and coach_list %}
+    {% if athlete-list and coach-list %}
         Both athletes and coaches are available.
     {% endif %}
 
-    {% if not athlete_list %}
+    {% if not athlete-list %}
         There are no athletes.
     {% endif %}
 
-    {% if athlete_list or coach_list %}
+    {% if athlete-list or coach-list %}
         There are some athletes or some coaches.
     {% endif %}
 
-    {% if not athlete_list or coach_list %}
+    {% if not athlete-list or coach-list %}
         There are no athletes or there are some coaches (OK, so
         writing English translations of boolean logic sounds
         stupid; it's not our fault).
     {% endif %}
 
-    {% if athlete_list and not coach_list %}
+    {% if athlete-list and not coach-list %}
         There are some athletes and absolutely no coaches.
     {% endif %}
 
 Use of both ``and`` and ``or`` clauses within the same tag is allowed, with
 ``and`` having higher precedence than ``or`` e.g.::
 
-    {% if athlete_list and coach_list or cheerleader_list %}
+    {% if athlete-list and coach-list or cheerleader-list %}
 
 will be interpreted like:
 
 .. code-block:: python
 
-    if (athlete_list and coach_list) or cheerleader_list
+    if (athlete-list and coach-list) or cheerleader-list
 
 Use of actual parentheses in the :ttag:`if` tag is invalid syntax. If you need
 them to indicate precedence, you should use nested :ttag:`if` tags.
@@ -612,7 +613,7 @@ will be displayed if the value has not changed::
 
         {% for match in matches %}
             <div style="background-color:
-                {% ifchanged match.ballot_id %}
+                {% ifchanged match.ballot-id %}
                     {% cycle "red" "blue" %}
                 {% else %}
                     gray
@@ -629,7 +630,7 @@ Output the contents of the block if the two arguments equal each other.
 
 Example::
 
-    {% ifequal user.pk comment.user_id %}
+    {% ifequal user.pk comment.user-id %}
         ...
     {% endifequal %}
 
@@ -671,9 +672,9 @@ This example includes the contents of the template ``"foo/bar.html"``::
     {% include "foo/bar.html" %}
 
 This example includes the contents of the template whose name is contained in
-the variable ``template_name``::
+the variable ``template-name``::
 
-    {% include template_name %}
+    {% include template-name %}
 
 .. versionchanged:: 1.7
 
@@ -687,21 +688,21 @@ includes it. This example produces the output ``"Hello, John"``:
 * Context: variable ``person`` is set to ``"john"``.
 * Template::
 
-    {% include "name_snippet.html" %}
+    {% include "name-snippet.html" %}
 
-* The ``name_snippet.html`` template::
+* The ``name-snippet.html`` template::
 
     {{ greeting }}, {{ person|default:"friend" }}!
 
 You can pass additional context to the template using keyword arguments::
 
-    {% include "name_snippet.html" with person="Jane" greeting="Hello" %}
+    {% include "name-snippet.html" with person="Jane" greeting="Hello" %}
 
 If you want to render the context only with the variables provided (or even
 no variables at all), use the ``only`` option. No other variables are
 available to the included template::
 
-    {% include "name_snippet.html" with greeting="Hi" only %}
+    {% include "name-snippet.html" with greeting="Hi" only %}
 
 .. note::
     The :ttag:`include` tag should be considered as an implementation of
