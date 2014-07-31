@@ -4,12 +4,13 @@
       (make-instance 'file-store
 		     :search-path 
 		     (list (asdf:system-relative-pathname :djula "test/templates/"))))
-
-(defparameter +t1+ (djula:compile-template* "t1.djula"))
-(defparameter +t2+ (djula:compile-template* "t2.djula"))
-(defparameter +t3+ (djula:compile-template* "t3.djula"))
-(defparameter +t4+ (djula:compile-template* "t4.djula"))
-(defparameter +t5+ (djula:compile-template* "t5.djula"))
+(let ((djula:*catch-template-errors-p* nil))
+  (defparameter +t1+ (djula:compile-template* "t1.djula"))
+  (defparameter +t2+ (djula:compile-template* "t2.djula"))
+  (defparameter +t3+ (djula:compile-template* "t3.djula"))
+  (defparameter +t4+ (djula:compile-template* "t4.djula"))
+  (defparameter +t5+ (djula:compile-template* "t5.djula"))
+  (defparameter +t6+ (djula:compile-template* "t6.djula")))
 
 (test simple-block-test
   (let ((output (djula:render-template* +t1+ nil)))
@@ -58,3 +59,10 @@
   (signals djula::template-error
     (let ((djula:*catch-template-errors-p* nil))
       (djula::compile-string "{% super foo %}"))))
+
+(test include-test
+  (let ((djula:*catch-template-errors-p* nil))
+    (is (equalp (remove-if (lambda (char)
+			     (member char (list #\  #\Newline)))
+			   (djula::render-template* +t6+))
+		"beforeHelloafterbeforeByeafter"))))
