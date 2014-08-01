@@ -46,6 +46,8 @@
 					 nil
 					 args)))))))
 
+(defparameter +custom-date-format+ '((:YEAR 4) #\/ (:MONTH 2) #\/ (:DAY 2)))
+
 (defparameter *demos*
   (render-demos
    `(("variables"
@@ -85,7 +87,8 @@
      ("safe"
       ("{{ html | safe }}" :html ,"<p>Hello</p>"))
      ("date"
-      ("{{ date | date }}" :date ,(get-universal-time))))))
+      ("{{ date | date }}" :date ,(get-universal-time))
+      ("{{ date | date: djula-demo::+custom-date-format+}}" :date ,(get-universal-time))))))
 
 (hunchentoot:define-easy-handler (demo :uri "/") ()
   (djula:render-template* +demo.html+

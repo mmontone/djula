@@ -76,7 +76,10 @@
      timestamp
      :format
      (or (and format
-	      (read-from-string format))
+	      (let ((read-format (read-from-string format)))
+		(if (symbolp read-format)
+		    (symbol-value read-format)
+		    read-format)))
 	 local-time:+iso-8601-date-format+))))
 
 (def-filter :time (it &optional format)
