@@ -1,7 +1,7 @@
 (asdf:defsystem #:djula
   :description "An implementation of Django templates for Common Lisp."
   :version "0.2"
-  :maintainer "Eric Sessoms <eric@nubgames.com>"
+  :maintainer "Eric Sessoms <eric@nubgames.com>, Mariano Montone <marianomontone@gmail.com>"
   :author "Nick Allen <nallen05@gmail.com>"
   :license "MIT"
   :depends-on (#:access
