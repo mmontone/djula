@@ -48,19 +48,44 @@
 
 (defparameter *demos*
   (render-demos
-  `(("variables"
-     ("{{var}}" :var "foo")
-     ("{{var.x}}" :var (:x "baz")))
-    ("if"
-     ("{% if foo %}yes{% else %}no{% endif %}"
-      :foo t)
-     ("{% if foo %}yes{% else %}no{% endif %}"
-      :foo nil))
-    ("for"
-     ("<ul>{% for x in list %}<li>{{x}}</li>{% endfor %}</ul>"
-      :list (list 1 2 3)))
-    ("lisp"
-     ("{% lisp (+ 2 5) %}")))))
+   `(("variables"
+      ("{{var}}" :var ,"foo")
+      ("{{var.x}}" :var (:x ,"baz")))
+     ("if"
+      ("{% if foo %}yes{% else %}no{% endif %}"
+       :foo ,t)
+      ("{% if foo %}yes{% else %}no{% endif %}"
+       :foo ,nil)
+      ("{% ifequal foo bar %}yes{% else %}no{% endifequal %}"
+       :foo ,"foo" :bar ,"bar")
+      ("{% ifequal foo bar %}yes{% else %}no{% endifequal %}"
+       :foo ,"foo" :bar ,"foo"))
+      ("for"
+       ("<ul>{% for x in list %}<li>{{x}}</li>{% endfor %}</ul>"
+	:list ,(list 1 2 3)))
+      ("lisp"
+       ("{% lisp (+ 2 5) %}"))
+     ("length"
+      ("{{ list | length }}" :list ,(list 1 2 3)))
+     ("cut"
+      ("{{ text | cut: IT }}" :text "cutITout"))
+     ("default"
+      ("{{ text | default: hello!! }}" :text ,nil))
+     ("lower"
+      ("{{ text | lower }}" :text ,"Hello"))
+     ("upper"
+      ("{{ text | upper }}" :text ,"Hello"))
+     ("capfirst"
+      ("{{ text | capfirst }}" :text ,"hello"))
+     ("add"
+      ("{{ n | add: 4 }}" :n ,1))
+     ("lisp filter"
+      ("{{ text | lisp: string-upcase }}" :text ,"hello")
+      ("{{ num | lisp: 1+}}" :num ,0))
+     ("safe"
+      ("{{ html | safe }}" :html ,"<p>Hello</p>"))
+     ("date"
+      ("{{ date | date }}" :date ,(get-universal-time))))))
 
 (hunchentoot:define-easy-handler (demo :uri "/") ()
   (djula:render-template* +demo.html+
