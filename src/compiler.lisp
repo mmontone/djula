@@ -6,9 +6,46 @@
 (defclass compiler ()
   ())
 
+(defclass compiled-template ()
+  ((compiled-template :initarg :compiled-template
+		      :initform nil
+		      :accessor compiled-template
+		      :documentation "The compiled template (a closure)")
+   (template-file :initarg :template-file
+		  :accessor template-file
+		  :initform (error "Provide the template file")
+		  :documentation "The filepath of the template")
+   (template-file-write-date :accessor template-file-write-date
+			     :documentation "The write date of the template file"))
+  (:metaclass closer-mop:funcallable-standard-class)
+  (:documentation "A compiled template"))
+
+(defmethod initialize-instance :after ((compiled-template compiled-template) &rest initargs)
+  (declare (ignore initargs))
+  (flet ((compile-template-file ()
+	   ;; Set the template file write date
+	   (setf (template-file-write-date compiled-template)
+		 (file-write-date (template-file compiled-template)))
+ 
+	   ;; Compile the template file
+	   (setf (compiled-template compiled-template)
+		 (compile-string (fetch-template* (template-file compiled-template))))))
+    
+    (compile-template-file)
+  
+    (closer-mop:set-funcallable-instance-function
+     compiled-template
+     (lambda (stream)
+       ;; Recompile the template if the template-file has changed
+       (when (not (equalp (file-write-date (template-file compiled-template))
+			  (template-file-write-date compiled-template)))
+	 (compile-template-file))
+       (funcall (compiled-template compiled-template) stream)))))
+
 (defmethod compile-template ((compiler compiler) name &optional (error-p t))
-  (when-let ((key (find-template* name error-p)))
-    (compile-string (fetch-template* key))))
+  (when-let ((template-file (find-template* name error-p)))
+    (make-instance 'compiled-template
+		   :template-file template-file)))
 
 (defclass toplevel-compiler (compiler)
   ((fragment-compiler

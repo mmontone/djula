@@ -11,7 +11,8 @@
 	       #:cl-ppcre
 	       #:cl-fad
 	       #:split-sequence
-	       #:local-time)
+	       #:local-time
+	       #:closer-mop)
   :components
   ((:module :src
 	    :components
