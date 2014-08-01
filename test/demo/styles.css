@@ -2,5 +2,11 @@
     background: none repeat scroll 0 0 #DADADA;
     color: #444444;
     padding-bottom: 10px;
+    padding-left: 10px;
     padding-top: 10px;
+}
+
+.example {
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
