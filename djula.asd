@@ -12,7 +12,8 @@
 	       #:cl-fad
 	       #:split-sequence
 	       #:local-time
-	       #:closer-mop)
+	       #:closer-mop
+	       #:trivial-backtrace)
   :components
   ((:module :src
 	    :components
