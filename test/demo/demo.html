@@ -6,6 +6,18 @@
         <link rel="stylesheet" href="simplegrid.css">
     </head>
     <body>
+        <div class="grid grid-pad">
+            <div class="col-1-1">
+                <div class="content">
+                    <h3>Errors</h3>
+                    <ul>
+                        <li><a href="/error">Error</a></li>
+                        <li><a href="/error-uncatched">Unhandled error</a></li>
+                        <li><a href="/fancy-error">Fancy error</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         {% for demo in demos %}
         <div class="grid grid-pad">
             <div class="col-1-1">
@@ -14,25 +26,27 @@
                 </div>
             </div>
             {% for example in demo.examples %}
-            <div class="col-1-3">
-                <pre><code class="jinja">
-                    {{ example.source }}
-                </code></pre>
-            </div>
-            <div class="col-1-3">
-                <pre><code class="lisp">
-                    {{ example.args }}
-                </code></pre>
-            </div>
-            <div class="col-1-3">
-                <pre><code class="html">
-                    {{ example.output }}
-                </code></pre>
+            <div class="grid grid-pad">
+                <div class="col-1-3">
+                    <pre><code class="jinja">
+                        {{ example.source }}
+                    </code></pre>
+                </div>
+                <div class="col-1-3">
+                    <pre><code class="lisp">
+                        {{ example.args }}
+                    </code></pre>
+                </div>
+                <div class="col-1-3">
+                    <pre><code class="html">
+                        {{ example.output }}
+                    </code></pre>
+                </div>
             </div>
             {% endfor %}
         </div>
         {% endfor %}
         <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

@@ -51,9 +51,16 @@
   `(("variables"
      ("{{var}}" :var "foo")
      ("{{var.x}}" :var (:x "baz")))
+    ("if"
+     ("{% if foo %}yes{% else %}no{% endif %}"
+      :foo t)
+     ("{% if foo %}yes{% else %}no{% endif %}"
+      :foo nil))
     ("for"
      ("<ul>{% for x in list %}<li>{{x}}</li>{% endfor %}</ul>"
-      :list (list 1 2 3))))))
+      :list (list 1 2 3)))
+    ("lisp"
+     ("{% lisp (+ 2 5) %}")))))
 
 (hunchentoot:define-easy-handler (demo :uri "/") ()
   (djula:render-template* +demo.html+
