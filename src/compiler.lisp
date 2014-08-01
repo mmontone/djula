@@ -20,6 +20,10 @@
   (:metaclass closer-mop:funcallable-standard-class)
   (:documentation "A compiled template"))
 
+(defmethod print-object ((compiled-template compiled-template) stream)
+  (print-unreadable-object (compiled-template stream :type t :identity t)
+    (format stream "~A" (template-file compiled-template))))
+
 (defmethod initialize-instance :after ((compiled-template compiled-template) &rest initargs)
   (declare (ignore initargs))
   (flet ((compile-template-file ()
@@ -77,10 +81,17 @@
            (*known-example-tables* nil)
            (*accumulated-javascript-strings* nil)
            (*current-language* *current-language*))
-       (if stream
-           (funcall template stream)
-           (with-output-to-string (s)
-             (funcall template s)))))))
+       (handler-case 
+	   (if stream
+	       (funcall template stream)
+	       (with-output-to-string (s)
+		 (funcall template s)))
+	 (error (e)
+	   (if *fancy-error-template-p*
+	       (render-error-template e
+				      (trivial-backtrace:print-backtrace e :output nil)
+				      template stream)
+	       (signal e))))))))
 
 (defun compile-string (string)
   (let ((fs (mapcar #'compile-token (process-tokens (parse-template-string string)))))

@@ -14,6 +14,8 @@
 
 (defvar *verbose-errors-p* t "When enabled, errors are displayed more verbosely. Good for debugging")
 
+(defvar *fancy-error-template-p* t "When enabled, show a fancy template when an error ocurrs")
+
 (defvar *allow-include-roots* ())
 
 (defvar *template-string-if-invalid* nil)
