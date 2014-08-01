@@ -69,6 +69,9 @@
        ("{% lisp (+ 2 5) %}"))
      ("length"
       ("{{ list | length }}" :list ,(list 1 2 3)))
+     ("filter composition"
+      ("{{ text | truncatechars: 10 | upper }}" :text "This is a long text")
+      ("{{ text | truncatechars: 10 | cut:This }}" :text "This is great"))
      ("cut"
       ("{{ text | cut: IT }}" :text "cutITout"))
      ("default"
@@ -79,8 +82,17 @@
       ("{{ text | upper }}" :text ,"Hello"))
      ("capfirst"
       ("{{ text | capfirst }}" :text ,"hello"))
+     ("join"
+      ("{{ list | join:\",\"}}" :list ,(list 1 2 3))
+      ("{{ list | join:\" // \"}}" :list ,(list 1 2 3)))
+     ("first"
+      ("{{ list | first }}" :list ,(list 1 2 3)))
+     ("last"
+      ("{{ list | last }}" :list ,(list 1 2 3)))
      ("add"
       ("{{ n | add: 4 }}" :n ,1))
+     ("truncatechars"
+      ("{{ text | truncatechars: 10 }}" :text "This is a long text")) 
      ("lisp filter"
       ("{{ text | lisp: string-upcase }}" :text ,"hello")
       ("{{ num | lisp: 1+}}" :num ,0))
