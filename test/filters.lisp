@@ -19,7 +19,7 @@ asdf")))
   (is (string= "LALA" (filter :lisp "lala" "string-upcase")))
   (is (string= (filter :urlencode "http://www.google.com")
 	       "http%3A%2F%2Fwww.google.com"))
-  (is (= (filter :add 2 2) 4))
+  (is (= (filter :add 2 "2") 4))
   (is (string= (filter :addslashes "I'm using Djula")
 	       "I\\'m using Djula"))
   (is (string=
