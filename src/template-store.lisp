@@ -14,6 +14,7 @@
     :documentation "The location of the most-recently fetched template.")
    (search-path
     :initarg :search-path
+    :accessor search-path
     :initform nil
     :type list
     :documentation "User-provided list of template locations."))
@@ -45,6 +46,11 @@
 
 (defvar *current-store* (make-instance 'file-store)
   "The currently in-use template store.  Defaults to a FILE-STORE.")
+
+(defun add-template-directory (directory &optional (template-store *current-store*))
+  (pushnew directory
+	   (search-path template-store)
+	   :test #'equalp))
 
 (defun find-template* (name &optional (error-p t))
   (find-template *current-store* name error-p))

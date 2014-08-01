@@ -1,9 +1,7 @@
 (in-package :djula-test)
 
-(setf *current-store*
-      (make-instance 'file-store
-		     :search-path 
-		     (list (asdf:system-relative-pathname :djula "test/templates/"))))
+(djula:add-template-directory (asdf:system-relative-pathname :djula "test/templates/"))
+
 (let ((djula:*catch-template-errors-p* nil))
   (defparameter +t1+ (djula:compile-template* "t1.djula"))
   (defparameter +t2+ (djula:compile-template* "t2.djula"))

@@ -37,4 +37,5 @@
            #:translation-table-p
            #:url-decode
            #:url-encode
-           #:url-encode-path))
+           #:url-encode-path
+	   #:add-template-directory))

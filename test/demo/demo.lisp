@@ -1,6 +1,12 @@
-(in-package :djula-test)
+(defpackage :djula-demo
+  (:use :cl)
+  (:export #:start-demo
+	   #:stop-demo))
 
-(ql:quickload :hunchentoot)
+(in-package :djula-demo)
+
+(djula:add-template-directory
+ (asdf:system-relative-pathname :djula "test/demo/"))
 
 (defparameter *demo-acceptor* (make-instance 'hunchentoot:easy-acceptor :port 9090))
 
