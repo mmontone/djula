@@ -8,6 +8,7 @@
   (:export #:*allow-include-roots*
            #:*catch-template-errors-p*
 	   #:*verbose-errors-p*
+	   #:*fancy-error-template-p*
            #:*current-compiler*
            #:*current-language*
            #:*current-store*

@@ -83,12 +83,16 @@ the result probably shouldn't be considered useful."
         (if error-string
             (with-template-error error-string
               (error error-string))
-            (let ((str (princ-to-string (or ret ""))))
-              (princ (apply-filters (if dont-escape
-                                        str
-                                        (escape-for-html str))
-                                    filters)
-                     stream)))))))
+	    (let ((filtered-ret
+		   (princ-to-string
+		    (or
+		     (apply-filters 
+		      ret filters)
+		     ""))))
+	    (princ (if dont-escape
+		       filtered-ret
+		       (escape-for-html filtered-ret))
+		   stream)))))))
 
 ;;; making sure all the variables in an example table are in *TEMPLATE-ARGUMENTS*
 (defun .check-example-table-plist (example-table-plist)

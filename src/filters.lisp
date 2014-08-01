@@ -1,19 +1,19 @@
 (in-package #:djula)
 
-(defun apply-filters (string filters)
-  (reduce (lambda (string filter)
+(defun apply-filters (value filters)
+  (reduce (lambda (value filter)
             (destructuring-bind (name . args)
                 filter
               (handler-case
                   (if-let ((fn (get name 'filter)))
-                    (apply fn string args)
+                    (apply fn value args)
                     (template-error-string "Unknown filter ~A" name))
                 (template-error (e1)
                   (princ-to-string e1))
                 (error (e)
                   (template-error-string* e "There was an error applying the filter ~A" name)))))
           filters
-          :initial-value string))
+          :initial-value value))
 
 (def-filter :capfirst (it)
   (string-capitalize (princ-to-string it)))
@@ -53,7 +53,7 @@
       (template-error "There was an error executing the lisp tag ~S: ~A" lisp-string e))))
 
 (def-filter :add (it n)
-  (+ it n))
+  (+ it (parse-integer n)))
 
 (def-filter :first (it)
   (first it))

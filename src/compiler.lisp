@@ -92,7 +92,7 @@
 	       (render-error-template e
 				      (trivial-backtrace:print-backtrace e :output nil)
 				      template stream)
-	       (signal e))))))))
+	       (error e))))))))
 
 (defun compile-string (string)
   (let ((fs (mapcar #'compile-token (process-tokens (parse-template-string string)))))
@@ -123,7 +123,7 @@
                           (error e1)))
                     (error (e2)
                       (let ((msg (template-error-string* e2 "There was an error rendering the token ~A" token)))
-                        (if *catch-template-errors-p*
+			(if *catch-template-errors-p*
                             (princ msg stream)
                             (template-error msg)))))))
             (template-error (e1)
