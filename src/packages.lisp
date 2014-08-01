@@ -3,12 +3,8 @@
 (defpackage #:djula
   (:use #:access
         #:alexandria
+	#:anaphora
         #:common-lisp)
-  (:import-from #:arnesi
-                #:aand
-                #:acond
-                #:aif
-                #:it)
   (:export #:*allow-include-roots*
            #:*catch-template-errors-p*
 	   #:*verbose-errors-p*

@@ -6,7 +6,7 @@
   :license "MIT"
   :depends-on (#:access
                #:alexandria
-               #:arnesi
+               #:anaphora
                #:babel
 	       #:cl-ppcre
 	       #:cl-fad
