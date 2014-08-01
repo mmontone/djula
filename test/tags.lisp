@@ -55,6 +55,14 @@
 	 (djula:render-template* template nil :list (list "foo" "bar"))
 	 "<ul><li>foo</li><li>bar</li></ul>"))))
 
+(test nested-loop-test
+  (let ((template (djula::compile-string "{% for list in lists %}<ul>{% for elem in list %}<li>{{elem}}</li>{% endfor %}</ul>{% endfor %}")))
+    (is (equalp
+	 (djula:render-template* template nil
+			    :lists (list (list "foo" "bar")
+					 (list "baz")))
+	 "<ul><li>foo</li><li>bar</li></ul><ul><li>baz</li></ul>"))))
+
 (test logical-statements-test
   (let ((template (djula::compile-string "{% if foo and baz %}yes{% else %}no{% endif %}")))
     (is (equalp 
