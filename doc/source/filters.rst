@@ -274,13 +274,13 @@ If ``value`` is the list ``("a" "b" "c")``, the output will be ``"a"``.
 join
 ^^^^
 
-Joins a list with a string, like Python's ``str.join(list)``
+Joins a list with a string.
 
 For example::
 
     {{ value|join:" // " }}
 
-If ``value`` is the list ``['a', 'b', 'c']``, the output will be the string
+If ``value`` is the list ``("a" "b" "c")``, the output will be the string
 ``"a // b // c"``.
 
 .. templatefilter:: last
@@ -308,29 +308,25 @@ For example::
 
     {{ value|length }}
 
-If ``value`` is ``['a', 'b', 'c', 'd']`` or ``"abcd"``, the output will be
+If ``value`` is ``("a" "b" "c" "d")`` or ``"abcd"``, the output will be
 ``4``.
 
-.. versionchanged:: 1.8
+..
+   .. templatefilter:: length_is
 
-    The filter returns ``0`` for an undefined variable. Previously, it returned
-    an empty string.
+   length_is
+   ^^^^^^^^^
 
-.. templatefilter:: length_is
+   Returns ``True`` if the value's length is the argument, or ``False`` otherwise.
 
-length_is
-^^^^^^^^^
+   For example::
 
-Returns ``True`` if the value's length is the argument, or ``False`` otherwise.
+       {{ value|length_is:"4" }}
 
-For example::
+   If ``value`` is ``['a', 'b', 'c', 'd']`` or ``"abcd"``, the output will be
+   ``True``.
 
-    {{ value|length_is:"4" }}
-
-If ``value`` is ``['a', 'b', 'c', 'd']`` or ``"abcd"``, the output will be
-``True``.
-
-.. templatefilter:: linebreaks
+   .. templatefilter:: linebreaks
 
 linebreaks
 ^^^^^^^^^^
@@ -363,41 +359,42 @@ slug``.
 
 .. templatefilter:: linenumbers
 
-linenumbers
-^^^^^^^^^^^
+..
+   linenumbers
+   ^^^^^^^^^^^
 
-Displays text with line numbers.
+   Displays text with line numbers.
 
-For example::
+   For example::
 
-    {{ value|linenumbers }}
+       {{ value|linenumbers }}
 
-If ``value`` is::
+   If ``value`` is::
 
-    one
-    two
-    three
+       one
+       two
+       three
 
-the output will be::
+   the output will be::
 
-    1. one
-    2. two
-    3. three
+       1. one
+       2. two
+       3. three
 
-.. templatefilter:: ljust
+   .. templatefilter:: ljust
 
-ljust
-^^^^^
+   ljust
+   ^^^^^
 
-Left-aligns the value in a field of a given width.
+   Left-aligns the value in a field of a given width.
 
-**Argument:** field size
+   **Argument:** field size
 
-For example::
+   For example::
 
-    "{{ value|ljust:"10" }}"
+       "{{ value|ljust:"10" }}"
 
-If ``value`` is ``Djula``, the output will be ``"Djula    "``.
+   If ``value`` is ``Djula``, the output will be ``"Djula    "``.
 
 .. templatefilter:: lower
 
@@ -415,122 +412,123 @@ If ``value`` is ``Still MAD At Yoko``, the output will be
 
 .. templatefilter:: make_list
 
-make_list
-^^^^^^^^^
+..
+   make_list
+   ^^^^^^^^^
 
-Returns the value turned into a list. For a string, it's a list of characters.
-For an integer, the argument is cast into an unicode string before creating a
-list.
+   Returns the value turned into a list. For a string, it's a list of characters.
+   For an integer, the argument is cast into an unicode string before creating a
+   list.
 
-For example::
+   For example::
 
-    {{ value|make_list }}
+       {{ value|make_list }}
 
-If ``value`` is the string ``"Joel"``, the output would be the list
-``['J', 'o', 'e', 'l']``. If ``value`` is ``123``, the output will be the
-list ``['1', '2', '3']``.
+   If ``value`` is the string ``"Joel"``, the output would be the list
+   ``['J', 'o', 'e', 'l']``. If ``value`` is ``123``, the output will be the
+   list ``['1', '2', '3']``.
 
-.. templatefilter:: phone2numeric
+   .. templatefilter:: phone2numeric
 
-phone2numeric
-^^^^^^^^^^^^^
+   phone2numeric
+   ^^^^^^^^^^^^^
 
-Converts a phone number (possibly containing letters) to its numerical
-equivalent.
+   Converts a phone number (possibly containing letters) to its numerical
+   equivalent.
 
-The input doesn't have to be a valid phone number. This will happily convert
-any string.
+   The input doesn't have to be a valid phone number. This will happily convert
+   any string.
 
-For example::
+   For example::
 
-    {{ value|phone2numeric }}
+       {{ value|phone2numeric }}
 
-If ``value`` is ``800-COLLECT``, the output will be ``800-2655328``.
+   If ``value`` is ``800-COLLECT``, the output will be ``800-2655328``.
 
-.. templatefilter:: pluralize
+   .. templatefilter:: pluralize
 
-pluralize
-^^^^^^^^^
+   pluralize
+   ^^^^^^^^^
 
-Returns a plural suffix if the value is not 1. By default, this suffix is
-``'s'``.
+   Returns a plural suffix if the value is not 1. By default, this suffix is
+   ``'s'``.
 
-Example::
+   Example::
 
-    You have {{ num_messages }} message{{ num_messages|pluralize }}.
+       You have {{ num_messages }} message{{ num_messages|pluralize }}.
 
-If ``num_messages`` is ``1``, the output will be ``You have 1 message.``
-If ``num_messages`` is ``2``  the output will be ``You have 2 messages.``
+   If ``num_messages`` is ``1``, the output will be ``You have 1 message.``
+   If ``num_messages`` is ``2``  the output will be ``You have 2 messages.``
 
-For words that require a suffix other than ``'s'``, you can provide an alternate
-suffix as a parameter to the filter.
+   For words that require a suffix other than ``'s'``, you can provide an alternate
+   suffix as a parameter to the filter.
 
-Example::
+   Example::
 
-    You have {{ num_walruses }} walrus{{ num_walruses|pluralize:"es" }}.
+       You have {{ num_walruses }} walrus{{ num_walruses|pluralize:"es" }}.
 
-For words that don't pluralize by simple suffix, you can specify both a
-singular and plural suffix, separated by a comma.
+   For words that don't pluralize by simple suffix, you can specify both a
+   singular and plural suffix, separated by a comma.
 
-Example::
+   Example::
 
-    You have {{ num_cherries }} cherr{{ num_cherries|pluralize:"y,ies" }}.
+       You have {{ num_cherries }} cherr{{ num_cherries|pluralize:"y,ies" }}.
 
-.. note:: Use :ttag:`blocktrans` to pluralize translated strings.
+   .. note:: Use :ttag:`blocktrans` to pluralize translated strings.
 
-.. templatefilter:: pprint
+   .. templatefilter:: pprint
 
-pprint
-^^^^^^
+   pprint
+   ^^^^^^
 
-A wrapper around :func:`pprint.pprint` -- for debugging, really.
+   A wrapper around :func:`pprint.pprint` -- for debugging, really.
 
-.. templatefilter:: random
+   .. templatefilter:: random
 
-random
-^^^^^^
+   random
+   ^^^^^^
 
-Returns a random item from the given list.
+   Returns a random item from the given list.
 
-For example::
+   For example::
 
-    {{ value|random }}
+       {{ value|random }}
 
-If ``value`` is the list ``['a', 'b', 'c', 'd']``, the output could be ``"b"``.
+   If ``value`` is the list ``['a', 'b', 'c', 'd']``, the output could be ``"b"``.
 
-.. templatefilter:: removetags
+   .. templatefilter:: removetags
 
-removetags
-^^^^^^^^^^
+   removetags
+   ^^^^^^^^^^
 
-Removes a space-separated list of [X]HTML tags from the output.
+   Removes a space-separated list of [X]HTML tags from the output.
 
-For example::
+   For example::
 
-    {{ value|removetags:"b span"|safe }}
+       {{ value|removetags:"b span"|safe }}
 
-If ``value`` is ``"<b>Joel</b> <button>is</button> a <span>slug</span>"`` the
-output will be ``"Joel <button>is</button> a slug"``.
+   If ``value`` is ``"<b>Joel</b> <button>is</button> a <span>slug</span>"`` the
+   output will be ``"Joel <button>is</button> a slug"``.
 
-Note that this filter is case-sensitive.
+   Note that this filter is case-sensitive.
 
-If ``value`` is ``"<B>Joel</B> <button>is</button> a <span>slug</span>"`` the
-output will be ``"<B>Joel</B> <button>is</button> a slug"``.
+   If ``value`` is ``"<B>Joel</B> <button>is</button> a <span>slug</span>"`` the
+   output will be ``"<B>Joel</B> <button>is</button> a slug"``.
 
-.. templatefilter:: rjust
+   .. templatefilter:: rjust
 
-rjust
-^^^^^
+   rjust
+   ^^^^^
 
-Right-aligns the value in a field of a given width.
+   Right-aligns the value in a field of a given width.
 
-**Argument:** field size
+   **Argument:** field size
 
-For example::
+   For example::
 
-    "{{ value|rjust:"10" }}"
+       "{{ value|rjust:"10" }}"
 
-If ``value`` is ``Djula``, the output will be ``"    Djula"``.
+   If ``value`` is ``Djula``, the output will be ``"    Djula"``.
 
 .. templatefilter:: safe
 
@@ -550,70 +548,67 @@ autoescaping is off, this filter has no effect.
 
         {{ var|safe|escape }}
 
-.. templatefilter:: safeseq
+..
+   .. templatefilter:: safeseq
 
-safeseq
-^^^^^^^
+   safeseq
+   ^^^^^^^
 
-Applies the :tfilter:`safe` filter to each element of a sequence. Useful in
-conjunction with other filters that operate on sequences, such as
-:tfilter:`join`. For example::
+   Applies the :tfilter:`safe` filter to each element of a sequence. Useful in
+   conjunction with other filters that operate on sequences, such as
+   :tfilter:`join`. For example::
 
-    {{ some_list|safeseq|join:", " }}
+       {{ some_list|safeseq|join:", " }}
 
-You couldn't use the :tfilter:`safe` filter directly in this case, as it would
-first convert the variable into a string, rather than working with the
-individual elements of the sequence.
+   You couldn't use the :tfilter:`safe` filter directly in this case, as it would
+   first convert the variable into a string, rather than working with the
+   individual elements of the sequence.
 
-.. templatefilter:: slice
+   .. templatefilter:: slice
 
-slice
-^^^^^
+   slice
+   ^^^^^
 
-Returns a slice of the list.
+   Returns a slice of the list.
 
-Uses the same syntax as Python's list slicing. See
-http://www.diveintopython3.net/native-datatypes.html#slicinglists
-for an introduction.
+   Uses the same syntax as Python's list slicing. See
+   http://www.diveintopython3.net/native-datatypes.html#slicinglists
+   for an introduction.
 
-Example::
+   Example::
 
-    {{ some_list|slice:":2" }}
+       {{ some_list|slice:":2" }}
 
-If ``some_list`` is ``['a', 'b', 'c']``, the output will be ``['a', 'b']``.
+   If ``some_list`` is ``['a', 'b', 'c']``, the output will be ``['a', 'b']``.
 
-.. templatefilter:: slugify
+   .. templatefilter:: slugify
 
-slugify
-^^^^^^^
+   slugify
+   ^^^^^^^
 
-Converts to lowercase, removes non-word characters (alphanumerics and
-underscores) and converts spaces to hyphens. Also strips leading and trailing
-whitespace.
+   Converts to lowercase, removes non-word characters (alphanumerics and
+   underscores) and converts spaces to hyphens. Also strips leading and trailing
+   whitespace.
 
-For example::
+   For example::
 
-    {{ value|slugify }}
+       {{ value|slugify }}
 
-If ``value`` is ``"Joel is a slug"``, the output will be ``"joel-is-a-slug"``.
+   If ``value`` is ``"Joel is a slug"``, the output will be ``"joel-is-a-slug"``.
 
 .. templatefilter:: stringformat
 
-stringformat
-^^^^^^^^^^^^
+format
+^^^^^^
 
 Formats the variable according to the argument, a string formatting specifier.
-This specifier uses Python string formatting syntax, with the exception that
-the leading "%" is dropped.
-
-See http://docs.python.org/library/stdtypes.html#string-formatting-operations
-for documentation of Python string formatting
+This specifier uses Common Lisp string formatting syntax
 
 For example::
 
-    {{ value|stringformat:"E" }}
+    {{ value | format:"~:d" }}
 
-If ``value`` is ``10``, the output will be ``1.000000E+01``.
+If ``value`` is ``1000000``, the output will be ``1,000,000``.
 
 .. templatefilter:: striptags
 

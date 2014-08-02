@@ -82,6 +82,9 @@
 (def-filter :addslashes (it)
   (cl-ppcre:regex-replace-all "'" it "\\\\'"))
 
+(def-filter :format (it fmt)
+  (format nil fmt it))
+
 (def-filter :date (it &optional format)
   (let ((timestamp (cond
 		     ((integerp it)

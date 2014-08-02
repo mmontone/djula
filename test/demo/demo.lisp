@@ -96,6 +96,8 @@
      ("filter composition"
       ("{{ text | truncatechars: 10 | upper }}" :text "This is a long text")
       ("{{ text | truncatechars: 10 | cut:This }}" :text "This is great"))
+     ("format"
+      ("{{ value | format:\"~:d\" }}" :value 1000000))
      ("cut"
       ("{{ text | cut: IT }}" :text "cutITout"))
      ("default"
