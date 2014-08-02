@@ -390,7 +390,7 @@ sure all the variables in `VARIABLE/VALUE-PLIST' are in *TEMPLATE-ARGUMENTS*"
                         (list* var nil :forloop loopfor *template-arguments*)))
                   (dolist (x (if reversed (reverse list) list))
                     ;; Update the value of the loop variable.
-                    (setf (cadr *template-arguments*) x)
+                    (setf (getf *template-arguments* var) x)
                     (dolist (f fs)
                       (funcall f stream))
                     (incf (cdr (assoc :counter loopfor)))
