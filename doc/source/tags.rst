@@ -494,48 +494,6 @@ This example includes the contents of the template ``"foo/bar.html"``::
 
     {% include "foo/bar.html" %}
 
-This example includes the contents of the template whose name is contained in
-the variable ``template-name``::
-
-    {% include template-name %}
-
-.. versionchanged:: 1.7
-
-    The variable may also be any object with a ``render()`` method that
-    accepts a context. This allows you to reference a compiled ``Template`` in
-    your context.
-
-An included template is rendered within the context of the template that
-includes it. This example produces the output ``"Hello, John"``:
-
-* Context: variable ``person`` is set to ``"john"``.
-* Template::
-
-    {% include "name-snippet.html" %}
-
-* The ``name-snippet.html`` template::
-
-    {{ greeting }}, {{ person|default:"friend" }}!
-
-You can pass additional context to the template using keyword arguments::
-
-    {% include "name-snippet.html" with person="Jane" greeting="Hello" %}
-
-If you want to render the context only with the variables provided (or even
-no variables at all), use the ``only`` option. No other variables are
-available to the included template::
-
-    {% include "name-snippet.html" with greeting="Hi" only %}
-
-.. note::
-    The :ttag:`include` tag should be considered as an implementation of
-    "render this subtemplate and include the HTML", not as "parse this
-    subtemplate and include its contents as if it were part of the parent".
-    This means that there is no shared state between included templates --
-    each include is a completely independent rendering process.
-
-See also: :ttag:`{% ssi %}<ssi>`.
-
 ..
    .. templatetag:: load
 
