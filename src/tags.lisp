@@ -95,11 +95,17 @@ form that returns some debugging info."
 (def-tag-compiler :cycle (&rest list)
   (let ((circle (copy-list list))
 	(unique-id (gensym "cycle")))
-    (setf (rest (last circle)) circle)
+    ;; Make the circle list circular
+    (setf (cdr (last circle)) circle)
     (lambda (stream)
       (unless (getf *template-arguments* unique-id)
         (setf *template-arguments* (list* unique-id circle *template-arguments*)))
-      (princ (pop (getf *template-arguments* unique-id)) stream))))
+      (let ((cycle-item (pop (getf *template-arguments* unique-id))))
+	(let ((cycle-item-value
+	       (if (symbolp cycle-item)
+		   (getf *template-arguments* cycle-item)
+		   cycle-item)))
+	  (princ cycle-item-value stream))))))
 
 (def-tag-compiler :debug ()
   (lambda (out)

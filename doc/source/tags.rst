@@ -13,9 +13,7 @@ some load external information into the template to be used by later variables.
 Some tags require beginning and ending tags (i.e. ``{% tag %} ... tag contents
 ... {% endtag %}``).
 
-Djula ships with about two dozen built-in template tags. You can read all about
-them in the :ref:`built-in tag reference <ref-templates-builtins-tags>`. To give
-you a taste of what's available, here are some of the more commonly used
+Here are some of the more commonly used
 tags:
 
 :ttag:`for`
@@ -28,35 +26,15 @@ tags:
         {% endfor %}
         </ul>
 
-:ttag:`if`, ``elif``, and ``else``
+:ttag:`if`, ``else``
     Evaluates a variable, and if that variable is "true" the contents of the
     block are displayed::
 
         {% if athlete-list %}
             Number of athletes: {{ athlete-list|length }}
-        {% elif athlete-in-locker-room-list %}
-            Athletes should be out of the locker room soon!
         {% else %}
             No athletes.
         {% endif %}
-
-    In the above, if ``athlete-list`` is not empty, the number of athletes
-    will be displayed by the ``{{ athlete-list|length }}`` variable. Otherwise,
-    if ``athlete-in-locker-room-list`` is not empty, the message "Athletes
-    should be out..." will be displayed. If both lists are empty,
-    "No athletes." will be displayed.
-
-    You can also use filters and various operators in the :ttag:`if` tag::
-
-        {% if athlete-list|length > 1 %}
-           Team: {% for athlete in athlete-list %} ... {% endfor %}
-        {% else %}
-           Athlete: {{ athlete-list.0.name }}
-        {% endif %}
-
-    While the above example works, be aware that most template filters return
-    strings, so mathematical comparisons using filters will generally not work
-    as you expect. :tfilter:`length` is an exception.
 
 :ttag:`block` and :ttag:`extends`
     Set up `template inheritance`_ (see below), a powerful way
@@ -99,11 +77,15 @@ Sample usage::
 super
 ^^^^^
 
-Gets the content of the block from the parent template. You have to pass the name of the block of the parent template you want to access.
+Gets the content of the block from the parent template. You can pass the name of the block of the parent block you want to access. If no name is passed, then the current block's parent is used.
 
 Sample usage::
 
      {% super "stylesheets" %}
+
+     {% block stylesheets %}
+       {% super %}
+     {% endblock %}
 
 .. templatetag:: comment     
 
@@ -116,21 +98,12 @@ useful when commenting out code for documenting why the code was disabled.
 
 Sample usage::
 
-    <p>Rendered text with {{ pub-date|date:"c" }}</p>
+    <p>Rendered text with {{ pub-date|date }}</p>
     {% comment "Optional note" %}
-        <p>Commented out text with {{ create-date|date:"c" }}</p>
+        <p>Commented out text with {{ create-date|date }}</p>
     {% endcomment %}
 
 ``comment`` tags cannot be nested.
-
-..
-   .. templatetag:: csrf-token
-
-   csrf-token
-   ^^^^^^^^^^
-
-   This tag is used for CSRF protection, as described in the documentation for
-   :doc:`Cross Site Request Forgeries </ref/contrib/csrf>`.
 
 .. templatetag:: cycle
 
@@ -145,7 +118,7 @@ the first argument and produces it again.
 This tag is particularly useful in a loop::
 
     {% for o in some-list %}
-        <tr class="{% cycle 'row1' 'row2' %}">
+        <tr class="{% cycle "row1" "row2" %}">
             ...
         </tr>
     {% endfor %}
@@ -164,98 +137,29 @@ this::
         </tr>
     {% endfor %}
 
-Variables included in the cycle will be escaped.  You can disable auto-escaping
-with::
+..
+   Variables included in the cycle will be escaped.  You can disable auto-escaping
+   with::
 
-    {% for o in some-list %}
-        <tr class="{% autoescape off %}{% cycle rowvalue1 rowvalue2 %}{% endautoescape %}
-            ...
-        </tr>
-    {% endfor %}
+       {% for o in some-list %}
+	   <tr class="{% autoescape off %}{% cycle rowvalue1 rowvalue2 %}{% endautoescape %}
+	       ...
+	   </tr>
+       {% endfor %}
 
 You can mix variables and strings::
 
     {% for o in some-list %}
-        <tr class="{% cycle 'row1' rowvalue2 'row3' %}">
+        <tr class="{% cycle "row1" rowvalue2 "row3" %}">
             ...
         </tr>
     {% endfor %}
 
-In some cases you might want to refer to the current value of a cycle
-without advancing to the next value. To do this,
-just give the ``{% cycle %}`` tag a name, using "as", like this::
-
-    {% cycle 'row1' 'row2' as rowcolors %}
-
-From then on, you can insert the current value of the cycle wherever you'd like
-in your template by referencing the cycle name as a context variable. If you
-want to move the cycle to the next value independently of the original
-``cycle`` tag, you can use another ``cycle`` tag and specify the name of the
-variable. So, the following template::
-
-    <tr>
-        <td class="{% cycle 'row1' 'row2' as rowcolors %}">...</td>
-        <td class="{{ rowcolors }}">...</td>
-    </tr>
-    <tr>
-        <td class="{% cycle rowcolors %}">...</td>
-        <td class="{{ rowcolors }}">...</td>
-    </tr>
-
-would output::
-
-    <tr>
-        <td class="row1">...</td>
-        <td class="row1">...</td>
-    </tr>
-    <tr>
-        <td class="row2">...</td>
-        <td class="row2">...</td>
-    </tr>
 
 You can use any number of values in a ``cycle`` tag, separated by spaces.
-Values enclosed in single quotes (``'``) or double quotes (``"``) are treated
+Values enclosed in double quotes (``"``) are treated
 as string literals, while values without quotes are treated as template
 variables.
-
-By default, when you use the ``as`` keyword with the cycle tag, the
-usage of ``{% cycle %}`` that initiates the cycle will itself produce
-the first value in the cycle. This could be a problem if you want to
-use the value in a nested loop or an included template. If you only want
-to declare the cycle but not produce the first value, you can add a
-``silent`` keyword as the last keyword in the tag. For example::
-
-    {% for obj in some-list %}
-        {% cycle 'row1' 'row2' as rowcolors silent %}
-        <tr class="{{ rowcolors }}">{% include "subtemplate.html" %}</tr>
-    {% endfor %}
-
-This will output a list of ``<tr>`` elements with ``class``
-alternating between ``row1`` and ``row2``. The subtemplate will have
-access to ``rowcolors`` in its context and the value will match the class
-of the ``<tr>`` that encloses it. If the ``silent`` keyword were to be
-omitted, ``row1`` and ``row2`` would be emitted as normal text, outside the
-``<tr>`` element.
-
-When the silent keyword is used on a cycle definition, the silence
-automatically applies to all subsequent uses of that specific cycle tag.
-The following template would output *nothing*, even though the second
-call to ``{% cycle %}`` doesn't specify ``silent``::
-
-    {% cycle 'row1' 'row2' as rowcolors silent %}
-    {% cycle rowcolors %}
-
-For backward compatibility, the ``{% cycle %}`` tag supports the much inferior
-old syntax from previous Django versions. You shouldn't use this in any new
-projects, but for the sake of the people who are still using it, here's what it
-looks like::
-
-    {% cycle row1,row2,row3 %}
-
-In this syntax, each value gets interpreted as a literal string, and there's no
-way to specify variable values. Or literal commas. Or spaces. Did we mention
-you shouldn't use this syntax in any new projects?
-
 
 .. templatetag:: debug
 

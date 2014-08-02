@@ -47,7 +47,8 @@
 					 args)))))))
 
 (defparameter +custom-date-format+ '((:YEAR 4) #\/ (:MONTH 2) #\/ (:DAY 2)))
-
+(let ((djula:*catch-template-errors-p* nil)
+	(djula:*fancy-error-template-p* nil))
 (defparameter *demos*
   (render-demos
    `(("variables"
@@ -62,11 +63,22 @@
        :foo ,"foo" :bar ,"bar")
       ("{% ifequal foo bar %}yes{% else %}no{% endifequal %}"
        :foo ,"foo" :bar ,"foo"))
-      ("for"
-       ("<ul>{% for x in list %}<li>{{x}}</li>{% endfor %}</ul>"
-	:list ,(list 1 2 3)))
-      ("lisp"
-       ("{% lisp (+ 2 5) %}"))
+     ("for"
+      ("<ul>{% for x in list %}<li>{{x}}</li>{% endfor %}</ul>"
+       :list ,(list 1 2 3)))
+     ("cycle"
+      ("{% for x in list %}
+        <tr class=\"{% cycle \"row1\" \"row2\" %}\">
+           <td>{{x}}</td> 
+        </tr>
+        {% endfor %}" :list ,(list 1 2 3))
+      ("{% for x in list %}
+        <tr class=\"{% cycle row1 row2 %}\">
+           <td>{{x}}</td> 
+        </tr>
+        {% endfor %}" :list ,(list 1 2 3) :row1 "r1" :row2 "r2"))
+     ("lisp"
+      ("{% lisp (+ 2 5) %}"))
      ("length"
       ("{{ list | length }}" :list ,(list 1 2 3)))
      ("filter composition"
@@ -100,12 +112,14 @@
       ("{{ html | safe }}" :html ,"<p>Hello</p>"))
      ("date"
       ("{{ date | date }}" :date ,(get-universal-time))
-      ("{{ date | date: djula-demo::+custom-date-format+}}" :date ,(get-universal-time))))))
+      ("{{ date | date: djula-demo::+custom-date-format+}}" :date ,(get-universal-time)))))))
 
 (hunchentoot:define-easy-handler (demo :uri "/") ()
+  (let ((djula:*catch-template-errors-p* nil)
+	(djula:*fancy-error-template-p* nil))
   (djula:render-template* +demo.html+
 			  nil
-			  :demos *demos*))
+			  :demos *demos*)))
 
 (hunchentoot:define-easy-handler (default-error :uri "/error") ()
   (let ((djula:*catch-template-errors-p* t))
