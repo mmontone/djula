@@ -26,7 +26,7 @@
 (def-filter :default (it default)
   (if (zerop (length it)) default it))
 
-(def-filter :force_escape (it)
+(def-filter :force-escape (it)
   (escape-for-html (princ-to-string it)))
 
 (def-filter :length (it)

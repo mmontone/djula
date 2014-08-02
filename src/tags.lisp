@@ -355,7 +355,7 @@ sure all the variables in `VARIABLE/VALUE-PLIST' are in *TEMPLATE-ARGUMENTS*"
 
 (def-unparsed-tag-processor :filter (unparsed-string) rest
   (process-tokens
-   `((:tag :semi-parsed-filter ,@(rest (.parse-variable-clause (format nil "INTERNAL|~A" unparsed-string))))
+   `((:tag :semi-parsed-filter ,@(rest (parse-variable-clause (format nil "INTERNAL|~A" unparsed-string))))
      ,@rest)))
 
 (def-token-compiler :parsed-filter (filters . clauses)

@@ -47,8 +47,7 @@
 					 args)))))))
 
 (defparameter +custom-date-format+ '((:YEAR 4) #\/ (:MONTH 2) #\/ (:DAY 2)))
-(let ((djula:*catch-template-errors-p* nil)
-	(djula:*fancy-error-template-p* nil))
+
 (defparameter *demos*
   (render-demos
    `(("variables"
@@ -77,6 +76,10 @@
            <td>{{x}}</td> 
         </tr>
         {% endfor %}" :list ,(list 1 2 3) :row1 "r1" :row2 "r2"))
+     ("filter"
+      ("{% filter force-escape|lower %}
+           This text will be <b>HTML</b>-escaped, and will <p>appear</p> in all lowercase.
+        {% endfilter %}"))
      ("lisp"
       ("{% lisp (+ 2 5) %}"))
      ("length"
@@ -112,7 +115,7 @@
       ("{{ html | safe }}" :html ,"<p>Hello</p>"))
      ("date"
       ("{{ date | date }}" :date ,(get-universal-time))
-      ("{{ date | date: djula-demo::+custom-date-format+}}" :date ,(get-universal-time)))))))
+      ("{{ date | date: djula-demo::+custom-date-format+}}" :date ,(get-universal-time))))))
 
 (hunchentoot:define-easy-handler (demo :uri "/") ()
   (let ((djula:*catch-template-errors-p* nil)
