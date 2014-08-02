@@ -113,6 +113,11 @@
       ("{{ list | first }}" :list ,(list 1 2 3)))
      ("last"
       ("{{ list | last }}" :list ,(list 1 2 3)))
+     ("sort"
+      ("{{ list | sort }}" :list ,(list 1 3 2 5))
+      ("{{ list | sort: > }}" :list ,(list 1 3 2 5)))
+     ("reverse"
+      ("{{ list | reverse }}" :list ,(list 1 2 3 4)))
      ("add"
       ("{{ n | add: 4 }}" :n ,1))
      ("truncatechars"

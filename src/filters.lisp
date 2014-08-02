@@ -32,6 +32,24 @@
 (def-filter :length (it)
   (length (princ-to-string it)))
 
+(def-filter :sort (it &optional
+		      (predicate #'<)
+		      (key #'identity))
+  (flet ((read-function (arg)
+	   (let* ((*package* (find-package :common-lisp-user))
+		  (sexp (read-from-string arg)))
+	     (coerce sexp 'function))))
+    (let ((predicate-f (if (functionp predicate)
+			   predicate
+			   (read-function predicate)))
+	  (key-f (if (functionp key)
+		     key
+		     (read-function key))))
+      (sort (copy-list it) predicate-f :key key-f))))
+
+(def-filter :reverse (it)
+  (reverse it))
+
 (def-filter :linebreaks (it)
   (cl-ppcre:regex-replace-all
    "\\n"

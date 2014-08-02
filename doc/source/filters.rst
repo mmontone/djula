@@ -161,12 +161,20 @@ If ``value`` is ``""`` (the empty string), the output will be ``nothing``.
 sort
 ^^^^
 
-Takes a list and returns that list sorted by the key given in
-the argument.
+Takes a list and returns that list sorted.
 
 For example::
 
-    {{ value | sort }}
+    {{ list | sort }}
+
+reverse
+^^^^^^^
+
+Takes a list and returns that list reversed.
+
+For example::
+
+    {{ list | reverse }}  
 
 ..
    divisibleby
