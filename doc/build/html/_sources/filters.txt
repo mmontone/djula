@@ -161,12 +161,20 @@ If ``value`` is ``""`` (the empty string), the output will be ``nothing``.
 sort
 ^^^^
 
-Takes a list and returns that list sorted by the key given in
-the argument.
+Takes a list and returns that list sorted.
 
 For example::
 
-    {{ value | sort }}
+    {{ list | sort }}
+
+reverse
+^^^^^^^
+
+Takes a list and returns that list reversed.
+
+For example::
+
+    {{ list | reverse }}  
 
 ..
    divisibleby
@@ -197,12 +205,12 @@ For example::
    The escaping is only applied when the string is output, so it does not matter
    where in a chained sequence of filters you put ``escape``: it will always be
    applied as though it were the last filter. If you want escaping to be applied
-   immediately, use the :tfilter:`force_escape` filter.
+   immediately, use the :tfilter:`force-escape` filter.
 
    Applying ``escape`` to a variable that would normally have auto-escaping
    applied to the result will only result in one round of escaping being done. So
    it is safe to use this function even in auto-escaping environments. If you want
-   multiple escaping passes to be applied, use the :tfilter:`force_escape` filter.
+   multiple escaping passes to be applied, use the :tfilter:`force-escape` filter.
 
    For example, you can apply ``escape`` to fields when :ttag:`autoescape` is off::
 
@@ -266,13 +274,13 @@ If ``value`` is the list ``("a" "b" "c")``, the output will be ``"a"``.
 join
 ^^^^
 
-Joins a list with a string, like Python's ``str.join(list)``
+Joins a list with a string.
 
 For example::
 
     {{ value|join:" // " }}
 
-If ``value`` is the list ``['a', 'b', 'c']``, the output will be the string
+If ``value`` is the list ``("a" "b" "c")``, the output will be the string
 ``"a // b // c"``.
 
 .. templatefilter:: last
@@ -300,29 +308,25 @@ For example::
 
     {{ value|length }}
 
-If ``value`` is ``['a', 'b', 'c', 'd']`` or ``"abcd"``, the output will be
+If ``value`` is ``("a" "b" "c" "d")`` or ``"abcd"``, the output will be
 ``4``.
 
-.. versionchanged:: 1.8
+..
+   .. templatefilter:: length_is
 
-    The filter returns ``0`` for an undefined variable. Previously, it returned
-    an empty string.
+   length_is
+   ^^^^^^^^^
 
-.. templatefilter:: length_is
+   Returns ``True`` if the value's length is the argument, or ``False`` otherwise.
 
-length_is
-^^^^^^^^^
+   For example::
 
-Returns ``True`` if the value's length is the argument, or ``False`` otherwise.
+       {{ value|length_is:"4" }}
 
-For example::
+   If ``value`` is ``['a', 'b', 'c', 'd']`` or ``"abcd"``, the output will be
+   ``True``.
 
-    {{ value|length_is:"4" }}
-
-If ``value`` is ``['a', 'b', 'c', 'd']`` or ``"abcd"``, the output will be
-``True``.
-
-.. templatefilter:: linebreaks
+   .. templatefilter:: linebreaks
 
 linebreaks
 ^^^^^^^^^^
@@ -355,41 +359,42 @@ slug``.
 
 .. templatefilter:: linenumbers
 
-linenumbers
-^^^^^^^^^^^
+..
+   linenumbers
+   ^^^^^^^^^^^
 
-Displays text with line numbers.
+   Displays text with line numbers.
 
-For example::
+   For example::
 
-    {{ value|linenumbers }}
+       {{ value|linenumbers }}
 
-If ``value`` is::
+   If ``value`` is::
 
-    one
-    two
-    three
+       one
+       two
+       three
 
-the output will be::
+   the output will be::
 
-    1. one
-    2. two
-    3. three
+       1. one
+       2. two
+       3. three
 
-.. templatefilter:: ljust
+   .. templatefilter:: ljust
 
-ljust
-^^^^^
+   ljust
+   ^^^^^
 
-Left-aligns the value in a field of a given width.
+   Left-aligns the value in a field of a given width.
 
-**Argument:** field size
+   **Argument:** field size
 
-For example::
+   For example::
 
-    "{{ value|ljust:"10" }}"
+       "{{ value|ljust:"10" }}"
 
-If ``value`` is ``Djula``, the output will be ``"Djula    "``.
+   If ``value`` is ``Djula``, the output will be ``"Djula    "``.
 
 .. templatefilter:: lower
 
@@ -407,122 +412,123 @@ If ``value`` is ``Still MAD At Yoko``, the output will be
 
 .. templatefilter:: make_list
 
-make_list
-^^^^^^^^^
+..
+   make_list
+   ^^^^^^^^^
 
-Returns the value turned into a list. For a string, it's a list of characters.
-For an integer, the argument is cast into an unicode string before creating a
-list.
+   Returns the value turned into a list. For a string, it's a list of characters.
+   For an integer, the argument is cast into an unicode string before creating a
+   list.
 
-For example::
+   For example::
 
-    {{ value|make_list }}
+       {{ value|make_list }}
 
-If ``value`` is the string ``"Joel"``, the output would be the list
-``['J', 'o', 'e', 'l']``. If ``value`` is ``123``, the output will be the
-list ``['1', '2', '3']``.
+   If ``value`` is the string ``"Joel"``, the output would be the list
+   ``['J', 'o', 'e', 'l']``. If ``value`` is ``123``, the output will be the
+   list ``['1', '2', '3']``.
 
-.. templatefilter:: phone2numeric
+   .. templatefilter:: phone2numeric
 
-phone2numeric
-^^^^^^^^^^^^^
+   phone2numeric
+   ^^^^^^^^^^^^^
 
-Converts a phone number (possibly containing letters) to its numerical
-equivalent.
+   Converts a phone number (possibly containing letters) to its numerical
+   equivalent.
 
-The input doesn't have to be a valid phone number. This will happily convert
-any string.
+   The input doesn't have to be a valid phone number. This will happily convert
+   any string.
 
-For example::
+   For example::
 
-    {{ value|phone2numeric }}
+       {{ value|phone2numeric }}
 
-If ``value`` is ``800-COLLECT``, the output will be ``800-2655328``.
+   If ``value`` is ``800-COLLECT``, the output will be ``800-2655328``.
 
-.. templatefilter:: pluralize
+   .. templatefilter:: pluralize
 
-pluralize
-^^^^^^^^^
+   pluralize
+   ^^^^^^^^^
 
-Returns a plural suffix if the value is not 1. By default, this suffix is
-``'s'``.
+   Returns a plural suffix if the value is not 1. By default, this suffix is
+   ``'s'``.
 
-Example::
+   Example::
 
-    You have {{ num_messages }} message{{ num_messages|pluralize }}.
+       You have {{ num_messages }} message{{ num_messages|pluralize }}.
 
-If ``num_messages`` is ``1``, the output will be ``You have 1 message.``
-If ``num_messages`` is ``2``  the output will be ``You have 2 messages.``
+   If ``num_messages`` is ``1``, the output will be ``You have 1 message.``
+   If ``num_messages`` is ``2``  the output will be ``You have 2 messages.``
 
-For words that require a suffix other than ``'s'``, you can provide an alternate
-suffix as a parameter to the filter.
+   For words that require a suffix other than ``'s'``, you can provide an alternate
+   suffix as a parameter to the filter.
 
-Example::
+   Example::
 
-    You have {{ num_walruses }} walrus{{ num_walruses|pluralize:"es" }}.
+       You have {{ num_walruses }} walrus{{ num_walruses|pluralize:"es" }}.
 
-For words that don't pluralize by simple suffix, you can specify both a
-singular and plural suffix, separated by a comma.
+   For words that don't pluralize by simple suffix, you can specify both a
+   singular and plural suffix, separated by a comma.
 
-Example::
+   Example::
 
-    You have {{ num_cherries }} cherr{{ num_cherries|pluralize:"y,ies" }}.
+       You have {{ num_cherries }} cherr{{ num_cherries|pluralize:"y,ies" }}.
 
-.. note:: Use :ttag:`blocktrans` to pluralize translated strings.
+   .. note:: Use :ttag:`blocktrans` to pluralize translated strings.
 
-.. templatefilter:: pprint
+   .. templatefilter:: pprint
 
-pprint
-^^^^^^
+   pprint
+   ^^^^^^
 
-A wrapper around :func:`pprint.pprint` -- for debugging, really.
+   A wrapper around :func:`pprint.pprint` -- for debugging, really.
 
-.. templatefilter:: random
+   .. templatefilter:: random
 
-random
-^^^^^^
+   random
+   ^^^^^^
 
-Returns a random item from the given list.
+   Returns a random item from the given list.
 
-For example::
+   For example::
 
-    {{ value|random }}
+       {{ value|random }}
 
-If ``value`` is the list ``['a', 'b', 'c', 'd']``, the output could be ``"b"``.
+   If ``value`` is the list ``['a', 'b', 'c', 'd']``, the output could be ``"b"``.
 
-.. templatefilter:: removetags
+   .. templatefilter:: removetags
 
-removetags
-^^^^^^^^^^
+   removetags
+   ^^^^^^^^^^
 
-Removes a space-separated list of [X]HTML tags from the output.
+   Removes a space-separated list of [X]HTML tags from the output.
 
-For example::
+   For example::
 
-    {{ value|removetags:"b span"|safe }}
+       {{ value|removetags:"b span"|safe }}
 
-If ``value`` is ``"<b>Joel</b> <button>is</button> a <span>slug</span>"`` the
-output will be ``"Joel <button>is</button> a slug"``.
+   If ``value`` is ``"<b>Joel</b> <button>is</button> a <span>slug</span>"`` the
+   output will be ``"Joel <button>is</button> a slug"``.
 
-Note that this filter is case-sensitive.
+   Note that this filter is case-sensitive.
 
-If ``value`` is ``"<B>Joel</B> <button>is</button> a <span>slug</span>"`` the
-output will be ``"<B>Joel</B> <button>is</button> a slug"``.
+   If ``value`` is ``"<B>Joel</B> <button>is</button> a <span>slug</span>"`` the
+   output will be ``"<B>Joel</B> <button>is</button> a slug"``.
 
-.. templatefilter:: rjust
+   .. templatefilter:: rjust
 
-rjust
-^^^^^
+   rjust
+   ^^^^^
 
-Right-aligns the value in a field of a given width.
+   Right-aligns the value in a field of a given width.
 
-**Argument:** field size
+   **Argument:** field size
 
-For example::
+   For example::
 
-    "{{ value|rjust:"10" }}"
+       "{{ value|rjust:"10" }}"
 
-If ``value`` is ``Djula``, the output will be ``"    Djula"``.
+   If ``value`` is ``Djula``, the output will be ``"    Djula"``.
 
 .. templatefilter:: safe
 
@@ -542,201 +548,160 @@ autoescaping is off, this filter has no effect.
 
         {{ var|safe|escape }}
 
-.. templatefilter:: safeseq
+..
+   .. templatefilter:: safeseq
 
-safeseq
-^^^^^^^
+   safeseq
+   ^^^^^^^
 
-Applies the :tfilter:`safe` filter to each element of a sequence. Useful in
-conjunction with other filters that operate on sequences, such as
-:tfilter:`join`. For example::
+   Applies the :tfilter:`safe` filter to each element of a sequence. Useful in
+   conjunction with other filters that operate on sequences, such as
+   :tfilter:`join`. For example::
 
-    {{ some_list|safeseq|join:", " }}
+       {{ some_list|safeseq|join:", " }}
 
-You couldn't use the :tfilter:`safe` filter directly in this case, as it would
-first convert the variable into a string, rather than working with the
-individual elements of the sequence.
+   You couldn't use the :tfilter:`safe` filter directly in this case, as it would
+   first convert the variable into a string, rather than working with the
+   individual elements of the sequence.
 
-.. templatefilter:: slice
+   .. templatefilter:: slice
 
-slice
-^^^^^
+   slice
+   ^^^^^
 
-Returns a slice of the list.
+   Returns a slice of the list.
 
-Uses the same syntax as Python's list slicing. See
-http://www.diveintopython3.net/native-datatypes.html#slicinglists
-for an introduction.
+   Uses the same syntax as Python's list slicing. See
+   http://www.diveintopython3.net/native-datatypes.html#slicinglists
+   for an introduction.
 
-Example::
+   Example::
 
-    {{ some_list|slice:":2" }}
+       {{ some_list|slice:":2" }}
 
-If ``some_list`` is ``['a', 'b', 'c']``, the output will be ``['a', 'b']``.
+   If ``some_list`` is ``['a', 'b', 'c']``, the output will be ``['a', 'b']``.
 
-.. templatefilter:: slugify
+   .. templatefilter:: slugify
 
-slugify
-^^^^^^^
+   slugify
+   ^^^^^^^
 
-Converts to lowercase, removes non-word characters (alphanumerics and
-underscores) and converts spaces to hyphens. Also strips leading and trailing
-whitespace.
+   Converts to lowercase, removes non-word characters (alphanumerics and
+   underscores) and converts spaces to hyphens. Also strips leading and trailing
+   whitespace.
 
-For example::
+   For example::
 
-    {{ value|slugify }}
+       {{ value|slugify }}
 
-If ``value`` is ``"Joel is a slug"``, the output will be ``"joel-is-a-slug"``.
+   If ``value`` is ``"Joel is a slug"``, the output will be ``"joel-is-a-slug"``.
 
 .. templatefilter:: stringformat
 
-stringformat
-^^^^^^^^^^^^
+format
+^^^^^^
 
 Formats the variable according to the argument, a string formatting specifier.
-This specifier uses Python string formatting syntax, with the exception that
-the leading "%" is dropped.
-
-See http://docs.python.org/library/stdtypes.html#string-formatting-operations
-for documentation of Python string formatting
+This specifier uses Common Lisp string formatting syntax
 
 For example::
 
-    {{ value|stringformat:"E" }}
+    {{ value | format:"~:d" }}
 
-If ``value`` is ``10``, the output will be ``1.000000E+01``.
+If ``value`` is ``1000000``, the output will be ``1,000,000``.
 
 .. templatefilter:: striptags
 
-striptags
-^^^^^^^^^
+..
+   striptags
+   ^^^^^^^^^
 
-Makes all possible efforts to strip all [X]HTML tags.
+   Makes all possible efforts to strip all [X]HTML tags.
 
-For example::
+   For example::
 
-    {{ value|striptags }}
+       {{ value|striptags }}
 
-If ``value`` is ``"<b>Joel</b> <button>is</button> a <span>slug</span>"``, the
-output will be ``"Joel is a slug"``.
+   If ``value`` is ``"<b>Joel</b> <button>is</button> a <span>slug</span>"``, the
+   output will be ``"Joel is a slug"``.
 
-.. admonition:: No safety guarantee
+   .. admonition:: No safety guarantee
 
-    Note that ``striptags`` doesn't give any guarantee about its output being
-    entirely HTML safe, particularly with non valid HTML input. So **NEVER**
-    apply the ``safe`` filter to a ``striptags`` output.
-    If you are looking for something more robust, you can use the ``bleach``
-    Python library, notably its `clean`_ method.
+       Note that ``striptags`` doesn't give any guarantee about its output being
+       entirely HTML safe, particularly with non valid HTML input. So **NEVER**
+       apply the ``safe`` filter to a ``striptags`` output.
+       If you are looking for something more robust, you can use the ``bleach``
+       Python library, notably its `clean`_ method.
 
-.. _clean: http://bleach.readthedocs.org/en/latest/clean.html
+   .. _clean: http://bleach.readthedocs.org/en/latest/clean.html
 
-.. templatefilter:: time
+   .. templatefilter:: time
 
 time
 ^^^^
 
 Formats a time according to the given format.
 
-Given format can be the predefined one :setting:`TIME_FORMAT`, or a custom
-format, same as the :tfilter:`date` filter. Note that the predefined format
-is locale-dependent.
-
 For example::
 
-    {{ value|time:"H:i" }}
+    {{ value | time }}
 
-If ``value`` is equivalent to ``datetime.datetime.now()``, the output will be
-the string ``"01:23"``.
+..
+   .. templatefilter:: timesince
 
-Another example:
+   timesince
+   ^^^^^^^^^
 
-Assuming that :setting:`USE_L10N` is ``True`` and :setting:`LANGUAGE_CODE` is,
-for example, ``"de"``, then for::
+   Formats a date as the time since that date (e.g., "4 days, 6 hours").
 
-    {{ value|time:"TIME_FORMAT" }}
+   Takes an optional argument that is a variable containing the date to use as
+   the comparison point (without the argument, the comparison point is *now*).
+   For example, if ``blog_date`` is a date instance representing midnight on 1
+   June 2006, and ``comment_date`` is a date instance for 08:00 on 1 June 2006,
+   then the following would return "8 hours"::
 
-the output will be the string ``"01:23:00"`` (The ``"TIME_FORMAT"`` format
-specifier for the ``de`` locale as shipped with Djula is ``"H:i:s"``).
+       {{ blog_date|timesince:comment_date }}
 
-The ``time`` filter will only accept parameters in the format string that
-relate to the time of day, not the date (for obvious reasons). If you need to
-format a ``date`` value, use the :tfilter:`date` filter instead (or along
-``time`` if you need to render a full :py:class:`~datetime.datetime` value).
+   Comparing offset-naive and offset-aware datetimes will return an empty string.
 
-There is one exception the above rule: When passed a ``datetime`` value with
-attached timezone information (a :ref:`time-zone-aware
-<naive_vs_aware_datetimes>` ``datetime`` instance) the ``time`` filter will
-accept the timezone-related :ref:`format specifiers
-<date-and-time-formatting-specifiers>` ``'e'``, ``'O'`` , ``'T'`` and ``'Z'``.
+   Minutes is the smallest unit used, and "0 minutes" will be returned for any
+   date that is in the future relative to the comparison point.
 
-When used without a format string::
+   .. templatefilter:: timeuntil
 
-    {{ value|time }}
+   timeuntil
+   ^^^^^^^^^
 
-...the formatting string defined in the :setting:`TIME_FORMAT` setting will be
-used, without applying any localization.
+   Similar to ``timesince``, except that it measures the time from now until the
+   given date or datetime. For example, if today is 1 June 2006 and
+   ``conference_date`` is a date instance holding 29 June 2006, then
+   ``{{ conference_date|timeuntil }}`` will return "4 weeks".
 
-.. versionchanged:: 1.7
+   Takes an optional argument that is a variable containing the date to use as
+   the comparison point (instead of *now*). If ``from_date`` contains 22 June
+   2006, then the following will return "1 week"::
 
-    The ability to receive and act on values with attached timezone
-    information was added in Djula 1.7.
+       {{ conference_date|timeuntil:from_date }}
 
-.. templatefilter:: timesince
+   Comparing offset-naive and offset-aware datetimes will return an empty string.
 
-timesince
-^^^^^^^^^
+   Minutes is the smallest unit used, and "0 minutes" will be returned for any
+   date that is in the past relative to the comparison point.
 
-Formats a date as the time since that date (e.g., "4 days, 6 hours").
+   .. templatefilter:: title
 
-Takes an optional argument that is a variable containing the date to use as
-the comparison point (without the argument, the comparison point is *now*).
-For example, if ``blog_date`` is a date instance representing midnight on 1
-June 2006, and ``comment_date`` is a date instance for 08:00 on 1 June 2006,
-then the following would return "8 hours"::
+   title
+   ^^^^^
 
-    {{ blog_date|timesince:comment_date }}
+   Converts a string into titlecase by making words start with an uppercase
+   character and the remaining characters lowercase. This tag makes no effort to
+   keep "trivial words" in lowercase.
 
-Comparing offset-naive and offset-aware datetimes will return an empty string.
+   For example::
 
-Minutes is the smallest unit used, and "0 minutes" will be returned for any
-date that is in the future relative to the comparison point.
+       {{ value|title }}
 
-.. templatefilter:: timeuntil
-
-timeuntil
-^^^^^^^^^
-
-Similar to ``timesince``, except that it measures the time from now until the
-given date or datetime. For example, if today is 1 June 2006 and
-``conference_date`` is a date instance holding 29 June 2006, then
-``{{ conference_date|timeuntil }}`` will return "4 weeks".
-
-Takes an optional argument that is a variable containing the date to use as
-the comparison point (instead of *now*). If ``from_date`` contains 22 June
-2006, then the following will return "1 week"::
-
-    {{ conference_date|timeuntil:from_date }}
-
-Comparing offset-naive and offset-aware datetimes will return an empty string.
-
-Minutes is the smallest unit used, and "0 minutes" will be returned for any
-date that is in the past relative to the comparison point.
-
-.. templatefilter:: title
-
-title
-^^^^^
-
-Converts a string into titlecase by making words start with an uppercase
-character and the remaining characters lowercase. This tag makes no effort to
-keep "trivial words" in lowercase.
-
-For example::
-
-    {{ value|title }}
-
-If ``value`` is ``"my FIRST post"``, the output will be ``"My First Post"``.
+   If ``value`` is ``"my FIRST post"``, the output will be ``"My First Post"``.
 
 .. templatefilter:: truncatechars
 
@@ -756,88 +721,89 @@ If ``value`` is ``"Joel is a slug"``, the output will be ``"Joel i..."``.
 
 .. templatefilter:: truncatechars_html
 
-truncatechars_html
-^^^^^^^^^^^^^^^^^^
+..
+   truncatechars_html
+   ^^^^^^^^^^^^^^^^^^
 
-.. versionadded:: 1.7
+   .. versionadded:: 1.7
 
-Similar to :tfilter:`truncatechars`, except that it is aware of HTML tags. Any
-tags that are opened in the string and not closed before the truncation point
-are closed immediately after the truncation.
+   Similar to :tfilter:`truncatechars`, except that it is aware of HTML tags. Any
+   tags that are opened in the string and not closed before the truncation point
+   are closed immediately after the truncation.
 
-For example::
+   For example::
 
-    {{ value|truncatechars_html:9 }}
+       {{ value|truncatechars_html:9 }}
 
-If ``value`` is ``"<p>Joel is a slug</p>"``, the output will be
-``"<p>Joel i...</p>"``.
+   If ``value`` is ``"<p>Joel is a slug</p>"``, the output will be
+   ``"<p>Joel i...</p>"``.
 
-Newlines in the HTML content will be preserved.
+   Newlines in the HTML content will be preserved.
 
-.. templatefilter:: truncatewords
+   .. templatefilter:: truncatewords
 
-truncatewords
-^^^^^^^^^^^^^
+   truncatewords
+   ^^^^^^^^^^^^^
 
-Truncates a string after a certain number of words.
+   Truncates a string after a certain number of words.
 
-**Argument:** Number of words to truncate after
+   **Argument:** Number of words to truncate after
 
-For example::
+   For example::
 
-    {{ value|truncatewords:2 }}
+       {{ value|truncatewords:2 }}
 
-If ``value`` is ``"Joel is a slug"``, the output will be ``"Joel is ..."``.
+   If ``value`` is ``"Joel is a slug"``, the output will be ``"Joel is ..."``.
 
-Newlines within the string will be removed.
+   Newlines within the string will be removed.
 
-.. templatefilter:: truncatewords_html
+   .. templatefilter:: truncatewords_html
 
-truncatewords_html
-^^^^^^^^^^^^^^^^^^
+   truncatewords_html
+   ^^^^^^^^^^^^^^^^^^
 
-Similar to :tfilter:`truncatewords`, except that it is aware of HTML tags. Any
-tags that are opened in the string and not closed before the truncation point,
-are closed immediately after the truncation.
+   Similar to :tfilter:`truncatewords`, except that it is aware of HTML tags. Any
+   tags that are opened in the string and not closed before the truncation point,
+   are closed immediately after the truncation.
 
-This is less efficient than :tfilter:`truncatewords`, so should only be used
-when it is being passed HTML text.
+   This is less efficient than :tfilter:`truncatewords`, so should only be used
+   when it is being passed HTML text.
 
-For example::
+   For example::
 
-    {{ value|truncatewords_html:2 }}
+       {{ value|truncatewords_html:2 }}
 
-If ``value`` is ``"<p>Joel is a slug</p>"``, the output will be
-``"<p>Joel is ...</p>"``.
+   If ``value`` is ``"<p>Joel is a slug</p>"``, the output will be
+   ``"<p>Joel is ...</p>"``.
 
-Newlines in the HTML content will be preserved.
+   Newlines in the HTML content will be preserved.
 
-.. templatefilter:: unordered_list
+   .. templatefilter:: unordered_list
 
-unordered_list
-^^^^^^^^^^^^^^
+   unordered_list
+   ^^^^^^^^^^^^^^
 
-Recursively takes a self-nested list and returns an HTML unordered list --
-WITHOUT opening and closing <ul> tags.
+   Recursively takes a self-nested list and returns an HTML unordered list --
+   WITHOUT opening and closing <ul> tags.
 
-The list is assumed to be in the proper format. For example, if ``var``
-contains ``['States', ['Kansas', ['Lawrence', 'Topeka'], 'Illinois']]``, then
-``{{ var|unordered_list }}`` would return::
+   The list is assumed to be in the proper format. For example, if ``var``
+   contains ``['States', ['Kansas', ['Lawrence', 'Topeka'], 'Illinois']]``, then
+   ``{{ var|unordered_list }}`` would return::
 
-    <li>States
-    <ul>
-            <li>Kansas
-            <ul>
-                    <li>Lawrence</li>
-                    <li>Topeka</li>
-            </ul>
-            </li>
-            <li>Illinois</li>
-    </ul>
-    </li>
+       <li>States
+       <ul>
+	       <li>Kansas
+	       <ul>
+		       <li>Lawrence</li>
+		       <li>Topeka</li>
+	       </ul>
+	       </li>
+	       <li>Illinois</li>
+       </ul>
+       </li>
 
-Note: An older, more restrictive and verbose input format is also supported:
-``['States', [['Kansas', [['Lawrence', []], ['Topeka', []]]], ['Illinois', []]]]``,
+   Note: An older, more restrictive and verbose input format is also supported:
+   ``['States', [['Kansas', [['Lawrence', []], ['Topeka', []]]], ['Illinois', []]]]``,
 
 .. templatefilter:: upper
 
@@ -877,164 +843,173 @@ provided when *all* characters should be escaped. For example::
 If ``value`` is ``"http://www.example.org/"``, the output will be
 ``"http%3A%2F%2Fwww.example.org%2F"``.
 
-.. templatefilter:: urlize
+..
+   .. templatefilter:: urlize
 
-urlize
-^^^^^^
+   urlize
+   ^^^^^^
 
-Converts URLs and email addresses in text into clickable links.
+   Converts URLs and email addresses in text into clickable links.
 
-This template tag works on links prefixed with ``http://``, ``https://``, or
-``www.``. For example, ``http://goo.gl/aia1t`` will get converted but
-``goo.gl/aia1t`` won't.
+   This template tag works on links prefixed with ``http://``, ``https://``, or
+   ``www.``. For example, ``http://goo.gl/aia1t`` will get converted but
+   ``goo.gl/aia1t`` won't.
 
-It also supports domain-only links ending in one of the original top level
-domains (``.com``, ``.edu``, ``.gov``, ``.int``, ``.mil``, ``.net``, and
-``.org``). For example, ``djulaproject.com`` gets converted.
+   It also supports domain-only links ending in one of the original top level
+   domains (``.com``, ``.edu``, ``.gov``, ``.int``, ``.mil``, ``.net``, and
+   ``.org``). For example, ``djulaproject.com`` gets converted.
 
-.. versionchanged:: 1.8
+   .. versionchanged:: 1.8
 
-    Support for domain-only links that include characters after the top-level
-    domain (e.g. ``djulaproject.com/`` and ``djulaproject.com/download/``)
-    was added.
+       Support for domain-only links that include characters after the top-level
+       domain (e.g. ``djulaproject.com/`` and ``djulaproject.com/download/``)
+       was added.
 
-Links can have trailing punctuation (periods, commas, close-parens) and leading
-punctuation (opening parens), and ``urlize`` will still do the right thing.
+   Links can have trailing punctuation (periods, commas, close-parens) and leading
+   punctuation (opening parens), and ``urlize`` will still do the right thing.
 
-Links generated by ``urlize`` have a ``rel="nofollow"`` attribute added
-to them.
+   Links generated by ``urlize`` have a ``rel="nofollow"`` attribute added
+   to them.
 
-For example::
+   For example::
 
-    {{ value|urlize }}
+       {{ value|urlize }}
 
-If ``value`` is ``"Check out www.djulaproject.com"``, the output will be
-``"Check out <a href="http://www.djulaproject.com"
-rel="nofollow">www.djulaproject.com</a>"``.
+   If ``value`` is ``"Check out www.djulaproject.com"``, the output will be
+   ``"Check out <a href="http://www.djulaproject.com"
+   rel="nofollow">www.djulaproject.com</a>"``.
 
-In addition to web links, ``urlize`` also converts email addresses into
-``mailto:`` links. If ``value`` is
-``"Send questions to foo@example.com"``, the output will be
-``"Send questions to <a href="mailto:foo@example.com">foo@example</a>"``.
+   In addition to web links, ``urlize`` also converts email addresses into
+   ``mailto:`` links. If ``value`` is
+   ``"Send questions to foo@example.com"``, the output will be
+   ``"Send questions to <a href="mailto:foo@example.com">foo@example</a>"``.
 
-The ``urlize`` filter also takes an optional parameter ``autoescape``. If
-``autoescape`` is ``True``, the link text and URLs will be escaped using
-Djula's built-in :tfilter:`escape` filter. The default value for
-``autoescape`` is ``True``.
+   The ``urlize`` filter also takes an optional parameter ``autoescape``. If
+   ``autoescape`` is ``True``, the link text and URLs will be escaped using
+   Djula's built-in :tfilter:`escape` filter. The default value for
+   ``autoescape`` is ``True``.
 
-.. note::
+   .. note::
 
-    If ``urlize`` is applied to text that already contains HTML markup,
-    things won't work as expected. Apply this filter only to plain text.
+       If ``urlize`` is applied to text that already contains HTML markup,
+       things won't work as expected. Apply this filter only to plain text.
 
-.. templatefilter:: urlizetrunc
+   .. templatefilter:: urlizetrunc
 
-urlizetrunc
-^^^^^^^^^^^
+   urlizetrunc
+   ^^^^^^^^^^^
 
-Converts URLs and email addresses into clickable links just like urlize_, but truncates URLs
-longer than the given character limit.
+   Converts URLs and email addresses into clickable links just like urlize_, but truncates URLs
+   longer than the given character limit.
 
-**Argument:** Number of characters that link text should be truncated to,
-including the ellipsis that's added if truncation is necessary.
+   **Argument:** Number of characters that link text should be truncated to,
+   including the ellipsis that's added if truncation is necessary.
 
-For example::
+   For example::
 
-    {{ value|urlizetrunc:15 }}
+       {{ value|urlizetrunc:15 }}
 
-If ``value`` is ``"Check out www.djulaproject.com"``, the output would be
-``'Check out <a href="http://www.djulaproject.com"
-rel="nofollow">www.djulapr...</a>'``.
+   If ``value`` is ``"Check out www.djulaproject.com"``, the output would be
+   ``'Check out <a href="http://www.djulaproject.com"
+   rel="nofollow">www.djulapr...</a>'``.
 
-As with urlize_, this filter should only be applied to plain text.
+   As with urlize_, this filter should only be applied to plain text.
 
-.. templatefilter:: wordcount
+   .. templatefilter:: wordcount
 
-wordcount
-^^^^^^^^^
+   wordcount
+   ^^^^^^^^^
 
-Returns the number of words.
+   Returns the number of words.
 
-For example::
+   For example::
 
-    {{ value|wordcount }}
+       {{ value|wordcount }}
 
-If ``value`` is ``"Joel is a slug"``, the output will be ``4``.
+   If ``value`` is ``"Joel is a slug"``, the output will be ``4``.
 
-.. templatefilter:: wordwrap
+   .. templatefilter:: wordwrap
 
-wordwrap
-^^^^^^^^
+   wordwrap
+   ^^^^^^^^
 
-Wraps words at specified line length.
+   Wraps words at specified line length.
 
-**Argument:** number of characters at which to wrap the text
+   **Argument:** number of characters at which to wrap the text
 
-For example::
+   For example::
 
-    {{ value|wordwrap:5 }}
+       {{ value|wordwrap:5 }}
 
-If ``value`` is ``Joel is a slug``, the output would be::
+   If ``value`` is ``Joel is a slug``, the output would be::
 
-    Joel
-    is a
-    slug
+       Joel
+       is a
+       slug
 
-.. templatefilter:: yesno
+   .. templatefilter:: yesno
 
-yesno
-^^^^^
+   yesno
+   ^^^^^
 
-Maps values for true, false and (optionally) None, to the strings "yes", "no",
-"maybe", or a custom mapping passed as a comma-separated list, and
-returns one of those strings according to the value:
+   Maps values for true, false and (optionally) None, to the strings "yes", "no",
+   "maybe", or a custom mapping passed as a comma-separated list, and
+   returns one of those strings according to the value:
 
-For example::
+   For example::
 
-    {{ value|yesno:"yeah,no,maybe" }}
+       {{ value|yesno:"yeah,no,maybe" }}
 
-==========  ======================  ==================================
-Value       Argument                Outputs
-==========  ======================  ==================================
-``True``                            ``yes``
-``True``    ``"yeah,no,maybe"``     ``yeah``
-``False``   ``"yeah,no,maybe"``     ``no``
-``None``    ``"yeah,no,maybe"``     ``maybe``
-``None``    ``"yeah,no"``           ``"no"`` (converts None to False
-                                    if no mapping for None is given)
-==========  ======================  ==================================
+   ==========  ======================  ==================================
+   Value       Argument                Outputs
+   ==========  ======================  ==================================
+   ``True``                            ``yes``
+   ``True``    ``"yeah,no,maybe"``     ``yeah``
+   ``False``   ``"yeah,no,maybe"``     ``no``
+   ``None``    ``"yeah,no,maybe"``     ``maybe``
+   ``None``    ``"yeah,no"``           ``"no"`` (converts None to False
+				       if no mapping for None is given)
+   ==========  ======================  ==================================
 
 Internationalization tags and filters
 -------------------------------------
 
-Djula provides template tags and filters to control each aspect of
-:doc:`internationalization </topics/i18n/index>` in templates. They allow for
-granular control of translations, formatting, and time zone conversions.
+TODO
 
-i18n
-^^^^
+..
+   Djula provides template tags and filters to control each aspect of
+   :doc:`internationalization </topics/i18n/index>` in templates. They allow for
+   granular control of translations, formatting, and time zone conversions.
 
-This library allows specifying translatable text in templates.
-To enable it, set :setting:`USE_I18N` to ``True``, then load it with
-``{% load i18n %}``.
+   i18n
+   ^^^^
 
-See :ref:`specifying-translation-strings-in-template-code`.
+   This library allows specifying translatable text in templates.
+   To enable it, set :setting:`USE_I18N` to ``True``, then load it with
+   ``{% load i18n %}``.
 
-l10n
-^^^^
+   See :ref:`specifying-translation-strings-in-template-code`.
 
-This library provides control over the localization of values in templates.
-You only need to load the library using ``{% load l10n %}``, but you'll often
-set :setting:`USE_L10N` to ``True`` so that localization is active by default.
+   l10n
+   ^^^^
 
-See :ref:`topic-l10n-templates`.
+   This library provides control over the localization of values in templates.
+   You only need to load the library using ``{% load l10n %}``, but you'll often
+   set :setting:`USE_L10N` to ``True`` so that localization is active by default.
 
-tz
-^^
+   See :ref:`topic-l10n-templates`.
 
-This library provides control over time zone conversions in templates.
-Like ``l10n``, you only need to load the library using ``{% load tz %}``,
-but you'll usually also set :setting:`USE_TZ` to ``True`` so that conversion
-to local time happens by default.
+   tz
+   ^^
 
-See :ref:`time-zones-in-templates`.
+   This library provides control over time zone conversions in templates.
+   Like ``l10n``, you only need to load the library using ``{% load tz %}``,
+   but you'll usually also set :setting:`USE_TZ` to ``True`` so that conversion
+   to local time happens by default.
+
+   See :ref:`time-zones-in-templates`.
+
+Custom filters
+--------------
+
+TODO

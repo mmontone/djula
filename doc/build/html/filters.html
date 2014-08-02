@@ -102,53 +102,24 @@
 <li><a class="reference internal" href="#datetime">datetime</a></li>
 <li><a class="reference internal" href="#default">default</a></li>
 <li><a class="reference internal" href="#sort">sort</a></li>
+<li><a class="reference internal" href="#reverse">reverse</a></li>
 <li><a class="reference internal" href="#first">first</a></li>
 <li><a class="reference internal" href="#join">join</a></li>
 <li><a class="reference internal" href="#last">last</a></li>
 <li><a class="reference internal" href="#length">length</a></li>
-<li><a class="reference internal" href="#length-is">length_is</a></li>
 <li><a class="reference internal" href="#linebreaks">linebreaks</a></li>
 <li><a class="reference internal" href="#linebreaksbr">linebreaksbr</a></li>
-<li><a class="reference internal" href="#linenumbers">linenumbers</a></li>
-<li><a class="reference internal" href="#ljust">ljust</a></li>
 <li><a class="reference internal" href="#lower">lower</a></li>
-<li><a class="reference internal" href="#make-list">make_list</a></li>
-<li><a class="reference internal" href="#phone2numeric">phone2numeric</a></li>
-<li><a class="reference internal" href="#pluralize">pluralize</a></li>
-<li><a class="reference internal" href="#pprint">pprint</a></li>
-<li><a class="reference internal" href="#random">random</a></li>
-<li><a class="reference internal" href="#removetags">removetags</a></li>
-<li><a class="reference internal" href="#rjust">rjust</a></li>
 <li><a class="reference internal" href="#safe">safe</a></li>
-<li><a class="reference internal" href="#safeseq">safeseq</a></li>
-<li><a class="reference internal" href="#slice">slice</a></li>
-<li><a class="reference internal" href="#slugify">slugify</a></li>
-<li><a class="reference internal" href="#stringformat">stringformat</a></li>
-<li><a class="reference internal" href="#striptags">striptags</a></li>
-<li><a class="reference internal" href="#std:templatefilter-time">time</a></li>
-<li><a class="reference internal" href="#timesince">timesince</a></li>
-<li><a class="reference internal" href="#timeuntil">timeuntil</a></li>
-<li><a class="reference internal" href="#title">title</a></li>
+<li><a class="reference internal" href="#format">format</a></li>
+<li><a class="reference internal" href="#id2">time</a></li>
 <li><a class="reference internal" href="#truncatechars">truncatechars</a></li>
-<li><a class="reference internal" href="#truncatechars-html">truncatechars_html</a></li>
-<li><a class="reference internal" href="#truncatewords">truncatewords</a></li>
-<li><a class="reference internal" href="#truncatewords-html">truncatewords_html</a></li>
-<li><a class="reference internal" href="#unordered-list">unordered_list</a></li>
 <li><a class="reference internal" href="#upper">upper</a></li>
 <li><a class="reference internal" href="#urlencode">urlencode</a></li>
-<li><a class="reference internal" href="#urlize">urlize</a></li>
-<li><a class="reference internal" href="#urlizetrunc">urlizetrunc</a></li>
-<li><a class="reference internal" href="#wordcount">wordcount</a></li>
-<li><a class="reference internal" href="#wordwrap">wordwrap</a></li>
-<li><a class="reference internal" href="#yesno">yesno</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#internationalization-tags-and-filters">Internationalization tags and filters</a><ul>
-<li><a class="reference internal" href="#i18n">i18n</a></li>
-<li><a class="reference internal" href="#l10n">l10n</a></li>
-<li><a class="reference internal" href="#tz">tz</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#internationalization-tags-and-filters">Internationalization tags and filters</a></li>
+<li><a class="reference internal" href="#custom-filters">Custom filters</a></li>
 </ul>
 </li>
 </ul>
@@ -233,45 +204,20 @@ used template filters:</p>
 <li><a class="reference internal" href="#datetime" id="id9">datetime</a></li>
 <li><a class="reference internal" href="#default" id="id10">default</a></li>
 <li><a class="reference internal" href="#sort" id="id11">sort</a></li>
-<li><a class="reference internal" href="#first" id="id12">first</a></li>
-<li><a class="reference internal" href="#join" id="id13">join</a></li>
-<li><a class="reference internal" href="#last" id="id14">last</a></li>
-<li><a class="reference internal" href="#length" id="id15">length</a></li>
-<li><a class="reference internal" href="#length-is" id="id16">length_is</a></li>
+<li><a class="reference internal" href="#reverse" id="id12">reverse</a></li>
+<li><a class="reference internal" href="#first" id="id13">first</a></li>
+<li><a class="reference internal" href="#join" id="id14">join</a></li>
+<li><a class="reference internal" href="#last" id="id15">last</a></li>
+<li><a class="reference internal" href="#length" id="id16">length</a></li>
 <li><a class="reference internal" href="#linebreaks" id="id17">linebreaks</a></li>
 <li><a class="reference internal" href="#linebreaksbr" id="id18">linebreaksbr</a></li>
-<li><a class="reference internal" href="#linenumbers" id="id19">linenumbers</a></li>
-<li><a class="reference internal" href="#ljust" id="id20">ljust</a></li>
-<li><a class="reference internal" href="#lower" id="id21">lower</a></li>
-<li><a class="reference internal" href="#make-list" id="id22">make_list</a></li>
-<li><a class="reference internal" href="#phone2numeric" id="id23">phone2numeric</a></li>
-<li><a class="reference internal" href="#pluralize" id="id24">pluralize</a></li>
-<li><a class="reference internal" href="#pprint" id="id25">pprint</a></li>
-<li><a class="reference internal" href="#random" id="id26">random</a></li>
-<li><a class="reference internal" href="#removetags" id="id27">removetags</a></li>
-<li><a class="reference internal" href="#rjust" id="id28">rjust</a></li>
-<li><a class="reference internal" href="#safe" id="id29">safe</a></li>
-<li><a class="reference internal" href="#safeseq" id="id30">safeseq</a></li>
-<li><a class="reference internal" href="#slice" id="id31">slice</a></li>
-<li><a class="reference internal" href="#slugify" id="id32">slugify</a></li>
-<li><a class="reference internal" href="#stringformat" id="id33">stringformat</a></li>
-<li><a class="reference internal" href="#striptags" id="id34">striptags</a></li>
-<li><a class="reference internal" href="#std:templatefilter-time" id="id35">time</a></li>
-<li><a class="reference internal" href="#timesince" id="id36">timesince</a></li>
-<li><a class="reference internal" href="#timeuntil" id="id37">timeuntil</a></li>
-<li><a class="reference internal" href="#title" id="id38">title</a></li>
-<li><a class="reference internal" href="#truncatechars" id="id39">truncatechars</a></li>
-<li><a class="reference internal" href="#truncatechars-html" id="id40">truncatechars_html</a></li>
-<li><a class="reference internal" href="#truncatewords" id="id41">truncatewords</a></li>
-<li><a class="reference internal" href="#truncatewords-html" id="id42">truncatewords_html</a></li>
-<li><a class="reference internal" href="#unordered-list" id="id43">unordered_list</a></li>
-<li><a class="reference internal" href="#upper" id="id44">upper</a></li>
-<li><a class="reference internal" href="#urlencode" id="id45">urlencode</a></li>
-<li><a class="reference internal" href="#urlize" id="id46">urlize</a></li>
-<li><a class="reference internal" href="#urlizetrunc" id="id47">urlizetrunc</a></li>
-<li><a class="reference internal" href="#wordcount" id="id48">wordcount</a></li>
-<li><a class="reference internal" href="#wordwrap" id="id49">wordwrap</a></li>
-<li><a class="reference internal" href="#yesno" id="id50">yesno</a></li>
+<li><a class="reference internal" href="#lower" id="id19">lower</a></li>
+<li><a class="reference internal" href="#safe" id="id20">safe</a></li>
+<li><a class="reference internal" href="#format" id="id21">format</a></li>
+<li><a class="reference internal" href="#id2" id="id22">time</a></li>
+<li><a class="reference internal" href="#truncatechars" id="id23">truncatechars</a></li>
+<li><a class="reference internal" href="#upper" id="id24">upper</a></li>
+<li><a class="reference internal" href="#urlencode" id="id25">urlencode</a></li>
 </ul>
 </div>
 <div class="section" id="s-add">
@@ -353,15 +299,22 @@ value.</p>
 <span class="target" id="std:templatefilter-default_if_none"></span></div>
 <div class="section" id="s-sort">
 <span id="s-std:templatefilter-sort"></span><span id="sort"></span><span id="std:templatefilter-sort"></span><h3><a class="toc-backref" href="#id11">sort</a><a class="headerlink" href="#sort" title="Permalink to this headline">¶</a></h3>
-<p>Takes a list and returns that list sorted by the key given in
-the argument.</p>
+<p>Takes a list and returns that list sorted.</p>
 <p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span> <span class="o">|</span> <span class="nf">sort</span> <span class="cp">}}</span>
+<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">list</span> <span class="o">|</span> <span class="nf">sort</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="s-reverse">
+<span id="reverse"></span><h3><a class="toc-backref" href="#id12">reverse</a><a class="headerlink" href="#reverse" title="Permalink to this headline">¶</a></h3>
+<p>Takes a list and returns that list reversed.</p>
+<p>For example:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">list</span> <span class="o">|</span> <span class="nf">reverse</span> <span class="cp">}}</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="s-first">
-<span id="s-std:templatefilter-first"></span><span id="first"></span><span id="std:templatefilter-first"></span><h3><a class="toc-backref" href="#id12">first</a><a class="headerlink" href="#first" title="Permalink to this headline">¶</a></h3>
+<span id="s-std:templatefilter-first"></span><span id="first"></span><span id="std:templatefilter-first"></span><h3><a class="toc-backref" href="#id13">first</a><a class="headerlink" href="#first" title="Permalink to this headline">¶</a></h3>
 <p>Returns the first item in a list.</p>
 <p>For example:</p>
 <div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">first</span> <span class="cp">}}</span>
@@ -370,17 +323,17 @@ the argument.</p>
 <p>If <tt class="docutils literal"><span class="pre">value</span></tt> is the list <tt class="docutils literal"><span class="pre">(&quot;a&quot;</span> <span class="pre">&quot;b&quot;</span> <span class="pre">&quot;c&quot;)</span></tt>, the output will be <tt class="docutils literal"><span class="pre">&quot;a&quot;</span></tt>.</p>
 </div>
 <div class="section" id="s-join">
-<span id="s-std:templatefilter-join"></span><span id="join"></span><span id="std:templatefilter-join"></span><h3><a class="toc-backref" href="#id13">join</a><a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h3>
-<p>Joins a list with a string, like Python&#8217;s <tt class="docutils literal"><span class="pre">str.join(list)</span></tt></p>
+<span id="s-std:templatefilter-join"></span><span id="join"></span><span id="std:templatefilter-join"></span><h3><a class="toc-backref" href="#id14">join</a><a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h3>
+<p>Joins a list with a string.</p>
 <p>For example:</p>
 <div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">join</span><span class="s2">:&quot; // &quot;</span> <span class="cp">}}</span>
 </pre></div>
 </div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is the list <tt class="docutils literal"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c']</span></tt>, the output will be the string
+<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is the list <tt class="docutils literal"><span class="pre">(&quot;a&quot;</span> <span class="pre">&quot;b&quot;</span> <span class="pre">&quot;c&quot;)</span></tt>, the output will be the string
 <tt class="docutils literal"><span class="pre">&quot;a</span> <span class="pre">//</span> <span class="pre">b</span> <span class="pre">//</span> <span class="pre">c&quot;</span></tt>.</p>
 </div>
 <div class="section" id="s-last">
-<span id="s-std:templatefilter-last"></span><span id="last"></span><span id="std:templatefilter-last"></span><h3><a class="toc-backref" href="#id14">last</a><a class="headerlink" href="#last" title="Permalink to this headline">¶</a></h3>
+<span id="s-std:templatefilter-last"></span><span id="last"></span><span id="std:templatefilter-last"></span><h3><a class="toc-backref" href="#id15">last</a><a class="headerlink" href="#last" title="Permalink to this headline">¶</a></h3>
 <p>Returns the last item in a list.</p>
 <p>For example:</p>
 <div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">last</span> <span class="cp">}}</span>
@@ -390,31 +343,17 @@ the argument.</p>
 string <tt class="docutils literal"><span class="pre">&quot;d&quot;</span></tt>.</p>
 </div>
 <div class="section" id="s-length">
-<span id="s-std:templatefilter-length"></span><span id="length"></span><span id="std:templatefilter-length"></span><h3><a class="toc-backref" href="#id15">length</a><a class="headerlink" href="#length" title="Permalink to this headline">¶</a></h3>
+<span id="s-std:templatefilter-length"></span><span id="length"></span><span id="std:templatefilter-length"></span><h3><a class="toc-backref" href="#id16">length</a><a class="headerlink" href="#length" title="Permalink to this headline">¶</a></h3>
 <p>Returns the length of the value. This works for both strings and lists.</p>
 <p>For example:</p>
 <div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">length</span> <span class="cp">}}</span>
 </pre></div>
 </div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c',</span> <span class="pre">'d']</span></tt> or <tt class="docutils literal"><span class="pre">&quot;abcd&quot;</span></tt>, the output will be
+<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">(&quot;a&quot;</span> <span class="pre">&quot;b&quot;</span> <span class="pre">&quot;c&quot;</span> <span class="pre">&quot;d&quot;)</span></tt> or <tt class="docutils literal"><span class="pre">&quot;abcd&quot;</span></tt>, the output will be
 <tt class="docutils literal"><span class="pre">4</span></tt>.</p>
-<div class="versionchanged">
-<span class="title">Changed in Django 1.8:</span> <p>The filter returns <tt class="docutils literal"><span class="pre">0</span></tt> for an undefined variable. Previously, it returned
-an empty string.</p>
-</div>
-</div>
-<div class="section" id="s-length-is">
-<span id="s-std:templatefilter-length_is"></span><span id="length-is"></span><span id="std:templatefilter-length_is"></span><h3><a class="toc-backref" href="#id16">length_is</a><a class="headerlink" href="#length-is" title="Permalink to this headline">¶</a></h3>
-<p>Returns <tt class="docutils literal"><span class="pre">True</span></tt> if the value&#8217;s length is the argument, or <tt class="docutils literal"><span class="pre">False</span></tt> otherwise.</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">length_is</span><span class="s2">:&quot;4&quot;</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c',</span> <span class="pre">'d']</span></tt> or <tt class="docutils literal"><span class="pre">&quot;abcd&quot;</span></tt>, the output will be
-<tt class="docutils literal"><span class="pre">True</span></tt>.</p>
 </div>
 <div class="section" id="s-linebreaks">
-<span id="s-std:templatefilter-linebreaks"></span><span id="linebreaks"></span><span id="std:templatefilter-linebreaks"></span><h3><a class="toc-backref" href="#id17">linebreaks</a><a class="headerlink" href="#linebreaks" title="Permalink to this headline">¶</a></h3>
+<span id="linebreaks"></span><h3><a class="toc-backref" href="#id17">linebreaks</a><a class="headerlink" href="#linebreaks" title="Permalink to this headline">¶</a></h3>
 <p>Replaces line breaks in plain text with appropriate HTML; a single
 newline becomes an HTML line break (<tt class="docutils literal"><span class="pre">&lt;br</span> <span class="pre">/&gt;</span></tt>) and a new line
 followed by a blank line becomes a paragraph break (<tt class="docutils literal"><span class="pre">&lt;/p&gt;</span></tt>).</p>
@@ -435,39 +374,9 @@ followed by a blank line becomes a paragraph break (<tt class="docutils literal"
 </div>
 <p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">Joel\nis</span> <span class="pre">a</span> <span class="pre">slug</span></tt>, the output will be <tt class="docutils literal"><span class="pre">Joel&lt;br</span> <span class="pre">/&gt;is</span> <span class="pre">a</span>
 <span class="pre">slug</span></tt>.</p>
-</div>
-<div class="section" id="s-linenumbers">
-<span id="s-std:templatefilter-linenumbers"></span><span id="linenumbers"></span><span id="std:templatefilter-linenumbers"></span><h3><a class="toc-backref" href="#id19">linenumbers</a><a class="headerlink" href="#linenumbers" title="Permalink to this headline">¶</a></h3>
-<p>Displays text with line numbers.</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">linenumbers</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is:</p>
-<div class="highlight-html+django"><div class="highlight"><pre>one
-two
-three
-</pre></div>
-</div>
-<p>the output will be:</p>
-<div class="highlight-html+django"><div class="highlight"><pre>1. one
-2. two
-3. three
-</pre></div>
-</div>
-</div>
-<div class="section" id="s-ljust">
-<span id="s-std:templatefilter-ljust"></span><span id="ljust"></span><span id="std:templatefilter-ljust"></span><h3><a class="toc-backref" href="#id20">ljust</a><a class="headerlink" href="#ljust" title="Permalink to this headline">¶</a></h3>
-<p>Left-aligns the value in a field of a given width.</p>
-<p><strong>Argument:</strong> field size</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre>&quot;<span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">ljust</span><span class="s2">:&quot;10&quot;</span> <span class="cp">}}</span>&quot;
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">Djula</span></tt>, the output will be <tt class="docutils literal"><span class="pre">&quot;Djula</span>&nbsp;&nbsp;&nbsp; <span class="pre">&quot;</span></tt>.</p>
-</div>
+<span class="target" id="std:templatefilter-linenumbers"></span></div>
 <div class="section" id="s-lower">
-<span id="s-std:templatefilter-lower"></span><span id="lower"></span><span id="std:templatefilter-lower"></span><h3><a class="toc-backref" href="#id21">lower</a><a class="headerlink" href="#lower" title="Permalink to this headline">¶</a></h3>
+<span id="s-std:templatefilter-lower"></span><span id="lower"></span><span id="std:templatefilter-lower"></span><h3><a class="toc-backref" href="#id19">lower</a><a class="headerlink" href="#lower" title="Permalink to this headline">¶</a></h3>
 <p>Converts a string into all lowercase.</p>
 <p>For example:</p>
 <div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">lower</span> <span class="cp">}}</span>
@@ -475,97 +384,9 @@ three
 </div>
 <p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">Still</span> <span class="pre">MAD</span> <span class="pre">At</span> <span class="pre">Yoko</span></tt>, the output will be
 <tt class="docutils literal"><span class="pre">still</span> <span class="pre">mad</span> <span class="pre">at</span> <span class="pre">yoko</span></tt>.</p>
-</div>
-<div class="section" id="s-make-list">
-<span id="s-std:templatefilter-make_list"></span><span id="make-list"></span><span id="std:templatefilter-make_list"></span><h3><a class="toc-backref" href="#id22">make_list</a><a class="headerlink" href="#make-list" title="Permalink to this headline">¶</a></h3>
-<p>Returns the value turned into a list. For a string, it&#8217;s a list of characters.
-For an integer, the argument is cast into an unicode string before creating a
-list.</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">make_list</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is the string <tt class="docutils literal"><span class="pre">&quot;Joel&quot;</span></tt>, the output would be the list
-<tt class="docutils literal"><span class="pre">['J',</span> <span class="pre">'o',</span> <span class="pre">'e',</span> <span class="pre">'l']</span></tt>. If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">123</span></tt>, the output will be the
-list <tt class="docutils literal"><span class="pre">['1',</span> <span class="pre">'2',</span> <span class="pre">'3']</span></tt>.</p>
-</div>
-<div class="section" id="s-phone2numeric">
-<span id="s-std:templatefilter-phone2numeric"></span><span id="phone2numeric"></span><span id="std:templatefilter-phone2numeric"></span><h3><a class="toc-backref" href="#id23">phone2numeric</a><a class="headerlink" href="#phone2numeric" title="Permalink to this headline">¶</a></h3>
-<p>Converts a phone number (possibly containing letters) to its numerical
-equivalent.</p>
-<p>The input doesn&#8217;t have to be a valid phone number. This will happily convert
-any string.</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">phone2numeric</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">800-COLLECT</span></tt>, the output will be <tt class="docutils literal"><span class="pre">800-2655328</span></tt>.</p>
-</div>
-<div class="section" id="s-pluralize">
-<span id="s-std:templatefilter-pluralize"></span><span id="pluralize"></span><span id="std:templatefilter-pluralize"></span><h3><a class="toc-backref" href="#id24">pluralize</a><a class="headerlink" href="#pluralize" title="Permalink to this headline">¶</a></h3>
-<p>Returns a plural suffix if the value is not 1. By default, this suffix is
-<tt class="docutils literal"><span class="pre">'s'</span></tt>.</p>
-<p>Example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre>You have <span class="cp">{{</span> <span class="nv">num_messages</span> <span class="cp">}}</span> message<span class="cp">{{</span> <span class="nv">num_messages</span><span class="o">|</span><span class="nf">pluralize</span> <span class="cp">}}</span>.
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">num_messages</span></tt> is <tt class="docutils literal"><span class="pre">1</span></tt>, the output will be <tt class="docutils literal"><span class="pre">You</span> <span class="pre">have</span> <span class="pre">1</span> <span class="pre">message.</span></tt>
-If <tt class="docutils literal"><span class="pre">num_messages</span></tt> is <tt class="docutils literal"><span class="pre">2</span></tt>  the output will be <tt class="docutils literal"><span class="pre">You</span> <span class="pre">have</span> <span class="pre">2</span> <span class="pre">messages.</span></tt></p>
-<p>For words that require a suffix other than <tt class="docutils literal"><span class="pre">'s'</span></tt>, you can provide an alternate
-suffix as a parameter to the filter.</p>
-<p>Example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre>You have <span class="cp">{{</span> <span class="nv">num_walruses</span> <span class="cp">}}</span> walrus<span class="cp">{{</span> <span class="nv">num_walruses</span><span class="o">|</span><span class="nf">pluralize</span><span class="s2">:&quot;es&quot;</span> <span class="cp">}}</span>.
-</pre></div>
-</div>
-<p>For words that don&#8217;t pluralize by simple suffix, you can specify both a
-singular and plural suffix, separated by a comma.</p>
-<p>Example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre>You have <span class="cp">{{</span> <span class="nv">num_cherries</span> <span class="cp">}}</span> cherr<span class="cp">{{</span> <span class="nv">num_cherries</span><span class="o">|</span><span class="nf">pluralize</span><span class="s2">:&quot;y,ies&quot;</span> <span class="cp">}}</span>.
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Use <tt class="xref std std-ttag docutils literal"><span class="pre">blocktrans</span></tt> to pluralize translated strings.</p>
-</div>
-</div>
-<div class="section" id="s-pprint">
-<span id="s-std:templatefilter-pprint"></span><span id="pprint"></span><span id="std:templatefilter-pprint"></span><h3><a class="toc-backref" href="#id25">pprint</a><a class="headerlink" href="#pprint" title="Permalink to this headline">¶</a></h3>
-<p>A wrapper around <tt class="xref py py-func docutils literal"><span class="pre">pprint.pprint()</span></tt> &#8211; for debugging, really.</p>
-</div>
-<div class="section" id="s-random">
-<span id="s-std:templatefilter-random"></span><span id="random"></span><span id="std:templatefilter-random"></span><h3><a class="toc-backref" href="#id26">random</a><a class="headerlink" href="#random" title="Permalink to this headline">¶</a></h3>
-<p>Returns a random item from the given list.</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">random</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is the list <tt class="docutils literal"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c',</span> <span class="pre">'d']</span></tt>, the output could be <tt class="docutils literal"><span class="pre">&quot;b&quot;</span></tt>.</p>
-</div>
-<div class="section" id="s-removetags">
-<span id="s-std:templatefilter-removetags"></span><span id="removetags"></span><span id="std:templatefilter-removetags"></span><h3><a class="toc-backref" href="#id27">removetags</a><a class="headerlink" href="#removetags" title="Permalink to this headline">¶</a></h3>
-<p>Removes a space-separated list of [X]HTML tags from the output.</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">removetags</span><span class="s2">:&quot;b span&quot;</span><span class="o">|</span><span class="nf">safe</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;&lt;b&gt;Joel&lt;/b&gt;</span> <span class="pre">&lt;button&gt;is&lt;/button&gt;</span> <span class="pre">a</span> <span class="pre">&lt;span&gt;slug&lt;/span&gt;&quot;</span></tt> the
-output will be <tt class="docutils literal"><span class="pre">&quot;Joel</span> <span class="pre">&lt;button&gt;is&lt;/button&gt;</span> <span class="pre">a</span> <span class="pre">slug&quot;</span></tt>.</p>
-<p>Note that this filter is case-sensitive.</p>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;&lt;B&gt;Joel&lt;/B&gt;</span> <span class="pre">&lt;button&gt;is&lt;/button&gt;</span> <span class="pre">a</span> <span class="pre">&lt;span&gt;slug&lt;/span&gt;&quot;</span></tt> the
-output will be <tt class="docutils literal"><span class="pre">&quot;&lt;B&gt;Joel&lt;/B&gt;</span> <span class="pre">&lt;button&gt;is&lt;/button&gt;</span> <span class="pre">a</span> <span class="pre">slug&quot;</span></tt>.</p>
-</div>
-<div class="section" id="s-rjust">
-<span id="s-std:templatefilter-rjust"></span><span id="rjust"></span><span id="std:templatefilter-rjust"></span><h3><a class="toc-backref" href="#id28">rjust</a><a class="headerlink" href="#rjust" title="Permalink to this headline">¶</a></h3>
-<p>Right-aligns the value in a field of a given width.</p>
-<p><strong>Argument:</strong> field size</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre>&quot;<span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">rjust</span><span class="s2">:&quot;10&quot;</span> <span class="cp">}}</span>&quot;
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">Djula</span></tt>, the output will be <tt class="docutils literal"><span class="pre">&quot;</span>&nbsp;&nbsp;&nbsp; <span class="pre">Djula&quot;</span></tt>.</p>
-</div>
+<span class="target" id="std:templatefilter-make_list"></span></div>
 <div class="section" id="s-safe">
-<span id="s-std:templatefilter-safe"></span><span id="safe"></span><span id="std:templatefilter-safe"></span><h3><a class="toc-backref" href="#id29">safe</a><a class="headerlink" href="#safe" title="Permalink to this headline">¶</a></h3>
+<span id="s-std:templatefilter-safe"></span><span id="safe"></span><span id="std:templatefilter-safe"></span><h3><a class="toc-backref" href="#id20">safe</a><a class="headerlink" href="#safe" title="Permalink to this headline">¶</a></h3>
 <p>Marks a string as not requiring further HTML escaping prior to output. When
 autoescaping is off, this filter has no effect.</p>
 <div class="admonition note">
@@ -578,154 +399,26 @@ prints the variable as is, unescaped:</p>
 </div>
 </div>
 </div>
-<div class="section" id="s-safeseq">
-<span id="s-std:templatefilter-safeseq"></span><span id="safeseq"></span><span id="std:templatefilter-safeseq"></span><h3><a class="toc-backref" href="#id30">safeseq</a><a class="headerlink" href="#safeseq" title="Permalink to this headline">¶</a></h3>
-<p>Applies the <a class="reference internal" href="#std:templatefilter-safe"><tt class="xref std std-tfilter docutils literal"><span class="pre">safe</span></tt></a> filter to each element of a sequence. Useful in
-conjunction with other filters that operate on sequences, such as
-<a class="reference internal" href="#std:templatefilter-join"><tt class="xref std std-tfilter docutils literal"><span class="pre">join</span></tt></a>. For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">some_list</span><span class="o">|</span><span class="nf">safeseq</span><span class="o">|</span><span class="nf">join</span><span class="s2">:&quot;, &quot;</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>You couldn&#8217;t use the <a class="reference internal" href="#std:templatefilter-safe"><tt class="xref std std-tfilter docutils literal"><span class="pre">safe</span></tt></a> filter directly in this case, as it would
-first convert the variable into a string, rather than working with the
-individual elements of the sequence.</p>
-</div>
-<div class="section" id="s-slice">
-<span id="s-std:templatefilter-slice"></span><span id="slice"></span><span id="std:templatefilter-slice"></span><h3><a class="toc-backref" href="#id31">slice</a><a class="headerlink" href="#slice" title="Permalink to this headline">¶</a></h3>
-<p>Returns a slice of the list.</p>
-<p>Uses the same syntax as Python&#8217;s list slicing. See
-<a class="reference external" href="http://www.diveintopython3.net/native-datatypes.html#slicinglists">http://www.diveintopython3.net/native-datatypes.html#slicinglists</a>
-for an introduction.</p>
-<p>Example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">some_list</span><span class="o">|</span><span class="nf">slice</span><span class="s2">:&quot;:2&quot;</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">some_list</span></tt> is <tt class="docutils literal"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c']</span></tt>, the output will be <tt class="docutils literal"><span class="pre">['a',</span> <span class="pre">'b']</span></tt>.</p>
-</div>
-<div class="section" id="s-slugify">
-<span id="s-std:templatefilter-slugify"></span><span id="slugify"></span><span id="std:templatefilter-slugify"></span><h3><a class="toc-backref" href="#id32">slugify</a><a class="headerlink" href="#slugify" title="Permalink to this headline">¶</a></h3>
-<p>Converts to lowercase, removes non-word characters (alphanumerics and
-underscores) and converts spaces to hyphens. Also strips leading and trailing
-whitespace.</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">slugify</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;Joel</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">slug&quot;</span></tt>, the output will be <tt class="docutils literal"><span class="pre">&quot;joel-is-a-slug&quot;</span></tt>.</p>
-</div>
-<div class="section" id="s-stringformat">
-<span id="s-std:templatefilter-stringformat"></span><span id="stringformat"></span><span id="std:templatefilter-stringformat"></span><h3><a class="toc-backref" href="#id33">stringformat</a><a class="headerlink" href="#stringformat" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="s-format">
+<span id="s-std:templatefilter-stringformat"></span><span id="format"></span><span id="std:templatefilter-stringformat"></span><h3><a class="toc-backref" href="#id21">format</a><a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h3>
 <p>Formats the variable according to the argument, a string formatting specifier.
-This specifier uses Python string formatting syntax, with the exception that
-the leading &#8220;%&#8221; is dropped.</p>
-<p>See <a class="reference external" href="http://docs.python.org/library/stdtypes.html#string-formatting-operations">http://docs.python.org/library/stdtypes.html#string-formatting-operations</a>
-for documentation of Python string formatting</p>
+This specifier uses Common Lisp string formatting syntax</p>
 <p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">stringformat</span><span class="s2">:&quot;E&quot;</span> <span class="cp">}}</span>
+<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span> <span class="o">|</span> <span class="nf">format</span><span class="s2">:&quot;~:d&quot;</span> <span class="cp">}}</span>
 </pre></div>
 </div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">10</span></tt>, the output will be <tt class="docutils literal"><span class="pre">1.000000E+01</span></tt>.</p>
-</div>
-<div class="section" id="s-striptags">
-<span id="s-std:templatefilter-striptags"></span><span id="striptags"></span><span id="std:templatefilter-striptags"></span><h3><a class="toc-backref" href="#id34">striptags</a><a class="headerlink" href="#striptags" title="Permalink to this headline">¶</a></h3>
-<p>Makes all possible efforts to strip all [X]HTML tags.</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">striptags</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;&lt;b&gt;Joel&lt;/b&gt;</span> <span class="pre">&lt;button&gt;is&lt;/button&gt;</span> <span class="pre">a</span> <span class="pre">&lt;span&gt;slug&lt;/span&gt;&quot;</span></tt>, the
-output will be <tt class="docutils literal"><span class="pre">&quot;Joel</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">slug&quot;</span></tt>.</p>
-<div class="admonition-no-safety-guarantee admonition">
-<p class="first admonition-title">No safety guarantee</p>
-<p class="last">Note that <tt class="docutils literal"><span class="pre">striptags</span></tt> doesn&#8217;t give any guarantee about its output being
-entirely HTML safe, particularly with non valid HTML input. So <strong>NEVER</strong>
-apply the <tt class="docutils literal"><span class="pre">safe</span></tt> filter to a <tt class="docutils literal"><span class="pre">striptags</span></tt> output.
-If you are looking for something more robust, you can use the <tt class="docutils literal"><span class="pre">bleach</span></tt>
-Python library, notably its <a class="reference external" href="http://bleach.readthedocs.org/en/latest/clean.html">clean</a> method.</p>
-</div>
-</div>
-<div class="section" id="s-std:templatefilter-time">
-<span id="s-id2"></span><span id="std:templatefilter-time"></span><span id="id2"></span><h3><a class="toc-backref" href="#id35">time</a><a class="headerlink" href="#std:templatefilter-time" title="Permalink to this headline">¶</a></h3>
+<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">1000000</span></tt>, the output will be <tt class="docutils literal"><span class="pre">1,000,000</span></tt>.</p>
+<span class="target" id="std:templatefilter-striptags"></span></div>
+<div class="section" id="s-id2">
+<span id="id2"></span><h3><a class="toc-backref" href="#id22">time</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Formats a time according to the given format.</p>
-<p>Given format can be the predefined one <tt class="xref std std-setting docutils literal"><span class="pre">TIME_FORMAT</span></tt>, or a custom
-format, same as the <a class="reference internal" href="#std:templatefilter-date"><tt class="xref std std-tfilter docutils literal"><span class="pre">date</span></tt></a> filter. Note that the predefined format
-is locale-dependent.</p>
 <p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">time</span><span class="s2">:&quot;H:i&quot;</span> <span class="cp">}}</span>
+<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span> <span class="o">|</span> <span class="nf">time</span> <span class="cp">}}</span>
 </pre></div>
 </div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is equivalent to <tt class="docutils literal"><span class="pre">datetime.datetime.now()</span></tt>, the output will be
-the string <tt class="docutils literal"><span class="pre">&quot;01:23&quot;</span></tt>.</p>
-<p>Another example:</p>
-<p>Assuming that <tt class="xref std std-setting docutils literal"><span class="pre">USE_L10N</span></tt> is <tt class="docutils literal"><span class="pre">True</span></tt> and <tt class="xref std std-setting docutils literal"><span class="pre">LANGUAGE_CODE</span></tt> is,
-for example, <tt class="docutils literal"><span class="pre">&quot;de&quot;</span></tt>, then for:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">time</span><span class="s2">:&quot;TIME_FORMAT&quot;</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>the output will be the string <tt class="docutils literal"><span class="pre">&quot;01:23:00&quot;</span></tt> (The <tt class="docutils literal"><span class="pre">&quot;TIME_FORMAT&quot;</span></tt> format
-specifier for the <tt class="docutils literal"><span class="pre">de</span></tt> locale as shipped with Djula is <tt class="docutils literal"><span class="pre">&quot;H:i:s&quot;</span></tt>).</p>
-<p>The <tt class="docutils literal"><span class="pre">time</span></tt> filter will only accept parameters in the format string that
-relate to the time of day, not the date (for obvious reasons). If you need to
-format a <tt class="docutils literal"><span class="pre">date</span></tt> value, use the <a class="reference internal" href="#std:templatefilter-date"><tt class="xref std std-tfilter docutils literal"><span class="pre">date</span></tt></a> filter instead (or along
-<tt class="docutils literal"><span class="pre">time</span></tt> if you need to render a full <tt class="xref py py-class docutils literal"><span class="pre">datetime</span></tt> value).</p>
-<p>There is one exception the above rule: When passed a <tt class="docutils literal"><span class="pre">datetime</span></tt> value with
-attached timezone information (a <em class="xref std std-ref">time-zone-aware</em> <tt class="docutils literal"><span class="pre">datetime</span></tt> instance) the <tt class="docutils literal"><span class="pre">time</span></tt> filter will
-accept the timezone-related <em class="xref std std-ref">format specifiers</em> <tt class="docutils literal"><span class="pre">'e'</span></tt>, <tt class="docutils literal"><span class="pre">'O'</span></tt> , <tt class="docutils literal"><span class="pre">'T'</span></tt> and <tt class="docutils literal"><span class="pre">'Z'</span></tt>.</p>
-<p>When used without a format string:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">time</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>...the formatting string defined in the <tt class="xref std std-setting docutils literal"><span class="pre">TIME_FORMAT</span></tt> setting will be
-used, without applying any localization.</p>
-<div class="versionchanged">
-<span class="title">Changed in Django 1.7:</span> <p>The ability to receive and act on values with attached timezone
-information was added in Djula 1.7.</p>
-</div>
-</div>
-<div class="section" id="s-timesince">
-<span id="s-std:templatefilter-timesince"></span><span id="timesince"></span><span id="std:templatefilter-timesince"></span><h3><a class="toc-backref" href="#id36">timesince</a><a class="headerlink" href="#timesince" title="Permalink to this headline">¶</a></h3>
-<p>Formats a date as the time since that date (e.g., &#8220;4 days, 6 hours&#8221;).</p>
-<p>Takes an optional argument that is a variable containing the date to use as
-the comparison point (without the argument, the comparison point is <em>now</em>).
-For example, if <tt class="docutils literal"><span class="pre">blog_date</span></tt> is a date instance representing midnight on 1
-June 2006, and <tt class="docutils literal"><span class="pre">comment_date</span></tt> is a date instance for 08:00 on 1 June 2006,
-then the following would return &#8220;8 hours&#8221;:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">blog_date</span><span class="o">|</span><span class="nf">timesince</span><span class="o">:</span><span class="nv">comment_date</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>Comparing offset-naive and offset-aware datetimes will return an empty string.</p>
-<p>Minutes is the smallest unit used, and &#8220;0 minutes&#8221; will be returned for any
-date that is in the future relative to the comparison point.</p>
-</div>
-<div class="section" id="s-timeuntil">
-<span id="s-std:templatefilter-timeuntil"></span><span id="timeuntil"></span><span id="std:templatefilter-timeuntil"></span><h3><a class="toc-backref" href="#id37">timeuntil</a><a class="headerlink" href="#timeuntil" title="Permalink to this headline">¶</a></h3>
-<p>Similar to <tt class="docutils literal"><span class="pre">timesince</span></tt>, except that it measures the time from now until the
-given date or datetime. For example, if today is 1 June 2006 and
-<tt class="docutils literal"><span class="pre">conference_date</span></tt> is a date instance holding 29 June 2006, then
-<tt class="docutils literal"><span class="pre">{{</span> <span class="pre">conference_date|timeuntil</span> <span class="pre">}}</span></tt> will return &#8220;4 weeks&#8221;.</p>
-<p>Takes an optional argument that is a variable containing the date to use as
-the comparison point (instead of <em>now</em>). If <tt class="docutils literal"><span class="pre">from_date</span></tt> contains 22 June
-2006, then the following will return &#8220;1 week&#8221;:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">conference_date</span><span class="o">|</span><span class="nf">timeuntil</span><span class="o">:</span><span class="nv">from_date</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>Comparing offset-naive and offset-aware datetimes will return an empty string.</p>
-<p>Minutes is the smallest unit used, and &#8220;0 minutes&#8221; will be returned for any
-date that is in the past relative to the comparison point.</p>
-</div>
-<div class="section" id="s-title">
-<span id="s-std:templatefilter-title"></span><span id="title"></span><span id="std:templatefilter-title"></span><h3><a class="toc-backref" href="#id38">title</a><a class="headerlink" href="#title" title="Permalink to this headline">¶</a></h3>
-<p>Converts a string into titlecase by making words start with an uppercase
-character and the remaining characters lowercase. This tag makes no effort to
-keep &#8220;trivial words&#8221; in lowercase.</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">title</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;my</span> <span class="pre">FIRST</span> <span class="pre">post&quot;</span></tt>, the output will be <tt class="docutils literal"><span class="pre">&quot;My</span> <span class="pre">First</span> <span class="pre">Post&quot;</span></tt>.</p>
 </div>
 <div class="section" id="s-truncatechars">
-<span id="s-std:templatefilter-truncatechars"></span><span id="truncatechars"></span><span id="std:templatefilter-truncatechars"></span><h3><a class="toc-backref" href="#id39">truncatechars</a><a class="headerlink" href="#truncatechars" title="Permalink to this headline">¶</a></h3>
+<span id="s-std:templatefilter-truncatechars"></span><span id="truncatechars"></span><span id="std:templatefilter-truncatechars"></span><h3><a class="toc-backref" href="#id23">truncatechars</a><a class="headerlink" href="#truncatechars" title="Permalink to this headline">¶</a></h3>
 <p>Truncates a string if it is longer than the specified number of characters.
 Truncated strings will end with a translatable ellipsis sequence (&#8221;...&#8221;).</p>
 <p><strong>Argument:</strong> Number of characters to truncate to</p>
@@ -734,73 +427,9 @@ Truncated strings will end with a translatable ellipsis sequence (&#8221;...&#82
 </pre></div>
 </div>
 <p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;Joel</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">slug&quot;</span></tt>, the output will be <tt class="docutils literal"><span class="pre">&quot;Joel</span> <span class="pre">i...&quot;</span></tt>.</p>
-</div>
-<div class="section" id="s-truncatechars-html">
-<span id="s-std:templatefilter-truncatechars_html"></span><span id="truncatechars-html"></span><span id="std:templatefilter-truncatechars_html"></span><h3><a class="toc-backref" href="#id40">truncatechars_html</a><a class="headerlink" href="#truncatechars-html" title="Permalink to this headline">¶</a></h3>
-<div class="versionadded">
-<span class="title">New in Django 1.7.</span> </div>
-<p>Similar to <a class="reference internal" href="#std:templatefilter-truncatechars"><tt class="xref std std-tfilter docutils literal"><span class="pre">truncatechars</span></tt></a>, except that it is aware of HTML tags. Any
-tags that are opened in the string and not closed before the truncation point
-are closed immediately after the truncation.</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">truncatechars_html</span><span class="o">:</span><span class="m">9</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;&lt;p&gt;Joel</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">slug&lt;/p&gt;&quot;</span></tt>, the output will be
-<tt class="docutils literal"><span class="pre">&quot;&lt;p&gt;Joel</span> <span class="pre">i...&lt;/p&gt;&quot;</span></tt>.</p>
-<p>Newlines in the HTML content will be preserved.</p>
-</div>
-<div class="section" id="s-truncatewords">
-<span id="s-std:templatefilter-truncatewords"></span><span id="truncatewords"></span><span id="std:templatefilter-truncatewords"></span><h3><a class="toc-backref" href="#id41">truncatewords</a><a class="headerlink" href="#truncatewords" title="Permalink to this headline">¶</a></h3>
-<p>Truncates a string after a certain number of words.</p>
-<p><strong>Argument:</strong> Number of words to truncate after</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">truncatewords</span><span class="o">:</span><span class="m">2</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;Joel</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">slug&quot;</span></tt>, the output will be <tt class="docutils literal"><span class="pre">&quot;Joel</span> <span class="pre">is</span> <span class="pre">...&quot;</span></tt>.</p>
-<p>Newlines within the string will be removed.</p>
-</div>
-<div class="section" id="s-truncatewords-html">
-<span id="s-std:templatefilter-truncatewords_html"></span><span id="truncatewords-html"></span><span id="std:templatefilter-truncatewords_html"></span><h3><a class="toc-backref" href="#id42">truncatewords_html</a><a class="headerlink" href="#truncatewords-html" title="Permalink to this headline">¶</a></h3>
-<p>Similar to <a class="reference internal" href="#std:templatefilter-truncatewords"><tt class="xref std std-tfilter docutils literal"><span class="pre">truncatewords</span></tt></a>, except that it is aware of HTML tags. Any
-tags that are opened in the string and not closed before the truncation point,
-are closed immediately after the truncation.</p>
-<p>This is less efficient than <a class="reference internal" href="#std:templatefilter-truncatewords"><tt class="xref std std-tfilter docutils literal"><span class="pre">truncatewords</span></tt></a>, so should only be used
-when it is being passed HTML text.</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">truncatewords_html</span><span class="o">:</span><span class="m">2</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;&lt;p&gt;Joel</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">slug&lt;/p&gt;&quot;</span></tt>, the output will be
-<tt class="docutils literal"><span class="pre">&quot;&lt;p&gt;Joel</span> <span class="pre">is</span> <span class="pre">...&lt;/p&gt;&quot;</span></tt>.</p>
-<p>Newlines in the HTML content will be preserved.</p>
-</div>
-<div class="section" id="s-unordered-list">
-<span id="s-std:templatefilter-unordered_list"></span><span id="unordered-list"></span><span id="std:templatefilter-unordered_list"></span><h3><a class="toc-backref" href="#id43">unordered_list</a><a class="headerlink" href="#unordered-list" title="Permalink to this headline">¶</a></h3>
-<p>Recursively takes a self-nested list and returns an HTML unordered list &#8211;
-WITHOUT opening and closing &lt;ul&gt; tags.</p>
-<p>The list is assumed to be in the proper format. For example, if <tt class="docutils literal"><span class="pre">var</span></tt>
-contains <tt class="docutils literal"><span class="pre">['States',</span> <span class="pre">['Kansas',</span> <span class="pre">['Lawrence',</span> <span class="pre">'Topeka'],</span> <span class="pre">'Illinois']]</span></tt>, then
-<tt class="docutils literal"><span class="pre">{{</span> <span class="pre">var|unordered_list</span> <span class="pre">}}</span></tt> would return:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="nt">&lt;li&gt;</span>States
-<span class="nt">&lt;ul&gt;</span>
-        <span class="nt">&lt;li&gt;</span>Kansas
-        <span class="nt">&lt;ul&gt;</span>
-                <span class="nt">&lt;li&gt;</span>Lawrence<span class="nt">&lt;/li&gt;</span>
-                <span class="nt">&lt;li&gt;</span>Topeka<span class="nt">&lt;/li&gt;</span>
-        <span class="nt">&lt;/ul&gt;</span>
-        <span class="nt">&lt;/li&gt;</span>
-        <span class="nt">&lt;li&gt;</span>Illinois<span class="nt">&lt;/li&gt;</span>
-<span class="nt">&lt;/ul&gt;</span>
-<span class="nt">&lt;/li&gt;</span>
-</pre></div>
-</div>
-<p>Note: An older, more restrictive and verbose input format is also supported:
-<tt class="docutils literal"><span class="pre">['States',</span> <span class="pre">[['Kansas',</span> <span class="pre">[['Lawrence',</span> <span class="pre">[]],</span> <span class="pre">['Topeka',</span> <span class="pre">[]]]],</span> <span class="pre">['Illinois',</span> <span class="pre">[]]]]</span></tt>,</p>
-</div>
+<span class="target" id="std:templatefilter-truncatechars_html"></span></div>
 <div class="section" id="s-upper">
-<span id="s-std:templatefilter-upper"></span><span id="upper"></span><span id="std:templatefilter-upper"></span><h3><a class="toc-backref" href="#id44">upper</a><a class="headerlink" href="#upper" title="Permalink to this headline">¶</a></h3>
+<span id="s-std:templatefilter-upper"></span><span id="upper"></span><span id="std:templatefilter-upper"></span><h3><a class="toc-backref" href="#id24">upper</a><a class="headerlink" href="#upper" title="Permalink to this headline">¶</a></h3>
 <p>Converts a string into all uppercase.</p>
 <p>For example:</p>
 <div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">upper</span> <span class="cp">}}</span>
@@ -809,7 +438,7 @@ contains <tt class="docutils literal"><span class="pre">['States',</span> <span 
 <p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;Joel</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">slug&quot;</span></tt>, the output will be <tt class="docutils literal"><span class="pre">&quot;JOEL</span> <span class="pre">IS</span> <span class="pre">A</span> <span class="pre">SLUG&quot;</span></tt>.</p>
 </div>
 <div class="section" id="s-urlencode">
-<span id="s-std:templatefilter-urlencode"></span><span id="urlencode"></span><span id="std:templatefilter-urlencode"></span><h3><a class="toc-backref" href="#id45">urlencode</a><a class="headerlink" href="#urlencode" title="Permalink to this headline">¶</a></h3>
+<span id="s-std:templatefilter-urlencode"></span><span id="urlencode"></span><span id="std:templatefilter-urlencode"></span><h3><a class="toc-backref" href="#id25">urlencode</a><a class="headerlink" href="#urlencode" title="Permalink to this headline">¶</a></h3>
 <p>Escapes a value for use in a URL.</p>
 <p>For example:</p>
 <div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">urlencode</span> <span class="cp">}}</span>
@@ -827,158 +456,14 @@ provided when <em>all</em> characters should be escaped. For example:</p>
 <p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;http://www.example.org/&quot;</span></tt>, the output will be
 <tt class="docutils literal"><span class="pre">&quot;http%3A%2F%2Fwww.example.org%2F&quot;</span></tt>.</p>
 </div>
-<div class="section" id="s-urlize">
-<span id="s-std:templatefilter-urlize"></span><span id="urlize"></span><span id="std:templatefilter-urlize"></span><h3><a class="toc-backref" href="#id46">urlize</a><a class="headerlink" href="#urlize" title="Permalink to this headline">¶</a></h3>
-<p>Converts URLs and email addresses in text into clickable links.</p>
-<p>This template tag works on links prefixed with <tt class="docutils literal"><span class="pre">http://</span></tt>, <tt class="docutils literal"><span class="pre">https://</span></tt>, or
-<tt class="docutils literal"><span class="pre">www.</span></tt>. For example, <tt class="docutils literal"><span class="pre">http://goo.gl/aia1t</span></tt> will get converted but
-<tt class="docutils literal"><span class="pre">goo.gl/aia1t</span></tt> won&#8217;t.</p>
-<p>It also supports domain-only links ending in one of the original top level
-domains (<tt class="docutils literal"><span class="pre">.com</span></tt>, <tt class="docutils literal"><span class="pre">.edu</span></tt>, <tt class="docutils literal"><span class="pre">.gov</span></tt>, <tt class="docutils literal"><span class="pre">.int</span></tt>, <tt class="docutils literal"><span class="pre">.mil</span></tt>, <tt class="docutils literal"><span class="pre">.net</span></tt>, and
-<tt class="docutils literal"><span class="pre">.org</span></tt>). For example, <tt class="docutils literal"><span class="pre">djulaproject.com</span></tt> gets converted.</p>
-<div class="versionchanged">
-<span class="title">Changed in Django 1.8:</span> <p>Support for domain-only links that include characters after the top-level
-domain (e.g. <tt class="docutils literal"><span class="pre">djulaproject.com/</span></tt> and <tt class="docutils literal"><span class="pre">djulaproject.com/download/</span></tt>)
-was added.</p>
-</div>
-<p>Links can have trailing punctuation (periods, commas, close-parens) and leading
-punctuation (opening parens), and <tt class="docutils literal"><span class="pre">urlize</span></tt> will still do the right thing.</p>
-<p>Links generated by <tt class="docutils literal"><span class="pre">urlize</span></tt> have a <tt class="docutils literal"><span class="pre">rel=&quot;nofollow&quot;</span></tt> attribute added
-to them.</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">urlize</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;Check</span> <span class="pre">out</span> <span class="pre">www.djulaproject.com&quot;</span></tt>, the output will be
-<tt class="docutils literal"><span class="pre">&quot;Check</span> <span class="pre">out</span> <span class="pre">&lt;a</span> <span class="pre">href=&quot;http://www.djulaproject.com&quot;</span>
-<span class="pre">rel=&quot;nofollow&quot;&gt;www.djulaproject.com&lt;/a&gt;&quot;</span></tt>.</p>
-<p>In addition to web links, <tt class="docutils literal"><span class="pre">urlize</span></tt> also converts email addresses into
-<tt class="docutils literal"><span class="pre">mailto:</span></tt> links. If <tt class="docutils literal"><span class="pre">value</span></tt> is
-<tt class="docutils literal"><span class="pre">&quot;Send</span> <span class="pre">questions</span> <span class="pre">to</span> <span class="pre">foo&#64;example.com&quot;</span></tt>, the output will be
-<tt class="docutils literal"><span class="pre">&quot;Send</span> <span class="pre">questions</span> <span class="pre">to</span> <span class="pre">&lt;a</span> <span class="pre">href=&quot;mailto:foo&#64;example.com&quot;&gt;foo&#64;example&lt;/a&gt;&quot;</span></tt>.</p>
-<p>The <tt class="docutils literal"><span class="pre">urlize</span></tt> filter also takes an optional parameter <tt class="docutils literal"><span class="pre">autoescape</span></tt>. If
-<tt class="docutils literal"><span class="pre">autoescape</span></tt> is <tt class="docutils literal"><span class="pre">True</span></tt>, the link text and URLs will be escaped using
-Djula&#8217;s built-in <tt class="xref std std-tfilter docutils literal"><span class="pre">escape</span></tt> filter. The default value for
-<tt class="docutils literal"><span class="pre">autoescape</span></tt> is <tt class="docutils literal"><span class="pre">True</span></tt>.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">If <tt class="docutils literal"><span class="pre">urlize</span></tt> is applied to text that already contains HTML markup,
-things won&#8217;t work as expected. Apply this filter only to plain text.</p>
-</div>
-</div>
-<div class="section" id="s-urlizetrunc">
-<span id="s-std:templatefilter-urlizetrunc"></span><span id="urlizetrunc"></span><span id="std:templatefilter-urlizetrunc"></span><h3><a class="toc-backref" href="#id47">urlizetrunc</a><a class="headerlink" href="#urlizetrunc" title="Permalink to this headline">¶</a></h3>
-<p>Converts URLs and email addresses into clickable links just like <a class="reference internal" href="#urlize">urlize</a>, but truncates URLs
-longer than the given character limit.</p>
-<p><strong>Argument:</strong> Number of characters that link text should be truncated to,
-including the ellipsis that&#8217;s added if truncation is necessary.</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">urlizetrunc</span><span class="o">:</span><span class="m">15</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;Check</span> <span class="pre">out</span> <span class="pre">www.djulaproject.com&quot;</span></tt>, the output would be
-<tt class="docutils literal"><span class="pre">'Check</span> <span class="pre">out</span> <span class="pre">&lt;a</span> <span class="pre">href=&quot;http://www.djulaproject.com&quot;</span>
-<span class="pre">rel=&quot;nofollow&quot;&gt;www.djulapr...&lt;/a&gt;'</span></tt>.</p>
-<p>As with <a class="reference internal" href="#urlize">urlize</a>, this filter should only be applied to plain text.</p>
-</div>
-<div class="section" id="s-wordcount">
-<span id="s-std:templatefilter-wordcount"></span><span id="wordcount"></span><span id="std:templatefilter-wordcount"></span><h3><a class="toc-backref" href="#id48">wordcount</a><a class="headerlink" href="#wordcount" title="Permalink to this headline">¶</a></h3>
-<p>Returns the number of words.</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">wordcount</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;Joel</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">slug&quot;</span></tt>, the output will be <tt class="docutils literal"><span class="pre">4</span></tt>.</p>
-</div>
-<div class="section" id="s-wordwrap">
-<span id="s-std:templatefilter-wordwrap"></span><span id="wordwrap"></span><span id="std:templatefilter-wordwrap"></span><h3><a class="toc-backref" href="#id49">wordwrap</a><a class="headerlink" href="#wordwrap" title="Permalink to this headline">¶</a></h3>
-<p>Wraps words at specified line length.</p>
-<p><strong>Argument:</strong> number of characters at which to wrap the text</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">wordwrap</span><span class="o">:</span><span class="m">5</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">Joel</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">slug</span></tt>, the output would be:</p>
-<div class="highlight-html+django"><div class="highlight"><pre>Joel
-is a
-slug
-</pre></div>
-</div>
-</div>
-<div class="section" id="s-yesno">
-<span id="s-std:templatefilter-yesno"></span><span id="yesno"></span><span id="std:templatefilter-yesno"></span><h3><a class="toc-backref" href="#id50">yesno</a><a class="headerlink" href="#yesno" title="Permalink to this headline">¶</a></h3>
-<p>Maps values for true, false and (optionally) None, to the strings &#8220;yes&#8221;, &#8220;no&#8221;,
-&#8220;maybe&#8221;, or a custom mapping passed as a comma-separated list, and
-returns one of those strings according to the value:</p>
-<p>For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">yesno</span><span class="s2">:&quot;yeah,no,maybe&quot;</span> <span class="cp">}}</span>
-</pre></div>
-</div>
-<table class="docutils">
-<colgroup>
-<col width="15%" />
-<col width="33%" />
-<col width="52%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Value</th>
-<th class="head">Argument</th>
-<th class="head">Outputs</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">True</span></tt></td>
-<td>&nbsp;</td>
-<td><tt class="docutils literal"><span class="pre">yes</span></tt></td>
-</tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">True</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">&quot;yeah,no,maybe&quot;</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">yeah</span></tt></td>
-</tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">False</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">&quot;yeah,no,maybe&quot;</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">no</span></tt></td>
-</tr>
-<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">None</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">&quot;yeah,no,maybe&quot;</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">maybe</span></tt></td>
-</tr>
-<tr class="row-even"><td><tt class="docutils literal"><span class="pre">None</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">&quot;yeah,no&quot;</span></tt></td>
-<td><tt class="docutils literal"><span class="pre">&quot;no&quot;</span></tt> (converts None to False
-if no mapping for None is given)</td>
-</tr>
-</tbody>
-</table>
-</div>
 </div>
 <div class="section" id="s-internationalization-tags-and-filters">
 <span id="internationalization-tags-and-filters"></span><h2>Internationalization tags and filters<a class="headerlink" href="#internationalization-tags-and-filters" title="Permalink to this headline">¶</a></h2>
-<p>Djula provides template tags and filters to control each aspect of
-<tt class="xref doc docutils literal"><span class="pre">internationalization</span></tt> in templates. They allow for
-granular control of translations, formatting, and time zone conversions.</p>
-<div class="section" id="s-i18n">
-<span id="i18n"></span><h3>i18n<a class="headerlink" href="#i18n" title="Permalink to this headline">¶</a></h3>
-<p>This library allows specifying translatable text in templates.
-To enable it, set <tt class="xref std std-setting docutils literal"><span class="pre">USE_I18N</span></tt> to <tt class="docutils literal"><span class="pre">True</span></tt>, then load it with
-<tt class="docutils literal"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">i18n</span> <span class="pre">%}</span></tt>.</p>
-<p>See <em class="xref std std-ref">specifying-translation-strings-in-template-code</em>.</p>
+<p>TODO</p>
 </div>
-<div class="section" id="s-l10n">
-<span id="l10n"></span><h3>l10n<a class="headerlink" href="#l10n" title="Permalink to this headline">¶</a></h3>
-<p>This library provides control over the localization of values in templates.
-You only need to load the library using <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">l10n</span> <span class="pre">%}</span></tt>, but you&#8217;ll often
-set <tt class="xref std std-setting docutils literal"><span class="pre">USE_L10N</span></tt> to <tt class="docutils literal"><span class="pre">True</span></tt> so that localization is active by default.</p>
-<p>See <em class="xref std std-ref">topic-l10n-templates</em>.</p>
-</div>
-<div class="section" id="s-tz">
-<span id="tz"></span><h3>tz<a class="headerlink" href="#tz" title="Permalink to this headline">¶</a></h3>
-<p>This library provides control over time zone conversions in templates.
-Like <tt class="docutils literal"><span class="pre">l10n</span></tt>, you only need to load the library using <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">tz</span> <span class="pre">%}</span></tt>,
-but you&#8217;ll usually also set <tt class="xref std std-setting docutils literal"><span class="pre">USE_TZ</span></tt> to <tt class="docutils literal"><span class="pre">True</span></tt> so that conversion
-to local time happens by default.</p>
-<p>See <em class="xref std std-ref">time-zones-in-templates</em>.</p>
-</div>
+<div class="section" id="s-custom-filters">
+<span id="custom-filters"></span><h2>Custom filters<a class="headerlink" href="#custom-filters" title="Permalink to this headline">¶</a></h2>
+<p>TODO</p>
 </div>
 </div>
 

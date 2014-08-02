@@ -13,9 +13,7 @@ some load external information into the template to be used by later variables.
 Some tags require beginning and ending tags (i.e. ``{% tag %} ... tag contents
 ... {% endtag %}``).
 
-Djula ships with about two dozen built-in template tags. You can read all about
-them in the :ref:`built-in tag reference <ref-templates-builtins-tags>`. To give
-you a taste of what's available, here are some of the more commonly used
+Here are some of the more commonly used
 tags:
 
 :ttag:`for`
@@ -28,35 +26,15 @@ tags:
         {% endfor %}
         </ul>
 
-:ttag:`if`, ``elif``, and ``else``
+:ttag:`if`, ``else``
     Evaluates a variable, and if that variable is "true" the contents of the
     block are displayed::
 
         {% if athlete-list %}
             Number of athletes: {{ athlete-list|length }}
-        {% elif athlete-in-locker-room-list %}
-            Athletes should be out of the locker room soon!
         {% else %}
             No athletes.
         {% endif %}
-
-    In the above, if ``athlete-list`` is not empty, the number of athletes
-    will be displayed by the ``{{ athlete-list|length }}`` variable. Otherwise,
-    if ``athlete-in-locker-room-list`` is not empty, the message "Athletes
-    should be out..." will be displayed. If both lists are empty,
-    "No athletes." will be displayed.
-
-    You can also use filters and various operators in the :ttag:`if` tag::
-
-        {% if athlete-list|length > 1 %}
-           Team: {% for athlete in athlete-list %} ... {% endfor %}
-        {% else %}
-           Athlete: {{ athlete-list.0.name }}
-        {% endif %}
-
-    While the above example works, be aware that most template filters return
-    strings, so mathematical comparisons using filters will generally not work
-    as you expect. :tfilter:`length` is an exception.
 
 :ttag:`block` and :ttag:`extends`
     Set up `template inheritance`_ (see below), a powerful way
@@ -99,11 +77,15 @@ Sample usage::
 super
 ^^^^^
 
-Gets the content of the block from the parent template. You have to pass the name of the block of the parent template you want to access.
+Gets the content of the block from the parent template. You can pass the name of the block of the parent block you want to access. If no name is passed, then the current block's parent is used.
 
 Sample usage::
 
      {% super "stylesheets" %}
+
+     {% block stylesheets %}
+       {% super %}
+     {% endblock %}
 
 .. templatetag:: comment     
 
@@ -116,21 +98,12 @@ useful when commenting out code for documenting why the code was disabled.
 
 Sample usage::
 
-    <p>Rendered text with {{ pub-date|date:"c" }}</p>
+    <p>Rendered text with {{ pub-date|date }}</p>
     {% comment "Optional note" %}
-        <p>Commented out text with {{ create-date|date:"c" }}</p>
+        <p>Commented out text with {{ create-date|date }}</p>
     {% endcomment %}
 
 ``comment`` tags cannot be nested.
-
-..
-   .. templatetag:: csrf-token
-
-   csrf-token
-   ^^^^^^^^^^
-
-   This tag is used for CSRF protection, as described in the documentation for
-   :doc:`Cross Site Request Forgeries </ref/contrib/csrf>`.
 
 .. templatetag:: cycle
 
@@ -145,7 +118,7 @@ the first argument and produces it again.
 This tag is particularly useful in a loop::
 
     {% for o in some-list %}
-        <tr class="{% cycle 'row1' 'row2' %}">
+        <tr class="{% cycle "row1" "row2" %}">
             ...
         </tr>
     {% endfor %}
@@ -164,106 +137,36 @@ this::
         </tr>
     {% endfor %}
 
-Variables included in the cycle will be escaped.  You can disable auto-escaping
-with::
+..
+   Variables included in the cycle will be escaped.  You can disable auto-escaping
+   with::
 
-    {% for o in some-list %}
-        <tr class="{% autoescape off %}{% cycle rowvalue1 rowvalue2 %}{% endautoescape %}
-            ...
-        </tr>
-    {% endfor %}
+       {% for o in some-list %}
+	   <tr class="{% autoescape off %}{% cycle rowvalue1 rowvalue2 %}{% endautoescape %}
+	       ...
+	   </tr>
+       {% endfor %}
 
 You can mix variables and strings::
 
     {% for o in some-list %}
-        <tr class="{% cycle 'row1' rowvalue2 'row3' %}">
+        <tr class="{% cycle "row1" rowvalue2 "row3" %}">
             ...
         </tr>
     {% endfor %}
 
-In some cases you might want to refer to the current value of a cycle
-without advancing to the next value. To do this,
-just give the ``{% cycle %}`` tag a name, using "as", like this::
-
-    {% cycle 'row1' 'row2' as rowcolors %}
-
-From then on, you can insert the current value of the cycle wherever you'd like
-in your template by referencing the cycle name as a context variable. If you
-want to move the cycle to the next value independently of the original
-``cycle`` tag, you can use another ``cycle`` tag and specify the name of the
-variable. So, the following template::
-
-    <tr>
-        <td class="{% cycle 'row1' 'row2' as rowcolors %}">...</td>
-        <td class="{{ rowcolors }}">...</td>
-    </tr>
-    <tr>
-        <td class="{% cycle rowcolors %}">...</td>
-        <td class="{{ rowcolors }}">...</td>
-    </tr>
-
-would output::
-
-    <tr>
-        <td class="row1">...</td>
-        <td class="row1">...</td>
-    </tr>
-    <tr>
-        <td class="row2">...</td>
-        <td class="row2">...</td>
-    </tr>
 
 You can use any number of values in a ``cycle`` tag, separated by spaces.
-Values enclosed in single quotes (``'``) or double quotes (``"``) are treated
+Values enclosed in double quotes (``"``) are treated
 as string literals, while values without quotes are treated as template
 variables.
-
-By default, when you use the ``as`` keyword with the cycle tag, the
-usage of ``{% cycle %}`` that initiates the cycle will itself produce
-the first value in the cycle. This could be a problem if you want to
-use the value in a nested loop or an included template. If you only want
-to declare the cycle but not produce the first value, you can add a
-``silent`` keyword as the last keyword in the tag. For example::
-
-    {% for obj in some-list %}
-        {% cycle 'row1' 'row2' as rowcolors silent %}
-        <tr class="{{ rowcolors }}">{% include "subtemplate.html" %}</tr>
-    {% endfor %}
-
-This will output a list of ``<tr>`` elements with ``class``
-alternating between ``row1`` and ``row2``. The subtemplate will have
-access to ``rowcolors`` in its context and the value will match the class
-of the ``<tr>`` that encloses it. If the ``silent`` keyword were to be
-omitted, ``row1`` and ``row2`` would be emitted as normal text, outside the
-``<tr>`` element.
-
-When the silent keyword is used on a cycle definition, the silence
-automatically applies to all subsequent uses of that specific cycle tag.
-The following template would output *nothing*, even though the second
-call to ``{% cycle %}`` doesn't specify ``silent``::
-
-    {% cycle 'row1' 'row2' as rowcolors silent %}
-    {% cycle rowcolors %}
-
-For backward compatibility, the ``{% cycle %}`` tag supports the much inferior
-old syntax from previous Django versions. You shouldn't use this in any new
-projects, but for the sake of the people who are still using it, here's what it
-looks like::
-
-    {% cycle row1,row2,row3 %}
-
-In this syntax, each value gets interpreted as a literal string, and there's no
-way to specify variable values. Or literal commas. Or spaces. Did we mention
-you shouldn't use this syntax in any new projects?
-
 
 .. templatetag:: debug
 
 debug
 ^^^^^
 
-Outputs a whole load of debugging information, including the current context
-and imported modules.
+Outputs a whole load of debugging information
 
 .. templatetag:: filter
 
@@ -301,30 +204,21 @@ Sample usage::
 
     {% firstof var1 var2 var3 %}
 
-This is equivalent to::
-
-    {% if var1 %}
-        {{ var1|safe }}
-    {% elif var2 %}
-        {{ var2|safe }}
-    {% elif var3 %}
-        {{ var3|safe }}
-    {% endif %}
-
 You can also use a literal string as a fallback value in case all
 passed variables are False::
 
     {% firstof var1 var2 var3 "fallback value" %}
 
-This tag auto-escapes variable values. You can disable auto-escaping with::
+..
+   This tag auto-escapes variable values. You can disable auto-escaping with::
 
-    {% autoescape off %}
-        {% firstof var1 var2 var3 "<strong>fallback value</strong>" %}
-    {% endautoescape %}
+       {% autoescape off %}
+	   {% firstof var1 var2 var3 "<strong>fallback value</strong>" %}
+       {% endautoescape %}
 
-Or if only some variables should be escaped, you can use::
+   Or if only some variables should be escaped, you can use::
 
-    {% firstof var1 var2|safe var3 "<strong>fallback value</strong>"|safe %}
+       {% firstof var1 var2|safe var3 "<strong>fallback value</strong>"|safe %}
 
 .. templatetag:: for
 
@@ -341,70 +235,6 @@ variable. For example, to display a list of athletes provided in
     {% endfor %}
     </ul>
 
-You can loop over a list in reverse by using
-``{% for obj in list reversed %}``.
-
-If you need to loop over a list of lists, you can unpack the values
-in each sublist into individual variables. For example, if your context
-contains a list of (x,y) coordinates called ``points``, you could use the
-following to output the list of points::
-
-    {% for x, y in points %}
-        There is a point at {{ x }},{{ y }}
-    {% endfor %}
-
-This can also be useful if you need to access the items in a dictionary.
-For example, if your context contained a dictionary ``data``, the following
-would display the keys and values of the dictionary::
-
-    {% for key, value in data.items %}
-        {{ key }}: {{ value }}
-    {% endfor %}
-
-The for loop sets a number of variables available within the loop:
-
-==========================  ===============================================
-Variable                    Description
-==========================  ===============================================
-``forloop.counter``         The current iteration of the loop (1-indexed)
-``forloop.counter0``        The current iteration of the loop (0-indexed)
-``forloop.revcounter``      The number of iterations from the end of the
-                            loop (1-indexed)
-``forloop.revcounter0``     The number of iterations from the end of the
-                            loop (0-indexed)
-``forloop.first``           True if this is the first time through the loop
-``forloop.last``            True if this is the last time through the loop
-``forloop.parentloop``      For nested loops, this is the loop surrounding
-                            the current one
-==========================  ===============================================
-
-for ... empty
-^^^^^^^^^^^^^
-
-The ``for`` tag can take an optional ``{% empty %}`` clause whose text is
-displayed if the given array is empty or could not be found::
-
-    <ul>
-    {% for athlete in athlete-list %}
-        <li>{{ athlete.name }}</li>
-    {% empty %}
-        <li>Sorry, no athletes in this list.</li>
-    {% endfor %}
-    </ul>
-
-The above is equivalent to -- but shorter, cleaner, and possibly faster
-than -- the following::
-
-    <ul>
-      {% if athlete-list %}
-        {% for athlete in athlete-list %}
-          <li>{{ athlete.name }}</li>
-        {% endfor %}
-      {% else %}
-        <li>Sorry, no athletes in this list.</li>
-      {% endif %}
-    </ul>
-
 .. templatetag:: if
 
 if
@@ -416,18 +246,12 @@ block are output::
 
     {% if athlete-list %}
         Number of athletes: {{ athlete-list|length }}
-    {% elif athlete-in-locker-room-list %}
-        Athletes should be out of the locker room soon!
     {% else %}
         No athletes.
     {% endif %}
 
 In the above, if ``athlete-list`` is not empty, the number of athletes will be
 displayed by the ``{{ athlete-list|length }}`` variable.
-
-As you can see, the ``if`` tag may take one or several ``{% elif %}``
-clauses, as well as an ``{% else %}`` clause that will be displayed if all
-previous conditions fail. These clauses are optional.
 
 Boolean operators
 ^^^^^^^^^^^^^^^^^
@@ -464,117 +288,118 @@ Use of both ``and`` and ``or`` clauses within the same tag is allowed, with
 
 will be interpreted like:
 
-.. code-block:: python
+.. code-block:: common-lisp
 
-    if (athlete-list and coach-list) or cheerleader-list
+    (if (or (athlete-list and coach-list) cheerleader-list) ..)
 
 Use of actual parentheses in the :ttag:`if` tag is invalid syntax. If you need
 them to indicate precedence, you should use nested :ttag:`if` tags.
 
-:ttag:`if` tags may also use the operators ``==``, ``!=``, ``<``, ``>``,
-``<=``, ``>=`` and ``in`` which work as follows:
+..
+   :ttag:`if` tags may also use the operators ``==``, ``!=``, ``<``, ``>``,
+   ``<=``, ``>=`` and ``in`` which work as follows:
 
 
-``==`` operator
-^^^^^^^^^^^^^^^
+   ``==`` operator
+   ^^^^^^^^^^^^^^^
 
-Equality. Example::
+   Equality. Example::
 
-    {% if somevar == "x" %}
-      This appears if variable somevar equals the string "x"
-    {% endif %}
+       {% if somevar == "x" %}
+	 This appears if variable somevar equals the string "x"
+       {% endif %}
 
-``!=`` operator
-^^^^^^^^^^^^^^^
+   ``!=`` operator
+   ^^^^^^^^^^^^^^^
 
-Inequality. Example::
+   Inequality. Example::
 
-    {% if somevar != "x" %}
-      This appears if variable somevar does not equal the string "x",
-      or if somevar is not found in the context
-    {% endif %}
+       {% if somevar != "x" %}
+	 This appears if variable somevar does not equal the string "x",
+	 or if somevar is not found in the context
+       {% endif %}
 
-``<`` operator
-^^^^^^^^^^^^^^
+   ``<`` operator
+   ^^^^^^^^^^^^^^
 
-Less than. Example::
+   Less than. Example::
 
-    {% if somevar < 100 %}
-      This appears if variable somevar is less than 100.
-    {% endif %}
+       {% if somevar < 100 %}
+	 This appears if variable somevar is less than 100.
+       {% endif %}
 
-``>`` operator
-^^^^^^^^^^^^^^
+   ``>`` operator
+   ^^^^^^^^^^^^^^
 
-Greater than. Example::
+   Greater than. Example::
 
-    {% if somevar > 0 %}
-      This appears if variable somevar is greater than 0.
-    {% endif %}
+       {% if somevar > 0 %}
+	 This appears if variable somevar is greater than 0.
+       {% endif %}
 
-``<=`` operator
-^^^^^^^^^^^^^^^
+   ``<=`` operator
+   ^^^^^^^^^^^^^^^
 
-Less than or equal to. Example::
+   Less than or equal to. Example::
 
-    {% if somevar <= 100 %}
-      This appears if variable somevar is less than 100 or equal to 100.
-    {% endif %}
+       {% if somevar <= 100 %}
+	 This appears if variable somevar is less than 100 or equal to 100.
+       {% endif %}
 
-``>=`` operator
-^^^^^^^^^^^^^^^
+   ``>=`` operator
+   ^^^^^^^^^^^^^^^
 
-Greater than or equal to. Example::
+   Greater than or equal to. Example::
 
-    {% if somevar >= 1 %}
-      This appears if variable somevar is greater than 1 or equal to 1.
-    {% endif %}
+       {% if somevar >= 1 %}
+	 This appears if variable somevar is greater than 1 or equal to 1.
+       {% endif %}
 
-``in`` operator
-^^^^^^^^^^^^^^^
+   ``in`` operator
+   ^^^^^^^^^^^^^^^
 
-Contained within. This operator is supported by many Python containers to test
-whether the given value is in the container. The following are some examples
-of how ``x in y`` will be interpreted::
+   Contained within. This operator is supported by many Python containers to test
+   whether the given value is in the container. The following are some examples
+   of how ``x in y`` will be interpreted::
 
-    {% if "bc" in "abcdef" %}
-      This appears since "bc" is a substring of "abcdef"
-    {% endif %}
+       {% if "bc" in "abcdef" %}
+	 This appears since "bc" is a substring of "abcdef"
+       {% endif %}
 
-    {% if "hello" in greetings %}
-      If greetings is a list or set, one element of which is the string
-      "hello", this will appear.
-    {% endif %}
+       {% if "hello" in greetings %}
+	 If greetings is a list or set, one element of which is the string
+	 "hello", this will appear.
+       {% endif %}
 
-    {% if user in users %}
-      If users is a QuerySet, this will appear if user is an
-      instance that belongs to the QuerySet.
-    {% endif %}
+       {% if user in users %}
+	 If users is a QuerySet, this will appear if user is an
+	 instance that belongs to the QuerySet.
+       {% endif %}
 
-``not in`` operator
-^^^^^^^^^^^^^^^^^^^
+   ``not in`` operator
+   ^^^^^^^^^^^^^^^^^^^
 
-Not contained within. This is the negation of the ``in`` operator.
-
-
-The comparison operators cannot be 'chained' like in Python or in mathematical
-notation. For example, instead of using::
-
-    {% if a > b > c %}  (WRONG)
-
-you should use::
-
-    {% if a > b and b > c %}
+   Not contained within. This is the negation of the ``in`` operator.
 
 
-Filters
-^^^^^^^
+   The comparison operators cannot be 'chained' like in Python or in mathematical
+   notation. For example, instead of using::
 
-You can also use filters in the :ttag:`if` expression. For example::
+       {% if a > b > c %}  (WRONG)
 
-    {% if messages|length >= 100 %}
-       You have lots of messages today!
-    {% endif %}
+   you should use::
+
+       {% if a > b and b > c %}
+
+..
+   Filters
+   ^^^^^^^
+
+   You can also use filters in the :ttag:`if` expression. For example::
+
+       {% if messages|length >= 100 %}
+	  You have lots of messages today!
+       {% endif %}
 
 .. templatetag:: ifchanged
 
@@ -583,23 +408,12 @@ ifchanged
 
 Check if a value has changed from the last iteration of a loop.
 
-The ``{% ifchanged %}`` block tag is used within a loop. It has two possible
-uses.
+The ``{% ifchanged %}`` block tag is used within a loop. 
 
-1. Checks its own rendered contents against its previous state and only
-   displays the content if it has changed. For example, this displays a list of
-   days, only displaying the month if it changes::
+If given one or more variables, check whether any variable has changed.
 
-        <h1>Archive for {{ year }}</h1>
-
-        {% for date in days %}
-            {% ifchanged %}<h3>{{ date|date:"F" }}</h3>{% endifchanged %}
-            <a href="{{ date|date:"M/d"|lower }}/">{{ date|date:"j" }}</a>
-        {% endfor %}
-
-2. If given one or more variables, check whether any variable has changed.
-   For example, the following shows the date every time it changes, while
-   showing the hour if either the hour or the date has changed::
+For example, the following shows the date every time it changes, while
+showing the hour if either the hour or the date has changed::
 
         {% for date in days %}
             {% ifchanged date.date %} {{ date.date }} {% endifchanged %}
@@ -670,48 +484,6 @@ in either single or double quotes.
 This example includes the contents of the template ``"foo/bar.html"``::
 
     {% include "foo/bar.html" %}
-
-This example includes the contents of the template whose name is contained in
-the variable ``template-name``::
-
-    {% include template-name %}
-
-.. versionchanged:: 1.7
-
-    The variable may also be any object with a ``render()`` method that
-    accepts a context. This allows you to reference a compiled ``Template`` in
-    your context.
-
-An included template is rendered within the context of the template that
-includes it. This example produces the output ``"Hello, John"``:
-
-* Context: variable ``person`` is set to ``"john"``.
-* Template::
-
-    {% include "name-snippet.html" %}
-
-* The ``name-snippet.html`` template::
-
-    {{ greeting }}, {{ person|default:"friend" }}!
-
-You can pass additional context to the template using keyword arguments::
-
-    {% include "name-snippet.html" with person="Jane" greeting="Hello" %}
-
-If you want to render the context only with the variables provided (or even
-no variables at all), use the ``only`` option. No other variables are
-available to the included template::
-
-    {% include "name-snippet.html" with greeting="Hi" only %}
-
-.. note::
-    The :ttag:`include` tag should be considered as an implementation of
-    "render this subtemplate and include the HTML", not as "parse this
-    subtemplate and include its contents as if it were part of the parent".
-    This means that there is no shared state between included templates --
-    each include is a completely independent rendering process.
-
-See also: :ttag:`{% ssi %}<ssi>`.
 
 ..
    .. templatetag:: load
@@ -808,3 +580,5 @@ See also: :ttag:`{% ssi %}<ssi>`.
       
 Custom tags
 -----------
+
+TODO
