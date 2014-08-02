@@ -197,12 +197,12 @@ For example::
    The escaping is only applied when the string is output, so it does not matter
    where in a chained sequence of filters you put ``escape``: it will always be
    applied as though it were the last filter. If you want escaping to be applied
-   immediately, use the :tfilter:`force_escape` filter.
+   immediately, use the :tfilter:`force-escape` filter.
 
    Applying ``escape`` to a variable that would normally have auto-escaping
    applied to the result will only result in one round of escaping being done. So
    it is safe to use this function even in auto-escaping environments. If you want
-   multiple escaping passes to be applied, use the :tfilter:`force_escape` filter.
+   multiple escaping passes to be applied, use the :tfilter:`force-escape` filter.
 
    For example, you can apply ``escape`` to fields when :ttag:`autoescape` is off::
 

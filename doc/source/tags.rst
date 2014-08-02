@@ -204,16 +204,6 @@ Sample usage::
 
     {% firstof var1 var2 var3 %}
 
-This is equivalent to::
-
-    {% if var1 %}
-        {{ var1|safe }}
-    {% elif var2 %}
-        {{ var2|safe }}
-    {% elif var3 %}
-        {{ var3|safe }}
-    {% endif %}
-
 You can also use a literal string as a fallback value in case all
 passed variables are False::
 
@@ -401,14 +391,15 @@ them to indicate precedence, you should use nested :ttag:`if` tags.
 
        {% if a > b and b > c %}
 
-Filters
-^^^^^^^
+..
+   Filters
+   ^^^^^^^
 
-You can also use filters in the :ttag:`if` expression. For example::
+   You can also use filters in the :ttag:`if` expression. For example::
 
-    {% if messages|length >= 100 %}
-       You have lots of messages today!
-    {% endif %}
+       {% if messages|length >= 100 %}
+	  You have lots of messages today!
+       {% endif %}
 
 .. templatetag:: ifchanged
 
