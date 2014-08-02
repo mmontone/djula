@@ -80,6 +80,15 @@
       ("{% filter force-escape|lower %}
            This text will be <b>HTML</b>-escaped, and will <p>appear</p> in all lowercase.
         {% endfilter %}"))
+     ("firstof"
+      ("{% firstof var1 var2 var3 %}" :var2 "x")
+      ("{% firstof var1 var2 var3 %}" :var3 "x")
+      ("{% firstof var1 var2 var3 \"fallback\" %}"))
+     ("ifchanged"
+      ("{% for x in list %}
+          {% ifchanged x %}changed{% endifchanged %}
+          {{x}}
+        {% endfor %}" :list ,(list 1 1 2 2 2 3)))
      ("lisp"
       ("{% lisp (+ 2 5) %}"))
      ("length"

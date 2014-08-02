@@ -219,15 +219,16 @@ passed variables are False::
 
     {% firstof var1 var2 var3 "fallback value" %}
 
-This tag auto-escapes variable values. You can disable auto-escaping with::
+..
+   This tag auto-escapes variable values. You can disable auto-escaping with::
 
-    {% autoescape off %}
-        {% firstof var1 var2 var3 "<strong>fallback value</strong>" %}
-    {% endautoescape %}
+       {% autoescape off %}
+	   {% firstof var1 var2 var3 "<strong>fallback value</strong>" %}
+       {% endautoescape %}
 
-Or if only some variables should be escaped, you can use::
+   Or if only some variables should be escaped, you can use::
 
-    {% firstof var1 var2|safe var3 "<strong>fallback value</strong>"|safe %}
+       {% firstof var1 var2|safe var3 "<strong>fallback value</strong>"|safe %}
 
 .. templatetag:: for
 
@@ -244,70 +245,6 @@ variable. For example, to display a list of athletes provided in
     {% endfor %}
     </ul>
 
-You can loop over a list in reverse by using
-``{% for obj in list reversed %}``.
-
-If you need to loop over a list of lists, you can unpack the values
-in each sublist into individual variables. For example, if your context
-contains a list of (x,y) coordinates called ``points``, you could use the
-following to output the list of points::
-
-    {% for x, y in points %}
-        There is a point at {{ x }},{{ y }}
-    {% endfor %}
-
-This can also be useful if you need to access the items in a dictionary.
-For example, if your context contained a dictionary ``data``, the following
-would display the keys and values of the dictionary::
-
-    {% for key, value in data.items %}
-        {{ key }}: {{ value }}
-    {% endfor %}
-
-The for loop sets a number of variables available within the loop:
-
-==========================  ===============================================
-Variable                    Description
-==========================  ===============================================
-``forloop.counter``         The current iteration of the loop (1-indexed)
-``forloop.counter0``        The current iteration of the loop (0-indexed)
-``forloop.revcounter``      The number of iterations from the end of the
-                            loop (1-indexed)
-``forloop.revcounter0``     The number of iterations from the end of the
-                            loop (0-indexed)
-``forloop.first``           True if this is the first time through the loop
-``forloop.last``            True if this is the last time through the loop
-``forloop.parentloop``      For nested loops, this is the loop surrounding
-                            the current one
-==========================  ===============================================
-
-for ... empty
-^^^^^^^^^^^^^
-
-The ``for`` tag can take an optional ``{% empty %}`` clause whose text is
-displayed if the given array is empty or could not be found::
-
-    <ul>
-    {% for athlete in athlete-list %}
-        <li>{{ athlete.name }}</li>
-    {% empty %}
-        <li>Sorry, no athletes in this list.</li>
-    {% endfor %}
-    </ul>
-
-The above is equivalent to -- but shorter, cleaner, and possibly faster
-than -- the following::
-
-    <ul>
-      {% if athlete-list %}
-        {% for athlete in athlete-list %}
-          <li>{{ athlete.name }}</li>
-        {% endfor %}
-      {% else %}
-        <li>Sorry, no athletes in this list.</li>
-      {% endif %}
-    </ul>
-
 .. templatetag:: if
 
 if
@@ -319,18 +256,12 @@ block are output::
 
     {% if athlete-list %}
         Number of athletes: {{ athlete-list|length }}
-    {% elif athlete-in-locker-room-list %}
-        Athletes should be out of the locker room soon!
     {% else %}
         No athletes.
     {% endif %}
 
 In the above, if ``athlete-list`` is not empty, the number of athletes will be
 displayed by the ``{{ athlete-list|length }}`` variable.
-
-As you can see, the ``if`` tag may take one or several ``{% elif %}``
-clauses, as well as an ``{% else %}`` clause that will be displayed if all
-previous conditions fail. These clauses are optional.
 
 Boolean operators
 ^^^^^^^^^^^^^^^^^
@@ -367,108 +298,108 @@ Use of both ``and`` and ``or`` clauses within the same tag is allowed, with
 
 will be interpreted like:
 
-.. code-block:: python
+.. code-block:: common-lisp
 
-    if (athlete-list and coach-list) or cheerleader-list
+    (if (or (athlete-list and coach-list) cheerleader-list) ..)
 
 Use of actual parentheses in the :ttag:`if` tag is invalid syntax. If you need
 them to indicate precedence, you should use nested :ttag:`if` tags.
 
-:ttag:`if` tags may also use the operators ``==``, ``!=``, ``<``, ``>``,
-``<=``, ``>=`` and ``in`` which work as follows:
+..
+   :ttag:`if` tags may also use the operators ``==``, ``!=``, ``<``, ``>``,
+   ``<=``, ``>=`` and ``in`` which work as follows:
 
 
-``==`` operator
-^^^^^^^^^^^^^^^
+   ``==`` operator
+   ^^^^^^^^^^^^^^^
 
-Equality. Example::
+   Equality. Example::
 
-    {% if somevar == "x" %}
-      This appears if variable somevar equals the string "x"
-    {% endif %}
+       {% if somevar == "x" %}
+	 This appears if variable somevar equals the string "x"
+       {% endif %}
 
-``!=`` operator
-^^^^^^^^^^^^^^^
+   ``!=`` operator
+   ^^^^^^^^^^^^^^^
 
-Inequality. Example::
+   Inequality. Example::
 
-    {% if somevar != "x" %}
-      This appears if variable somevar does not equal the string "x",
-      or if somevar is not found in the context
-    {% endif %}
+       {% if somevar != "x" %}
+	 This appears if variable somevar does not equal the string "x",
+	 or if somevar is not found in the context
+       {% endif %}
 
-``<`` operator
-^^^^^^^^^^^^^^
+   ``<`` operator
+   ^^^^^^^^^^^^^^
 
-Less than. Example::
+   Less than. Example::
 
-    {% if somevar < 100 %}
-      This appears if variable somevar is less than 100.
-    {% endif %}
+       {% if somevar < 100 %}
+	 This appears if variable somevar is less than 100.
+       {% endif %}
 
-``>`` operator
-^^^^^^^^^^^^^^
+   ``>`` operator
+   ^^^^^^^^^^^^^^
 
-Greater than. Example::
+   Greater than. Example::
 
-    {% if somevar > 0 %}
-      This appears if variable somevar is greater than 0.
-    {% endif %}
+       {% if somevar > 0 %}
+	 This appears if variable somevar is greater than 0.
+       {% endif %}
 
-``<=`` operator
-^^^^^^^^^^^^^^^
+   ``<=`` operator
+   ^^^^^^^^^^^^^^^
 
-Less than or equal to. Example::
+   Less than or equal to. Example::
 
-    {% if somevar <= 100 %}
-      This appears if variable somevar is less than 100 or equal to 100.
-    {% endif %}
+       {% if somevar <= 100 %}
+	 This appears if variable somevar is less than 100 or equal to 100.
+       {% endif %}
 
-``>=`` operator
-^^^^^^^^^^^^^^^
+   ``>=`` operator
+   ^^^^^^^^^^^^^^^
 
-Greater than or equal to. Example::
+   Greater than or equal to. Example::
 
-    {% if somevar >= 1 %}
-      This appears if variable somevar is greater than 1 or equal to 1.
-    {% endif %}
+       {% if somevar >= 1 %}
+	 This appears if variable somevar is greater than 1 or equal to 1.
+       {% endif %}
 
-``in`` operator
-^^^^^^^^^^^^^^^
+   ``in`` operator
+   ^^^^^^^^^^^^^^^
 
-Contained within. This operator is supported by many Python containers to test
-whether the given value is in the container. The following are some examples
-of how ``x in y`` will be interpreted::
+   Contained within. This operator is supported by many Python containers to test
+   whether the given value is in the container. The following are some examples
+   of how ``x in y`` will be interpreted::
 
-    {% if "bc" in "abcdef" %}
-      This appears since "bc" is a substring of "abcdef"
-    {% endif %}
+       {% if "bc" in "abcdef" %}
+	 This appears since "bc" is a substring of "abcdef"
+       {% endif %}
 
-    {% if "hello" in greetings %}
-      If greetings is a list or set, one element of which is the string
-      "hello", this will appear.
-    {% endif %}
+       {% if "hello" in greetings %}
+	 If greetings is a list or set, one element of which is the string
+	 "hello", this will appear.
+       {% endif %}
 
-    {% if user in users %}
-      If users is a QuerySet, this will appear if user is an
-      instance that belongs to the QuerySet.
-    {% endif %}
+       {% if user in users %}
+	 If users is a QuerySet, this will appear if user is an
+	 instance that belongs to the QuerySet.
+       {% endif %}
 
-``not in`` operator
-^^^^^^^^^^^^^^^^^^^
+   ``not in`` operator
+   ^^^^^^^^^^^^^^^^^^^
 
-Not contained within. This is the negation of the ``in`` operator.
+   Not contained within. This is the negation of the ``in`` operator.
 
 
-The comparison operators cannot be 'chained' like in Python or in mathematical
-notation. For example, instead of using::
+   The comparison operators cannot be 'chained' like in Python or in mathematical
+   notation. For example, instead of using::
 
-    {% if a > b > c %}  (WRONG)
+       {% if a > b > c %}  (WRONG)
 
-you should use::
+   you should use::
 
-    {% if a > b and b > c %}
-
+       {% if a > b and b > c %}
 
 Filters
 ^^^^^^^
@@ -486,23 +417,12 @@ ifchanged
 
 Check if a value has changed from the last iteration of a loop.
 
-The ``{% ifchanged %}`` block tag is used within a loop. It has two possible
-uses.
+The ``{% ifchanged %}`` block tag is used within a loop. 
 
-1. Checks its own rendered contents against its previous state and only
-   displays the content if it has changed. For example, this displays a list of
-   days, only displaying the month if it changes::
+If given one or more variables, check whether any variable has changed.
 
-        <h1>Archive for {{ year }}</h1>
-
-        {% for date in days %}
-            {% ifchanged %}<h3>{{ date|date:"F" }}</h3>{% endifchanged %}
-            <a href="{{ date|date:"M/d"|lower }}/">{{ date|date:"j" }}</a>
-        {% endfor %}
-
-2. If given one or more variables, check whether any variable has changed.
-   For example, the following shows the date every time it changes, while
-   showing the hour if either the hour or the date has changed::
+For example, the following shows the date every time it changes, while
+showing the hour if either the hour or the date has changed::
 
         {% for date in days %}
             {% ifchanged date.date %} {{ date.date }} {% endifchanged %}
