@@ -48,6 +48,7 @@
   "The currently in-use template store.  Defaults to a FILE-STORE.")
 
 (defun add-template-directory (directory &optional (template-store *current-store*))
+  "Adds DIRECTORY to the search path of the TEMPLATE-STORE"
   (pushnew directory
 	   (search-path template-store)
 	   :test #'equalp))

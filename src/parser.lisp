@@ -12,7 +12,8 @@
                 (apply f rest-token-list args)
               (template-error (e1)
                 ;; Parse errors can be reported by substituting a simple string token.
-                (if *catch-template-errors-p*
+                (if (and *catch-template-errors-p*
+			 (not *fancy-error-template-p*))
                     (cons
                      (list :string
                            (princ-to-string e1))
@@ -21,7 +22,8 @@
               (error (e2)
                 ;; Parse errors can be reported by substituting a simple string token.
                 (let ((msg (template-error-string* e2"There was an error processing the token ~A" token)))
-                  (if *catch-template-errors-p*
+                  (if (and *catch-template-errors-p*
+			   (not *fancy-error-template-p*))
                       (cons
                        (list :string
                              msg)

@@ -88,7 +88,8 @@
 	       (with-output-to-string (s)
 		 (funcall template s)))
 	 (error (e)
-	   (if *fancy-error-template-p*
+	   (if (and *catch-template-errors-p*
+		    *fancy-error-template-p*)
 	       (render-error-template e
 				      (trivial-backtrace:print-backtrace e :output nil)
 				      template stream)
@@ -123,17 +124,20 @@
                           (error e1)))
                     (error (e2)
                       (let ((msg (template-error-string* e2 "There was an error rendering the token ~A" token)))
-			(if *catch-template-errors-p*
+			(if (and *catch-template-errors-p*
+				 (not *fancy-error-template-p*))
                             (princ msg stream)
                             (template-error msg)))))))
             (template-error (e1)
-              (if *catch-template-errors-p*
+              (if (and *catch-template-errors-p*
+		       (not *catch-template-errors-p*))
                   (lambda (stream)
                     (princ e1 stream))
                   (error e1)))
             (error (e2)
               (let ((msg (template-error-string* e2 "There was an error compiling the token ~A" token)))
-                (if *catch-template-errors-p*
+                (if (and *catch-template-errors-p*
+			 (not *fancy-error-template-p*))
                     (lambda (stream)
                       (princ msg stream))
                     (template-error msg)))))))))

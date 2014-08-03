@@ -149,7 +149,8 @@
 			  :demos *demos*)))
 
 (hunchentoot:define-easy-handler (default-error :uri "/error") ()
-  (let ((djula:*catch-template-errors-p* t))
+  (let ((djula:*catch-template-errors-p* t)
+	(djula:*fancy-error-template-p* nil))
     (djula:render-template* +error.html+)))
 
 (hunchentoot:define-easy-handler (error-not-catched :uri "/error-uncatched") ()
@@ -158,6 +159,6 @@
     (djula:render-template* +error.html+)))
 
 (hunchentoot:define-easy-handler (fancy-error :uri "/fancy-error") ()
-  (let ((djula:*catch-template-errors-p* nil)
+  (let ((djula:*catch-template-errors-p* t)
 	(djula::*fancy-error-template-p* t))
     (djula:render-template* +error.html+)))
