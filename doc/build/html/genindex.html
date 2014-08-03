@@ -68,14 +68,13 @@
       aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basics.html">Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tags.html">Tags</a></li>
 <li class="toctree-l1"><a class="reference internal" href="comments.html">Comments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Template inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="escaping.html">Automatic HTML escaping</a></li>
-<li class="toctree-l1"><a class="reference internal" href="custom.html">Custom tag and filter libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error-handling.html">Error handling</a></li>
 </ul>
 </ul>
 </li>
@@ -156,6 +155,10 @@
   </dt>
 
       </dl></dd>
+      
+  <dt><a href="usage.html#function:djula:add-template-directory">add-template-directory (Lisp function)</a>
+  </dt>
+
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
@@ -365,8 +368,6 @@
   </dt>
 
       </dl></dd>
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt>
     firstof
@@ -378,6 +379,8 @@
   </dt>
 
       </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt>
     for
@@ -386,6 +389,17 @@
       <dd><dl>
         
   <dt><a href="tags.html#std:templatetag-for">template tag</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    format
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="filters.html#std:templatefilter-format">template filter</a>
   </dt>
 
       </dl></dd>
@@ -578,6 +592,41 @@
       </dl></dd>
       
   <dt>
+    safeseq
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="filters.html#std:templatefilter-safeseq">template filter</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    slice
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="filters.html#std:templatefilter-slice">template filter</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    slugify
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="filters.html#std:templatefilter-slugify">template filter</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt>
     sort
   </dt>
 
@@ -587,19 +636,6 @@
   </dt>
 
       </dl></dd>
-      
-  <dt>
-    stringformat
-  </dt>
-
-      <dd><dl>
-        
-  <dt><a href="filters.html#std:templatefilter-stringformat">template filter</a>
-  </dt>
-
-      </dl></dd>
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt>
     striptags
@@ -675,6 +711,10 @@
   </dt>
 
         
+  <dt><a href="filters.html#std:templatefilter-format">format</a>
+  </dt>
+
+        
   <dt><a href="filters.html#std:templatefilter-join">join</a>
   </dt>
 
@@ -707,11 +747,19 @@
   </dt>
 
         
-  <dt><a href="filters.html#std:templatefilter-sort">sort</a>
+  <dt><a href="filters.html#std:templatefilter-safeseq">safeseq</a>
   </dt>
 
         
-  <dt><a href="filters.html#std:templatefilter-stringformat">stringformat</a>
+  <dt><a href="filters.html#std:templatefilter-slice">slice</a>
+  </dt>
+
+        
+  <dt><a href="filters.html#std:templatefilter-slugify">slugify</a>
+  </dt>
+
+        
+  <dt><a href="filters.html#std:templatefilter-sort">sort</a>
   </dt>
 
         

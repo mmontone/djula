@@ -29,8 +29,8 @@
     <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Djula HTML templating system 0.2 documentation" href="index.html" />
-    <link rel="next" title="Tags" href="tags.html" />
-    <link rel="prev" title="Variables" href="templates.html" />
+    <link rel="next" title="Variables" href="variables.html" />
+    <link rel="prev" title="Basics" href="basics.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -69,14 +69,12 @@
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basics.html">Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html">Variables</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tags.html">Tags</a></li>
 <li class="toctree-l1"><a class="reference internal" href="comments.html">Comments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Template inheritance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="escaping.html">Automatic HTML escaping</a></li>
-<li class="toctree-l1"><a class="reference internal" href="custom.html">Custom tag and filter libraries</a></li>
 </ul>
 </ul>
 </li>
@@ -103,11 +101,11 @@
               
                 
   <li>
-    <a href="templates.html" title="Previous Chapter: Variables"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Variables</span>
+    <a href="basics.html" title="Previous Chapter: Basics"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Basics</span>
     </a>
   </li>
   <li>
-    <a href="tags.html" title="Next Chapter: Tags"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Tags &raquo;</span>
+    <a href="variables.html" title="Next Chapter: Variables"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Variables &raquo;</span>
     </a>
   </li>
               
@@ -145,21 +143,15 @@
 <span id="usage"></span><h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <p>To render our templates, they need to be compiled first. We do that with the <a class="reference internal" href="#function:djula:compile-template*" title="djula:compile-template*"><tt class="xref cl cl-function docutils literal"><span class="pre">COMPILE-TEMPLATE*</span></tt></a> function.
 For inheritance to work, we need to put all the templates in the same directory so that Djula can find them when resolving templates inheritance.</p>
-<p>In the following example we use <tt class="xref cl cl-symbol docutils literal"><span class="pre">*TEMPLATE-FOLDER*</span></tt> as the templates folder, and then several templates are compiled with the <a class="reference internal" href="#function:djula:compile-template*" title="djula:compile-template*"><tt class="xref cl cl-function docutils literal"><span class="pre">COMPILE-TEMPLATE*</span></tt></a> function.</p>
-<div class="highlight-common-lisp"><div class="highlight"><pre><span class="p">(</span><span class="nb">defparameter</span> <span class="vg">*templates-folder*</span>
-  <span class="p">(</span><span class="nv">asdf:system-relative-pathname</span> <span class="s">&quot;webapp&quot;</span> <span class="s">&quot;templates/&quot;</span><span class="p">))</span>
+<p>Djula looks for templates in the <tt class="xref cl cl-symbol docutils literal"><span class="pre">*CURRENT-STORE*</span></tt>. For our templates to be found, we have to add the template folder path the templates store. We can do that with the <a class="reference internal" href="#function:djula:add-template-directory" title="djula:add-template-directory"><tt class="xref cl cl-function docutils literal"><span class="pre">add-template-directory</span></tt></a> function.</p>
+<p>Here is an example:</p>
+<div class="highlight-common-lisp"><div class="highlight"><pre><span class="p">(</span><span class="nv">add-template-directory</span> <span class="p">(</span><span class="nv">asdf:system-relative-pathname</span> <span class="s">&quot;webapp&quot;</span> <span class="s">&quot;templates/&quot;</span><span class="p">))</span>
 
-<span class="p">(</span><span class="nb">defparameter</span> <span class="nv">+base.html+</span> <span class="p">(</span><span class="nv">djula:compile-template*</span>
-                            <span class="p">(</span><span class="nb">princ-to-string</span>
-                              <span class="p">(</span><span class="nb">merge-pathnames</span> <span class="s">&quot;base.html&quot;</span> <span class="vg">*templates-folder*</span><span class="p">))))</span>
+<span class="p">(</span><span class="nb">defparameter</span> <span class="nv">+base.html+</span> <span class="p">(</span><span class="nv">djula:compile-template*</span> <span class="s">&quot;base.html&quot;</span><span class="p">))</span>
 
-<span class="p">(</span><span class="nb">defparameter</span> <span class="nv">+welcome.html+</span> <span class="p">(</span><span class="nv">djula:compile-template*</span>
-                               <span class="p">(</span><span class="nb">princ-to-string</span>
-                                 <span class="p">(</span><span class="nb">merge-pathnames</span> <span class="s">&quot;welcome.html&quot;</span> <span class="vg">*templates-folder*</span><span class="p">))))</span>
+<span class="p">(</span><span class="nb">defparameter</span> <span class="nv">+welcome.html+</span> <span class="p">(</span><span class="nv">djula:compile-template*</span> <span class="s">&quot;welcome.html&quot;</span><span class="p">))</span>
 
-<span class="p">(</span><span class="nb">defparameter</span> <span class="nv">+contact.html+</span> <span class="p">(</span><span class="nv">djula:compile-template*</span>
-                               <span class="p">(</span><span class="nb">princ-to-string</span>
-                               <span class="p">(</span><span class="nb">merge-pathnames</span> <span class="s">&quot;contact.html&quot;</span> <span class="vg">*templates-folder*</span><span class="p">))))</span>
+<span class="p">(</span><span class="nb">defparameter</span> <span class="nv">+contact.html+</span> <span class="p">(</span><span class="nv">djula:compile-template*</span> <span class="s">&quot;contact.html&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Then we can render our compiled templates using the <a class="reference internal" href="#function:djula:render-template*" title="djula:render-template*"><tt class="xref cl cl-function docutils literal"><span class="pre">RENDER-TEMPLATE*</span></tt></a> function:</p>
@@ -171,6 +163,11 @@ For inheritance to work, we need to put all the templates in the same directory 
 </div>
 <div class="section" id="s-api">
 <span id="api"></span><h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="function:djula:add-template-directory">
+<em class="property">function </em> (<tt class="descname">add-template-directory</tt> <em>directory</em> <em class="lambda_keyword text-muted">&amp;optional</em> (<em>template-store</em> <em>*current-store*</em>))<a class="headerlink" href="#function:djula:add-template-directory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="generic">
 <dt id="generic:djula:compile-template">
 <em class="property">generic </em> (<tt class="descname">compile-template</tt> <em>compiler</em> <em>name</em> <em class="lambda_keyword text-muted">&amp;optional</em> <em>error-p</em>)<a class="headerlink" href="#generic:djula:compile-template" title="Permalink to this definition">¶</a></dt>

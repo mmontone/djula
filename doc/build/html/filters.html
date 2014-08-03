@@ -69,8 +69,8 @@
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basics.html">Basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tags.html">Tags</a></li>
 <li class="toctree-l1"><a class="reference internal" href="comments.html">Comments</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Filters</a></li>
@@ -111,6 +111,7 @@
 <li><a class="reference internal" href="#linebreaksbr">linebreaksbr</a></li>
 <li><a class="reference internal" href="#lower">lower</a></li>
 <li><a class="reference internal" href="#safe">safe</a></li>
+<li><a class="reference internal" href="#slice">slice</a></li>
 <li><a class="reference internal" href="#format">format</a></li>
 <li><a class="reference internal" href="#id2">time</a></li>
 <li><a class="reference internal" href="#truncatechars">truncatechars</a></li>
@@ -213,11 +214,12 @@ used template filters:</p>
 <li><a class="reference internal" href="#linebreaksbr" id="id18">linebreaksbr</a></li>
 <li><a class="reference internal" href="#lower" id="id19">lower</a></li>
 <li><a class="reference internal" href="#safe" id="id20">safe</a></li>
-<li><a class="reference internal" href="#format" id="id21">format</a></li>
-<li><a class="reference internal" href="#id2" id="id22">time</a></li>
-<li><a class="reference internal" href="#truncatechars" id="id23">truncatechars</a></li>
-<li><a class="reference internal" href="#upper" id="id24">upper</a></li>
-<li><a class="reference internal" href="#urlencode" id="id25">urlencode</a></li>
+<li><a class="reference internal" href="#slice" id="id21">slice</a></li>
+<li><a class="reference internal" href="#format" id="id22">format</a></li>
+<li><a class="reference internal" href="#id2" id="id23">time</a></li>
+<li><a class="reference internal" href="#truncatechars" id="id24">truncatechars</a></li>
+<li><a class="reference internal" href="#upper" id="id25">upper</a></li>
+<li><a class="reference internal" href="#urlencode" id="id26">urlencode</a></li>
 </ul>
 </div>
 <div class="section" id="s-add">
@@ -398,9 +400,36 @@ prints the variable as is, unescaped:</p>
 </pre></div>
 </div>
 </div>
+<span class="target" id="std:templatefilter-safeseq"></span></div>
+<div class="section" id="s-slice">
+<span id="s-std:templatefilter-slice"></span><span id="slice"></span><span id="std:templatefilter-slice"></span><h3><a class="toc-backref" href="#id21">slice</a><a class="headerlink" href="#slice" title="Permalink to this headline">¶</a></h3>
+<p>Returns a slice of a sequence (i.e. lists, vectors, strings)</p>
+<p>Uses the Common Lisp <tt class="docutils literal"><span class="pre">cl-slice</span></tt> library.</p>
+<p>Syntax:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">seq</span> <span class="o">|</span> <span class="nf">slice</span><span class="o">:</span> <span class="nv">slices</span> <span class="cp">}}</span>
+</pre></div>
 </div>
+<p>Each <tt class="docutils literal"><span class="pre">slice</span></tt> selects a subset of subscripts along the corresponding axis.</p>
+<ul>
+<li><p class="first">A nonnegative integer selects the corresponding index, while a negative integer selects an index counting backwards from the last index:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">list</span> <span class="o">|</span> <span class="nf">slice</span><span class="o">:</span> <span class="m">4</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>if the list is <tt class="docutils literal"><span class="pre">(1</span> <span class="pre">2</span> <span class="pre">3</span> <span class="pre">4</span> <span class="pre">5</span> <span class="pre">6)</span></tt> it will output <tt class="docutils literal"><span class="pre">(5)</span></tt></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">(start</span> <span class="pre">.</span> <span class="pre">end)</span></tt> to select a range.  When <tt class="docutils literal"><span class="pre">end</span></tt> is <tt class="docutils literal"><span class="pre">NIL</span></tt>, the last index is included.</li>
+</ul>
+<p>Each boundary is resolved according to the other rules if applicable, so you can use negative integers:</p>
+<div class="highlight-html+django"><div class="highlight"><pre>{{ string | slice: (0 . 5) }}
+{{ string | slice: (5 . nil) }}
+</pre></div>
+</div>
+<p>if the string is <tt class="docutils literal"><span class="pre">&quot;Hello</span> <span class="pre">world&quot;</span></tt> is will output <tt class="docutils literal"><span class="pre">Hello</span></tt> and <tt class="docutils literal"><span class="pre">world</span></tt>.</p>
+<span class="target" id="std:templatefilter-slugify"></span></div>
 <div class="section" id="s-format">
-<span id="s-std:templatefilter-stringformat"></span><span id="format"></span><span id="std:templatefilter-stringformat"></span><h3><a class="toc-backref" href="#id21">format</a><a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h3>
+<span id="s-std:templatefilter-format"></span><span id="format"></span><span id="std:templatefilter-format"></span><h3><a class="toc-backref" href="#id22">format</a><a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h3>
 <p>Formats the variable according to the argument, a string formatting specifier.
 This specifier uses Common Lisp string formatting syntax</p>
 <p>For example:</p>
@@ -410,7 +439,7 @@ This specifier uses Common Lisp string formatting syntax</p>
 <p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">1000000</span></tt>, the output will be <tt class="docutils literal"><span class="pre">1,000,000</span></tt>.</p>
 <span class="target" id="std:templatefilter-striptags"></span></div>
 <div class="section" id="s-id2">
-<span id="id2"></span><h3><a class="toc-backref" href="#id22">time</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<span id="id2"></span><h3><a class="toc-backref" href="#id23">time</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Formats a time according to the given format.</p>
 <p>For example:</p>
 <div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span> <span class="o">|</span> <span class="nf">time</span> <span class="cp">}}</span>
@@ -418,7 +447,7 @@ This specifier uses Common Lisp string formatting syntax</p>
 </div>
 </div>
 <div class="section" id="s-truncatechars">
-<span id="s-std:templatefilter-truncatechars"></span><span id="truncatechars"></span><span id="std:templatefilter-truncatechars"></span><h3><a class="toc-backref" href="#id23">truncatechars</a><a class="headerlink" href="#truncatechars" title="Permalink to this headline">¶</a></h3>
+<span id="s-std:templatefilter-truncatechars"></span><span id="truncatechars"></span><span id="std:templatefilter-truncatechars"></span><h3><a class="toc-backref" href="#id24">truncatechars</a><a class="headerlink" href="#truncatechars" title="Permalink to this headline">¶</a></h3>
 <p>Truncates a string if it is longer than the specified number of characters.
 Truncated strings will end with a translatable ellipsis sequence (&#8221;...&#8221;).</p>
 <p><strong>Argument:</strong> Number of characters to truncate to</p>
@@ -429,7 +458,7 @@ Truncated strings will end with a translatable ellipsis sequence (&#8221;...&#82
 <p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;Joel</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">slug&quot;</span></tt>, the output will be <tt class="docutils literal"><span class="pre">&quot;Joel</span> <span class="pre">i...&quot;</span></tt>.</p>
 <span class="target" id="std:templatefilter-truncatechars_html"></span></div>
 <div class="section" id="s-upper">
-<span id="s-std:templatefilter-upper"></span><span id="upper"></span><span id="std:templatefilter-upper"></span><h3><a class="toc-backref" href="#id24">upper</a><a class="headerlink" href="#upper" title="Permalink to this headline">¶</a></h3>
+<span id="s-std:templatefilter-upper"></span><span id="upper"></span><span id="std:templatefilter-upper"></span><h3><a class="toc-backref" href="#id25">upper</a><a class="headerlink" href="#upper" title="Permalink to this headline">¶</a></h3>
 <p>Converts a string into all uppercase.</p>
 <p>For example:</p>
 <div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">upper</span> <span class="cp">}}</span>
@@ -438,7 +467,7 @@ Truncated strings will end with a translatable ellipsis sequence (&#8221;...&#82
 <p>If <tt class="docutils literal"><span class="pre">value</span></tt> is <tt class="docutils literal"><span class="pre">&quot;Joel</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">slug&quot;</span></tt>, the output will be <tt class="docutils literal"><span class="pre">&quot;JOEL</span> <span class="pre">IS</span> <span class="pre">A</span> <span class="pre">SLUG&quot;</span></tt>.</p>
 </div>
 <div class="section" id="s-urlencode">
-<span id="s-std:templatefilter-urlencode"></span><span id="urlencode"></span><span id="std:templatefilter-urlencode"></span><h3><a class="toc-backref" href="#id25">urlencode</a><a class="headerlink" href="#urlencode" title="Permalink to this headline">¶</a></h3>
+<span id="s-std:templatefilter-urlencode"></span><span id="urlencode"></span><span id="std:templatefilter-urlencode"></span><h3><a class="toc-backref" href="#id26">urlencode</a><a class="headerlink" href="#urlencode" title="Permalink to this headline">¶</a></h3>
 <p>Escapes a value for use in a URL.</p>
 <p>For example:</p>
 <div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">urlencode</span> <span class="cp">}}</span>

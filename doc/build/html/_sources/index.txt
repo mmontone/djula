@@ -18,7 +18,6 @@ Contents:
 
    intro
    basics
-   templates
    download
    example
    usage
@@ -27,8 +26,11 @@ Contents:
    comments
    filters
    inheritance
-   escaping
-   custom
+   error-handling
+   ..
+      escaping
+   ..
+      custom
 
 Indices and tables
 ==================

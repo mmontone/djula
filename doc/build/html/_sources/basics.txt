@@ -16,7 +16,7 @@ explained later in this document.
 
 .. code-block:: html+django
 
-    {% extends "base_generic.html" %}
+    {% extends "base.html" %}
 
     {% block title %}{{ section.title }}{% endblock %}
 
@@ -25,10 +25,10 @@ explained later in this document.
 
     {% for story in story_list %}
     <h2>
-      <a href="{{ story.get_absolute_url }}">
+      <a href="{{ story.url }}">
         {{ story.headline|upper }}
       </a>
     </h2>
-    <p>{{ story.tease|truncatewords:"100" }}</p>
+    <p>{{ story.tease|truncatewords:100 }}</p>
     {% endfor %}
     {% endblock %}
