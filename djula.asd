@@ -13,7 +13,8 @@
 	       #:split-sequence
 	       #:local-time
 	       #:closer-mop
-	       #:trivial-backtrace)
+	       #:trivial-backtrace
+	       #:cl-slice)
   :components
   ((:module :src
 	    :components

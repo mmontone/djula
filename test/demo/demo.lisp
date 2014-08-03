@@ -111,6 +111,14 @@
      ("join"
       ("{{ list | join:\",\"}}" :list ,(list 1 2 3))
       ("{{ list | join:\" // \"}}" :list ,(list 1 2 3)))
+     ("slice"
+      ("{{ list | slice: 4 }}" :list ,(list 1 2 3 4 5 6))
+      ("{{ list | slice: (2 . 4) }}" :list ,(list 1 2 3 4 5 6))
+      ("{{ string | slice: 3 }}" :string "Hello world")
+      ("{{ string | slice: -5 }}" :string "Hello world")
+      ("{{ string | slice: (3 . 5) }}" :string "Hello world")
+      ("{{ string | slice: (5 . nil) }}" :string "Hello world")
+      ("{{ string | slice: (0 . 5) }}" :string "Hello world"))
      ("first"
       ("{{ list | first }}" :list ,(list 1 2 3)))
      ("last"

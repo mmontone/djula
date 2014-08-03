@@ -134,6 +134,9 @@
 (def-filter :join (it sep)
   (join sep (mapcar #'princ-to-string it)))
 
+(def-filter :slice (it &rest slices)
+  (apply #'cl-slice:slice it (mapcar #'read-from-string slices)))
+
 (def-filter :lower (it)
   (string-downcase (princ-to-string it)))
 

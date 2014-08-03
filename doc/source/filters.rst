@@ -548,9 +548,9 @@ autoescaping is off, this filter has no effect.
 
         {{ var|safe|escape }}
 
-..
-   .. templatefilter:: safeseq
+.. templatefilter:: safeseq
 
+..
    safeseq
    ^^^^^^^
 
@@ -564,25 +564,38 @@ autoescaping is off, this filter has no effect.
    first convert the variable into a string, rather than working with the
    individual elements of the sequence.
 
-   .. templatefilter:: slice
+.. templatefilter:: slice
 
-   slice
-   ^^^^^
+slice
+^^^^^
 
-   Returns a slice of the list.
+Returns a slice of a sequence (i.e. lists, vectors, strings)
 
-   Uses the same syntax as Python's list slicing. See
-   http://www.diveintopython3.net/native-datatypes.html#slicinglists
-   for an introduction.
+Uses the Common Lisp ``cl-slice`` library.
 
-   Example::
+Syntax::
 
-       {{ some_list|slice:":2" }}
+  {{ seq | slice: slices }}
 
-   If ``some_list`` is ``['a', 'b', 'c']``, the output will be ``['a', 'b']``.
+Each ``slice`` selects a subset of subscripts along the corresponding axis.
 
-   .. templatefilter:: slugify
+* A nonnegative integer selects the corresponding index, while a negative integer selects an index counting backwards from the last index::
+    
+  {{ list | slice: 4 }}
 
+if the list is ``(1 2 3 4 5 6)`` it will output ``(5)``
+
+* ``(start . end)`` to select a range.  When ``end`` is ``NIL``, the last index is included.
+Each boundary is resolved according to the other rules if applicable, so you can use negative integers::
+    
+  {{ string | slice: (0 . 5) }}
+  {{ string | slice: (5 . nil) }}
+
+if the string is ``"Hello world"`` is will output ``Hello`` and ``world``.
+
+.. templatefilter:: slugify
+
+..
    slugify
    ^^^^^^^
 
@@ -596,7 +609,7 @@ autoescaping is off, this filter has no effect.
 
    If ``value`` is ``"Joel is a slug"``, the output will be ``"joel-is-a-slug"``.
 
-.. templatefilter:: stringformat
+.. templatefilter:: format
 
 format
 ^^^^^^
