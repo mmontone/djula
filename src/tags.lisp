@@ -133,10 +133,6 @@ form that returns some debugging info."
                       "Printing template errors in the browser"
                       "<<<Not printing template errors in the browser>>>")))
 
-        (with-safe "the template error string if invalid"
-          (if *template-string-if-invalid*
-              (% "<<<Temlate string if invalid: ~S>>>" *template-string-if-invalid*)))
-
         (with-safe "*ALLOW-INCLUDE-ROOTS*"
           (% "Allow include-roots: ~A" *allow-include-roots*))
 
@@ -152,45 +148,6 @@ form that returns some debugging info."
                                  (% "   ~A. ~A = ~A" (incf n) k (short v))
                                  (rfn rest)))))
                     (rfn *template-arguments*))))))
-
-        (with-safe "known translation tables"
-          (if (null *known-translation-tables*)
-              (% "No known translation tables")
-              (progn
-                (% "Translation tables:")
-                (let ((n 0))
-                  (dolist (d *known-translation-tables*)
-                    (destructuring-bind (path . alist) d
-                      (% "   ~S. ~A" (incf n) (or (format nil "~S" path)
-                                                  "{% translation %}"))
-                      (let ((n 0))
-                        (dolist (a alist)
-                          (destructuring-bind (var . plist) a
-                            (% "       ~S. ~S" (incf n) var)
-                            (labels ((rfn (language-plist)
-                                       (when language-plist
-                                         (destructuring-bind (k v . rest) language-plist
-                                           (% "          language: ~S" k)
-                                           (% "          value: ~S" (short v))
-                                           (rfn rest)))))
-                              (rfn plist)))))))))))
-
-        (with-safe "The current example tables"
-          (if (null *known-example-tables*)
-              (% "No known example tables")
-              (progn
-                (% "Example tables:")
-                (let ((n 0))
-                  (dolist (d *known-example-tables*)
-                    (destructuring-bind (path . plist) d
-                      (% "   ~S. ~A" (incf n) (or (format nil "~S" path)
-                                                  "{% example %}"))
-                      (labels ((rfn (var-plist)
-                                 (when plist
-                                   (destructuring-bind (k v . rest) var-plist
-                                     (% "      ~A. ~A = ~A" (incf n) k (short v))
-                                     (rfn rest)))))
-                        (rfn plist))))))))
 
         (% "<<<END DEBUG INFO>>>")))))
 
@@ -220,136 +177,6 @@ is useful to determine the package in which :LISP tags are executed"
 *CURRENT-LANGUAGE* or *DEFAULT-LANGUAGE* if there is no current language"
   (lambda (stream)
     (princ (or *current-language* *default-language*) stream)))
-
-(def-tag-compiler :translation-table (template-path)
-  ":TRANSLATION-TABLE tags compile into a function that pushes a thunk that pushes
-the list
-
-   (`PATH' . ALIST)
-
-to *KNOWN-TRANSLATION-TABLES*, where ALIST is composed of elements that look like:
-
-   (VARIABLE . LANGUAGE-PLIST)
-
-and LANGUAGE-PLIST contains LANGUAGE/VALUE key val pairs]
-
-pushing this stuff to *KNOWN-TRANSLATION-TABLES* lets GET-TRANSLATION know
-about the variable definitions contained in the translation table indicated by
-`TEMPLATE-PATH'"
-  (with-template-error
-      (lambda ()
-        (template-error-string "There was an error reading or parsing the contents of the translation table ~S"
-                               template-path))
-    (if (not (translation-table-p template-path))
-
-	;; it doesn't look like a translation table, complain
-	(lambda ()
-          (template-error-string "the path ~S does not name a translation table! the names of translation table must match one of the following regular expressions: ~{~S ~}"
-                                 template-path
-                                 *translation-table-regexps*))
-
-	(aif (find-template* template-path)
-	     (progn
-	       
-	       (pushnew it *linked-files* :test 'equal)
-	       (if (not (every 'listp (.read-table it)))
-
-		   ;; it doesn't smell like a translation table, complain
-		   (lambda ()
-                     (template-error-string "The translation table ~A doesn't look like a translation table..." template-path))
-
-		   ;; use the current contents of the translation table forever
-		   (let ((compiled (compile-translation-table it)))
-		     (lambda ()
-                       (push (cons it compiled)
-                             *known-translation-tables*)
-                       ""))))
-
-	     ;; the file doesn't exist, complain
-	     (lambda ()
-               (template-error-string "The translation table ~A doesn't exist!" it))))))
-
-(def-tag-compiler :example-table (template-path)
-  ":EXAMPLE-TABLE tags compile into a function that pushes a thunk that pushes the
-list
-
-   (`PATH' . PLIST)
-
-to *KNOWN-EXAMPLE-TABLES* [where PLIST is composed of variable/value pairs], thus letting
-GET-VARIABLES know about the variable definitions contained in the example table
-pointed to by `TEMPLATE-PATH'
-
-Note: definitions contained in an example table are only visible to the template if
-*USE-EXAMPLE-VALUES-P* is non-NULL. If *USE-EXAMPLE-VALUES-P* is NULL, then the example table
-checks to make sure *TEMPLATE-ARGUMENTS* contains all its variables, complaining if
-it doesn't"
-  (with-template-error
-      (lambda ()
-        (template-error-string "There was an error reading or parsing the contents of the example table ~S"
-                               template-path))
-    (if (not (example-table-p template-path))
-
-	;; it doesn't look like an example table, complain
-	(lambda ()
-          (template-error-string "the path ~S does not name an example table! the name of an example table must match one of the following regular expressions: ~{~S ~}"
-                                 template-path
-                                 *example-table-regexps*))
-
-	(aif (find-template* template-path)
-
-	     (if (not (evenp (length (.read-table it))))
-
-		 ;; it doesn't smell like an example table, complain
-		 (lambda ()
-                   (template-error-string "the example table ~S does not look like an example table!"
-                                          template-path))
-
-		 (let ((plist (.read-table it)))
-                   (lambda ()
-                     (push (cons it plist)
-                           *known-example-tables*)
-                     (if *use-example-values-p*
-                         ""
-                         (apply 'concatenate
-                                'string
-                                ""
-                                (.check-example-table-plist plist))))))
-
-	     ;; it doesn't exist, complain
-	     (lambda ()
-               (template-error-string "The example table ~A doesn't exist" template-path))))))
-
-(def-unparsed-tag-processor :translation (unparsed-string) rest
-  (process-tokens
-   `((:parsed-translation ,@(.read-table-string unparsed-string))
-     ,@rest)))
-
-(def-token-compiler :parsed-translation (variable . language/value-plist)
-  ":PARSED-TRANSLATION tags compile into a function that pushes the list
-\(`LANGUAGE' NIL `VARIABLE-NAME' `VALUE') to *KNOWN-TRANSLATION-TABLES*, thus
-letting GET-VARIABLE know about the variable `VARIABLE-NAME'"
-  (let ((d (list nil (.compile-translation-table-variable (cons variable language/value-plist)))))
-    (lambda (stream)
-      (declare (ignore stream))
-      (push d *known-translation-tables*))))
-
-(def-unparsed-tag-processor :example (unparsed-string) rest
-  (process-tokens
-   `((:example ,@(.read-table-string unparsed-string))
-     ,@rest)))
-
-(def-token-compiler :parsed-example (&rest variable/value-plist &key &allow-other-keys)
-  ":PARSED-EXAMPLE compiles into a thunk that pushes
-
-   (NIL . `VARIABLE/VALUE-PLIST')
-
-to *KNOWN-EXAMPLE-TABLES*. if *USE-EXAMPLE-VALUES-P* is NULL then it checks to make
-sure all the variables in `VARIABLE/VALUE-PLIST' are in *TEMPLATE-ARGUMENTS*"
-  (let ((d (cons nil variable/value-plist)))
-    (lambda (stream)
-      (push d *known-example-tables*)
-      (unless *use-example-values-p*
-        (princ (.check-example-table-plist variable/value-plist) stream)))))
 
 (def-delimited-tag :semi-parsed-filter :endfilter :parsed-filter)
 
@@ -665,14 +492,6 @@ they compile into a function that simply calls this function with *TEMPLATE-ARGU
 		  (template-error* e "There was an error executing the lisp form ~A" sexp))))))
     (error (e)
       (template-error* e "There was an error executing the lisp form ~A" sexp))))
-
-(def-tag-compiler :show-table (path)
-  ":SHOW-TABLE tags compile into a function that return the html-escaped contents of
-the file pointed to by the template-path `PATH'"
-  (with-file-handler (string path)
-    (let ((escaped (html-escape string)))
-      (lambda (stream)
-        (princ escaped stream)))))
 
 (def-tag-compiler :ssi (path &optional parse)
   "if `PATH' lives in a folder reckognized by *ALLOW-INCLUDE-ROOTS*, then :SSI tags

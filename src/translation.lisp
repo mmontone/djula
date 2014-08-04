@@ -26,7 +26,7 @@
 (def-token-compiler :translation-variable (name)
   (lambda (stream)
     (let ((value
-	 (if (symbolp name)
-	     (get-variable name)
-	     name)))
+	   (if (symbolp name)
+	       (get-variable name)
+	       name)))
       (princ (translate value) stream))))

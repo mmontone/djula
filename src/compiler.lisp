@@ -78,9 +78,7 @@
      ;; Accept strings and pathnames as template designators.
      (apply #'render-template* (compile-template* template) stream *template-arguments*))
     ((functionp template)
-     (let ((*known-translation-tables* nil)
-           (*known-example-tables* nil)
-           (*accumulated-javascript-strings* nil)
+     (let ((*accumulated-javascript-strings* nil)
            (*current-language* *current-language*))
        (handler-case 
 	   (if stream
