@@ -180,6 +180,27 @@
 (hunchentoot:define-easy-handler (debug-demo :uri "/debug") ()
   (djula:render-template* +debug.html+))
 
+(defparameter +translation.html+ (djula:compile-template* "translation.html"))
+
+(hunchentoot:define-easy-handler (locale-demo :uri "/locale")
+    (lang)
+  (let ((lang-key (intern (string-upcase lang) :keyword)))
+    (let ((djula:*current-language* lang-key)
+	  (djula::*translation-backend* :locale))
+      (djula:render-template* +translation.html+))))
+
+(hunchentoot:define-easy-handler (gettext-demo :uri "/gettext")
+    (lang)
+  (let ((djula:*current-language* lang)
+	(djula::*translation-backend* :gettext))
+      (djula:render-template* +translation.html+)))
+
 (cl-locale:define-dictionary demo
   (:en (asdf:system-relative-pathname :djula-demo "demo/i18n/en/message.lisp"))
   (:es (asdf:system-relative-pathname :djula-demo "demo/i18n/es/message.lisp")))
+
+(gettext:setup-gettext #:djula-demo "demo")
+(gettext:preload-catalogs #.(asdf:system-relative-pathname :djula-demo "demo/locale/"))
+;(setf (gettext:textdomaindir "demo")
+;      (asdf:system-relative-pathname :djula-demo "demo/locale/"))
+(setf djula::*gettext-domain* "demo")

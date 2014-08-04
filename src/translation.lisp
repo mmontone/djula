@@ -11,8 +11,10 @@
 (defmethod backend-translate ((backend (eql :locale)) string language)
   (cl-locale:i18n string :locale language))
 
+(defvar *gettext-domain* nil)
+
 (defmethod backend-translate ((backend (eql :gettext)) string language)
-  (gettext:gettext* string nil nil language))
+  (gettext:gettext* string *gettext-domain* nil (string language)))
 
 ; reading :UNPARSED-TRANSLATION-VARIABLE TOKENS created by {_ translation-variable _}
 
