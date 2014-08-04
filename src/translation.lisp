@@ -21,6 +21,11 @@
      ,(read-from-string unparsed-string))
     ,@(process-tokens rest)))
 
+(def-unparsed-tag-processor :trans (unparsed-string) rest
+  `((:translation-variable
+     ,(read-from-string unparsed-string))
+    ,@(process-tokens rest)))
+
 ; compiling :TRANSLATION-VARIABLE tokens
 
 (def-token-compiler :translation-variable (name)
