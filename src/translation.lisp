@@ -35,3 +35,6 @@
 	       (get-variable name)
 	       name)))
       (princ (translate value) stream))))
+
+(def-filter :trans (it)
+  (translate it))

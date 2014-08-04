@@ -148,7 +148,9 @@
       ("{% trans hello %}" :hello "hello")
       ("{% set-language :es %}{% trans hello %}" :hello "hello")
       ("{% trans \"hello\" %}")
-      ("{% set-language :es %}{% trans \"hello\" %}")))))
+      ("{% set-language :es %}{% trans \"hello\" %}")
+      ("{{ hello | trans }}" :hello "hello")
+      ("{% set-language :es %}{{ hello | trans }}" :hello "hello")))))
 
 (hunchentoot:define-easy-handler (demo :uri "/") ()
   (let ((djula:*catch-template-errors-p* nil)
