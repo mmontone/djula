@@ -117,7 +117,7 @@
              <div id='file'>In {{template}}{% if line %} on line {{line}}{% endif %}.</div>
          </div>
          <div id='error-content'>
-           {{error-backtrace | linebreaksbr }}
+           {{error-backtrace | linebreaksbr | safe }}
          </div>
        {% endif %}
    </body>
