@@ -6,7 +6,7 @@
 
 (defvar *djula-execute-package* (find-package :common-lisp-user))
 
-(defvar *default-language* :english)
+(defvar *default-language* :en)
 
 (defvar *use-example-values-p* nil)
 

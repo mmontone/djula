@@ -19,11 +19,11 @@
 		   (type (case next
 			   (#\# :comment)
 			   (#\{ :unparsed-variable)
-			   (#\_ :unparsed-dictionary-variable)
+			   (#\_ :unparsed-translation-variable)
 			   (#\% :unparsed-tag)
 			   (otherwise :not-special))))
 	      (ecase type
-		((:comment :unparsed-variable :unparsed-dictionary-variable :unparsed-tag)
+		((:comment :unparsed-variable :unparsed-translation-variable :unparsed-tag)
 		 (let ((end (search (get-closing-delimiter type)
 				    string
 				    :start2 (1+ {))))

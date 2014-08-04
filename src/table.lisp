@@ -75,24 +75,3 @@
 							     *default-language*))
 	(if present-p
 	    (return-from .get-translation (values v present-p)))))))
-
-; reading :UNPARSED-TRANSLATION-VARIABLE TOKENS created by {_ translation-variable _}
-
-(def-token-processor :unparsed-translation-variable (unparsed-string) rest
-  `((:translation-variable ,(let ((*package* (find-package :keyword))
-				  *read-eval*)
-				 (read-from-string unparsed-string)))
-    ,@(process-tokens rest)))
-
-; compiling :TRANSLATION-VARIABLE tokens
-
-(def-token-compiler :translation-variable (name)
-
-  ;; return a function that finds the value of the translation variable
-  (f0 (with-template-error (template-error-string "There was an error while looking up the translation of ~A"
-						  name)
-	(multiple-value-bind (v present-p) (.get-translation name)
-	  (if present-p
-	      v
-	      (or *template-string-if-invalid*
-		  (template-error-string "invalid translation variable ~A" name)))))))

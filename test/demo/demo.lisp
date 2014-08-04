@@ -139,7 +139,12 @@
       ("{{ html | safe }}" :html ,"<p>Hello</p>"))
      ("date"
       ("{{ date | date }}" :date ,(get-universal-time))
-      ("{{ date | date: djula-demo::+custom-date-format+}}" :date ,(get-universal-time))))))
+      ("{{ date | date: djula-demo::+custom-date-format+}}" :date ,(get-universal-time)))
+     ("translation"
+      ("{_ hello _}" :hello "hello")
+      ("{% set-language :es %}{_ hello _}" :hello "hello")
+      ("{_ \"hello\" _}")
+      ("{% set-language :es %}{_ \"hello\"_}")))))
 
 (hunchentoot:define-easy-handler (demo :uri "/") ()
   (let ((djula:*catch-template-errors-p* nil)
@@ -162,3 +167,7 @@
   (let ((djula:*catch-template-errors-p* t)
 	(djula::*fancy-error-template-p* t))
     (djula:render-template* +error.html+)))
+
+(cl-locale:define-dictionary demo
+  (:en (asdf:system-relative-pathname :djula-demo "test/demo/i18n/en/message.lisp"))
+  (:es (asdf:system-relative-pathname :djula-demo "test/demo/i18n/es/message.lisp")))

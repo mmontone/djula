@@ -1,7 +1,8 @@
 (asdf:defsystem #:djula
   :description "An implementation of Django templates for Common Lisp."
   :version "0.2"
-  :maintainer "Eric Sessoms <eric@nubgames.com>, Mariano Montone <marianomontone@gmail.com>"
+  :maintainer ("Eric Sessoms <eric@nubgames.com>"
+	       "Mariano Montone <marianomontone@gmail.com>")
   :author "Nick Allen <nallen05@gmail.com>"
   :license "MIT"
   :depends-on (#:access
@@ -14,7 +15,9 @@
 	       #:local-time
 	       #:closer-mop
 	       #:trivial-backtrace
-	       #:cl-slice)
+	       #:cl-slice
+	       #:cl-locale
+	       #:gettext)
   :components
   ((:module :src
 	    :components
@@ -26,11 +29,10 @@
              (:file "parser"         :depends-on ("pipeline"))
              (:file "pipeline"       :depends-on ("conditions"))
              (:file "specials"       :depends-on ("packages"))
-             #+nil
-             (:file "table"          :depends-on ("pipeline"))
              (:file "tags"           :depends-on ("tag"))
              (:file "tag"            :depends-on ("pipeline"))
              (:file "template-store" :depends-on ("specials"))
+	     (:file "translation"    :depends-on ("pipeline"))
              (:file "util"           :depends-on ("packages"))
              (:file "variables"      :depends-on ("specials" "util")))))
   :in-order-to ((test-op (load-op djula-test)))
