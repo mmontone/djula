@@ -984,44 +984,6 @@ If ``value`` is ``"http://www.example.org/"``, the output will be
 				       if no mapping for None is given)
    ==========  ======================  ==================================
 
-Internationalization tags and filters
--------------------------------------
-
-TODO
-
-..
-   Djula provides template tags and filters to control each aspect of
-   :doc:`internationalization </topics/i18n/index>` in templates. They allow for
-   granular control of translations, formatting, and time zone conversions.
-
-   i18n
-   ^^^^
-
-   This library allows specifying translatable text in templates.
-   To enable it, set :setting:`USE_I18N` to ``True``, then load it with
-   ``{% load i18n %}``.
-
-   See :ref:`specifying-translation-strings-in-template-code`.
-
-   l10n
-   ^^^^
-
-   This library provides control over the localization of values in templates.
-   You only need to load the library using ``{% load l10n %}``, but you'll often
-   set :setting:`USE_L10N` to ``True`` so that localization is active by default.
-
-   See :ref:`topic-l10n-templates`.
-
-   tz
-   ^^
-
-   This library provides control over time zone conversions in templates.
-   Like ``l10n``, you only need to load the library using ``{% load tz %}``,
-   but you'll usually also set :setting:`USE_TZ` to ``True`` so that conversion
-   to local time happens by default.
-
-   See :ref:`time-zones-in-templates`.
-
 Custom filters
 --------------
 
