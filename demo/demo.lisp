@@ -6,20 +6,20 @@
 (in-package :djula-demo)
 
 (djula:add-template-directory
- (asdf:system-relative-pathname :djula "test/demo/"))
+ (asdf:system-relative-pathname :djula "demo/"))
 
 (defparameter *demo-acceptor* (make-instance 'hunchentoot:easy-acceptor :port 9090))
 
 (push
  (hunchentoot:create-static-file-dispatcher-and-handler
   "/simplegrid.css"
-  (asdf:system-relative-pathname :djula "test/demo/simplegrid.css"))
+  (asdf:system-relative-pathname :djula "demo/simplegrid.css"))
  hunchentoot:*dispatch-table*)
 
 (push
  (hunchentoot:create-static-file-dispatcher-and-handler
   "/styles.css"
-  (asdf:system-relative-pathname :djula "test/demo/styles.css"))
+  (asdf:system-relative-pathname :djula "demo/styles.css"))
  hunchentoot:*dispatch-table*)
 
 (defun start-demo ()
@@ -181,5 +181,5 @@
   (djula:render-template* +debug.html+))
 
 (cl-locale:define-dictionary demo
-  (:en (asdf:system-relative-pathname :djula-demo "test/demo/i18n/en/message.lisp"))
-  (:es (asdf:system-relative-pathname :djula-demo "test/demo/i18n/es/message.lisp")))
+  (:en (asdf:system-relative-pathname :djula-demo "demo/i18n/en/message.lisp"))
+  (:es (asdf:system-relative-pathname :djula-demo "demo/i18n/es/message.lisp")))

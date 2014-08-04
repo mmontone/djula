@@ -32,7 +32,7 @@
              (:file "tags"           :depends-on ("tag"))
              (:file "tag"            :depends-on ("pipeline"))
              (:file "template-store" :depends-on ("specials"))
-	     (:file "translation"    :depends-on ("pipeline"))
+	     (:file "translation"    :depends-on ("specials" "pipeline"))
              (:file "util"           :depends-on ("packages"))
              (:file "variables"      :depends-on ("specials" "util")))))
   :in-order-to ((test-op (load-op djula-test)))

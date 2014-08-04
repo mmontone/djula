@@ -4,6 +4,5 @@
                #:hunchentoot)
   :components
   ((:module :demo
-	    :pathname "test/demo"
 	    :components
             ((:file "demo")))))
