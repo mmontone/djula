@@ -30,6 +30,7 @@
 
 (defparameter +demo.html+ (djula:compile-template* "demo.html"))
 (defparameter +error.html+ (djula:compile-template* "error.html"))
+(defparameter +debug.html+ (djula:compile-template* "debug.html"))
 
 (defun render-demos (demos)
   (loop for demo in demos
@@ -150,7 +151,9 @@
       ("{% trans \"hello\" %}")
       ("{% set-language :es %}{% trans \"hello\" %}")
       ("{{ hello | trans }}" :hello "hello")
-      ("{% set-language :es %}{{ hello | trans }}" :hello "hello")))))
+      ("{% set-language :es %}{{ hello | trans }}" :hello "hello"))
+     ("debug"
+      ("{% debug %}")))))
 
 (hunchentoot:define-easy-handler (demo :uri "/") ()
   (let ((djula:*catch-template-errors-p* nil)
@@ -173,6 +176,9 @@
   (let ((djula:*catch-template-errors-p* t)
 	(djula::*fancy-error-template-p* t))
     (djula:render-template* +error.html+)))
+
+(hunchentoot:define-easy-handler (debug-demo :uri "/debug") ()
+  (djula:render-template* +debug.html+))
 
 (cl-locale:define-dictionary demo
   (:en (asdf:system-relative-pathname :djula-demo "test/demo/i18n/en/message.lisp"))
