@@ -1,2 +1,0 @@
-* Translation: fix what is there, or extend, with multiple backends, like cl-locale and gettext
-* Fancy error page when there's a template-error
