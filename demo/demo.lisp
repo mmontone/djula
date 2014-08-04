@@ -49,6 +49,18 @@
 
 (defparameter +custom-date-format+ '((:YEAR 4) #\/ (:MONTH 2) #\/ (:DAY 2)))
 
+;; Setup translation
+
+(cl-locale:define-dictionary demo
+  (:en (asdf:system-relative-pathname :djula-demo "demo/i18n/en/message.lisp"))
+  (:es (asdf:system-relative-pathname :djula-demo "demo/i18n/es/message.lisp")))
+
+(gettext:setup-gettext #:djula-demo "demo")
+(gettext:preload-catalogs #.(asdf:system-relative-pathname :djula-demo "demo/locale/"))
+;(setf (gettext:textdomaindir "demo")
+;      (asdf:system-relative-pathname :djula-demo "demo/locale/"))
+(setf djula::*gettext-domain* "demo")
+
 (defparameter *demos*
   (render-demos
    `(("variables"
@@ -194,13 +206,3 @@
   (let ((djula:*current-language* lang)
 	(djula::*translation-backend* :gettext))
       (djula:render-template* +translation.html+)))
-
-(cl-locale:define-dictionary demo
-  (:en (asdf:system-relative-pathname :djula-demo "demo/i18n/en/message.lisp"))
-  (:es (asdf:system-relative-pathname :djula-demo "demo/i18n/es/message.lisp")))
-
-(gettext:setup-gettext #:djula-demo "demo")
-(gettext:preload-catalogs #.(asdf:system-relative-pathname :djula-demo "demo/locale/"))
-;(setf (gettext:textdomaindir "demo")
-;      (asdf:system-relative-pathname :djula-demo "demo/locale/"))
-(setf djula::*gettext-domain* "demo")
