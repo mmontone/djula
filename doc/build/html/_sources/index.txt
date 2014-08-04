@@ -26,6 +26,7 @@ Contents:
    comments
    filters
    inheritance
+   internationalization
    error-handling
    ..
       escaping

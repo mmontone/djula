@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Internationalization &mdash; Djula HTML templating system 0.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.1.0/yeti/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Djula HTML templating system 0.2 documentation" href="index.html" />
+    <link rel="next" title="Error handling" href="error-handling.html" />
+    <link rel="prev" title="Template inheritance" href="inheritance.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          Djula HTML templating system</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.2</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            <li class="divider-vertical"></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tags.html">Tags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comments.html">Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inheritance.html">Template inheritance</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error-handling.html">Error handling</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Internationalization</a><ul>
+<li><a class="reference internal" href="#syntax">Syntax</a></li>
+<li><a class="reference internal" href="#tags">Tags</a><ul>
+<li><a class="reference internal" href="#trans">trans</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#filters">Filters</a><ul>
+<li><a class="reference internal" href="#std:templatefilter-urlencode">trans</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#choosing-language">Choosing language</a></li>
+<li><a class="reference internal" href="#backends">Backends</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="inheritance.html" title="Previous Chapter: Template inheritance"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Template inherit...</span>
+    </a>
+  </li>
+  <li>
+    <a href="error-handling.html" title="Next Chapter: Error handling"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Error handling &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/internationalization.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="s-internationalization">
+<span id="internationalization"></span><h1>Internationalization<a class="headerlink" href="#internationalization" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="s-syntax">
+<span id="syntax"></span><h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to translate a string or variable is to enclose it between <tt class="docutils literal"><span class="pre">{_</span></tt> and <tt class="docutils literal"><span class="pre">_}</span></tt>:</p>
+<div class="highlight-html+django"><div class="highlight"><pre>{_ var _}
+{_ &quot;hello&quot; _}
+</pre></div>
+</div>
+</div>
+<div class="section" id="s-tags">
+<span id="tags"></span><h2>Tags<a class="headerlink" href="#tags" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="s-trans">
+<span id="s-std:templatetag-trans"></span><span id="trans"></span><span id="std:templatetag-trans"></span><h3>trans<a class="headerlink" href="#trans" title="Permalink to this headline">¶</a></h3>
+<p>Translates a variable or string</p>
+<p>Example:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">trans</span> <span class="nv">var</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">trans</span> <span class="s2">&quot;hello&quot;</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="s-filters">
+<span id="filters"></span><h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="s-std:templatefilter-urlencode">
+<span id="s-id1"></span><span id="std:templatefilter-urlencode"></span><span id="id1"></span><h3>trans<a class="headerlink" href="#std:templatefilter-urlencode" title="Permalink to this headline">¶</a></h3>
+<p>Translates a variable or string.</p>
+<p>For example:</p>
+<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">var</span> <span class="o">|</span> <span class="nf">trans</span> <span class="cp">}}</span>
+<span class="cp">{{</span> <span class="s2">&quot;my string&quot;</span> <span class="o">|</span>  <span class="nf">trans</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="s-choosing-language">
+<span id="choosing-language"></span><h2>Choosing language<a class="headerlink" href="#choosing-language" title="Permalink to this headline">¶</a></h2>
+<p>To choose the language to use, set the <tt class="xref cl cl-symbol docutils literal"><span class="pre">*CURRENT-LANGUAGE*</span></tt> variable.</p>
+<p>For example:</p>
+<div class="highlight-common-lisp"><div class="highlight"><pre><span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">djula:*current-language*</span> <span class="ss">:es</span><span class="p">))</span>
+   <span class="p">(</span><span class="nv">djula:render-template*</span> <span class="nv">+translation.html+</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="s-backends">
+<span id="backends"></span><h2>Backends<a class="headerlink" href="#backends" title="Permalink to this headline">¶</a></h2>
+<p>Djula supports two backends for doing translations: <a class="reference external" href="https://github.com/arielnetworks/cl-locale">cl-locale</a> and <a class="reference external" href="https://github.com/copyleft/gettext">gettext</a></p>
+<p>Please have a look at the demo and the documentation of those packages to figure out how to use them.</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2014, Nick Allen.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
