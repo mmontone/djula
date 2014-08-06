@@ -35,9 +35,13 @@
 (defun apply-keys/indexes (thing keys/indexes)
   (reduce (lambda (thing key)
             (handler-case
-                (if (numberp key)
-                    (elt thing key)
-                    (access thing key))
+		(cond
+		   ((numberp key) (elt thing key))
+		   ((keywordp key) 
+		    (or
+		     (access thing key)
+		     (access thing (intern (symbol-name key)))))
+		   (t (access thing key)))
               (error (e)
                 (template-error-string* e 
                  "There was an error while accessing the ~A ~S of the object ~S"
