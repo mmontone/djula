@@ -41,7 +41,8 @@
          (progn
            ,@body)
        (error (,e)
-         (if *catch-template-errors-p*
+         (if (and *catch-template-errors-p*
+		  (not *fancy-error-template-p*))
              ,recovery-form
              (error ,e))))))
 
