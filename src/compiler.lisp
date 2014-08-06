@@ -33,7 +33,9 @@
  
 	   ;; Compile the template file
 	   (setf (compiled-template compiled-template)
-		 (compile-string (fetch-template* (template-file compiled-template))))))
+		   (let ((*block-alist* nil)
+			 (*linked-files* nil))
+		     (compile-string (fetch-template* (template-file compiled-template)))))))
     
     (compile-template-file)
   
