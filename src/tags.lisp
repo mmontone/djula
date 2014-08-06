@@ -122,16 +122,30 @@ form that returns some debugging info."
                       ,@body)))
         (% "<<<START DEBUG INFO>>>")
 
+	(with-safe "the default language"
+          (% "Default language: ~A" (or *default-language* "none")))
+	
         (with-safe "the current language"
-          (% "Language: ~S" (or *current-language* "none")))
+          (% "Current language: ~A" (or *current-language* "none")))
 
-        (with-safe "the default language"
-          (% "Language: ~S" (or *default-language* "none")))
+	(with-safe "the current lisp execution package"
+	  (% "Lisp execution package: ~A" (or *djula-execute-package* "none")))
 
         (with-safe "whether or not template errors are printing to the browser"
           (% "~A" (if *catch-template-errors-p*
                       "Printing template errors in the browser"
                       "<<<Not printing template errors in the browser>>>")))
+
+	(with-safe "whether or not template errores are verbose"
+          (% "~A" (if *verbose-errors-p*
+                      "Signaling verbose errors"
+                      "<<<Not signaling verbose errors>>>")))
+
+	(with-safe "whether or not fancy errors are active"
+          (% "~A" (if (and *catch-template-errors-p*
+			   *fancy-error-template-p*)
+                      "Fancy template on errors is enabled"
+                      "<<<Fancy error template is disabled>>>")))
 
         (with-safe "*ALLOW-INCLUDE-ROOTS*"
           (% "Allow include-roots: ~A" *allow-include-roots*))
