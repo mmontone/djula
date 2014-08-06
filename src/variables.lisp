@@ -37,10 +37,11 @@
             (handler-case
 		(cond
 		   ((numberp key) (elt thing key))
-		   ((keywordp key) 
+		   ((keywordp key)
+		    (access thing key)
 		    (or
 		     (access thing key)
-		     (access thing (intern (symbol-name key)))))
+		     (access thing (intern (symbol-name key) *djula-execute-package*))))
 		   (t (access thing key)))
               (error (e)
                 (template-error-string* e 

@@ -18,6 +18,16 @@
               '((:alist-a . 1) (:alist-b . (:plist-a #(3 2 1 0) :plist-b nil)))
               '(:alist-b :plist-a 2)))))
 
+(defclass my-obj ()
+  ((name :accessor name
+	 :initform "my-obj")))
+
+(defmethod id ((my-obj my-obj))
+  22)
+
+(defun fid (my-obj)
+  33)
+
 (test variables-accessing-test
   (let ((djula:*catch-template-errors-p* nil))
     
@@ -75,4 +85,25 @@
 	    template
 	    nil
 	    :foo (list :bar "bar"))
-	   "bar")))))
+	   "bar")))
+    
+    ;; Slot accessing
+    (is (equalp
+	 (let ((djula:*djula-execute-package* :djula-test))
+	   (let ((template (djula::compile-string "{{obj.name}}")))
+	     (djula:render-template* template nil :obj (make-instance 'my-obj))))
+	 "my-obj"))
+    
+    ;; Method accessing
+    (is (equalp
+	 (let ((djula:*djula-execute-package* :djula-test))
+	   (let ((template (djula::compile-string "{{obj.id}}")))
+	     (djula:render-template* template nil :obj (make-instance 'my-obj))))
+	 "22"))
+
+    ;; Function accessing
+    (is (equalp
+	 (let ((djula:*djula-execute-package* :djula-test))
+	   (let ((template (djula::compile-string "{{obj.fid}}")))
+	     (djula:render-template* template nil :obj (make-instance 'my-obj))))
+	 "33"))))
