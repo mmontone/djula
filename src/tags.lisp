@@ -173,7 +173,7 @@ form that returns some debugging info."
     (macrolet ((with-safe (about &body body)
 		 `(with-template-error (format stream "<<<There was an error gathering debug information about ~A>>>" ,about)
 		    ,@body)))
-      (format stream "<div class=\"debug\" style=\"position:absolute;bottom:0;font-size:12px;height:100px;overflow-y:auto;\">")
+      (format stream "<div class=\"debug\" style=\"position:fixed;bottom:0;font-size:12px;height:100px;overflow-y:auto;background-color:white;\">")
       (format stream "<ul style=\"list-style-type:none;\">")
       
       (with-safe "the default language"
@@ -215,7 +215,9 @@ form that returns some debugging info."
 			   (destructuring-bind (k v . rest) plist
 			     (format stream "   ~A. ~A = ~A" (incf n) k (escape-for-html (short v)))
 			     (rfn rest)))))
-		(rfn *template-arguments*))))))))
+		(rfn *template-arguments*)))))
+      (format stream "</ul>")
+      (format stream "</div>"))))
 
 (def-tag-compiler :debug ()
   (lambda (stream)
