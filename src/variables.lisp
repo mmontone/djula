@@ -12,13 +12,7 @@
   (flet ((interp (s)
 	   (if (every 'digit-char-p s)
 	       (parse-integer s)
-	       ;; Here we convert to an interned symbol in the executing package instead
-	       ;; of a keyword as it works better for accessing object methods via the
-	       ;; access library. Also, the access library has no problem accessing "keyword based"
-	       ;; structures like plists using non keyword symbols. Example: (access (list :a 22) 'a)
-	       #+nil(make-keyword (string-upcase s))
-	       (intern (string-upcase s) *djula-execute-package*)
-	       )))
+	       (make-keyword (string-upcase s)))))
     (if-let ((dot (position #\. string)))
       (cons (interp (subseq string 0 dot))
             (parse-variable-phrase (subseq string (1+ dot))))
