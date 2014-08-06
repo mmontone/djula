@@ -107,63 +107,121 @@ form that returns some debugging info."
 		   cycle-item)))
 	  (princ cycle-item-value stream))))))
 
-(def-tag-compiler :debug ()
-  (lambda (out)
-    (flet ((% (fmt-string &rest fmt-args)
-             (terpri out)
-             (apply 'format out fmt-string fmt-args))
-           (short (thing)
-             (let ((string (princ-to-string thing)))
-               (if (> (length string) 25)
-                   (format nil "~A..." (subseq string 0 22))
-                   string))))
-      (macrolet ((with-safe (about &body body)
-                   `(with-template-error (% "<<<There was an error gathering debug information about ~A>>>" ,about)
-                      ,@body)))
-        (% "<<<START DEBUG INFO>>>")
+(defun print-debugging-information (out)
+  (flet ((% (fmt-string &rest fmt-args)
+	   (terpri out)
+	   (apply 'format out fmt-string fmt-args))
+	 (short (thing)
+	   (let ((string (princ-to-string thing)))
+	     (if (> (length string) 25)
+		 (format nil "~A..." (subseq string 0 22))
+		 string))))
+    (macrolet ((with-safe (about &body body)
+		 `(with-template-error (% "<<<There was an error gathering debug information about ~A>>>" ,about)
+		    ,@body)))
+      (% "<<<START DEBUG INFO>>>")
 
-	(with-safe "the default language"
-          (% "Default language: ~A" (or *default-language* "none")))
+      (with-safe "the default language"
+	(% "Default language: ~A" (or *default-language* "none")))
 	
-        (with-safe "the current language"
-          (% "Current language: ~A" (or *current-language* "none")))
+      (with-safe "the current language"
+	(% "Current language: ~A" (or *current-language* "none")))
 
-	(with-safe "the current lisp execution package"
-	  (% "Lisp execution package: ~A" (or *djula-execute-package* "none")))
+      (with-safe "the current lisp execution package"
+	(% "Lisp execution package: ~A" (or *djula-execute-package* "none")))
 
-        (with-safe "whether or not template errors are printing to the browser"
-          (% "~A" (if *catch-template-errors-p*
-                      "Printing template errors in the browser"
-                      "<<<Not printing template errors in the browser>>>")))
+      (with-safe "whether or not template errors are printing to the browser"
+	(% "~A" (if *catch-template-errors-p*
+		    "Printing template errors in the browser"
+		    "<<<Not printing template errors in the browser>>>")))
 
-	(with-safe "whether or not template errores are verbose"
-          (% "~A" (if *verbose-errors-p*
-                      "Signaling verbose errors"
-                      "<<<Not signaling verbose errors>>>")))
+      (with-safe "whether or not template errores are verbose"
+	(% "~A" (if *verbose-errors-p*
+		    "Signaling verbose errors"
+		    "<<<Not signaling verbose errors>>>")))
 
-	(with-safe "whether or not fancy errors are active"
-          (% "~A" (if (and *catch-template-errors-p*
-			   *fancy-error-template-p*)
-                      "Fancy template on errors is enabled"
-                      "<<<Fancy error template is disabled>>>")))
+      (with-safe "whether or not fancy errors are active"
+	(% "~A" (if (and *catch-template-errors-p*
+			 *fancy-error-template-p*)
+		    "Fancy template on errors is enabled"
+		    "<<<Fancy error template is disabled>>>")))
 
-        (with-safe "*ALLOW-INCLUDE-ROOTS*"
-          (% "Allow include-roots: ~A" *allow-include-roots*))
+      (with-safe "*ALLOW-INCLUDE-ROOTS*"
+	(% "Allow include-roots: ~A" *allow-include-roots*))
 
-        (with-safe "the arguments given to the template"
-          (if (null *template-arguments*)
-              (% "There were no arguments given to the template")
-              (progn
-                (% "Template arguments:")
-                (let ((n 0))
-                  (labels ((rfn (plist)
-                             (when plist
-                               (destructuring-bind (k v . rest) plist
-                                 (% "   ~A. ~A = ~A" (incf n) k (short v))
-                                 (rfn rest)))))
-                    (rfn *template-arguments*))))))
+      (with-safe "the arguments given to the template"
+	(if (null *template-arguments*)
+	    (% "There were no arguments given to the template")
+	    (progn
+	      (% "Template arguments:")
+	      (let ((n 0))
+		(labels ((rfn (plist)
+			   (when plist
+			     (destructuring-bind (k v . rest) plist
+			       (% "   ~A. ~A = ~A" (incf n) k (short v))
+			       (rfn rest)))))
+		  (rfn *template-arguments*))))))
 
-        (% "<<<END DEBUG INFO>>>")))))
+      (% "<<<END DEBUG INFO>>>"))))
+
+(defun print-fancy-debugging-information (stream)
+  (flet ((short (thing)
+	   (let ((string (princ-to-string thing)))
+	     (if (> (length string) 25)
+		 (format nil "~A..." (subseq string 0 22))
+		 string))))
+    (macrolet ((with-safe (about &body body)
+		 `(with-template-error (format stream "<<<There was an error gathering debug information about ~A>>>" ,about)
+		    ,@body)))
+      (format stream "<div class=\"debug\" style=\"position:absolute;bottom:0;font-size:12px;height:100px;overflow-y:auto;\">")
+      (format stream "<ul style=\"list-style-type:none;\">")
+      
+      (with-safe "the default language"
+	(format stream "<li><b>Default language:</b> ~A </li>" (or *default-language* "none")))
+	
+      (with-safe "the current language"
+	(format stream "<li><b>Current language:</b> ~A</li>" (or *current-language* "none")))
+
+      (with-safe "the current lisp execution package"
+	(format stream "<li><b>Lisp execution package:</b> ~A</li>"
+		(escape-for-html (princ-to-string (or *djula-execute-package* "none")))))
+
+      (with-safe "whether or not template errors are printing to the browser"
+	(format stream "<li><b>Print errors in browser:</b> ~A</li>"
+		(if *catch-template-errors-p*
+		    "yes" "no")))
+
+      (with-safe "whether or not template errores are verbose"
+	(format stream "<li><b>Verbose errors:</b> ~A</li>"
+		(if *verbose-errors-p* "yes" "no")))
+
+      (with-safe "whether or not fancy errors are active"
+	(format stream
+		"<li><b>Fancy errors:</b> ~A</li>"
+		(if (and *catch-template-errors-p*
+			 *fancy-error-template-p*)
+		    "enabled" "disabled")))
+
+      (with-safe "*ALLOW-INCLUDE-ROOTS*"
+	(format stream "<li><b>Allow include-roots:</b> ~A</li>" *allow-include-roots*))
+
+      (with-safe "the arguments given to the template"
+	(format stream "<li><b>Template arguments:</b> ")
+	(if (null *template-arguments*)
+	    (format stream "There were no arguments given to the template")
+	    (let ((n 0))
+	      (labels ((rfn (plist)
+			 (when plist
+			   (destructuring-bind (k v . rest) plist
+			     (format stream "   ~A. ~A = ~A" (incf n) k (escape-for-html (short v)))
+			     (rfn rest)))))
+		(rfn *template-arguments*))))))))
+
+(def-tag-compiler :debug ()
+  (lambda (stream)
+    (if *fancy-debug-p*
+	(print-fancy-debugging-information stream)
+	(print-debugging-information stream))))
 
 (def-tag-compiler :set-language (name)
   ":SET-LANGUAGE tags are compiled into a function that set *CURRENT-LANGUAGE* to the

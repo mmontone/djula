@@ -9,6 +9,7 @@
            #:*catch-template-errors-p*
 	   #:*verbose-errors-p*
 	   #:*fancy-error-template-p*
+	   #:*fancy-debug-p*
            #:*current-compiler*
            #:*current-language*
            #:*current-store*

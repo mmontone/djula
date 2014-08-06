@@ -14,6 +14,8 @@
 
 (defvar *fancy-error-template-p* t "When enabled, show a fancy template when an error ocurrs")
 
+(defvar *fancy-debug-p* t "When enabled, displays fancy html based debugging information for the {% debug %} tag")
+
 (defvar *allow-include-roots* ())
 
 (defvar *eval-lisp-tags* t)

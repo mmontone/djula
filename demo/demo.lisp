@@ -190,7 +190,12 @@
     (djula:render-template* +error.html+)))
 
 (hunchentoot:define-easy-handler (debug-demo :uri "/debug") ()
-  (djula:render-template* +debug.html+))
+  (let ((djula:*fancy-debug-p* nil))
+    (djula:render-template* +debug.html+)))
+
+(hunchentoot:define-easy-handler (fancy-debug-demo :uri "/fancy-debug") ()
+  (let ((djula:*fancy-debug-p* t))
+    (djula:render-template* +debug.html+)))
 
 (defparameter +translation.html+ (djula:compile-template* "translation.html"))
 
