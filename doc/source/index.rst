@@ -28,6 +28,7 @@ Contents:
    inheritance
    internationalization
    error-handling
+   api
    ..
       escaping
    ..
