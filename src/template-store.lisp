@@ -10,7 +10,7 @@
 (defclass file-store ()
   ((current-path
     :initform nil
-    :type (or null string)
+    :type (or null string pathname)
     :documentation "The location of the most-recently fetched template.")
    (search-path
     :initarg :search-path

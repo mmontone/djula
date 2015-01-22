@@ -8,15 +8,15 @@
 
 (defclass compiled-template ()
   ((compiled-template :initarg :compiled-template
-		      :initform nil
-		      :accessor compiled-template
-		      :documentation "The compiled template (a closure)")
+                      :initform nil
+                      :accessor compiled-template
+                      :documentation "The compiled template (a closure)")
    (template-file :initarg :template-file
-		  :accessor template-file
-		  :initform (error "Provide the template file")
-		  :documentation "The filepath of the template")
+                  :accessor template-file
+                  :initform (error "Provide the template file")
+                  :documentation "The filepath of the template")
    (template-file-write-date :accessor template-file-write-date
-			     :documentation "The write date of the template file"))
+                             :documentation "The write date of the template file"))
   (:metaclass closer-mop:funcallable-standard-class)
   (:documentation "A compiled template"))
 
@@ -27,31 +27,31 @@
 (defmethod initialize-instance :after ((compiled-template compiled-template) &rest initargs)
   (declare (ignore initargs))
   (flet ((compile-template-file ()
-	   ;; Set the template file write date
-	   (setf (template-file-write-date compiled-template)
-		 (file-write-date (template-file compiled-template)))
- 
-	   ;; Compile the template file
-	   (setf (compiled-template compiled-template)
-		   (let ((*block-alist* nil)
-			 (*linked-files* nil))
-		     (compile-string (fetch-template* (template-file compiled-template)))))))
-    
+           ;; Set the template file write date
+           (setf (template-file-write-date compiled-template)
+                 (file-write-date (template-file compiled-template)))
+
+           ;; Compile the template file
+           (setf (compiled-template compiled-template)
+                 (let ((*block-alist* nil)
+                       (*linked-files* nil))
+                   (compile-string (fetch-template* (template-file compiled-template)))))))
+
     (compile-template-file)
-  
+
     (closer-mop:set-funcallable-instance-function
      compiled-template
      (lambda (stream)
        ;; Recompile the template if the template-file has changed
        (when (not (equalp (file-write-date (template-file compiled-template))
-			  (template-file-write-date compiled-template)))
-	 (compile-template-file))
+                          (template-file-write-date compiled-template)))
+         (compile-template-file))
        (funcall (compiled-template compiled-template) stream)))))
 
 (defmethod compile-template ((compiler compiler) name &optional (error-p t))
   (when-let ((template-file (find-template* name error-p)))
     (make-instance 'compiled-template
-		   :template-file template-file)))
+                   :template-file template-file)))
 
 (defclass toplevel-compiler (compiler)
   ((fragment-compiler
@@ -65,7 +65,7 @@
   (let ((*block-alist* nil)
         (*linked-files* nil))
     (let ((*current-compiler* (fragment-compiler compiler)))
-      (call-next-method *current-compiler* name))))
+      (call-next-method))))
 
 (defun compile-template* (name)
   "Compiles template NAME with compiler in *CURRENT-COMPILER*"
@@ -82,18 +82,18 @@
     ((functionp template)
      (let ((*accumulated-javascript-strings* nil)
            (*current-language* *current-language*))
-       (handler-case 
-	   (if stream
-	       (funcall template stream)
-	       (with-output-to-string (s)
-		 (funcall template s)))
-	 (error (e)
-	   (if (and *catch-template-errors-p*
-		    *fancy-error-template-p*)
-	       (render-error-template e
-				      (trivial-backtrace:print-backtrace e :output nil)
-				      template stream)
-	       (error e))))))))
+       (handler-case
+           (if stream
+               (funcall template stream)
+               (with-output-to-string (s)
+                 (funcall template s)))
+         (error (e)
+           (if (and *catch-template-errors-p*
+                    *fancy-error-template-p*)
+               (render-error-template e
+                                      (trivial-backtrace:print-backtrace e :output nil)
+                                      template stream)
+               (error e))))))))
 
 (defun compile-string (string)
   (let ((fs (mapcar #'compile-token (process-tokens (parse-template-string string)))))
@@ -105,9 +105,9 @@
   (destructuring-bind (name . args) token
     (let ((compiler (get name 'token-compiler)))
       (if (null compiler)
-	  (lambda (stream)
+          (lambda (stream)
             (princ (template-error-string "Unknown token ~A" name) stream))
-	  (handler-case
+          (handler-case
               ;; Handle compile-time errors.
               (let ((f (apply compiler args)))
                 (assert (functionp f)
@@ -124,20 +124,20 @@
                           (error e1)))
                     (error (e2)
                       (let ((msg (template-error-string* e2 "There was an error rendering the token ~A" token)))
-			(if (and *catch-template-errors-p*
-				 (not *fancy-error-template-p*))
+                        (if (and *catch-template-errors-p*
+                                 (not *fancy-error-template-p*))
                             (princ msg stream)
                             (template-error msg)))))))
             (template-error (e1)
               (if (and *catch-template-errors-p*
-		       (not *catch-template-errors-p*))
+                       (not *catch-template-errors-p*))
                   (lambda (stream)
                     (princ e1 stream))
                   (error e1)))
             (error (e2)
               (let ((msg (template-error-string* e2 "There was an error compiling the token ~A" token)))
                 (if (and *catch-template-errors-p*
-			 (not *fancy-error-template-p*))
+                         (not *fancy-error-template-p*))
                     (lambda (stream)
                       (princ msg stream))
                     (template-error msg)))))))))
