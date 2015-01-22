@@ -14,4 +14,4 @@ install:
   - curl https://raw.githubusercontent.com/luismbo/cl-travis/master/install.sh | bash
 
 script:
-  - cl-launch -i "(ql:quickload :djula-test)(djula-test:run-djula-tests)"
+  - cl -l djula-test -e "(djula-test:run-djula-tests)"
