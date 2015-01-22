@@ -11,7 +11,7 @@ env:
     - LISP=ccl
 
 install:
-  - curl https://raw2.github.com/luismbo/cl-travis/master/install.sh | bash
+  - curl https://raw.githubusercontent.com/luismbo/cl-travis/master/install.sh | bash
 
 script:
   - cl-launch -i "(ql:quickload :djula-test)(djula-test:run-djula-tests)"
