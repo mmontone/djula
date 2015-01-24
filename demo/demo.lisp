@@ -8,19 +8,36 @@
 (djula:add-template-directory
  (asdf:system-relative-pathname :djula "demo/"))
 
+(defun ensure-file (path)
+  (when (not (probe-file path))
+    (error "File not found: ~A" path))
+  path)
+
+(defun define-static-resource (uri relative-path)
+  (push
+   (hunchentoot:create-static-file-dispatcher-and-handler
+    uri
+    (ensure-file
+     (asdf:system-relative-pathname :djula relative-path)))
+   hunchentoot:*dispatch-table*)
+  uri)
+
 (defparameter *demo-acceptor* (make-instance 'hunchentoot:easy-acceptor :port 9090))
 
-(push
- (hunchentoot:create-static-file-dispatcher-and-handler
-  "/simplegrid.css"
-  (asdf:system-relative-pathname :djula "demo/simplegrid.css"))
- hunchentoot:*dispatch-table*)
+(define-static-resource "/simplegrid.css"
+    "demo/static/simplegrid.css")
 
-(push
- (hunchentoot:create-static-file-dispatcher-and-handler
-  "/styles.css"
-  (asdf:system-relative-pathname :djula "demo/styles.css"))
- hunchentoot:*dispatch-table*)
+(define-static-resource "/styles.css"
+    "demo/static/styles.css")
+
+(define-static-resource "/prettify.js"
+    "demo/static/prettify/prettify.js")
+
+(define-static-resource "/lang-lisp.js"
+    "demo/static/prettify/lang-lisp.js")
+
+(define-static-resource "/prettify.css"
+    "demo/static/prettify/prettify.css")
 
 (defun start-demo ()
   (hunchentoot:start *demo-acceptor*))
