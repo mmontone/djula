@@ -6,7 +6,7 @@
 (in-package :djula-demo)
 
 (djula:add-template-directory
- (asdf:system-relative-pathname :djula "demo/"))
+ (asdf:system-relative-pathname :djula "demo/templates/"))
 
 (defun ensure-file (path)
   (when (not (probe-file path))
