@@ -12,4 +12,6 @@
              (:file "parser"    :depends-on ("packages"))
              (:file "tags"      :depends-on ("packages"))
              (:file "variables" :depends-on ("packages"))
-	     (:file "inheritance" :depends-on ("packages"))))))
+	     (:file "inheritance" :depends-on ("packages")))))
+  :perform (asdf:test-op (op c)
+			 (uiop:symbol-call :djula-test :run-djula-tests)))

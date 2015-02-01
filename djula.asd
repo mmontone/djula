@@ -35,6 +35,4 @@
 	     (:file "translation"    :depends-on ("specials" "pipeline"))
              (:file "util"           :depends-on ("packages"))
              (:file "variables"      :depends-on ("specials" "util")))))
-  :in-order-to ((test-op (load-op djula-test)))
-  :perform (test-op :after (op c)
-                    (funcall (intern "RUN-DJULA-TESTS" :djula-test))))
+  :in-order-to ((asdf:test-op (asdf:test-op :djula-test))))
