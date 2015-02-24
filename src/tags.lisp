@@ -343,44 +343,10 @@ conditional branching of the {% if %} tag. when called, the function returns two
    2. an error message string if something went wrong [ie, an invalid variable].
       [note: if return value 2 is present, then its probably not safe to consider return
        value 1 useful]"
-  (labels ((resolvers (list)
-	     "takes a \"logical statement\" [a list of keywords] minus any :OR or :AND tokens and
-returns a list of thunks which, when called, return two values:
-
-   1. whether or not the local statement is true or false
-   2. an error-string if something went wrong"
-	     (when list
-	       (destructuring-bind (head . tail)
-                   list
-		 (if (eql head :not)
-		     (let* ((2nd (first tail))
-			    (phrase (parse-variable-phrase (string 2nd))))
-		       (cons (lambda ()
-                               (multiple-value-bind (ret error-string) 
-                                   (resolve-variable-phrase phrase)
-                                 (values (not ret) error-string)))
-			     (resolvers (rest tail))))
-		     (let ((phrase (parse-variable-phrase (string head))))
-		       (cons (lambda ()
-                               (resolve-variable-phrase phrase))
-			     (resolvers tail))))))))
-    (multiple-value-bind (fs error-string)
-        (resolvers (remove :and (remove :or statement)))
-      (let ((and-token-seen-p (find :and statement)))
-	(values (lambda ()
-                  (block evaluate-logical-statement
-                    (flet ((evaluate (statement)
-                             "takes a thunks and funcalls it, returning the 1st value. if there is a second value
-it treats it as a template error string. see #'%"
-                             (multiple-value-bind (ret error-string)
-                                 (funcall statement)
-                               (if error-string
-                                   (return-from evaluate-logical-statement (values ret error-string))
-                                   ret))))
-                      (if and-token-seen-p
-                          (every #'evaluate fs)
-                          (some #'evaluate fs)))))
-		error-string)))))
+  (let ((parsed-statement (parse-sequence* (boolexp-parser) statement)))
+    (values (lambda ()
+	      (compile-boolexp parsed-statement))
+	  nil)))
 
 (def-token-compiler :parsed-if (statement then &optional else)
   ":PARSED-IF tags are compiled into a function that executes the {% if %} clause"
@@ -703,12 +669,34 @@ the file pointed to by the template-path `PATH'"
   "Parser: accept alphanumeric character"
   (sat #'symbolp))
 
-(parse-sequence* (boolexp-parser) (list :hello))
-(parse-sequence* (boolexp-parser) (list :not :that))
-(parse-sequence* (boolexp-parser) (list (list :not :that)))
-(parse-sequence* (boolexp-parser) (list :foo :and :bar))
-(parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar))
-(parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and :baz))
-(parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and :not :baz))
-(parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and :baz :or :boo))
-(parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and (list :baz :or :boo)))
+;; (parse-sequence* (boolexp-parser) (list :hello))
+;; (parse-sequence* (boolexp-parser) (list :not :that))
+;; (parse-sequence* (boolexp-parser) (list (list :not :that)))
+;; (parse-sequence* (boolexp-parser) (list :foo :and :bar))
+;; (parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar))
+;; (parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and :baz))
+;; (parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and :not :baz))
+;; (parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and :baz :or :boo))
+;; (parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and (list :baz :or :boo)))
+
+(defun compile-boolexp (bexp)
+  (if (symbolp bexp)
+      (resolve-variable-phrase (parse-variable-phrase (string bexp)))
+      (ecase (first bexp)
+	(:and (every #'compile-boolexp (rest bexp)))
+	(:or (some #'compile-boolexp (rest bexp)))
+	(:not (not (compile-boolexp (second bexp))))
+	(:< (< (compile-boolexp (second bexp))
+	       (compile-boolexp (third bexp))))
+	(:<= (<= (compile-boolexp (second bexp))
+		 (compile-boolexp (third bexp))))
+	(:> (> (compile-boolexp (second bexp))
+	       (compile-boolexp (third bexp))))
+	(:>= (>= (compile-boolexp (second bexp))
+		 (compile-boolexp (third bexp))))	
+	(:== (equalp (compile-boolexp (second bexp))
+		     (compile-boolexp (third bexp))))
+	(:!= (not (equalp (compile-boolexp (second bexp))
+			  (compile-boolexp (third bexp)))))
+	(:<> (not (equalp (compile-boolexp (second bexp))
+			  (compile-boolexp (third bexp))))))))

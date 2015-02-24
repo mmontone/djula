@@ -31,7 +31,7 @@
     (is (string= "LOJBAN" (tag :show-language)))))
 
 (test logic
-  (let ((fn (djula::compile-logical-statement (list "Thursday"))))
+  (let ((fn (djula::compile-logical-statement (list :thursday))))
     (let ((djula::*template-arguments* '((:thursday . t))))
       (is (funcall fn)))
     (let ((djula::*template-arguments* '((:thursday . nil))))
@@ -73,9 +73,9 @@
   ;; subexpressions
   (let ((template (djula::compile-string "{%if foo and (bar or baz) %}true{% else %}false{% endif %}")))
     (is (equalp
-	 (djula:render-template* template nil :foo (list :value t) 
-				 :bar (list :length 2))
-	"foo and bar")))
+	 (djula:render-template* template nil :foo t 
+				 :bar t)
+	"true")))
 
   ;; equality
   (let ((template (djula::compile-string "{%if foo == bar %}true{% else %}false{% endif %}")))
