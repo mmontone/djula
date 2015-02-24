@@ -17,7 +17,8 @@
 	       #:trivial-backtrace
 	       #:cl-slice
 	       #:cl-locale
-	       #:gettext)
+	       #:gettext
+	       #:parser-combinators)
   :components
   ((:module :src
 	    :components

@@ -44,7 +44,68 @@
 	 "bar"))
     (is (equalp
 	 (djula:render-template* template nil :foo t)
-	 "foo"))))
+	 "foo")))
+  ;; or
+  (let ((template (djula::compile-string "{%if foo or bar %}foo or bar{% else %}not foo or bar{% endif %}")))
+    (is (equalp
+	 (djula:render-template* template nil :foo nil :bar nil)
+	"not foo or bar"))
+    (is (equalp
+	 (djula:render-template* template nil :foo t :bar nil)
+	 "foo or bar")))
+
+  ;; and
+  (let ((template (djula::compile-string "{%if foo and bar %}foo and bar{% else %}not foo and bar{% endif %}")))
+    (is (equalp
+	 (djula:render-template* template nil :foo t :bar nil)
+	"not foo and bar"))
+    (is (equalp
+	 (djula:render-template* template nil :foo t :bar t)
+	 "foo and bar")))
+
+  ;; vars
+  (let ((template (djula::compile-string "{%if foo.value and bar.length %}foo and bar{% else %}not foo and bar{% endif %}")))
+    (is (equalp
+	 (djula:render-template* template nil :foo (list :value t) 
+				 :bar (list :length 2))
+	"foo and bar")))
+
+  ;; subexpressions
+  (let ((template (djula::compile-string "{%if foo and (bar or baz) %}true{% else %}false{% endif %}")))
+    (is (equalp
+	 (djula:render-template* template nil :foo (list :value t) 
+				 :bar (list :length 2))
+	"foo and bar")))
+
+  ;; equality
+  (let ((template (djula::compile-string "{%if foo == bar %}true{% else %}false{% endif %}")))
+    (is (equalp
+	 (djula:render-template* template nil 
+				 :foo "foo"
+				 :bar "bar")
+	"false"))
+    (is (equalp
+	 (djula:render-template* template nil 
+				 :foo "foo"
+				 :bar "foo")
+	"true")))
+
+  ;; unequality
+  (let ((template (djula::compile-string "{%if foo != bar %}true{% else %}false{% endif %}")))
+    (is (equalp
+	 (djula:render-template* template nil 
+				 :foo "foo"
+				 :bar "bar")
+	"true"))
+    (is (equalp
+	 (djula:render-template* template nil 
+				 :foo "foo"
+				 :bar "foo")
+	"false")))
+
+  ;; greater and lower
+  
+  )
 
 (test loop-test
   (let ((template (djula::compile-string "<ul>{% for elem in list %}<li>{{elem}}</li>{% endfor %}</ul>")))

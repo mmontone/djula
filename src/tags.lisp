@@ -610,3 +610,105 @@ the file pointed to by the template-path `PATH'"
             (template-error-string "Unknown templatetag ~A. known template tags are: openblock, closeblock, openvariable, closevariable, openbrace, closebrace, opencomment, closecomment" argument)))))
     (lambda (stream)
       (princ string stream))))
+
+;; Boolean expressions parser
+
+(def-cached-arg-parser transform (transform)
+  "Parser: transform and return the result, when the transformation applies (not null)"
+  #'(lambda (inp)
+      (typecase inp
+        (end-context (constantly nil))
+        (parser-combinators::context
+	 (let ((result (funcall transform (parser-combinators::context-peek inp))))
+           (if result
+               (let ((closure-value
+                      (make-instance 'parser-combinators::parser-possibility
+                                     :tree result :suffix (parser-combinators::context-next inp))))
+                 #'(lambda ()
+                     (when closure-value
+                       (prog1
+                           closure-value
+                         (setf closure-value nil)))))
+               (constantly nil)))))))
+
+(defun in-list (parser)
+  (transform
+   (lambda (x)
+     (and (listp x)
+	  (parse-sequence* parser x)))))
+
+(defun boolexp-parser ()
+  (named? boolexp
+    (choices 
+     (bterm boolexp)
+     (not-bfactor boolexp))))
+
+(defun not-bfactor (boolexp)
+  (choice
+   (seq-list? :not (boolexp-factor boolexp))
+   (boolexp-factor boolexp)))
+
+(defun boolexp-factor (boolexp)
+  (choices
+   (boolean-comparison)
+   (symbol?)
+   (in-list boolexp)))
+
+(defun boolean-comparison ()
+  (named-seq?
+   (<- e1 (symbol?))
+   (<- op (comparison-operator-parser))
+   (<- e2 (symbol?))
+   (list op e1 e2)))   
+
+(defun bterm (boolexp)
+  (choices 
+   (or-bterm boolexp)
+   (and-bterm boolexp)))
+
+(defun or-bterm (boolexp)
+  (named-seq? (<- exp (and-bterm boolexp))
+	      (<- exps
+		  (many1? (named-seq? :or
+				      (<- exp (and-bterm boolexp))
+				      exp)))
+	      (append (list :or exp) exps)))
+
+(defun and-bterm (boolexp)
+  (choice
+   (named-seq? (<- exp (not-bfactor boolexp))
+	       (<- exps
+		   (many1? (named-seq? :and
+				       (<- exp (not-bfactor boolexp))
+				       exp)))
+	       (append (list :and exp) exps))
+   (not-bfactor boolexp)))
+
+(defun bterm-ops (boolexp)
+  (many1*
+   (seq-list*
+    (binary-bool-operator-parser)
+    (not-bfactor boolexp))))
+
+(defun comparison-operator-parser ()
+  (choices :==
+	   :!=
+	   :<>
+	   :>
+	   :>=
+	   :<
+	   :<=))
+
+(def-cached-parser symbol?
+  "Parser: accept alphanumeric character"
+  (sat #'symbolp))
+
+(parse-sequence* (boolexp-parser) (list :hello))
+(parse-sequence* (boolexp-parser) (list :not :that))
+(parse-sequence* (boolexp-parser) (list (list :not :that)))
+(parse-sequence* (boolexp-parser) (list :foo :and :bar))
+(parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar))
+(parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and :baz))
+(parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and :not :baz))
+(parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and :baz :or :boo))
+(parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and (list :baz :or :boo)))

@@ -4,7 +4,8 @@
   (:use #:access
         #:alexandria
 	#:anaphora
-        #:common-lisp)
+        #:common-lisp
+	#:parser-combinators)
   (:export #:*allow-include-roots*
            #:*catch-template-errors-p*
 	   #:*verbose-errors-p*
