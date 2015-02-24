@@ -617,15 +617,21 @@ the file pointed to by the template-path `PATH'"
 (defun boolexp-factor (boolexp)
   (choices
    (boolean-comparison)
-   (symbol?)
+   (bliteral)
    (in-list boolexp)))
+
+(defun bliteral ()
+  (choices
+   (sat #'symbolp)
+   (sat #'stringp)
+   (sat #'integerp)))
 
 (defun boolean-comparison ()
   (named-seq?
-   (<- e1 (symbol?))
+   (<- e1 (bliteral))
    (<- op (comparison-operator-parser))
-   (<- e2 (symbol?))
-   (list op e1 e2)))   
+   (<- e2 (bliteral))
+   (list op e1 e2)))
 
 (defun bterm (boolexp)
   (choices 
@@ -665,10 +671,6 @@ the file pointed to by the template-path `PATH'"
 	   :<
 	   :<=))
 
-(def-cached-parser symbol?
-  "Parser: accept alphanumeric character"
-  (sat #'symbolp))
-
 ;; (parse-sequence* (boolexp-parser) (list :hello))
 ;; (parse-sequence* (boolexp-parser) (list :not :that))
 ;; (parse-sequence* (boolexp-parser) (list (list :not :that)))
@@ -679,24 +681,34 @@ the file pointed to by the template-path `PATH'"
 ;; (parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and :baz :or :boo))
 ;; (parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and (list :baz :or :boo)))
 
+(parse-sequence* (boolexp-parser) (list :foo.bar :== "foo"))
+(parse-sequence* (boolexp-parser) (list :foo.bar :== 55))
+
 (defun compile-boolexp (bexp)
-  (if (symbolp bexp)
-      (resolve-variable-phrase (parse-variable-phrase (string bexp)))
-      (ecase (first bexp)
-	(:and (every #'compile-boolexp (rest bexp)))
-	(:or (some #'compile-boolexp (rest bexp)))
-	(:not (not (compile-boolexp (second bexp))))
-	(:< (< (compile-boolexp (second bexp))
-	       (compile-boolexp (third bexp))))
-	(:<= (<= (compile-boolexp (second bexp))
-		 (compile-boolexp (third bexp))))
-	(:> (> (compile-boolexp (second bexp))
-	       (compile-boolexp (third bexp))))
-	(:>= (>= (compile-boolexp (second bexp))
-		 (compile-boolexp (third bexp))))	
-	(:== (equalp (compile-boolexp (second bexp))
-		     (compile-boolexp (third bexp))))
-	(:!= (not (equalp (compile-boolexp (second bexp))
-			  (compile-boolexp (third bexp)))))
-	(:<> (not (equalp (compile-boolexp (second bexp))
-			  (compile-boolexp (third bexp))))))))
+  (cond 
+    ((symbolp bexp)
+     (resolve-variable-phrase (parse-variable-phrase (string bexp))))
+    ((integerp bexp)
+     bexp)
+    ((stringp bexp)
+     bexp)
+    ((listp bexp)
+     (ecase (first bexp)
+       (:and (every #'compile-boolexp (rest bexp)))
+       (:or (some #'compile-boolexp (rest bexp)))
+       (:not (not (compile-boolexp (second bexp))))
+       (:< (< (compile-boolexp (second bexp))
+	      (compile-boolexp (third bexp))))
+       (:<= (<= (compile-boolexp (second bexp))
+		(compile-boolexp (third bexp))))
+       (:> (> (compile-boolexp (second bexp))
+	      (compile-boolexp (third bexp))))
+       (:>= (>= (compile-boolexp (second bexp))
+		(compile-boolexp (third bexp))))	
+       (:== (equalp (compile-boolexp (second bexp))
+		    (compile-boolexp (third bexp))))
+       (:!= (not (equalp (compile-boolexp (second bexp))
+			 (compile-boolexp (third bexp)))))
+       (:<> (not (equalp (compile-boolexp (second bexp))
+			 (compile-boolexp (third bexp)))))))
+    (t (error "Cannot compile boolean expression"))))

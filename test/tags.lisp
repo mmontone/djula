@@ -104,8 +104,38 @@
 	"false")))
 
   ;; greater and lower
+  (let ((template (djula::compile-string "{%if foo > bar %}greater{% else %}lower{% endif %}")))
+    (is (equalp
+	 (djula:render-template* template nil 
+				 :foo 44
+				 :bar 33)
+	"greater"))
+    (is (equalp
+	 (djula:render-template* template nil 
+				 :foo 33
+				 :bar 44)
+	"lower")))
   
-  )
+  ;; literals
+  (let ((template (djula::compile-string "{%if foo > 5 %}greater{% else %}lower{% endif %}")))
+    (is (equalp
+	 (djula:render-template* template nil 
+				 :foo 44)
+	"greater"))
+    (is (equalp
+	 (djula:render-template* template nil
+				 :foo 1)
+	 "lower")))
+
+  (let ((template (djula::compile-string "{%if foo == \"foo\" %}foo{% else %}bar{% endif %}")))
+    (is (equalp
+	 (djula:render-template* template nil 
+				 :foo "foo")
+	"foo"))
+    (is (equalp
+	 (djula:render-template* template nil
+				 :foo "lala")
+	 "bar"))))
 
 (test loop-test
   (let ((template (djula::compile-string "<ul>{% for elem in list %}<li>{{elem}}</li>{% endfor %}</ul>")))
