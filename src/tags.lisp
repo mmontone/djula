@@ -656,12 +656,6 @@ the file pointed to by the template-path `PATH'"
 	       (append (list :and exp) exps))
    (not-bfactor boolexp)))
 
-(defun bterm-ops (boolexp)
-  (many1*
-   (seq-list*
-    (binary-bool-operator-parser)
-    (not-bfactor boolexp))))
-
 (defun comparison-operator-parser ()
   (choices :==
 	   :!=

@@ -175,8 +175,8 @@
     (is (equalp 
 	 (djula:render-template* template nil :foo "foo" :baz "baz")
 	 "no")))
-  ;; association doesnt work for now:
-  #+nil(let ((template (djula::compile-string "{% if foo and (not baz) %}yes{% else %}no{% endif %}")))
+  ;; association
+  (let ((template (djula::compile-string "{% if foo and (not baz) %}yes{% else %}no{% endif %}")))
 	 (is (equalp 
 	      (djula:render-template* template nil)
 	      "no"))
@@ -186,8 +186,8 @@
 	 (is (equalp 
 	      (djula:render-template* template nil :foo "foo" :baz "baz")
 	      "no")))
-  ;; numeric comparison operators are not supported (<,>,=,/=)
-  #+nil(let ((template (djula::compile-string "{% if foo > baz %}yes{% else %}no{% endif %}")))
+  ;; numeric comparison
+  (let ((template (djula::compile-string "{% if foo > baz %}yes{% else %}no{% endif %}")))
     (is (equalp 
 	 (djula:render-template* template nil :foo 3 :baz 2)
 	 "yes"))
