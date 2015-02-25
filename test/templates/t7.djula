@@ -1,0 +1,2 @@
+{% include t1 %}
+{% include t2 %}

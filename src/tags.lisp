@@ -466,14 +466,30 @@ conditional branching of the {% if %} tag. when called, the function returns two
 (def-tag-compiler :include (path)
   "when compiled, :INCLUDE tags first compile the template pointed to by `PATH' then
 they compile into a function that simply calls this function with *TEMPLATE-ARGUMENTS*"
-  (aif (find-template* path)
-       (progn
-	 (pushnew it *linked-files* :test 'equal)
-	 (handler-case
-             (compile-template* path)
-           (error ()
-             (template-error "There was an error including the template ~A" it))))
-       (template-error "Cannot include the template ~A because it does not exist." path)))
+  (cond
+    ((stringp path)
+     (aif (find-template* path)
+	  (progn
+	    (pushnew it *linked-files* :test 'equal)
+	    (handler-case
+		(compile-template* path)
+	      (error ()
+		(template-error "There was an error including the template ~A" it))))
+	  (template-error "Cannot include the template ~A because it does not exist." path)))
+    ((keywordp path)
+     (lambda (stream)
+       (let ((path (resolve-variable-phrase (parse-variable-phrase (string path)))))
+	 
+	 (aif (find-template* path)
+	      (progn
+		(let ((compiled-template 
+		       (handler-case
+			   (compile-template* path)
+			(error ()
+			       (template-error "There was an error including the template ~A" it)))))
+		  (funcall compiled-template stream)))
+	      (template-error "Cannot include the template ~A because it does not exist." path)))))
+    (t (error "Invalid include template path: ~A" path))))
 
 (defvar *accumulated-javascript-strings* nil)
 
