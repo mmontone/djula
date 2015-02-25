@@ -666,23 +666,11 @@ the file pointed to by the template-path `PATH'"
   (choices :==
 	   :!=
 	   :<>
+	   :/=
 	   :>
 	   :>=
 	   :<
 	   :<=))
-
-;; (parse-sequence* (boolexp-parser) (list :hello))
-;; (parse-sequence* (boolexp-parser) (list :not :that))
-;; (parse-sequence* (boolexp-parser) (list (list :not :that)))
-;; (parse-sequence* (boolexp-parser) (list :foo :and :bar))
-;; (parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar))
-;; (parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and :baz))
-;; (parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and :not :baz))
-;; (parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and :baz :or :boo))
-;; (parse-sequence* (boolexp-parser) (list :foo.bar :<> :bar :and (list :baz :or :boo)))
-
-(parse-sequence* (boolexp-parser) (list :foo.bar :== "foo"))
-(parse-sequence* (boolexp-parser) (list :foo.bar :== 55))
 
 (defun compile-boolexp (bexp)
   (cond 
@@ -710,5 +698,7 @@ the file pointed to by the template-path `PATH'"
        (:!= (not (equalp (compile-boolexp (second bexp))
 			 (compile-boolexp (third bexp)))))
        (:<> (not (equalp (compile-boolexp (second bexp))
+			 (compile-boolexp (third bexp)))))
+       (:/= (not (equalp (compile-boolexp (second bexp))
 			 (compile-boolexp (third bexp)))))))
     (t (error "Cannot compile boolean expression"))))
