@@ -573,6 +573,21 @@ template."
           (lambda (stream)
             (princ string stream))))))
 
+(def-delimited-tag :autoescape :endautoescape :parsed-autoescape)
+
+(def-token-compiler :parsed-autoescape ((autoescape-enabled) . block-tokens)
+  (let* ((autoescape-p (cond
+			((member autoescape-enabled (list :yes :on))
+			 t)
+			((member autoescape-enabled (list :no :off))
+			 nil)
+			(t (error "Invalid argument ~A in autoescape" autoescape-enabled))))
+	(fs (let ((*auto-escape* autoescape-p))
+	      (mapcar #'compile-token block-tokens))))
+    (lambda (stream)
+      (dolist (f fs)
+	(funcall f stream)))))
+
 (def-tag-compiler :templatetag (argument)
   ":SHOW-FILE tags compile into a function that return the html-escaped contents of
 the file pointed to by the template-path `PATH'"

@@ -260,6 +260,49 @@
 	 (djula:render-template* template nil :foo 4 :bar 4)
 	"no"))))
 
+(test autoescape-test
+  (let ((djula:*catch-template-errors-p* nil))
+    (is (equalp
+	 (let ((template (djula::compile-string "{% autoescape on %}{{foo}}{% endautoescape %}")))
+	   (djula:render-template* template nil :foo "<b>Hello</b>"))
+	 "&lt;b&gt;Hello&lt;/b&gt;"))
+    (is (equalp
+	 (let ((template (djula::compile-string "{% autoescape off %}{{foo}}{% endautoescape %}")))
+	   (djula:render-template* template nil :foo "<b>Hello</b>"))
+	 "<b>Hello</b>"))
+    (is (equalp
+	 (let ((template (djula::compile-string "{% autoescape on %}{{foo | safe}}{% endautoescape %}")))
+	   (djula:render-template* template nil :foo "<b>Hello</b>"))
+	 "<b>Hello</b>"))
+    (is (equalp
+	 (let ((template (djula::compile-string "{% autoescape off %}{{foo | escape}}{% endautoescape %}")))
+	   (djula:render-template* template nil :foo "<b>Hello</b>"))
+	 "&lt;b&gt;Hello&lt;/b&gt;"))
+
+    (is (equalp
+	 (let ((template (djula::compile-string "{% autoescape yes %}{{foo}}{% endautoescape %}")))
+	   (djula:render-template* template nil :foo "<b>Hello</b>"))
+	 "&lt;b&gt;Hello&lt;/b&gt;"))
+    (is (equalp
+	 (let ((template (djula::compile-string "{% autoescape no %}{{foo}}{% endautoescape %}")))
+	   (djula:render-template* template nil :foo "<b>Hello</b>"))
+	 "<b>Hello</b>"))
+    (is (equalp
+	 (let ((template (djula::compile-string "{% autoescape yes %}{{foo | safe}}{% endautoescape %}")))
+	   (djula:render-template* template nil :foo "<b>Hello</b>"))
+	 "<b>Hello</b>"))
+    (is (equalp
+	 (let ((template (djula::compile-string "{% autoescape no %}{{foo | escape}}{% endautoescape %}")))
+	   (djula:render-template* template nil :foo "<b>Hello</b>"))
+	 "&lt;b&gt;Hello&lt;/b&gt;"))
+
+    ;; Invalid argument
+    (signals djula::template-error
+      (djula::compile-string "{% autoescape nope %}{{foo | escape}}{% endautoescape %}"))
+    (signals djula::template-error
+      (djula::compile-string "{% autoescape true %}{{foo | escape}}{% endautoescape %}"))
+    (signals djula::template-error
+      (djula::compile-string "{% autoescape %}{{foo | escape}}{% endautoescape %}"))))
 
 #+nil(test translation-test
   (let ((template (djula::compile-string "{% translation hello %}")))
