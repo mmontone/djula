@@ -1,5 +1,7 @@
 (in-package #:djula)
 
+(defvar *auto-escape* t)
+
 ;;; truncatechars:"30" => (:truncatechars 30)
 (defun parse-filter-string (string)
   (if-let ((colon (position #\: string)))
@@ -73,8 +75,12 @@ the result probably shouldn't be considered useful."
 
 (def-token-compiler :variable (variable-phrase &rest filters)
   ;; check to see if the "dont-escape" filter is used
+  ;; "safe" takes precedence before "escape"
   (let ((dont-escape
-         (find '(:safe) filters :test #'equal)))
+         (or
+          (find '(:safe) filters :test #'equal) ; safe filter used
+          (and (not *auto-escape*)              ; autoescape off and no escape filter used
+               (not (find '(:escape) filters :test #'equal))))))
     ;; return a function that resolves the variable-phase and applies the filters
     (lambda (stream)
       (multiple-value-bind (ret error-string)

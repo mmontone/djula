@@ -144,6 +144,10 @@
 (def-filter :safe (it)
   it)
 
+;;; this also
+(def-filter :escape (it)
+  it)
+
 ;;; TODO: Seems like an opportune place so adopt INTERACTIVE from Emacs.
 (def-filter :truncatechars (it n)
   (let ((n (if (stringp n)
