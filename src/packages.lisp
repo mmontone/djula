@@ -33,7 +33,6 @@
            #:html-escape
            #:render-template*
            #:toplevel-compiler
-	   #:url-decode
            #:url-encode
            #:url-encode-path
 	   #:add-template-directory))
