@@ -23,9 +23,11 @@
 	 :initform "my-obj")))
 
 (defmethod id ((my-obj my-obj))
+  (declare (ignore my-obj))
   22)
 
 (defun fid (my-obj)
+  (declare (ignore my-obj))
   33)
 
 (test variables-accessing-test
@@ -107,3 +109,37 @@
 	   (let ((template (djula::compile-string "{{obj.fid}}")))
 	     (djula:render-template* template nil :obj (make-instance 'my-obj))))
 	 "33"))))
+
+(test escaping-test
+  (let ((djula:*catch-template-errors-p* nil))
+    ;; Test defaults
+    (is (equalp
+	 (let ((template (djula::compile-string "{{foo}}")))
+	   (djula:render-template* template nil :foo "<b>Hello</b>"))
+	 "&lt;b&gt;Hello&lt;/b&gt;"))
+    (is (equalp
+	 (let ((template (djula::compile-string "{{foo | safe}}")))
+	   (djula:render-template* template nil :foo "<b>Hello</b>"))
+	 "<b>Hello</b>"))
+    ;; Auto escape setting
+    (let ((djula:*auto-escape* t))
+      (is (equalp
+	   (let ((template (djula::compile-string "{{foo}}")))
+	     (djula:render-template* template nil :foo "<b>Hello</b>"))
+	   "&lt;b&gt;Hello&lt;/b&gt;")))
+    (let ((djula:*auto-escape* nil))
+      (is (equalp
+	   (let ((template (djula::compile-string "{{foo}}")))
+	     (djula:render-template* template nil :foo "<b>Hello</b>"))
+	   "<b>Hello</b>")))
+    ;; Safe and auto-escape priorities
+    (let ((djula:*auto-escape* t))
+      (is (equalp
+	   (let ((template (djula::compile-string "{{foo | safe}}")))
+	     (djula:render-template* template nil :foo "<b>Hello</b>"))
+	   "<b>Hello</b>")))
+    (let ((djula:*auto-escape* nil))
+      (is (equalp
+	   (let ((template (djula::compile-string "{{foo | escape}}")))
+	     (djula:render-template* template nil :foo "<b>Hello</b>"))
+	   "&lt;b&gt;Hello&lt;/b&gt;")))))
