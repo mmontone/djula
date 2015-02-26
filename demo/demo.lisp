@@ -167,6 +167,13 @@
       ("{{ num | lisp: 1+}}" :num ,0))
      ("safe"
       ("{{ html | safe }}" :html ,"<p>Hello</p>"))
+     ("escape"
+      ("{{ html | escape }}" :html ,"<p>Hello</p>"))
+     ("autoescape"
+      ("{% autoescape on %}{{html}}{% endautoescape %}"
+       :html ,"<p>Hello</p>")
+      ("{% autoescape off %}{{html}}{% endautoescape %}"
+       :html ,"<p>Hello</p>"))
      ("date"
       ("{{ date | date }}" :date ,(get-universal-time))
       ("{{ date | date: djula-demo::+custom-date-format+}}" :date ,(get-universal-time)))
