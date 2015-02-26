@@ -7,6 +7,7 @@
         #:common-lisp
 	#:parser-combinators)
   (:export #:*allow-include-roots*
+           #:*auto-escape*
            #:*catch-template-errors-p*
 	   #:*verbose-errors-p*
 	   #:*fancy-error-template-p*
