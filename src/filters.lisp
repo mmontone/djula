@@ -36,7 +36,7 @@
 		      (predicate #'<)
 		      (key #'identity))
   (flet ((read-function (arg)
-	   (let* ((*package* (find-package :common-lisp-user))
+	   (let* ((*package* *djula-execute-package*)
 		  (sexp (read-from-string arg)))
 	     (coerce sexp 'function))))
     (let ((predicate-f (if (functionp predicate)
@@ -63,7 +63,7 @@
   (unless *eval-lisp-tags*
     (template-error "I can't evaulate the \"lisp\" filter ~A because *EVAL-LISP-TAGS* is NIL" lisp-string))
   (handler-case
-      (let* ((*package* (find-package :common-lisp-user))
+      (let* ((*package* *djula-execute-package*)
              (sexp (read-from-string lisp-string))
              (fn (coerce sexp 'function)))
         (funcall fn it))
