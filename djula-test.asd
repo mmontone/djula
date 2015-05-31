@@ -1,5 +1,6 @@
 (asdf:defsystem #:djula-test
   :license "MIT"
+  :description "Tests for the Djula template system"
   :depends-on (#:djula
                #:fiveam)
   :components
