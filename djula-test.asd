@@ -1,6 +1,9 @@
 (asdf:defsystem #:djula-test
   :license "MIT"
   :description "Tests for the Djula template system"
+  :author "Nick Allen <nallen05@gmail.com>"
+  :maintainer ("Eric Sessoms <eric@nubgames.com>"
+	       "Mariano Montone <marianomontone@gmail.com>")
   :depends-on (#:djula
                #:fiveam)
   :components
