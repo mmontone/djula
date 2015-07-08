@@ -11,6 +11,10 @@
                       :initform nil
                       :accessor compiled-template
                       :documentation "The compiled template (a closure)")
+   (linked-files :initarg :linked-files
+                 :accessor linked-files
+                 :initform '()
+                 :documentation "Extends for Include files.")
    (template-file :initarg :template-file
                   :accessor template-file
                   :initform (error "Provide the template file")
@@ -32,10 +36,12 @@
                  (file-write-date (template-file compiled-template)))
 
            ;; Compile the template file
-           (setf (compiled-template compiled-template)
-                 (let ((*block-alist* nil)
-                       (*linked-files* nil))
-                   (compile-string (fetch-template* (template-file compiled-template)))))))
+           (let ((*block-alist* nil)
+                 (*linked-files* nil))
+             (let ((compiled-str
+                     (compile-string (fetch-template* (template-file compiled-template)))))
+               (setf (compiled-template compiled-template) compiled-str
+                     (linked-files compiled-template) *linked-files*)))))
 
     (compile-template-file)
 
@@ -43,9 +49,13 @@
      compiled-template
      (lambda (stream)
        ;; Recompile the template if the template-file has changed
-       (when (not (equalp (file-write-date (template-file compiled-template))
-                          (template-file-write-date compiled-template)))
-         (compile-template-file))
+       (let ((template-file-write-date (template-file-write-date compiled-template)))
+         (when (or (not (equalp (file-write-date (template-file compiled-template))
+                                template-file-write-date))
+                   (loop for linked-file in (linked-files compiled-template)
+                         thereis (or (not (cl-fad:file-exists-p linked-file))
+                                     (> (file-write-date linked-file) template-file-write-date))))
+         (compile-template-file)))
        (funcall (compiled-template compiled-template) stream)))))
 
 (defmethod compile-template ((compiler compiler) name &optional (error-p t))
