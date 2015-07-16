@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootswatch-3.1.0/yeti/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.2.0/yeti/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,9 +26,10 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Djula HTML templating system 0.2 documentation" href="index.html" />
+    <link rel="next" title="API" href="api.html" />
     <link rel="prev" title="Internationalization" href="internationalization.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -54,7 +55,6 @@
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
-            <li class="divider-vertical"></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -72,10 +72,12 @@
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tags.html">Tags</a></li>
 <li class="toctree-l1"><a class="reference internal" href="comments.html">Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verbatim.html">Verbatim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Template inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="internationalization.html">Internationalization</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 </ul>
 </ul>
 </li>
@@ -102,7 +104,11 @@
               
                 
   <li>
-    <a href="internationalization.html" title="Previous Chapter: Internationalization"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Internationaliza...</span>
+    <a href="internationalization.html" title="Previous Chapter: Internationalization"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Internationaliza...</span>
+    </a>
+  </li>
+  <li>
+    <a href="api.html" title="Next Chapter: API"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">API &raquo;</span>
     </a>
   </li>
               
@@ -139,9 +145,9 @@
   <div class="section" id="s-error-handling">
 <span id="error-handling"></span><h1>Error handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h1>
 <p>Djula catches errors and barfs them to the template output by default.</p>
-<p>That is controlled via the <tt class="xref cl cl-symbol docutils literal"><span class="pre">*CATCH-TEMPLATE-ERRORS-P*</span></tt>. If changed to <tt class="docutils literal"><span class="pre">NIL</span></tt>, then errors are not caught anymore and are debuggable from the lisp listener.</p>
-<p>Djula provides more or less verbosity in template errors. Verbosity is controlled via the variable <tt class="xref cl cl-symbol docutils literal"><span class="pre">*VERBOSE-ERRORS-P*</span></tt>.</p>
-<p>Also, there&#8217;s a fancy page to display errors, which can be disabled if desired. That is controlled via the variable <tt class="xref cl cl-symbol docutils literal"><span class="pre">*FANCY-ERROR-TEMPLATE-P*</span></tt></p>
+<p>That is controlled via the <a class="reference internal" href="api.html#variable:djula:*catch-template-errors-p*" title="djula:*catch-template-errors-p*"><tt class="xref cl cl-symbol docutils literal"><span class="pre">*CATCH-TEMPLATE-ERRORS-P*</span></tt></a>. If changed to <tt class="docutils literal"><span class="pre">NIL</span></tt>, then errors are not caught anymore and are debuggable from the lisp listener.</p>
+<p>Djula provides more or less verbosity in template errors. Verbosity is controlled via the variable <a class="reference internal" href="api.html#variable:djula:*verbose-errors-p*" title="djula:*verbose-errors-p*"><tt class="xref cl cl-symbol docutils literal"><span class="pre">*VERBOSE-ERRORS-P*</span></tt></a>.</p>
+<p>Also, there&#8217;s a fancy page to display errors, which can be disabled if desired. That is controlled via the variable <a class="reference internal" href="api.html#variable:djula:*fancy-error-template-p*" title="djula:*fancy-error-template-p*"><tt class="xref cl cl-symbol docutils literal"><span class="pre">*FANCY-ERROR-TEMPLATE-P*</span></tt></a></p>
 <div class="section" id="s-api">
 <span id="api"></span><h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
 <dl class="variable">
@@ -175,7 +181,7 @@
     </p>
     <p>
         &copy; Copyright 2014, Nick Allen.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
     </p>
   </div>
 </footer>

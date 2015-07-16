@@ -24,10 +24,12 @@ Contents:
    variables
    tags
    comments
+   verbatim
    filters
    inheritance
    internationalization
    error-handling
+   api
    ..
       escaping
    ..

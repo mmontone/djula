@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootswatch-3.1.0/yeti/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.2.0/yeti/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Djula HTML templating system 0.2 documentation" href="index.html" />
     <link rel="next" title="Variables" href="variables.html" />
@@ -55,7 +55,6 @@
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
-            <li class="divider-vertical"></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -73,10 +72,12 @@
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tags.html">Tags</a></li>
 <li class="toctree-l1"><a class="reference internal" href="comments.html">Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verbatim.html">Verbatim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Template inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="internationalization.html">Internationalization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="error-handling.html">Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 </ul>
 </ul>
 </li>
@@ -103,11 +104,11 @@
               
                 
   <li>
-    <a href="basics.html" title="Previous Chapter: Basics"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Basics</span>
+    <a href="basics.html" title="Previous Chapter: Basics"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Basics</span>
     </a>
   </li>
   <li>
-    <a href="variables.html" title="Next Chapter: Variables"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Variables &raquo;</span>
+    <a href="variables.html" title="Next Chapter: Variables"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Variables &raquo;</span>
     </a>
   </li>
               
@@ -143,9 +144,9 @@
       
   <div class="section" id="s-usage">
 <span id="usage"></span><h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
-<p>To render our templates, they need to be compiled first. We do that with the <a class="reference internal" href="#function:djula:compile-template*" title="djula:compile-template*"><tt class="xref cl cl-function docutils literal"><span class="pre">COMPILE-TEMPLATE*</span></tt></a> function.
+<p>To render our templates, they need to be compiled first. We do that with the <a class="reference internal" href="api.html#function:djula:compile-template*" title="djula:compile-template*"><tt class="xref cl cl-function docutils literal"><span class="pre">COMPILE-TEMPLATE*</span></tt></a> function.
 For inheritance to work, we need to put all the templates in the same directory so that Djula can find them when resolving templates inheritance.</p>
-<p>Djula looks for templates in the <tt class="xref cl cl-symbol docutils literal"><span class="pre">*CURRENT-STORE*</span></tt>. For our templates to be found, we have to add the template folder path the templates store. We can do that with the <a class="reference internal" href="#function:djula:add-template-directory" title="djula:add-template-directory"><tt class="xref cl cl-function docutils literal"><span class="pre">add-template-directory</span></tt></a> function.</p>
+<p>Djula looks for templates in the <a class="reference internal" href="api.html#variable:djula:*current-store*" title="djula:*current-store*"><tt class="xref cl cl-symbol docutils literal"><span class="pre">*CURRENT-STORE*</span></tt></a>. For our templates to be found, we have to add the template folder path the templates store. We can do that with the <a class="reference internal" href="api.html#function:djula:add-template-directory" title="djula:add-template-directory"><tt class="xref cl cl-function docutils literal"><span class="pre">add-template-directory</span></tt></a> function.</p>
 <p>Here is an example:</p>
 <div class="highlight-common-lisp"><div class="highlight"><pre><span class="p">(</span><span class="nv">add-template-directory</span> <span class="p">(</span><span class="nv">asdf:system-relative-pathname</span> <span class="s">&quot;webapp&quot;</span> <span class="s">&quot;templates/&quot;</span><span class="p">))</span>
 
@@ -156,7 +157,7 @@ For inheritance to work, we need to put all the templates in the same directory 
 <span class="p">(</span><span class="nb">defparameter</span> <span class="nv">+contact.html+</span> <span class="p">(</span><span class="nv">djula:compile-template*</span> <span class="s">&quot;contact.html&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Then we can render our compiled templates using the <a class="reference internal" href="#function:djula:render-template*" title="djula:render-template*"><tt class="xref cl cl-function docutils literal"><span class="pre">RENDER-TEMPLATE*</span></tt></a> function:</p>
+<p>Then we can render our compiled templates using the <a class="reference internal" href="api.html#function:djula:render-template*" title="djula:render-template*"><tt class="xref cl cl-function docutils literal"><span class="pre">RENDER-TEMPLATE*</span></tt></a> function:</p>
 <div class="highlight-common-lisp"><div class="highlight"><pre><span class="p">(</span><span class="nv">djula:render-template*</span> <span class="nv">+welcome.html+</span> <span class="nv">s</span>
                            <span class="ss">:title</span> <span class="s">&quot;Ukeleles&quot;</span>
                            <span class="ss">:project-name</span> <span class="s">&quot;Ukeleles&quot;</span>
@@ -219,7 +220,7 @@ For inheritance to work, we need to put all the templates in the same directory 
     </p>
     <p>
         &copy; Copyright 2014, Nick Allen.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
     </p>
   </div>
 </footer>

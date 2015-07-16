@@ -9,7 +9,7 @@
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootswatch-3.1.0/yeti/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.2.0/yeti/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -26,7 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Djula HTML templating system 0.2 documentation" href="index.html" />
     <link rel="next" title="Error handling" href="error-handling.html" />
@@ -55,7 +55,6 @@
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
-            <li class="divider-vertical"></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -73,10 +72,12 @@
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tags.html">Tags</a></li>
 <li class="toctree-l1"><a class="reference internal" href="comments.html">Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verbatim.html">Verbatim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Template inheritance</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Internationalization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="error-handling.html">Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 </ul>
 </ul>
 </li>
@@ -113,11 +114,11 @@
               
                 
   <li>
-    <a href="inheritance.html" title="Previous Chapter: Template inheritance"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm">&laquo; Template inherit...</span>
+    <a href="inheritance.html" title="Previous Chapter: Template inheritance"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Template inherit...</span>
     </a>
   </li>
   <li>
-    <a href="error-handling.html" title="Next Chapter: Error handling"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm">Error handling &raquo;</span>
+    <a href="error-handling.html" title="Next Chapter: Error handling"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Error handling &raquo;</span>
     </a>
   </li>
               
@@ -187,7 +188,7 @@
 </div>
 <div class="section" id="s-choosing-language">
 <span id="choosing-language"></span><h2>Choosing language<a class="headerlink" href="#choosing-language" title="Permalink to this headline">¶</a></h2>
-<p>To choose the language to use, set the <tt class="xref cl cl-symbol docutils literal"><span class="pre">*CURRENT-LANGUAGE*</span></tt> variable.</p>
+<p>To choose the language to use, set the <a class="reference internal" href="api.html#variable:djula:*current-language*" title="djula:*current-language*"><tt class="xref cl cl-symbol docutils literal"><span class="pre">*CURRENT-LANGUAGE*</span></tt></a> variable.</p>
 <p>For example:</p>
 <div class="highlight-common-lisp"><div class="highlight"><pre><span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">djula:*current-language*</span> <span class="ss">:es</span><span class="p">))</span>
    <span class="p">(</span><span class="nv">djula:render-template*</span> <span class="nv">+translation.html+</span><span class="p">))</span>
@@ -214,7 +215,7 @@
     </p>
     <p>
         &copy; Copyright 2014, Nick Allen.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
     </p>
   </div>
 </footer>

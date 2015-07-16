@@ -10,7 +10,7 @@
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootswatch-3.1.0/yeti/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.2.0/yeti/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
     <link rel="top" title="Djula HTML templating system 0.2 documentation" href="index.html" />
 <meta charset='utf-8'>
@@ -54,7 +54,6 @@
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
-            <li class="divider-vertical"></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -72,10 +71,12 @@
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tags.html">Tags</a></li>
 <li class="toctree-l1"><a class="reference internal" href="comments.html">Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verbatim.html">Verbatim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Template inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="internationalization.html">Internationalization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="error-handling.html">Error handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 </ul>
 </ul>
 </li>
@@ -126,7 +127,8 @@
 <h1 id="index">Index</h1>
 
 <div class="genindex-jumpbox">
- <a href="#A"><strong>A</strong></a>
+ <a href="#Symbols"><strong>Symbols</strong></a>
+ | <a href="#A"><strong>A</strong></a>
  | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
@@ -142,6 +144,54 @@
  | <a href="#U"><strong>U</strong></a>
  
 </div>
+<h2 id="Symbols">Symbols</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api.html#variable:djula:*allow-include-roots*">*allow-include-roots* (Lisp variable)</a>
+  </dt>
+
+      
+  <dt><a href="api.html#variable:djula:*catch-template-errors-p*">*catch-template-errors-p* (Lisp variable)</a>
+  </dt>
+
+      
+  <dt><a href="api.html#variable:djula:*current-compiler*">*current-compiler* (Lisp variable)</a>
+  </dt>
+
+      
+  <dt><a href="api.html#variable:djula:*current-language*">*current-language* (Lisp variable)</a>
+  </dt>
+
+      
+  <dt><a href="api.html#variable:djula:*current-store*">*current-store* (Lisp variable)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api.html#variable:djula:*default-language*">*default-language* (Lisp variable)</a>
+  </dt>
+
+      
+  <dt><a href="api.html#variable:djula:*djula-execute-package*">*djula-execute-package* (Lisp variable)</a>
+  </dt>
+
+      
+  <dt><a href="api.html#variable:djula:*fancy-debug-p*">*fancy-debug-p* (Lisp variable)</a>
+  </dt>
+
+      
+  <dt><a href="api.html#variable:djula:*fancy-error-template-p*">*fancy-error-template-p* (Lisp variable)</a>
+  </dt>
+
+      
+  <dt><a href="api.html#variable:djula:*verbose-errors-p*">*verbose-errors-p* (Lisp variable)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
@@ -157,7 +207,7 @@
 
       </dl></dd>
       
-  <dt><a href="usage.html#function:djula:add-template-directory">add-template-directory (Lisp function)</a>
+  <dt><a href="api.html#function:djula:add-template-directory">add-template-directory (Lisp function)</a>, <a href="usage.html#function:djula:add-template-directory">[1]</a>
   </dt>
 
   </dl></td>
@@ -236,7 +286,7 @@
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="usage.html#function:djula:compile-template*">compile-template* (Lisp function)</a>
+  <dt><a href="api.html#function:djula:compile-template*">compile-template* (Lisp function)</a>, <a href="usage.html#function:djula:compile-template*">[1]</a>
   </dt>
 
       
@@ -303,6 +353,10 @@
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="api.html#macro:djula:def-tag-compiler">def-tag-compiler (Lisp macro)</a>
+  </dt>
+
+      
   <dt>
     default
   </dt>
@@ -348,6 +402,10 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="api.html#function:djula:fetch-template*">fetch-template* (Lisp function)</a>
+  </dt>
+
+      
   <dt>
     filter
   </dt>
@@ -359,6 +417,10 @@
 
       </dl></dd>
       
+  <dt><a href="api.html#function:djula:find-template*">find-template* (Lisp function)</a>
+  </dt>
+
+      
   <dt>
     first
   </dt>
@@ -369,6 +431,8 @@
   </dt>
 
       </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt>
     firstof
@@ -380,8 +444,6 @@
   </dt>
 
       </dl></dd>
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt>
     for
@@ -571,7 +633,7 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="usage.html#function:djula:render-template*">render-template* (Lisp function)</a>
+  <dt><a href="api.html#function:djula:render-template*">render-template* (Lisp function)</a>, <a href="usage.html#function:djula:render-template*">[1]</a>
   </dt>
 
   </dl></td>
@@ -784,7 +846,7 @@
   </dt>
 
         
-  <dt><a href="filters.html#std:templatefilter-urlencode">urlencode</a>, <a href="internationalization.html#std:templatefilter-urlencode">[1]</a>
+  <dt><a href="internationalization.html#std:templatefilter-urlencode">urlencode</a>, <a href="filters.html#std:templatefilter-urlencode">[1]</a>
   </dt>
 
       </dl></dd>
@@ -918,8 +980,20 @@
   </dt>
 
       </dl></dd>
+      
+  <dt><a href="api.html#function:djula:url-decode">url-decode (Lisp function)</a>
+  </dt>
+
+      
+  <dt><a href="api.html#function:djula:url-encode">url-encode (Lisp function)</a>
+  </dt>
+
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="api.html#function:djula:url-encode-path">url-encode-path (Lisp function)</a>
+  </dt>
+
       
   <dt>
     urlencode
@@ -927,7 +1001,7 @@
 
       <dd><dl>
         
-  <dt><a href="filters.html#std:templatefilter-urlencode">template filter</a>, <a href="internationalization.html#std:templatefilter-urlencode">[1]</a>
+  <dt><a href="internationalization.html#std:templatefilter-urlencode">template filter</a>, <a href="filters.html#std:templatefilter-urlencode">[1]</a>
   </dt>
 
       </dl></dd>
@@ -948,7 +1022,7 @@
     </p>
     <p>
         &copy; Copyright 2014, Nick Allen.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
     </p>
   </div>
 </footer>
