@@ -260,6 +260,17 @@
 	 (djula:render-template* template nil :foo 4 :bar 4)
 	"no"))))
 
+(test verbatim-test
+  (let ((template (djula::compile-string "{$ this is {{verbatim}} $}")))
+    (is (equalp 
+	 (djula:render-template* template nil)
+	 " this is {{verbatim}} ")))
+  (let ((template (djula::compile-string "{$ {% ifequal foo bar %}yes{% else %}no{% endifequal %} $}")))
+    (is 
+     (equalp 
+      (djula:render-template* template nil)
+      " {% ifequal foo bar %}yes{% else %}no{% endifequal %} "))))
+
 (test autoescape-test
   (let ((djula:*catch-template-errors-p* nil))
     (is (equalp

@@ -174,6 +174,9 @@
        :html ,"<p>Hello</p>")
       ("{% autoescape off %}{{html}}{% endautoescape %}"
        :html ,"<p>Hello</p>"))
+     ("verbatim"
+      ("{$ this is {{verbatim}} $}")
+      ("{$ {% if foo %}yes{% else %}no{% endif %} $}"))
      ("date"
       ("{{ date | date }}" :date ,(get-universal-time))
       ("{{ date | date: djula-demo::+custom-date-format+}}" :date ,(get-universal-time)))
