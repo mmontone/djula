@@ -24,6 +24,7 @@ Contents:
    variables
    tags
    comments
+   verbatim
    filters
    inheritance
    internationalization
