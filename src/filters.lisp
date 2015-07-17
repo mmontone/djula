@@ -30,7 +30,9 @@
   (escape-for-html (princ-to-string it)))
 
 (def-filter :length (it)
-  (length (princ-to-string it)))
+  (length (if (typep it 'sequence)
+              it
+              (princ-to-string it))))
 
 (def-filter :sort (it &optional
 		      (predicate #'<)
