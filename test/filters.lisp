@@ -13,6 +13,7 @@
   (is (string= "short..." (filter :truncatechars "short message" 5)))
   (is (string= "UPPER"    (filter :upper "upper")))
   (is (=        6         (filter :length "length")))
+  (is (=        3         (filter :length '("abcd" "ef" "g"))))
   (is (string= "&lt;asdf&gt;" (filter :force-escape "<asdf>")))
   (is (string= "asdf<br />asdf" (filter :linebreaksbr "asdf
 asdf")))
