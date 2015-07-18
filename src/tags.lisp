@@ -272,6 +272,13 @@ is useful to determine the package in which :LISP tags are executed"
 
 (def-delimited-tag :for :endfor :parsed-for)
 
+(defun iterable-list (iterable)
+  (typecase iterable
+    (array (coerce iterable 'list))
+    (hash-table (alexandria:hash-table-alist iterable))
+    (sequence iterable)
+    (t (error "Cannot iterate on ~A" iterable))))
+
 (def-token-compiler :parsed-for ((var in %listvar% &optional reversed) . clause)
   (if (not (eql in :in))
       (list
@@ -279,12 +286,13 @@ is useful to determine the package in which :LISP tags are executed"
       (let ((fs (mapcar #'compile-token clause))
 	    (phrase (parse-variable-phrase (string %listvar%))))
 	(lambda (stream)
-          (multiple-value-bind (list error-string)
+	  (multiple-value-bind (iterable error-string)
               (resolve-variable-phrase phrase)
-            (if error-string
+	    (if error-string
                 (with-template-error error-string
                   (error error-string))
-                (let* ((length (length list))
+		(let* ((list (iterable-list iterable))
+		       (length (length list))
                        (loopfor (list (cons :counter 1)
                                       (cons :counter0 0)
                                       (cons :revcounter length)
@@ -294,10 +302,16 @@ is useful to determine the package in which :LISP tags are executed"
                                       (cons :parentloop (get-variable :forloop))))
                        (*template-arguments*
                         ;; NIL is a placeholder for the value of the loop variable.
-                        (list* var nil :forloop loopfor *template-arguments*)))
+                        (if (consp var)
+			    (list* (car var) nil (cdr var) nil :forloop loopfor *template-arguments*)
+			    (list* var nil :forloop loopfor *template-arguments*))))
                   (dolist (x (if reversed (reverse list) list))
                     ;; Update the value of the loop variable.
-                    (setf (getf *template-arguments* var) x)
+		    (if (consp var)
+			(progn
+			  (setf (getf *template-arguments* (car var)) (car x))
+			  (setf (getf *template-arguments* (cdr var)) (cdr x)))
+			(setf (getf *template-arguments* var) x))
                     (dolist (f fs)
                       (funcall f stream))
                     (incf (cdr (assoc :counter loopfor)))
@@ -305,7 +319,8 @@ is useful to determine the package in which :LISP tags are executed"
                     (decf (cdr (assoc :revcounter loopfor)))
                     (decf (cdr (assoc :revcounter0 loopfor)))
                     (setf (cdr (assoc :first loopfor)) nil
-                          (cdr (assoc :last loopfor)) (zerop (cdr (assoc :revcounter0 loopfor))))))))))))
+                          (cdr (assoc :last loopfor)) 
+			  (zerop (cdr (assoc :revcounter0 loopfor))))))))))))
 
 (defun split-if-clause (clause-tokens)
   "returns two values:

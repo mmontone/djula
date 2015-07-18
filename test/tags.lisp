@@ -144,31 +144,63 @@
 	 "<ul></ul>"))
     (is (equalp
 	 (djula:render-template* template nil :list (list "foo" "bar"))
-	 "<ul><li>foo</li><li>bar</li></ul>"))
-    (let ((template (djula::compile-string "{% for x in list %}{{forloop.counter}}{% endfor %}")))
-      (is (equalp
-	   (djula:render-template* template nil :list (list 1 2 3))
-	   "123")))
-    (let ((template (djula::compile-string "{% for x in list %}{{forloop.counter0}}{% endfor %}")))
-      (is (equalp
-	   (djula:render-template* template nil :list (list 1 2 3))
-	   "012")))
-    (let ((template (djula::compile-string "{% for x in list %}{{forloop.revcounter}}{% endfor %}")))
-      (is (equalp
-	   (djula:render-template* template nil :list (list 1 2 3))
-	   "321")))
-    (let ((template (djula::compile-string "{% for x in list %}{{forloop.revcounter0}}{% endfor %}")))
-      (is (equalp
-	   (djula:render-template* template nil :list (list 1 2 3))
-	   "210")))
-    (let ((template (djula::compile-string "{% for x in list %}{{x}}{% if not forloop.last %}, {% endif %}{% endfor %}")))
-      (is (equalp
-	   (djula:render-template* template nil :list (list 1 2 3))
-	   "1, 2, 3")))
-    (let ((template (djula::compile-string "{% for x in list %}{% if forloop.first %}<first>{% endif %}{{x}}{% if forloop.first %}</first>{% endif %}{% endfor %}")))
-      (is (equalp
-	   (djula:render-template* template nil :list (list 1 2 3))
-	   "<first>1</first>23")))))
+	 "<ul><li>foo</li><li>bar</li></ul>")))
+  (let ((template (djula::compile-string "{% for x in list %}{{forloop.counter}}{% endfor %}")))
+    (is (equalp
+	 (djula:render-template* template nil :list (list 1 2 3))
+	 "123")))
+  (let ((template (djula::compile-string "{% for x in list %}{{forloop.counter0}}{% endfor %}")))
+    (is (equalp
+	 (djula:render-template* template nil :list (list 1 2 3))
+	 "012")))
+  (let ((template (djula::compile-string "{% for x in list %}{{forloop.revcounter}}{% endfor %}")))
+    (is (equalp
+	 (djula:render-template* template nil :list (list 1 2 3))
+	 "321")))
+  (let ((template (djula::compile-string "{% for x in list %}{{forloop.revcounter0}}{% endfor %}")))
+    (is (equalp
+	 (djula:render-template* template nil :list (list 1 2 3))
+	 "210")))
+  (let ((template (djula::compile-string "{% for x in list %}{{x}}{% if not forloop.last %}, {% endif %}{% endfor %}")))
+    (is (equalp
+	 (djula:render-template* template nil :list (list 1 2 3))
+	 "1, 2, 3")))
+  (let ((template (djula::compile-string "{% for x in list %}{% if forloop.first %}<first>{% endif %}{{x}}{% if forloop.first %}</first>{% endif %}{% endfor %}")))
+    (is (equalp
+	 (djula:render-template* template nil :list (list 1 2 3))
+	 "<first>1</first>23")))
+  (let ((template (djula::compile-string "<ul>{% for elem in list %}<li>{{elem}}</li>{% endfor %}</ul>")))
+    (is (equalp
+	 (djula:render-template* template nil :list #())
+	 "<ul></ul>"))
+    (is (equalp
+	 (djula:render-template* template nil :list #("foo" "bar"))
+	 "<ul><li>foo</li><li>bar</li></ul>")))
+  (let ((template (djula::compile-string "<ul>{% for elem in list %}<li>{{elem}}</li>{% endfor %}</ul>")))
+    (is (equalp
+	 (djula:render-template* template nil :list "")
+	 "<ul></ul>"))
+    (is (equalp
+	 (djula:render-template* template nil :list "abc")
+	 "<ul><li>a</li><li>b</li><li>c</li></ul>")))
+  (let ((template (djula::compile-string "<ul>{% for (x . y) in list %}<li>{{x}}->{{y}}</li>{% endfor %}</ul>")))
+    (is (equalp
+	 (djula:render-template* template nil :list ())
+	 "<ul></ul>"))
+    (is (equalp
+	 (djula:render-template* template nil :list '((a . foo) (b . bar)))
+	 "<ul><li>A->FOO</li><li>B->BAR</li></ul>")))
+  (let ((template (djula::compile-string "<ul>{% for (x . y) in list %}<li>{{x}}->{{y}}</li>{% endfor %}</ul>")))
+    (is (equalp
+	 (djula:render-template* template nil :list (make-hash-table))
+	 "<ul></ul>"))
+    (is (equalp
+	 (djula:render-template* template nil 
+				 :list (let ((table (make-hash-table)))
+					 (setf (gethash 'b table) 'bar)
+					 (setf (gethash 'a table) 'foo)	 
+					 table))
+	 "<ul><li>A->FOO</li><li>B->BAR</li></ul>"))))
 
 (test nested-loop-test
   (let ((template (djula::compile-string "{% for list in lists %}<ul>{% for elem in list %}<li>{{elem}}</li>{% endfor %}</ul>{% endfor %}")))
