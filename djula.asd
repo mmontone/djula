@@ -18,7 +18,8 @@
 	       #:cl-slice
 	       #:cl-locale
 	       #:gettext
-	       #:parser-combinators)
+	       #:parser-combinators
+	       #:iterate)
   :components
   ((:module :src
 	    :components

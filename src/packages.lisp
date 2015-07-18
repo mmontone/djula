@@ -1,8 +1,8 @@
 (in-package #:common-lisp-user)
 
 (defpackage #:djula
-  (:use #:access
-        #:alexandria
+  (:use #:iterate
+	#:alexandria
 	#:anaphora
         #:common-lisp
 	#:parser-combinators)
