@@ -94,7 +94,9 @@
        :foo ,"foo" :bar ,"foo"))
      ("for"
       ("<ul>{% for x in list %}<li>{{x}}</li>{% endfor %}</ul>"
-       :list ,(list 1 2 3)))
+       :list ,(list 1 2 3))
+      ("<ul>{% for (x . y) in list %}<li>{{x}}->{{y}}</li>{% endfor %}</ul>"
+       :list ,(list (cons 'a 1) (cons 'b 2) (cons 'b 3))))
      ("cycle"
       ("{% for x in list %}
         <tr class=\"{% cycle \"row1\" \"row2\" %}\">
