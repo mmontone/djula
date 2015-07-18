@@ -26,6 +26,40 @@ tags:
         {% endfor %}
         </ul>
 
+    If you need to loop over an association list, you can unpack the values
+    in each sublist into individual variables. For example, if your context
+    contains a list of (x . y) coordinates called ``points``, you could use the
+    following to output the list of points::
+
+	{% for (x . y) in points %}
+	    There is a point at {{ x }},{{ y }}
+	{% endfor %}
+
+    This can also be useful if you need to access the items in a hash-table.
+    For example, if your context contained a dictionary ``data``, the following
+    would display the keys and values of the dictionary::
+
+	{% for (key . value) in data.items %}
+	    {{ key }}: {{ value }}
+	{% endfor %}
+
+    The for loop sets a number of variables available within the loop:
+
+    ==========================  ===============================================
+    Variable                    Description
+    ==========================  ===============================================
+    ``forloop.counter``         The current iteration of the loop (1-indexed)
+    ``forloop.counter0``        The current iteration of the loop (0-indexed)
+    ``forloop.revcounter``      The number of iterations from the end of the
+				loop (1-indexed)
+    ``forloop.revcounter0``     The number of iterations from the end of the
+				loop (0-indexed)
+    ``forloop.first``           True if this is the first time through the loop
+    ``forloop.last``            True if this is the last time through the loop
+    ``forloop.parentloop``      For nested loops, this is the loop surrounding
+				the current one
+    ==========================  ===============================================
+
 :ttag:`if`, ``else``
     Evaluates a variable, and if that variable is "true" the contents of the
     block are displayed::
