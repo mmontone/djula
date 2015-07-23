@@ -71,11 +71,11 @@
 
 (defvar *current-compiler* (make-instance 'toplevel-compiler))
 
-(defmethod compile-template :around ((compiler toplevel-compiler) name &optional (error-p t))
+(defmethod compile-template ((compiler toplevel-compiler) name &optional (error-p t))
   (let ((*block-alist* nil)
         (*linked-files* nil))
     (let ((*current-compiler* (fragment-compiler compiler)))
-      (call-next-method))))
+      (compile-template *current-compiler* name error-p))))
 
 (defun compile-template* (name)
   "Compiles template NAME with compiler in *CURRENT-COMPILER*"
