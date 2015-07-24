@@ -103,7 +103,9 @@
                (render-error-template e
                                       (trivial-backtrace:print-backtrace e :output nil)
                                       template stream)
-               (error e))))))))
+               (error e))))))
+    (t (error 'simple-error :format-control "~A is not a valid template"
+	      :format-arguments (list template)))))
 
 (defun compile-string (string)
   (let ((fs (mapcar #'compile-token (process-tokens (parse-template-string string)))))
