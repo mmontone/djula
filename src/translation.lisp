@@ -1,12 +1,16 @@
 (in-package :djula)
 
-(defvar *translation-backend* :locale "The translation backend. One of :locale, :gettext")
+(defvar *translation-backend* nil "The translation backend. One of :locale, :gettext")
 
 (defun translate (string &optional (language (or *current-language* *default-language*))
 			   (backend *translation-backend*))
   (backend-translate backend string language))
 
-(defgeneric backend-translate (backend string language))
+(defgeneric backend-translate (backend string language)
+  (:method ((backend null) string language)
+    (error "Translation backend has not been setup"))
+  (:method ((backend t) string language)
+    (error "Invalid translation backend: ~A" backend)))
 
 (defmethod backend-translate ((backend (eql :locale)) string language)
   (cl-locale:i18n string :locale language))

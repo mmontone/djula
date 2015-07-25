@@ -35,4 +35,5 @@
            #:toplevel-compiler
            #:url-encode
            #:url-encode-path
-	   #:add-template-directory))
+	   #:add-template-directory
+	   #:*translation-backend*))
