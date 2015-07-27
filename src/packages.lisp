@@ -36,4 +36,5 @@
            #:url-encode
            #:url-encode-path
 	   #:add-template-directory
+	   #:translate
 	   #:*translation-backend*))
