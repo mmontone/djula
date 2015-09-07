@@ -48,16 +48,16 @@
                    (t (loop for octet across (babel:string-to-octets string :start index :end (1+ index))
                             do (format s "%~2,'0x" octet)))))))
 
-(defun join (str lst &optional (jstr ""))
-  (cond
-    ((null lst) jstr)
-    (t (let ((news (concatenate 'string
-				jstr
-				(first lst)
-				(if (null (rest lst))
-				    ""
-				    str))))
-	 (join str (rest lst) news)))))
+(defun join (separator list)
+  "Join the strings in LIST, using SEPARATOR in between the elements.
+
+Similar to Python's str.join"
+  ;; We have to remove the 'extra' separator at the start.
+  (subseq
+   (let ((result ""))
+     (dolist (item list result)
+       (setf result (concatenate 'string result separator item))))
+   (length separator)))
 
 (defun split (chars str &optional (lst nil) (accm ""))
   (cond
