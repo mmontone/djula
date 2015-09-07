@@ -245,8 +245,8 @@ following to output the list of points::
   {% endfor %}
 
 This can also be useful if you need to access the items in a hash-table.
-For example, if your context contained a dictionary ``data``, the following
-would display the keys and values of the dictionary::
+For example, if your context contained a hash-table named ``data``, the following
+would display the keys and values of the hash-table::
 
   {% for (key . value) in data.items %}
       {{ key }}: {{ value }}
