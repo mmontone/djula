@@ -10,7 +10,8 @@
   (is (string= "cutout"   (filter :cut "cutITout" "IT")))
   (is (string= "default"  (filter :default "" "default")))
   (is (string= "lower"    (filter :lower "LOWER")))
-  (is (string= "short..." (filter :truncatechars "short message" 5)))
+  (is (string= "sh..." (filter :truncatechars "short message" 5)))
+  (is (string= "Joel i..." (filter :truncatechars "Joel is a slug" 9)))
   (is (string= "UPPER"    (filter :upper "upper")))
   (is (=        6         (filter :length "length")))
   (is (=        3         (filter :length '("abcd" "ef" "g"))))
@@ -37,11 +38,11 @@ asdf")))
   (is (equalp (filter :join (list "1" "2" "3") ",,")
               "1,,2,,3"))
   (is (equalp (filter :first (list "a" "b" "c" "d"))
-	      "a"))
+              "a"))
   (is (equalp (filter :last (list "a" "b" "c" "d"))
-	      "d")))
+              "d")))
 
 (test apply-filters
-  (is (string= "SHORT..."
+  (is (string= "SH..."
                (djula::apply-filters "short message" '((:truncatechars 5) (:upper))))))
 

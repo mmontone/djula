@@ -153,12 +153,12 @@
 ;;; TODO: Seems like an opportune place so adopt INTERACTIVE from Emacs.
 (def-filter :truncatechars (it n)
   (let ((n (if (stringp n)
-	       (parse-integer n :junk-allowed t)
-	       n))
-	(string (princ-to-string it)))
+               (parse-integer n :junk-allowed t)
+               n))
+        (string (princ-to-string it)))
     (if (> (length string) n)
-	(concatenate 'string (subseq string 0 n) "...")
-	string)))
+        (concatenate 'string (subseq string 0 (- n 3)) "...")
+        string)))
 
 (def-filter :upper (it)
   (string-upcase (princ-to-string it)))
