@@ -2,7 +2,7 @@
 
 (in-suite djula-test)
 
-(test compiler
+(def-test compiler (:compile-at :definition-time)
   (let ((fn (djula::compile-string
              "{% ifequal day \"Thursday\" %}
 I never could get the hang of {{ day }}s.
