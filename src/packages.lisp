@@ -2,24 +2,25 @@
 
 (defpackage #:djula
   (:use #:iterate
-	#:alexandria
-	#:anaphora
+        #:alexandria
+        #:anaphora
         #:common-lisp
-	#:parser-combinators)
+        #:parser-combinators)
   (:export #:*allow-include-roots*
            #:*auto-escape*
            #:*catch-template-errors-p*
-	   #:*verbose-errors-p*
-	   #:*fancy-error-template-p*
-	   #:*fancy-debug-p*
+           #:*verbose-errors-p*
+           #:*fancy-error-template-p*
+           #:*fancy-debug-p*
            #:*current-compiler*
            #:*current-language*
            #:*current-store*
            #:*default-language*
+           #:*error-template*
            #:*template-eval*
            #:*template-root-folder*
            #:*template-search-path*
-	   #:*djula-execute-package*
+           #:*djula-execute-package*
            #:compile-template
            #:compile-template*
            #:compiler
@@ -35,6 +36,6 @@
            #:toplevel-compiler
            #:url-encode
            #:url-encode-path
-	   #:add-template-directory
-	   #:translate
-	   #:*translation-backend*))
+           #:add-template-directory
+           #:translate
+           #:*translation-backend*))
