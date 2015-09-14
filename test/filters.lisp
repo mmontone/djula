@@ -47,6 +47,5 @@ asdf")))
               "d")))
 
 (def-test apply-filters (:compile-at :definition-time)
-  (is (string= "SHORT..."
+  (is (string= "SH..."
                (djula::apply-filters "short message" '((:truncatechars 5) (:upper))))))
-
