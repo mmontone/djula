@@ -2,7 +2,7 @@
 
 (in-suite djula-test)
 
-(test parser
+(def-test parser (:compile-at :definition-time)
   (is (equalp
        `((:string "
 ")

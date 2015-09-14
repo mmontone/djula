@@ -10,7 +10,7 @@
     (with-output-to-string (s)
       (funcall fn s))))
 
-(test cycle
+(def-test cycle (:compile-at :definition-time)
   (is (string= "010101"
                (let ((fn (apply (get :cycle 'djula::tag-compiler) '(0 1)))
                      (djula::*template-arguments* nil))
@@ -18,26 +18,26 @@
                    (dotimes (_ 6)
                      (funcall fn s)))))))
 
-(test js
+(def-test js (:compile-at :definition-time)
   (let ((djula::*accumulated-javascript-strings* nil))
     (is (string= "" (tag :parsed-js "http://cdn.sockjs.org/sockjs-0.3.min.js")))
     (is (string= "
 <script type='text/javascript' src=\"http://cdn.sockjs.org/sockjs-0.3.min.js\"></script>"
                  (tag :emit-js)))))
 
-(test language
+(def-test language (:compile-at :definition-time)
   (let ((djula::*current-language* :english))
     (is (string= "" (tag :set-language :lojban)))
     (is (string= "LOJBAN" (tag :show-language)))))
 
-(test logic
+(def-test logic (:compile-at :definition-time)
   (let ((fn (djula::compile-logical-statement (list :thursday))))
     (let ((djula::*template-arguments* '((:thursday . t))))
       (is (funcall fn)))
     (let ((djula::*template-arguments* '((:thursday . nil))))
       (is (not (funcall fn))))))
 
-(test conditional-test
+(def-test conditional-test (:compile-at :definition-time)
   (let ((template (djula::compile-string "{% if foo %}foo{% else %}bar{% endif %}")))
     (is (equalp
          (djula:render-template* template nil)
@@ -137,7 +137,7 @@
                                  :foo "lala")
          "bar"))))
 
-(test loop-test
+(def-test loop-test (:compile-at :definition-time)
   (let ((template (djula::compile-string "<ul>{% for elem in list %}<li>{{elem}}</li>{% endfor %}</ul>")))
     (is (equalp
          (djula:render-template* template nil)
@@ -202,7 +202,7 @@
                                          table))
          "<ul><li>A->FOO</li><li>B->BAR</li></ul>"))))
 
-(test nested-loop-test
+(def-test nested-loop-test (:compile-at :definition-time)
   (let ((template (djula::compile-string "{% for list in lists %}<ul>{% for elem in list %}<li>{{elem}}</li>{% endfor %}</ul>{% endfor %}")))
     (is (equalp
          (djula:render-template* template nil
@@ -210,7 +210,7 @@
                                               (list "baz")))
          "<ul><li>foo</li><li>bar</li></ul><ul><li>baz</li></ul>"))))
 
-(test logical-statements-test
+(def-test logical-statements-test (:compile-at :definition-time)
   (let ((template (djula::compile-string "{% if foo and baz %}yes{% else %}no{% endif %}")))
     (is (equalp
          (djula:render-template* template nil)
@@ -262,7 +262,7 @@
 (defun print-hello ()
   "Hello!!")
 
-(test lisp-tag-test
+(def-test lisp-tag-test (:compile-at :definition-time)
   (let ((djula:*catch-template-errors-p* nil))
     ;; Simple lisp expression
     (let ((template (djula::compile-string "{% lisp (+ 33 44)%}")))
@@ -288,7 +288,7 @@
            (djula:render-template* template nil)
            "9")))))
 
-(test comment-test
+(def-test comment-test (:compile-at :definition-time)
   (let ((template (djula::compile-string "Hello{% comment %}This is a comment {% endcomment %}")))
     (is (equalp
          (djula:render-template* template nil)
@@ -298,7 +298,7 @@
          (djula:render-template* template nil)
          "Hello"))))
 
-(test ifequal-test
+(def-test ifequal-test (:compile-at :definition-time)
   (let ((template (djula::compile-string "{% ifequal foo bar %}yes{% else %}no{% endifequal %}")))
     (is (equalp
          (djula:render-template* template nil :foo "foo" :bar "bar")
@@ -310,7 +310,7 @@
          (djula:render-template* template nil :foo 4 :bar 4)
          "yes"))))
 
-(test ifnotequal-test
+(def-test ifnotequal-test (:compile-at :definition-time)
   (let ((template (djula::compile-string "{% ifnotequal foo bar %}yes{% else %}no{% endifnotequal %}")))
     (is (equalp
          (djula:render-template* template nil :foo "foo" :bar "bar")
@@ -322,7 +322,7 @@
          (djula:render-template* template nil :foo 4 :bar 4)
          "no"))))
 
-(test verbatim-test
+(def-test verbatim-test (:compile-at :definition-time)
   (let ((template (djula::compile-string "{$ this is {{verbatim}} $}")))
     (is (equalp
          (djula:render-template* template nil)
@@ -333,7 +333,7 @@
       (djula:render-template* template nil)
       " {% ifequal foo bar %}yes{% else %}no{% endifequal %} "))))
 
-(test autoescape-test
+(def-test autoescape-test (:compile-at :definition-time)
   (let ((djula:*catch-template-errors-p* nil))
     (is (equalp
          (let ((template (djula::compile-string "{% autoescape on %}{{foo}}{% endautoescape %}")))

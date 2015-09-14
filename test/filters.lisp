@@ -5,7 +5,7 @@
 (defun filter (name &rest args)
   (apply (get name 'djula::filter) args))
 
-(test filters
+(def-test filters (:compile-at :definition-time)
   (is (string= "Capfirst" (filter :capfirst "capfirst")))
   (is (string= "cutout"   (filter :cut "cutITout" "IT")))
   (is (string= "default"  (filter :default "" "default")))
@@ -41,7 +41,7 @@ asdf")))
   (is (equalp (filter :last (list "a" "b" "c" "d"))
 	      "d")))
 
-(test apply-filters
+(def-test apply-filters (:compile-at :definition-time)
   (is (string= "SHORT..."
                (djula::apply-filters "short message" '((:truncatechars 5) (:upper))))))
 

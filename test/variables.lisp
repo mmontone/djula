@@ -2,7 +2,7 @@
 
 (in-suite djula-test)
 
-(test variables-test
+(def-test variables-test (:compile-at :definition-time)
   (is (equal '(:truncatechars "30")
              (djula::parse-filter-string "truncatechars:\"30\"")))
   (is (equal '(:truncatechars "30")
@@ -12,7 +12,7 @@
   (is (equal '((:foo :bar :baz 2) (:truncatechars "30") (:upper))
              (djula::parse-variable-clause "foo.bar.baz.2 | truncatechars:30 | upper"))))
 
-(test apply-keys/indexes-test
+(def-test apply-keys/indexes-test (:compile-at :definition-time)
   (is (equal 1
              (djula::apply-keys/indexes
               '((:alist-a . 1) (:alist-b . (:plist-a #(3 2 1 0) :plist-b nil)))
@@ -30,7 +30,7 @@
   (declare (ignore my-obj))
   33)
 
-(test variables-accessing-test
+(def-test variables-accessing-test (:compile-at :definition-time)
   (let ((djula:*catch-template-errors-p* nil))
     
     (let ((template (djula::compile-string "{{foo}}")))
@@ -110,7 +110,7 @@
 	     (djula:render-template* template nil :obj (make-instance 'my-obj))))
 	 "33"))))
 
-(test escaping-test
+(def-test escaping-test (:compile-at :definition-time)
   (let ((djula:*catch-template-errors-p* nil))
     ;; Test defaults
     (is (equalp

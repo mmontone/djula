@@ -2,7 +2,7 @@
 
 (in-suite djula-test)
 
-(test lexer
+(def-test lexer (:compile-at :definition-time)
   (is (equalp
        `((:comment " you're going to be late ")
          (:string "

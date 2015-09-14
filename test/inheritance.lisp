@@ -11,47 +11,47 @@
   (defparameter +t6+ (djula:compile-template* "t6.djula"))
   (defparameter +t7+ (djula:compile-template* "t7.djula")))
 
-(test simple-block-test
+(def-test simple-block-test (:compile-at :definition-time)
   (let ((output (djula:render-template* +t1+ nil)))
     (is (equalp (remove-if (lambda (char)
 			     (member char (list #\  #\Newline)))
 			   output)
 		"beforeHelloafter"))))
 
-(test one-level-block-inheritance-test
+(def-test one-level-block-inheritance-test (:compile-at :definition-time)
   (let ((output (djula:render-template* +t2+ nil)))
     (is (equalp (remove-if (lambda (char)
 			     (member char (list #\  #\Newline)))
 			   output)
 		"beforeByeafter"))))
 
-(test two-levels-block-inheritance-test
+(def-test two-levels-block-inheritance-test (:compile-at :definition-time)
   (let ((output (djula:render-template* +t3+ nil)))
     (is (equalp (remove-if (lambda (char)
 			     (member char (list #\  #\Newline)))
 			   output)
 		"beforeFooafter"))))
 
-(test extends-error-test
+(def-test extends-error-test (:compile-at :definition-time)
   (signals djula::template-error
     (let ((djula:*catch-template-errors-p* nil))
       (djula::compile-string "{% extends \"foo.djula\" %}"))))
 
-(test simple-super-test
+(def-test simple-super-test (:compile-at :definition-time)
   (let ((output (djula:render-template* +t4+ nil)))
     (is (equalp (remove-if (lambda (char)
 			     (member char (list #\  #\Newline)))
 			   output)
 		"beforeHelloByeafter"))))
 
-(test simple-annon-super-test
+(def-test simple-annon-super-test (:compile-at :definition-time)
   (let ((output (djula:render-template* +t5+ nil)))
     (is (equalp (remove-if (lambda (char)
 			     (member char (list #\  #\Newline)))
 			   output)
 		"beforeHelloByeafter"))))
 
-(test super-error
+(def-test super-error (:compile-at :definition-time)
   (signals djula::template-error
     (let ((djula:*catch-template-errors-p* nil))
       (djula::compile-string "{% super %}")))
@@ -59,14 +59,14 @@
     (let ((djula:*catch-template-errors-p* nil))
       (djula::compile-string "{% super foo %}"))))
 
-(test include-test
+(def-test include-test (:compile-at :definition-time)
   (let ((djula:*catch-template-errors-p* nil))
     (is (equalp (remove-if (lambda (char)
 			     (member char (list #\  #\Newline)))
 			   (djula::render-template* +t6+))
 		"beforeHelloafterbeforeByeafter"))))
 
-(test include-with-vars-test
+(def-test include-with-vars-test (:compile-at :definition-time)
   (let ((djula:*catch-template-errors-p* nil))
     (is (equalp (remove-if (lambda (char)
 			     (member char (list #\  #\Newline)))
