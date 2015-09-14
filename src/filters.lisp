@@ -152,13 +152,20 @@
 
 ;;; TODO: Seems like an opportune place so adopt INTERACTIVE from Emacs.
 (def-filter :truncatechars (it n)
-  (let ((n (if (stringp n)
-	       (parse-integer n :junk-allowed t)
-	       n))
-	(string (princ-to-string it)))
-    (if (> (length string) n)
-	(concatenate 'string (subseq string 0 n) "...")
-	string)))
+  (let* ((n (if (stringp n)
+               (parse-integer n :junk-allowed t)
+               n))
+         (it-string (princ-to-string it))
+         (it-string-length (length it-string))
+         (ellision-string-length (length *ellision-string*)))
+    (cond
+      ((> ellision-string-length it-string-length)
+       (template-error "filter truncatechars: The ellision-string is is larger than the maximum length." ))
+      ((> it-string-length n)
+       (concatenate 'string
+                    (subseq it-string 0 (- n  ellision-string-length))
+                    *ellision-string*))
+      (t it-string))))
 
 (def-filter :upper (it)
   (string-upcase (princ-to-string it)))

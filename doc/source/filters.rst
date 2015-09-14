@@ -722,7 +722,7 @@ truncatechars
 ^^^^^^^^^^^^^
 
 Truncates a string if it is longer than the specified number of characters.
-Truncated strings will end with a translatable ellipsis sequence ("...").
+Truncated strings will end with the :cl:symbol:*ELLISION-STRING*, which defaults to "...".
 
 **Argument:** Number of characters to truncate to
 
