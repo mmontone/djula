@@ -9,16 +9,19 @@
           (string-trim '(#\") (subseq string (1+ colon))))
     (list (make-keyword (string-upcase string)))))
 
+(defun integer-or-keyword (string)
+  "If the STRING is an integer return an integer, otherwise return STRING as a
+keyword."
+  (if (every 'digit-char-p string)
+      (parse-integer string)
+      (make-keyword (string-upcase string))))
+
 ;;; foo.bar.baz.2 => (:foo :bar :baz 2)
 (defun parse-variable-phrase (string)
-  (flet ((interp (s)
-	   (if (every 'digit-char-p s)
-	       (parse-integer s)
-	       (make-keyword (string-upcase s)))))
-    (if-let ((dot (position #\. string)))
-      (cons (interp (subseq string 0 dot))
-            (parse-variable-phrase (subseq string (1+ dot))))
-      (list (interp string)))))
+  (if-let ((dot (position #\. string)))
+    (cons (integer-or-keyword (subseq string 0 dot))
+          (parse-variable-phrase (subseq string (1+ dot))))
+    (list (integer-or-keyword string))))
 
 ;;; foo.bar.baz.2 | truncatechars:"30" | upper => ((:foo :bar :baz 2) (:truncatechars 30) (:upper))
 (defun parse-variable-clause (unparsed-string)
