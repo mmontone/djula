@@ -744,7 +744,7 @@ the file pointed to by the template-path `PATH'"
 	 (case bexp
 	   (:true t)
 	   (:false nil)
-	   (resolve-variable-phrase (parse-variable-phrase (string bexp)))))
+	   (t (resolve-variable-phrase (parse-variable-phrase (string bexp))))))
     ((integerp bexp)
      bexp)
     ((stringp bexp)
