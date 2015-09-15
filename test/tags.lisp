@@ -127,6 +127,16 @@
                                  :foo 1)
          "lower")))
 
+  (let ((template (djula::compile-string "{%if true %}true{% else %}false{% endif %}")))
+    (is (equalp
+         (djula:render-template* template nil)
+         "true")))
+
+  (let ((template (djula::compile-string "{%if false %}false{% else %}true{% endif %}")))
+    (is (equalp
+         (djula:render-template* template nil)
+         "true")))
+
   (let ((template (djula::compile-string "{%if foo == \"foo\" %}foo{% else %}bar{% endif %}")))
     (is (equalp
          (djula:render-template* template nil
@@ -135,7 +145,14 @@
     (is (equalp
          (djula:render-template* template nil
                                  :foo "lala")
-         "bar"))))
+         "bar")))
+
+  ;; Expression parsing error
+  (signals error
+    (djula::compile-string "{%if foo bar %}foo{% else %}bar{% endif %}"))
+
+  (signals error
+    (djula::compile-string "{%if foo bar %}foo = bar{% else %}bar{% endif %}")))
 
 (def-test loop-test (:compile-at :definition-time)
   (let ((template (djula::compile-string "<ul>{% for elem in list %}<li>{{elem}}</li>{% endfor %}</ul>")))
@@ -276,12 +293,12 @@
           (is (equalp
                (djula:render-template* template nil)
                (print-hello))))))
-	;; Fix this. Fails on the first run for some reason. Works afterwards.
+    ;; Fix this. Fails on the first run for some reason. Works afterwards.
     ;; Set the lisp package for accessing the function
     #+nil(let ((template (djula::compile-string "{% set-package djula-test %}{% lisp (print-hello)%}")))
-      (is (equalp
-           (djula:render-template* template nil)
-           (print-hello))))
+           (is (equalp
+                (djula:render-template* template nil)
+                (print-hello))))
     ;; Set a template variable
     (let ((template (djula::compile-string "{% set hello = (+ 4 5) %}{{ hello }}")))
       (is (equalp

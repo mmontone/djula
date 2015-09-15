@@ -356,8 +356,13 @@ conditional branching of the {% if %} tag. when called, the function returns two
    2. an error message string if something went wrong [ie, an invalid variable].
       [note: if return value 2 is present, then its probably not safe to consider return
        value 1 useful]"
-  (let ((parsed-statement (parse-sequence* (boolexp-parser) statement)))
-    (values (lambda ()
+  (let ((parsed-statement (parse-sequence* (boolexp-parser)
+										   statement
+										   :complete t
+										   )))
+	(when (not parsed-statement)
+	  (template-error "Invalid boolean expression: ~A" statement))
+	(values (lambda ()
               (compile-boolexp parsed-statement))
             nil)))
 
@@ -673,7 +678,9 @@ the file pointed to by the template-path `PATH'"
   (transform
    (lambda (x)
      (and (listp x)
-          (parse-sequence* parser x)))))
+          (parse-sequence* parser x
+						   :complete t
+						   )))))
 
 (defun boolexp-parser ()
   (named? boolexp
