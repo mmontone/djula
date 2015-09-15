@@ -741,7 +741,10 @@ the file pointed to by the template-path `PATH'"
 (defun compile-boolexp (bexp)
   (cond
     ((symbolp bexp)
-     (resolve-variable-phrase (parse-variable-phrase (string bexp))))
+	 (case bexp
+	   (:true t)
+	   (:false nil)
+	   (resolve-variable-phrase (parse-variable-phrase (string bexp)))))
     ((integerp bexp)
      bexp)
     ((stringp bexp)
