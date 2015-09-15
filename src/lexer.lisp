@@ -1,5 +1,21 @@
 (in-package #:djula)
 
+#|
+
+The lexer tokens are of the form of (:type <string>)
+
+The token types are:
+- :comment
+- :unparsed-variable
+- :unparsed-translation-variable
+- :unparsed-tag
+- :verbatim
+
+Although not a lexer token, the keyword :not-special is used to signify that the string following a { is not a tag. 
+
+- :not-special: The previous { is converted into the token (:string "{")
+
+|#
 (defun get-closing-delimiter (type)
   (ecase type
     (:comment "#}")
