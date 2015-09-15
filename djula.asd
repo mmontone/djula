@@ -23,7 +23,8 @@
   :components
   ((:module :src
 	    :components
-            ((:file "compiler"       :depends-on ("lexer" "parser" "template-store"))
+            ((:file "access-patches" :depends-on ("packages"))
+             (:file "compiler"       :depends-on ("lexer" "parser" "template-store"))
              (:file "conditions"     :depends-on ("specials"))
              (:file "filters"        :depends-on ("pipeline"))
              (:file "lexer"          :depends-on ("pipeline"))
@@ -34,7 +35,7 @@
              (:file "tags"           :depends-on ("tag" "variables"))
              (:file "tag"            :depends-on ("pipeline"))
              (:file "template-store" :depends-on ("specials"))
-	     (:file "translation"    :depends-on ("specials" "pipeline"))
+             (:file "translation"    :depends-on ("specials" "pipeline"))
              (:file "util"           :depends-on ("packages"))
-             (:file "variables"      :depends-on ("specials" "util")))))
+             (:file "variables"      :depends-on ("access-patches" "specials" "util")))))
   :in-order-to ((asdf:test-op (asdf:test-op :djula-test))))
