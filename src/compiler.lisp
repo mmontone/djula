@@ -142,7 +142,7 @@
                             (template-error msg)))))))
             (template-error (e1)
               (if (and *catch-template-errors-p*
-                       (not *catch-template-errors-p*))
+                       (not *fancy-error-template-p*))
                   (lambda (stream)
                     (princ e1 stream))
                   (error e1)))
