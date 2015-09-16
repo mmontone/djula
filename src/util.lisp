@@ -58,3 +58,20 @@ Similar to Python's str.join"
      (dolist (item list result)
        (setf result (concatenate 'string result separator item))))
    (length separator)))
+
+(defun truncate-characters (string max-length &optional (elision-string *elision-string*))
+  "If the STRING is larger than MAX-LENGTH, truncate it and append the
+ELISION-STRING so that the total length is MAX-LENGTH. Otherwise return the
+STRING unmodified. If the truncation is impossible to accomplish, return nil. "
+  (assert (and (stringp string)
+               (integerp max-length)))
+  (let ((string-length (length string))
+        (elision-string-length (length elision-string)))
+    (cond
+      ((> elision-string-length string-length)
+       nil)
+      ((> string-length max-length)
+       (concatenate 'string
+                    (subseq string 0 (- max-length elision-string-length))
+                    elision-string))
+      (t string))))

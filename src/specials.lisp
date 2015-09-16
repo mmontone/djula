@@ -29,5 +29,5 @@
 (defvar *error-template* (asdf:system-relative-pathname :djula "templates/error-template.djhtml")
   "The error template used by `render-error-template'.")
 
-(defvar *ellision-string* "..."
+(defvar *elision-string* "..."
   "The string to be used by `truncatechars' at the end of truncated strings.")
