@@ -12,7 +12,7 @@
   (is (string= "lower"    (filter :lower "LOWER")))
   (is (string= "sh..." (filter :truncatechars "short message" 5)))
   (is (string= "Joel i..." (filter :truncatechars "Joel is a slug" 9)))
-  (let ((djula:*ellision-string* "xx"))
+  (let ((djula:*elision-string* "xx"))
     (is (string= "Joel isxx" (filter :truncatechars "Joel is a slug" 9))))
   (signals djula::template-error
     (filter :truncatechars "Joel is a slug" 2))

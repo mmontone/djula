@@ -17,7 +17,7 @@
            #:*current-store*
            #:*default-language*
            #:*error-template*
-           #:*ellision-string*
+           #:*elision-string*
            #:*template-eval*
            #:*template-root-folder*
            #:*template-search-path*

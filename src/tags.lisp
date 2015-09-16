@@ -110,12 +110,7 @@ form that returns some debugging info."
 (defun print-debugging-information (out)
   (flet ((% (fmt-string &rest fmt-args)
            (terpri out)
-           (apply 'format out fmt-string fmt-args))
-         (short (thing)
-           (let ((string (princ-to-string thing)))
-             (if (> (length string) 25)
-                 (format nil "~A..." (subseq string 0 22))
-                 string))))
+           (apply 'format out fmt-string fmt-args)))
     (macrolet ((with-safe (about &body body)
                  `(with-template-error (% "<<<There was an error gathering debug information about ~A>>>" ,about)
                     ,@body)))
@@ -158,66 +153,61 @@ form that returns some debugging info."
                 (labels ((rfn (plist)
                            (when plist
                              (destructuring-bind (k v . rest) plist
-                               (% "   ~A. ~A = ~A" (incf n) k (short v))
+                               (% "   ~A. ~A = ~A" (incf n) k (truncate-characters v 25 "..."))
                                (rfn rest)))))
                   (rfn *template-arguments*))))))
 
       (% "<<<END DEBUG INFO>>>"))))
 
 (defun print-fancy-debugging-information (stream)
-  (flet ((short (thing)
-           (let ((string (princ-to-string thing)))
-             (if (> (length string) 25)
-                 (format nil "~A..." (subseq string 0 22))
-                 string))))
-    (macrolet ((with-safe (about &body body)
-                 `(with-template-error (format stream "<<<There was an error gathering debug information about ~A>>>" ,about)
-                    ,@body)))
-      (format stream "<div class=\"debug\" style=\"position:fixed;bottom:0;font-size:12px;height:100px;overflow-y:auto;background-color:white;\">")
-      (format stream "<ul style=\"list-style-type:none;\">")
+  (macrolet ((with-safe (about &body body)
+               `(with-template-error (format stream "<<<There was an error gathering debug information about ~A>>>" ,about)
+                  ,@body)))
+    (format stream "<div class=\"debug\" style=\"position:fixed;bottom:0;font-size:12px;height:100px;overflow-y:auto;background-color:white;\">")
+    (format stream "<ul style=\"list-style-type:none;\">")
 
-      (with-safe "the default language"
-        (format stream "<li><b>Default language:</b> ~A </li>" (or *default-language* "none")))
+    (with-safe "the default language"
+      (format stream "<li><b>Default language:</b> ~A </li>" (or *default-language* "none")))
 
-      (with-safe "the current language"
-        (format stream "<li><b>Current language:</b> ~A</li>" (or *current-language* "none")))
+    (with-safe "the current language"
+      (format stream "<li><b>Current language:</b> ~A</li>" (or *current-language* "none")))
 
-      (with-safe "the current lisp execution package"
-        (format stream "<li><b>Lisp execution package:</b> ~A</li>"
-                (escape-for-html (princ-to-string (or *djula-execute-package* "none")))))
+    (with-safe "the current lisp execution package"
+      (format stream "<li><b>Lisp execution package:</b> ~A</li>"
+              (escape-for-html (princ-to-string (or *djula-execute-package* "none")))))
 
-      (with-safe "whether or not template errors are printing to the browser"
-        (format stream "<li><b>Print errors in browser:</b> ~A</li>"
-                (if *catch-template-errors-p*
-                    "yes" "no")))
+    (with-safe "whether or not template errors are printing to the browser"
+      (format stream "<li><b>Print errors in browser:</b> ~A</li>"
+              (if *catch-template-errors-p*
+                  "yes" "no")))
 
-      (with-safe "whether or not template errores are verbose"
-        (format stream "<li><b>Verbose errors:</b> ~A</li>"
-                (if *verbose-errors-p* "yes" "no")))
+    (with-safe "whether or not template errores are verbose"
+      (format stream "<li><b>Verbose errors:</b> ~A</li>"
+              (if *verbose-errors-p* "yes" "no")))
 
-      (with-safe "whether or not fancy errors are active"
-        (format stream
-                "<li><b>Fancy errors:</b> ~A</li>"
-                (if (and *catch-template-errors-p*
-                         *fancy-error-template-p*)
-                    "enabled" "disabled")))
+    (with-safe "whether or not fancy errors are active"
+      (format stream
+              "<li><b>Fancy errors:</b> ~A</li>"
+              (if (and *catch-template-errors-p*
+                       *fancy-error-template-p*)
+                  "enabled" "disabled")))
 
-      (with-safe "*ALLOW-INCLUDE-ROOTS*"
-        (format stream "<li><b>Allow include-roots:</b> ~A</li>" *allow-include-roots*))
+    (with-safe "*ALLOW-INCLUDE-ROOTS*"
+      (format stream "<li><b>Allow include-roots:</b> ~A</li>" *allow-include-roots*))
 
-      (with-safe "the arguments given to the template"
-        (format stream "<li><b>Template arguments:</b> ")
-        (if (null *template-arguments*)
-            (format stream "There were no arguments given to the template")
-            (let ((n 0))
-              (labels ((rfn (plist)
-                         (when plist
-                           (destructuring-bind (k v . rest) plist
-                             (format stream "   ~A. ~A = ~A" (incf n) k (escape-for-html (short v)))
-                             (rfn rest)))))
-                (rfn *template-arguments*)))))
-      (format stream "</ul>")
-      (format stream "</div>"))))
+    (with-safe "the arguments given to the template"
+      (format stream "<li><b>Template arguments:</b> ")
+      (if (null *template-arguments*)
+          (format stream "There were no arguments given to the template")
+          (let ((n 0))
+            (labels ((rfn (plist)
+                       (when plist
+                         (destructuring-bind (k v . rest) plist
+                           (format stream "   ~A. ~A = ~A" (incf n) k (escape-for-html (truncate-characters v 25 "...")))
+                           (rfn rest)))))
+              (rfn *template-arguments*)))))
+    (format stream "</ul>")
+    (format stream "</div>")))
 
 (def-tag-compiler :debug ()
   (lambda (stream)
