@@ -2,27 +2,27 @@
   :description "An implementation of Django templates for Common Lisp."
   :version "0.2"
   :maintainer ("Eric Sessoms <eric@nubgames.com>"
-	       "Mariano Montone <marianomontone@gmail.com>")
+               "Mariano Montone <marianomontone@gmail.com>")
   :author "Nick Allen <nallen05@gmail.com>"
   :license "MIT"
   :depends-on (#:access
                #:alexandria
                #:anaphora
                #:babel
-	       #:cl-ppcre
-	       #:cl-fad
-	       #:split-sequence
-	       #:local-time
-	       #:closer-mop
-	       #:trivial-backtrace
-	       #:cl-slice
-	       #:cl-locale
-	       #:gettext
-	       #:parser-combinators
-	       #:iterate)
+               #:cl-ppcre
+               #:cl-fad
+               #:split-sequence
+               #:local-time
+               #:closer-mop
+               #:trivial-backtrace
+               #:cl-slice
+               #:cl-locale
+               #:gettext
+               #:parser-combinators
+               #:iterate)
   :components
   ((:module :src
-	    :components
+            :components
             ((:file "compiler"       :depends-on ("lexer" "parser" "template-store"))
              (:file "conditions"     :depends-on ("specials"))
              (:file "filters"        :depends-on ("pipeline"))
