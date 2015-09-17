@@ -1,6 +1,6 @@
 (in-package #:djula)
 
-(declaim (special *template-arguments*))
+(defvar *template-arguments*)
 
 (defvar *current-language* nil)
 
