@@ -5,7 +5,7 @@
   :maintainer ("Eric Sessoms <eric@nubgames.com>"
 	       "Mariano Montone <marianomontone@gmail.com>")
   :depends-on (#:djula
-               #:fiveam)
+               #:1am)
   :components
   ((:module :test
 	    :components
