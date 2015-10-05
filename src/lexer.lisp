@@ -55,9 +55,10 @@ Although not a lexer token, the keyword :not-special is used to signify that the
       (:not-special (values '(:string "{")
                             (1+ current-position))))))
 
-(defun split-template-string (template current-position)
+(defun parse-template-string (template)
   "Transform the TEMPLATE into a list of lexer tokens "
-  (let (results)
+  (let ((results nil)
+        (current-position 0))
     (loop
       :for { := (next-tag template current-position)
       :until (null {)
@@ -74,6 +75,3 @@ Although not a lexer token, the keyword :not-special is used to signify that the
 (def-token-compiler :verbatim (string)
   (lambda (stream)
     (write-string string stream)))
-
-(defun parse-template-string (string)
-  (split-template-string string 0))
