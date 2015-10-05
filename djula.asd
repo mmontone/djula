@@ -26,7 +26,7 @@
             ((:file "compiler"       :depends-on ("lexer" "parser" "template-store"))
              (:file "conditions"     :depends-on ("specials"))
              (:file "filters"        :depends-on ("pipeline"))
-             (:file "lexer"          :depends-on ("pipeline"))
+             (:file "lexer"          :depends-on ("pipeline" "util"))
              (:file "packages")
              (:file "parser"         :depends-on ("pipeline"))
              (:file "pipeline"       :depends-on ("conditions"))

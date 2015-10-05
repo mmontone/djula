@@ -55,25 +55,22 @@ Although not a lexer token, the keyword :not-special is used to signify that the
       (:not-special (values '(:string "{")
                             (1+ current-position))))))
 
-(defun split-template-string (template current-position)
+(defun parse-template-string (template)
   "Transform the TEMPLATE into a list of lexer tokens "
-  (let (results)
-    (loop
-      :for { := (next-tag template current-position)
-      :until (null {)
-      :do
-         (when (> { current-position)
-           (push `(:string ,(subseq template current-position {)) results))
-         (multiple-value-bind (token next-position) (parse-tag template {)
-           (push token results)
-           (setf current-position next-position)))
-    (when (< current-position (length template))
-      (push `(:string ,(subseq template current-position)) results))
-    (nreverse results)))
+  (let ((current-position 0))
+    (accum accumulate
+      (loop
+        :for { := (next-tag template current-position)
+        :until (null {)
+        :do
+           (when (> { current-position)
+             (accumulate `(:string ,(subseq template current-position {))))
+           (multiple-value-bind (token next-position) (parse-tag template {)
+             (accumulate token)
+             (setf current-position next-position)))
+      (when (< current-position (length template))
+        (accumulate `(:string ,(subseq template current-position)))))))
 
 (def-token-compiler :verbatim (string)
   (lambda (stream)
     (write-string string stream)))
-
-(defun parse-template-string (string)
-  (split-template-string string 0))

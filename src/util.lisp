@@ -75,3 +75,17 @@ STRING unmodified. If the truncation is impossible to accomplish, return nil. "
                     (subseq string 0 (- max-length elision-string-length))
                     elision-string))
       (t string))))
+
+;; Taken from: http://malisper.me/2015/05/31/efficiently-building-lists/
+(defmacro accum (accfn &body body)
+  (let ((ghead (gensym "HEAD"))
+        (gtail (gensym "TAIL"))
+        (garg  (gensym "ARG")))
+    `(let* ((,ghead (list nil))
+            (,gtail ,ghead))
+       (macrolet ((,accfn (,garg)
+                    `(setf ,',gtail
+                           (setf (cdr ,',gtail)
+                                 (list ,,garg)))))
+         ,@body
+         (cdr ,ghead)))))
