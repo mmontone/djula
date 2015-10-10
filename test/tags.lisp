@@ -3,8 +3,8 @@
 (in-suite djula-test)
 
 (defun tag (name &rest args)
-  (let ((fn (apply (or (get name 'djula::tag-compiler)
-                       (get name 'djula::token-compiler))
+  (let ((fn (apply (or (djula::find-tag-compiler name)
+                       (djula::find-token-compiler name))
                    args))
         (*template-arguments* nil))
     (with-output-to-string (s)
@@ -12,7 +12,7 @@
 
 (def-test cycle (:compile-at :definition-time)
   (is (string= "010101"
-               (let ((fn (apply (get :cycle 'djula::tag-compiler) '(0 1)))
+               (let ((fn (apply (djula::find-tag-compiler :cycle) '(0 1)))
                      (djula::*template-arguments* nil))
                  (with-output-to-string (s)
                    (dotimes (_ 6)

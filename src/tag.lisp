@@ -16,33 +16,35 @@
 (def-token-processor :unparsed-tag (unparsed-string) rest
   (multiple-value-bind (tag-name start-rest)
       (semi-parse-tag unparsed-string)
-    (if-let ((f (get tag-name 'unparsed-tag-processor)))
+    (if-let ((f (find-unparsed-tag-processor tag-name)))
       (funcall f rest (subseq unparsed-string start-rest))
       (let ((ret (parse-rest-of-tag unparsed-string start-rest)))
         (process-tokens (cons (list* :tag tag-name ret) rest))))))
 
 (def-token-processor :tag (name . args) rest
   ":TAG tokens are sometimes parsed into some other tokens by PROCESS-TOKENS"
-  (let ((f (get name 'tag-processor)))
+  (let ((f (find-tag-processor name)))
     (if (null f)
-	(cons (list* :tag name args)
+        (cons (list* :tag name args)
               (process-tokens rest))
-	(with-template-error
+        (with-template-error
             (cons
              (list :string
-                   (template-error-string "There was an error processing tag ~A" name))
+                   (template-error-string "There was an error processing tag ~A"
+                                          name))
              (process-tokens rest))
-	  (apply f rest args)))))
+          (apply f rest args)))))
 
 (def-token-compiler :tag (name . args)
-  (let ((f (get name 'tag-compiler)))
+  (let ((f (find-tag-compiler name)))
     (if (null f)
-	(lambda (stream)
+        (lambda (stream)
           (princ (template-error-string "Unknown tag ~A" name) stream))
-	(with-template-error
+        (with-template-error
             (lambda (stream)
-              (princ (template-error-string "There was an error compiling tag ~A" name) stream))
-	  (apply f args)))))
+              (princ (template-error-string "There was an error compiling tag ~A" name)
+                     stream))
+          (apply f args)))))
 
 (defun find-end-tag (tag-name tokens)
   "returns NIL if a :TAG token with the name `TAG-NAME' can't be found in `TOKENS'.
