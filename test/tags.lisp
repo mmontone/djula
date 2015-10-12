@@ -211,13 +211,15 @@
     (is (equalp
          (djula:render-template* template nil :list (make-hash-table))
          "<ul></ul>"))
-    (is (equalp
+    (is (member
          (djula:render-template* template nil
                                  :list (let ((table (make-hash-table)))
                                          (setf (gethash 'b table) 'bar)
                                          (setf (gethash 'a table) 'foo)
                                          table))
-         "<ul><li>A->FOO</li><li>B->BAR</li></ul>"))))
+         '("<ul><li>A->FOO</li><li>B->BAR</li></ul>"
+           "<ul><li>B->BAR</li><li>A->FOO</li></ul>")
+         :test #'string=))))
 
 (def-test nested-loop-test (:compile-at :definition-time)
   (let ((template (djula::compile-string "{% for list in lists %}<ul>{% for elem in list %}<li>{{elem}}</li>{% endfor %}</ul>{% endfor %}")))
