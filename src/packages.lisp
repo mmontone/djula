@@ -44,6 +44,7 @@
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (unless (find-package "DJULA.TOKEN-PROCESSORS")
     (defpackage "DJULA.TOKEN-PROCESSORS"
+      (:use)
       (:documentation "Contains the token processors")
       (:export #:comment-tag
                #:almost-parsed-ifequal
@@ -59,6 +60,7 @@
 
   (unless (find-package "DJULA.UNPARSED-TAG-PROCESSORS")
     (defpackage "DJULA.UNPARSED-TAG-PROCESSORS"
+      (:use)
       (:documentation "This package contains the unparsed tag processors.")
       (:export #:filter
                #:set
@@ -70,6 +72,7 @@
 
   (unless (find-package "DJULA.TAG-PROCESSORS")
     (defpackage "DJULA.TAG-PROCESSORS"
+      (:use)
       (:documentation "This package contains the tag processors.")
       (:export #:semi-parsed-ifequal
                #:semi-parsed-filter
@@ -85,6 +88,7 @@
 
   (unless (find-package "DJULA.TOKEN-COMPILERS")
     (defpackage "DJULA.TOKEN-COMPILERS"
+      (:use)
       (:documentation "This package contains the token compilers.")
       (:export #:parsed-js-script
                #:tag
@@ -105,6 +109,7 @@
 
   (unless (find-package "DJULA.TAG-COMPILERS")
     (defpackage "DJULA.TAG-COMPILERS"
+      (:use)
       (:documentation "This package contains the tag compilers.")
       (:export #:set-package
                #:endifchanged
@@ -129,6 +134,7 @@
 
   (unless (find-package "DJULA.FILTERS")
     (defpackage "DJULA.FILTERS"
+      (:use)
       (:documentation "This package contains the djula filters. Filters are take as
   a first argument a string and return a string.")
       (:export #:date
