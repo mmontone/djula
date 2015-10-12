@@ -3,7 +3,7 @@
 (in-suite djula-test)
 
 (defun filter (name &rest args)
-  (apply (get name 'djula::filter) args))
+  (apply (djula::find-filter name) args))
 
 (def-test filters (:compile-at :definition-time)
   (is (string= "Capfirst" (filter :capfirst "capfirst")))

@@ -5,7 +5,7 @@
             (destructuring-bind (name . args)
                 filter
               (handler-case
-                  (if-let ((fn (get name 'filter)))
+                  (if-let ((fn (find-filter name)))
                     (apply fn value args)
                     (template-error-string "Unknown filter ~A" name))
                 (template-error (e1)

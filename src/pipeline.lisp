@@ -25,29 +25,69 @@
 ;;; variables in the current scope.
 
 ;;; rest-var => a poorly executed stream variable
+
 (defmacro def-token-processor (name args rest-var &body body)
-  (with-unique-names (arg-list)
-    `(setf (get ,name 'token-processor)
-           (lambda (&rest ,arg-list)
+  (let* ((token-processor-package (find-package "DJULA.TOKEN-PROCESSORS"))
+         (function-name (intern (symbol-name name)
+                                token-processor-package)))
+    (multiple-value-bind (body declarations docstring)
+        (parse-body body :documentation t)
+      (with-unique-names (arg-list)
+        `(progn
+           (defun ,function-name (&rest ,arg-list)
+             ,@(when docstring (list docstring))
+             ,@declarations
              (destructuring-bind (,rest-var ,@args)
                  ,arg-list
-               ,@body)))))
+               ,@body))
+           (export ',function-name ,token-processor-package))))))
+
+(defun find-token-processor (name)
+  "Return the token processor by the name of NAME."
+  (find-symbol (symbol-name name)
+               (find-package "DJULA.TOKEN-PROCESSORS")))
 
 (defmacro def-unparsed-tag-processor (name args rest-var &body body)
-  (with-unique-names (arg-list)
-    `(setf (get ,name 'unparsed-tag-processor)
-           (lambda (&rest ,arg-list)
+  (let* ((unparsed-tag-processor-package (find-package "DJULA.UNPARSED-TAG-PROCESSORS"))
+         (function-name (intern (symbol-name name)
+                                unparsed-tag-processor-package)))
+    (multiple-value-bind (body declarations docstring)
+        (parse-body body :documentation t)
+      (with-unique-names (arg-list)
+        `(progn
+           (defun ,function-name (&rest ,arg-list)
+             ,@(when docstring (list docstring))
+             ,@declarations
              (destructuring-bind (,rest-var ,@args)
                  ,arg-list
-               ,@body)))))
+               ,@body))
+           (export ',function-name ,unparsed-tag-processor-package))))))
+
+(defun find-unparsed-tag-processor (tag-name)
+  "Return the unparsed tag processor by the name of TAG-NAME."
+  (find-symbol (symbol-name tag-name)
+               (find-package "DJULA.UNPARSED-TAG-PROCESSORS")))
 
 (defmacro def-tag-processor (name args rest-var &body body)
-  (with-unique-names (arg-list)
-    `(setf (get ,name 'tag-processor)
-           (lambda (&rest ,arg-list)
+  (let* ((tag-processor-package (find-package "DJULA.TAG-PROCESSORS"))
+         (function-name (intern (symbol-name name)
+                                tag-processor-package)))
+    (multiple-value-bind (body declarations docstring)
+        (parse-body body :documentation t)
+      (with-unique-names (arg-list)
+        `(progn
+           (defun ,function-name (&rest ,arg-list)
+             ,@(when docstring (list docstring))
+             ,@declarations
              (destructuring-bind (,rest-var ,@args)
                  ,arg-list
-               ,@body)))))
+               ,@body))
+           (export ',function-name ,tag-processor-package))))))
+
+(defun find-tag-processor (name)
+  "Return the tag processor by the name of NAME."
+  (find-symbol (symbol-name name)
+               (find-package "DJULA.TAG-PROCESSORS")))
 
 (defmacro def-delimited-tag (starttag endtag delimited-name)
   `(progn
@@ -63,36 +103,72 @@
        (template-error "unmatched ending tag {% ~A~@[~A~] %}" ,endtag argument))))
 
 (defmacro def-token-compiler (name args &body body)
-  (with-unique-names (arg-list)
-    `(setf (get ,name 'token-compiler)
-           (lambda (&rest ,arg-list)
+  (let* ((token-compiler-package (find-package "DJULA.TOKEN-COMPILERS"))
+         (function-name (intern (symbol-name name)
+                                token-compiler-package)))
+    (multiple-value-bind (body declarations docstring)
+        (parse-body body :documentation t)
+      (with-unique-names (arg-list)
+        `(progn
+           (defun ,function-name (&rest ,arg-list)
+             ,@(when docstring (list docstring))
+             ,@declarations
              (destructuring-bind (,@args)
                  ,arg-list
-               ,@body)))))
+               ,@body))
+           (export ',function-name ,token-compiler-package))))))
+
+(defun find-token-compiler (name)
+  "Return the token processor by the name of NAME."
+  (find-symbol (symbol-name name) (find-package "DJULA.TOKEN-COMPILERS")))
 
 (defmacro def-tag-compiler (name args &body body)
-  (with-unique-names (arg-list)
-    `(setf (get ,name 'tag-compiler)
-           (lambda (&rest ,arg-list)
+  (let* ((tag-compiler-package (find-package "DJULA.TAG-COMPILERS"))
+         (function-name (intern (symbol-name name)
+                                tag-compiler-package)))
+    (multiple-value-bind (body declarations docstring)
+        (parse-body body :documentation t)
+      (with-unique-names (arg-list)
+        `(progn
+           (defun ,function-name (&rest ,arg-list)
+             ,@(when docstring (list docstring))
+             ,@declarations
              (destructuring-bind (,@args)
                  ,arg-list
-               ,@body)))))
+               ,@body))
+           (export ',function-name ,tag-compiler-package))))))
+
+(defun find-tag-compiler (name)
+  "Return the tag compiler by the name of NAME."
+  (find-symbol (symbol-name name) (find-package "DJULA.TAG-COMPILERS")))
 
 (defmacro def-filter (name args &body body)
-  (with-unique-names (e msg)
-    `(setf (get ,name 'filter)
-           (lambda (,@args)
+  (let* ((filter-package (find-package "DJULA.FILTERS"))
+         (function-name (intern (symbol-name name)
+                                filter-package)))
+    (multiple-value-bind (body declarations docstring)
+        (parse-body body :documentation t)
+      (with-unique-names (e msg)
+        `(progn
+           (defun ,function-name (,@args)
+             ,@(when docstring (list docstring))
+             ,@declarations
              (handler-case
                  (locally
                      ,@body)
                (template-error (,e)
                  (if (and *catch-template-errors-p*
-			  (not *fancy-error-template-p*))
+                          (not *fancy-error-template-p*))
                      (princ-to-string ,e)
                      (error ,e)))
                (error (,e)
                  (let ((,msg (template-error-string* ,e "There was an error running filter ~A" ,name)))
                    (if (and *catch-template-errors-p*
-			    (not *fancy-error-template-p*))
+                            (not *fancy-error-template-p*))
                        (princ-to-string ,msg)
-                       (template-error ,msg)))))))))
+                       (template-error ,msg))))))
+           (export ',function-name ,filter-package))))))
+
+(defun find-filter (name)
+  "Return the filter by the name of NAME."
+  (find-symbol (symbol-name name) (find-package "DJULA.FILTERS")))

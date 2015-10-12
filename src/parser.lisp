@@ -2,28 +2,32 @@
 
 (defun process-token (token rest-token-list)
   (destructuring-bind (name . args) token
-    (let ((f (get name 'token-processor)))
+    (let ((f (find-token-processor name)))
       (if (null f)
-	  ;; If it is not a processor, then just collect the token
-	  (cons token (process-tokens rest-token-list))
-	  ;; else, we apply the processor
-	  (progn
+          ;; XXX: Move this to find-token-processor, as the 'default' token
+          ;; processor.
+          ;; If it is not a processor, then just collect the token
+          (cons token (process-tokens rest-token-list))
+          ;; else, we apply the processor
+          (progn
             (handler-case
                 (apply f rest-token-list args)
               (template-error (e1)
-                ;; Parse errors can be reported by substituting a simple string token.
+                ;; Parse errors can be reported by substituting a simple string
+                ;; token.
                 (if (and *catch-template-errors-p*
-			 (not *fancy-error-template-p*))
+                         (not *fancy-error-template-p*))
                     (cons
                      (list :string
                            (princ-to-string e1))
                      (process-tokens rest-token-list))
                     (error e1)))
               (error (e2)
-                ;; Parse errors can be reported by substituting a simple string token.
-                (let ((msg (template-error-string* e2"There was an error processing the token ~A" token)))
+                ;; Parse errors can be reported by substituting a simple string
+                ;; token.
+                (let ((msg (template-error-string* e2 "There was an error processing the token ~A" token)))
                   (if (and *catch-template-errors-p*
-			   (not *fancy-error-template-p*))
+                           (not *fancy-error-template-p*))
                       (cons
                        (list :string
                              msg)

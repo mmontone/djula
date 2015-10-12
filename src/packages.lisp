@@ -40,3 +40,128 @@
            #:add-template-directory
            #:translate
            #:*translation-backend*))
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (unless (find-package "DJULA.TOKEN-PROCESSORS")
+    (defpackage "DJULA.TOKEN-PROCESSORS"
+      (:use)
+      (:documentation "Contains the token processors")
+      (:export #:comment-tag
+               #:almost-parsed-ifequal
+               #:almost-parsed-ifnotequal
+               #:comment
+               #:unparsed-variable
+               #:semi-parsed-js-script
+               #:unparsed-translation-variable
+               #:tag
+               #:semi-parsed-if
+               #:string
+               #:unparsed-tag)))
+
+  (unless (find-package "DJULA.UNPARSED-TAG-PROCESSORS")
+    (defpackage "DJULA.UNPARSED-TAG-PROCESSORS"
+      (:use)
+      (:documentation "This package contains the unparsed tag processors.")
+      (:export #:filter
+               #:set
+               #:trans
+               #:lisp
+               #:ifequal
+               #:ifnotequal
+               #:js)))
+
+  (unless (find-package "DJULA.TAG-PROCESSORS")
+    (defpackage "DJULA.TAG-PROCESSORS"
+      (:use)
+      (:documentation "This package contains the tag processors.")
+      (:export #:semi-parsed-ifequal
+               #:semi-parsed-filter
+               #:js-script
+               #:comment
+               #:block
+               #:autoescape
+               #:for
+               #:ifchanged
+               #:if
+               #:semi-parsed-ifnotequal
+               #:extends)))
+
+  (unless (find-package "DJULA.TOKEN-COMPILERS")
+    (defpackage "DJULA.TOKEN-COMPILERS"
+      (:use)
+      (:documentation "This package contains the token compilers.")
+      (:export #:parsed-js-script
+               #:tag
+               #:string
+               #:parsed-filter
+               #:verbatim
+               #:translation-variable
+               #:parsed-if
+               #:parsed-block
+               #:parsed-js
+               #:parsed-ifchanged
+               #:parsed-ifequal
+               #:parsed-lisp
+               #:variable
+               #:parsed-autoescape
+               #:parsed-set
+               #:parsed-for)))
+
+  (unless (find-package "DJULA.TAG-COMPILERS")
+    (defpackage "DJULA.TAG-COMPILERS"
+      (:use)
+      (:documentation "This package contains the tag compilers.")
+      (:export #:set-package
+               #:endifchanged
+               #:show-language
+               #:endautoescape
+               #:endifnotequal
+               #:cycle
+               #:endcomment
+               #:endfor
+               #:set-language
+               #:emit-js
+               #:endifequal
+               #:templatetag
+               #:endjs-script
+               #:super
+               #:ssi
+               #:endblock
+               #:endfilter
+               #:endif
+               #:include
+               #:debug)))
+
+  (unless (find-package "DJULA.FILTERS")
+    (defpackage "DJULA.FILTERS"
+      (:use)
+      (:documentation "This package contains the djula filters. Filters are take as
+  a first argument a string and return a string.")
+      (:export #:date
+               #:force-escape
+               #:datetime
+               #:trans
+               #:safe
+               #:escape
+               #:linebreaksbr
+               #:last
+               #:truncatechars
+               #:addslashes
+               #:time
+               #:lisp
+               #:capfirst
+               #:urlencode
+               #:sort
+               #:linebreaks
+               #:length
+               #:upper
+               #:slice
+               #:lower
+               #:format
+               #:first
+               #:cut
+               #:add
+               #:default
+               #:reverse
+               #:join))))
+

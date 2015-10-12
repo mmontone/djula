@@ -115,7 +115,7 @@
 
 (defun compile-token (token)
   (destructuring-bind (name . args) token
-    (let ((compiler (get name 'token-compiler)))
+    (let ((compiler (find-token-compiler name)))
       (if (null compiler)
           (lambda (stream)
             (princ (template-error-string "Unknown token ~A" name) stream))
