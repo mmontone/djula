@@ -499,9 +499,6 @@ they compile into a function that simply calls this function with *TEMPLATE-ARGU
               (template-error "Cannot include the template ~A because it does not exist." path)))))
     (t (error "Invalid include template path: ~A" path))))
 
-
-(defvar *accumulated-javascript-strings* nil)
-
 (def-unparsed-tag-processor :js (string) rest
   (cons (list :parsed-js string)
         (process-tokens rest)))
@@ -523,7 +520,7 @@ they compile into a function that simply calls this function with *TEMPLATE-ARGU
   (let ((compiled (mapcar #'compile-token clauses)))
     (lambda (stream)
       (declare (ignore stream))
-      (push (with-output-to-string (s)
+	  (push (with-output-to-string (s)
               (format s "~%<script type='text/javascript'>")
               (dolist (f compiled)
                 (funcall f s))

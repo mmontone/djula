@@ -31,3 +31,5 @@
 
 (defvar *elision-string* "..."
   "The string to be used by `truncatechars' at the end of truncated strings.")
+
+(defvar *accumulated-javascript-strings* nil)
