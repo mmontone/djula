@@ -72,6 +72,16 @@ form that returns some debugging info."
         (dolist (f fs)
           (funcall f stream))))))
 
+(defun remove-first (item sequence &key (test #'eql) (key #'identity))
+  "Removes the first ocurrence of item in sequence"
+  (loop
+	 :with removed-p = nil
+	 :for x :in sequence
+	 :when (or removed-p (not (funcall test (funcall key x) item)))
+	 :collect x
+	 :when (funcall test (funcall key x) item)
+	 :do (setf removed-p t)))
+
 (def-tag-compiler :super (&optional name)
   (let* ((super-block-name (or name *current-block*
                                (template-error "No parent block")))
@@ -79,8 +89,10 @@ form that returns some debugging info."
                   (second (remove-if-not (lambda (block)
                                            (equalp super-block-name (first block)))
                                          *block-alist*))
-                  (template-error "Parent block ~A not found" (or name *current-block*))))
-         (*block-alist* (if target (rest target) *block-alist*))
+										(template-error "Parent block ~A not found" (or name *current-block*))))
+         (*block-alist* (if target
+							(remove-first (first target) *block-alist* :key #'first :test #'equalp)
+							*block-alist*))
          (fs (when target
                (mapcar #'compile-token (rest target)))))
     (lambda (stream)
