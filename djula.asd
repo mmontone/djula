@@ -16,7 +16,7 @@
                #:closer-mop
                #:trivial-backtrace
                #:cl-slice
-               #:cl-locale
+               #-lispworks #:cl-locale
                #:gettext
                #:parser-combinators
                #:iterate)

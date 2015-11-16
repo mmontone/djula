@@ -68,6 +68,7 @@
 
 ;; Setup translation
 
+#-lispworks
 (cl-locale:define-dictionary demo
   (:en (asdf:system-relative-pathname :djula-demo "demo/i18n/en/message.lisp"))
   (:es (asdf:system-relative-pathname :djula-demo "demo/i18n/es/message.lisp")))
@@ -228,6 +229,7 @@
 
 (defparameter +translation.html+ (djula:compile-template* "translation.html"))
 
+#-lispworks
 (hunchentoot:define-easy-handler (locale-demo :uri "/locale")
     (lang)
   (let ((lang-key (intern (string-upcase lang) :keyword)))

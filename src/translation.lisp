@@ -12,6 +12,7 @@
   (:method ((backend t) string language)
     (error "Invalid translation backend: ~A" backend)))
 
+#-lispworks
 (defmethod backend-translate ((backend (eql :locale)) string language)
   (cl-locale:i18n string :locale language))
 
