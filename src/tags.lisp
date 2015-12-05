@@ -75,12 +75,12 @@ form that returns some debugging info."
 (defun remove-first (item sequence &key (test #'eql) (key #'identity))
   "Removes the first ocurrence of item in sequence"
   (loop
-	 :with removed-p = nil
-	 :for x :in sequence
-	 :when (or removed-p (not (funcall test (funcall key x) item)))
-	 :collect x
-	 :when (funcall test (funcall key x) item)
-	 :do (setf removed-p t)))
+     :with removed-p = nil
+     :for x :in sequence
+     :when (or removed-p (not (funcall test (funcall key x) item)))
+     :collect x
+     :when (funcall test (funcall key x) item)
+     :do (setf removed-p t)))
 
 (def-tag-compiler :super (&optional name)
   (let* ((super-block-name (or name *current-block*
@@ -89,10 +89,10 @@ form that returns some debugging info."
                   (second (remove-if-not (lambda (block)
                                            (equalp super-block-name (first block)))
                                          *block-alist*))
-										(template-error "Parent block ~A not found" (or name *current-block*))))
+                  (template-error "Parent block ~A not found" (or name *current-block*))))
          (*block-alist* (if target
-							(remove-first (first target) *block-alist* :key #'first :test #'equalp)
-							*block-alist*))
+                            (remove-first (first target) *block-alist* :key #'first :test #'equalp)
+                            *block-alist*))
          (fs (when target
                (mapcar #'compile-token (rest target)))))
     (lambda (stream)
@@ -359,12 +359,12 @@ conditional branching of the {% if %} tag. when called, the function returns two
       [note: if return value 2 is present, then its probably not safe to consider return
        value 1 useful]"
   (let ((parsed-statement (parse-sequence* (boolexp-parser)
-										   statement
-										   :complete t
-										   )))
-	(when (not parsed-statement)
-	  (template-error "Invalid boolean expression: ~A" statement))
-	(values (lambda ()
+                                           statement
+                                           :complete t
+                                           )))
+    (when (not parsed-statement)
+      (template-error "Invalid boolean expression: ~A" statement))
+    (values (lambda ()
               (compile-boolexp parsed-statement))
             nil)))
 
@@ -416,33 +416,33 @@ conditional branching of the {% if %} tag. when called, the function returns two
            (let ((s (string-trim '(#\space #\newline #\tab #\return)
                                  (subseq unparsed-string start))))
              (cond
-			   ((char= (char s 0) #\")
-				;; is a hard-coded string
-				(read-from-string s))
-			   ((member (char s 0)
-						(list #\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9 #\.)
-						:test #'char=)
-				;; it is a number
-				(let ((end (or (position-if-not (lambda (x)
-											  (member x
-													  (list #\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9 #\.)
-													  :test #'char=))
-											s)
-							   (length s))))
-				  (values (read-from-string (subseq s 0 end))
-						  (1+ end))))
-			   (t
-				;; is a variable
-				(let ((end (or (position-if (lambda (x)
-											  (or (char= x #\space)
-												  (char= x #\tab)
-												  (char= x #\return)
-												  (char= x #\newline)
-												  (char= x #\")))
-											s)
-							   (length s))))
-				  (values (parse-variable-phrase (subseq s 0 end))
-						  (1+ end))))))))
+               ((char= (char s 0) #\")
+                ;; is a hard-coded string
+                (read-from-string s))
+               ((member (char s 0)
+                        (list #\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9)
+                        :test #'char=)
+                ;; it is a number
+                (let* ((num-member (list #\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9 #\.))
+                       (end (or (position-if-not (lambda (x)
+                                                   (member x num-member
+                                                           :test #'char=))
+                                                 s)
+                                (length s))))
+                  (values (read-from-string (subseq s 0 end))
+                          (1+ end))))
+               (t
+                ;; is a variable
+                (let ((end (or (position-if (lambda (x)
+                                              (or (char= x #\space)
+                                                  (char= x #\tab)
+                                                  (char= x #\return)
+                                                  (char= x #\newline)
+                                                  (char= x #\")))
+                                            s)
+                               (length s))))
+                  (values (parse-variable-phrase (subseq s 0 end))
+                          (1+ end))))))))
     (multiple-value-bind (a end-a)
         (% 0)
       (values a (% end-a)))))
@@ -480,7 +480,7 @@ conditional branching of the {% if %} tag. when called, the function returns two
   (flet ((% (x)
            (etypecase x
              (string x)
-			 (number x)
+             (number x)
              (list (resolve-variable-phrase x)))))
     ;; return a thunk that executes the {% ifequal %} clause
     (let ((then (mapcar #'compile-token then))
@@ -547,7 +547,7 @@ they compile into a function that simply calls this function with *TEMPLATE-ARGU
   (let ((compiled (mapcar #'compile-token clauses)))
     (lambda (stream)
       (declare (ignore stream))
-	  (push (with-output-to-string (s)
+      (push (with-output-to-string (s)
               (format s "~%<script type='text/javascript'>")
               (dolist (f compiled)
                 (funcall f s))
@@ -693,8 +693,8 @@ the file pointed to by the template-path `PATH'"
    (lambda (x)
      (and (listp x)
           (parse-sequence* parser x
-						   :complete t
-						   )))))
+                           :complete t
+                           )))))
 
 (defun boolexp-parser ()
   (named? boolexp
@@ -762,10 +762,10 @@ the file pointed to by the template-path `PATH'"
 (defun compile-boolexp (bexp)
   (cond
     ((symbolp bexp)
-	 (case bexp
-	   (:true t)
-	   (:false nil)
-	   (t (resolve-variable-phrase (parse-variable-phrase (string bexp))))))
+     (case bexp
+       (:true t)
+       (:false nil)
+       (t (resolve-variable-phrase (parse-variable-phrase (string bexp))))))
     ((integerp bexp)
      bexp)
     ((stringp bexp)
