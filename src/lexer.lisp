@@ -60,12 +60,12 @@ Although not a lexer token, the keyword :not-special is used to signify that the
   (let ((current-position 0))
     (accum accumulate
       (loop
-        :for { := (next-tag template current-position)
-        :until (null {)
+        :for open-brace := (next-tag template current-position)
+        :until (null open-brace)
         :do
-           (when (> { current-position)
-             (accumulate `(:string ,(subseq template current-position {))))
-           (multiple-value-bind (token next-position) (parse-tag template {)
+           (when (> open-brace current-position)
+             (accumulate `(:string ,(subseq template current-position open-brace))))
+           (multiple-value-bind (token next-position) (parse-tag template open-brace)
              (accumulate token)
              (setf current-position next-position)))
       (when (< current-position (length template))
