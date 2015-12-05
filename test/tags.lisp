@@ -327,7 +327,21 @@
          "yes"))
     (is (equalp
          (djula:render-template* template nil :foo 4 :bar 4)
-         "yes"))))
+         "yes")))
+  (let ((template (djula::compile-string "{% ifequal foo.x bar.y %}yes{% else %}no{% endifequal %}")))
+    (is (equalp
+         (djula:render-template* template nil :foo '(:x "foo") :bar '(:y "bar"))
+         "no"))
+    (is (equalp
+         (djula:render-template* template nil :foo '(:x "foo") :bar '(:y "foo"))
+         "yes"))
+    (is (equalp
+         (djula:render-template* template nil :foo '(:x 4) :bar '(:y 4))
+         "yes")))
+  (let ((template (djula::compile-string "{% ifequal foo.x 22 %}yes{% else %}no{% endifequal %}")))
+	(is (equalp
+		 (djula:render-template* template nil :foo '(:x 22))
+		 "yes"))))
 
 (def-test ifnotequal-test (:compile-at :definition-time)
   (let ((template (djula::compile-string "{% ifnotequal foo bar %}yes{% else %}no{% endifnotequal %}")))

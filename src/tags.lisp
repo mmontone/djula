@@ -415,20 +415,34 @@ conditional branching of the {% if %} tag. when called, the function returns two
   (flet ((% (start)
            (let ((s (string-trim '(#\space #\newline #\tab #\return)
                                  (subseq unparsed-string start))))
-             (if (char= (char s 0) #\")
-                 ;; is a hard-coded string
-                 (read-from-string s)
-                 ;; is a variable
-                 (let ((end (or (position-if (lambda (x)
-                                               (or (char= x #\space)
-                                                   (char= x #\tab)
-                                                   (char= x #\return)
-                                                   (char= x #\newline)
-                                                   (char= x #\")))
-                                             s)
-                                (length s))))
-                   (values (parse-variable-phrase (subseq s 0 end))
-                           (1+ end)))))))
+             (cond
+			   ((char= (char s 0) #\")
+				;; is a hard-coded string
+				(read-from-string s))
+			   ((member (char s 0)
+						(list #\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9 #\.)
+						:test #'char=)
+				;; it is a number
+				(let ((end (or (position-if-not (lambda (x)
+											  (member x
+													  (list #\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9 #\.)
+													  :test #'char=))
+											s)
+							   (length s))))
+				  (values (read-from-string (subseq s 0 end))
+						  (1+ end))))
+			   (t
+				;; is a variable
+				(let ((end (or (position-if (lambda (x)
+											  (or (char= x #\space)
+												  (char= x #\tab)
+												  (char= x #\return)
+												  (char= x #\newline)
+												  (char= x #\")))
+											s)
+							   (length s))))
+				  (values (parse-variable-phrase (subseq s 0 end))
+						  (1+ end))))))))
     (multiple-value-bind (a end-a)
         (% 0)
       (values a (% end-a)))))
@@ -466,6 +480,7 @@ conditional branching of the {% if %} tag. when called, the function returns two
   (flet ((% (x)
            (etypecase x
              (string x)
+			 (number x)
              (list (resolve-variable-phrase x)))))
     ;; return a thunk that executes the {% ifequal %} clause
     (let ((then (mapcar #'compile-token then))
