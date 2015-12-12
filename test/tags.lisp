@@ -410,6 +410,15 @@
     (signals djula::template-error
       (djula::compile-string "{% autoescape %}{{foo | escape}}{% endautoescape %}"))))
 
+(def-test ifchanged-test (:compile-at :definition-time)
+  (let ((template (djula::compile-string "start {% for i in data %}{% ifchanged i %}[changed] {% endifchanged %}{{ i }} {% endfor %}end")))
+    (is (equalp (djula:render-template* template nil :data '(1 2))
+                "start [changed] 1 [changed] 2 end"))
+    (is (equalp (djula:render-template* template nil :data '(1 1))
+                "start [changed] 1 1 end"))
+    (is (equalp (djula:render-template* template nil :data '(1 1))
+                "start [changed] 1 1 end"))))
+
 #+nil(test translation-test
        (let ((template (djula::compile-string "{% translation hello %}")))
          (djula:render-template* template))
