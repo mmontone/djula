@@ -53,11 +53,12 @@
 
 Similar to Python's str.join"
   ;; We have to remove the 'extra' separator at the start.
-  (subseq
-   (let ((result ""))
-     (dolist (item list result)
-       (setf result (concatenate 'string result separator item))))
-   (length separator)))
+  (when list
+    (subseq
+     (let ((result ""))
+       (dolist (item list result)
+         (setf result (concatenate 'string result separator item))))
+     (length separator))))
 
 (defun truncate-characters (string max-length &optional (elision-string *elision-string*))
   "If the STRING is larger than MAX-LENGTH, truncate it and append the

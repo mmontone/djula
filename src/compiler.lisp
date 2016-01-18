@@ -28,35 +28,36 @@
   (print-unreadable-object (compiled-template stream :type t :identity t)
     (format stream "~A" (template-file compiled-template))))
 
+(defmethod compile-template-file ((compiled-template compiled-template))
+    ;; Set the template file write date
+  (setf (template-file-write-date compiled-template)
+        (file-write-date (template-file compiled-template)))
+
+  ;; Compile the template file
+  (let ((*block-alist* nil)
+        (*linked-files* nil))
+    (let ((compiled-str
+           (compile-string (fetch-template* (template-file compiled-template)))))
+      (setf (compiled-template compiled-template) compiled-str
+            (linked-files compiled-template) *linked-files*))))
+
 (defmethod initialize-instance :after ((compiled-template compiled-template) &rest initargs)
   (declare (ignore initargs))
-  (flet ((compile-template-file ()
-           ;; Set the template file write date
-           (setf (template-file-write-date compiled-template)
-                 (file-write-date (template-file compiled-template)))
+  
+  (compile-template-file compiled-template)
 
-           ;; Compile the template file
-           (let ((*block-alist* nil)
-                 (*linked-files* nil))
-             (let ((compiled-str
-                     (compile-string (fetch-template* (template-file compiled-template)))))
-               (setf (compiled-template compiled-template) compiled-str
-                     (linked-files compiled-template) *linked-files*)))))
-
-    (compile-template-file)
-
-    (closer-mop:set-funcallable-instance-function
-     compiled-template
-     (lambda (stream)
-       ;; Recompile the template if the template-file has changed
-       (let ((template-file-write-date (template-file-write-date compiled-template)))
-         (when (or (not (equalp (file-write-date (template-file compiled-template))
-                                template-file-write-date))
-                   (loop for linked-file in (linked-files compiled-template)
-                         thereis (or (not (cl-fad:file-exists-p linked-file))
-                                     (> (file-write-date linked-file) template-file-write-date))))
-         (compile-template-file)))
-       (funcall (compiled-template compiled-template) stream)))))
+  (closer-mop:set-funcallable-instance-function
+   compiled-template
+   (lambda (stream)
+     ;; Recompile the template if the template-file has changed
+     (let ((template-file-write-date (template-file-write-date compiled-template)))
+       (when (or (not (equalp (file-write-date (template-file compiled-template))
+                              template-file-write-date))
+                 (loop for linked-file in (linked-files compiled-template)
+                    thereis (or (not (cl-fad:file-exists-p linked-file))
+                                (> (file-write-date linked-file) template-file-write-date))))
+         (compile-template-file compiled-template)))
+     (funcall (compiled-template compiled-template) stream))))
 
 (defmethod compile-template ((compiler compiler) name &optional (error-p t))
   (when-let ((template-file (find-template* name error-p)))
@@ -91,7 +92,8 @@
      (apply #'render-template* (compile-template* template) stream *template-arguments*))
     ((functionp template)
      (let ((*accumulated-javascript-strings* nil)
-           (*current-language* *current-language*))
+           (*current-language* *current-language*)
+           (*current-template* template))
        (handler-case
            (if stream
                (funcall template stream)

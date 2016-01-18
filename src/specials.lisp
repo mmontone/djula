@@ -26,6 +26,8 @@
 
 (defvar *linked-files*)
 
+(defvar *current-template*)
+
 (defvar *error-template* (asdf:system-relative-pathname :djula "templates/error-template.djhtml")
   "The error template used by `render-error-template'.")
 
