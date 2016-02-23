@@ -44,7 +44,7 @@ keyword."
                   ((numberp key) (elt thing key))
                   ((keywordp key)
                    (multiple-value-bind (val accessed-p)
-                       (access:access thing key)
+                       (ignore-errors (access:access thing key))
                      (if accessed-p
                          val
                          (access:access thing (intern (symbol-name key)
