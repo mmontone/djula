@@ -43,12 +43,12 @@ keyword."
                 (cond
                   ((numberp key) (elt thing key))
                   ((keywordp key)
-                   (multiple-value-bind (val accessed-p)
-                       (ignore-errors (access:access thing key))
-                     (if accessed-p
-                         val
-                         (access:access thing (intern (symbol-name key)
-                                                      *djula-execute-package*)))))
+                   (let ((*package* *djula-execute-package*))
+                     (multiple-value-bind (val accessed-p)
+                         (ignore-errors (access:access thing key))
+                       (if (and accessed-p (not (typep accessed-p 'error)))
+                           val
+                           (access:access thing (intern (symbol-name key)))))))
                   (t (access:access thing key)))
               (error (e)
                 (template-error-string* e
