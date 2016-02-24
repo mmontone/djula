@@ -38,28 +38,28 @@ keyword."
         (process-tokens rest)))
 
 (defun apply-keys/indexes (thing keys/indexes)
-  (reduce (lambda (thing key)
-            (handler-case
-                (cond
-                  ((numberp key) (elt thing key))
-                  ((keywordp key)
-                   (let ((*package* *djula-execute-package*))
+  (let ((*package* (find-package *djula-execute-package*)))
+    (reduce (lambda (thing key)
+              (handler-case
+                  (cond
+                    ((numberp key) (elt thing key))
+                    ((keywordp key)
                      (multiple-value-bind (val accessed-p)
                          (ignore-errors (access:access thing key))
                        (if (and accessed-p (not (typep accessed-p 'error)))
                            val
-                           (access:access thing (intern (symbol-name key)))))))
-                  (t (access:access thing key)))
-              (error (e)
-                (template-error-string* e
-                                        "There was an error while accessing the ~A ~S of the object ~S"
-                                        (if (numberp key)
-                                            "index"
-                                            "attribute")
-                                        key
-                                        thing))))
-          keys/indexes
-          :initial-value thing))
+                           (access:access thing (intern (symbol-name key))))))
+                    (t (access:access thing key)))
+                (error (e)
+                  (template-error-string* e
+                                          "There was an error while accessing the ~A ~S of the object ~S"
+                                          (if (numberp key)
+                                              "index"
+                                              "attribute")
+                                          key
+                                          thing))))
+            keys/indexes
+            :initial-value thing)))
 
 (defun get-variable (name)
   "takes a variable `NAME' and returns:
