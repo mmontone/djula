@@ -1,6 +1,8 @@
 # Djula
 
 [![Build Status](https://travis-ci.org/mmontone/djula.svg?branch=master)](https://travis-ci.org/mmontone/djula)
+[![Quicklisp](http://quickdocs.org/badge/cl-jsx.svg)](http://quickdocs.org/djula/)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 Djula is a port of Python's [Django](http://www.djangoproject.com) template engine to Common Lisp. 
 
