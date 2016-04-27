@@ -48,7 +48,9 @@ form that returns some debugging info."
                             (mapcar #'block-children
                                     top-level-blocks)))))))))
     (let ((real-path (find-template* template-path)))
-      (pushnew real-path *linked-files* :test 'equal)
+      (pushnew (compile-template* real-path) *linked-templates*
+               :test 'equal
+               :key 'template-file)
       (handler-case
           (when real-path
             (let* ((string (fetch-template* real-path))
@@ -512,25 +514,30 @@ they compile into a function that simply calls this function with *TEMPLATE-ARGU
   (cond
     ((stringp path)
      (aif (find-template* path)
-          (progn
-            (pushnew it *linked-files* :test 'equal)
-            (handler-case
-                (compile-template* path)
-              (error ()
-                (template-error "There was an error including the template ~A" it))))
+          (handler-case
+              (let ((template (compile-template* it)))
+                (pushnew template *linked-templates*
+                         :test 'equal
+                         :key 'template-file)
+                template)
+            (error ()
+              (template-error "There was an error including the template ~A" it)))
+          ;; else
           (template-error "Cannot include the template ~A because it does not exist." path)))
     ((keywordp path)
      (lambda (stream)
        (let ((path (resolve-variable-phrase (parse-variable-phrase (string path)))))
-
          (aif (find-template* path)
-              (progn
-                (let ((compiled-template
-                       (handler-case
-                           (compile-template* path)
-                         (error ()
-                           (template-error "There was an error including the template ~A" it)))))
-                  (funcall compiled-template stream)))
+              (let ((compiled-template
+                     (handler-case
+                         (compile-template* path)
+                       (error ()
+                         (template-error "There was an error including the template ~A" it)))))
+                #+nil(pushnew compiled-template *linked-templates*
+                         :test 'equal
+                         :key 'template-file)
+                (funcall compiled-template stream))
+              ;; else
               (template-error "Cannot include the template ~A because it does not exist." path)))))
     (t (error "Invalid include template path: ~A" path))))
 

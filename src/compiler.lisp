@@ -11,8 +11,8 @@
                       :initform nil
                       :accessor compiled-template
                       :documentation "The compiled template (a closure)")
-   (linked-files :initarg :linked-files
-                 :accessor linked-files
+   (linked-templates :initarg :linked-templates
+                 :accessor linked-templates
                  :initform '()
                  :documentation "Extends for Include files.")
    (template-file :initarg :template-file
@@ -35,11 +35,16 @@
 
   ;; Compile the template file
   (let ((*block-alist* nil)
-        (*linked-files* nil))
+        (*linked-templates* nil))
     (let ((compiled-str
            (compile-string (fetch-template* (template-file compiled-template)))))
       (setf (compiled-template compiled-template) compiled-str
-            (linked-files compiled-template) *linked-files*))))
+            (linked-templates compiled-template) *linked-templates*))))
+
+(defmethod template-changed ((compiled-template compiled-template))
+  (or (not (cl-fad:file-exists-p (template-file compiled-template)))
+      (not (= (template-file-write-date compiled-template)
+              (file-write-date (template-file compiled-template))))))
 
 (defmethod initialize-instance :after ((compiled-template compiled-template) &rest initargs)
   (declare (ignore initargs))
@@ -53,9 +58,8 @@
      (let ((template-file-write-date (template-file-write-date compiled-template)))
        (when (or (not (equalp (file-write-date (template-file compiled-template))
                               template-file-write-date))
-                 (loop for linked-file in (linked-files compiled-template)
-                    thereis (or (not (cl-fad:file-exists-p linked-file))
-                                (> (file-write-date linked-file) template-file-write-date))))
+                 (loop for linked-template in (linked-templates compiled-template)
+                    thereis (template-changed linked-template)))
          (compile-template-file compiled-template)))
      (funcall (compiled-template compiled-template) stream))))
 
@@ -74,7 +78,7 @@
 
 (defmethod compile-template ((compiler toplevel-compiler) name &optional (error-p t))
   (let ((*block-alist* nil)
-        (*linked-files* nil))
+        (*linked-templates* nil))
     (let ((*current-compiler* (fragment-compiler compiler)))
       (compile-template *current-compiler* name error-p))))
 

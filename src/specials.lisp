@@ -24,7 +24,7 @@
 
 (defvar *current-block* nil)
 
-(defvar *linked-files*)
+(defvar *linked-templates*)
 
 (defvar *current-template*)
 
