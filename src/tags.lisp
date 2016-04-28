@@ -533,9 +533,6 @@ they compile into a function that simply calls this function with *TEMPLATE-ARGU
                          (compile-template* path)
                        (error ()
                          (template-error "There was an error including the template ~A" it)))))
-                #+nil(pushnew compiled-template *linked-templates*
-                         :test 'equal
-                         :key 'template-file)
                 (funcall compiled-template stream))
               ;; else
               (template-error "Cannot include the template ~A because it does not exist." path)))))
