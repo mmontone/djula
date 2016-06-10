@@ -53,15 +53,19 @@
 
   (closer-mop:set-funcallable-instance-function
    compiled-template
-   (lambda (stream)
-     ;; Recompile the template if the template-file has changed
-     (let ((template-file-write-date (template-file-write-date compiled-template)))
-       (when (or (not (equalp (file-write-date (template-file compiled-template))
-                              template-file-write-date))
-                 (loop for linked-template in (linked-templates compiled-template)
-                    thereis (template-changed linked-template)))
-         (compile-template-file compiled-template)))
-     (funcall (compiled-template compiled-template) stream))))
+   (if (not (uiop:featurep :djula-prod))
+       ;; If :djula-prod is not enabled, recompile templates when they change on disk
+       (lambda (stream)
+         ;; Recompile the template if the template-file has changed
+         (let ((template-file-write-date (template-file-write-date compiled-template)))
+           (when (or (not (equalp (file-write-date (template-file compiled-template))
+                                  template-file-write-date))
+                     (loop for linked-template in (linked-templates compiled-template)
+                        thereis (template-changed linked-template)))
+             (compile-template-file compiled-template)))
+         (funcall (compiled-template compiled-template) stream))
+       ;; If :djula-prod is enabled, avoid the automatic template file checking and recompilation
+       (compiled-template compiled-template))))
 
 (defmethod compile-template ((compiler compiler) name &optional (error-p t))
   (when-let ((template-file (find-template* name error-p)))
