@@ -10,6 +10,38 @@
     (with-output-to-string (s)
       (funcall fn s))))
 
+(def-test firstof (:compile-at :definition-time)
+  ;; Choice first string found
+  (is (string= "first"
+               (let ((fn (apply (djula::find-tag-compiler :firstof) '("first" "second"))))
+                 (with-output-to-string (stream)
+                   (funcall fn stream)))))
+
+  ;; Do not error on non existing vars
+  (is (string= "fallback"
+       (let ((template (djula::compile-string "{% firstof foo bar \"fallback\" %}")))
+         (djula:render-template* template nil :foobar "<b>Hello</b>"))))
+
+  ;; Choice first non nil var
+  (is (string= "bar"
+               (let ((template (djula::compile-string "{% firstof foo bar \"fallback\" %}")))
+                 (djula:render-template* template nil :foo nil :bar "bar"))))
+
+  ;; Output nothing if no var is non nil
+  (is (string= ""
+               (let ((template (djula::compile-string "{% firstof foo bar %}")))
+                 (djula:render-template* template nil :foo nil :bar nil))))
+
+  ;; Output numbers correctly
+  (is (string= "5"
+               (let ((template (djula::compile-string "{% firstof foo bar 5 %}")))
+                 (djula:render-template* template nil :foo nil :bar nil))))
+
+  ;; Handle empty argument lists correctly
+  (is (string= ""
+               (let ((template (djula::compile-string "{% firstof %}")))
+                 (djula:render-template* template nil)))))
+
 (def-test cycle (:compile-at :definition-time)
   (is (string= "010101"
                (let ((fn (apply (djula::find-tag-compiler :cycle) '(0 1)))
