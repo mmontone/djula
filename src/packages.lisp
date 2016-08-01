@@ -117,6 +117,7 @@
                #:endautoescape
                #:endifnotequal
                #:cycle
+               #:firstof
                #:endcomment
                #:endfor
                #:set-language

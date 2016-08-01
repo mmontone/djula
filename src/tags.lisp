@@ -106,6 +106,21 @@ form that returns some debugging info."
 (def-token-processor :comment-tag (&rest %) rest-tokens
   (process-tokens rest-tokens))
 
+(def-tag-compiler :firstof (&rest list)
+  (flet ((% (x)
+           (etypecase x
+             (string x)
+             (number x)
+             (symbol (resolve-variable-phrase (list x))))))
+    (lambda (stream)
+      (dolist (item list)
+        (multiple-value-bind (val val-error)
+            (% item)
+          (when (or val val-error)
+            (princ (or val-error val)
+                   stream)
+            (return)))))))
+
 (def-tag-compiler :cycle (&rest list)
   (let ((circle (copy-list list))
         (unique-id (gensym "cycle")))
