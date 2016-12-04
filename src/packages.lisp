@@ -52,7 +52,7 @@
                #:comment
                #:unparsed-variable
                #:semi-parsed-js-script
-               #:unparsed-translation-variable
+               #:unparsed-translation
                #:tag
                #:semi-parsed-if
                #:string
@@ -95,7 +95,7 @@
                #:string
                #:parsed-filter
                #:verbatim
-               #:translation-variable
+               #:translation
                #:parsed-if
                #:parsed-block
                #:parsed-js

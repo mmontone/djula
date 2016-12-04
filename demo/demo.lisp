@@ -235,10 +235,12 @@
   (let ((lang-key (intern (string-upcase lang) :keyword)))
     (let ((djula:*current-language* lang-key)
 	  (djula::*translation-backend* :locale))
-      (djula:render-template* +translation.html+))))
+      (djula:render-template* +translation.html+ nil
+                              :user (list :name "Martin")))))
 
 (hunchentoot:define-easy-handler (gettext-demo :uri "/gettext")
     (lang)
   (let ((djula:*current-language* lang)
-	(djula::*translation-backend* :gettext))
-      (djula:render-template* +translation.html+)))
+        (djula::*translation-backend* :gettext))
+    (djula:render-template* +translation.html+ nil
+                            :user (list :name "Martin"))))

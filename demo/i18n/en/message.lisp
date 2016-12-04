@@ -1,1 +1,2 @@
-(("hello" . "hello"))
+(("hello" . "hello")
+ ("salute-person" . "Welcome :name"))

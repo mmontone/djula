@@ -26,15 +26,15 @@
     (or
      (cond
        ((pathnamep name)
-	(fad:file-exists-p name))
+        (fad:file-exists-p name))
        ((char= (char name 0) #\/)
-	(fad:file-exists-p name))
+        (fad:file-exists-p name))
        (t (loop
-	     with path = (if current-path
-			     (cons (directory-namestring current-path) search-path)
-			     search-path)
-	     for dir in path
-	     thereis (fad:file-exists-p (merge-pathnames name dir)))))
+             with path = (if current-path
+                             (cons (directory-namestring current-path) search-path)
+                             search-path)
+             for dir in path
+             thereis (fad:file-exists-p (merge-pathnames name dir)))))
      (when error-p
        (error "Template ~A not found" name)))))
 
@@ -50,8 +50,8 @@
 (defun add-template-directory (directory &optional (template-store *current-store*))
   "Adds DIRECTORY to the search path of the TEMPLATE-STORE"
   (pushnew directory
-	   (search-path template-store)
-	   :test #'equalp))
+           (search-path template-store)
+           :test #'equalp))
 
 (defun find-template* (name &optional (error-p t))
   (find-template *current-store* name error-p))

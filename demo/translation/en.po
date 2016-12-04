@@ -19,4 +19,6 @@ msgstr ""
 #: demo.lisp:205
 msgid "hello"
 msgstr "hello"
+msgid "salute-person"
+msgstr "Welcome :name"
 

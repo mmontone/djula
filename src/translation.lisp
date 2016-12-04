@@ -2,56 +2,94 @@
 
 (defvar *translation-backend* nil "The translation backend. One of :locale, :gettext")
 
-(defun translate (string &optional (language (or *current-language* *default-language*))
+(defun translate (string &optional args
+                           (language (or *current-language* *default-language*))
                            (backend *translation-backend*))
-  (backend-translate backend string language))
+  (apply #'backend-translate backend string language args))
 
-(defgeneric backend-translate (backend string language)
-  (:method ((backend null) string language)
+(defun format-translation (string &rest args)
+  (apply #'format nil
+         (ppcre:regex-replace-all
+               "\\:(\\w*)"
+               string
+               (lambda (_ varname)
+                 (declare (ignore _))
+                 (let ((val (access:access args (make-keyword varname))))
+                   (or (and val (princ-to-string val))
+                       (error "~A missing in ~A translation" varname string))))
+               :simple-calls t)
+          args))
+                                       
+(defgeneric backend-translate (backend string language &rest args)
+  (:method ((backend null) string language &rest args)
     (error "Translation backend has not been setup"))
-  (:method ((backend t) string language)
+  (:method ((backend t) string language &rest args)
     (error "Invalid translation backend: ~A" backend)))
 
 #-lispworks
-(defmethod backend-translate ((backend (eql :locale)) string language)
-  (cl-locale:i18n string :locale language))
+(defmethod backend-translate ((backend (eql :locale)) string language &rest args)
+  (apply #'format-translation
+         (cl-locale:i18n string
+                         :locale language
+                         :params args)
+         args))
 
 (defvar *gettext-domain* nil)
 
-(defmethod backend-translate ((backend (eql :gettext)) string language)
-  (gettext:gettext* string *gettext-domain* nil (string language)))
+(defmethod backend-translate ((backend (eql :gettext)) string language &rest args)
+  (apply #'format-translation
+           (gettext:gettext* string *gettext-domain* nil (string-downcase (string language)))
+           args))
 
-;; reading :UNPARSED-TRANSLATION-VARIABLE TOKENS created by {_ translation-variable _}
+;; reading :UNPARSED-TRANSLATION-VARIABLE TOKENS created by {_ translation _}
 
-(def-token-processor :unparsed-translation-variable (unparsed-string) rest
-  `((:translation-variable
-     ,(let ((thing (read-from-string unparsed-string)))
-        (if (stringp thing)
-            ;; is a hard-coded string
-            thing
-            ;; we assume it is a variable reference
-            (parse-variable-phrase (string-trim (list #\space #\tab #\newline) unparsed-string)))))
-    ,@(process-tokens rest)))
+(def-token-processor :unparsed-translation (unparsed-string) rest
+  (multiple-value-bind (key pos) (read-from-string unparsed-string)
+    (let ((args (and (< pos (length unparsed-string))
+                     (read-from-string (format nil "(~A)"
+                                               (subseq unparsed-string pos))))))
+      `((:translation
+         ,(if (stringp key)
+              ;; is a hard-coded string
+              key
+              ;; we assume it is a variable reference
+              (parse-variable-phrase (princ-to-string key)))
+         ,@args)
+        ,@(process-tokens rest)))))
 
 (def-unparsed-tag-processor :trans (unparsed-string) rest
-  `((:translation-variable
-     ,(let ((thing (read-from-string unparsed-string)))
-        (if (stringp thing)
-            ;; is a hard-coded string
-            thing
-            ;; we assume it is a variable reference
-            (parse-variable-phrase (string-trim (list #\space #\tab #\newline) unparsed-string)))))
-    ,@(process-tokens rest)))
+  (multiple-value-bind (key pos) (read-from-string unparsed-string)
+    (let ((args (and (< pos (length unparsed-string))
+                     (read-from-string (format nil "(~A)"
+                                               (subseq unparsed-string pos))))))
+      `((:translation
+         ,(if (stringp key)
+              ;; is a hard-coded string
+              key
+              ;; we assume it is a variable reference
+              (parse-variable-phrase (princ-to-string key)))
+         ,@args)
+        ,@(process-tokens rest)))))
 
 ;; compiling :TRANSLATION-VARIABLE tokens
 
-(def-token-compiler :translation-variable (var)
-  (lambda (stream)
-    (let ((value
-           (if (stringp var)
-               var
-               (resolve-variable-phrase var))))
-      (princ (translate value) stream))))
+(defun resolve-plist (plist)
+  (loop
+     :for key :in plist :by #'cddr
+     :for val :in (cdr plist) :by #'cddr
+     :collect key
+     :collect (if (symbolp val)
+                  (resolve-variable-phrase
+                   (parse-variable-phrase (princ-to-string val)))
+                  (princ-to-string val))))
 
-(def-filter :trans (it)
-  (translate it))
+(def-token-compiler :translation (key &rest args)
+  (lambda (stream)
+    (let ((key-val
+           (if (stringp key)
+               key
+               (resolve-variable-phrase key))))
+      (princ (translate key-val (resolve-plist args)) stream))))
+
+(def-filter :trans (it &rest args)
+  (translate it args))
