@@ -27,6 +27,7 @@
              (:file "conditions"     :depends-on ("specials"))
              (:file "filters"        :depends-on ("pipeline"))
              (:file "lexer"          :depends-on ("pipeline" "util"))
+             (:file "locale"         :depends-on ("lexer"))
              (:file "packages")
              (:file "parser"         :depends-on ("pipeline"))
              (:file "pipeline"       :depends-on ("conditions"))

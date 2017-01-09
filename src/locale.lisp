@@ -7,11 +7,12 @@
   #-abcl #\No-break_space
   #+abcl (code-char 160))
 
-(defconstant +whitespace+
+(alexandria:define-constant +whitespace+
   #.(remove-duplicates
      (coerce (list #\Space #\Tab #\Linefeed #\Return #\Newline #\Page +no-break-space+)
              'string))
-  "Whitespace characters.")
+  :test #'string=
+  :documentation "Whitespace characters.")
 
 (defun trim-whitespace (string)
   "STRING without whitespace at ends."
