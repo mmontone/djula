@@ -112,7 +112,7 @@ holding the cl-locale dictionary files"
       (let ((message-file (merge-pathnames "message.lisp" dir)))
         (update-locale-list message-file strings)))))
 
-(defun caveman-update-project (project)
+(defun update-caveman-project (project)
   "update the cl-locale dictionary files with the djula translate strings.
 Project should coincide with project (asdf) name of the caveman project. "
   (let* ((root-dir (asdf:system-source-directory project))

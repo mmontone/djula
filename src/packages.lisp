@@ -170,7 +170,7 @@
       (:use :cl)
       (:documentation "This package contains code to generate cl-locale dictionary files.")
       (:export #:update-project
-               #:caveman-update-project
+               #:update-caveman-project
                #:locale-list
                #:update-locale-list
                #:directory-translate-strings
