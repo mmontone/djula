@@ -30,12 +30,13 @@
 (defun string-translate-strings (string)
   "given a djula html template string, find all the substrings to be translated"
   (remove-duplicates
-   (loop for l in (parse-template-string string)
-         for x = (first l)
-         for y = (trim-whitespace (second l))
-         when (and (eq x :unparsed-translation)
-                   (string-string-p y))
-           collect (read-from-string y))
+   (let ((*read-eval* nil))
+     (loop for l in (parse-template-string string)
+                 for x = (first l)
+                 for y = (trim-whitespace (second l))
+                 when (and (eq x :unparsed-translation)
+                           (string-string-p y))
+                   collect (read-from-string y)))  
    :test #'string=))
 
 (defun file-template-translate-strings (file)
@@ -56,8 +57,6 @@
    #'string-lessp))
 
 
-
-
 (defun locale-list (message-file translate-strings)
   "return an augmented dictionary of a cl-locale message file with the translate strings.
  Does not update the file."
@@ -69,8 +68,6 @@
               (push (cons s "") dictionary)))
           #'string-lessp
           :key #'car)))
-
-
 
 
 (defun alter-pathname (pathname &rest options)
@@ -102,12 +99,9 @@
       (format o "(~%~{ ~s~%~})~%" dict))
     dict))
 
-
-
-
 (defun update-project (template-dir locale-dir)
-  " update a djula project informing the template directory and the directory
-holding the cl-locale dictionary files"
+  "update a djula project informing the template directory and the directory
+of subdirectories holding the cl-locale dictionary files"
   (let ((strings (directory-translate-strings template-dir :recurse t)))
     (dolist (dir (uiop:subdirectories locale-dir))
       (let ((message-file (merge-pathnames "message.lisp" dir)))
