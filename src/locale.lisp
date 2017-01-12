@@ -1,16 +1,19 @@
 ;;;; locale.lisp
 
+#|
+
+This file helps create, update and maintain cl-locale translation dictionary files
+of a djula project. It does not depend on the code of cl-locale but certainly
+depends on the format of the cl-locale files (currently an association list).
+
+|#
+
 (in-package #:djula.locale)
 
-
-(defconstant +no-break-space+
-  #-abcl #\No-break_space
-  #+abcl (code-char 160))
-
 (alexandria:define-constant +whitespace+
-  #.(remove-duplicates
-     (coerce (list #\Space #\Tab #\Linefeed #\Return #\Newline #\Page +no-break-space+)
-             'string))
+  (remove-duplicates
+   (coerce (list #\Space #\Tab #\Linefeed #\Return #\Newline #\Page #\No-break_space)
+           'string))
   :test #'string=
   :documentation "Whitespace characters.")
 
@@ -102,14 +105,20 @@
 (defun update-project (template-dir locale-dir)
   "update a djula project informing the template directory and the directory
 of subdirectories holding the cl-locale dictionary files"
-  (let ((strings (directory-translate-strings template-dir :recurse t)))
-    (dolist (dir (uiop:subdirectories locale-dir))
+  (let ((strings (directory-translate-strings template-dir :recurse t))
+        (count 0))
+    (dolist (dir (uiop:subdirectories locale-dir) count)
       (let ((message-file (merge-pathnames "message.lisp" dir)))
-        (update-locale-list message-file strings)))))
+        (update-locale-list message-file strings)
+        (print message-file)
+        (incf count)))))
 
 (defun update-caveman-project (project)
   "update the cl-locale dictionary files with the djula translate strings.
-Project should coincide with project (asdf) name of the caveman project. "
+Project should coincide with project (asdf) name of the caveman project.
+This assumes the project uses the standard caveman2 directory structure.
+It does not depend on any caveman source code and
+caveman or your project need not be loaded. "
   (let* ((root-dir (asdf:system-source-directory project))
          (locale-dir (merge-pathnames #P"i18n/" root-dir) )
          (template-dir (merge-pathnames #P"templates/" root-dir)))
