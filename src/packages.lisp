@@ -164,5 +164,15 @@
                #:add
                #:default
                #:reverse
-               #:join))))
+               #:join)))
+  (unless (find-package "DJULA.LOCALE")
+    (defpackage "DJULA.LOCALE"
+      (:use :cl)
+      (:documentation "This package contains code to generate cl-locale dictionary files.")
+      (:export #:update-project
+               #:update-caveman-project
+               #:locale-list
+               #:update-locale-list
+               #:directory-translate-strings
+               #:file-template-translate-strings))))
 
