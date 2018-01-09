@@ -12,7 +12,8 @@ depends on the format of the cl-locale files (currently an association list).
 
 (alexandria:define-constant +whitespace+
   (remove-duplicates
-   (coerce (list #\Space #\Tab #\Linefeed #\Return #\Newline #\Page #\No-break_space)
+   (coerce (list #\Space #\Tab #\Linefeed #\Return #\Newline #\Page
+                 #.(code-char 160)) ; No-Break-Space
            'string))
   :test #'string=
   :documentation "Whitespace characters.")
