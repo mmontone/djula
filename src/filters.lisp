@@ -163,3 +163,13 @@
 
 (def-filter :urlencode (it)
   (url-encode (princ-to-string it)))
+
+(def-filter :replace (it regex)
+  (lambda (replace)
+    (cl-ppcre:regex-replace-all regex it replace)))
+
+(def-filter :with (it replace)
+  (funcall it replace))
+
+(def-filter :scan (it regex)
+  (cl-ppcre:scan-to-strings regex it))

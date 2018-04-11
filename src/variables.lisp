@@ -23,12 +23,32 @@ keyword."
           (parse-variable-phrase (subseq string (1+ dot))))
     (list (integer-or-keyword string))))
 
+
+(defun escape-string-split (char string &optional (escape #\\) (quotes (list #\" #\')))
+  (let (escaped
+        quoted)
+    (flet ((escaped-char (delimiter char)
+	     (when (not escaped)
+	       (cond ((and quoted (eql char quoted))
+		      (setf quoted nil))
+		     ((and (not quoted) (member char quotes))
+		      (setf quoted char))))
+	     (prog1
+                 (and (not escaped)
+                      (not quoted)
+                      (eql delimiter char))
+               (if (and (not escaped) ;; Check for escaped escape char
+                        (eql escape char))
+                   (setf escaped t)
+                   (setf escaped nil)))))
+      (split-sequence:split-sequence char string :test #'escaped-char))))
+
 ;;; foo.bar.baz.2 | truncatechars:"30" | upper => ((:foo :bar :baz 2) (:truncatechars 30) (:upper))
 (defun parse-variable-clause (unparsed-string)
   (destructuring-bind (var . filter-strings)
       (mapcar (lambda (s)
                 (string-trim '(#\space #\tab #\newline #\return) s))
-              (split-sequence:split-sequence #\| unparsed-string))
+              (escape-string-split #\| unparsed-string))
     (cons (parse-variable-phrase var)
           (mapcar #'parse-filter-string filter-strings))))
 
