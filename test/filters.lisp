@@ -49,3 +49,23 @@ asdf")))
 (def-test apply-filters (:compile-at :definition-time)
   (is (string= "SH..."
                (djula::apply-filters "short message" '((:truncatechars 5) (:upper))))))
+
+(def-test regex-filters (:compile-at :definition-time)
+  (let ((template
+         ;; Extract the date month
+         (djula::compile-string  "{{ date | scan:\"(?<=-)[0-9]*\" }}")))
+    (is (string= (djula:render-template* template nil :date "2050-10-03")
+                 "10")))
+
+  (let ((template
+         ;; First word with >= 5 letters
+         (djula::compile-string "{{ subject | scan:\"[a-zA-Z]{5,}\"}}")))
+    (is (string= 
+         (djula:render-template* template nil :subject "foo world")
+         "world")))
+
+  (let ((template
+         ;; Replace regex
+         (djula::compile-string "{{ data | replace:\"hello\" | with:\"bye cruel\"}}")))
+    (is (string= (djula:render-template* template nil :data "hello world")
+                 "bye cruel world"))))
