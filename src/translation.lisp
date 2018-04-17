@@ -2,6 +2,9 @@
 
 (defvar *translation-backend* nil "The translation backend. One of :locale, :gettext")
 
+(defvar *warn-on-untranslated-messages* t)
+(defvar *untranslated-messages* nil)
+
 (defun translate (string &optional args
                            (language (or *current-language* *default-language*))
                            (backend *translation-backend*))
@@ -10,16 +13,16 @@
 (defun format-translation (string &rest args)
   (apply #'format nil
          (ppcre:regex-replace-all
-               "\\:(\\w*)"
-               string
-               (lambda (_ varname)
-                 (declare (ignore _))
-                 (let ((val (access:access args (make-keyword varname))))
-                   (or (and val (princ-to-string val))
-                       (error "~A missing in ~A translation" varname string))))
-               :simple-calls t)
-          args))
-                                       
+          "\\:(\\w*)"
+          string
+          (lambda (_ varname)
+            (declare (ignore _))
+            (let ((val (access:access args (make-keyword varname))))
+              (or (and val (princ-to-string val))
+                  (error "~A missing in ~A translation" varname string))))
+          :simple-calls t)
+         args))
+
 (defgeneric backend-translate (backend string language &rest args)
   (:method ((backend null) string language &rest args)
     (error "Translation backend has not been setup"))
@@ -28,6 +31,13 @@
 
 #-lispworks
 (defmethod backend-translate ((backend (eql :locale)) string language &rest args)
+  (let ((dictionary (locale:current-dictionary)))
+    (when (not (arnesi:aand (not (eq language locale:*default-locale*))
+                            (gethash language dictionary)
+                            (gethash string arnesi:it)))
+      (when *warn-on-untranslated-messages*
+        (warn "DJULA TRANSLATION NOT GIVEN: ~A ~A" string language))
+      (pushnew (cons string language) *untranslated-messages* :test 'equalp)))
   (apply #'format-translation
          (cl-locale:i18n string
                          :locale language
@@ -38,8 +48,8 @@
 
 (defmethod backend-translate ((backend (eql :gettext)) string language &rest args)
   (apply #'format-translation
-           (gettext:gettext* string *gettext-domain* nil (string-downcase (string language)))
-           args))
+         (gettext:gettext* string *gettext-domain* nil (string-downcase (string language)))
+         args))
 
 ;; reading :UNPARSED-TRANSLATION-VARIABLE TOKENS created by {_ translation _}
 
