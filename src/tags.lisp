@@ -523,7 +523,7 @@ conditional branching of the {% if %} tag. when called, the function returns two
                             else))
                (funcall f stream)))))))))
 
-(def-tag-compiler :include (path)
+(def-tag-compiler :include (path &rest bindings)
   "when compiled, :INCLUDE tags first compile the template pointed to by `PATH' then
 they compile into a function that simply calls this function with *TEMPLATE-ARGUMENTS*"
   (cond
@@ -534,7 +534,20 @@ they compile into a function that simply calls this function with *TEMPLATE-ARGU
                 (pushnew template *linked-templates*
                          :test 'equal
                          :key 'template-file)
-                template)
+                (lambda (stream)
+                  (let ((*template-arguments* (append
+                                               (mapcan (lambda (binding
+                                                                &aux (var (first binding)) (value (second binding)))
+                                                         (list var
+                                                               (etypecase value
+                                                                 (symbol (case value
+                                                                           (:t t)
+                                                                           (:nil nil)
+                                                                           (t (resolve-variable-phrase (parse-variable-phrase (string value))))))
+                                                                 (string value))))
+                                                       bindings)
+                                               *template-arguments*)))
+                    (funcall template stream))))
             (error ()
               (template-error "There was an error including the template ~A" it)))
           ;; else
