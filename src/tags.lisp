@@ -523,35 +523,53 @@ conditional branching of the {% if %} tag. when called, the function returns two
                             else))
                (funcall f stream)))))))))
 
-(def-tag-compiler :include (path)
+(def-tag-compiler :include (path &rest parameters)
   "when compiled, :INCLUDE tags first compile the template pointed to by `PATH' then
-they compile into a function that simply calls this function with *TEMPLATE-ARGUMENTS*"
-  (cond
-    ((stringp path)
-     (aif (find-template* path)
-          (handler-case
-              (let ((template (compile-template* it)))
-                (pushnew template *linked-templates*
-                         :test 'equal
-                         :key 'template-file)
-                template)
-            (error ()
-              (template-error "There was an error including the template ~A" it)))
-          ;; else
-          (template-error "Cannot include the template ~A because it does not exist." path)))
-    ((keywordp path)
-     (lambda (stream)
-       (let ((path (resolve-variable-phrase (parse-variable-phrase (string path)))))
-         (aif (find-template* path)
-              (let ((compiled-template
-                     (handler-case
-                         (compile-template* path)
-                       (error ()
-                         (template-error "There was an error including the template ~A" it)))))
-                (funcall compiled-template stream))
-              ;; else
-              (template-error "Cannot include the template ~A because it does not exist." path)))))
-    (t (error "Invalid include template path: ~A" path))))
+they compile into a function that simply calls this function with *TEMPLATE-ARGUMENTS*
+
+`PARAMETERS' should have the form (:param1 value1 :param2 value2 ...). If given, they
+are prepended to *TEMPLATE-ARGUMENTS*"
+  (flet ((template-with-parameters (template)
+           (lambda (stream)
+             (let ((*template-arguments* (append (loop
+                                                    :for (var value) :on parameters :by #'cddr
+                                                    :collect var
+                                                    :collect (etypecase value
+                                                               (symbol (case value
+                                                                         (:t t)
+                                                                         (:nil nil)
+                                                                         (t (resolve-variable-phrase (parse-variable-phrase (string value))))))
+                                                               (string value)
+                                                               (number value)))
+                                                 *template-arguments*)))
+               (funcall template stream)))))
+    (cond
+      ((stringp path)
+       (aif (find-template* path)
+            (handler-case
+                (let ((template (compile-template* it)))
+                  (pushnew template *linked-templates*
+                           :test 'equal
+                           :key 'template-file)
+                  (template-with-parameters template))
+              (error ()
+                (template-error "There was an error including the template ~A" it)))
+            ;; else
+            (template-error "Cannot include the template ~A because it does not exist." path)))
+      ((keywordp path)
+       (template-with-parameters
+        (lambda (stream)
+          (let ((path (resolve-variable-phrase (parse-variable-phrase (string path)))))
+            (aif (find-template* path)
+                 (let ((compiled-template
+                        (handler-case
+                            (compile-template* path)
+                          (error ()
+                            (template-error "There was an error including the template ~A" it)))))
+                   (funcall compiled-template stream))
+                 ;; else
+                 (template-error "Cannot include the template ~A because it does not exist." path))))))
+      (t (error "Invalid include template path: ~A" path)))))
 
 (def-unparsed-tag-processor :js (string) rest
   (cons (list :parsed-js string)
