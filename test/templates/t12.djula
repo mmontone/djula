@@ -1,0 +1,2 @@
+{% include t10 :x "Hello" :y 123 %}
+{% include t10 :x "Hello" :y name %}

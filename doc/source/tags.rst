@@ -519,6 +519,12 @@ This example includes the contents of the template ``"foo/bar.html"``::
 
     {% include "foo/bar.html" %}
 
+A set of parameters can also be added, which become available as context
+variables when the included template is rendered::
+
+    {% include "user.html" :user record.creator %}
+    {% include "user.html" :user record.updater %}
+
 ..
    .. templatetag:: load
 
