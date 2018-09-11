@@ -43,7 +43,7 @@ Adds the argument to the value.
 
 For example::
 
-    {{ value|add "2" }}
+    {{ value|add:2 }}
 
 If ``value`` is ``4``, then the output will be ``6``.
 
