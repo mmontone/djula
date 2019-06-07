@@ -26,6 +26,7 @@
            #:compile-template*
            #:compiler
            #:def-tag-compiler
+           #:def-filter
            #:fetch-template
            #:fetch-template*
            #:file-store
