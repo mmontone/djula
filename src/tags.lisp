@@ -531,17 +531,18 @@ they compile into a function that simply calls this function with *TEMPLATE-ARGU
 are prepended to *TEMPLATE-ARGUMENTS*"
   (flet ((template-with-parameters (template)
            (lambda (stream)
-             (let ((*template-arguments* (append (loop
-                                                    :for (var value) :on parameters :by #'cddr
-                                                    :collect var
-                                                    :collect (etypecase value
-                                                               (symbol (case value
-                                                                         (:t t)
-                                                                         (:nil nil)
-                                                                         (t (resolve-variable-phrase (parse-variable-phrase (string value))))))
-                                                               (string value)
-                                                               (number value)))
-                                                 *template-arguments*)))
+             (let ((*template-arguments*
+                    (append (loop
+                               :for (var value) :on parameters :by #'cddr
+                               :collect var
+                               :collect (etypecase value
+                                          (symbol (case value
+                                                    (:t t)
+                                                    (:nil nil)
+                                                    (t (resolve-variable-phrase (parse-variable-phrase (string value))))))
+                                          (string value)
+                                          (number value)))
+                            *template-arguments*)))
                (funcall template stream)))))
     (cond
       ((stringp path)
@@ -560,7 +561,7 @@ are prepended to *TEMPLATE-ARGUMENTS*"
        (template-with-parameters
         (lambda (stream)
           (let ((path (resolve-variable-phrase (parse-variable-phrase (string path)))))
-            (aif (find-template* path)
+            (aif (and path (find-template* path))
                  (let ((compiled-template
                         (handler-case
                             (compile-template* path)
