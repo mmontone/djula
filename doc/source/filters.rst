@@ -987,4 +987,37 @@ If ``value`` is ``"http://www.example.org/"``, the output will be
 Custom filters
 --------------
 
-TODO
+Use the ``def-filter`` macro. Its general form is::
+
+        (def-filter :myfilter-name (value arg2 &optional other-args)
+           (body))
+
+It always takes the variable's value as argument, and it can have more
+required or optional arguments. For example, this is how those
+built-in filters are defined::
+
+       (def-filter :capfirst (val)
+         (string-capitalize (princ-to-string val)))
+
+This is all there is to it. Once written, you can use it in your
+templates. You can define a filter wherever you want and there is no
+need to register it or to import it in your templates.
+
+Here's a filter with a required argument::
+
+       (def-filter :add (it n)
+         (+ it (parse-integer n)))
+
+and with an optional one::
+
+       (def-filter :datetime (it &optional format)
+         (let ((timestamp …))))
+
+Errors are handled by the macro, but you can handle them and return a
+``template-error`` condition::
+
+       (def-filter :handle-error-filter (it)
+          (handler-case
+                (do-something)
+            (condition (e)
+              (template-error "There was an error executing this filter: ~A" e))))
