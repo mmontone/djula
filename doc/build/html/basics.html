@@ -1,43 +1,30 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Basics &mdash; Djula HTML templating system 0.2 documentation</title>
-    
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootswatch-3.2.0/yeti/bootstrap.min.css" type="text/css" />
+    <meta charset="utf-8" />
+    <title>Basics &#8212; Djula HTML templating system 0.2 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.2',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="Djula HTML templating system 0.2 documentation" href="index.html" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Usage" href="usage.html" />
     <link rel="prev" title="Introduction" href="intro.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
 
-  </head>
-  <body>
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -67,7 +54,7 @@
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Basics</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tags.html">Tags</a></li>
@@ -115,7 +102,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="_sources/basics.txt"
+  <a href="_sources/basics.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -137,30 +124,30 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="s-basics">
-<span id="basics"></span><h1>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="basics">
+<h1>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h1>
 <p>A template is simply a text file. It can generate any text-based format (HTML,
 XML, CSV, etc.).</p>
 <p>A template contains <strong>variables</strong>, which get replaced with values when the
 template is evaluated, and <strong>tags</strong>, which control the logic of the template.</p>
 <p>Below is a minimal template that illustrates a few basics. Each element will be
 explained later in this document.</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
 
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{{</span> <span class="nv">section.title</span> <span class="cp">}}{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
-<span class="nt">&lt;h1&gt;</span><span class="cp">{{</span> <span class="nv">section.title</span> <span class="cp">}}</span><span class="nt">&lt;/h1&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">section.title</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
 <span class="cp">{%</span> <span class="k">for</span> <span class="nv">story</span> <span class="k">in</span> <span class="nv">story_list</span> <span class="cp">%}</span>
-<span class="nt">&lt;h2&gt;</span>
-  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">story.url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="nt">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">story.url</span> <span class="cp">}}</span><span class="s">&quot;</span><span class="p">&gt;</span>
     <span class="cp">{{</span> <span class="nv">story.headline</span><span class="o">|</span><span class="nf">upper</span> <span class="cp">}}</span>
-  <span class="nt">&lt;/a&gt;</span>
-<span class="nt">&lt;/h2&gt;</span>
-<span class="nt">&lt;p&gt;</span><span class="cp">{{</span> <span class="nv">story.tease</span><span class="o">|</span><span class="nf">truncatewords</span><span class="o">:</span><span class="m">100</span> <span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">story.tease</span><span class="o">|</span><span class="nf">truncatewords</span><span class="o">:</span><span class="m">100</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre></div>
@@ -180,7 +167,7 @@ explained later in this document.</p>
     </p>
     <p>
         &copy; Copyright 2014, Nick Allen.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.<br/>
     </p>
   </div>
 </footer>

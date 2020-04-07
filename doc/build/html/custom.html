@@ -1,41 +1,28 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Custom tag and filter libraries &mdash; Djula HTML templating system 0.2 documentation</title>
-    
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootswatch-3.2.0/yeti/bootstrap.min.css" type="text/css" />
+    <meta charset="utf-8" />
+    <title>Custom tag and filter libraries &#8212; Djula HTML templating system 0.2 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.2',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="Djula HTML templating system 0.2 documentation" href="index.html" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
 
-  </head>
-  <body>
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -108,7 +95,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="_sources/custom.txt"
+  <a href="_sources/custom.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -130,36 +117,36 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="s-custom-tag-and-filter-libraries">
-<span id="custom-tag-and-filter-libraries"></span><h1>Custom tag and filter libraries<a class="headerlink" href="#custom-tag-and-filter-libraries" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="custom-tag-and-filter-libraries">
+<h1>Custom tag and filter libraries<a class="headerlink" href="#custom-tag-and-filter-libraries" title="Permalink to this headline">¶</a></h1>
 <p>Certain applications provide custom tag and filter libraries. To access them in
-a template, use the <tt class="xref std std-ttag docutils literal"><span class="pre">load</span></tt> tag:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments</span> <span class="cp">%}</span>
+a template, use the <a href="#id1"><span class="problematic" id="id2">:ttag:`load`</span></a> tag:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments</span> <span class="cp">%}</span>
 
 <span class="cp">{%</span> <span class="k">comment_form</span> <span class="nv">for</span> <span class="nv">blogs.entries</span> <span class="nv">entry.id</span> <span class="k">with</span> <span class="nv">is_public</span> <span class="nv">yes</span> <span class="cp">%}</span>
 </pre></div>
 </div>
-<p>In the above, the <tt class="xref std std-ttag docutils literal"><span class="pre">load</span></tt> tag loads the <tt class="docutils literal"><span class="pre">comments</span></tt> tag library, which then
-makes the <tt class="docutils literal"><span class="pre">comment_form</span></tt> tag available for use. Consult the documentation
+<p>In the above, the <a href="#id3"><span class="problematic" id="id4">:ttag:`load`</span></a> tag loads the <code class="docutils literal notranslate"><span class="pre">comments</span></code> tag library, which then
+makes the <code class="docutils literal notranslate"><span class="pre">comment_form</span></code> tag available for use. Consult the documentation
 area in your admin to find the list of custom libraries in your installation.</p>
-<p>The <tt class="xref std std-ttag docutils literal"><span class="pre">load</span></tt> tag can take multiple library names, separated by spaces.
+<p>The <a href="#id5"><span class="problematic" id="id6">:ttag:`load`</span></a> tag can take multiple library names, separated by spaces.
 Example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments</span> <span class="nv">i18n</span> <span class="cp">%}</span>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">comments</span> <span class="nv">i18n</span> <span class="cp">%}</span>
 </pre></div>
 </div>
-<p>See <tt class="xref doc docutils literal"><span class="pre">/howto/custom-template-tags</span></tt> for information on writing your own custom
+<p>See <span class="xref std std-doc">/howto/custom-template-tags</span> for information on writing your own custom
 template libraries.</p>
-<div class="section" id="s-custom-libraries-and-template-inheritance">
-<span id="custom-libraries-and-template-inheritance"></span><h2>Custom libraries and template inheritance<a class="headerlink" href="#custom-libraries-and-template-inheritance" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="custom-libraries-and-template-inheritance">
+<h2>Custom libraries and template inheritance<a class="headerlink" href="#custom-libraries-and-template-inheritance" title="Permalink to this headline">¶</a></h2>
 <p>When you load a custom tag or filter library, the tags/filters are only made
-available to the current template &#8211; not any parent or child templates along
+available to the current template – not any parent or child templates along
 the template-inheritance path.</p>
-<p>For example, if a template <tt class="docutils literal"><span class="pre">foo.html</span></tt> has <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">comments</span> <span class="pre">%}</span></tt>, a child
-template (e.g., one that has <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">extends</span> <span class="pre">&quot;foo.html&quot;</span> <span class="pre">%}</span></tt>) will <em>not</em> have
+<p>For example, if a template <code class="docutils literal notranslate"><span class="pre">foo.html</span></code> has <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">comments</span> <span class="pre">%}</span></code>, a child
+template (e.g., one that has <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">extends</span> <span class="pre">&quot;foo.html&quot;</span> <span class="pre">%}</span></code>) will <em>not</em> have
 access to the comments template tags and filters. The child template is
-responsible for its own <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">comments</span> <span class="pre">%}</span></tt>.</p>
+responsible for its own <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">load</span> <span class="pre">comments</span> <span class="pre">%}</span></code>.</p>
 <p>This is a feature for the sake of maintainability and sanity.</p>
 </div>
 </div>
@@ -177,7 +164,7 @@ responsible for its own <tt class="docutils literal"><span class="pre">{%</span>
     </p>
     <p>
         &copy; Copyright 2014, Nick Allen.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.<br/>
     </p>
   </div>
 </footer>

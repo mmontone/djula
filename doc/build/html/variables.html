@@ -1,43 +1,30 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Variables &mdash; Djula HTML templating system 0.2 documentation</title>
-    
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootswatch-3.2.0/yeti/bootstrap.min.css" type="text/css" />
+    <meta charset="utf-8" />
+    <title>Variables &#8212; Djula HTML templating system 0.2 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.2',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="Djula HTML templating system 0.2 documentation" href="index.html" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tags" href="tags.html" />
     <link rel="prev" title="Usage" href="usage.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
 
-  </head>
-  <body>
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -69,7 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basics.html">Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Variables</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tags.html">Tags</a></li>
 <li class="toctree-l1"><a class="reference internal" href="comments.html">Comments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="verbatim.html">Verbatim</a></li>
@@ -115,7 +102,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="_sources/variables.txt"
+  <a href="_sources/variables.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -137,26 +124,26 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="s-variables">
-<span id="variables"></span><h1>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h1>
-<p>Variables look like this: <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">variable</span> <span class="pre">}}</span></tt>. When the template engine
+  <div class="section" id="variables">
+<h1>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h1>
+<p>Variables look like this: <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">variable</span> <span class="pre">}}</span></code>. When the template engine
 encounters a variable, it evaluates that variable and replaces it with the
 result. Variable names consist of any combination of alphanumeric characters
-and the underscore (<tt class="docutils literal"><span class="pre">&quot;_&quot;</span></tt>). The dot (<tt class="docutils literal"><span class="pre">&quot;.&quot;</span></tt>) also appears in variable
+and the underscore (<code class="docutils literal notranslate"><span class="pre">&quot;_&quot;</span></code>). The dot (<code class="docutils literal notranslate"><span class="pre">&quot;.&quot;</span></code>) also appears in variable
 sections, although that has a special meaning, as indicated below.
 Importantly, <em>you cannot have spaces or punctuation characters in variable
 names.</em></p>
-<p>Use a dot (<tt class="docutils literal"><span class="pre">.</span></tt>) to access attributes of a variable.</p>
+<p>Use a dot (<code class="docutils literal notranslate"><span class="pre">.</span></code>) to access attributes of a variable.</p>
 <div class="admonition-behind-the-scenes admonition">
-<p class="first admonition-title">Behind the scenes</p>
-<p class="last">For accessing variables the <tt class="docutils literal"><span class="pre">ACCESS</span></tt> Common Lisp library is used: <a class="reference external" href="https://github.com/AccelerationNet/access">https://github.com/AccelerationNet/access</a></p>
+<p class="admonition-title">Behind the scenes</p>
+<p>For accessing variables the <code class="docutils literal notranslate"><span class="pre">ACCESS</span></code> Common Lisp library is used: <a class="reference external" href="https://github.com/AccelerationNet/access">https://github.com/AccelerationNet/access</a></p>
 </div>
-<p>In the above example, <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">section.title</span> <span class="pre">}}</span></tt> will be replaced with the
-<tt class="docutils literal"><span class="pre">title</span></tt> attribute of the <tt class="docutils literal"><span class="pre">section</span></tt> object.</p>
-<p>Note that &#8220;bar&#8221; in a template expression like <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">foo.bar</span> <span class="pre">}}</span></tt> will be
-interpreted as a literal string and not using the value of the variable &#8220;bar&#8221;,
+<p>In the above example, <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">section.title</span> <span class="pre">}}</span></code> will be replaced with the
+<code class="docutils literal notranslate"><span class="pre">title</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">section</span></code> object.</p>
+<p>Note that “bar” in a template expression like <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">foo.bar</span> <span class="pre">}}</span></code> will be
+interpreted as a literal string and not using the value of the variable “bar”,
 if one exists in the template context.</p>
 </div>
 
@@ -173,7 +160,7 @@ if one exists in the template context.</p>
     </p>
     <p>
         &copy; Copyright 2014, Nick Allen.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.<br/>
     </p>
   </div>
 </footer>

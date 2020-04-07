@@ -1,43 +1,30 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Error handling &mdash; Djula HTML templating system 0.2 documentation</title>
-    
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootswatch-3.2.0/yeti/bootstrap.min.css" type="text/css" />
+    <meta charset="utf-8" />
+    <title>Error handling &#8212; Djula HTML templating system 0.2 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.2',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="Djula HTML templating system 0.2 documentation" href="index.html" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="API" href="api.html" />
     <link rel="prev" title="Internationalization" href="internationalization.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
 
-  </head>
-  <body>
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -76,7 +63,7 @@
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inheritance.html">Template inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="internationalization.html">Internationalization</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Error handling</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Error handling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 </ul>
 </ul>
@@ -104,7 +91,7 @@
               
                 
   <li>
-    <a href="internationalization.html" title="Previous Chapter: Internationalization"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Internationaliza...</span>
+    <a href="internationalization.html" title="Previous Chapter: Internationalization"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Internationalization</span>
     </a>
   </li>
   <li>
@@ -118,7 +105,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="_sources/error-handling.txt"
+  <a href="_sources/error-handling.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -140,29 +127,29 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="s-error-handling">
-<span id="error-handling"></span><h1>Error handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="error-handling">
+<h1>Error handling<a class="headerlink" href="#error-handling" title="Permalink to this headline">¶</a></h1>
 <p>Djula catches errors and barfs them to the template output by default.</p>
-<p>That is controlled via the <a class="reference internal" href="api.html#variable:djula:*catch-template-errors-p*" title="djula:*catch-template-errors-p*"><tt class="xref cl cl-symbol docutils literal"><span class="pre">*CATCH-TEMPLATE-ERRORS-P*</span></tt></a>. If changed to <tt class="docutils literal"><span class="pre">NIL</span></tt>, then errors are not caught anymore and are debuggable from the lisp listener.</p>
-<p>Djula provides more or less verbosity in template errors. Verbosity is controlled via the variable <a class="reference internal" href="api.html#variable:djula:*verbose-errors-p*" title="djula:*verbose-errors-p*"><tt class="xref cl cl-symbol docutils literal"><span class="pre">*VERBOSE-ERRORS-P*</span></tt></a>.</p>
-<p>Also, there&#8217;s a fancy page to display errors, which can be disabled if desired. That is controlled via the variable <a class="reference internal" href="api.html#variable:djula:*fancy-error-template-p*" title="djula:*fancy-error-template-p*"><tt class="xref cl cl-symbol docutils literal"><span class="pre">*FANCY-ERROR-TEMPLATE-P*</span></tt></a></p>
-<div class="section" id="s-api">
-<span id="api"></span><h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
-<dl class="variable">
+<p>That is controlled via the <a class="reference internal" href="api.html#variable:djula:*catch-template-errors-p*" title="djula:*catch-template-errors-p*"><code class="xref cl cl-symbol docutils literal notranslate"><span class="pre">*CATCH-TEMPLATE-ERRORS-P*</span></code></a>. If changed to <code class="docutils literal notranslate"><span class="pre">NIL</span></code>, then errors are not caught anymore and are debuggable from the lisp listener.</p>
+<p>Djula provides more or less verbosity in template errors. Verbosity is controlled via the variable <a class="reference internal" href="api.html#variable:djula:*verbose-errors-p*" title="djula:*verbose-errors-p*"><code class="xref cl cl-symbol docutils literal notranslate"><span class="pre">*VERBOSE-ERRORS-P*</span></code></a>.</p>
+<p>Also, there’s a fancy page to display errors, which can be disabled if desired. That is controlled via the variable <a class="reference internal" href="api.html#variable:djula:*fancy-error-template-p*" title="djula:*fancy-error-template-p*"><code class="xref cl cl-symbol docutils literal notranslate"><span class="pre">*FANCY-ERROR-TEMPLATE-P*</span></code></a></p>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="cl variable">
 <dt>
-<em class="property">variable </em><tt class="descname">*catch-template-errors-p*</tt></dt>
+<em class="property">variable </em><code class="sig-name descname">*catch-template-errors-p*</code></dt>
 <dd></dd></dl>
 
-<dl class="variable">
+<dl class="cl variable">
 <dt>
-<em class="property">variable </em><tt class="descname">*fancy-error-template-p*</tt></dt>
+<em class="property">variable </em><code class="sig-name descname">*fancy-error-template-p*</code></dt>
 <dd></dd></dl>
 
-<dl class="variable">
+<dl class="cl variable">
 <dt>
-<em class="property">variable </em><tt class="descname">*verbose-errors-p*</tt></dt>
+<em class="property">variable </em><code class="sig-name descname">*verbose-errors-p*</code></dt>
 <dd></dd></dl>
 
 </div>
@@ -181,7 +168,7 @@
     </p>
     <p>
         &copy; Copyright 2014, Nick Allen.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.<br/>
     </p>
   </div>
 </footer>

@@ -1,43 +1,30 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Introduction &mdash; Djula HTML templating system 0.2 documentation</title>
-    
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootswatch-3.2.0/yeti/bootstrap.min.css" type="text/css" />
+    <meta charset="utf-8" />
+    <title>Introduction &#8212; Djula HTML templating system 0.2 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.2',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="Djula HTML templating system 0.2 documentation" href="index.html" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Basics" href="basics.html" />
     <link rel="prev" title="Welcome to Djula HTML templating system’s documentation!" href="index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
 
-  </head>
-  <body>
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -66,7 +53,7 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basics.html">Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
@@ -105,7 +92,7 @@
               
                 
   <li>
-    <a href="index.html" title="Previous Chapter: Welcome to Djula HTML templating system’s documentation!"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Welcome to Djula...</span>
+    <a href="index.html" title="Previous Chapter: Welcome to Djula HTML templating system’s documentation!"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Welcome to Dj...</span>
     </a>
   </li>
   <li>
@@ -119,7 +106,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="_sources/intro.txt"
+  <a href="_sources/intro.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -141,35 +128,35 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="s-introduction">
-<span id="introduction"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>Djula is an HTML templating system similar to Django templates for Common Lisp.</p>
-<p>Djula&#8217;s template language is designed to strike a balance between power and
-ease. It&#8217;s designed to feel comfortable to those used to working with HTML.</p>
+<p>Djula’s template language is designed to strike a balance between power and
+ease. It’s designed to feel comfortable to those used to working with HTML.</p>
 <div class="admonition-philosophy admonition">
-<p class="first admonition-title">Philosophy</p>
-<p>If you have a background in programming, or if you&#8217;re used to languages
-which mix programming code directly into HTML, you&#8217;ll want to bear in
+<p class="admonition-title">Philosophy</p>
+<p>If you have a background in programming, or if you’re used to languages
+which mix programming code directly into HTML, you’ll want to bear in
 mind that the Djula template system is not simply Common Lisp code embedded into
 HTML. This is by design: the template system is meant to express
 presentation, not program logic.</p>
-<p class="last">The Djula template system provides tags which function similarly to some
-programming constructs &#8211; an <a class="reference internal" href="tags.html#std:templatetag-if"><tt class="xref std std-ttag docutils literal"><span class="pre">if</span></tt></a> tag for boolean tests, a <a class="reference internal" href="tags.html#std:templatetag-for"><tt class="xref std std-ttag docutils literal"><span class="pre">for</span></tt></a>
-tag for looping, etc. &#8211; but these are not simply executed as the
+<p>The Djula template system provides tags which function similarly to some
+programming constructs – an <a href="#id1"><span class="problematic" id="id2">:ttag:`if`</span></a> tag for boolean tests, a <a href="#id3"><span class="problematic" id="id4">:ttag:`for`</span></a>
+tag for looping, etc. – but these are not simply executed as the
 corresponding Lisp code, and the template system will not execute
 arbitrary Lisp expressions. Only the tags, filters and syntax listed below
-are supported by default (although you can add <tt class="xref doc docutils literal"><span class="pre">your</span> <span class="pre">own</span> <span class="pre">extensions</span></tt> to the template language as needed).</p>
+are supported by default (although you can add <span class="xref std std-doc">your own extensions</span> to the template language as needed).</p>
 </div>
-<div class="section" id="s-prerequisites">
-<span id="prerequisites"></span><h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
 <p>TODO: list of Common Lisp compilers Djula works on.</p>
 </div>
-<div class="section" id="s-installation">
-<span id="installation"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>Djula is available on Quicklisp:</p>
-<div class="highlight-common-lisp"><div class="highlight"><pre><span class="p">(</span><span class="nv">ql:quickload</span> <span class="ss">:djula</span><span class="p">)</span>
+<div class="highlight-common-lisp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nv">ql:quickload</span> <span class="ss">:djula</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -188,7 +175,7 @@ are supported by default (although you can add <tt class="xref doc docutils lite
     </p>
     <p>
         &copy; Copyright 2014, Nick Allen.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.<br/>
     </p>
   </div>
 </footer>

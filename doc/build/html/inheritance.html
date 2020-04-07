@@ -1,43 +1,30 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Template inheritance &mdash; Djula HTML templating system 0.2 documentation</title>
-    
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootswatch-3.2.0/yeti/bootstrap.min.css" type="text/css" />
+    <meta charset="utf-8" />
+    <title>Template inheritance &#8212; Djula HTML templating system 0.2 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.2',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="Djula HTML templating system 0.2 documentation" href="index.html" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Internationalization" href="internationalization.html" />
     <link rel="prev" title="Filters" href="filters.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
 
-  </head>
-  <body>
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -74,7 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="comments.html">Comments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="verbatim.html">Verbatim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Template inheritance</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Template inheritance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="internationalization.html">Internationalization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="error-handling.html">Error handling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
@@ -105,7 +92,7 @@
     </a>
   </li>
   <li>
-    <a href="internationalization.html" title="Next Chapter: Internationalization"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Internationaliza... &raquo;</span>
+    <a href="internationalization.html" title="Next Chapter: Internationalization"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Internationalization &raquo;</span>
     </a>
   </li>
               
@@ -115,7 +102,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="_sources/inheritance.txt"
+  <a href="_sources/inheritance.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -137,147 +124,143 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="s-template-inheritance">
-<span id="template-inheritance"></span><h1>Template inheritance<a class="headerlink" href="#template-inheritance" title="Permalink to this headline">¶</a></h1>
-<p>The most powerful &#8211; and thus the most complex &#8211; part of Djula&#8217;s template
+  <div class="section" id="template-inheritance">
+<h1>Template inheritance<a class="headerlink" href="#template-inheritance" title="Permalink to this headline">¶</a></h1>
+<p>The most powerful – and thus the most complex – part of Djula’s template
 engine is template inheritance. Template inheritance allows you to build a base
-&#8220;skeleton&#8221; template that contains all the common elements of your site and
+“skeleton” template that contains all the common elements of your site and
 defines <strong>blocks</strong> that child templates can override.</p>
-<p>It&#8217;s easiest to understand template inheritance by starting with an example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;style.css&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;title&gt;</span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>My amazing site<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
+<p>It’s easiest to understand template inheritance by starting with an example:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;style.css&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>My amazing site<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
 
-<span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;sidebar&quot;</span><span class="nt">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
         <span class="cp">{%</span> <span class="k">block</span> <span class="nv">sidebar</span> <span class="cp">%}</span>
-        <span class="nt">&lt;ul&gt;</span>
-            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/blog/&quot;</span><span class="nt">&gt;</span>Blog<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-        <span class="nt">&lt;/ul&gt;</span>
+        <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/blog/&quot;</span><span class="p">&gt;</span>Blog<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
         <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
-    <span class="nt">&lt;/div&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
         <span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
-    <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 </div>
-<p>This template, which we&#8217;ll call <tt class="docutils literal"><span class="pre">base.html</span></tt>, defines a simple HTML skeleton
-document that you might use for a simple two-column page. It&#8217;s the job of
-&#8220;child&#8221; templates to fill the empty blocks with content.</p>
-<p>In this example, the <a class="reference internal" href="tags.html#std:templatetag-block"><tt class="xref std std-ttag docutils literal"><span class="pre">block</span></tt></a> tag defines three blocks that child
-templates can fill in. All the <a class="reference internal" href="tags.html#std:templatetag-block"><tt class="xref std std-ttag docutils literal"><span class="pre">block</span></tt></a> tag does is to tell the template
+<p>This template, which we’ll call <code class="docutils literal notranslate"><span class="pre">base.html</span></code>, defines a simple HTML skeleton
+document that you might use for a simple two-column page. It’s the job of
+“child” templates to fill the empty blocks with content.</p>
+<p>In this example, the <a href="#id1"><span class="problematic" id="id2">:ttag:`block`</span></a> tag defines three blocks that child
+templates can fill in. All the <a href="#id3"><span class="problematic" id="id4">:ttag:`block`</span></a> tag does is to tell the template
 engine that a child template may override those portions of the template.</p>
 <p>A child template might look like this:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
 
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>My amazing blog<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">for</span> <span class="nv">entry</span> <span class="k">in</span> <span class="nv">blog_entries</span> <span class="cp">%}</span>
-    <span class="nt">&lt;h2&gt;</span><span class="cp">{{</span> <span class="nv">entry.title</span> <span class="cp">}}</span><span class="nt">&lt;/h2&gt;</span>
-    <span class="nt">&lt;p&gt;</span><span class="cp">{{</span> <span class="nv">entry.body</span> <span class="cp">}}</span><span class="nt">&lt;/p&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">entry.title</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">entry.body</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="tags.html#std:templatetag-extends"><tt class="xref std std-ttag docutils literal"><span class="pre">extends</span></tt></a> tag is the key here. It tells the template engine that
-this template &#8220;extends&#8221; another template. When the template system evaluates
-this template, first it locates the parent &#8211; in this case, &#8220;base.html&#8221;.</p>
-<p>At that point, the template engine will notice the three <a class="reference internal" href="tags.html#std:templatetag-block"><tt class="xref std std-ttag docutils literal"><span class="pre">block</span></tt></a> tags
-in <tt class="docutils literal"><span class="pre">base.html</span></tt> and replace those blocks with the contents of the child
-template. Depending on the value of <tt class="docutils literal"><span class="pre">blog_entries</span></tt>, the output might look
+<p>The <a href="#id5"><span class="problematic" id="id6">:ttag:`extends`</span></a> tag is the key here. It tells the template engine that
+this template “extends” another template. When the template system evaluates
+this template, first it locates the parent – in this case, “base.html”.</p>
+<p>At that point, the template engine will notice the three <a href="#id7"><span class="problematic" id="id8">:ttag:`block`</span></a> tags
+in <code class="docutils literal notranslate"><span class="pre">base.html</span></code> and replace those blocks with the contents of the child
+template. Depending on the value of <code class="docutils literal notranslate"><span class="pre">blog_entries</span></code>, the output might look
 like:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;style.css&quot;</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;title&gt;</span>My amazing blog<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;style.css&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>My amazing blog<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
 
-<span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;sidebar&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;ul&gt;</span>
-            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/blog/&quot;</span><span class="nt">&gt;</span>Blog<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-        <span class="nt">&lt;/ul&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span><span class="p">&gt;</span>Home<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/blog/&quot;</span><span class="p">&gt;</span>Blog<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;content&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;h2&gt;</span>Entry one<span class="nt">&lt;/h2&gt;</span>
-        <span class="nt">&lt;p&gt;</span>This is my first entry.<span class="nt">&lt;/p&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Entry one<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This is my first entry.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 
-        <span class="nt">&lt;h2&gt;</span>Entry two<span class="nt">&lt;/h2&gt;</span>
-        <span class="nt">&lt;p&gt;</span>This is my second entry.<span class="nt">&lt;/p&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Entry two<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>This is my second entry.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 </div>
-<p>Note that since the child template didn&#8217;t define the <tt class="docutils literal"><span class="pre">sidebar</span></tt> block, the
-value from the parent template is used instead. Content within a <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt>
+<p>Note that since the child template didn’t define the <code class="docutils literal notranslate"><span class="pre">sidebar</span></code> block, the
+value from the parent template is used instead. Content within a <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></code>
 tag in a parent template is always used as a fallback.</p>
 <p>You can use as many levels of inheritance as needed. One common way of using
 inheritance is the following three-level approach:</p>
 <ul class="simple">
-<li>Create a <tt class="docutils literal"><span class="pre">base.html</span></tt> template that holds the main look-and-feel of your
-site.</li>
-<li>Create a <tt class="docutils literal"><span class="pre">base_SECTIONNAME.html</span></tt> template for each &#8220;section&#8221; of your
-site. For example, <tt class="docutils literal"><span class="pre">base_news.html</span></tt>, <tt class="docutils literal"><span class="pre">base_sports.html</span></tt>. These
-templates all extend <tt class="docutils literal"><span class="pre">base.html</span></tt> and include section-specific
-styles/design.</li>
-<li>Create individual templates for each type of page, such as a news
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">base.html</span></code> template that holds the main look-and-feel of your
+site.</p></li>
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">base_SECTIONNAME.html</span></code> template for each “section” of your
+site. For example, <code class="docutils literal notranslate"><span class="pre">base_news.html</span></code>, <code class="docutils literal notranslate"><span class="pre">base_sports.html</span></code>. These
+templates all extend <code class="docutils literal notranslate"><span class="pre">base.html</span></code> and include section-specific
+styles/design.</p></li>
+<li><p>Create individual templates for each type of page, such as a news
 article or blog entry. These templates extend the appropriate section
-template.</li>
+template.</p></li>
 </ul>
 <p>This approach maximizes code reuse and makes it easy to add items to shared
 content areas, such as section-wide navigation.</p>
 <p>Here are some tips for working with inheritance:</p>
 <ul>
-<li><p class="first">If you use <a class="reference internal" href="tags.html#std:templatetag-extends"><tt class="xref std std-ttag docutils literal"><span class="pre">{%</span> <span class="pre">extends</span> <span class="pre">%}</span></tt></a> in a template, it must be the first template
-tag in that template. Template inheritance won&#8217;t work, otherwise.</p>
-</li>
-<li><p class="first">More <a class="reference internal" href="tags.html#std:templatetag-block"><tt class="xref std std-ttag docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt></a> tags in your base templates are better. Remember,
-child templates don&#8217;t have to define all parent blocks, so you can fill
+<li><p>If you use <a href="#id9"><span class="problematic" id="id10">:ttag:`{% extends %}&lt;extends&gt;`</span></a> in a template, it must be the first template
+tag in that template. Template inheritance won’t work, otherwise.</p></li>
+<li><p>More <a href="#id11"><span class="problematic" id="id12">:ttag:`{% block %}&lt;block&gt;`</span></a> tags in your base templates are better. Remember,
+child templates don’t have to define all parent blocks, so you can fill
 in reasonable defaults in a number of blocks, then only define the ones
-you need later. It&#8217;s better to have more hooks than fewer hooks.</p>
-</li>
-<li><p class="first">If you find yourself duplicating content in a number of templates, it
-probably means you should move that content to a <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt> in a
-parent template.</p>
-</li>
-<li><p class="first">If you need to get the content of the block from the parent template,
-the <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">block.super</span> <span class="pre">}}</span></tt> variable will do the trick. This is useful
+you need later. It’s better to have more hooks than fewer hooks.</p></li>
+<li><p>If you find yourself duplicating content in a number of templates, it
+probably means you should move that content to a <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></code> in a
+parent template.</p></li>
+<li><p>If you need to get the content of the block from the parent template,
+the <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">block.super</span> <span class="pre">}}</span></code> variable will do the trick. This is useful
 if you want to add to the contents of a parent block instead of
-completely overriding it. Data inserted using <tt class="docutils literal"><span class="pre">{{</span> <span class="pre">block.super</span> <span class="pre">}}</span></tt> will
-not be automatically escaped (see the <a href="#id1"><span class="problematic" id="id2">`next section`_</span></a>), since it was
-already escaped, if necessary, in the parent template.</p>
-</li>
-<li><p class="first">For extra readability, you can optionally give a <em>name</em> to your
-<tt class="docutils literal"><span class="pre">{%</span> <span class="pre">endblock</span> <span class="pre">%}</span></tt> tag. For example:</p>
-<div class="highlight-html+django"><div class="highlight"><pre><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+completely overriding it. Data inserted using <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">block.super</span> <span class="pre">}}</span></code> will
+not be automatically escaped (see the <a href="#id17"><span class="problematic" id="id18">`next section`_</span></a>), since it was
+already escaped, if necessary, in the parent template.</p></li>
+<li><p>For extra readability, you can optionally give a <em>name</em> to your
+<code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">endblock</span> <span class="pre">%}</span></code> tag. For example:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
 ...
 <span class="cp">{%</span> <span class="k">endblock</span> <span class="nv">content</span> <span class="cp">%}</span>
 </pre></div>
 </div>
-<p>In larger templates, this technique helps you see which <tt class="docutils literal"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></tt>
+<p>In larger templates, this technique helps you see which <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></code>
 tags are being closed.</p>
 </li>
 </ul>
-<p>Finally, note that you can&#8217;t define multiple <a class="reference internal" href="tags.html#std:templatetag-block"><tt class="xref std std-ttag docutils literal"><span class="pre">block</span></tt></a> tags with the same
+<p>Finally, note that you can’t define multiple <a href="#id13"><span class="problematic" id="id14">:ttag:`block`</span></a> tags with the same
 name in the same template. This limitation exists because a block tag works in
-&#8220;both&#8221; directions. That is, a block tag doesn&#8217;t just provide a hole to fill &#8211;
+“both” directions. That is, a block tag doesn’t just provide a hole to fill –
 it also defines the content that fills the hole in the <em>parent</em>. If there were
-two similarly-named <a class="reference internal" href="tags.html#std:templatetag-block"><tt class="xref std std-ttag docutils literal"><span class="pre">block</span></tt></a> tags in a template, that template&#8217;s parent
-wouldn&#8217;t know which one of the blocks&#8217; content to use.</p>
+two similarly-named <a href="#id15"><span class="problematic" id="id16">:ttag:`block`</span></a> tags in a template, that template’s parent
+wouldn’t know which one of the blocks’ content to use.</p>
 </div>
 
 
@@ -293,7 +276,7 @@ wouldn&#8217;t know which one of the blocks&#8217; content to use.</p>
     </p>
     <p>
         &copy; Copyright 2014, Nick Allen.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.<br/>
     </p>
   </div>
 </footer>

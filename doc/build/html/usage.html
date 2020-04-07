@@ -1,43 +1,30 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Usage &mdash; Djula HTML templating system 0.2 documentation</title>
-    
-    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/bootswatch-3.2.0/yeti/bootstrap.min.css" type="text/css" />
+    <meta charset="utf-8" />
+    <title>Usage &#8212; Djula HTML templating system 0.2 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.2',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="Djula HTML templating system 0.2 documentation" href="index.html" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Variables" href="variables.html" />
     <link rel="prev" title="Basics" href="basics.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
 
-  </head>
-  <body>
+  </head><body>
 
   <div id="navbar" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -68,7 +55,7 @@
       aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basics.html">Basics</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variables.html">Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tags.html">Tags</a></li>
 <li class="toctree-l1"><a class="reference internal" href="comments.html">Comments</a></li>
@@ -118,7 +105,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="_sources/usage.txt"
+  <a href="_sources/usage.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -140,15 +127,15 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="s-usage">
-<span id="usage"></span><h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
-<p>To render our templates, they need to be compiled first. We do that with the <a class="reference internal" href="api.html#function:djula:compile-template*" title="djula:compile-template*"><tt class="xref cl cl-function docutils literal"><span class="pre">COMPILE-TEMPLATE*</span></tt></a> function.
+  <div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<p>To render our templates, they need to be compiled first. We do that with the <a class="reference internal" href="api.html#function:djula:compile-template*" title="djula:compile-template*"><code class="xref cl cl-function docutils literal notranslate"><span class="pre">COMPILE-TEMPLATE*</span></code></a> function.
 For inheritance to work, we need to put all the templates in the same directory so that Djula can find them when resolving templates inheritance.</p>
-<p>Djula looks for templates in the <a class="reference internal" href="api.html#variable:djula:*current-store*" title="djula:*current-store*"><tt class="xref cl cl-symbol docutils literal"><span class="pre">*CURRENT-STORE*</span></tt></a>. For our templates to be found, we have to add the template folder path the templates store. We can do that with the <a class="reference internal" href="api.html#function:djula:add-template-directory" title="djula:add-template-directory"><tt class="xref cl cl-function docutils literal"><span class="pre">add-template-directory</span></tt></a> function.</p>
+<p>Djula looks for templates in the <a class="reference internal" href="api.html#variable:djula:*current-store*" title="djula:*current-store*"><code class="xref cl cl-symbol docutils literal notranslate"><span class="pre">*CURRENT-STORE*</span></code></a>. For our templates to be found, we have to add the template folder path the templates store. We can do that with the <a class="reference internal" href="api.html#function:djula:add-template-directory" title="djula:add-template-directory"><code class="xref cl cl-function docutils literal notranslate"><span class="pre">add-template-directory</span></code></a> function.</p>
 <p>Here is an example:</p>
-<div class="highlight-common-lisp"><div class="highlight"><pre><span class="p">(</span><span class="nv">add-template-directory</span> <span class="p">(</span><span class="nv">asdf:system-relative-pathname</span> <span class="s">&quot;webapp&quot;</span> <span class="s">&quot;templates/&quot;</span><span class="p">))</span>
+<div class="highlight-common-lisp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nv">add-template-directory</span> <span class="p">(</span><span class="nv">asdf:system-relative-pathname</span> <span class="s">&quot;webapp&quot;</span> <span class="s">&quot;templates/&quot;</span><span class="p">))</span>
 
 <span class="p">(</span><span class="nb">defparameter</span> <span class="nv">+base.html+</span> <span class="p">(</span><span class="nv">djula:compile-template*</span> <span class="s">&quot;base.html&quot;</span><span class="p">))</span>
 
@@ -157,51 +144,47 @@ For inheritance to work, we need to put all the templates in the same directory 
 <span class="p">(</span><span class="nb">defparameter</span> <span class="nv">+contact.html+</span> <span class="p">(</span><span class="nv">djula:compile-template*</span> <span class="s">&quot;contact.html&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Then we can render our compiled templates using the <a class="reference internal" href="api.html#function:djula:render-template*" title="djula:render-template*"><tt class="xref cl cl-function docutils literal"><span class="pre">RENDER-TEMPLATE*</span></tt></a> function:</p>
-<div class="highlight-common-lisp"><div class="highlight"><pre><span class="p">(</span><span class="nv">djula:render-template*</span> <span class="nv">+welcome.html+</span> <span class="nv">s</span>
+<p>Then we can render our compiled templates using the <a class="reference internal" href="api.html#function:djula:render-template*" title="djula:render-template*"><code class="xref cl cl-function docutils literal notranslate"><span class="pre">RENDER-TEMPLATE*</span></code></a> function:</p>
+<div class="highlight-common-lisp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nv">djula:render-template*</span> <span class="nv">+welcome.html+</span> <span class="nv">s</span>
                            <span class="ss">:title</span> <span class="s">&quot;Ukeleles&quot;</span>
                            <span class="ss">:project-name</span> <span class="s">&quot;Ukeleles&quot;</span>
                            <span class="ss">:mode</span> <span class="s">&quot;welcome&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="section" id="s-api">
-<span id="api"></span><h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="cl function">
 <dt id="function:djula:add-template-directory">
-<em class="property">function </em> (<tt class="descname">add-template-directory</tt> <em>directory</em> <em class="lambda_keyword text-muted">&amp;optional</em> (<em>template-store</em> <em>*current-store*</em>))<a class="headerlink" href="#function:djula:add-template-directory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds <tt class="docutils literal"><span class="pre">DIRECTORY</span></tt> to the search path of the <tt class="docutils literal"><span class="pre">TEMPLATE-STORE</span></tt></p>
+<em class="property">function </em> (<code class="sig-name descname">add-template-directory</code> <em>directory</em> <em class="lambda_keyword text-muted">&amp;optional</em> (<em>template-store</em> <em>*current-store*</em>))<a class="headerlink" href="#function:djula:add-template-directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds <code class="docutils literal notranslate"><span class="pre">DIRECTORY</span></code> to the search path of the <code class="docutils literal notranslate"><span class="pre">TEMPLATE-STORE</span></code></p>
 </dd></dl>
 
-<dl class="generic">
+<dl class="cl generic">
 <dt id="generic:djula:compile-template">
-<em class="property">generic </em> (<tt class="descname">compile-template</tt> <em>compiler</em> <em>name</em> <em class="lambda_keyword text-muted">&amp;optional</em> <em>error-p</em>)<a class="headerlink" href="#generic:djula:compile-template" title="Permalink to this definition">¶</a></dt>
+<em class="property">generic </em> (<code class="sig-name descname">compile-template</code> <em>compiler</em> <em>name</em> <em class="lambda_keyword text-muted">&amp;optional</em> <em>error-p</em>)<a class="headerlink" href="#generic:djula:compile-template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides a hook to customize template compilation.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Specializers:</th><td class="field-body"><ul class="first last">
-<li><span class="first"><p><tt class="xref cl cl-method docutils literal"><span class="pre">(toplevel-compiler</span> <span class="pre">common-lisp:t)</span></tt></p>
+<dl class="field-list">
+<dt class="field-odd">Specializers</dt>
+<dd class="field-odd"><ul>
+<li><span><p><code class="xref cl cl-method docutils literal notranslate"><span class="pre">(toplevel-compiler</span> <span class="pre">common-lisp:t)</span></code></p>
 </span></li>
-<li><span class="first"><p><tt class="xref cl cl-method docutils literal"><span class="pre">(compiler</span> <span class="pre">common-lisp:t)</span></tt></p>
+<li><span><p><code class="xref cl cl-method docutils literal notranslate"><span class="pre">(compiler</span> <span class="pre">common-lisp:t)</span></code></p>
 </span></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="cl function">
 <dt id="function:djula:compile-template*">
-<em class="property">function </em> (<tt class="descname">compile-template*</tt> <em>name</em>)<a class="headerlink" href="#function:djula:compile-template*" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compiles template <tt class="docutils literal"><span class="pre">NAME</span></tt> with compiler in <em>CURRENT-COMPILER</em></p>
+<em class="property">function </em> (<code class="sig-name descname">compile-template*</code> <em>name</em>)<a class="headerlink" href="#function:djula:compile-template*" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compiles template <code class="docutils literal notranslate"><span class="pre">NAME</span></code> with compiler in <em>CURRENT-COMPILER</em></p>
 </dd></dl>
 
-<dl class="function">
+<dl class="cl function">
 <dt id="function:djula:render-template*">
-<em class="property">function </em> (<tt class="descname">render-template*</tt> <em>template</em> <em class="lambda_keyword text-muted">&amp;optional</em> <em>stream</em> <em class="lambda_keyword text-muted">&amp;rest</em> <em>*template-arguments*</em>)<a class="headerlink" href="#function:djula:render-template*" title="Permalink to this definition">¶</a></dt>
-<dd><p>Render <tt class="docutils literal"><span class="pre">TEMPLATE</span></tt> into <tt class="docutils literal"><span class="pre">STREAM</span></tt> passing <em>TEMPLATE-ARGUMENTS</em></p>
+<em class="property">function </em> (<code class="sig-name descname">render-template*</code> <em>template</em> <em class="lambda_keyword text-muted">&amp;optional</em> <em>stream</em> <em class="lambda_keyword text-muted">&amp;rest</em> <em>*template-arguments*</em>)<a class="headerlink" href="#function:djula:render-template*" title="Permalink to this definition">¶</a></dt>
+<dd><p>Render <code class="docutils literal notranslate"><span class="pre">TEMPLATE</span></code> into <code class="docutils literal notranslate"><span class="pre">STREAM</span></code> passing <em>TEMPLATE-ARGUMENTS</em></p>
 </dd></dl>
 
 </div>
@@ -220,7 +203,7 @@ For inheritance to work, we need to put all the templates in the same directory 
     </p>
     <p>
         &copy; Copyright 2014, Nick Allen.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.<br/>
     </p>
   </div>
 </footer>
