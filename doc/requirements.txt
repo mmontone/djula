@@ -1,0 +1,5 @@
+setuptools==34.3.0
+sphinx==3.0
+sphinx_bootstrap_theme
+-e git+https://github.com/40ants/pygments-cl-repl.git#egg=pygments-cl-repl
+-e git+https://github.com/mmontone/sphinxcontrib-cldomain.git#egg=sphinxcontrib-cldomain
