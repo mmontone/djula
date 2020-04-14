@@ -1029,11 +1029,11 @@ Custom filters
 
 Use the ``def-filter`` macro. Its general form is::
 
-        (def-filter :myfilter-name (value arg2 &optional other-args)
+        (def-filter :myfilter-name (value arg)
            (body))
 
-It always takes the variable's value as argument, and it can have more
-required or optional arguments. For example, this is how those
+It always takes the variable's value as argument, and it can have one
+required or optional argument. For example, this is how those
 built-in filters are defined::
 
        (def-filter :capfirst (val)
@@ -1052,6 +1052,21 @@ and with an optional one::
 
        (def-filter :datetime (it &optional format)
          (let ((timestamp …))))
+
+When you need to pass a second argument, make your filter return a
+lambda function and chain it with the ``with`` filter::
+
+    (def-filter :replace (it regex)
+       (lambda (replace)
+         (ppcre:regex-replace-all regex it replace)))
+
+    (def-filter :with (it replace)
+       (funcall it replace))
+
+Now we can write::
+
+    {{ value | replace:foo | with:bar }}
+
 
 Errors are handled by the macro, but you can handle them and return a
 ``template-error`` condition::
