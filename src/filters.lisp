@@ -61,6 +61,7 @@
 (def-filter :linebreaksbr (it)
   (cl-ppcre:regex-replace-all "\\n" (princ-to-string it) "<br />"))
 
+;xxx: undocumented
 (def-filter :lisp (it &optional lisp-string)
   (unless *eval-lisp-tags*
     (template-error "I can't evaulate the \"lisp\" filter ~A because *EVAL-LISP-TAGS* is NIL" lisp-string))
