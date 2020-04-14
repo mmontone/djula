@@ -156,16 +156,7 @@ If ``value`` is ``""`` (the empty string), the output will be ``nothing``.
 
 .. templatefilter:: default_if_none
 
-.. templatefilter:: sort
-
-sort
-^^^^
-
-Takes a list and returns that list sorted.
-
-For example::
-
-    {{ list | sort }}
+.. templatefilter:: reverse
 
 reverse
 ^^^^^^^
@@ -174,7 +165,7 @@ Takes a list and returns that list reversed.
 
 For example::
 
-    {{ list | reverse }}  
+    {{ list | reverse }}
 
 ..
    divisibleby
@@ -189,7 +180,20 @@ For example::
    If ``value`` is ``21``, the output would be ``True``.
 
 ..
-   .. templatefilter:: escape
+
+.. templatefilter:: sort
+
+sort
+^^^^
+
+Takes a list and returns that list sorted.
+
+For example::
+
+    {{ list | sort }}
+
+
+.. templatefilter:: escape
 
    escape
    ^^^^^^
@@ -396,6 +400,7 @@ slug``.
 
    If ``value`` is ``Djula``, the output will be ``"Djula    "``.
 
+
 .. templatefilter:: lower
 
 lower
@@ -532,8 +537,8 @@ If ``value`` is ``Still MAD At Yoko``, the output will be
 
 .. templatefilter:: safe
 
-safe
-^^^^
+safe, escape
+^^^^^^^^^^^^
 
 Marks a string as not requiring further HTML escaping prior to output. When
 autoescaping is off, this filter has no effect.
@@ -580,14 +585,14 @@ Syntax::
 Each ``slice`` selects a subset of subscripts along the corresponding axis.
 
 * A nonnegative integer selects the corresponding index, while a negative integer selects an index counting backwards from the last index::
-    
+
   {{ list | slice: 4 }}
 
 if the list is ``(1 2 3 4 5 6)`` it will output ``(5)``
 
 * ``(start . end)`` to select a range.  When ``end`` is ``NIL``, the last index is included.
 Each boundary is resolved according to the other rules if applicable, so you can use negative integers::
-    
+
   {{ string | slice: (0 . 5) }}
   {{ string | slice: (5 . nil) }}
 
@@ -608,6 +613,18 @@ if the string is ``"Hello world"`` is will output ``Hello`` and ``world``.
        {{ value|slugify }}
 
    If ``value`` is ``"Joel is a slug"``, the output will be ``"joel-is-a-slug"``.
+
+.. templatefilter:: force-escape
+
+force-escape
+^^^^^^^^^^^^
+
+Forces escaping HTML characters (``<, >, ', \, &``)::
+
+
+       {{ value | force-escape }}
+
+It calls ``djula::escape-for-html``.
 
 .. templatefilter:: format
 
@@ -648,7 +665,30 @@ If ``value`` is ``1000000``, the output will be ``1,000,000``.
 
    .. _clean: http://bleach.readthedocs.org/en/latest/clean.html
 
-   .. templatefilter:: time
+   .. templatefilter:: replace
+
+replace ... with
+^^^^^^^^^^^^^^^^
+
+The ``replace`` and the ``with`` filters work together::
+
+    {{ value | replace:regexp | with:string }}
+
+This will replace all occurences of the regexp in "value" with a new
+string, using ``ppcre:regex-replace-all``.
+
+.. templatefilter:: scan
+
+scan
+^^^^
+
+Extracts and displays a regexp from the value::
+
+    {{ value | scan:regexp }}
+
+This will display only the text that matches the regexp (using ``ppcre:scan-to-strings``).
+
+.. templatefilter:: time
 
 time
 ^^^^
