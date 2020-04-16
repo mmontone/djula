@@ -115,7 +115,8 @@ Example::
 
 A LOCAL-TIME format spec can be provided::
 
-  {{ date-today | date ()
+  (defvar timestamp 3752179200)
+  {{ timestamp | date:(:year "/" (:month 2) "/" (:day 2)) }} ;; shows 2018/11/26
 
 .. templatefilter:: time
 
