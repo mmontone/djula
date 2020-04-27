@@ -23,9 +23,21 @@ Then we can render our compiled templates using the :cl:function:`RENDER-TEMPLAT
 .. code-block:: common-lisp
 		
    (djula:render-template* +welcome.html+ s
-			      :title "Ukeleles"
-			      :project-name "Ukeleles"
-			      :mode "welcome")
+			   :title "Ukeleles"
+			   :project-name "Ukeleles"
+			   :mode "welcome")
+
+Auto-reload
+-----------
+
+By default, Djula automatically recompiles the templates when they change.
+
+If you want to disable this, use the `:djula-prod` *feature*:
+
+.. code-block:: common-lisp
+
+    (push :djula-prod *features*)
+
 
 API
 ---
