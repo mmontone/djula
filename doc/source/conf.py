@@ -37,7 +37,9 @@ sys.path.append(abspath(join(dirname(__file__), "../_ext")))
 extensions = ['sphinxcontrib.cldomain',
               'sphinxcontrib.hyperspec',
               "sphinx.ext.intersphinx",
-              "sphinx.ext.viewcode"]
+              "sphinx.ext.viewcode",
+              'sphinx.ext.autodoc',
+              'sphinxcontrib_django']
 
 #cl_packages = {"djula": join(dirname(realpath(__file__)), "../../")}
 cl_systems = [{'name': "djula"}]
