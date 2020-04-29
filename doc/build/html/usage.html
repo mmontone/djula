@@ -79,6 +79,7 @@
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">Usage</a><ul>
+<li><a class="reference internal" href="#auto-reload">Auto-reload</a></li>
 <li><a class="reference internal" href="#api">API</a></li>
 </ul>
 </li>
@@ -146,10 +147,18 @@ For inheritance to work, we need to put all the templates in the same directory 
 </div>
 <p>Then we can render our compiled templates using the <a class="reference internal" href="api.html#function:djula:render-template*" title="djula:render-template*"><code class="xref cl cl-function docutils literal notranslate"><span class="pre">RENDER-TEMPLATE*</span></code></a> function:</p>
 <div class="highlight-common-lisp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nv">djula:render-template*</span> <span class="nv">+welcome.html+</span> <span class="nv">s</span>
-                           <span class="ss">:title</span> <span class="s">&quot;Ukeleles&quot;</span>
-                           <span class="ss">:project-name</span> <span class="s">&quot;Ukeleles&quot;</span>
-                           <span class="ss">:mode</span> <span class="s">&quot;welcome&quot;</span><span class="p">)</span>
+                        <span class="ss">:title</span> <span class="s">&quot;Ukeleles&quot;</span>
+                        <span class="ss">:project-name</span> <span class="s">&quot;Ukeleles&quot;</span>
+                        <span class="ss">:mode</span> <span class="s">&quot;welcome&quot;</span><span class="p">)</span>
 </pre></div>
+</div>
+<div class="section" id="auto-reload">
+<h2>Auto-reload<a class="headerlink" href="#auto-reload" title="Permalink to this headline">¶</a></h2>
+<p>By default, Djula automatically recompiles the templates when they change.</p>
+<p>If you want to disable this, use the <cite>:djula-prod</cite> <em>feature</em>:</p>
+<div class="highlight-common-lisp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nb">push</span> <span class="ss">:djula-prod</span> <span class="vg">*features*</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="api">
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
@@ -166,9 +175,9 @@ For inheritance to work, we need to put all the templates in the same directory 
 <dl class="field-list">
 <dt class="field-odd">Specializers</dt>
 <dd class="field-odd"><ul>
-<li><span><p><code class="xref cl cl-method docutils literal notranslate"><span class="pre">(compiler</span> <span class="pre">common-lisp:t)</span></code></p>
-</span></li>
 <li><span><p><code class="xref cl cl-method docutils literal notranslate"><span class="pre">(toplevel-compiler</span> <span class="pre">common-lisp:t)</span></code></p>
+</span></li>
+<li><span><p><code class="xref cl cl-method docutils literal notranslate"><span class="pre">(compiler</span> <span class="pre">common-lisp:t)</span></code></p>
 </span></li>
 </ul>
 </dd>
