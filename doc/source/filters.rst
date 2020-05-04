@@ -678,6 +678,19 @@ The ``replace`` and the ``with`` filters work together::
 This will replace all occurences of the regexp in "value" with a new
 string, using ``ppcre:regex-replace-all``.
 
+.. templatefilter:: rest
+
+rest
+^^^^
+
+Returns the ``rest`` of a list (aka ``cdr``).
+
+For example::
+
+    {{ values|rest }}
+
+If ``values`` is the list ``("a" "b" "c")``, the output will be ``("b" "c")``.
+
 .. templatefilter:: scan
 
 scan

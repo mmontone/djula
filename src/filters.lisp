@@ -79,6 +79,9 @@
 (def-filter :first (it)
   (first it))
 
+(djula:def-filter :rest (list)
+  (rest list))
+
 (def-filter :last (it)
   (car (last it)))
 
