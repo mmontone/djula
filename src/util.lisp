@@ -69,6 +69,8 @@ STRING unmodified. If the truncation is impossible to accomplish, return nil. "
   (let ((string-length (length string))
         (elision-string-length (length elision-string)))
     (cond
+      ((< string-length max-length)
+       string)
       ((> elision-string-length string-length)
        nil)
       ((> string-length max-length)
