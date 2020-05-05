@@ -609,11 +609,11 @@ are prepended to *TEMPLATE-ARGUMENTS*"
   (handler-case
       (process-tokens
        (cons (list :parsed-lisp
-                   (let ((*package* *djula-execute-package*))
+                   (let ((*package* (find-package *djula-execute-package*)))
                      (read-from-string unparsed-string)))
              rest))
-    (error ()
-      (template-error "There was an error parsing the lisp statement ~S" unparsed-string))))
+    (error (e)
+      (template-error "There was an error parsing the lisp statement ~S: ~a" unparsed-string e))))
 
 (def-token-compiler :parsed-lisp (sexp)
   (handler-case
@@ -636,7 +636,7 @@ are prepended to *TEMPLATE-ARGUMENTS*"
         (process-tokens
          (cons (list :parsed-set
                      (make-keyword (string-upcase (string-trim (list #\space ) var-str)))
-                     (let ((*package* *djula-execute-package*))
+                     (let ((*package* (find-package *djula-execute-package*)))
                        (read-from-string value-str)))
                rest)))
     (error ()
