@@ -72,12 +72,13 @@ keyword."
                     (t (access:access thing key)))
                 (error (e)
                   (template-error
-                   "There was an error while accessing the ~A ~S of the object ~S"
+                   "There was an error while accessing the ~A ~S of the object ~S: ~a"
                    (if (numberp key)
                        "index"
                        "attribute")
                    key
-                   thing))))
+                   thing
+                   e))))
             keys/indexes
             :initial-value thing)))
 
