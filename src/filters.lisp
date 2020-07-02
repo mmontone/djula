@@ -142,7 +142,7 @@
 (djula::def-filter :divisibleby (it number)
   (let ((number (parse-integer number)))
     (when (= (mod it number) 0)
-        "True")))
+        t)))
 
 (def-filter :lower (it)
   (string-downcase (princ-to-string it)))
