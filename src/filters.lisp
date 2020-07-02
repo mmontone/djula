@@ -139,6 +139,11 @@
 (def-filter :slice (it &rest slices)
   (apply #'cl-slice:slice it (mapcar #'read-from-string slices)))
 
+(djula::def-filter :divisibleby (it number)
+  (let ((number (parse-integer number)))
+    (when (= (mod it number) 0)
+        "True")))
+
 (def-filter :lower (it)
   (string-downcase (princ-to-string it)))
 
