@@ -92,3 +92,15 @@ STRING unmodified. If the truncation is impossible to accomplish, return nil. "
                                  (list ,,garg)))))
          ,@body
          (cdr ,ghead)))))
+
+(defgeneric template-print-object (object)
+  (:documentation "Print an object in a template. Customize this function to implement custom printers for your objects."))
+
+(defmethod template-print-object (object)
+  (princ-to-string object))
+
+(defmethod template-print-object ((true (eql t)))
+  (translate "true"))
+
+(defmethod template-print-object ((timestamp local-time:timestamp))
+  (local-time:format-timestring nil timestamp))

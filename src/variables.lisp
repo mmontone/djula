@@ -115,7 +115,7 @@ the result probably shouldn't be considered useful."
             (with-template-error error-string
               (error error-string))
             (let ((filtered-ret
-                   (princ-to-string
+                   (template-print-object
                     (or
                      (apply-filters
                       ret filters)
