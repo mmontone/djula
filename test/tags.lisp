@@ -60,7 +60,7 @@
 (def-test language (:compile-at :definition-time)
   (let ((djula::*current-language* :english))
     (is (string= "" (tag :set-language :lojban)))
-    (is (string= "LOJBAN" (tag :show-language)))))
+    (is (string= (princ-to-string :lojban) (tag :show-language)))))
 
 (def-test logic (:compile-at :definition-time)
   (let ((fn (djula::compile-logical-statement (list :thursday))))
@@ -249,8 +249,8 @@
                                          (setf (gethash 'b table) 'bar)
                                          (setf (gethash 'a table) 'foo)
                                          table))
-         '("<ul><li>A->FOO</li><li>B->BAR</li></ul>"
-           "<ul><li>B->BAR</li><li>A->FOO</li></ul>")
+         `(,(format nil "<ul><li>~a->~a</li><li>~a->~a</li></ul>" 'a 'foo 'b 'bar)
+            ,(format nil"<ul><li>~a->~a</li><li>~a->~a</li></ul>" 'b 'bar 'a 'foo))
          :test #'string=))))
 
 (def-test nested-loop-test (:compile-at :definition-time)

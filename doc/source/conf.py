@@ -36,11 +36,13 @@ sys.path.append(abspath(join(dirname(__file__), "../_ext")))
 
 extensions = ['sphinxcontrib.cldomain',
               'sphinxcontrib.hyperspec',
-              "djangodocs",
               "sphinx.ext.intersphinx",
-              "sphinx.ext.viewcode"]
+              "sphinx.ext.viewcode",
+              'sphinx.ext.autodoc',
+              'sphinxcontrib_django']
 
-cl_packages = {"djula": join(dirname(realpath(__file__)), "../../")}
+#cl_packages = {"djula": join(dirname(realpath(__file__)), "../../")}
+cl_systems = [{'name': "djula"}]
 
 from os.path import expandvars
 cl_quicklisp = expandvars('$HOME/quicklisp/')
@@ -279,7 +281,7 @@ texinfo_documents = [
 
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.
-html_use_smartypants = True
+#html_use_smartypants = True
 
 # HTML translator class for the builder
-html_translator_class = "djangodocs.DjangoHTMLTranslator"
+#html_translator_class = "djangodocs.DjangoHTMLTranslator"

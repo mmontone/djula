@@ -36,6 +36,7 @@
            #:html-escape
            #:render-template*
            #:toplevel-compiler
+           #:template-print-object
            #:url-encode
            #:url-encode-path
            #:add-template-directory

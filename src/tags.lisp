@@ -131,9 +131,9 @@ form that returns some debugging info."
         (setf *template-arguments* (list* unique-id circle *template-arguments*)))
       (let ((cycle-item (pop (getf *template-arguments* unique-id))))
         (let ((cycle-item-value
-               (if (symbolp cycle-item)
-                   (getf *template-arguments* cycle-item)
-                   cycle-item)))
+                (if (symbolp cycle-item)
+                    (getf *template-arguments* cycle-item)
+                    cycle-item)))
           (princ cycle-item-value stream))))))
 
 (defun print-debugging-information (out)
@@ -318,10 +318,10 @@ is useful to determine the package in which :LISP tags are executed"
                                       (cons :last (= length 1))
                                       (cons :parentloop (get-variable :forloop))))
                        (*template-arguments*
-                        ;; NIL is a placeholder for the value of the loop variable.
-                        (if (consp var)
-                            (list* (car var) nil (cdr var) nil :forloop loopfor *template-arguments*)
-                            (list* var nil :forloop loopfor *template-arguments*))))
+                         ;; NIL is a placeholder for the value of the loop variable.
+                         (if (consp var)
+                             (list* (car var) nil (cdr var) nil :forloop loopfor *template-arguments*)
+                             (list* var nil :forloop loopfor *template-arguments*))))
                   (dolist (x (if reversed (reverse list) list))
                     ;; Update the value of the loop variable.
                     (if (consp var)
@@ -532,7 +532,7 @@ are prepended to *TEMPLATE-ARGUMENTS*"
   (flet ((template-with-parameters (template)
            (lambda (stream)
              (let ((*template-arguments*
-                    (append (loop
+                     (append (loop
                                :for (var value) :on parameters :by #'cddr
                                :collect var
                                :collect (etypecase value
@@ -542,7 +542,7 @@ are prepended to *TEMPLATE-ARGUMENTS*"
                                                     (t (resolve-variable-phrase (parse-variable-phrase (string value))))))
                                           (string value)
                                           (number value)))
-                            *template-arguments*)))
+                             *template-arguments*)))
                (funcall template stream)))))
     (cond
       ((stringp path)
@@ -563,10 +563,10 @@ are prepended to *TEMPLATE-ARGUMENTS*"
           (let ((path (resolve-variable-phrase (parse-variable-phrase (string path)))))
             (aif (and path (find-template* path))
                  (let ((compiled-template
-                        (handler-case
-                            (compile-template* path)
-                          (error ()
-                            (template-error "There was an error including the template ~A" it)))))
+                         (handler-case
+                             (compile-template* path)
+                           (error ()
+                             (template-error "There was an error including the template ~A" it)))))
                    (funcall compiled-template stream))
                  ;; else
                  (template-error "Cannot include the template ~A because it does not exist." path))))))
@@ -609,11 +609,11 @@ are prepended to *TEMPLATE-ARGUMENTS*"
   (handler-case
       (process-tokens
        (cons (list :parsed-lisp
-                   (let ((*package* *djula-execute-package*))
+                   (let ((*package* (find-package *djula-execute-package*)))
                      (read-from-string unparsed-string)))
              rest))
-    (error ()
-      (template-error "There was an error parsing the lisp statement ~S" unparsed-string))))
+    (error (e)
+      (template-error "There was an error parsing the lisp statement ~S: ~a" unparsed-string e))))
 
 (def-token-compiler :parsed-lisp (sexp)
   (handler-case
@@ -636,7 +636,7 @@ are prepended to *TEMPLATE-ARGUMENTS*"
         (process-tokens
          (cons (list :parsed-set
                      (make-keyword (string-upcase (string-trim (list #\space ) var-str)))
-                     (let ((*package* *djula-execute-package*))
+                     (let ((*package* (find-package *djula-execute-package*)))
                        (read-from-string value-str)))
                rest)))
     (error ()
@@ -698,19 +698,19 @@ template."
   ":SHOW-FILE tags compile into a function that return the html-escaped contents of
 the file pointed to by the template-path `PATH'"
   (let ((string
-         (case argument
-           (:openblock "{%")
-           (:closeblock "%}")
-           (:openvariable "{{")
-           (:closevariable "}}")
-           (:openbrace "{")
-           (:closebrace "}")
-           (:opencomment "{#")
-           (:closecomment "#}")
-           (:opentranslationvariable "{_")
-           (:closetranslationvariable "_}")
-           (otherwise
-            (template-error-string "Unknown templatetag ~A. known template tags are: openblock, closeblock, openvariable, closevariable, openbrace, closebrace, opencomment, closecomment" argument)))))
+          (case argument
+            (:openblock "{%")
+            (:closeblock "%}")
+            (:openvariable "{{")
+            (:closevariable "}}")
+            (:openbrace "{")
+            (:closebrace "}")
+            (:opencomment "{#")
+            (:closecomment "#}")
+            (:opentranslationvariable "{_")
+            (:closetranslationvariable "_}")
+            (otherwise
+             (template-error-string "Unknown templatetag ~A. known template tags are: openblock, closeblock, openvariable, closevariable, openbrace, closebrace, opencomment, closecomment" argument)))))
     (lambda (stream)
       (princ string stream))))
 
@@ -725,8 +725,8 @@ the file pointed to by the template-path `PATH'"
          (let ((result (funcall transform (parser-combinators::context-peek inp))))
            (if result
                (let ((closure-value
-                      (make-instance 'parser-combinators::parser-possibility
-                                     :tree result :suffix (parser-combinators::context-next inp))))
+                       (make-instance 'parser-combinators::parser-possibility
+                                      :tree result :suffix (parser-combinators::context-next inp))))
                  #'(lambda ()
                      (when closure-value
                        (prog1

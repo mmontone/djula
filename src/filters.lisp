@@ -61,6 +61,7 @@
 (def-filter :linebreaksbr (it)
   (cl-ppcre:regex-replace-all "\\n" (princ-to-string it) "<br />"))
 
+;xxx: undocumented
 (def-filter :lisp (it &optional lisp-string)
   (unless *eval-lisp-tags*
     (template-error "I can't evaulate the \"lisp\" filter ~A because *EVAL-LISP-TAGS* is NIL" lisp-string))
@@ -77,6 +78,9 @@
 
 (def-filter :first (it)
   (first it))
+
+(djula:def-filter :rest (list)
+  (rest list))
 
 (def-filter :last (it)
   (car (last it)))
@@ -140,10 +144,8 @@
   (apply #'cl-slice:slice it (mapcar #'read-from-string slices)))
 
 (djula::def-filter :divisibleby (it number)
-  (let ((number (parse-integer number)))
-    (when (= (mod it number) 0)
-        t)))
-
+  (zerop (mod it (parse-integer number))))
+  
 (def-filter :lower (it)
   (string-downcase (princ-to-string it)))
 

@@ -71,13 +71,14 @@ keyword."
                            (access:access thing (intern (symbol-name key))))))
                     (t (access:access thing key)))
                 (error (e)
-                  (template-error-string* e
-                                          "There was an error while accessing the ~A ~S of the object ~S"
-                                          (if (numberp key)
-                                              "index"
-                                              "attribute")
-                                          key
-                                          thing))))
+                  (template-error
+                   "There was an error while accessing the ~A ~S of the object ~S: ~a"
+                   (if (numberp key)
+                       "index"
+                       "attribute")
+                   key
+                   thing
+                   e))))
             keys/indexes
             :initial-value thing)))
 
@@ -114,7 +115,7 @@ the result probably shouldn't be considered useful."
             (with-template-error error-string
               (error error-string))
             (let ((filtered-ret
-                   (princ-to-string
+                   (template-print-object
                     (or
                      (apply-filters
                       ret filters)

@@ -15,8 +15,8 @@
 (defun template-error-string* (error fmt &rest args)
   (if *verbose-errors-p*
       (format nil "{# Error: ~A : ~A #}"
-	      (apply #'format nil fmt args)
-	      error)
+              (apply #'format nil fmt args)
+              error)
       (apply #'template-error-string fmt args)))
 
 (defun template-error (msg &rest args)
@@ -28,12 +28,12 @@
 (defun template-error* (error msg &rest args)
   (if *verbose-errors-p*
       (error 'template-error
-	     :message (format nil "~A: ~A"
-			      (if args
-				  (apply #'template-error-string args)
-				  msg)
-			      error))
-      (apply #'template-error msg args)))	 
+             :message (format nil "~A: ~A"
+                              (if args
+                                  (apply #'template-error-string args)
+                                  msg)
+                              error))
+      (apply #'template-error msg args)))
 
 (defmacro with-template-error (recovery-form &body body)
   (with-unique-names (e)
@@ -42,7 +42,7 @@
            ,@body)
        (error (,e)
          (if (and *catch-template-errors-p*
-		  (not *fancy-error-template-p*))
+                  (not *fancy-error-template-p*))
              ,recovery-form
              (error ,e))))))
 
