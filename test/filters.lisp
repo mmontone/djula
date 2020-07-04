@@ -19,6 +19,8 @@
   (is (string= "UPPER"    (filter :upper "upper")))
   (is (=        6         (filter :length "length")))
   (is (=        3         (filter :length '("abcd" "ef" "g"))))
+  (is (filter :length_is "asdf" "4"))
+  (is (filter :length_is '(1 2 3 4) "4"))
   (is (string= "&lt;asdf&gt;" (filter :force-escape "<asdf>")))
   (is (string= "asdf<br />asdf" (filter :linebreaksbr "asdf
 asdf")))

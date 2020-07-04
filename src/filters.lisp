@@ -34,6 +34,9 @@
               it
               (princ-to-string it))))
 
+(def-filter :length_is (it length)
+  (= (length it) (parse-integer length)))
+
 (def-filter :sort (it &optional
 		      (predicate #'<)
 		      (key #'identity))
