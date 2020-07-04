@@ -315,20 +315,19 @@ For example::
 If ``value`` is ``("a" "b" "c" "d")`` or ``"abcd"``, the output will be
 ``4``.
 
-..
-   .. templatefilter:: length_is
+.. templatefilter:: length_is
 
-   length_is
-   ^^^^^^^^^
+length_is
+^^^^^^^^^
 
-   Returns ``True`` if the value's length is the argument, or ``False`` otherwise.
+Returns ``True`` if the value's length is the argument, or ``False`` otherwise.
 
-   For example::
+For example::
 
-       {{ value|length_is:"4" }}
+    {{ value|length_is:"4" }}
 
-   If ``value`` is ``['a', 'b', 'c', 'd']`` or ``"abcd"``, the output will be
-   ``True``.
+If ``value`` is ``['a', 'b', 'c', 'd']`` or ``"abcd"``, the output will be
+``True``.
 
    .. templatefilter:: linebreaks
 
