@@ -152,6 +152,9 @@
 (def-filter :lower (it)
   (string-downcase (princ-to-string it)))
 
+(def-filter :make_list (it)
+  (coerce it 'list))
+
 ;;; CAVEAT: THIS FILTER IS TREATED SPECIALLY BY COMPILE-TOKEN!!!
 (def-filter :safe (it)
   it)
