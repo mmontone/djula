@@ -10,6 +10,8 @@
   (is (string= "cutout"   (filter :cut "cutITout" "IT")))
   (is (string= "default"  (filter :default "" "default")))
   (is (string= "lower"    (filter :lower "LOWER")))
+  (is (equalp '(#\l \#o #\w #\e #\r)  (filter :make_list "lower")))
+  (is (equalp '(#\1 #\2 #\3)  (filter :make_list "123")))
   (is (string= "sh..." (filter :truncatechars "short message" 5)))
   (is (string= "Joel i..." (filter :truncatechars "Joel is a slug" 9)))
   (let ((djula:*elision-string* "xx"))

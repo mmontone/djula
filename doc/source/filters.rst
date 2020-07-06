@@ -416,22 +416,22 @@ If ``value`` is ``Still MAD At Yoko``, the output will be
 
 .. templatefilter:: make_list
 
+make_list
+^^^^^^^^^
+
+Returns the value turned into a list. For a string, it's a list of characters.
+For an integer, the argument is cast into an unicode string before creating a
+list.
+
+For example::
+
+    {{ value|make_list }}
+
+If ``value`` is the string ``"Joel"``, the output would be the list
+``['J', 'o', 'e', 'l']``. If ``value`` is ``123``, the output will be the
+list ``['1', '2', '3']``.
+
 ..
-   make_list
-   ^^^^^^^^^
-
-   Returns the value turned into a list. For a string, it's a list of characters.
-   For an integer, the argument is cast into an unicode string before creating a
-   list.
-
-   For example::
-
-       {{ value|make_list }}
-
-   If ``value`` is the string ``"Joel"``, the output would be the list
-   ``['J', 'o', 'e', 'l']``. If ``value`` is ``123``, the output will be the
-   list ``['1', '2', '3']``.
-
    .. templatefilter:: phone2numeric
 
    phone2numeric
