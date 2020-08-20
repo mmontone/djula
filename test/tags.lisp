@@ -179,6 +179,21 @@
                                  :foo "lala")
          "bar")))
 
+  ;; Empty values
+  (let ((template (djula::compile-string "{%if foo %}foo{% else %}bar{% endif %}")))
+    (is (equalp
+         (djula:render-template* template nil
+                                 :foo "")
+         "bar"))
+    (is (equalp
+         (djula:render-template* template nil
+                                 :foo #())
+         "bar"))
+    (is (equalp
+         (djula:render-template* template nil
+                                 :foo "lala")
+         "foo")))
+
   ;; Expression parsing error
   (signals error
     (djula::compile-string "{%if foo bar %}foo{% else %}bar{% endif %}"))

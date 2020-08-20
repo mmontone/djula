@@ -385,6 +385,18 @@ conditional branching of the {% if %} tag. when called, the function returns two
               (compile-boolexp parsed-statement))
             nil)))
 
+(defun djula-emptyp (val)
+  "The default truth decider function for if expressions.
+
+This is Django documentation for if expressions:
+
+The {% if %} tag evaluates a variable, and if that variable is “true” (i.e. exists, is not empty, and is not a false boolean value)"
+  (and (typep val 'sequence)
+       (zerop (length val))))
+
+(defvar *djula-emptyp* 'djula-emptyp
+  "Change this to customize how djula decides if some value is empty or not")
+
 (def-token-compiler :parsed-if (statement then &optional else)
   ":PARSED-IF tags are compiled into a function that executes the {% if %} clause"
   (multiple-value-bind (test error-string)
@@ -393,6 +405,7 @@ conditional branching of the {% if %} tag. when called, the function returns two
         ;; there was an error parsing the {% if %} tag [problably an invalid variable]
         ;; return a thunk that signals or prints the template error
         (lambda (stream)
+          (declare (ignore stream))
           (with-template-error error-string
             (error error-string)))
         ;; return the function that does the {% if %}
@@ -404,7 +417,10 @@ conditional branching of the {% if %} tag. when called, the function returns two
               (if error-string
                   (with-template-error error-string
                     (error error-string))
-                  (dolist (f (if ret then else))
+                  (dolist (f (if (and ret
+                                      (not (funcall *djula-emptyp* ret)))
+                                 then
+                                 else))
                     (funcall f stream)))))))))
 
 (def-delimited-tag :ifchanged :endifchanged :parsed-ifchanged)

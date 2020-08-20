@@ -22,6 +22,7 @@
            #:*template-root-folder*
            #:*template-search-path*
            #:*djula-execute-package*
+           #:*djula-emptyp*
            #:compile-template
            #:compile-template*
            #:compiler
