@@ -16,7 +16,8 @@
           :initial-value value))
 
 (def-filter :capfirst (it)
-  (string-capitalize (princ-to-string it)))
+  (unless (null it)
+    (string-capitalize (princ-to-string it))))
 
 (def-filter :cut (it charstring)
   (remove-if (lambda (s)
@@ -150,7 +151,8 @@
   (zerop (mod it (parse-integer number))))
   
 (def-filter :lower (it)
-  (string-downcase (princ-to-string it)))
+  (unless (null it)
+    (string-downcase (princ-to-string it))))
 
 (def-filter :make_list (it)
   (coerce it 'list))
@@ -172,7 +174,8 @@
     (template-error "filter truncatechars: The elision-string is is larger than the maximum length." )))
 
 (def-filter :upper (it)
-  (string-upcase (princ-to-string it)))
+  (unless (null it)
+    (string-upcase (princ-to-string it))))
 
 (def-filter :urlencode (it)
   (url-encode (princ-to-string it)))
