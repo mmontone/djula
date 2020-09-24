@@ -36,7 +36,7 @@
          (loop
            for dir in search-path
              thereis (fad:file-exists-p (merge-pathnames (subseq (string name) 1) dir)))))
-       ;; If nothing was found, try searching in the current path too.
+       ;; Otherwise, search relative to either current path or search paths
        (t (loop
              with path = (if current-path
                              (cons (directory-namestring current-path) search-path)
