@@ -21,14 +21,22 @@
   (:documentation "Searches for template files on disk according to the given search path."))
 
 (defmethod find-template ((store file-store) name &optional (error-p t))
+  "Algorithm that finds a template in a file-store."
   (with-slots (current-path search-path)
       store
     (or
      (cond
+       ;; If it is a pathname, just check that the file exists
        ((pathnamep name)
         (fad:file-exists-p name))
+       ;; If first character is a '/', then treat it as an absolute path first, then relative to template store search paths.
        ((char= (char name 0) #\/)
-        (fad:file-exists-p name))
+        (or
+         (fad:file-exists-p name)
+         (loop
+           for dir in search-path
+             thereis (fad:file-exists-p (merge-pathnames (subseq (string name) 1) dir)))))
+       ;; If nothing was found, try searching in the current path too.
        (t (loop
              with path = (if current-path
                              (cons (directory-namestring current-path) search-path)
