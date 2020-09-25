@@ -42,7 +42,7 @@
             (linked-templates compiled-template) *linked-templates*))))
 
 (defmethod template-changed ((compiled-template compiled-template))
-  (or (not (cl-fad:file-exists-p (template-file compiled-template)))
+  (or (not (uiop:file-exists-p (template-file compiled-template)))
       (not (= (template-file-write-date compiled-template)
               (file-write-date (template-file compiled-template))))))
 

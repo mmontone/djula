@@ -10,7 +10,6 @@
                #:anaphora
                #:babel
                #:cl-ppcre
-               #:cl-fad
                #:split-sequence
                #:local-time
                #:closer-mop
