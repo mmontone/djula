@@ -12,9 +12,9 @@
                       :accessor compiled-template
                       :documentation "The compiled template (a closure)")
    (linked-templates :initarg :linked-templates
-                 :accessor linked-templates
-                 :initform '()
-                 :documentation "Extends for Include files.")
+                     :accessor linked-templates
+                     :initform '()
+                     :documentation "Extends for Include files.")
    (template-file :initarg :template-file
                   :accessor template-file
                   :initform (error "Provide the template file")
@@ -29,7 +29,7 @@
     (format stream "~A" (template-file compiled-template))))
 
 (defmethod compile-template-file ((compiled-template compiled-template))
-    ;; Set the template file write date
+  ;; Set the template file write date
   (setf (template-file-write-date compiled-template)
         (file-write-date (template-file compiled-template)))
 
@@ -37,7 +37,7 @@
   (let ((*block-alist* nil)
         (*linked-templates* nil))
     (let ((compiled-str
-           (compile-string (fetch-template* (template-file compiled-template)))))
+            (compile-string (fetch-template* (template-file compiled-template)))))
       (setf (compiled-template compiled-template) compiled-str
             (linked-templates compiled-template) *linked-templates*))))
 
@@ -48,7 +48,7 @@
 
 (defmethod initialize-instance :after ((compiled-template compiled-template) &rest initargs)
   (declare (ignore initargs))
-  
+
   (compile-template-file compiled-template)
 
   (closer-mop:set-funcallable-instance-function
@@ -61,7 +61,7 @@
            (when (or (not (equalp (file-write-date (template-file compiled-template))
                                   template-file-write-date))
                      (loop for linked-template in (linked-templates compiled-template)
-                        thereis (template-changed linked-template)))
+                             thereis (template-changed linked-template)))
              (compile-template-file compiled-template)))
          (funcall (compiled-template compiled-template) stream))
        ;; If :djula-prod is enabled, avoid the automatic template file checking and recompilation
@@ -114,8 +114,9 @@
                                       (trivial-backtrace:print-backtrace e :output nil)
                                       template stream)
                (error e))))))
-    (t (error 'simple-error :format-control "~A is not a valid template"
-	      :format-arguments (list template)))))
+    (t (error 'simple-error
+              :format-control "~A is not a valid template"
+              :format-arguments (list template)))))
 
 (defun compile-string (string)
   (let ((fs (mapcar #'compile-token (process-tokens (parse-template-string string)))))
