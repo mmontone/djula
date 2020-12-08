@@ -1,6 +1,6 @@
 (in-package #:djula)
 
-(defvar *template-arguments*)
+(defvar *template-arguments* nil)
 
 (defvar *current-language* nil)
 
@@ -24,9 +24,9 @@
 
 (defvar *current-block* nil)
 
-(defvar *linked-templates*)
+(defvar *linked-templates* nil)
 
-(defvar *current-template*)
+(defvar *current-template* nil)
 
 (defvar *error-template* (asdf:system-relative-pathname :djula "templates/error-template.djhtml")
   "The error template used by `render-error-template'.")
