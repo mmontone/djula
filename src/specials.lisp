@@ -2,6 +2,10 @@
 
 (defvar *template-arguments*)
 
+(defvar *default-template-arguments* nil
+  "List of arguments available for all templates. Add arguments to this list if you want them to be available in every template.
+This is a plist, so use getf to add arguments, like: (setf (getf djula:*default-template-arguments* :foo) 'some-value)")
+
 (defvar *current-language* nil)
 
 (defvar *djula-execute-package* (find-package :common-lisp-user))

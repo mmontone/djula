@@ -16,6 +16,7 @@
            #:*current-language*
            #:*current-store*
            #:*default-language*
+           #:*default-template-arguments*
            #:*error-template*
            #:*elision-string*
            #:*template-eval*

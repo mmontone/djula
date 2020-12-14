@@ -99,7 +99,8 @@
      ;; Accept strings and pathnames as template designators.
      (apply #'render-template* (compile-template* template) stream *template-arguments*))
     ((functionp template)
-     (let ((*accumulated-javascript-strings* nil)
+     (let ((*template-arguments* (append *template-arguments* *default-template-arguments*))
+           (*accumulated-javascript-strings* nil)
            (*current-language* *current-language*)
            (*current-template* template))
        (handler-case

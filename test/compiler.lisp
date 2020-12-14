@@ -7,7 +7,7 @@
              "{% ifequal day \"Thursday\" %}
 I never could get the hang of {{ day }}s.
 {% endifequal %}")
-          ))
+            ))
     (is (string= "
 I never could get the hang of Thursdays.
 "

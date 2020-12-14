@@ -143,3 +143,19 @@
 	   (let ((template (djula::compile-string "{{foo | escape}}")))
 	     (djula:render-template* template nil :foo "<b>Hello</b>"))
 	   "&lt;b&gt;Hello&lt;/b&gt;")))))
+
+(def-test default-template-arguments (:compile-at :definition-time)
+  (let ((fn (djula::compile-string
+             "{{foo}}")))
+    (is (string= ""
+                 (djula::render-template* fn nil)))
+    (is (string= "foo"
+                 (djula::render-template* fn nil :foo "foo")))
+    (setf (getf djula:*default-template-arguments* :foo) "foo")
+    (is (string= "foo"
+                 (djula::render-template* fn nil))
+        "Default arguments are rendered")
+    (is (string= "bar"
+                 (djula::render-template* fn nil :foo "bar"))
+        "Passed arguments have priority over default arguments")
+    (setf djula:*default-template-arguments* nil)))
