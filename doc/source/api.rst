@@ -47,6 +47,8 @@ Djula external symbols documentation
 
 .. cl:function:: render-template*
 
+.. cl:variable:: *default-template-arguments*
+
 .. cl:function:: add-template-directory
 
 .. cl:variable:: *catch-template-errors-p*
