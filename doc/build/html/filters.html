@@ -90,19 +90,23 @@
 <li><a class="reference internal" href="#datetime">datetime</a></li>
 <li><a class="reference internal" href="#default">default</a></li>
 <li><a class="reference internal" href="#reverse">reverse</a></li>
+<li><a class="reference internal" href="#divisibleby">divisibleby</a></li>
 <li><a class="reference internal" href="#sort">sort</a></li>
 <li><a class="reference internal" href="#first">first</a></li>
 <li><a class="reference internal" href="#join">join</a></li>
 <li><a class="reference internal" href="#last">last</a></li>
 <li><a class="reference internal" href="#length">length</a></li>
+<li><a class="reference internal" href="#length-is">length_is</a></li>
 <li><a class="reference internal" href="#linebreaks">linebreaks</a></li>
 <li><a class="reference internal" href="#linebreaksbr">linebreaksbr</a></li>
 <li><a class="reference internal" href="#lower">lower</a></li>
+<li><a class="reference internal" href="#make-list">make_list</a></li>
 <li><a class="reference internal" href="#safe-escape">safe, escape</a></li>
 <li><a class="reference internal" href="#slice">slice</a></li>
 <li><a class="reference internal" href="#force-escape">force-escape</a></li>
 <li><a class="reference internal" href="#format">format</a></li>
 <li><a class="reference internal" href="#replace-with">replace … with</a></li>
+<li><a class="reference internal" href="#rest">rest</a></li>
 <li><a class="reference internal" href="#scan">scan</a></li>
 <li><a class="reference internal" href="#id4">time</a></li>
 <li><a class="reference internal" href="#truncatechars">truncatechars</a></li>
@@ -195,24 +199,28 @@ used template filters:</p>
 <li><p><a class="reference internal" href="#datetime" id="id11">datetime</a></p></li>
 <li><p><a class="reference internal" href="#default" id="id12">default</a></p></li>
 <li><p><a class="reference internal" href="#reverse" id="id13">reverse</a></p></li>
-<li><p><a class="reference internal" href="#sort" id="id14">sort</a></p></li>
-<li><p><a class="reference internal" href="#first" id="id15">first</a></p></li>
-<li><p><a class="reference internal" href="#join" id="id16">join</a></p></li>
-<li><p><a class="reference internal" href="#last" id="id17">last</a></p></li>
-<li><p><a class="reference internal" href="#length" id="id18">length</a></p></li>
-<li><p><a class="reference internal" href="#linebreaks" id="id19">linebreaks</a></p></li>
-<li><p><a class="reference internal" href="#linebreaksbr" id="id20">linebreaksbr</a></p></li>
-<li><p><a class="reference internal" href="#lower" id="id21">lower</a></p></li>
-<li><p><a class="reference internal" href="#safe-escape" id="id22">safe, escape</a></p></li>
-<li><p><a class="reference internal" href="#slice" id="id23">slice</a></p></li>
-<li><p><a class="reference internal" href="#force-escape" id="id24">force-escape</a></p></li>
-<li><p><a class="reference internal" href="#format" id="id25">format</a></p></li>
-<li><p><a class="reference internal" href="#replace-with" id="id26">replace … with</a></p></li>
-<li><p><a class="reference internal" href="#scan" id="id27">scan</a></p></li>
-<li><p><a class="reference internal" href="#id4" id="id28">time</a></p></li>
-<li><p><a class="reference internal" href="#truncatechars" id="id29">truncatechars</a></p></li>
-<li><p><a class="reference internal" href="#upper" id="id30">upper</a></p></li>
-<li><p><a class="reference internal" href="#urlencode" id="id31">urlencode</a></p></li>
+<li><p><a class="reference internal" href="#divisibleby" id="id14">divisibleby</a></p></li>
+<li><p><a class="reference internal" href="#sort" id="id15">sort</a></p></li>
+<li><p><a class="reference internal" href="#first" id="id16">first</a></p></li>
+<li><p><a class="reference internal" href="#join" id="id17">join</a></p></li>
+<li><p><a class="reference internal" href="#last" id="id18">last</a></p></li>
+<li><p><a class="reference internal" href="#length" id="id19">length</a></p></li>
+<li><p><a class="reference internal" href="#length-is" id="id20">length_is</a></p></li>
+<li><p><a class="reference internal" href="#linebreaks" id="id21">linebreaks</a></p></li>
+<li><p><a class="reference internal" href="#linebreaksbr" id="id22">linebreaksbr</a></p></li>
+<li><p><a class="reference internal" href="#lower" id="id23">lower</a></p></li>
+<li><p><a class="reference internal" href="#make-list" id="id24">make_list</a></p></li>
+<li><p><a class="reference internal" href="#safe-escape" id="id25">safe, escape</a></p></li>
+<li><p><a class="reference internal" href="#slice" id="id26">slice</a></p></li>
+<li><p><a class="reference internal" href="#force-escape" id="id27">force-escape</a></p></li>
+<li><p><a class="reference internal" href="#format" id="id28">format</a></p></li>
+<li><p><a class="reference internal" href="#replace-with" id="id29">replace … with</a></p></li>
+<li><p><a class="reference internal" href="#rest" id="id30">rest</a></p></li>
+<li><p><a class="reference internal" href="#scan" id="id31">scan</a></p></li>
+<li><p><a class="reference internal" href="#id4" id="id32">time</a></p></li>
+<li><p><a class="reference internal" href="#truncatechars" id="id33">truncatechars</a></p></li>
+<li><p><a class="reference internal" href="#upper" id="id34">upper</a></p></li>
+<li><p><a class="reference internal" href="#urlencode" id="id35">urlencode</a></p></li>
 </ul>
 </div>
 <div class="section" id="add">
@@ -301,8 +309,17 @@ value.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="divisibleby">
+<h3><a class="toc-backref" href="#id14">divisibleby</a><a class="headerlink" href="#divisibleby" title="Permalink to this headline">¶</a></h3>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the value is divisible by the argument.</p>
+<p>For example:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">divisibleby</span><span class="s2">:&quot;3&quot;</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">value</span></code> is <code class="docutils literal notranslate"><span class="pre">21</span></code>, the output would be <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</div>
 <div class="section" id="sort">
-<h3><a class="toc-backref" href="#id14">sort</a><a class="headerlink" href="#sort" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id15">sort</a><a class="headerlink" href="#sort" title="Permalink to this headline">¶</a></h3>
 <p>Takes a list and returns that list sorted.</p>
 <p>For example:</p>
 <div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">list</span> <span class="o">|</span> <span class="nf">sort</span> <span class="cp">}}</span>
@@ -310,7 +327,7 @@ value.</p>
 </div>
 </div>
 <div class="section" id="first">
-<h3><a class="toc-backref" href="#id15">first</a><a class="headerlink" href="#first" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id16">first</a><a class="headerlink" href="#first" title="Permalink to this headline">¶</a></h3>
 <p>Returns the first item in a list.</p>
 <p>For example:</p>
 <div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">first</span> <span class="cp">}}</span>
@@ -319,7 +336,7 @@ value.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">value</span></code> is the list <code class="docutils literal notranslate"><span class="pre">(&quot;a&quot;</span> <span class="pre">&quot;b&quot;</span> <span class="pre">&quot;c&quot;)</span></code>, the output will be <code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code>.</p>
 </div>
 <div class="section" id="join">
-<h3><a class="toc-backref" href="#id16">join</a><a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id17">join</a><a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h3>
 <p>Joins a list with a string.</p>
 <p>For example:</p>
 <div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">join</span><span class="s2">:&quot; // &quot;</span> <span class="cp">}}</span>
@@ -329,7 +346,7 @@ value.</p>
 <code class="docutils literal notranslate"><span class="pre">&quot;a</span> <span class="pre">//</span> <span class="pre">b</span> <span class="pre">//</span> <span class="pre">c&quot;</span></code>.</p>
 </div>
 <div class="section" id="last">
-<h3><a class="toc-backref" href="#id17">last</a><a class="headerlink" href="#last" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id18">last</a><a class="headerlink" href="#last" title="Permalink to this headline">¶</a></h3>
 <p>Returns the last item in a list.</p>
 <p>For example:</p>
 <div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">last</span> <span class="cp">}}</span>
@@ -339,7 +356,7 @@ value.</p>
 string <code class="docutils literal notranslate"><span class="pre">&quot;d&quot;</span></code>.</p>
 </div>
 <div class="section" id="length">
-<h3><a class="toc-backref" href="#id18">length</a><a class="headerlink" href="#length" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id19">length</a><a class="headerlink" href="#length" title="Permalink to this headline">¶</a></h3>
 <p>Returns the length of the value. This works for both strings and lists.</p>
 <p>For example:</p>
 <div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">length</span> <span class="cp">}}</span>
@@ -348,8 +365,20 @@ string <code class="docutils literal notranslate"><span class="pre">&quot;d&quot
 <p>If <code class="docutils literal notranslate"><span class="pre">value</span></code> is <code class="docutils literal notranslate"><span class="pre">(&quot;a&quot;</span> <span class="pre">&quot;b&quot;</span> <span class="pre">&quot;c&quot;</span> <span class="pre">&quot;d&quot;)</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;abcd&quot;</span></code>, the output will be
 <code class="docutils literal notranslate"><span class="pre">4</span></code>.</p>
 </div>
+<div class="section" id="length-is">
+<h3><a class="toc-backref" href="#id20">length_is</a><a class="headerlink" href="#length-is" title="Permalink to this headline">¶</a></h3>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the value’s length is the argument, or <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+<p>For example:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">length_is</span><span class="s2">:&quot;4&quot;</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">value</span></code> is <code class="docutils literal notranslate"><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'c',</span> <span class="pre">'d']</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;abcd&quot;</span></code>, the output will be
+<code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<blockquote>
+<div></div></blockquote>
+</div>
 <div class="section" id="linebreaks">
-<h3><a class="toc-backref" href="#id19">linebreaks</a><a class="headerlink" href="#linebreaks" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id21">linebreaks</a><a class="headerlink" href="#linebreaks" title="Permalink to this headline">¶</a></h3>
 <p>Replaces line breaks in plain text with appropriate HTML; a single
 newline becomes an HTML line break (<code class="docutils literal notranslate"><span class="pre">&lt;br</span> <span class="pre">/&gt;</span></code>) and a new line
 followed by a blank line becomes a paragraph break (<code class="docutils literal notranslate"><span class="pre">&lt;/p&gt;</span></code>).</p>
@@ -361,7 +390,7 @@ followed by a blank line becomes a paragraph break (<code class="docutils litera
 <span class="pre">slug&lt;/p&gt;</span></code>.</p>
 </div>
 <div class="section" id="linebreaksbr">
-<h3><a class="toc-backref" href="#id20">linebreaksbr</a><a class="headerlink" href="#linebreaksbr" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id22">linebreaksbr</a><a class="headerlink" href="#linebreaksbr" title="Permalink to this headline">¶</a></h3>
 <p>Converts all newlines in a piece of plain text to HTML line breaks
 (<code class="docutils literal notranslate"><span class="pre">&lt;br</span> <span class="pre">/&gt;</span></code>).</p>
 <p>For example:</p>
@@ -372,7 +401,7 @@ followed by a blank line becomes a paragraph break (<code class="docutils litera
 <span class="pre">slug</span></code>.</p>
 </div>
 <div class="section" id="lower">
-<h3><a class="toc-backref" href="#id21">lower</a><a class="headerlink" href="#lower" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id23">lower</a><a class="headerlink" href="#lower" title="Permalink to this headline">¶</a></h3>
 <p>Converts a string into all lowercase.</p>
 <p>For example:</p>
 <div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">lower</span> <span class="cp">}}</span>
@@ -381,8 +410,21 @@ followed by a blank line becomes a paragraph break (<code class="docutils litera
 <p>If <code class="docutils literal notranslate"><span class="pre">value</span></code> is <code class="docutils literal notranslate"><span class="pre">Still</span> <span class="pre">MAD</span> <span class="pre">At</span> <span class="pre">Yoko</span></code>, the output will be
 <code class="docutils literal notranslate"><span class="pre">still</span> <span class="pre">mad</span> <span class="pre">at</span> <span class="pre">yoko</span></code>.</p>
 </div>
+<div class="section" id="make-list">
+<h3><a class="toc-backref" href="#id24">make_list</a><a class="headerlink" href="#make-list" title="Permalink to this headline">¶</a></h3>
+<p>Returns the value turned into a list. For a string, it’s a list of characters.
+For an integer, the argument is cast into an unicode string before creating a
+list.</p>
+<p>For example:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">make_list</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">value</span></code> is the string <code class="docutils literal notranslate"><span class="pre">&quot;Joel&quot;</span></code>, the output would be the list
+<code class="docutils literal notranslate"><span class="pre">['J',</span> <span class="pre">'o',</span> <span class="pre">'e',</span> <span class="pre">'l']</span></code>. If <code class="docutils literal notranslate"><span class="pre">value</span></code> is <code class="docutils literal notranslate"><span class="pre">123</span></code>, the output will be the
+list <code class="docutils literal notranslate"><span class="pre">['1',</span> <span class="pre">'2',</span> <span class="pre">'3']</span></code>.</p>
+</div>
 <div class="section" id="safe-escape">
-<h3><a class="toc-backref" href="#id22">safe, escape</a><a class="headerlink" href="#safe-escape" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id25">safe, escape</a><a class="headerlink" href="#safe-escape" title="Permalink to this headline">¶</a></h3>
 <p>Marks a string as not requiring further HTML escaping prior to output. When
 autoescaping is off, this filter has no effect.</p>
 <div class="admonition note">
@@ -396,7 +438,7 @@ prints the variable as is, unescaped:</p>
 </div>
 </div>
 <div class="section" id="slice">
-<h3><a class="toc-backref" href="#id23">slice</a><a class="headerlink" href="#slice" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id26">slice</a><a class="headerlink" href="#slice" title="Permalink to this headline">¶</a></h3>
 <p>Returns a slice of a sequence (i.e. lists, vectors, strings)</p>
 <p>Uses the Common Lisp <code class="docutils literal notranslate"><span class="pre">cl-slice</span></code> library.</p>
 <p>Syntax:</p>
@@ -423,7 +465,7 @@ prints the variable as is, unescaped:</p>
 <p>if the string is <code class="docutils literal notranslate"><span class="pre">&quot;Hello</span> <span class="pre">world&quot;</span></code> is will output <code class="docutils literal notranslate"><span class="pre">Hello</span></code> and <code class="docutils literal notranslate"><span class="pre">world</span></code>.</p>
 </div>
 <div class="section" id="force-escape">
-<h3><a class="toc-backref" href="#id24">force-escape</a><a class="headerlink" href="#force-escape" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id27">force-escape</a><a class="headerlink" href="#force-escape" title="Permalink to this headline">¶</a></h3>
 <p>Forces escaping HTML characters (<code class="docutils literal notranslate"><span class="pre">&lt;,</span> <span class="pre">&gt;,</span> <span class="pre">',</span> <span class="pre">\,</span> <span class="pre">&amp;</span></code>):</p>
 <div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">value</span> <span class="o">|</span> <span class="nf">force</span><span class="o">-</span><span class="nv">escape</span> <span class="cp">}}</span>
 </pre></div>
@@ -431,7 +473,7 @@ prints the variable as is, unescaped:</p>
 <p>It calls <code class="docutils literal notranslate"><span class="pre">djula::escape-for-html</span></code>.</p>
 </div>
 <div class="section" id="format">
-<h3><a class="toc-backref" href="#id25">format</a><a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id28">format</a><a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h3>
 <p>Formats the variable according to the argument, a string formatting specifier.
 This specifier uses Common Lisp string formatting syntax</p>
 <p>For example:</p>
@@ -441,7 +483,7 @@ This specifier uses Common Lisp string formatting syntax</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">value</span></code> is <code class="docutils literal notranslate"><span class="pre">1000000</span></code>, the output will be <code class="docutils literal notranslate"><span class="pre">1,000,000</span></code>.</p>
 </div>
 <div class="section" id="replace-with">
-<h3><a class="toc-backref" href="#id26">replace … with</a><a class="headerlink" href="#replace-with" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id29">replace … with</a><a class="headerlink" href="#replace-with" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">replace</span></code> and the <code class="docutils literal notranslate"><span class="pre">with</span></code> filters work together:</p>
 <div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">value</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">:</span><span class="nv">regexp</span> <span class="o">|</span> <span class="nf">with</span><span class="o">:</span><span class="nv">string</span> <span class="cp">}}</span>
 </pre></div>
@@ -449,8 +491,17 @@ This specifier uses Common Lisp string formatting syntax</p>
 <p>This will replace all occurences of the regexp in “value” with a new
 string, using <code class="docutils literal notranslate"><span class="pre">ppcre:regex-replace-all</span></code>.</p>
 </div>
+<div class="section" id="rest">
+<h3><a class="toc-backref" href="#id30">rest</a><a class="headerlink" href="#rest" title="Permalink to this headline">¶</a></h3>
+<p>Returns the <code class="docutils literal notranslate"><span class="pre">rest</span></code> of a list (aka <code class="docutils literal notranslate"><span class="pre">cdr</span></code>).</p>
+<p>For example:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">values</span><span class="o">|</span><span class="nf">rest</span> <span class="cp">}}</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">values</span></code> is the list <code class="docutils literal notranslate"><span class="pre">(&quot;a&quot;</span> <span class="pre">&quot;b&quot;</span> <span class="pre">&quot;c&quot;)</span></code>, the output will be <code class="docutils literal notranslate"><span class="pre">(&quot;b&quot;</span> <span class="pre">&quot;c&quot;)</span></code>.</p>
+</div>
 <div class="section" id="scan">
-<h3><a class="toc-backref" href="#id27">scan</a><a class="headerlink" href="#scan" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id31">scan</a><a class="headerlink" href="#scan" title="Permalink to this headline">¶</a></h3>
 <p>Extracts and displays a regexp from the value:</p>
 <div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">value</span> <span class="o">|</span> <span class="nf">scan</span><span class="o">:</span><span class="nv">regexp</span> <span class="cp">}}</span>
 </pre></div>
@@ -458,7 +509,7 @@ string, using <code class="docutils literal notranslate"><span class="pre">ppcre
 <p>This will display only the text that matches the regexp (using <code class="docutils literal notranslate"><span class="pre">ppcre:scan-to-strings</span></code>).</p>
 </div>
 <div class="section" id="id4">
-<h3><a class="toc-backref" href="#id28">time</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id32">time</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>Formats a time according to the given format.</p>
 <p>For example:</p>
 <div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">value</span> <span class="o">|</span> <span class="nf">time</span> <span class="cp">}}</span>
@@ -466,7 +517,7 @@ string, using <code class="docutils literal notranslate"><span class="pre">ppcre
 </div>
 </div>
 <div class="section" id="truncatechars">
-<h3><a class="toc-backref" href="#id29">truncatechars</a><a class="headerlink" href="#truncatechars" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id33">truncatechars</a><a class="headerlink" href="#truncatechars" title="Permalink to this headline">¶</a></h3>
 <p>Truncates a string if it is longer than the specified number of characters.
 Truncated strings will end with the :cl:symbol:<em>ELLISION-STRING</em>, which defaults to “…”.</p>
 <p><strong>Argument:</strong> Number of characters to truncate to</p>
@@ -477,7 +528,7 @@ Truncated strings will end with the :cl:symbol:<em>ELLISION-STRING</em>, which d
 <p>If <code class="docutils literal notranslate"><span class="pre">value</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;Joel</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">slug&quot;</span></code>, the output will be <code class="docutils literal notranslate"><span class="pre">&quot;Joel</span> <span class="pre">i...&quot;</span></code>.</p>
 </div>
 <div class="section" id="upper">
-<h3><a class="toc-backref" href="#id30">upper</a><a class="headerlink" href="#upper" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id34">upper</a><a class="headerlink" href="#upper" title="Permalink to this headline">¶</a></h3>
 <p>Converts a string into all uppercase.</p>
 <p>For example:</p>
 <div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">upper</span> <span class="cp">}}</span>
@@ -486,7 +537,7 @@ Truncated strings will end with the :cl:symbol:<em>ELLISION-STRING</em>, which d
 <p>If <code class="docutils literal notranslate"><span class="pre">value</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;Joel</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">slug&quot;</span></code>, the output will be <code class="docutils literal notranslate"><span class="pre">&quot;JOEL</span> <span class="pre">IS</span> <span class="pre">A</span> <span class="pre">SLUG&quot;</span></code>.</p>
 </div>
 <div class="section" id="urlencode">
-<h3><a class="toc-backref" href="#id31">urlencode</a><a class="headerlink" href="#urlencode" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id35">urlencode</a><a class="headerlink" href="#urlencode" title="Permalink to this headline">¶</a></h3>
 <p>Escapes a value for use in a URL.</p>
 <p>For example:</p>
 <div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{{</span> <span class="nv">value</span><span class="o">|</span><span class="nf">urlencode</span> <span class="cp">}}</span>

@@ -168,17 +168,16 @@ For example::
 
     {{ list | reverse }}
 
-..
-   divisibleby
-   ^^^^^^^^^^^
+divisibleby
+^^^^^^^^^^^
 
-   Returns ``True`` if the value is divisible by the argument.
+Returns ``True`` if the value is divisible by the argument.
 
-   For example::
+For example::
 
-       {{ value|divisibleby:"3" }}
+    {{ value|divisibleby:"3" }}
 
-   If ``value`` is ``21``, the output would be ``True``.
+If ``value`` is ``21``, the output would be ``True``.
 
 ..
 
@@ -316,20 +315,19 @@ For example::
 If ``value`` is ``("a" "b" "c" "d")`` or ``"abcd"``, the output will be
 ``4``.
 
-..
-   .. templatefilter:: length_is
+.. templatefilter:: length_is
 
-   length_is
-   ^^^^^^^^^
+length_is
+^^^^^^^^^
 
-   Returns ``True`` if the value's length is the argument, or ``False`` otherwise.
+Returns ``True`` if the value's length is the argument, or ``False`` otherwise.
 
-   For example::
+For example::
 
-       {{ value|length_is:"4" }}
+    {{ value|length_is:"4" }}
 
-   If ``value`` is ``['a', 'b', 'c', 'd']`` or ``"abcd"``, the output will be
-   ``True``.
+If ``value`` is ``['a', 'b', 'c', 'd']`` or ``"abcd"``, the output will be
+``True``.
 
    .. templatefilter:: linebreaks
 
@@ -418,22 +416,22 @@ If ``value`` is ``Still MAD At Yoko``, the output will be
 
 .. templatefilter:: make_list
 
+make_list
+^^^^^^^^^
+
+Returns the value turned into a list. For a string, it's a list of characters.
+For an integer, the argument is cast into an unicode string before creating a
+list.
+
+For example::
+
+    {{ value|make_list }}
+
+If ``value`` is the string ``"Joel"``, the output would be the list
+``['J', 'o', 'e', 'l']``. If ``value`` is ``123``, the output will be the
+list ``['1', '2', '3']``.
+
 ..
-   make_list
-   ^^^^^^^^^
-
-   Returns the value turned into a list. For a string, it's a list of characters.
-   For an integer, the argument is cast into an unicode string before creating a
-   list.
-
-   For example::
-
-       {{ value|make_list }}
-
-   If ``value`` is the string ``"Joel"``, the output would be the list
-   ``['J', 'o', 'e', 'l']``. If ``value`` is ``123``, the output will be the
-   list ``['1', '2', '3']``.
-
    .. templatefilter:: phone2numeric
 
    phone2numeric
@@ -677,6 +675,19 @@ The ``replace`` and the ``with`` filters work together::
 
 This will replace all occurences of the regexp in "value" with a new
 string, using ``ppcre:regex-replace-all``.
+
+.. templatefilter:: rest
+
+rest
+^^^^
+
+Returns the ``rest`` of a list (aka ``cdr``).
+
+For example::
+
+    {{ values|rest }}
+
+If ``values`` is the list ``("a" "b" "c")``, the output will be ``("b" "c")``.
 
 .. templatefilter:: scan
 

@@ -78,7 +78,10 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Variables</a></li>
+<li><a class="reference internal" href="#">Variables</a><ul>
+<li><a class="reference internal" href="#default-template-variables">Default template variables</a></li>
+</ul>
+</li>
 </ul>
 </ul>
 </li>
@@ -145,6 +148,20 @@ names.</em></p>
 <p>Note that “bar” in a template expression like <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">foo.bar</span> <span class="pre">}}</span></code> will be
 interpreted as a literal string and not using the value of the variable “bar”,
 if one exists in the template context.</p>
+<div class="section" id="default-template-variables">
+<h2>Default template variables<a class="headerlink" href="#default-template-variables" title="Permalink to this headline">¶</a></h2>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">*default-template-arguments*</span></code> variable to store arguments that will be available for all templates. It is a plist, so use getf to add arguments, like this:</p>
+<div class="highlight-common-lisp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nb">setf</span> <span class="p">(</span><span class="nb">getf</span> <span class="nv">djula:*default-template-arguments*</span> <span class="ss">:foo</span><span class="p">)</span> <span class="ss">&#39;some-value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And now, you can access <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">foo</span> <span class="pre">}}</span></code> in your template.</p>
+<p>This is useful when you have many templates that rely on the same set of variables. Use this variable to refactor your code when appropriate.</p>
+<p>Note that you could also write a function that wraps <code class="docutils literal notranslate"><span class="pre">render-template*</span></code> and uses a default list of variables plus other ones given as arguments:</p>
+<div class="highlight-common-lisp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-render-template</span> <span class="p">(</span><span class="nv">template</span> <span class="nc">stream</span> <span class="k">&amp;rest</span> <span class="nv">args</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">apply</span> <span class="nf">#&#39;</span><span class="nv">djula:render-template*</span> <span class="nv">template</span> <span class="nc">stream</span> <span class="p">(</span><span class="nb">list*</span> <span class="ss">:foo</span> <span class="ss">&#39;some-value</span> <span class="nv">args</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
