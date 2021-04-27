@@ -5,6 +5,10 @@
                "Mariano Montone <marianomontone@gmail.com>")
   :author "Nick Allen <nallen05@gmail.com>"
   :license "MIT"
+  :homepage "http://mmontone.github.io/djula"
+  :long-description
+  #.(uiop:read-file-string
+     (uiop:subpathname *load-pathname* "README.md"))
   :depends-on (#:access
                #:alexandria
                #:anaphora
