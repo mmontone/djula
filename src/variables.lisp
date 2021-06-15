@@ -1,6 +1,7 @@
 (in-package #:djula)
 
-(defvar *auto-escape* t)
+(defvar *auto-escape* t
+  "Controls auto escaping.")
 
 ;;; truncatechars:"30" => (:truncatechars 30)
 (defun parse-filter-string (string)

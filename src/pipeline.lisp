@@ -123,6 +123,10 @@
   (find-symbol (symbol-name name) (find-package "DJULA.TOKEN-COMPILERS")))
 
 (defmacro def-tag-compiler (name args &body body)
+  "Define a Djula tag compiler.
+NAME is the name of the tag.
+ARGS is the list of arguments required.
+BODY is the tag compilation implementation."
   (let* ((tag-compiler-package (find-package "DJULA.TAG-COMPILERS"))
          (function-name (intern (symbol-name name)
                                 tag-compiler-package)))
@@ -143,6 +147,10 @@
   (find-symbol (symbol-name name) (find-package "DJULA.TAG-COMPILERS")))
 
 (defmacro def-filter (name args &body body)
+  "Define a Djula filter.
+NAME is the name of the filter.
+ARGS is the list of arguments of the filter.
+BODY is the implementation of the filter."
   (let* ((filter-package (find-package "DJULA.FILTERS"))
          (function-name (intern (symbol-name name)
                                 filter-package)))

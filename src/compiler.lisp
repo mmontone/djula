@@ -4,7 +4,8 @@
   (:documentation "Provides a hook to customize template compilation."))
 
 (defclass compiler ()
-  ())
+  ()
+  (:documentation "Abstract class. Top-level class for template compilers."))
 
 (defclass compiled-template ()
   ((compiled-template :initarg :compiled-template
@@ -76,9 +77,11 @@
   ((fragment-compiler
     :reader fragment-compiler
     :initarg :fragment-compiler
-    :initform (make-instance 'compiler))))
+    :initform (make-instance 'compiler)))
+  (:documentation "The default Djula template compiler."))
 
-(defvar *current-compiler* (make-instance 'toplevel-compiler))
+(defvar *current-compiler* (make-instance 'toplevel-compiler)
+  "The current template compiler.")
 
 (defmethod compile-template ((compiler toplevel-compiler) name &optional (error-p t))
   (let ((*block-alist* nil)
@@ -87,11 +90,11 @@
       (compile-template *current-compiler* name error-p))))
 
 (defun compile-template* (name)
-  "Compiles template NAME with compiler in *CURRENT-COMPILER*"
+  "Compiles template NAME with compiler in *CURRENT-COMPILER*."
   (compile-template *current-compiler* name))
 
 (defun render-template* (template &optional stream &rest *template-arguments*)
-  "Render TEMPLATE into STREAM passing *TEMPLATE-ARGUMENTS*"
+  "Render TEMPLATE into STREAM passing *TEMPLATE-ARGUMENTS*."
   (check-type stream (or null stream))
   (cond
     ((or (pathnamep template)
@@ -120,6 +123,8 @@
               :format-arguments (list template)))))
 
 (defun compile-string (string)
+  "Compile the template in STRING.
+Returns a funcallable template."
   (let ((fs (mapcar #'compile-token (process-tokens (parse-template-string string)))))
     (lambda (stream)
       (dolist (f fs)

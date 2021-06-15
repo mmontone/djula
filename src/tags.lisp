@@ -672,10 +672,11 @@ are prepended to *TEMPLATE-ARGUMENTS*"
 
 
 (def-tag-compiler :ssi (path &optional parse)
-  "if `PATH' lives in a folder reckognized by *ALLOW-INCLUDE-ROOTS*, then :SSI tags
-compile into a function that return the contents of the file pointed to
-by the template-path `PATH'. If `PARSE' is T then the function renders `PATH' as a
-template."
+  "Server Side Includes.
+If `PATH' lives in a folder reckognized by *ALLOW-INCLUDE-ROOTS*, then :SSI tag
+compiles into a function that returns the contents of the file pointed to
+by the template-path `PATH'. 
+If `PARSE' is T then the function renders `PATH' as a template."
   (let ((path-string (namestring path)))
     (if (not (find-if (lambda (x)
                         (eql (mismatch x path-string :test 'char=)

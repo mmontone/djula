@@ -56,12 +56,14 @@
   "The currently in-use template store.  Defaults to a FILE-STORE.")
 
 (defun add-template-directory (directory &optional (template-store *current-store*))
-  "Adds DIRECTORY to the search path of the TEMPLATE-STORE"
+  "Adds DIRECTORY to the search path of the TEMPLATE-STORE."
   (pushnew directory
            (search-path template-store)
            :test #'equalp))
 
 (defun find-template* (name &optional (error-p t))
+  "Find template with name NAME in *CURRENT-STORE*.
+If the template is not found, an error is signaled depending on ERROR-P argument value."
   (find-template *current-store* name error-p))
 
 (defun fetch-template* (key)

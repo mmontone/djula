@@ -8,6 +8,9 @@
 (defun translate (string &optional args
                            (language (or *current-language* *default-language*))
                            (backend *translation-backend*))
+  "Translate STRING using Djula transaltion backend.
+LANGUAGE is the language to translate to. The default is to use either *CURRENT-LANGUAGE* or *DEFAULT-LANGUAGE*, in that order.
+BACKEND is the translation backend to use. Default is *TRANSLATION-BACKEND*."
   (apply #'backend-translate backend string language args))
 
 (defun format-translation (string &rest args)

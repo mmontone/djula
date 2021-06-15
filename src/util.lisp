@@ -1,6 +1,7 @@
 (in-package #:djula)
 
 (defun url-encode-path (path)
+  "URL encode the url path PATH."
   (with-output-to-string (out)
     (destructuring-bind (abs/rel . dpath)
         (pathname-directory path)
