@@ -289,12 +289,22 @@ is useful to determine the package in which :LISP tags are executed"
 
 (def-delimited-tag :for :endfor :parsed-for)
 
-(defun iterable-list (iterable)
-  (typecase iterable
-    (array (coerce iterable 'list))
-    (hash-table (alexandria:hash-table-alist iterable))
-    (sequence iterable)
-    (t (error "Cannot iterate on ~A" iterable))))
+(defgeneric iterable-list (iterable)
+  (:documentation "Create a list from ITERABLE.
+This is used in {% for %} to convert different types.
+Library user can extend this generic function, add methods for types to iterate on."))
+
+(defmethod iterable-list (iterable)
+  (error "Cannot iterate on ~A" iterable))
+
+(defmethod iterable-list ((iterable sequence))
+  iterable)
+
+(defmethod iterable-list ((iterable array))
+  (coerce iterable 'list))
+
+(defmethod iterable-list ((iterable hash-table))
+  (alexandria:hash-table-alist iterable))
 
 (def-token-compiler :parsed-for ((var in %listvar% &optional reversed) . clause)
   (if (not (eql in :in))
