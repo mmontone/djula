@@ -252,6 +252,14 @@ would display the keys and values of the hash-table::
       {{ key }}: {{ value }}
   {% endfor %}
 
+If you need to loop a fixed number of times, you can use the following trick, where ``data.nb`` resolves to an integer::
+
+  {% for _ in data.nb.make-list %}
+     index: {{ forloop.counter }}
+  {% endfor %}
+
+The ``_`` is not meaningful, it is only a placeholder for a value that we can't reuse (it's nil). See also the ``djula::iterable-list`` generic method.
+
 The for loop sets a number of variables available within the loop:
 
 ==========================  ===============================================
