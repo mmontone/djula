@@ -2,15 +2,16 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Automatic HTML escaping &#8212; Djula HTML templating system 0.2 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
 <meta charset='utf-8'>
@@ -158,24 +159,24 @@ do potentially bad things. This type of security exploit is called a
 <a class="reference external" href="http://en.wikipedia.org/wiki/Cross-site_scripting">Cross Site Scripting</a> (XSS) attack.</p>
 <p>To avoid this problem, you have two options:</p>
 <ul class="simple">
-<li><p>One, you can make sure to run each untrusted variable through the
+<li>One, you can make sure to run each untrusted variable through the
 <a href="#id1"><span class="problematic" id="id2">:tfilter:`escape`</span></a> filter (documented below), which converts potentially
 harmful HTML characters to unharmful ones. This was the default solution
 in Django for its first few years, but the problem is that it puts the
 onus on <em>you</em>, the developer / template author, to ensure you’re escaping
-everything. It’s easy to forget to escape data.</p></li>
-<li><p>Two, you can take advantage of Django’s automatic HTML escaping. The
-remainder of this section describes how auto-escaping works.</p></li>
+everything. It’s easy to forget to escape data.</li>
+<li>Two, you can take advantage of Django’s automatic HTML escaping. The
+remainder of this section describes how auto-escaping works.</li>
 </ul>
 <p>By default in Django, every template automatically escapes the output
 of every variable tag. Specifically, these five characters are
 escaped:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code> is converted to <code class="docutils literal notranslate"><span class="pre">&amp;lt;</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code> is converted to <code class="docutils literal notranslate"><span class="pre">&amp;gt;</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">'</span></code> (single quote) is converted to <code class="docutils literal notranslate"><span class="pre">&amp;#39;</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;</span></code> (double quote) is converted to <code class="docutils literal notranslate"><span class="pre">&amp;quot;</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code> is converted to <code class="docutils literal notranslate"><span class="pre">&amp;amp;</span></code></p></li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;</span></code> is converted to <code class="docutils literal notranslate"><span class="pre">&amp;lt;</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">&gt;</span></code> is converted to <code class="docutils literal notranslate"><span class="pre">&amp;gt;</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">'</span></code> (single quote) is converted to <code class="docutils literal notranslate"><span class="pre">&amp;#39;</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">&quot;</span></code> (double quote) is converted to <code class="docutils literal notranslate"><span class="pre">&amp;quot;</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">&amp;</span></code> is converted to <code class="docutils literal notranslate"><span class="pre">&amp;amp;</span></code></li>
 </ul>
 <p>Again, we stress that this behavior is on by default. If you’re using Django’s
 template system, you’re protected.</p>
@@ -307,7 +308,7 @@ they’re beyond the control of the template author.</p>
     </p>
     <p>
         &copy; Copyright 2014, Nick Allen.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
 </footer>

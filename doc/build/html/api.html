@@ -2,15 +2,16 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>API &#8212; Djula HTML templating system 0.2 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Error handling" href="error-handling.html" />
@@ -124,113 +125,113 @@
   <div class="section" id="api">
 <h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
 <p>Djula external symbols documentation</p>
-<dl class="cl function">
+<dl class="function">
 <dt id="function:djula:compile-template*">
-<em class="property">function </em> (<code class="sig-name descname">compile-template*</code> <em>name</em>)<a class="headerlink" href="#function:djula:compile-template*" title="Permalink to this definition">¶</a></dt>
+<em class="property">function </em> (<code class="descname">compile-template*</code> <em>name</em>)<a class="headerlink" href="#function:djula:compile-template*" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compiles template <code class="docutils literal notranslate"><span class="pre">NAME</span></code> with compiler in <em>CURRENT-COMPILER</em></p>
 </dd></dl>
 
-<dl class="cl function">
+<dl class="function">
 <dt id="function:djula:url-encode">
-<em class="property">function </em> (<code class="sig-name descname">url-encode</code> <em>string</em>)<a class="headerlink" href="#function:djula:url-encode" title="Permalink to this definition">¶</a></dt>
+<em class="property">function </em> (<code class="descname">url-encode</code> <em>string</em>)<a class="headerlink" href="#function:djula:url-encode" title="Permalink to this definition">¶</a></dt>
 <dd><p>URL-encodes a string using the external format EXTERNAL-FORMAT.</p>
 </dd></dl>
 
-<dl class="cl variable">
+<dl class="variable">
 <dt id="variable:djula:*current-store*">
-<em class="property">variable </em><code class="sig-name descname">*current-store*</code><a class="headerlink" href="#variable:djula:*current-store*" title="Permalink to this definition">¶</a></dt>
+<em class="property">variable </em><code class="descname">*current-store*</code><a class="headerlink" href="#variable:djula:*current-store*" title="Permalink to this definition">¶</a></dt>
 <dd><p>The currently in-use template store.  Defaults to a <code class="xref cl cl-symbol docutils literal notranslate"><span class="pre">FILE-STORE</span></code>.</p>
 </dd></dl>
 
-<dl class="cl variable">
+<dl class="variable">
 <dt id="variable:djula:*allow-include-roots*">
-<em class="property">variable </em><code class="sig-name descname">*allow-include-roots*</code><a class="headerlink" href="#variable:djula:*allow-include-roots*" title="Permalink to this definition">¶</a></dt>
+<em class="property">variable </em><code class="descname">*allow-include-roots*</code><a class="headerlink" href="#variable:djula:*allow-include-roots*" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="cl variable">
+<dl class="variable">
 <dt id="variable:djula:*current-compiler*">
-<em class="property">variable </em><code class="sig-name descname">*current-compiler*</code><a class="headerlink" href="#variable:djula:*current-compiler*" title="Permalink to this definition">¶</a></dt>
+<em class="property">variable </em><code class="descname">*current-compiler*</code><a class="headerlink" href="#variable:djula:*current-compiler*" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="cl variable">
+<dl class="variable">
 <dt id="variable:djula:*fancy-debug-p*">
-<em class="property">variable </em><code class="sig-name descname">*fancy-debug-p*</code><a class="headerlink" href="#variable:djula:*fancy-debug-p*" title="Permalink to this definition">¶</a></dt>
+<em class="property">variable </em><code class="descname">*fancy-debug-p*</code><a class="headerlink" href="#variable:djula:*fancy-debug-p*" title="Permalink to this definition">¶</a></dt>
 <dd><p>When enabled, displays fancy html based debugging information for the {% debug %} tag</p>
 </dd></dl>
 
-<dl class="cl variable">
+<dl class="variable">
 <dt id="variable:djula:*djula-execute-package*">
-<em class="property">variable </em><code class="sig-name descname">*djula-execute-package*</code><a class="headerlink" href="#variable:djula:*djula-execute-package*" title="Permalink to this definition">¶</a></dt>
+<em class="property">variable </em><code class="descname">*djula-execute-package*</code><a class="headerlink" href="#variable:djula:*djula-execute-package*" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="cl function">
+<dl class="function">
 <dt id="function:djula:fetch-template*">
-<em class="property">function </em> (<code class="sig-name descname">fetch-template*</code> <em>key</em>)<a class="headerlink" href="#function:djula:fetch-template*" title="Permalink to this definition">¶</a></dt>
+<em class="property">function </em> (<code class="descname">fetch-template*</code> <em>key</em>)<a class="headerlink" href="#function:djula:fetch-template*" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the text of a template fetched from the <em>CURRENT-STORE</em>.</p>
 </dd></dl>
 
-<dl class="cl function">
+<dl class="function">
 <dt id="function:djula:url-encode-path">
-<em class="property">function </em> (<code class="sig-name descname">url-encode-path</code> <em>path</em>)<a class="headerlink" href="#function:djula:url-encode-path" title="Permalink to this definition">¶</a></dt>
+<em class="property">function </em> (<code class="descname">url-encode-path</code> <em>path</em>)<a class="headerlink" href="#function:djula:url-encode-path" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="cl function">
+<dl class="function">
 <dt id="function:djula:url-decode">
-<em class="property">function </em> (<code class="sig-name descname">url-decode</code>)<a class="headerlink" href="#function:djula:url-decode" title="Permalink to this definition">¶</a></dt>
+<em class="property">function </em> (<code class="descname">url-decode</code>)<a class="headerlink" href="#function:djula:url-decode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="cl macro">
+<dl class="macro">
 <dt id="macro:djula:def-tag-compiler">
-<em class="property">macro </em> (<code class="sig-name descname">def-tag-compiler</code> <em>name</em> <em>args</em> <em>&amp;body</em> <em>body</em>)<a class="headerlink" href="#macro:djula:def-tag-compiler" title="Permalink to this definition">¶</a></dt>
+<em class="property">macro </em> (<code class="descname">def-tag-compiler</code> <em>name</em> <em>args</em> <em>&amp;body</em> <em>body</em>)<a class="headerlink" href="#macro:djula:def-tag-compiler" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="cl function">
+<dl class="function">
 <dt id="function:djula:find-template*">
-<em class="property">function </em> (<code class="sig-name descname">find-template*</code> <em>name</em> <em class="lambda_keyword text-muted">&amp;optional</em> (<em>error-p</em> <em>t</em>))<a class="headerlink" href="#function:djula:find-template*" title="Permalink to this definition">¶</a></dt>
+<em class="property">function </em> (<code class="descname">find-template*</code> <em>name</em> <em class="lambda_keyword text-muted">&amp;optional</em> (<em>error-p</em> <em>t</em>))<a class="headerlink" href="#function:djula:find-template*" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="cl variable">
+<dl class="variable">
 <dt id="variable:djula:*fancy-error-template-p*">
-<em class="property">variable </em><code class="sig-name descname">*fancy-error-template-p*</code><a class="headerlink" href="#variable:djula:*fancy-error-template-p*" title="Permalink to this definition">¶</a></dt>
+<em class="property">variable </em><code class="descname">*fancy-error-template-p*</code><a class="headerlink" href="#variable:djula:*fancy-error-template-p*" title="Permalink to this definition">¶</a></dt>
 <dd><p>When enabled, show a fancy template when an error ocurrs</p>
 </dd></dl>
 
-<dl class="cl variable">
+<dl class="variable">
 <dt id="variable:djula:*default-language*">
-<em class="property">variable </em><code class="sig-name descname">*default-language*</code><a class="headerlink" href="#variable:djula:*default-language*" title="Permalink to this definition">¶</a></dt>
+<em class="property">variable </em><code class="descname">*default-language*</code><a class="headerlink" href="#variable:djula:*default-language*" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="cl function">
+<dl class="function">
 <dt id="function:djula:render-template*">
-<em class="property">function </em> (<code class="sig-name descname">render-template*</code> <em>template</em> <em class="lambda_keyword text-muted">&amp;optional</em> <em>stream</em> <em class="lambda_keyword text-muted">&amp;rest</em> <em>*template-arguments*</em>)<a class="headerlink" href="#function:djula:render-template*" title="Permalink to this definition">¶</a></dt>
+<em class="property">function </em> (<code class="descname">render-template*</code> <em>template</em> <em class="lambda_keyword text-muted">&amp;optional</em> <em>stream</em> <em class="lambda_keyword text-muted">&amp;rest</em> <em>*template-arguments*</em>)<a class="headerlink" href="#function:djula:render-template*" title="Permalink to this definition">¶</a></dt>
 <dd><p>Render <code class="docutils literal notranslate"><span class="pre">TEMPLATE</span></code> into <code class="docutils literal notranslate"><span class="pre">STREAM</span></code> passing <em>TEMPLATE-ARGUMENTS</em></p>
 </dd></dl>
 
-<dl class="cl variable">
+<dl class="variable">
 <dt id="variable:djula:*default-template-arguments*">
-<em class="property">variable </em><code class="sig-name descname">*default-template-arguments*</code><a class="headerlink" href="#variable:djula:*default-template-arguments*" title="Permalink to this definition">¶</a></dt>
+<em class="property">variable </em><code class="descname">*default-template-arguments*</code><a class="headerlink" href="#variable:djula:*default-template-arguments*" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="cl function">
+<dl class="function">
 <dt id="function:djula:add-template-directory">
-<em class="property">function </em> (<code class="sig-name descname">add-template-directory</code> <em>directory</em> <em class="lambda_keyword text-muted">&amp;optional</em> (<em>template-store</em> <em>*current-store*</em>))<a class="headerlink" href="#function:djula:add-template-directory" title="Permalink to this definition">¶</a></dt>
+<em class="property">function </em> (<code class="descname">add-template-directory</code> <em>directory</em> <em class="lambda_keyword text-muted">&amp;optional</em> (<em>template-store</em> <em>*current-store*</em>))<a class="headerlink" href="#function:djula:add-template-directory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds <code class="docutils literal notranslate"><span class="pre">DIRECTORY</span></code> to the search path of the <code class="docutils literal notranslate"><span class="pre">TEMPLATE-STORE</span></code></p>
 </dd></dl>
 
-<dl class="cl variable">
+<dl class="variable">
 <dt id="variable:djula:*catch-template-errors-p*">
-<em class="property">variable </em><code class="sig-name descname">*catch-template-errors-p*</code><a class="headerlink" href="#variable:djula:*catch-template-errors-p*" title="Permalink to this definition">¶</a></dt>
+<em class="property">variable </em><code class="descname">*catch-template-errors-p*</code><a class="headerlink" href="#variable:djula:*catch-template-errors-p*" title="Permalink to this definition">¶</a></dt>
 <dd><p>When enabled, caught errors during the rendering of the template are written to the output instead of being handled by the lisp listener</p>
 </dd></dl>
 
-<dl class="cl variable">
+<dl class="variable">
 <dt id="variable:djula:*current-language*">
-<em class="property">variable </em><code class="sig-name descname">*current-language*</code><a class="headerlink" href="#variable:djula:*current-language*" title="Permalink to this definition">¶</a></dt>
+<em class="property">variable </em><code class="descname">*current-language*</code><a class="headerlink" href="#variable:djula:*current-language*" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="cl variable">
+<dl class="variable">
 <dt id="variable:djula:*verbose-errors-p*">
-<em class="property">variable </em><code class="sig-name descname">*verbose-errors-p*</code><a class="headerlink" href="#variable:djula:*verbose-errors-p*" title="Permalink to this definition">¶</a></dt>
+<em class="property">variable </em><code class="descname">*verbose-errors-p*</code><a class="headerlink" href="#variable:djula:*verbose-errors-p*" title="Permalink to this definition">¶</a></dt>
 <dd><p>When enabled, errors are displayed more verbosely. Good for debugging</p>
 </dd></dl>
 
@@ -249,7 +250,7 @@
     </p>
     <p>
         &copy; Copyright 2014, Nick Allen.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
 </footer>

@@ -2,15 +2,16 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Template inheritance &#8212; Djula HTML templating system 0.2 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Internationalization" href="internationalization.html" />
@@ -78,7 +79,10 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Template inheritance</a></li>
+<li><a class="reference internal" href="#">Template inheritance</a><ul>
+<li><a class="reference internal" href="#include">Include</a></li>
+</ul>
+</li>
 </ul>
 </ul>
 </li>
@@ -132,6 +136,7 @@
 engine is template inheritance. Template inheritance allows you to build a base
 “skeleton” template that contains all the common elements of your site and
 defines <strong>blocks</strong> that child templates can override.</p>
+<p>You can also refactor independent template sections in their own file and <strong>include</strong> it in the main template, passing it the required arguments.</p>
 <p>It’s easiest to understand template inheritance by starting with an example:</p>
 <div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
@@ -215,36 +220,40 @@ tag in a parent template is always used as a fallback.</p>
 <p>You can use as many levels of inheritance as needed. One common way of using
 inheritance is the following three-level approach:</p>
 <ul class="simple">
-<li><p>Create a <code class="docutils literal notranslate"><span class="pre">base.html</span></code> template that holds the main look-and-feel of your
-site.</p></li>
-<li><p>Create a <code class="docutils literal notranslate"><span class="pre">base_SECTIONNAME.html</span></code> template for each “section” of your
+<li>Create a <code class="docutils literal notranslate"><span class="pre">base.html</span></code> template that holds the main look-and-feel of your
+site.</li>
+<li>Create a <code class="docutils literal notranslate"><span class="pre">base_SECTIONNAME.html</span></code> template for each “section” of your
 site. For example, <code class="docutils literal notranslate"><span class="pre">base_news.html</span></code>, <code class="docutils literal notranslate"><span class="pre">base_sports.html</span></code>. These
 templates all extend <code class="docutils literal notranslate"><span class="pre">base.html</span></code> and include section-specific
-styles/design.</p></li>
-<li><p>Create individual templates for each type of page, such as a news
+styles/design.</li>
+<li>Create individual templates for each type of page, such as a news
 article or blog entry. These templates extend the appropriate section
-template.</p></li>
+template.</li>
 </ul>
 <p>This approach maximizes code reuse and makes it easy to add items to shared
 content areas, such as section-wide navigation.</p>
 <p>Here are some tips for working with inheritance:</p>
 <ul>
-<li><p>If you use <a href="#id9"><span class="problematic" id="id10">:ttag:`{% extends %}&lt;extends&gt;`</span></a> in a template, it must be the first template
-tag in that template. Template inheritance won’t work, otherwise.</p></li>
-<li><p>More <a href="#id11"><span class="problematic" id="id12">:ttag:`{% block %}&lt;block&gt;`</span></a> tags in your base templates are better. Remember,
+<li><p class="first">If you use <a href="#id9"><span class="problematic" id="id10">:ttag:`{% extends %}&lt;extends&gt;`</span></a> in a template, it must be the first template
+tag in that template. Template inheritance won’t work, otherwise.</p>
+</li>
+<li><p class="first">More <a href="#id11"><span class="problematic" id="id12">:ttag:`{% block %}&lt;block&gt;`</span></a> tags in your base templates are better. Remember,
 child templates don’t have to define all parent blocks, so you can fill
 in reasonable defaults in a number of blocks, then only define the ones
-you need later. It’s better to have more hooks than fewer hooks.</p></li>
-<li><p>If you find yourself duplicating content in a number of templates, it
+you need later. It’s better to have more hooks than fewer hooks.</p>
+</li>
+<li><p class="first">If you find yourself duplicating content in a number of templates, it
 probably means you should move that content to a <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">block</span> <span class="pre">%}</span></code> in a
-parent template.</p></li>
-<li><p>If you need to get the content of the block from the parent template,
+parent template.</p>
+</li>
+<li><p class="first">If you need to get the content of the block from the parent template,
 the <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">block.super</span> <span class="pre">}}</span></code> variable will do the trick. This is useful
 if you want to add to the contents of a parent block instead of
 completely overriding it. Data inserted using <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">block.super</span> <span class="pre">}}</span></code> will
-not be automatically escaped (see the <a href="#id17"><span class="problematic" id="id18">`next section`_</span></a>), since it was
-already escaped, if necessary, in the parent template.</p></li>
-<li><p>For extra readability, you can optionally give a <em>name</em> to your
+not be automatically escaped (see the <a href="#id19"><span class="problematic" id="id20">`next section`_</span></a>), since it was
+already escaped, if necessary, in the parent template.</p>
+</li>
+<li><p class="first">For extra readability, you can optionally give a <em>name</em> to your
 <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">endblock</span> <span class="pre">%}</span></code> tag. For example:</p>
 <div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
 ...
@@ -261,6 +270,29 @@ name in the same template. This limitation exists because a block tag works in
 it also defines the content that fills the hole in the <em>parent</em>. If there were
 two similarly-named <a href="#id15"><span class="problematic" id="id16">:ttag:`block`</span></a> tags in a template, that template’s parent
 wouldn’t know which one of the blocks’ content to use.</p>
+<div class="section" id="include">
+<h2>Include<a class="headerlink" href="#include" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">include</span></code> loads a template, renders it with the given (optional) variables and inserts its content into the calling template.</p>
+<p>For example, we have this first template that renders a list of blog entries:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">entry</span> <span class="k">in</span> <span class="nv">blog_entries</span> <span class="cp">%}</span>
+    <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">entry.title</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">entry.body</span> <span class="cp">}}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>During development, we realize that rendering a blog entry is more
+convoluted than first planned, so we want to <strong>refactor</strong> the blog
+entry template logic in its own file. And most of all, we plan on
+rendering a blog entry on another part of the site, so we want to
+<strong>re-use</strong> the rendering logic.</p>
+<p>We create a new template in <code class="docutils literal notranslate"><span class="pre">includes/blog-entry.html</span></code> and we use the <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">include</span> <span class="pre">%}</span></code> template tag, giving it an entry object as argument:</p>
+<div class="highlight-html+django notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">entry</span> <span class="k">in</span> <span class="nv">blog_entries</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">include</span> <span class="s2">&quot;includes/blog-entry.html&quot;</span> <span class="o">:</span><span class="nv">entry</span> <span class="nv">entry</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>See also the <a href="#id17"><span class="problematic" id="id18">:ttag:`ssi`</span></a> tag for Server-Side Includes.</p>
+</div>
 </div>
 
 
@@ -276,7 +308,7 @@ wouldn’t know which one of the blocks’ content to use.</p>
     </p>
     <p>
         &copy; Copyright 2014, Nick Allen.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
 </footer>
