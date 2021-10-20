@@ -8,6 +8,8 @@ engine is template inheritance. Template inheritance allows you to build a base
 "skeleton" template that contains all the common elements of your site and
 defines **blocks** that child templates can override.
 
+You can also refactor independent template sections in their own file and **include** it in the main template, passing it the required arguments.
+
 It's easiest to understand template inheritance by starting with an example::
 
     <!DOCTYPE html>
@@ -145,3 +147,29 @@ name in the same template. This limitation exists because a block tag works in
 it also defines the content that fills the hole in the *parent*. If there were
 two similarly-named :ttag:`block` tags in a template, that template's parent
 wouldn't know which one of the blocks' content to use.
+
+Include
+-------
+
+``include`` loads a template, renders it with the given (optional) variables and inserts its content into the calling template.
+
+For example, we have this first template that renders a list of blog entries::
+
+    {% for entry in blog_entries %}
+        <h2>{{ entry.title }}</h2>
+        <p>{{ entry.body }}</p>
+    {% endfor %}
+
+During development, we realize that rendering a blog entry is more
+convoluted than first planned, so we want to **refactor** the blog
+entry template logic in its own file. And most of all, we plan on
+rendering a blog entry on another part of the site, so we want to
+**re-use** the rendering logic.
+
+We create a new template in ``includes/blog-entry.html`` and we use the ``{% include %}`` template tag, giving it an entry object as argument::
+
+    {% for entry in blog_entries %}
+        {% include "includes/blog-entry.html" :entry entry %}
+    {% endfor %}
+
+See also the :ttag:`ssi` tag for Server-Side Includes.
