@@ -67,7 +67,7 @@ Contents:
 * Comments:: 
 * Verbatim:: 
 * Filters:: 
-* Template inheritance:: 
+* Templates composition:: 
 * Internationalization:: 
 * Error handling:: 
 * API: API<3>. 
@@ -155,8 +155,9 @@ List of filters
 * upper:: 
 * urlencode:: 
 
-Template inheritance
+Templates composition
 
+* Template inheritance::
 * Include:: 
 
 Internationalization
@@ -1066,10 +1067,9 @@ equal.
 An alternative to the @code{ifnotequal} tag is to use the >>:ttag:`if`<< tag and
 the @code{!=} operator.
 
-@node include,,ifnotequal,List of tags
+@node include
 @anchor{tags include}@anchor{29}
 @subsection include
-
 
 Loads a template and renders it with the current context. This is a way of
 “including” other templates within a template.
@@ -1224,7 +1224,7 @@ For example, this template would render as @code{'this is @{@{verbatim@}@}'}:
 @{$ this is @{@{verbatim@}@} $@}
 @end example
 
-@node Filters,Template inheritance,Verbatim,Top
+@node Filters,,Verbatim,Top
 @anchor{filters doc}@anchor{31}@anchor{filters filters}@anchor{32}
 @chapter Filters
 
@@ -2369,9 +2369,17 @@ Errors are handled by the macro, but you can handle them and return a
        (template-error "There was an error executing this filter: ~A" e))))
 @end example
 
-@node Template inheritance,Internationalization,Filters,Top
+@node Templates composition
+@chapter Templates composition
+
+@menu
+* Template inheritance::
+* Include::
+@end menu
+
+@node Template inheritance
 @anchor{inheritance doc}@anchor{55}@anchor{inheritance template-inheritance}@anchor{56}
-@chapter Template inheritance
+@section Template inheritance
 
 
 The most powerful – and thus the most complex – part of Djula’s template
@@ -2545,14 +2553,9 @@ it also defines the content that fills the hole in the @emph{parent}. If there w
 two similarly-named >>:ttag:`block`<< tags in a template, that template’s parent
 wouldn’t know which one of the blocks’ content to use.
 
-@menu
-* Include:: 
-
-@end menu
-
-@node Include,,,Template inheritance
+@node Include
 @anchor{inheritance include}@anchor{57}
-@section Include
+@section Including other templates
 
 
 @code{include} loads a template, renders it with the given (optional) variables and inserts its content into the calling template.
@@ -2582,7 +2585,7 @@ We create a new template in @code{includes/blog-entry.html} and we use the @code
 
 See also the >>:ttag:`ssi`<< tag for Server-Side Includes.
 
-@node Internationalization,Error handling,Template inheritance,Top
+@node Internationalization,Error handling,Templates composition,Top
 @anchor{internationalization doc}@anchor{58}@anchor{internationalization internationalization}@anchor{59}
 @chapter Internationalization
 
