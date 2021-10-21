@@ -29,4 +29,4 @@ Here a small example of a template::
 Application logic is for the controller but don't try to make the life
 for the template designer too hard by giving him too few functionality.
 
-For more information visit the new [Djula webpage](http://mmontone.github.io/djula) and [documentation](http://mmontone.github.io/djula/doc/build/html/index.html).
+For more information visit the [documentation page](http://mmontone.github.io/djula/djula/).
