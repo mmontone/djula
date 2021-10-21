@@ -1,0 +1,543 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Djula HTML templating system 0.2, Oct 21, 2021
+
+Nick Allen
+
+Copyright (C) 2014, Nick Allen.
+Maintained by Mariano Montone.
+ -->
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Template inheritance (Djula HTML templating system Documentation)</title>
+
+<meta name="description" content="Template inheritance (Djula HTML templating system Documentation)">
+<meta name="keywords" content="Template inheritance (Djula HTML templating system Documentation)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2any">
+<link href="index.html" rel="start" title="Top">
+<link href="Index.html" rel="index" title="Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Include.html" rel="next" title="Include">
+<link href="Custom-filters.html" rel="prev" title="Custom filters">
+<style type="text/css">
+<!--
+/*
+#+##############################################################################
+#
+# A CSS stylesheet for Texinfo HTML output produced by texi2any 5.0 (or greater)
+#
+#    Copyright (C) 2012,2013  Jason Massey <jason@janixsoft.com>
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+#    02110-1301  USA
+#
+#-##############################################################################
+*/
+
+/* CSS RESET */
+
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+*
+{
+margin: 0;
+padding: 0;
+vertical-align: baseline;
+}
+
+sup {
+    vertical-align: super;
+}
+
+hr
+{
+margin: 1em 0em 1em 0em;
+border-top: 1px solid #C2C2C2;
+}
+
+body
+{
+margin: 2% 7% 3% 7%;
+font-size: 125%;
+}
+
+div.smallexample, div.example
+{
+border: 1px solid silver;
+background: rgb(244, 244, 244);
+margin: 1em 0em 1em 0em;
+color: #033DA3;
+border-radius: 4px;
+}
+
+pre.example, pre.smallexample
+{
+margin: .5em 1em .5em 1em;
+
+}
+
+pre.verbatim
+{
+border: 1px solid #900;
+padding: 1em;
+color: #900;
+background: white;
+border-radius: 4px;
+}
+
+pre.lisp
+{
+border: 1px solid black;
+padding: 1em;
+color: black;
+background: #CCE0F5;
+border-radius: 4px;
+}
+
+div.lisp
+{
+margin: 0;
+}
+
+pre.display
+{
+border: 1px solid black;
+padding: 1em;
+color: black;
+background: #E6F0FA;
+border-radius: 4px;
+font-family: serif;
+}
+
+pre.format
+{
+font-family: serif;
+border: 1px solid black;
+padding: 1em;
+color: black;
+background: #C2E0C2;
+border-radius: 4px;
+}
+
+blockquote
+{
+border: 1px solid #900;
+margin: 1em 3em 1em 3em;
+background: rgba(248, 248, 2, 0.16);
+border-radius: 4px;
+padding: .25em .5em .25em .5em;
+}
+
+img
+{
+margin-top: 1em;
+margin-bottom: .5em;
+}
+
+
+h1, h2, h3, h4, h5
+{
+ color: #990000;
+}
+
+h1
+{
+margin-top: 1em;
+margin-bottom: .5em;
+}
+
+h1.chapter, h2.section, .subheading
+{
+margin-bottom: .375em;
+}
+
+h2.section, h3.section, h3.heading, h3.subsection
+{
+margin-top: 1em;
+}
+
+div.footnote h3
+{
+font-size: 90%;
+}
+
+.subheading
+{
+margin-top: 1em;
+}
+
+table.header, div.header p
+{
+/*border: 1px solid black;*/
+/*padding: .5em;*/
+white-space: nowrap;
+/*border-radius: 4px;*/
+}
+
+table.header a, div.header p a
+{
+    border-bottom: none;
+}
+
+table.header
+{
+    margin: .5em 0em .5em 0em;
+}
+
+table.cartouche
+{
+    border: 2px solid black;
+    padding: .5em;
+    box-shadow: 5px 5px silver;
+}
+
+p
+{
+    margin: 1em 0em 1em 0em;
+}
+
+/*
+table.header a:link, div.header p a:link
+{text-decoration:none;}
+*/
+
+table.header a:visited, div.header p a:visited
+{text-decoration:none;}
+
+table.header a:hover, div.header p a:hover
+{text-decoration:underline;}
+
+table.header a:active, div.header p a:active
+{text-decoration:underline;}
+
+
+div.contents code, div.contents var, div.contents samp, div.contents kbd,
+table.menu code, table.menu var, table.menu samp, table.menu kbd,
+h1 code, h1 var, h1 samp, h1 kbd,
+h2 code, h2 var, h2 samp, h2 kbd,
+h3 code, h3 var, h3 samp, h3 kbd,
+h4 code, h4 var, h4 samp, h4 kbd,
+a code, a var, a samp, a kbd
+{
+    padding: inherit;
+    font-family: inherit;
+    border: inherit;
+    background-color: inherit;
+    box-shadow: inherit;
+    color: inherit;
+}
+
+div.contents li
+{
+    margin-bottom: .25ex;
+    white-space: nowrap;
+}
+
+div.contents li, ul
+{
+    margin-top: .25ex;
+}
+
+ul, ol
+{
+    margin-left: 2.5em;
+    margin-top: .5em;
+    margin-bottom: 1em;
+}
+
+li
+{
+    margin-bottom: .5em;
+}
+
+table.menu
+{
+    border-top: solid 1px #C2C2C2;
+    padding-top: .5em;
+    white-space: nowrap;
+    margin-top: 2em;
+    line-height: 1.4em;
+}
+
+dl
+{
+    display: block;
+    margin-top: 1em;
+}
+
+dt
+{
+    color: #900;
+}
+
+dd
+{
+    margin-left: 2.5em;
+}
+
+pre.menu-comment
+{
+    margin-top: 1.5em;
+    font-family: Arial,sans-serif;
+}
+
+code
+{
+    color: #900;
+}
+
+kbd
+{
+    padding-left: .25em;
+    padding-right: .25em;
+    border: solid 1px #C2C2C2;
+    border-radius: 4px;
+    background-color: #F0F0F0;
+    box-shadow: 1px 1px silver;
+    color: black;
+}
+
+
+samp
+{
+    color: #046370;
+}
+
+var
+{
+
+    color: #927811;
+}
+
+span.nocodebreak {white-space:pre}
+span.nolinebreak {white-space:pre}
+span.roman {font-family:serif; font-weight:normal}
+span.sansserif {font-family:sans-serif; font-weight:normal}
+ul.no-bullet {list-style: none}
+
+/*
+--------------------------------------------------------------------------
+END OF janix-texinfo.css
+--------------------------------------------------------------------------
+*/
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<span id="Template-inheritance"></span><div class="header">
+<p>
+Next: <a href="Internationalization.html" accesskey="n" rel="next">Internationalization</a>, Previous: <a href="Filters.html" accesskey="p" rel="prev">Filters</a>, Up: <a href="index.html" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<hr>
+<span id="inheritance-doc"></span><span id="g_t55"></span><span id="inheritance-template_002dinheritance"></span><span id="g_t56"></span><span id="Template-inheritance-1"></span><h2 class="chapter">9 Template inheritance</h2>
+
+
+<p>The most powerful – and thus the most complex – part of Djula’s template
+engine is template inheritance. Template inheritance allows you to build a base
+“skeleton” template that contains all the common elements of your site and
+defines `blocks' that child templates can override.
+</p>
+<p>You can also refactor independent template sections in their own file and `include' it in the main template, passing it the required arguments.
+</p>
+<p>It’s easiest to understand template inheritance by starting with an example:
+</p>
+<div class="example">
+<pre class="example">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot; /&gt;
+    &lt;title&gt;{% block title %}My amazing site{% endblock %}&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;sidebar&quot;&gt;
+        {% block sidebar %}
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;/blog/&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        {% endblock %}
+    &lt;/div&gt;
+
+    &lt;div id=&quot;content&quot;&gt;
+        {% block content %}{% endblock %}
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+
+<p>This template, which we’ll call <code>base.html</code>, defines a simple HTML skeleton
+document that you might use for a simple two-column page. It’s the job of
+“child” templates to fill the empty blocks with content.
+</p>
+<p>In this example, the &gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; tag defines three blocks that child
+templates can fill in. All the &gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; tag does is to tell the template
+engine that a child template may override those portions of the template.
+</p>
+<p>A child template might look like this:
+</p>
+<div class="example">
+<pre class="example">{% extends &quot;base.html&quot; %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block content %}
+{% for entry in blog_entries %}
+    &lt;h2&gt;{{ entry.title }}&lt;/h2&gt;
+    &lt;p&gt;{{ entry.body }}&lt;/p&gt;
+{% endfor %}
+{% endblock %}
+</pre></div>
+
+<p>The &gt;&gt;:ttag:&lsquo;extends&lsquo;&lt;&lt; tag is the key here. It tells the template engine that
+this template “extends” another template. When the template system evaluates
+this template, first it locates the parent – in this case, “base.html”.
+</p>
+<p>At that point, the template engine will notice the three &gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; tags
+in <code>base.html</code> and replace those blocks with the contents of the child
+template. Depending on the value of <code>blog_entries</code>, the output might look
+like:
+</p>
+<div class="example">
+<pre class="example">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot; /&gt;
+    &lt;title&gt;My amazing blog&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;sidebar&quot;&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;/blog/&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;content&quot;&gt;
+        &lt;h2&gt;Entry one&lt;/h2&gt;
+        &lt;p&gt;This is my first entry.&lt;/p&gt;
+
+        &lt;h2&gt;Entry two&lt;/h2&gt;
+        &lt;p&gt;This is my second entry.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+
+<p>Note that since the child template didn’t define the <code>sidebar</code> block, the
+value from the parent template is used instead. Content within a <code>{% block %}</code>
+tag in a parent template is always used as a fallback.
+</p>
+<p>You can use as many levels of inheritance as needed. One common way of using
+inheritance is the following three-level approach:
+</p>
+
+<ul class="no-bullet">
+<li>* Create a <code>base.html</code> template that holds the main look-and-feel of your
+site.
+
+</li><li>* Create a <code>base_SECTIONNAME.html</code> template for each “section” of your
+site. For example, <code>base_news.html</code>, <code>base_sports.html</code>. These
+templates all extend <code>base.html</code> and include section-specific
+styles/design.
+
+</li><li>* Create individual templates for each type of page, such as a news
+article or blog entry. These templates extend the appropriate section
+template.
+</li></ul>
+
+<p>This approach maximizes code reuse and makes it easy to add items to shared
+content areas, such as section-wide navigation.
+</p>
+<p>Here are some tips for working with inheritance:
+</p>
+
+<ul class="no-bullet">
+<li>* If you use &gt;&gt;:ttag:&lsquo;{% extends %}&lt;extends&gt;&lsquo;&lt;&lt; in a template, it must be the first template
+tag in that template. Template inheritance won’t work, otherwise.
+
+</li><li>* More &gt;&gt;:ttag:&lsquo;{% block %}&lt;block&gt;&lsquo;&lt;&lt; tags in your base templates are better. Remember,
+child templates don’t have to define all parent blocks, so you can fill
+in reasonable defaults in a number of blocks, then only define the ones
+you need later. It’s better to have more hooks than fewer hooks.
+
+</li><li>* If you find yourself duplicating content in a number of templates, it
+probably means you should move that content to a <code>{% block %}</code> in a
+parent template.
+
+</li><li>* If you need to get the content of the block from the parent template,
+the <code>{{ block.super }}</code> variable will do the trick. This is useful
+if you want to add to the contents of a parent block instead of
+completely overriding it. Data inserted using <code>{{ block.super }}</code> will
+not be automatically escaped (see the &gt;&gt;&lsquo;next section&lsquo;_&lt;&lt;), since it was
+already escaped, if necessary, in the parent template.
+
+</li><li>* For extra readability, you can optionally give a `name' to your
+<code>{% endblock %}</code> tag. For example:
+
+<div class="example">
+<pre class="example">{% block content %}
+...
+{% endblock content %}
+</pre></div>
+
+<p>In larger templates, this technique helps you see which <code>{% block %}</code>
+tags are being closed.
+</p></li></ul>
+
+<p>Finally, note that you can’t define multiple &gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; tags with the same
+name in the same template. This limitation exists because a block tag works in
+“both” directions. That is, a block tag doesn’t just provide a hole to fill –
+it also defines the content that fills the hole in the `parent'. If there were
+two similarly-named &gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; tags in a template, that template’s parent
+wouldn’t know which one of the blocks’ content to use.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Include.html" accesskey="1">Include</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+
+</pre></th></tr></table>
+
+<hr>
+<div class="header">
+<p>
+Next: <a href="Internationalization.html" accesskey="n" rel="next">Internationalization</a>, Previous: <a href="Filters.html" accesskey="p" rel="prev">Filters</a>, Up: <a href="index.html" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>
