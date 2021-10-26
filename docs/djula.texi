@@ -1226,7 +1226,7 @@ For example, this template would render as @code{'this is @{@{verbatim@}@}'}:
 @{$ this is @{@{verbatim@}@} $@}
 @end example
 
-@node Filters,,Verbatim,Top
+@node Filters,Templates composition,Verbatim,Top
 @anchor{filters doc}@anchor{31}@anchor{filters filters}@anchor{32}
 @chapter Filters
 
