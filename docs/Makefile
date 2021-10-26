@@ -1,2 +1,2 @@
 html:
-	texi2any --html --css-include janix-texinfo.css djula.texi
+	texi2any --html --css-include manual.css djula.texi
