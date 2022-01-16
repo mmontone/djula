@@ -572,31 +572,31 @@ are prepended to *TEMPLATE-ARGUMENTS*"
                (funcall template stream)))))
     (cond
       ((stringp path)
-       (aif (find-template* path)
-            (handler-case
-                (let ((template (compile-template* it)))
-                  (pushnew template *linked-templates*
-                           :test 'equal
-                           :key 'template-file)
-                  (template-with-parameters template))
-              (error ()
-                (template-error "There was an error including the template ~A" it)))
-            ;; else
-            (template-error "Cannot include the template ~A because it does not exist." path)))
+       (if-let (source (find-template* path))
+         (handler-case
+             (let ((template (compile-template* path)))
+               (pushnew template *linked-templates*
+                        :test 'equal
+                        :key 'template-file)
+               (template-with-parameters template))
+           (error ()
+             (template-error "There was an error including the template ~A" path)))
+         ;; else
+         (template-error "Cannot include the template ~A because it does not exist." path)))
       ((keywordp path)
        (template-with-parameters
         (lambda (stream)
           (let ((path (resolve-variable-phrase (parse-variable-phrase (string path)))))
-            (aif (and path (find-template* path))
-                 (let ((compiled-template
-                         (handler-case
-                             (compile-template* path)
-                           (error ()
-                             (template-error "There was an error including the template ~A" it)))))
-                   (funcall compiled-template stream))
-                 ;; else
-                 (template-error "Cannot include the template ~A because it does not exist." path))))))
-      (t (error "Invalid include template path: ~A" path)))))
+            (if-let (source (and path (find-template* path)))
+              (let ((compiled-template
+                      (handler-case (compile-template* path)
+                        (error ()
+                          (template-error "There was an error including the template ~A" source)))))
+                (funcall compiled-template stream))
+              ;; else
+              (template-error "Cannot include the template ~A because it does not exist." path))))))
+      (t
+       (error "Invalid include template path: ~A" path)))))
 
 (def-unparsed-tag-processor :js (string) rest
   (cons (list :parsed-js string)

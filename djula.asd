@@ -11,7 +11,6 @@
      (uiop:subpathname *load-pathname* "README.md"))
   :depends-on (#:access
                #:alexandria
-               #:anaphora
                #:babel
                #:cl-ppcre
                #:split-sequence

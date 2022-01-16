@@ -3,7 +3,6 @@
 (defpackage #:djula
   (:use #:iterate
         #:alexandria
-        #:anaphora
         #:common-lisp
         #:parser-combinators)
   (:export #:*allow-include-roots*

@@ -97,8 +97,8 @@ is a direct translation from the dot (.) syntax] and returns two values:
    1. the result [looking up the var and applying index/keys]
    2. an error string if something went wrond [note: if there is an error string then
 the result probably shouldn't be considered useful."
-  (aand (get-variable (first list))
-        (apply-keys/indexes it (rest list))))
+  (when-let (v (get-variable (first list)))
+    (apply-keys/indexes v (rest list))))
 
 (def-token-compiler :variable (variable-phrase &rest filters)
   ;; check to see if the "dont-escape" filter is used
