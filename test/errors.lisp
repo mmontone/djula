@@ -6,6 +6,7 @@
   (error "Error!!"))
 
 (defun access-error (x)
+  (declare (ignore x))
   (error "Error!!"))
 
 (def-test catch-errors-test (:compile-at :definition-time)
