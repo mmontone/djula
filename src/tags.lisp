@@ -104,6 +104,7 @@ form that returns some debugging info."
 (def-delimited-tag :comment :endcomment :comment-tag)
 
 (def-token-processor :comment-tag (&rest %) rest-tokens
+  (declare (ignore %))
   (process-tokens rest-tokens))
 
 (def-tag-compiler :firstof (&rest list)
@@ -685,7 +686,7 @@ are prepended to *TEMPLATE-ARGUMENTS*"
   "Server Side Includes.
 If `PATH' lives in a folder reckognized by *ALLOW-INCLUDE-ROOTS*, then :SSI tag
 compiles into a function that returns the contents of the file pointed to
-by the template-path `PATH'. 
+by the template-path `PATH'.
 If `PARSE' is T then the function renders `PATH' as a template."
   (let ((path-string (namestring path)))
     (if (not (find-if (lambda (x)

@@ -36,9 +36,9 @@
         `(progn
            (defun ,function-name (&rest ,arg-list)
              ,@(when docstring (list docstring))
-             ,@declarations
              (destructuring-bind (,rest-var ,@args)
                  ,arg-list
+               ,@declarations
                ,@body))
            (export ',function-name ,token-processor-package))))))
 
