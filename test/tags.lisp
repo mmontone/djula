@@ -6,7 +6,7 @@
   (let ((fn (apply (or (djula::find-tag-compiler name)
                        (djula::find-token-compiler name))
                    args))
-        (*template-arguments* nil))
+        (djula::*template-arguments* nil))
     (with-output-to-string (s)
       (funcall fn s))))
 
