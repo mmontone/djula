@@ -35,7 +35,6 @@
            #:find-template
            #:find-template*
            #:fragment-compiler
-           #:html-escape
            #:render-template*
            #:toplevel-compiler
            #:template-print-object
@@ -179,4 +178,3 @@
                #:update-locale-list
                #:directory-translate-strings
                #:file-template-translate-strings))))
-
