@@ -40,6 +40,7 @@
 
 (def-token-processor :comment (comment-string) rest
   ":COMMENT tokens are removed by PROCESS-TOKENS"
+  (declare (ignore comment-string))
   (process-tokens rest))
 
 ;;; TODO: I suspect this is a false optimization.
