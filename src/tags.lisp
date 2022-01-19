@@ -575,7 +575,7 @@ are prepended to *TEMPLATE-ARGUMENTS*"
       ((stringp path)
        (if-let (source (find-template* path))
          (handler-case
-             (let ((template (compile-template* path)))
+             (let ((template (compile-template* source)))
                (pushnew template *linked-templates*
                         :test 'equal
                         :key 'template-file)
