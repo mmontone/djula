@@ -196,18 +196,17 @@ ease. It’s designed to feel comfortable to those used to working with HTML.
 
 @cartouche
 @quotation Philosophy 
-If you have a background in programming, or if you’re used to languages
-which mix programming code directly into HTML, you’ll want to bear in
-mind that the Djula template system is not simply Common Lisp code embedded into
-HTML. This is by design: the template system is meant to express
-presentation, not program logic.
+If you have a background in programming, or if you’re used to languages which mix
+programming code directly into HTML, you’ll want to bear in mind that the Djula template
+system is not simply Common Lisp code embedded into HTML. This is by design: the template
+system is meant to express presentation, not program logic.
 
-The Djula template system provides tags which function similarly to some
-programming constructs – an >>:ttag:`if`<< tag for boolean tests, a >>:ttag:`for`<<
-tag for looping, etc. – but these are not simply executed as the
-corresponding Lisp code, and the template system will not execute
-arbitrary Lisp expressions. Only the tags, filters and syntax listed below
-are supported by default (although you can add your own extensions to the template language as needed).
+The Djula template system provides tags which function similarly to some programming
+constructs – an @code{if} tag for boolean tests, a @code{for} tag for looping, etc. – but
+these are not simply executed as the corresponding Lisp code, and the template system will
+not execute arbitrary Lisp expressions. Only the tags, filters and syntax listed below are
+supported by default (although you can add your own extensions to the template language as
+needed).
 @end quotation
 @end cartouche
 
@@ -448,7 +447,7 @@ tags:
 
 @table @asis
 
-@item >>:ttag:`for`<<
+@item @code{for}
 
 Loop over each item in an array. For example, to display a list of athletes
 provided in @code{athlete-list}:
@@ -461,7 +460,7 @@ provided in @code{athlete-list}:
 </ul>
 @end example
 
-@item >>:ttag:`if`<<, @code{else}
+@item @code{if}, @code{else}
 
 Evaluates a variable, and if that variable is “true” the contents of the
 block are displayed:
@@ -474,10 +473,10 @@ block are displayed:
 @{% endif %@}
 @end example
 
-@item >>:ttag:`block`<< and >>:ttag:`extends`<<
+@item @code{block} and @code{extends}
 
-Set up >>`template inheritance`_<< (see below), a powerful way
-of cutting down on “boilerplate” in templates.
+Set up template inheritance (see below), a powerful way of cutting down on “boilerplate”
+in templates.
 @end table
 
 @node List of tags,Custom tags,Overview,Tags
@@ -519,7 +518,7 @@ Sample usage:
 @{% endblock %@}
 @end example
 
-See Template inheritance for more information.
+@xref{Template inheritance} for more information.
 
 @node extends,super,block,List of tags
 @anchor{tags extends}@anchor{1c}
@@ -661,7 +660,7 @@ Sample usage:
 @cartouche
 @quotation Note 
 The >>:tfilter:`escape`<< and >>:tfilter:`safe`<< filters are not acceptable
-arguments. Instead, use the >>:ttag:`autoescape`<< tag to manage autoescaping
+arguments. Instead, use the @code{autoescape} tag to manage autoescaping
 for blocks of template code.
 @end quotation
 @end cartouche
@@ -844,7 +843,7 @@ displayed by the @code{@{@{ athlete-list|length @}@}} variable.
 @subsection Boolean operators
 
 
->>:ttag:`if`<< tags may use @code{and}, @code{or} or @code{not} to test a number of
+@code{if} tags may use @code{and}, @code{or} or @code{not} to test a number of
 variables or to negate a given variable:
 
 @example
@@ -884,8 +883,8 @@ will be interpreted like:
 (if (or (athlete-list and coach-list) cheerleader-list) ..)
 @end example
 
-Use of actual parentheses in the >>:ttag:`if`<< tag is invalid syntax. If you need
-them to indicate precedence, you should use nested >>:ttag:`if`<< tags.
+Use of actual parentheses in the @code{if} tag is invalid syntax. If you need
+them to indicate precedence, you should use nested @code{if} tags.
 
 @c :ttag:`if` tags may also use the operators ``==``, ``!=``, ``<``, ``>``,
 @c ``<=``, ``>=`` and ``in`` which work as follows:
@@ -1044,7 +1043,7 @@ Example:
 @{% endifequal %@}
 @end example
 
-As in the >>:ttag:`if`<< tag, an @code{@{% else %@}} clause is optional.
+As in the @code{if} tag, an @code{@{% else %@}} clause is optional.
 
 The arguments can be hard-coded strings, so the following is valid:
 
@@ -1054,7 +1053,7 @@ The arguments can be hard-coded strings, so the following is valid:
 @{% endifequal %@}
 @end example
 
-An alternative to the @code{ifequal} tag is to use the >>:ttag:`if`<< tag and the
+An alternative to the @code{ifequal} tag is to use the @code{if} tag and the
 @code{==} operator.
 
 @node ifnotequal,include,ifequal,List of tags
@@ -1062,10 +1061,10 @@ An alternative to the @code{ifequal} tag is to use the >>:ttag:`if`<< tag and th
 @subsection ifnotequal
 
 
-Just like >>:ttag:`ifequal`<<, except it tests that the two arguments are not
+Just like @code{ifequal}, except it tests that the two arguments are not
 equal.
 
-An alternative to the @code{ifnotequal} tag is to use the >>:ttag:`if`<< tag and
+An alternative to the @code{ifnotequal} tag is to use the @code{if} and
 the @code{!=} operator.
 
 @node include
@@ -1210,7 +1209,7 @@ A comment can contain any template code, invalid or not. For example:
 @{# @{% if foo %@}bar@{% else %@} #@}
 @end example
 
-If you need to comment out a multiline portion of the template, see the >>:ttag:`comment`<< tag.
+If you need to comment out a multiline portion of the template, see the @code{comment} tag.
 
 @node Verbatim,Filters,Comments,Top
 @anchor{verbatim doc}@anchor{2e}@anchor{verbatim template-verbatim}@anchor{2f}@anchor{verbatim verbatim}@anchor{30}
@@ -2421,8 +2420,8 @@ This template, which we’ll call @code{base.html}, defines a simple HTML skelet
 document that you might use for a simple two-column page. It’s the job of
 “child” templates to fill the empty blocks with content.
 
-In this example, the >>:ttag:`block`<< tag defines three blocks that child
-templates can fill in. All the >>:ttag:`block`<< tag does is to tell the template
+In this example, the @code{block} tag defines three blocks that child
+templates can fill in. All the @code{block} tag does is to tell the template
 engine that a child template may override those portions of the template.
 
 A child template might look like this:
@@ -2440,11 +2439,11 @@ A child template might look like this:
 @{% endblock %@}
 @end example
 
-The >>:ttag:`extends`<< tag is the key here. It tells the template engine that
+The @code{extends} tag is the key here. It tells the template engine that
 this template “extends” another template. When the template system evaluates
 this template, first it locates the parent – in this case, “base.html”.
 
-At that point, the template engine will notice the three >>:ttag:`block`<< tags
+At that point, the template engine will notice the three @code{block} tags
 in @code{base.html} and replace those blocks with the contents of the child
 template. Depending on the value of @code{blog_entries}, the output might look
 like:
@@ -2511,11 +2510,11 @@ Here are some tips for working with inheritance:
 @itemize *
 
 @item 
-If you use >>:ttag:`@{% extends %@}<extends>`<< in a template, it must be the first template
+If you use @code{@{% extends %@}} in a template, it must be the first template
 tag in that template. Template inheritance won’t work, otherwise.
 
 @item 
-More >>:ttag:`@{% block %@}<block>`<< tags in your base templates are better. Remember,
+More @code{@{% block %@}} tags in your base templates are better. Remember,
 child templates don’t have to define all parent blocks, so you can fill
 in reasonable defaults in a number of blocks, then only define the ones
 you need later. It’s better to have more hooks than fewer hooks.
@@ -2527,11 +2526,11 @@ parent template.
 
 @item 
 If you need to get the content of the block from the parent template,
-the @code{@{@{ block.super @}@}} variable will do the trick. This is useful
-if you want to add to the contents of a parent block instead of
-completely overriding it. Data inserted using @code{@{@{ block.super @}@}} will
-not be automatically escaped (see the >>`next section`_<<), since it was
-already escaped, if necessary, in the parent template.
+the @code{@{@{ block.super @}@}} variable will do the trick. This is
+useful if you want to add to the contents of a parent block instead of
+completely overriding it. Data inserted using @code{@{@{ block.super
+@}@}} will not be automatically escaped (see the next section), since
+it was already escaped, if necessary, in the parent template.
 
 @item 
 For extra readability, you can optionally give a @emph{name} to your
@@ -2547,11 +2546,11 @@ In larger templates, this technique helps you see which @code{@{% block %@}}
 tags are being closed.
 @end itemize
 
-Finally, note that you can’t define multiple >>:ttag:`block`<< tags with the same
+Finally, note that you can’t define multiple @code{block} tags with the same
 name in the same template. This limitation exists because a block tag works in
 “both” directions. That is, a block tag doesn’t just provide a hole to fill –
 it also defines the content that fills the hole in the @emph{parent}. If there were
-two similarly-named >>:ttag:`block`<< tags in a template, that template’s parent
+two similarly-named @code{block} tags in a template, that template’s parent
 wouldn’t know which one of the blocks’ content to use.
 
 @node Template includes
@@ -2584,7 +2583,7 @@ We create a new template in @code{includes/blog-entry.html} and we use the @code
 @{% endfor %@}
 @end example
 
-See also the >>:ttag:`ssi`<< tag for Server-Side Includes.
+See also the @code{ssi} tag for Server-Side Includes.
 
 @node Internationalization,Error handling,Templates composition,Top
 @anchor{internationalization doc}@anchor{58}@anchor{internationalization internationalization}@anchor{59}
