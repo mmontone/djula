@@ -590,7 +590,7 @@ are prepended to *TEMPLATE-ARGUMENTS*"
           (let ((path (resolve-variable-phrase (parse-variable-phrase (string path)))))
             (if-let (source (and path (find-template* path)))
               (let ((compiled-template
-                      (handler-case (compile-template* path)
+                      (handler-case (compile-template* source)
                         (error ()
                           (template-error "There was an error including the template ~A" source)))))
                 (funcall compiled-template stream))
