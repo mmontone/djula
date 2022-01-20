@@ -149,9 +149,9 @@ Next: <a href="#Template-includes" accesskey="n" rel="next">Including other temp
 <p>The most powerful – and thus the most complex – part of Djula’s template
 engine is template inheritance. Template inheritance allows you to build a base
 “skeleton” template that contains all the common elements of your site and
-defines `blocks' that child templates can override.
+defines <strong>blocks</strong> that child templates can override.
 </p>
-<p>You can also refactor independent template sections in their own file and `include' it in the main template, passing it the required arguments.
+<p>You can also refactor independent template sections in their own file and <strong>include</strong> it in the main template, passing it the required arguments.
 </p>
 <p>It’s easiest to understand template inheritance by starting with an example:
 </p>
@@ -287,7 +287,7 @@ completely overriding it. Data inserted using <code>{{ block.super
 }}</code> will not be automatically escaped (see the next section), since
 it was already escaped, if necessary, in the parent template.
 
-</li><li>* For extra readability, you can optionally give a `name' to your
+</li><li>* For extra readability, you can optionally give a <em>name</em> to your
 <code>{% endblock %}</code> tag. For example:
 
 <div class="example">
@@ -303,7 +303,7 @@ tags are being closed.
 <p>Finally, note that you can’t define multiple <code>block</code> tags with the same
 name in the same template. This limitation exists because a block tag works in
 “both” directions. That is, a block tag doesn’t just provide a hole to fill –
-it also defines the content that fills the hole in the `parent'. If there were
+it also defines the content that fills the hole in the <em>parent</em>. If there were
 two similarly-named <code>block</code> tags in a template, that template’s parent
 wouldn’t know which one of the blocks’ content to use.
 </p>
@@ -329,10 +329,10 @@ Previous: <a href="#Template-inheritance" accesskey="p" rel="prev">Template inhe
 </pre></div>
 
 <p>During development, we realize that rendering a blog entry is more
-convoluted than first planned, so we want to `refactor' the blog
+convoluted than first planned, so we want to <strong>refactor</strong> the blog
 entry template logic in its own file. And most of all, we plan on
 rendering a blog entry on another part of the site, so we want to
-`re-use' the rendering logic.
+<strong>re-use</strong> the rendering logic.
 </p>
 <p>We create a new template in <code>includes/blog-entry.html</code> and we use the <code>{% include %}</code> template tag, giving it an entry object as argument:
 </p>
