@@ -184,8 +184,8 @@ defines `blocks' that child templates can override.
 document that you might use for a simple two-column page. It’s the job of
 “child” templates to fill the empty blocks with content.
 </p>
-<p>In this example, the &gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; tag defines three blocks that child
-templates can fill in. All the &gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; tag does is to tell the template
+<p>In this example, the <code>block</code> tag defines three blocks that child
+templates can fill in. All the <code>block</code> tag does is to tell the template
 engine that a child template may override those portions of the template.
 </p>
 <p>A child template might look like this:
@@ -203,11 +203,11 @@ engine that a child template may override those portions of the template.
 {% endblock %}
 </pre></div>
 
-<p>The &gt;&gt;:ttag:&lsquo;extends&lsquo;&lt;&lt; tag is the key here. It tells the template engine that
+<p>The <code>extends</code> tag is the key here. It tells the template engine that
 this template “extends” another template. When the template system evaluates
 this template, first it locates the parent – in this case, “base.html”.
 </p>
-<p>At that point, the template engine will notice the three &gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; tags
+<p>At that point, the template engine will notice the three <code>block</code> tags
 in <code>base.html</code> and replace those blocks with the contents of the child
 template. Depending on the value of <code>blog_entries</code>, the output might look
 like:
@@ -268,10 +268,10 @@ content areas, such as section-wide navigation.
 </p>
 
 <ul class="no-bullet">
-<li>* If you use &gt;&gt;:ttag:&lsquo;{% extends %}&lt;extends&gt;&lsquo;&lt;&lt; in a template, it must be the first template
+<li>* If you use <code>{% extends %}</code> in a template, it must be the first template
 tag in that template. Template inheritance won’t work, otherwise.
 
-</li><li>* More &gt;&gt;:ttag:&lsquo;{% block %}&lt;block&gt;&lsquo;&lt;&lt; tags in your base templates are better. Remember,
+</li><li>* More <code>{% block %}</code> tags in your base templates are better. Remember,
 child templates don’t have to define all parent blocks, so you can fill
 in reasonable defaults in a number of blocks, then only define the ones
 you need later. It’s better to have more hooks than fewer hooks.
@@ -281,11 +281,11 @@ probably means you should move that content to a <code>{% block %}</code> in a
 parent template.
 
 </li><li>* If you need to get the content of the block from the parent template,
-the <code>{{ block.super }}</code> variable will do the trick. This is useful
-if you want to add to the contents of a parent block instead of
-completely overriding it. Data inserted using <code>{{ block.super }}</code> will
-not be automatically escaped (see the &gt;&gt;&lsquo;next section&lsquo;_&lt;&lt;), since it was
-already escaped, if necessary, in the parent template.
+the <code>{{ block.super }}</code> variable will do the trick. This is
+useful if you want to add to the contents of a parent block instead of
+completely overriding it. Data inserted using <code>{{ block.super
+}}</code> will not be automatically escaped (see the next section), since
+it was already escaped, if necessary, in the parent template.
 
 </li><li>* For extra readability, you can optionally give a `name' to your
 <code>{% endblock %}</code> tag. For example:
@@ -300,11 +300,11 @@ already escaped, if necessary, in the parent template.
 tags are being closed.
 </p></li></ul>
 
-<p>Finally, note that you can’t define multiple &gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; tags with the same
+<p>Finally, note that you can’t define multiple <code>block</code> tags with the same
 name in the same template. This limitation exists because a block tag works in
 “both” directions. That is, a block tag doesn’t just provide a hole to fill –
 it also defines the content that fills the hole in the `parent'. If there were
-two similarly-named &gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; tags in a template, that template’s parent
+two similarly-named <code>block</code> tags in a template, that template’s parent
 wouldn’t know which one of the blocks’ content to use.
 </p>
 <hr>
@@ -342,7 +342,7 @@ rendering a blog entry on another part of the site, so we want to
 {% endfor %}
 </pre></div>
 
-<p>See also the &gt;&gt;:ttag:&lsquo;ssi&lsquo;&lt;&lt; tag for Server-Side Includes.
+<p>See also the <code>ssi</code> tag for Server-Side Includes.
 </p>
 </div>
 </div>

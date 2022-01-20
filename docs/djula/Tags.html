@@ -160,7 +160,7 @@ tags:
 </p>
 
 <dl compact="compact">
-<dt><span>&gt;&gt;:ttag:&lsquo;for&lsquo;&lt;&lt;</span></dt>
+<dt><span><code>for</code></span></dt>
 <dd>
 <p>Loop over each item in an array. For example, to display a list of athletes
 provided in <code>athlete-list</code>:
@@ -174,7 +174,7 @@ provided in <code>athlete-list</code>:
 </pre></div>
 
 </dd>
-<dt><span>&gt;&gt;:ttag:&lsquo;if&lsquo;&lt;&lt;, <code>else</code></span></dt>
+<dt><span><code>if</code>, <code>else</code></span></dt>
 <dd>
 <p>Evaluates a variable, and if that variable is “true” the contents of the
 block are displayed:
@@ -188,10 +188,10 @@ block are displayed:
 </pre></div>
 
 </dd>
-<dt><span>&gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; and &gt;&gt;:ttag:&lsquo;extends&lsquo;&lt;&lt;</span></dt>
+<dt><span><code>block</code> and <code>extends</code></span></dt>
 <dd>
-<p>Set up &gt;&gt;&lsquo;template inheritance&lsquo;_&lt;&lt; (see below), a powerful way
-of cutting down on “boilerplate” in templates.
+<p>Set up template inheritance (see below), a powerful way of cutting down on “boilerplate”
+in templates.
 </p></dd>
 </dl>
 
@@ -242,7 +242,7 @@ Next: <a href="#extends" accesskey="n" rel="next">extends</a>, Up: <a href="#Lis
 {% endblock %}
 </pre></div>
 
-<p>See Template inheritance for more information.
+<p>See <a href="Templates-composition.html#Template-inheritance">Template inheritance</a> for more information.
 </p>
 <hr>
 </div>
@@ -406,7 +406,7 @@ in variable syntax.
 <table class="cartouche" border="1"><tr><td>
 <blockquote>
 <p><b>Note:</b> The &gt;&gt;:tfilter:&lsquo;escape&lsquo;&lt;&lt; and &gt;&gt;:tfilter:&lsquo;safe&lsquo;&lt;&lt; filters are not acceptable
-arguments. Instead, use the &gt;&gt;:ttag:&lsquo;autoescape&lsquo;&lt;&lt; tag to manage autoescaping
+arguments. Instead, use the <code>autoescape</code> tag to manage autoescaping
 for blocks of template code.
 </p></blockquote>
 </td></tr></table>
@@ -544,7 +544,7 @@ Next: <a href="#ifchanged" accesskey="n" rel="next">ifchanged</a>, Previous: <a 
 <span id="tags-boolean_002doperators"></span><span id="g_t25"></span><span id="Boolean-operators-1"></span><h4 class="subsection">5.2.11 Boolean operators</h4>
 
 
-<p>&gt;&gt;:ttag:&lsquo;if&lsquo;&lt;&lt; tags may use <code>and</code>, <code>or</code> or <code>not</code> to test a number of
+<p><code>if</code> tags may use <code>and</code>, <code>or</code> or <code>not</code> to test a number of
 variables or to negate a given variable:
 </p>
 <div class="example">
@@ -584,8 +584,8 @@ variables or to negate a given variable:
 <pre class="example">(if (or (athlete-list and coach-list) cheerleader-list) ..)
 </pre></div>
 
-<p>Use of actual parentheses in the &gt;&gt;:ttag:&lsquo;if&lsquo;&lt;&lt; tag is invalid syntax. If you need
-them to indicate precedence, you should use nested &gt;&gt;:ttag:&lsquo;if&lsquo;&lt;&lt; tags.
+<p>Use of actual parentheses in the <code>if</code> tag is invalid syntax. If you need
+them to indicate precedence, you should use nested <code>if</code> tags.
 </p>
 
 
@@ -652,7 +652,7 @@ Next: <a href="#ifnotequal" accesskey="n" rel="next">ifnotequal</a>, Previous: <
 {% endifequal %}
 </pre></div>
 
-<p>As in the &gt;&gt;:ttag:&lsquo;if&lsquo;&lt;&lt; tag, an <code>{% else %}</code> clause is optional.
+<p>As in the <code>if</code> tag, an <code>{% else %}</code> clause is optional.
 </p>
 <p>The arguments can be hard-coded strings, so the following is valid:
 </p>
@@ -662,7 +662,7 @@ Next: <a href="#ifnotequal" accesskey="n" rel="next">ifnotequal</a>, Previous: <
 {% endifequal %}
 </pre></div>
 
-<p>An alternative to the <code>ifequal</code> tag is to use the &gt;&gt;:ttag:&lsquo;if&lsquo;&lt;&lt; tag and the
+<p>An alternative to the <code>ifequal</code> tag is to use the <code>if</code> tag and the
 <code>==</code> operator.
 </p>
 <hr>
@@ -675,10 +675,10 @@ Next: <a href="#include" accesskey="n" rel="next">include</a>, Previous: <a href
 <span id="tags-ifnotequal"></span><span id="g_t28"></span><span id="ifnotequal-1"></span><h4 class="subsection">5.2.14 ifnotequal</h4>
 
 
-<p>Just like &gt;&gt;:ttag:&lsquo;ifequal&lsquo;&lt;&lt;, except it tests that the two arguments are not
+<p>Just like <code>ifequal</code>, except it tests that the two arguments are not
 equal.
 </p>
-<p>An alternative to the <code>ifnotequal</code> tag is to use the &gt;&gt;:ttag:&lsquo;if&lsquo;&lt;&lt; tag and
+<p>An alternative to the <code>ifnotequal</code> tag is to use the <code>if</code> and
 the <code>!=</code> operator.
 </p>
 <hr>
