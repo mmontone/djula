@@ -130,16 +130,20 @@ body {
 <p>
 Next: <a href="API_003c3_003e.html" accesskey="n" rel="next">API</a>, Previous: <a href="Internationalization.html#Internationalization" accesskey="p" rel="prev">Internationalization</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="error_002dhandling-doc"></span><span id="g_t62"></span><span id="error_002dhandling-error_002dhandling"></span><span id="g_t63"></span><span id="Error-handling-1"></span><h2 class="chapter">11 Error handling</h2>
+<span id="error_002dhandling-doc"></span><span id="error_002dhandling-error_002dhandling"></span><span id="Error-handling-1"></span><h2 class="chapter">11 Error handling</h2>
 
 
 <p>Djula catches errors and barfs them to the template output by default.
 </p>
-<p>That is controlled via the <a href="API_003c3_003e.html#g_t64">*CATCH-TEMPLATE-ERRORS-P*</a>. If changed to <code>NIL</code>, then errors are not caught anymore and are debuggable from the lisp listener.
+<p>That is controlled via the <code>*CATCH-TEMPLATE-ERRORS-P*</code> variable.
+If changed to <code>NIL</code>, then errors are not caught anymore and are
+debuggable from the lisp listener.
 </p>
-<p>Djula provides more or less verbosity in template errors. Verbosity is controlled via the variable <a href="API_003c3_003e.html#g_t65">*VERBOSE-ERRORS-P*</a>.
+<p>Djula provides more or less verbosity in template errors. Verbosity is
+controlled via the variable <code>*VERBOSE-ERRORS-P*</code>.
 </p>
-<p>Also, there’s a fancy page to display errors, which can be disabled if desired. That is controlled via the variable <a href="API_003c3_003e.html#g_t66">*FANCY-ERROR-TEMPLATE-P*</a>
+<p>Also, there’s a fancy page to display errors, which can be disabled if
+desired. That is controlled via the variable <code>*FANCY-ERROR-TEMPLATE-P*</code>
 </p>
 
 <ul class="section-toc">
@@ -151,7 +155,7 @@ Next: <a href="API_003c3_003e.html" accesskey="n" rel="next">API</a>, Previous: 
 <p>
 Up: <a href="#Error-handling" accesskey="u" rel="up">Error handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="error_002dhandling-api"></span><span id="g_t67"></span><span id="API-2"></span><h3 class="section">11.1 API</h3>
+<span id="error_002dhandling-api"></span><span id="API-2"></span><h3 class="section">11.1 API</h3>
 
 
 
