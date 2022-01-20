@@ -185,7 +185,7 @@ Error handling
 @end menu
 
 @node Introduction
-@anchor{intro doc}@anchor{1}@anchor{intro introduction}@anchor{2}@anchor{intro welcome-to-djula-html-templating-system-s-documentation}@anchor{3}
+@anchor{intro doc}@anchor{intro introduction}@anchor{intro welcome-to-djula-html-templating-system-s-documentation}
 @chapter Introduction
 
 
@@ -217,14 +217,14 @@ needed).
 @end menu
 
 @node Prerequisites
-@anchor{intro prerequisites}@anchor{4}
+@anchor{intro prerequisites}
 @section Prerequisites
 
 
 TODO: list of Common Lisp compilers Djula works on.
 
 @node Installation
-@anchor{intro installation}@anchor{5}
+@anchor{intro installation}
 @section Installation
 
 
@@ -235,7 +235,7 @@ Djula is available on Quicklisp:
 @end example
 
 @node Basics
-@anchor{basics doc}@anchor{6}@anchor{basics basics}@anchor{7}
+@anchor{basics doc}@anchor{basics basics}
 @chapter Basics
 
 
@@ -268,14 +268,18 @@ explained later in this document.
 @end example
 
 @node Usage
-@anchor{usage doc}@anchor{8}@anchor{usage usage}@anchor{9}
+@anchor{usage doc}@anchor{usage usage}
 @chapter Usage
 
+To render our templates, they need be compiled first. We do that with
+the @code{COMPILE-TEMPLATE*} function. For inheritance to work, we
+need to put all the templates in the same directory so that Djula can
+find them when resolving templates inheritance.
 
-To render our templates, they need to be compiled first. We do that with the @ref{a,,COMPILE-TEMPLATE*} function.
-For inheritance to work, we need to put all the templates in the same directory so that Djula can find them when resolving templates inheritance.
-
-Djula looks for templates in the @ref{b,,*CURRENT-STORE*}. For our templates to be found, we have to add the template folder path the templates store. We can do that with the @ref{c,,add-template-directory} function.
+Djula looks for templates in the @code{*CURRENT-STORE*}. For our
+templates to be found, we have to add the template folder path the
+templates store. We can do that with the
+@code{ADD-TEMPLATE-DIRECTORY} function.
 
 Here is an example:
 
@@ -289,7 +293,7 @@ Here is an example:
 (defparameter +contact.html+ (djula:compile-template* "contact.html"))
 @end example
 
-Then we can render our compiled templates using the @ref{d,,RENDER-TEMPLATE*} function:
+Then we can render our compiled templates using the @code{RENDER-TEMPLATE*} function:
 
 @example
 (djula:render-template* +welcome.html+ s
@@ -305,7 +309,7 @@ Then we can render our compiled templates using the @ref{d,,RENDER-TEMPLATE*} fu
 @end menu
 
 @node Auto-reload
-@anchor{usage auto-reload}@anchor{e}
+@anchor{usage auto-reload}
 @section Auto-reload
 
 
@@ -318,19 +322,19 @@ If you want to disable this, use the @cite{:djula-prod} @emph{feature}:
 @end example
 
 @node API
-@anchor{usage api}@anchor{f}
+@anchor{usage api}
 @section API
 
 
 @geindex add-template-directory (Lisp function)
-@anchor{usage function djula add-template-directory}@anchor{10}
+@anchor{usage function djula add-template-directory}
 @deffn {Common Lisp Function}  (add@w{-}template@w{-}directorydirectory &optional (template-store *current-store*))
 
 Adds @code{DIRECTORY} to the search path of the @code{TEMPLATE-STORE}
 @end deffn
 
 @geindex compile-template (Lisp generic)
-@anchor{usage generic djula compile-template}@anchor{11}
+@anchor{usage generic djula compile-template}
 @deffn {Common Lisp Generic}  (compile@w{-}templatecompiler name &optional error-p)
 
 Provides a hook to customize template compilation.
@@ -349,21 +353,21 @@ Provides a hook to customize template compilation.
 @end deffn
 
 @geindex compile-template* (Lisp function)
-@anchor{usage function djula compile-template*}@anchor{12}
+@anchor{usage function djula compile-template*}
 @deffn {Common Lisp Function}  (compile@w{-}template*name)
 
 Compiles template @code{NAME} with compiler in @emph{CURRENT-COMPILER}
 @end deffn
 
 @geindex render-template* (Lisp function)
-@anchor{usage function djula render-template*}@anchor{13}
+@anchor{usage function djula render-template*}
 @deffn {Common Lisp Function}  (render@w{-}template*template &optional stream &rest *template-arguments*)
 
 Render @code{TEMPLATE} into @code{STREAM} passing @emph{TEMPLATE-ARGUMENTS}
 @end deffn
 
 @node Variables
-@anchor{variables doc}@anchor{14}@anchor{variables variables}@anchor{15}
+@anchor{variables doc}@anchor{variables variables}
 @chapter Variables
 
 
@@ -396,11 +400,13 @@ if one exists in the template context.
 @end menu
 
 @node Default template variables
-@anchor{variables default-template-variables}@anchor{16}
+@anchor{variables default-template-variables}
 @section Default template variables
 
 
-You can use the @code{*default-template-arguments*} variable to store arguments that will be available for all templates. It is a plist, so use getf to add arguments, like this:
+You can use the @code{*DEFAULT-TEMPLATE-ARGUMENTS*} variable to store
+arguments that will be available for all templates. It is a plist, so
+use getf to add arguments, like this:
 
 @example
 (setf (getf djula:*default-template-arguments* :foo) 'some-value)
@@ -408,9 +414,13 @@ You can use the @code{*default-template-arguments*} variable to store arguments 
 
 And now, you can access @code{@{@{ foo @}@}} in your template.
 
-This is useful when you have many templates that rely on the same set of variables. Use this variable to refactor your code when appropriate.
+This is useful when you have many templates that rely on the same set
+of variables. Use this variable to refactor your code when
+appropriate.
 
-Note that you could also write a function that wraps @code{render-template*} and uses a default list of variables plus other ones given as arguments:
+Note that you could also write a function that wraps
+@code{RENDER-TEMPLATE*} and uses a default list of variables plus
+other ones given as arguments:
 
 @example
 (defun my-render-template (template stream &rest args)
@@ -418,7 +428,7 @@ Note that you could also write a function that wraps @code{render-template*} and
 @end example
 
 @node Tags
-@anchor{tags doc}@anchor{17}@anchor{tags tags}@anchor{18}
+@anchor{tags doc}@anchor{tags tags}
 @chapter Tags
 
 
@@ -430,7 +440,7 @@ Note that you could also write a function that wraps @code{render-template*} and
 @end menu
 
 @node Overview
-@anchor{tags overview}@anchor{19}
+@anchor{tags overview}
 @section Overview
 
 
@@ -480,7 +490,7 @@ in templates.
 @end table
 
 @node List of tags
-@anchor{tags list-of-tags}@anchor{1a}
+@anchor{tags list-of-tags}
 @section List of tags
 
 
@@ -504,7 +514,7 @@ in templates.
 @end menu
 
 @node block
-@anchor{tags block}@anchor{1b}
+@anchor{tags block}
 @subsection block
 
 
@@ -521,7 +531,7 @@ Sample usage:
 @xref{Template inheritance} for more information.
 
 @node extends
-@anchor{tags extends}@anchor{1c}
+@anchor{tags extends}
 @subsection extends
 
 
@@ -534,7 +544,7 @@ Sample usage:
 @end example
 
 @node super
-@anchor{tags super}@anchor{1d}
+@anchor{tags super}
 @subsection super
 
 
@@ -551,7 +561,7 @@ Sample usage:
 @end example
 
 @node comment
-@anchor{tags comment}@anchor{1e}
+@anchor{tags comment}
 @subsection comment
 
 
@@ -571,7 +581,7 @@ Sample usage:
 @code{comment} tags cannot be nested.
 
 @node cycle
-@anchor{tags cycle}@anchor{1f}
+@anchor{tags cycle}
 @subsection cycle
 
 
@@ -631,14 +641,14 @@ as string literals, while values without quotes are treated as template
 variables.
 
 @node debug
-@anchor{tags debug}@anchor{20}
+@anchor{tags debug}
 @subsection debug
 
 
 Outputs a whole load of debugging information
 
 @node filter
-@anchor{tags filter}@anchor{21}
+@anchor{tags filter}
 @subsection filter
 
 
@@ -666,7 +676,7 @@ for blocks of template code.
 @end cartouche
 
 @node firstof
-@anchor{tags firstof}@anchor{22}
+@anchor{tags firstof}
 @subsection firstof
 
 
@@ -697,7 +707,7 @@ passed variables are False:
 @c     {% firstof var1 var2|safe var3 "<strong>fallback value</strong>"|safe %}
 
 @node for
-@anchor{tags for}@anchor{23}
+@anchor{tags for}
 @subsection for
 
 
@@ -819,7 +829,7 @@ the current one
 
 
 @node if
-@anchor{tags if}@anchor{24}
+@anchor{tags if}
 @subsection if
 
 
@@ -839,7 +849,7 @@ In the above, if @code{athlete-list} is not empty, the number of athletes will b
 displayed by the @code{@{@{ athlete-list|length @}@}} variable.
 
 @node Boolean operators
-@anchor{tags boolean-operators}@anchor{25}
+@anchor{tags boolean-operators}
 @subsection Boolean operators
 
 
@@ -991,7 +1001,7 @@ them to indicate precedence, you should use nested @code{if} tags.
 @c     {% endif %}
 
 @node ifchanged
-@anchor{tags ifchanged}@anchor{26}
+@anchor{tags ifchanged}
 @subsection ifchanged
 
 
@@ -1029,7 +1039,7 @@ will be displayed if the value has not changed:
 @end example
 
 @node ifequal
-@anchor{tags ifequal}@anchor{27}
+@anchor{tags ifequal}
 @subsection ifequal
 
 
@@ -1057,7 +1067,7 @@ An alternative to the @code{ifequal} tag is to use the @code{if} tag and the
 @code{==} operator.
 
 @node ifnotequal
-@anchor{tags ifnotequal}@anchor{28}
+@anchor{tags ifnotequal}
 @subsection ifnotequal
 
 
@@ -1068,7 +1078,7 @@ An alternative to the @code{ifnotequal} tag is to use the @code{if} and
 the @code{!=} operator.
 
 @node include
-@anchor{tags include}@anchor{29}
+@anchor{tags include}
 @subsection include
 
 Loads a template and renders it with the current context. This is a way of
@@ -1184,14 +1194,14 @@ variables when the included template is rendered:
 @c         It is {% now "SHORT_DATETIME_FORMAT" %}
 
 @node Custom tags
-@anchor{tags custom-tags}@anchor{2a}
+@anchor{tags custom-tags}
 @section Custom tags
 
 
 TODO
 
 @node Comments
-@anchor{comments doc}@anchor{2b}@anchor{comments comments}@anchor{2c}@anchor{comments template-comments}@anchor{2d}
+@anchor{comments doc}@anchor{comments comments}@anchor{comments template-comments}
 @chapter Comments
 
 
@@ -1212,7 +1222,7 @@ A comment can contain any template code, invalid or not. For example:
 If you need to comment out a multiline portion of the template, see the @code{comment} tag.
 
 @node Verbatim
-@anchor{verbatim doc}@anchor{2e}@anchor{verbatim template-verbatim}@anchor{2f}@anchor{verbatim verbatim}@anchor{30}
+@anchor{verbatim doc}@anchor{verbatim template-verbatim}@anchor{verbatim verbatim}
 @chapter Verbatim
 
 
@@ -1225,7 +1235,7 @@ For example, this template would render as @code{'this is @{@{verbatim@}@}'}:
 @end example
 
 @node Filters
-@anchor{filters doc}@anchor{31}@anchor{filters filters}@anchor{32}
+@anchor{filters doc}@anchor{filters filters}
 @chapter Filters
 
 
@@ -1237,7 +1247,7 @@ For example, this template would render as @code{'this is @{@{verbatim@}@}'}:
 @end menu
 
 @node Overview<2>
-@anchor{filters overview}@anchor{33}
+@anchor{filters overview}
 @section Overview
 
 
@@ -1264,7 +1274,7 @@ To give you a taste of what’s available, here are some of the more commonly
 used template filters:
 
 @node List of filters
-@anchor{filters list-of-filters}@anchor{34}
+@anchor{filters list-of-filters}
 @section List of filters
 
 
@@ -1304,7 +1314,7 @@ used template filters:
 @end menu
 
 @node add
-@anchor{filters add}@anchor{35}
+@anchor{filters add}
 @subsection add
 
 
@@ -1319,7 +1329,7 @@ For example:
 If @code{value} is @code{4}, then the output will be @code{6}.
 
 @node addslashes
-@anchor{filters addslashes}@anchor{36}
+@anchor{filters addslashes}
 @subsection addslashes
 
 
@@ -1335,7 +1345,7 @@ If @code{value} is @code{"I'm using Djula"}, the output will be
 @code{"I\'m using Djula"}.
 
 @node capfirst
-@anchor{filters capfirst}@anchor{37}
+@anchor{filters capfirst}
 @subsection capfirst
 
 
@@ -1362,7 +1372,7 @@ If @code{value} is @code{"djula"}, the output will be @code{"Djula"}.
 @c If ``value`` is ``"Djula"``, the output will be ``"     Djula    "``.
 
 @node cut
-@anchor{filters cut}@anchor{38}
+@anchor{filters cut}
 @subsection cut
 
 
@@ -1378,7 +1388,7 @@ If @code{value} is @code{"String with spaces"}, the output will be
 @code{"Stringwithspaces"}.
 
 @node date
-@anchor{filters date}@anchor{39}
+@anchor{filters date}
 @subsection date
 
 
@@ -1400,7 +1410,7 @@ A LOCAL-TIME format spec can be provided:
 @end example
 
 @node time
-@anchor{filters time}@anchor{3a}
+@anchor{filters time}
 @subsection time
 
 
@@ -1413,7 +1423,7 @@ Example:
 @end example
 
 @node datetime
-@anchor{filters datetime}@anchor{3b}
+@anchor{filters datetime}
 @subsection datetime
 
 
@@ -1426,7 +1436,7 @@ Example:
 @end example
 
 @node default
-@anchor{filters default}@anchor{3c}
+@anchor{filters default}
 @subsection default
 
 
@@ -1442,7 +1452,7 @@ For example:
 If @code{value} is @code{""} (the empty string), the output will be @code{nothing}.
 
 @node reverse
-@anchor{filters reverse}@anchor{3d}
+@anchor{filters reverse}
 @subsection reverse
 
 
@@ -1455,7 +1465,7 @@ For example:
 @end example
 
 @node divisibleby
-@anchor{filters divisibleby}@anchor{3e}
+@anchor{filters divisibleby}
 @subsection divisibleby
 
 
@@ -1471,7 +1481,7 @@ If @code{value} is @code{21}, the output would be @code{True}.
 
 
 @node sort
-@anchor{filters sort}@anchor{3f}
+@anchor{filters sort}
 @subsection sort
 
 
@@ -1484,7 +1494,7 @@ For example:
 @end example
 
 @node first
-@anchor{filters first}@anchor{40}
+@anchor{filters first}
 @subsection first
 
 
@@ -1499,7 +1509,7 @@ For example:
 If @code{value} is the list @code{("a" "b" "c")}, the output will be @code{"a"}.
 
 @node join
-@anchor{filters join}@anchor{41}
+@anchor{filters join}
 @subsection join
 
 
@@ -1515,7 +1525,7 @@ If @code{value} is the list @code{("a" "b" "c")}, the output will be the string
 @code{"a // b // c"}.
 
 @node last
-@anchor{filters last}@anchor{42}
+@anchor{filters last}
 @subsection last
 
 
@@ -1531,7 +1541,7 @@ If @code{value} is the list @code{("a" "b" "c" "d")}, the output will be the
 string @code{"d"}.
 
 @node length
-@anchor{filters length}@anchor{43}
+@anchor{filters length}
 @subsection length
 
 
@@ -1547,7 +1557,7 @@ If @code{value} is @code{("a" "b" "c" "d")} or @code{"abcd"}, the output will be
 @code{4}.
 
 @node length_is
-@anchor{filters length-is}@anchor{44}
+@anchor{filters length-is}
 @subsection length_is
 
 
@@ -1566,7 +1576,7 @@ If @code{value} is @code{['a', 'b', 'c', 'd']} or @code{"abcd"}, the output will
 @end quotation
 
 @node linebreaks
-@anchor{filters linebreaks}@anchor{45}
+@anchor{filters linebreaks}
 @subsection linebreaks
 
 
@@ -1584,7 +1594,7 @@ If @code{value} is @code{Joel\nis a slug}, the output will be @code{<p>Joel<br /
 slug</p>}.
 
 @node linebreaksbr
-@anchor{filters linebreaksbr}@anchor{46}
+@anchor{filters linebreaksbr}
 @subsection linebreaksbr
 
 
@@ -1637,7 +1647,7 @@ slug}.
 @c If ``value`` is ``Djula``, the output will be ``"Djula    "``.
 
 @node lower
-@anchor{filters lower}@anchor{47}
+@anchor{filters lower}
 @subsection lower
 
 
@@ -1653,7 +1663,7 @@ If @code{value} is @code{Still MAD At Yoko}, the output will be
 @code{still mad at yoko}.
 
 @node make_list
-@anchor{filters make-list}@anchor{48}
+@anchor{filters make-list}
 @subsection make_list
 
 
@@ -1774,7 +1784,7 @@ list @code{['1', '2', '3']}.
 @c If ``value`` is ``Djula``, the output will be ``"    Djula"``.
 
 @node safe escape
-@anchor{filters safe-escape}@anchor{49}
+@anchor{filters safe-escape}
 @subsection safe, escape
 
 
@@ -1807,7 +1817,7 @@ prints the variable as is, unescaped:
 @c individual elements of the sequence.
 
 @node slice
-@anchor{filters slice}@anchor{4a}
+@anchor{filters slice}
 @subsection slice
 
 
@@ -1866,7 +1876,7 @@ if the string is @code{"Hello world"} is will output @code{Hello} and @code{worl
 @c If ``value`` is ``"Joel is a slug"``, the output will be ``"joel-is-a-slug"``.
 
 @node force-escape
-@anchor{filters force-escape}@anchor{4b}
+@anchor{filters force-escape}
 @subsection force-escape
 
 
@@ -1879,7 +1889,7 @@ Forces escaping HTML characters (@code{<, >, ', \, &}):
 It calls @code{djula::escape-for-html}.
 
 @node format
-@anchor{filters format}@anchor{4c}
+@anchor{filters format}
 @subsection format
 
 
@@ -1919,7 +1929,7 @@ If @code{value} is @code{1000000}, the output will be @code{1,000,000}.
 @c .. templatefilter:: replace
 
 @node replace … with
-@anchor{filters replace-with}@anchor{4d}
+@anchor{filters replace-with}
 @subsection replace … with
 
 
@@ -1933,7 +1943,7 @@ This will replace all occurences of the regexp in “value” with a new
 string, using @code{ppcre:regex-replace-all}.
 
 @node rest
-@anchor{filters rest}@anchor{4e}
+@anchor{filters rest}
 @subsection rest
 
 
@@ -1948,7 +1958,7 @@ For example:
 If @code{values} is the list @code{("a" "b" "c")}, the output will be @code{("b" "c")}.
 
 @node scan
-@anchor{filters scan}@anchor{4f}
+@anchor{filters scan}
 @subsection scan
 
 
@@ -1961,7 +1971,7 @@ Extracts and displays a regexp from the value:
 This will display only the text that matches the regexp (using @code{ppcre:scan-to-strings}).
 
 @node time<2>
-@anchor{filters id4}@anchor{50}
+@anchor{filters id4}
 @subsection time
 
 
@@ -2030,7 +2040,7 @@ For example:
 @c If ``value`` is ``"my FIRST post"``, the output will be ``"My First Post"``.
 
 @node truncatechars
-@anchor{filters truncatechars}@anchor{51}
+@anchor{filters truncatechars}
 @subsection truncatechars
 
 
@@ -2131,7 +2141,7 @@ If @code{value} is @code{"Joel is a slug"}, the output will be @code{"Joel i..."
 @c ``['States', [['Kansas', [['Lawrence', []], ['Topeka', []]]], ['Illinois', []]]]``,
 
 @node upper
-@anchor{filters upper}@anchor{52}
+@anchor{filters upper}
 @subsection upper
 
 
@@ -2146,7 +2156,7 @@ For example:
 If @code{value} is @code{"Joel is a slug"}, the output will be @code{"JOEL IS A SLUG"}.
 
 @node urlencode
-@anchor{filters urlencode}@anchor{53}
+@anchor{filters urlencode}
 @subsection urlencode
 
 
@@ -2302,7 +2312,7 @@ If @code{value} is @code{"http://www.example.org/"}, the output will be
 @c ==========  ======================  ==================================
 
 @node Custom filters
-@anchor{filters custom-filters}@anchor{54}
+@anchor{filters custom-filters}
 @section Custom filters
 
 
@@ -2378,7 +2388,7 @@ Errors are handled by the macro, but you can handle them and return a
 @end menu
 
 @node Template inheritance
-@anchor{inheritance doc}@anchor{55}@anchor{inheritance template-inheritance}@anchor{56}
+@anchor{inheritance doc}@anchor{inheritance template-inheritance}
 @section Template inheritance
 
 
@@ -2554,7 +2564,7 @@ two similarly-named @code{block} tags in a template, that template’s parent
 wouldn’t know which one of the blocks’ content to use.
 
 @node Template includes
-@anchor{inheritance include}@anchor{57}
+@anchor{inheritance include}
 @section Including other templates
 
 
@@ -2586,7 +2596,7 @@ We create a new template in @code{includes/blog-entry.html} and we use the @code
 See also the @code{ssi} tag for Server-Side Includes.
 
 @node Internationalization
-@anchor{internationalization doc}@anchor{58}@anchor{internationalization internationalization}@anchor{59}
+@anchor{internationalization doc}@anchor{internationalization internationalization}
 @chapter Internationalization
 
 
@@ -2600,7 +2610,7 @@ See also the @code{ssi} tag for Server-Side Includes.
 @end menu
 
 @node Syntax
-@anchor{internationalization syntax}@anchor{5a}
+@anchor{internationalization syntax}
 @section Syntax
 
 
@@ -2612,7 +2622,7 @@ The easiest way to translate a string or variable is to enclose it between @code
 @end example
 
 @node Tags<2>
-@anchor{internationalization tags}@anchor{5b}
+@anchor{internationalization tags}
 @section Tags
 
 
@@ -2622,7 +2632,7 @@ The easiest way to translate a string or variable is to enclose it between @code
 @end menu
 
 @node trans
-@anchor{internationalization trans}@anchor{5c}
+@anchor{internationalization trans}
 @subsection trans
 
 
@@ -2636,7 +2646,7 @@ Example:
 @end example
 
 @node Filters<2>
-@anchor{internationalization filters}@anchor{5d}
+@anchor{internationalization filters}
 @section Filters
 
 
@@ -2646,7 +2656,7 @@ Example:
 @end menu
 
 @node trans<2>
-@anchor{internationalization id1}@anchor{5e}
+@anchor{internationalization id1}
 @subsection trans
 
 
@@ -2660,11 +2670,11 @@ For example:
 @end example
 
 @node Choosing language
-@anchor{internationalization choosing-language}@anchor{5f}
+@anchor{internationalization choosing-language}
 @section Choosing language
 
 
-To choose the language to use, set the @ref{60,,*CURRENT-LANGUAGE*} variable.
+To choose the language to use, set the @code{*CURRENT-LANGUAGE*} variable.
 
 For example:
 
@@ -2674,7 +2684,7 @@ For example:
 @end example
 
 @node Backends
-@anchor{internationalization backends}@anchor{61}
+@anchor{internationalization backends}
 @section Backends
 
 
@@ -2683,17 +2693,21 @@ Djula supports two backends for doing translations: cl-locale@footnote{https://g
 Please have a look at the demo and the documentation of those packages to figure out how to use them.
 
 @node Error handling
-@anchor{error-handling doc}@anchor{62}@anchor{error-handling error-handling}@anchor{63}
+@anchor{error-handling doc}@anchor{error-handling error-handling}
 @chapter Error handling
 
 
 Djula catches errors and barfs them to the template output by default.
 
-That is controlled via the @ref{64,,*CATCH-TEMPLATE-ERRORS-P*}. If changed to @code{NIL}, then errors are not caught anymore and are debuggable from the lisp listener.
+That is controlled via the @code{*CATCH-TEMPLATE-ERRORS-P*} variable.
+If changed to @code{NIL}, then errors are not caught anymore and are
+debuggable from the lisp listener.
 
-Djula provides more or less verbosity in template errors. Verbosity is controlled via the variable @ref{65,,*VERBOSE-ERRORS-P*}.
+Djula provides more or less verbosity in template errors. Verbosity is
+controlled via the variable @code{*VERBOSE-ERRORS-P*}.
 
-Also, there’s a fancy page to display errors, which can be disabled if desired. That is controlled via the variable @ref{66,,*FANCY-ERROR-TEMPLATE-P*}
+Also, there’s a fancy page to display errors, which can be disabled if
+desired. That is controlled via the variable @code{*FANCY-ERROR-TEMPLATE-P*}
 
 @menu
 * API: API<2>. 
@@ -2701,7 +2715,7 @@ Also, there’s a fancy page to display errors, which can be disabled if desired
 @end menu
 
 @node API<2>
-@anchor{error-handling api}@anchor{67}
+@anchor{error-handling api}
 @section API
 
 
@@ -2718,127 +2732,127 @@ Also, there’s a fancy page to display errors, which can be disabled if desired
 @end deffn
 
 @node API<3>
-@anchor{api doc}@anchor{68}@anchor{api api}@anchor{69}
+@anchor{api doc}@anchor{api api}
 @chapter API
 
 
 Djula external symbols documentation
 
 @geindex compile-template* (Lisp function)
-@anchor{api function djula compile-template*}@anchor{a}
+@anchor{api function djula compile-template*}
 @deffn {Common Lisp Function}  (compile@w{-}template*name)
 
 Compiles template @code{NAME} with compiler in @emph{CURRENT-COMPILER}
 @end deffn
 
 @geindex url-encode (Lisp function)
-@anchor{api function djula url-encode}@anchor{6a}
+@anchor{api function djula url-encode}
 @deffn {Common Lisp Function}  (url@w{-}encodestring)
 
 URL-encodes a string using the external format EXTERNAL-FORMAT.
 @end deffn
 
 @geindex *current-store* (Lisp variable)
-@anchor{api variable djula *current-store*}@anchor{b}
+@anchor{api variable djula *current-store*}
 @deffn {Common Lisp Variable} *current@w{-}store*
 
 The currently in-use template store.  Defaults to a @code{FILE-STORE}.
 @end deffn
 
 @geindex *allow-include-roots* (Lisp variable)
-@anchor{api variable djula *allow-include-roots*}@anchor{6b}
+@anchor{api variable djula *allow-include-roots*}
 @deffn {Common Lisp Variable} *allow@w{-}include@w{-}roots*
 @end deffn
 
 @geindex *current-compiler* (Lisp variable)
-@anchor{api variable djula *current-compiler*}@anchor{6c}
+@anchor{api variable djula *current-compiler*}
 @deffn {Common Lisp Variable} *current@w{-}compiler*
 @end deffn
 
 @geindex *fancy-debug-p* (Lisp variable)
-@anchor{api variable djula *fancy-debug-p*}@anchor{6d}
+@anchor{api variable djula *fancy-debug-p*}
 @deffn {Common Lisp Variable} *fancy@w{-}debug@w{-}p*
 
 When enabled, displays fancy html based debugging information for the @{% debug %@} tag
 @end deffn
 
 @geindex *djula-execute-package* (Lisp variable)
-@anchor{api variable djula *djula-execute-package*}@anchor{6e}
+@anchor{api variable djula *djula-execute-package*}
 @deffn {Common Lisp Variable} *djula@w{-}execute@w{-}package*
 @end deffn
 
 @geindex fetch-template* (Lisp function)
-@anchor{api function djula fetch-template*}@anchor{6f}
+@anchor{api function djula fetch-template*}
 @deffn {Common Lisp Function}  (fetch@w{-}template*key)
 
 Return the text of a template fetched from the @emph{CURRENT-STORE}.
 @end deffn
 
 @geindex url-encode-path (Lisp function)
-@anchor{api function djula url-encode-path}@anchor{70}
+@anchor{api function djula url-encode-path}
 @deffn {Common Lisp Function}  (url@w{-}encode@w{-}pathpath)
 @end deffn
 
 @geindex url-decode (Lisp function)
-@anchor{api function djula url-decode}@anchor{71}
+@anchor{api function djula url-decode}
 @deffn {Common Lisp Function}  (url@w{-}decode)
 @end deffn
 
 @geindex def-tag-compiler (Lisp macro)
-@anchor{api macro djula def-tag-compiler}@anchor{72}
+@anchor{api macro djula def-tag-compiler}
 @deffn {Common Lisp Macro}  (def@w{-}tag@w{-}compilername args &body body)
 @end deffn
 
 @geindex find-template* (Lisp function)
-@anchor{api function djula find-template*}@anchor{73}
+@anchor{api function djula find-template*}
 @deffn {Common Lisp Function}  (find@w{-}template*name &optional (error-p t))
 @end deffn
 
 @geindex *fancy-error-template-p* (Lisp variable)
-@anchor{api variable djula *fancy-error-template-p*}@anchor{66}
+@anchor{api variable djula *fancy-error-template-p*}
 @deffn {Common Lisp Variable} *fancy@w{-}error@w{-}template@w{-}p*
 
 When enabled, show a fancy template when an error ocurrs
 @end deffn
 
 @geindex *default-language* (Lisp variable)
-@anchor{api variable djula *default-language*}@anchor{74}
+@anchor{api variable djula *default-language*}
 @deffn {Common Lisp Variable} *default@w{-}language*
 @end deffn
 
 @geindex render-template* (Lisp function)
-@anchor{api function djula render-template*}@anchor{d}
+@anchor{api function djula render-template*}
 @deffn {Common Lisp Function}  (render@w{-}template*template &optional stream &rest *template-arguments*)
 
 Render @code{TEMPLATE} into @code{STREAM} passing @emph{TEMPLATE-ARGUMENTS}
 @end deffn
 
 @geindex *default-template-arguments* (Lisp variable)
-@anchor{api variable djula *default-template-arguments*}@anchor{75}
+@anchor{api variable djula *default-template-arguments*}
 @deffn {Common Lisp Variable} *default@w{-}template@w{-}arguments*
 @end deffn
 
 @geindex add-template-directory (Lisp function)
-@anchor{api function djula add-template-directory}@anchor{c}
+@anchor{api function djula add-template-directory}
 @deffn {Common Lisp Function}  (add@w{-}template@w{-}directorydirectory &optional (template-store *current-store*))
 
 Adds @code{DIRECTORY} to the search path of the @code{TEMPLATE-STORE}
 @end deffn
 
 @geindex *catch-template-errors-p* (Lisp variable)
-@anchor{api variable djula *catch-template-errors-p*}@anchor{64}
+@anchor{api variable djula *catch-template-errors-p*}
 @deffn {Common Lisp Variable} *catch@w{-}template@w{-}errors@w{-}p*
 
 When enabled, caught errors during the rendering of the template are written to the output instead of being handled by the lisp listener
 @end deffn
 
 @geindex *current-language* (Lisp variable)
-@anchor{api variable djula *current-language*}@anchor{60}
+@anchor{api variable djula *current-language*}
 @deffn {Common Lisp Variable} *current@w{-}language*
 @end deffn
 
 @geindex *verbose-errors-p* (Lisp variable)
-@anchor{api variable djula *verbose-errors-p*}@anchor{65}
+@anchor{api variable djula *verbose-errors-p*}
 @deffn {Common Lisp Variable} *verbose@w{-}errors@w{-}p*
 
 When enabled, errors are displayed more verbosely. Good for debugging
