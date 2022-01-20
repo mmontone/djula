@@ -15,8 +15,6 @@
 * djula: (djula.info). The Djula templating system.
 @end direntry
 
-@definfoenclose strong,`,'
-@definfoenclose emph,`,'
 @c %**end of header
 
 @copying
