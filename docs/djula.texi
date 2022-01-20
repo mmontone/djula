@@ -74,7 +74,7 @@ Contents:
 * Error handling:: 
 * API: API<3>. 
 * Indices and tables:: 
-* Index:: 
+* Symbol Index::
 
 @detailmenu
  --- The Detailed Node Listing ---
@@ -2846,7 +2846,7 @@ When enabled, caught errors during the rendering of the template are written to 
 When enabled, errors are displayed more verbosely. Good for debugging
 @end deffn
 
-@node Indices and tables,Index,API<3>,Top
+@node Indices and tables,Symbol Index,API<3>,Top
 @anchor{index indices-and-tables}@anchor{76}
 @unnumbered Indices and tables
 
@@ -2861,8 +2861,8 @@ genindex
 search
 @end itemize
 
-@node Index,,Indices and tables,Top
-@unnumbered Index
+@node Symbol Index,,Indices and tables,Top
+@unnumbered Symbol Index
 
 
 @printindex ge
