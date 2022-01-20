@@ -160,7 +160,7 @@ List of filters
 Templates composition
 
 * Template inheritance::
-* Include:: 
+* Template includes::
 
 Internationalization
 
@@ -2376,7 +2376,7 @@ Errors are handled by the macro, but you can handle them and return a
 
 @menu
 * Template inheritance::
-* Include::
+* Template includes::
 @end menu
 
 @node Template inheritance
@@ -2555,7 +2555,7 @@ it also defines the content that fills the hole in the @emph{parent}. If there w
 two similarly-named >>:ttag:`block`<< tags in a template, that template’s parent
 wouldn’t know which one of the blocks’ content to use.
 
-@node Include
+@node Template includes
 @anchor{inheritance include}@anchor{57}
 @section Including other templates
 
