@@ -1,5 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<!-- This file redirects to the location of a node or anchor -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
@@ -9,22 +13,13 @@ Copyright (C) 2014, Nick Allen.
 Maintained by Mariano Montone.
 
  -->
-<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>for (Djula HTML templating system)</title>
 
 <meta name="description" content="for (Djula HTML templating system)">
 <meta name="keywords" content="for (Djula HTML templating system)">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
-<meta name="Generator" content="texi2any">
-<link href="index.html" rel="start" title="Top">
-<link href="Index.html" rel="index" title="Index">
-<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
-<link href="List-of-tags.html" rel="up" title="List of tags">
-<link href="if.html" rel="next" title="if">
-<link href="firstof.html" rel="prev" title="firstof">
+<meta name="Generator" content="makeinfo">
 <style type="text/css">
 <!--
 /* Style-sheet to use for manuals (copied from Emacs) */
@@ -33,11 +28,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
-div.lisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
@@ -46,6 +41,7 @@ pre.menu-preformatted {font-family: serif}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
 ul.no-bullet {list-style: none}
 blockquote {
     font-style: normal;
@@ -118,86 +114,12 @@ body {
 -->
 </style>
 
+<meta http-equiv="Refresh" content="0; url=Tags.html#for">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 </head>
 
 <body lang="en">
-<span id="for"></span><div class="header">
-<p>
-Next: <a href="if.html" accesskey="n" rel="next">if</a>, Previous: <a href="firstof.html" accesskey="p" rel="prev">firstof</a>, Up: <a href="List-of-tags.html" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html" title="Index" rel="index">Index</a>]</p>
-</div>
-<hr>
-<span id="tags-for"></span><span id="g_t23"></span><span id="for-1"></span><h4 class="subsection">5.2.9 for</h4>
 
-
-<p>Loops over each item in an array, making the item available in a context
-variable. For example, to display a list of athletes provided in
-<code>athlete-list</code>:
-</p>
-<div class="example">
-<pre class="example">&lt;ul&gt;
-{% for athlete in athlete-list %}
-    &lt;li&gt;{{ athlete.name }}&lt;/li&gt;
-{% endfor %}
-&lt;/ul&gt;
-</pre></div>
-
-<p>If you need to loop over an association list, you can unpack the values
-in each sublist into individual variables. For example, if your context
-contains a list of (x . y) coordinates called <code>points</code>, you could use the
-following to output the list of points:
-</p>
-<div class="example">
-<pre class="example">{% for (x . y) in points %}
-    There is a point at {{ x }},{{ y }}
-{% endfor %}
-</pre></div>
-
-<p>This can also be useful if you need to access the items in a hash-table.
-For example, if your context contained a hash-table named <code>data</code>, the following
-would display the keys and values of the hash-table:
-</p>
-<div class="example">
-<pre class="example">{% for (key . value) in data.items %}
-    {{ key }}: {{ value }}
-{% endfor %}
-</pre></div>
-
-<p>If you need to loop a fixed number of times, you can use the following trick, where <code>data.nb</code> resolves to an integer:
-</p>
-<div class="example">
-<pre class="example">{% for _ in data.nb.make-list %}
-   index: {{ forloop.counter }}
-{% endfor %}
-</pre></div>
-
-<p>The <code>_</code> is not meaningful, it is only a placeholder for a value that we can’t reuse (it’s nil). See also the <code>djula::iterable-list</code> generic method.
-</p>
-<p>The for loop sets a number of variables available within the loop:
-</p>
-
-<table>
-<thead><tr><th>Variable</th><th>Description</th></tr></thead>
-<tr><td><code>forloop.counter</code></td><td>The current iteration of the loop (1-indexed)</td></tr>
-<tr><td><code>forloop.counter0</code></td><td>The current iteration of the loop (0-indexed)</td></tr>
-<tr><td><code>forloop.revcounter</code></td><td>The number of iterations from the end of the
-loop (1-indexed)</td></tr>
-<tr><td><code>forloop.revcounter0</code></td><td>The number of iterations from the end of the
-loop (0-indexed)</td></tr>
-<tr><td><code>forloop.first</code></td><td>True if this is the first time through the loop</td></tr>
-<tr><td><code>forloop.last</code></td><td>True if this is the last time through the loop</td></tr>
-<tr><td><code>forloop.parentloop</code></td><td>For nested loops, this is the loop surrounding
-the current one</td></tr>
-</table>
-
-
-<hr>
-<div class="header">
-<p>
-Next: <a href="if.html" accesskey="n" rel="next">if</a>, Previous: <a href="firstof.html" accesskey="p" rel="prev">firstof</a>, Up: <a href="List-of-tags.html" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html" title="Index" rel="index">Index</a>]</p>
-</div>
-
-
-
+<p>The node you are looking for is at <a href="Tags.html#for">for</a>.</p>
 </body>
-</html>

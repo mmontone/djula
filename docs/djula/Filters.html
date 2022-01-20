@@ -1,5 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
@@ -9,21 +12,20 @@ Copyright (C) 2014, Nick Allen.
 Maintained by Mariano Montone.
 
  -->
-<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Filters (Djula HTML templating system)</title>
 
 <meta name="description" content="Filters (Djula HTML templating system)">
 <meta name="keywords" content="Filters (Djula HTML templating system)">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
-<meta name="Generator" content="texi2any">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
 <link href="index.html" rel="start" title="Top">
-<link href="Index.html" rel="index" title="Index">
+<link href="Symbol-Index.html" rel="index" title="Symbol Index">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="index.html" rel="up" title="Top">
-<link href="Overview_003c2_003e.html" rel="next" title="Overview&lt;2&gt;">
+<link href="Templates-composition.html#Templates-composition" rel="next" title="Templates composition">
 <link href="Verbatim.html" rel="prev" title="Verbatim">
 <style type="text/css">
 <!--
@@ -33,11 +35,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
-div.lisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
@@ -46,6 +48,7 @@ pre.menu-preformatted {font-family: serif}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
 ul.no-bullet {list-style: none}
 blockquote {
     font-style: normal;
@@ -122,25 +125,868 @@ body {
 </head>
 
 <body lang="en">
-<span id="Filters"></span><div class="header">
+<div class="chapter" id="Filters">
+<div class="header">
 <p>
-Next: <a href="Templates-composition.html" accesskey="n" rel="next">Templates composition</a>, Previous: <a href="Verbatim.html" accesskey="p" rel="prev">Verbatim</a>, Up: <a href="index.html" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Templates-composition.html#Templates-composition" accesskey="n" rel="next">Templates composition</a>, Previous: <a href="Verbatim.html" accesskey="p" rel="prev">Verbatim</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<hr>
 <span id="filters-doc"></span><span id="g_t31"></span><span id="filters-filters"></span><span id="g_t32"></span><span id="Filters-1"></span><h2 class="chapter">8 Filters</h2>
 
 
-<table class="menu" border="0" cellspacing="0">
-<tr><td align="left" valign="top">&bull; <a href="Overview_003c2_003e.html" accesskey="1">Overview</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="List-of-filters.html" accesskey="2">List of filters</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Custom-filters.html" accesskey="3">Custom filters</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
 
-</pre></th></tr></table>
+<ul class="section-toc">
+<li><a href="#Overview_003c2_003e" accesskey="1">Overview</a></li>
+<li><a href="#List-of-filters" accesskey="2">List of filters</a></li>
+<li><a href="#Custom-filters" accesskey="3">Custom filters</a></li>
+</ul>
+<hr>
+<div class="section" id="Overview_003c2_003e">
+<div class="header">
+<p>
+Next: <a href="#List-of-filters" accesskey="n" rel="next">List of filters</a>, Up: <a href="#Filters" accesskey="u" rel="up">Filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-overview"></span><span id="g_t33"></span><span id="Overview-2"></span><h3 class="section">8.1 Overview</h3>
 
+
+<p>You can modify variables for display by using `filters'.
+</p>
+<p>Filters look like this: <code>{{ name|lower }}</code>. This displays the value of the
+<code>{{ name }}</code> variable after being filtered through the &gt;&gt;:tfilter:&lsquo;lower&lsquo;&lt;&lt;
+filter, which converts text to lowercase. Use a pipe (<code>|</code>) to apply a filter.
+</p>
+<p>Filters can be “chained.” The output of one filter is applied to the next.
+<code>{{ text|escape|linebreaks }}</code> is a common idiom for escaping text contents,
+then converting line breaks to <code>&lt;p&gt;</code> tags.
+</p>
+<p>Some filters take arguments. A filter argument looks like this: <code>{{
+bio|truncatewords:30 }}</code>. This will display the first 30 words of the <code>bio</code>
+variable.
+</p>
+<p>Filter arguments that contain spaces must be quoted; for example, to join a
+list with commas and spaced you’d use <code>{{ list|join:&quot;, &quot; }}</code>.
+</p>
+<p>Djula provides about thirty built-in template filters. You can read all about
+them in the built-in filter reference.
+To give you a taste of what’s available, here are some of the more commonly
+used template filters:
+</p>
+<hr>
+</div>
+<div class="section" id="List-of-filters">
+<div class="header">
+<p>
+Next: <a href="#Custom-filters" accesskey="n" rel="next">Custom filters</a>, Previous: <a href="#Overview_003c2_003e" accesskey="p" rel="prev">Overview</a>, Up: <a href="#Filters" accesskey="u" rel="up">Filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-list_002dof_002dfilters"></span><span id="g_t34"></span><span id="List-of-filters-1"></span><h3 class="section">8.2 List of filters</h3>
+
+
+
+<ul class="section-toc">
+<li><a href="#add" accesskey="1">add</a></li>
+<li><a href="#addslashes" accesskey="2">addslashes</a></li>
+<li><a href="#capfirst" accesskey="3">capfirst</a></li>
+<li><a href="#cut" accesskey="4">cut</a></li>
+<li><a href="#date" accesskey="5">date</a></li>
+<li><a href="#time" accesskey="6">time</a></li>
+<li><a href="#datetime" accesskey="7">datetime</a></li>
+<li><a href="#default" accesskey="8">default</a></li>
+<li><a href="#reverse" accesskey="9">reverse</a></li>
+<li><a href="#divisibleby">divisibleby</a></li>
+<li><a href="#sort">sort</a></li>
+<li><a href="#first">first</a></li>
+<li><a href="#join">join</a></li>
+<li><a href="#last">last</a></li>
+<li><a href="#length">length</a></li>
+<li><a href="#length_005fis">length_is</a></li>
+<li><a href="#linebreaks">linebreaks</a></li>
+<li><a href="#linebreaksbr">linebreaksbr</a></li>
+<li><a href="#lower">lower</a></li>
+<li><a href="#make_005flist">make_list</a></li>
+<li><a href="#safe-escape">safe, escape</a></li>
+<li><a href="#slice">slice</a></li>
+<li><a href="#force_002descape">force-escape</a></li>
+<li><a href="#format">format</a></li>
+<li><a href="#replace-_2026-with">replace … with</a></li>
+<li><a href="#rest">rest</a></li>
+<li><a href="#scan">scan</a></li>
+<li><a href="#time_003c2_003e">time</a></li>
+<li><a href="#truncatechars">truncatechars</a></li>
+<li><a href="#upper">upper</a></li>
+<li><a href="#urlencode">urlencode</a></li>
+</ul>
+<hr>
+<div class="subsection" id="add">
+<div class="header">
+<p>
+Next: <a href="#addslashes" accesskey="n" rel="next">addslashes</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-add"></span><span id="g_t35"></span><span id="add-1"></span><h4 class="subsection">8.2.1 add</h4>
+
+
+<p>Adds the argument to the value.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|add:2 }}
+</pre></div>
+
+<p>If <code>value</code> is <code>4</code>, then the output will be <code>6</code>.
+</p>
+<hr>
+</div>
+<div class="subsection" id="addslashes">
+<div class="header">
+<p>
+Next: <a href="#capfirst" accesskey="n" rel="next">capfirst</a>, Previous: <a href="#add" accesskey="p" rel="prev">add</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-addslashes"></span><span id="g_t36"></span><span id="addslashes-1"></span><h4 class="subsection">8.2.2 addslashes</h4>
+
+
+<p>Adds slashes before quotes. Useful for escaping strings in CSV, for example.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|addslashes }}
+</pre></div>
+
+<p>If <code>value</code> is <code>&quot;I'm using Djula&quot;</code>, the output will be
+<code>&quot;I\'m using Djula&quot;</code>.
+</p>
+<hr>
+</div>
+<div class="subsection" id="capfirst">
+<div class="header">
+<p>
+Next: <a href="#cut" accesskey="n" rel="next">cut</a>, Previous: <a href="#addslashes" accesskey="p" rel="prev">addslashes</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-capfirst"></span><span id="g_t37"></span><span id="capfirst-1"></span><h4 class="subsection">8.2.3 capfirst</h4>
+
+
+<p>Capitalizes the first character of the value. If the first character is not
+a letter, this filter has no effect.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|capfirst }}
+</pre></div>
+
+<p>If <code>value</code> is <code>&quot;djula&quot;</code>, the output will be <code>&quot;Djula&quot;</code>.
+</p>
+
+<hr>
+</div>
+<div class="subsection" id="cut">
+<div class="header">
+<p>
+Next: <a href="#date" accesskey="n" rel="next">date</a>, Previous: <a href="#capfirst" accesskey="p" rel="prev">capfirst</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-cut"></span><span id="g_t38"></span><span id="cut-1"></span><h4 class="subsection">8.2.4 cut</h4>
+
+
+<p>Removes all values of arg from the given string.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|cut:&quot; &quot; }}
+</pre></div>
+
+<p>If <code>value</code> is <code>&quot;String with spaces&quot;</code>, the output will be
+<code>&quot;Stringwithspaces&quot;</code>.
+</p>
+<hr>
+</div>
+<div class="subsection" id="date">
+<div class="header">
+<p>
+Next: <a href="#time" accesskey="n" rel="next">time</a>, Previous: <a href="#cut" accesskey="p" rel="prev">cut</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-date"></span><span id="g_t39"></span><span id="date-1"></span><h4 class="subsection">8.2.5 date</h4>
+
+
+<p>Formats a date
+</p>
+
+<dl compact="compact">
+<dt><span>Example::</span></dt>
+<dd>
+<p>{{ date-today | date }}
+</p></dd>
+</dl>
+
+<p>A LOCAL-TIME format spec can be provided:
+</p>
+<div class="example">
+<pre class="example">(defvar timestamp 3752179200)
+{{ timestamp | date:(:year &quot;/&quot; (:month 2) &quot;/&quot; (:day 2)) }} ;; shows 2018/11/26
+</pre></div>
+
+<hr>
+</div>
+<div class="subsection" id="time">
+<div class="header">
+<p>
+Next: <a href="#datetime" accesskey="n" rel="next">datetime</a>, Previous: <a href="#date" accesskey="p" rel="prev">date</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-time"></span><span id="g_t3a"></span><span id="time-1"></span><h4 class="subsection">8.2.6 time</h4>
+
+
+<p>Formats a time
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">{{ time-now | time }}
+</pre></div>
+
+<hr>
+</div>
+<div class="subsection" id="datetime">
+<div class="header">
+<p>
+Next: <a href="#default" accesskey="n" rel="next">default</a>, Previous: <a href="#time" accesskey="p" rel="prev">time</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-datetime"></span><span id="g_t3b"></span><span id="datetime-1"></span><h4 class="subsection">8.2.7 datetime</h4>
+
+
+<p>Formats a date and time
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example">{{ time-now | datetime }}
+</pre></div>
+
+<hr>
+</div>
+<div class="subsection" id="default">
+<div class="header">
+<p>
+Next: <a href="#reverse" accesskey="n" rel="next">reverse</a>, Previous: <a href="#datetime" accesskey="p" rel="prev">datetime</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-default"></span><span id="g_t3c"></span><span id="default-1"></span><h4 class="subsection">8.2.8 default</h4>
+
+
+<p>If value evaluates to <code>False</code>, uses the given default. Otherwise, uses the
+value.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|default &quot;nothing&quot; }}
+</pre></div>
+
+<p>If <code>value</code> is <code>&quot;&quot;</code> (the empty string), the output will be <code>nothing</code>.
+</p>
+<hr>
+</div>
+<div class="subsection" id="reverse">
+<div class="header">
+<p>
+Next: <a href="#divisibleby" accesskey="n" rel="next">divisibleby</a>, Previous: <a href="#default" accesskey="p" rel="prev">default</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-reverse"></span><span id="g_t3d"></span><span id="reverse-1"></span><h4 class="subsection">8.2.9 reverse</h4>
+
+
+<p>Takes a list and returns that list reversed.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ list | reverse }}
+</pre></div>
+
+<hr>
+</div>
+<div class="subsection" id="divisibleby">
+<div class="header">
+<p>
+Next: <a href="#sort" accesskey="n" rel="next">sort</a>, Previous: <a href="#reverse" accesskey="p" rel="prev">reverse</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-divisibleby"></span><span id="g_t3e"></span><span id="divisibleby-1"></span><h4 class="subsection">8.2.10 divisibleby</h4>
+
+
+<p>Returns <code>True</code> if the value is divisible by the argument.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|divisibleby:&quot;3&quot; }}
+</pre></div>
+
+<p>If <code>value</code> is <code>21</code>, the output would be <code>True</code>.
+</p>
+
+<hr>
+</div>
+<div class="subsection" id="sort">
+<div class="header">
+<p>
+Next: <a href="#first" accesskey="n" rel="next">first</a>, Previous: <a href="#divisibleby" accesskey="p" rel="prev">divisibleby</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-sort"></span><span id="g_t3f"></span><span id="sort-1"></span><h4 class="subsection">8.2.11 sort</h4>
+
+
+<p>Takes a list and returns that list sorted.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ list | sort }}
+</pre></div>
+
+<hr>
+</div>
+<div class="subsection" id="first">
+<div class="header">
+<p>
+Next: <a href="#join" accesskey="n" rel="next">join</a>, Previous: <a href="#sort" accesskey="p" rel="prev">sort</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-first"></span><span id="g_t40"></span><span id="first-1"></span><h4 class="subsection">8.2.12 first</h4>
+
+
+<p>Returns the first item in a list.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|first }}
+</pre></div>
+
+<p>If <code>value</code> is the list <code>(&quot;a&quot; &quot;b&quot; &quot;c&quot;)</code>, the output will be <code>&quot;a&quot;</code>.
+</p>
+<hr>
+</div>
+<div class="subsection" id="join">
+<div class="header">
+<p>
+Next: <a href="#last" accesskey="n" rel="next">last</a>, Previous: <a href="#first" accesskey="p" rel="prev">first</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-join"></span><span id="g_t41"></span><span id="join-1"></span><h4 class="subsection">8.2.13 join</h4>
+
+
+<p>Joins a list with a string.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|join:&quot; // &quot; }}
+</pre></div>
+
+<p>If <code>value</code> is the list <code>(&quot;a&quot; &quot;b&quot; &quot;c&quot;)</code>, the output will be the string
+<code>&quot;a // b // c&quot;</code>.
+</p>
+<hr>
+</div>
+<div class="subsection" id="last">
+<div class="header">
+<p>
+Next: <a href="#length" accesskey="n" rel="next">length</a>, Previous: <a href="#join" accesskey="p" rel="prev">join</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-last"></span><span id="g_t42"></span><span id="last-1"></span><h4 class="subsection">8.2.14 last</h4>
+
+
+<p>Returns the last item in a list.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|last }}
+</pre></div>
+
+<p>If <code>value</code> is the list <code>(&quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;)</code>, the output will be the
+string <code>&quot;d&quot;</code>.
+</p>
+<hr>
+</div>
+<div class="subsection" id="length">
+<div class="header">
+<p>
+Next: <a href="#length_005fis" accesskey="n" rel="next">length_is</a>, Previous: <a href="#last" accesskey="p" rel="prev">last</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-length"></span><span id="g_t43"></span><span id="length-1"></span><h4 class="subsection">8.2.15 length</h4>
+
+
+<p>Returns the length of the value. This works for both strings and lists.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|length }}
+</pre></div>
+
+<p>If <code>value</code> is <code>(&quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;)</code> or <code>&quot;abcd&quot;</code>, the output will be
+<code>4</code>.
+</p>
+<hr>
+</div>
+<div class="subsection" id="length_005fis">
+<div class="header">
+<p>
+Next: <a href="#linebreaks" accesskey="n" rel="next">linebreaks</a>, Previous: <a href="#length" accesskey="p" rel="prev">length</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-length_002dis"></span><span id="g_t44"></span><span id="length_005fis-1"></span><h4 class="subsection">8.2.16 length_is</h4>
+
+
+<p>Returns <code>True</code> if the value’s length is the argument, or <code>False</code> otherwise.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|length_is:&quot;4&quot; }}
+</pre></div>
+
+<p>If <code>value</code> is <code>['a', 'b', 'c', 'd']</code> or <code>&quot;abcd&quot;</code>, the output will be
+<code>True</code>.
+</p>
+<blockquote>
+</blockquote>
+
+<hr>
+</div>
+<div class="subsection" id="linebreaks">
+<div class="header">
+<p>
+Next: <a href="#linebreaksbr" accesskey="n" rel="next">linebreaksbr</a>, Previous: <a href="#length_005fis" accesskey="p" rel="prev">length_is</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-linebreaks"></span><span id="g_t45"></span><span id="linebreaks-1"></span><h4 class="subsection">8.2.17 linebreaks</h4>
+
+
+<p>Replaces line breaks in plain text with appropriate HTML; a single
+newline becomes an HTML line break (<code>&lt;br /&gt;</code>) and a new line
+followed by a blank line becomes a paragraph break (<code>&lt;/p&gt;</code>).
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|linebreaks }}
+</pre></div>
+
+<p>If <code>value</code> is <code>Joel\nis a slug</code>, the output will be <code>&lt;p&gt;Joel&lt;br /&gt;is a
+slug&lt;/p&gt;</code>.
+</p>
+<hr>
+</div>
+<div class="subsection" id="linebreaksbr">
+<div class="header">
+<p>
+Next: <a href="#lower" accesskey="n" rel="next">lower</a>, Previous: <a href="#linebreaks" accesskey="p" rel="prev">linebreaks</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-linebreaksbr"></span><span id="g_t46"></span><span id="linebreaksbr-1"></span><h4 class="subsection">8.2.18 linebreaksbr</h4>
+
+
+<p>Converts all newlines in a piece of plain text to HTML line breaks
+(<code>&lt;br /&gt;</code>).
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|linebreaksbr }}
+</pre></div>
+
+<p>If <code>value</code> is <code>Joel\nis a slug</code>, the output will be <code>Joel&lt;br /&gt;is a
+slug</code>.
+</p>
+
+<hr>
+</div>
+<div class="subsection" id="lower">
+<div class="header">
+<p>
+Next: <a href="#make_005flist" accesskey="n" rel="next">make_list</a>, Previous: <a href="#linebreaksbr" accesskey="p" rel="prev">linebreaksbr</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-lower"></span><span id="g_t47"></span><span id="lower-1"></span><h4 class="subsection">8.2.19 lower</h4>
+
+
+<p>Converts a string into all lowercase.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|lower }}
+</pre></div>
+
+<p>If <code>value</code> is <code>Still MAD At Yoko</code>, the output will be
+<code>still mad at yoko</code>.
+</p>
+<hr>
+</div>
+<div class="subsection" id="make_005flist">
+<div class="header">
+<p>
+Next: <a href="#safe-escape" accesskey="n" rel="next">safe, escape</a>, Previous: <a href="#lower" accesskey="p" rel="prev">lower</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-make_002dlist"></span><span id="g_t48"></span><span id="make_005flist-1"></span><h4 class="subsection">8.2.20 make_list</h4>
+
+
+<p>Returns the value turned into a list. For a string, it’s a list of characters.
+For an integer, the argument is cast into an unicode string before creating a
+list.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|make_list }}
+</pre></div>
+
+<p>If <code>value</code> is the string <code>&quot;Joel&quot;</code>, the output would be the list
+<code>['J', 'o', 'e', 'l']</code>. If <code>value</code> is <code>123</code>, the output will be the
+list <code>['1', '2', '3']</code>.
+</p>
+
+<hr>
+</div>
+<div class="subsection" id="safe-escape">
+<div class="header">
+<p>
+Next: <a href="#slice" accesskey="n" rel="next">slice</a>, Previous: <a href="#make_005flist" accesskey="p" rel="prev">make_list</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-safe_002descape"></span><span id="g_t49"></span><span id="safe_002c-escape"></span><h4 class="subsection">8.2.21 safe, escape</h4>
+
+
+<p>Marks a string as not requiring further HTML escaping prior to output. When
+autoescaping is off, this filter has no effect.
+</p>
+<table class="cartouche" border="1"><tr><td>
+<blockquote>
+<p><b>Note:</b> If you are chaining filters, a filter applied after <code>safe</code> can
+make the contents unsafe again. For example, the following code
+prints the variable as is, unescaped:
+</p>
+<div class="example">
+<pre class="example">{{ var|safe|escape }}
+</pre></div>
+</blockquote>
+</td></tr></table>
+
+
+<hr>
+</div>
+<div class="subsection" id="slice">
+<div class="header">
+<p>
+Next: <a href="#force_002descape" accesskey="n" rel="next">force-escape</a>, Previous: <a href="#safe-escape" accesskey="p" rel="prev">safe, escape</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-slice"></span><span id="g_t4a"></span><span id="slice-1"></span><h4 class="subsection">8.2.22 slice</h4>
+
+
+<p>Returns a slice of a sequence (i.e. lists, vectors, strings)
+</p>
+<p>Uses the Common Lisp <code>cl-slice</code> library.
+</p>
+<p>Syntax:
+</p>
+<div class="example">
+<pre class="example">{{ seq | slice: slices }}
+</pre></div>
+
+<p>Each <code>slice</code> selects a subset of subscripts along the corresponding axis.
+</p>
+
+<ul class="no-bullet">
+<li>* A nonnegative integer selects the corresponding index, while a negative integer selects an index counting backwards from the last index:
+
+<div class="example">
+<pre class="example">{{ list | slice: 4 }}
+</pre></div>
+</li></ul>
+
+<p>if the list is <code>(1 2 3 4 5 6)</code> it will output <code>(5)</code>
+</p>
+
+<ul class="no-bullet">
+<li>* <code>(start . end)</code> to select a range.  When <code>end</code> is <code>NIL</code>, the last index is included.
+</li></ul>
+
+<p>Each boundary is resolved according to the other rules if applicable, so you can use negative integers:
+</p>
+<div class="example">
+<pre class="example">{{ string | slice: (0 . 5) }}
+{{ string | slice: (5 . nil) }}
+</pre></div>
+
+<p>if the string is <code>&quot;Hello world&quot;</code> is will output <code>Hello</code> and <code>world</code>.
+</p>
+
+<hr>
+</div>
+<div class="subsection" id="force_002descape">
+<div class="header">
+<p>
+Next: <a href="#format" accesskey="n" rel="next">format</a>, Previous: <a href="#slice" accesskey="p" rel="prev">slice</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-force_002descape"></span><span id="g_t4b"></span><span id="force_002descape-1"></span><h4 class="subsection">8.2.23 force-escape</h4>
+
+
+<p>Forces escaping HTML characters (<code>&lt;, &gt;, ', \, &amp;</code>):
+</p>
+<div class="example">
+<pre class="example">{{ value | force-escape }}
+</pre></div>
+
+<p>It calls <code>djula::escape-for-html</code>.
+</p>
+<hr>
+</div>
+<div class="subsection" id="format">
+<div class="header">
+<p>
+Next: <a href="#replace-_2026-with" accesskey="n" rel="next">replace … with</a>, Previous: <a href="#force_002descape" accesskey="p" rel="prev">force-escape</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-format"></span><span id="g_t4c"></span><span id="format-1"></span><h4 class="subsection">8.2.24 format</h4>
+
+
+<p>Formats the variable according to the argument, a string formatting specifier.
+This specifier uses Common Lisp string formatting syntax
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value | format:&quot;~:d&quot; }}
+</pre></div>
+
+<p>If <code>value</code> is <code>1000000</code>, the output will be <code>1,000,000</code>.
+</p>
+
+<hr>
+</div>
+<div class="subsection" id="replace-_2026-with">
+<div class="header">
+<p>
+Next: <a href="#rest" accesskey="n" rel="next">rest</a>, Previous: <a href="#format" accesskey="p" rel="prev">format</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-replace_002dwith"></span><span id="g_t4d"></span><span id="replace-_2026-with-1"></span><h4 class="subsection">8.2.25 replace … with</h4>
+
+
+<p>The <code>replace</code> and the <code>with</code> filters work together:
+</p>
+<div class="example">
+<pre class="example">{{ value | replace:regexp | with:string }}
+</pre></div>
+
+<p>This will replace all occurences of the regexp in “value” with a new
+string, using <code>ppcre:regex-replace-all</code>.
+</p>
+<hr>
+</div>
+<div class="subsection" id="rest">
+<div class="header">
+<p>
+Next: <a href="#scan" accesskey="n" rel="next">scan</a>, Previous: <a href="#replace-_2026-with" accesskey="p" rel="prev">replace … with</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-rest"></span><span id="g_t4e"></span><span id="rest-1"></span><h4 class="subsection">8.2.26 rest</h4>
+
+
+<p>Returns the <code>rest</code> of a list (aka <code>cdr</code>).
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ values|rest }}
+</pre></div>
+
+<p>If <code>values</code> is the list <code>(&quot;a&quot; &quot;b&quot; &quot;c&quot;)</code>, the output will be <code>(&quot;b&quot; &quot;c&quot;)</code>.
+</p>
+<hr>
+</div>
+<div class="subsection" id="scan">
+<div class="header">
+<p>
+Next: <a href="#time_003c2_003e" accesskey="n" rel="next">time</a>, Previous: <a href="#rest" accesskey="p" rel="prev">rest</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-scan"></span><span id="g_t4f"></span><span id="scan-1"></span><h4 class="subsection">8.2.27 scan</h4>
+
+
+<p>Extracts and displays a regexp from the value:
+</p>
+<div class="example">
+<pre class="example">{{ value | scan:regexp }}
+</pre></div>
+
+<p>This will display only the text that matches the regexp (using <code>ppcre:scan-to-strings</code>).
+</p>
+<hr>
+</div>
+<div class="subsection" id="time_003c2_003e">
+<div class="header">
+<p>
+Next: <a href="#truncatechars" accesskey="n" rel="next">truncatechars</a>, Previous: <a href="#scan" accesskey="p" rel="prev">scan</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-id4"></span><span id="g_t50"></span><span id="time-2"></span><h4 class="subsection">8.2.28 time</h4>
+
+
+<p>Formats a time according to the given format.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value | time }}
+</pre></div>
+
+
+<hr>
+</div>
+<div class="subsection" id="truncatechars">
+<div class="header">
+<p>
+Next: <a href="#upper" accesskey="n" rel="next">upper</a>, Previous: <a href="#time_003c2_003e" accesskey="p" rel="prev">time</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-truncatechars"></span><span id="g_t51"></span><span id="truncatechars-1"></span><h4 class="subsection">8.2.29 truncatechars</h4>
+
+
+<p>Truncates a string if it is longer than the specified number of characters.
+Truncated strings will end with the :cl:symbol:`ELLISION-STRING', which defaults to “…”.
+</p>
+<p>`Argument:' Number of characters to truncate to
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|truncatechars:9 }}
+</pre></div>
+
+<p>If <code>value</code> is <code>&quot;Joel is a slug&quot;</code>, the output will be <code>&quot;Joel i...&quot;</code>.
+</p>
+
+<hr>
+</div>
+<div class="subsection" id="upper">
+<div class="header">
+<p>
+Next: <a href="#urlencode" accesskey="n" rel="next">urlencode</a>, Previous: <a href="#truncatechars" accesskey="p" rel="prev">truncatechars</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-upper"></span><span id="g_t52"></span><span id="upper-1"></span><h4 class="subsection">8.2.30 upper</h4>
+
+
+<p>Converts a string into all uppercase.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|upper }}
+</pre></div>
+
+<p>If <code>value</code> is <code>&quot;Joel is a slug&quot;</code>, the output will be <code>&quot;JOEL IS A SLUG&quot;</code>.
+</p>
+<hr>
+</div>
+<div class="subsection" id="urlencode">
+<div class="header">
+<p>
+Previous: <a href="#upper" accesskey="p" rel="prev">upper</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-urlencode"></span><span id="g_t53"></span><span id="urlencode-1"></span><h4 class="subsection">8.2.31 urlencode</h4>
+
+
+<p>Escapes a value for use in a URL.
+</p>
+<p>For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|urlencode }}
+</pre></div>
+
+<p>If <code>value</code> is <code>&quot;http://www.example.org/foo?a=b&amp;c=d&quot;</code>, the output will be
+<code>&quot;http%3A//www.example.org/foo%3Fa%3Db%26c%3Dd&quot;</code>.
+</p>
+<p>An optional argument containing the characters which should not be escaped can
+be provided.
+</p>
+<p>If not provided, the ‘/’ character is assumed safe. An empty string can be
+provided when `all' characters should be escaped. For example:
+</p>
+<div class="example">
+<pre class="example">{{ value|urlencode:&quot;&quot; }}
+</pre></div>
+
+<p>If <code>value</code> is <code>&quot;http://www.example.org/&quot;</code>, the output will be
+<code>&quot;http%3A%2F%2Fwww.example.org%2F&quot;</code>.
+</p>
+
+<hr>
+</div>
+</div>
+<div class="section" id="Custom-filters">
+<div class="header">
+<p>
+Previous: <a href="#List-of-filters" accesskey="p" rel="prev">List of filters</a>, Up: <a href="#Filters" accesskey="u" rel="up">Filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="filters-custom_002dfilters"></span><span id="g_t54"></span><span id="Custom-filters-1"></span><h3 class="section">8.3 Custom filters</h3>
+
+
+<p>Use the <code>def-filter</code> macro. Its general form is:
+</p>
+<div class="example">
+<pre class="example">(def-filter :myfilter-name (value arg)
+   (body))
+</pre></div>
+
+<p>It always takes the variable’s value as argument, and it can have one
+required or optional argument. For example, this is how those
+built-in filters are defined:
+</p>
+<div class="example">
+<pre class="example">(def-filter :capfirst (val)
+  (string-capitalize (princ-to-string val)))
+</pre></div>
+
+<p>This is all there is to it. Once written, you can use it in your
+templates. You can define a filter wherever you want and there is no
+need to register it or to import it in your templates.
+</p>
+<p>Here’s a filter with a required argument:
+</p>
+<div class="example">
+<pre class="example">(def-filter :add (it n)
+  (+ it (parse-integer n)))
+</pre></div>
+
+<p>and with an optional one:
+</p>
+<div class="example">
+<pre class="example">(def-filter :datetime (it &amp;optional format)
+  (let ((timestamp …))))
+</pre></div>
+
+<p>When you need to pass a second argument, make your filter return a
+lambda function and chain it with the <code>with</code> filter:
+</p>
+<div class="example">
+<pre class="example">(def-filter :replace (it regex)
+   (lambda (replace)
+     (ppcre:regex-replace-all regex it replace)))
+
+(def-filter :with (it replace)
+   (funcall it replace))
+</pre></div>
+
+<p>Now we can write:
+</p>
+<div class="example">
+<pre class="example">{{ value | replace:foo | with:bar }}
+</pre></div>
+
+<p>Errors are handled by the macro, but you can handle them and return a
+<code>template-error</code> condition:
+</p>
+<div class="example">
+<pre class="example">(def-filter :handle-error-filter (it)
+   (handler-case
+         (do-something)
+     (condition (e)
+       (template-error &quot;There was an error executing this filter: ~A&quot; e))))
+</pre></div>
+
+</div>
+</div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Templates-composition.html#Templates-composition" accesskey="n" rel="next">Templates composition</a>, Previous: <a href="Verbatim.html" accesskey="p" rel="prev">Verbatim</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
 
 
 

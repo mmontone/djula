@@ -1,5 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<!-- This file redirects to the location of a node or anchor -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
@@ -9,22 +13,13 @@ Copyright (C) 2014, Nick Allen.
 Maintained by Mariano Montone.
 
  -->
-<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Overview (Djula HTML templating system)</title>
 
 <meta name="description" content="Overview (Djula HTML templating system)">
 <meta name="keywords" content="Overview (Djula HTML templating system)">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
-<meta name="Generator" content="texi2any">
-<link href="index.html" rel="start" title="Top">
-<link href="Index.html" rel="index" title="Index">
-<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
-<link href="Tags.html" rel="up" title="Tags">
-<link href="List-of-tags.html" rel="next" title="List of tags">
-<link href="Tags.html" rel="prev" title="Tags">
+<meta name="Generator" content="makeinfo">
 <style type="text/css">
 <!--
 /* Style-sheet to use for manuals (copied from Emacs) */
@@ -33,11 +28,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
-div.lisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
@@ -46,6 +41,7 @@ pre.menu-preformatted {font-family: serif}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
 ul.no-bullet {list-style: none}
 blockquote {
     font-style: normal;
@@ -118,67 +114,12 @@ body {
 -->
 </style>
 
+<meta http-equiv="Refresh" content="0; url=Tags.html#Overview">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 </head>
 
 <body lang="en">
-<span id="Overview"></span><div class="header">
-<p>
-Next: <a href="List-of-tags.html" accesskey="n" rel="next">List of tags</a>, Up: <a href="Tags.html" accesskey="u" rel="up">Tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html" title="Index" rel="index">Index</a>]</p>
-</div>
-<hr>
-<span id="tags-overview"></span><span id="g_t19"></span><span id="Overview-1"></span><h3 class="section">5.1 Overview</h3>
 
-
-<p>Tags look like this: <code>{% tag %}</code>. Tags are more complex than variables: Some
-create text in the output, some control flow by performing loops or logic, and
-some load external information into the template to be used by later variables.
-</p>
-<p>Some tags require beginning and ending tags (i.e. <code>{% tag %} ... tag contents
-... {% endtag %}</code>).
-</p>
-<p>Here are some of the more commonly used
-tags:
-</p>
-
-<dl compact="compact">
-<dt>&gt;&gt;:ttag:&lsquo;for&lsquo;&lt;&lt;</dt>
-<dd>
-<p>Loop over each item in an array. For example, to display a list of athletes
-provided in <code>athlete-list</code>:
-</p>
-<div class="example">
-<pre class="example">&lt;ul&gt;
-{% for athlete in athlete-list %}
-    &lt;li&gt;{{ athlete.name }}&lt;/li&gt;
-{% endfor %}
-&lt;/ul&gt;
-</pre></div>
-
-</dd>
-<dt>&gt;&gt;:ttag:&lsquo;if&lsquo;&lt;&lt;, <code>else</code></dt>
-<dd>
-<p>Evaluates a variable, and if that variable is “true” the contents of the
-block are displayed:
-</p>
-<div class="example">
-<pre class="example">{% if athlete-list %}
-    Number of athletes: {{ athlete-list|length }}
-{% else %}
-    No athletes.
-{% endif %}
-</pre></div>
-
-</dd>
-<dt>&gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; and &gt;&gt;:ttag:&lsquo;extends&lsquo;&lt;&lt;</dt>
-<dd>
-<p>Set up &gt;&gt;&lsquo;template inheritance&lsquo;_&lt;&lt; (see below), a powerful way
-of cutting down on “boilerplate” in templates.
-</p></dd>
-</dl>
-
-
-
-
+<p>The node you are looking for is at <a href="Tags.html#Overview">Overview</a>.</p>
 </body>
-</html>

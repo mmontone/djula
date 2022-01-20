@@ -1,5 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
@@ -9,22 +12,21 @@ Copyright (C) 2014, Nick Allen.
 Maintained by Mariano Montone.
 
  -->
-<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Templates composition (Djula HTML templating system)</title>
 
 <meta name="description" content="Templates composition (Djula HTML templating system)">
 <meta name="keywords" content="Templates composition (Djula HTML templating system)">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
-<meta name="Generator" content="texi2any">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
 <link href="index.html" rel="start" title="Top">
-<link href="Index.html" rel="index" title="Index">
+<link href="Symbol-Index.html" rel="index" title="Symbol Index">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="index.html" rel="up" title="Top">
-<link href="Template-inheritance.html" rel="next" title="Template inheritance">
-<link href="Custom-filters.html" rel="prev" title="Custom filters">
+<link href="Internationalization.html#Internationalization" rel="next" title="Internationalization">
+<link href="Filters.html#Filters" rel="prev" title="Filters">
 <style type="text/css">
 <!--
 /* Style-sheet to use for manuals (copied from Emacs) */
@@ -33,11 +35,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
-div.lisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
@@ -46,6 +48,7 @@ pre.menu-preformatted {font-family: serif}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
 ul.no-bullet {list-style: none}
 blockquote {
     font-style: normal;
@@ -122,20 +125,232 @@ body {
 </head>
 
 <body lang="en">
-<span id="Templates-composition"></span><div class="header">
+<div class="chapter" id="Templates-composition">
+<div class="header">
 <p>
-Next: <a href="Internationalization.html" accesskey="n" rel="next">Internationalization</a>, Previous: <a href="Filters.html" accesskey="p" rel="prev">Filters</a>, Up: <a href="index.html" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Internationalization.html#Internationalization" accesskey="n" rel="next">Internationalization</a>, Previous: <a href="Filters.html#Filters" accesskey="p" rel="prev">Filters</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<hr>
 <span id="Templates-composition-1"></span><h2 class="chapter">9 Templates composition</h2>
 
-<table class="menu" border="0" cellspacing="0">
-<tr><td align="left" valign="top">&bull; <a href="Template-inheritance.html" accesskey="1">Template inheritance</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Include.html" accesskey="2">Include</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-</table>
 
+<ul class="section-toc">
+<li><a href="#Template-inheritance" accesskey="1">Template inheritance</a></li>
+<li><a href="#Template-includes" accesskey="2">Including other templates</a></li>
+</ul>
+<hr>
+<div class="section" id="Template-inheritance">
+<div class="header">
+<p>
+Next: <a href="#Template-includes" accesskey="n" rel="next">Including other templates</a>, Up: <a href="#Templates-composition" accesskey="u" rel="up">Templates composition</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="inheritance-doc"></span><span id="g_t55"></span><span id="inheritance-template_002dinheritance"></span><span id="g_t56"></span><span id="Template-inheritance-1"></span><h3 class="section">9.1 Template inheritance</h3>
+
+
+<p>The most powerful – and thus the most complex – part of Djula’s template
+engine is template inheritance. Template inheritance allows you to build a base
+“skeleton” template that contains all the common elements of your site and
+defines `blocks' that child templates can override.
+</p>
+<p>You can also refactor independent template sections in their own file and `include' it in the main template, passing it the required arguments.
+</p>
+<p>It’s easiest to understand template inheritance by starting with an example:
+</p>
+<div class="example">
+<pre class="example">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot; /&gt;
+    &lt;title&gt;{% block title %}My amazing site{% endblock %}&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;sidebar&quot;&gt;
+        {% block sidebar %}
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;/blog/&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        {% endblock %}
+    &lt;/div&gt;
+
+    &lt;div id=&quot;content&quot;&gt;
+        {% block content %}{% endblock %}
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+
+<p>This template, which we’ll call <code>base.html</code>, defines a simple HTML skeleton
+document that you might use for a simple two-column page. It’s the job of
+“child” templates to fill the empty blocks with content.
+</p>
+<p>In this example, the &gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; tag defines three blocks that child
+templates can fill in. All the &gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; tag does is to tell the template
+engine that a child template may override those portions of the template.
+</p>
+<p>A child template might look like this:
+</p>
+<div class="example">
+<pre class="example">{% extends &quot;base.html&quot; %}
+
+{% block title %}My amazing blog{% endblock %}
+
+{% block content %}
+{% for entry in blog_entries %}
+    &lt;h2&gt;{{ entry.title }}&lt;/h2&gt;
+    &lt;p&gt;{{ entry.body }}&lt;/p&gt;
+{% endfor %}
+{% endblock %}
+</pre></div>
+
+<p>The &gt;&gt;:ttag:&lsquo;extends&lsquo;&lt;&lt; tag is the key here. It tells the template engine that
+this template “extends” another template. When the template system evaluates
+this template, first it locates the parent – in this case, “base.html”.
+</p>
+<p>At that point, the template engine will notice the three &gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; tags
+in <code>base.html</code> and replace those blocks with the contents of the child
+template. Depending on the value of <code>blog_entries</code>, the output might look
+like:
+</p>
+<div class="example">
+<pre class="example">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot; /&gt;
+    &lt;title&gt;My amazing blog&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;div id=&quot;sidebar&quot;&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;/blog/&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;content&quot;&gt;
+        &lt;h2&gt;Entry one&lt;/h2&gt;
+        &lt;p&gt;This is my first entry.&lt;/p&gt;
+
+        &lt;h2&gt;Entry two&lt;/h2&gt;
+        &lt;p&gt;This is my second entry.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+
+<p>Note that since the child template didn’t define the <code>sidebar</code> block, the
+value from the parent template is used instead. Content within a <code>{% block %}</code>
+tag in a parent template is always used as a fallback.
+</p>
+<p>You can use as many levels of inheritance as needed. One common way of using
+inheritance is the following three-level approach:
+</p>
+
+<ul class="no-bullet">
+<li>* Create a <code>base.html</code> template that holds the main look-and-feel of your
+site.
+
+</li><li>* Create a <code>base_SECTIONNAME.html</code> template for each “section” of your
+site. For example, <code>base_news.html</code>, <code>base_sports.html</code>. These
+templates all extend <code>base.html</code> and include section-specific
+styles/design.
+
+</li><li>* Create individual templates for each type of page, such as a news
+article or blog entry. These templates extend the appropriate section
+template.
+</li></ul>
+
+<p>This approach maximizes code reuse and makes it easy to add items to shared
+content areas, such as section-wide navigation.
+</p>
+<p>Here are some tips for working with inheritance:
+</p>
+
+<ul class="no-bullet">
+<li>* If you use &gt;&gt;:ttag:&lsquo;{% extends %}&lt;extends&gt;&lsquo;&lt;&lt; in a template, it must be the first template
+tag in that template. Template inheritance won’t work, otherwise.
+
+</li><li>* More &gt;&gt;:ttag:&lsquo;{% block %}&lt;block&gt;&lsquo;&lt;&lt; tags in your base templates are better. Remember,
+child templates don’t have to define all parent blocks, so you can fill
+in reasonable defaults in a number of blocks, then only define the ones
+you need later. It’s better to have more hooks than fewer hooks.
+
+</li><li>* If you find yourself duplicating content in a number of templates, it
+probably means you should move that content to a <code>{% block %}</code> in a
+parent template.
+
+</li><li>* If you need to get the content of the block from the parent template,
+the <code>{{ block.super }}</code> variable will do the trick. This is useful
+if you want to add to the contents of a parent block instead of
+completely overriding it. Data inserted using <code>{{ block.super }}</code> will
+not be automatically escaped (see the &gt;&gt;&lsquo;next section&lsquo;_&lt;&lt;), since it was
+already escaped, if necessary, in the parent template.
+
+</li><li>* For extra readability, you can optionally give a `name' to your
+<code>{% endblock %}</code> tag. For example:
+
+<div class="example">
+<pre class="example">{% block content %}
+...
+{% endblock content %}
+</pre></div>
+
+<p>In larger templates, this technique helps you see which <code>{% block %}</code>
+tags are being closed.
+</p></li></ul>
+
+<p>Finally, note that you can’t define multiple &gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; tags with the same
+name in the same template. This limitation exists because a block tag works in
+“both” directions. That is, a block tag doesn’t just provide a hole to fill –
+it also defines the content that fills the hole in the `parent'. If there were
+two similarly-named &gt;&gt;:ttag:&lsquo;block&lsquo;&lt;&lt; tags in a template, that template’s parent
+wouldn’t know which one of the blocks’ content to use.
+</p>
+<hr>
+</div>
+<div class="section" id="Template-includes">
+<div class="header">
+<p>
+Previous: <a href="#Template-inheritance" accesskey="p" rel="prev">Template inheritance</a>, Up: <a href="#Templates-composition" accesskey="u" rel="up">Templates composition</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="inheritance-include"></span><span id="g_t57"></span><span id="Including-other-templates"></span><h3 class="section">9.2 Including other templates</h3>
+
+
+<p><code>include</code> loads a template, renders it with the given (optional) variables and inserts its content into the calling template.
+</p>
+<p>For example, we have this first template that renders a list of blog entries:
+</p>
+<div class="example">
+<pre class="example">{% for entry in blog_entries %}
+    &lt;h2&gt;{{ entry.title }}&lt;/h2&gt;
+    &lt;p&gt;{{ entry.body }}&lt;/p&gt;
+{% endfor %}
+</pre></div>
+
+<p>During development, we realize that rendering a blog entry is more
+convoluted than first planned, so we want to `refactor' the blog
+entry template logic in its own file. And most of all, we plan on
+rendering a blog entry on another part of the site, so we want to
+`re-use' the rendering logic.
+</p>
+<p>We create a new template in <code>includes/blog-entry.html</code> and we use the <code>{% include %}</code> template tag, giving it an entry object as argument:
+</p>
+<div class="example">
+<pre class="example">{% for entry in blog_entries %}
+    {% include &quot;includes/blog-entry.html&quot; :entry entry %}
+{% endfor %}
+</pre></div>
+
+<p>See also the &gt;&gt;:ttag:&lsquo;ssi&lsquo;&lt;&lt; tag for Server-Side Includes.
+</p>
+</div>
+</div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="Internationalization.html#Internationalization" accesskey="n" rel="next">Internationalization</a>, Previous: <a href="Filters.html#Filters" accesskey="p" rel="prev">Filters</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
 
 
 

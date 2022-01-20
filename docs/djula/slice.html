@@ -1,5 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<!-- This file redirects to the location of a node or anchor -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
@@ -9,22 +13,13 @@ Copyright (C) 2014, Nick Allen.
 Maintained by Mariano Montone.
 
  -->
-<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>slice (Djula HTML templating system)</title>
 
 <meta name="description" content="slice (Djula HTML templating system)">
 <meta name="keywords" content="slice (Djula HTML templating system)">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
-<meta name="Generator" content="texi2any">
-<link href="index.html" rel="start" title="Top">
-<link href="Index.html" rel="index" title="Index">
-<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
-<link href="List-of-filters.html" rel="up" title="List of filters">
-<link href="force_002descape.html" rel="next" title="force-escape">
-<link href="safe-escape.html" rel="prev" title="safe escape">
+<meta name="Generator" content="makeinfo">
 <style type="text/css">
 <!--
 /* Style-sheet to use for manuals (copied from Emacs) */
@@ -33,11 +28,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
-div.lisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
@@ -46,6 +41,7 @@ pre.menu-preformatted {font-family: serif}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
 ul.no-bullet {list-style: none}
 blockquote {
     font-style: normal;
@@ -118,58 +114,12 @@ body {
 -->
 </style>
 
+<meta http-equiv="Refresh" content="0; url=Filters.html#slice">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 </head>
 
 <body lang="en">
-<span id="slice"></span><div class="header">
-<p>
-Next: <a href="force_002descape.html" accesskey="n" rel="next">force-escape</a>, Previous: <a href="safe-escape.html" accesskey="p" rel="prev">safe escape</a>, Up: <a href="List-of-filters.html" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html" title="Index" rel="index">Index</a>]</p>
-</div>
-<hr>
-<span id="filters-slice"></span><span id="g_t4a"></span><span id="slice-1"></span><h4 class="subsection">8.2.22 slice</h4>
 
-
-<p>Returns a slice of a sequence (i.e. lists, vectors, strings)
-</p>
-<p>Uses the Common Lisp <code>cl-slice</code> library.
-</p>
-<p>Syntax:
-</p>
-<div class="example">
-<pre class="example">{{ seq | slice: slices }}
-</pre></div>
-
-<p>Each <code>slice</code> selects a subset of subscripts along the corresponding axis.
-</p>
-
-<ul class="no-bullet">
-<li>* A nonnegative integer selects the corresponding index, while a negative integer selects an index counting backwards from the last index:
-
-<div class="example">
-<pre class="example">{{ list | slice: 4 }}
-</pre></div>
-</li></ul>
-
-<p>if the list is <code>(1 2 3 4 5 6)</code> it will output <code>(5)</code>
-</p>
-
-<ul class="no-bullet">
-<li>* <code>(start . end)</code> to select a range.  When <code>end</code> is <code>NIL</code>, the last index is included.
-</li></ul>
-
-<p>Each boundary is resolved according to the other rules if applicable, so you can use negative integers:
-</p>
-<div class="example">
-<pre class="example">{{ string | slice: (0 . 5) }}
-{{ string | slice: (5 . nil) }}
-</pre></div>
-
-<p>if the string is <code>&quot;Hello world&quot;</code> is will output <code>Hello</code> and <code>world</code>.
-</p>
-
-
-
-
+<p>The node you are looking for is at <a href="Filters.html#slice">slice</a>.</p>
 </body>
-</html>

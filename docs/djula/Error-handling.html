@@ -1,5 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
@@ -9,22 +12,21 @@ Copyright (C) 2014, Nick Allen.
 Maintained by Mariano Montone.
 
  -->
-<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Error handling (Djula HTML templating system)</title>
 
 <meta name="description" content="Error handling (Djula HTML templating system)">
 <meta name="keywords" content="Error handling (Djula HTML templating system)">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
-<meta name="Generator" content="texi2any">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
 <link href="index.html" rel="start" title="Top">
-<link href="Index.html" rel="index" title="Index">
+<link href="Symbol-Index.html" rel="index" title="Symbol Index">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="index.html" rel="up" title="Top">
-<link href="API_003c2_003e.html" rel="next" title="API&lt;2&gt;">
-<link href="Backends.html" rel="prev" title="Backends">
+<link href="API_003c3_003e.html" rel="next" title="API&lt;3&gt;">
+<link href="Internationalization.html#Internationalization" rel="prev" title="Internationalization">
 <style type="text/css">
 <!--
 /* Style-sheet to use for manuals (copied from Emacs) */
@@ -33,11 +35,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
-div.lisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
@@ -46,6 +48,7 @@ pre.menu-preformatted {font-family: serif}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
 ul.no-bullet {list-style: none}
 blockquote {
     font-style: normal;
@@ -122,11 +125,11 @@ body {
 </head>
 
 <body lang="en">
-<span id="Error-handling"></span><div class="header">
+<div class="chapter" id="Error-handling">
+<div class="header">
 <p>
-Next: <a href="API_003c3_003e.html" accesskey="n" rel="next">API&lt;3&gt;</a>, Previous: <a href="Internationalization.html" accesskey="p" rel="prev">Internationalization</a>, Up: <a href="index.html" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="API_003c3_003e.html" accesskey="n" rel="next">API</a>, Previous: <a href="Internationalization.html#Internationalization" accesskey="p" rel="prev">Internationalization</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<hr>
 <span id="error_002dhandling-doc"></span><span id="g_t62"></span><span id="error_002dhandling-error_002dhandling"></span><span id="g_t63"></span><span id="Error-handling-1"></span><h2 class="chapter">11 Error handling</h2>
 
 
@@ -138,13 +141,41 @@ Next: <a href="API_003c3_003e.html" accesskey="n" rel="next">API&lt;3&gt;</a>, P
 </p>
 <p>Also, there’s a fancy page to display errors, which can be disabled if desired. That is controlled via the variable <a href="API_003c3_003e.html#g_t66">*FANCY-ERROR-TEMPLATE-P*</a>
 </p>
-<table class="menu" border="0" cellspacing="0">
-<tr><td align="left" valign="top">&bull; <a href="API_003c2_003e.html" accesskey="1">API</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
 
-</pre></th></tr></table>
+<ul class="section-toc">
+<li><a href="#API_003c2_003e" accesskey="1">API</a></li>
+</ul>
+<hr>
+<div class="section" id="API_003c2_003e">
+<div class="header">
+<p>
+Up: <a href="#Error-handling" accesskey="u" rel="up">Error handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="error_002dhandling-api"></span><span id="g_t67"></span><span id="API-2"></span><h3 class="section">11.1 API</h3>
 
+
+
+<dl class="def">
+<dt id="index-_002acatch_002dtemplate_002derrors_002dp_002a"><span class="category">Common Lisp Variable: </span><span><strong>*catch<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->errors<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002acatch_002dtemplate_002derrors_002dp_002a' class='copiable-anchor'> &para;</a></span></dt>
+</dl>
+
+
+<dl class="def">
+<dt id="index-_002afancy_002derror_002dtemplate_002dp_002a"><span class="category">Common Lisp Variable: </span><span><strong>*fancy<span class="nolinebreak">-</span><!-- /@w -->error<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002afancy_002derror_002dtemplate_002dp_002a' class='copiable-anchor'> &para;</a></span></dt>
+</dl>
+
+
+<dl class="def">
+<dt id="index-_002averbose_002derrors_002dp_002a"><span class="category">Common Lisp Variable: </span><span><strong>*verbose<span class="nolinebreak">-</span><!-- /@w -->errors<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002averbose_002derrors_002dp_002a' class='copiable-anchor'> &para;</a></span></dt>
+</dl>
+
+</div>
+</div>
+<hr>
+<div class="header">
+<p>
+Next: <a href="API_003c3_003e.html" accesskey="n" rel="next">API</a>, Previous: <a href="Internationalization.html#Internationalization" accesskey="p" rel="prev">Internationalization</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
 
 
 
