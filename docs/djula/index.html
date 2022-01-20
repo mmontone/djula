@@ -1,5 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
@@ -9,20 +12,19 @@ Copyright (C) 2014, Nick Allen.
 Maintained by Mariano Montone.
 
  -->
-<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Top (Djula HTML templating system)</title>
 
 <meta name="description" content="Top (Djula HTML templating system)">
 <meta name="keywords" content="Top (Djula HTML templating system)">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
-<meta name="Generator" content="texi2any">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
 <link href="#Top" rel="start" title="Top">
-<link href="Index.html" rel="index" title="Index">
+<link href="Symbol-Index.html" rel="index" title="Symbol Index">
 <link href="#SEC_Contents" rel="contents" title="Table of Contents">
-<link href="Introduction.html" rel="next" title="Introduction">
+<link href="Introduction.html#Introduction" rel="next" title="Introduction">
 <style type="text/css">
 <!--
 /* Style-sheet to use for manuals (copied from Emacs) */
@@ -31,11 +33,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
-div.lisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
@@ -44,6 +46,7 @@ pre.menu-preformatted {font-family: serif}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
 ul.no-bullet {list-style: none}
 blockquote {
     font-style: normal;
@@ -124,128 +127,14 @@ body {
 
 
 
-<span id="SEC_Contents"></span>
-<h2 class="contents-heading">Table of Contents</h2>
-
-<div class="contents">
-
-<ul class="no-bullet">
-  <li><a id="toc-Introduction-1" href="Introduction.html#Introduction">1 Introduction</a>
-  <ul class="no-bullet">
-    <li><a id="toc-Prerequisites-1" href="Prerequisites.html#Prerequisites">1.1 Prerequisites</a></li>
-    <li><a id="toc-Installation-1" href="Installation.html#Installation">1.2 Installation</a></li>
-  </ul></li>
-  <li><a id="toc-Basics-1" href="Basics.html#Basics">2 Basics</a></li>
-  <li><a id="toc-Usage-1" href="Usage.html#Usage">3 Usage</a>
-  <ul class="no-bullet">
-    <li><a id="toc-Auto_002dreload-1" href="Auto_002dreload.html#Auto_002dreload">3.1 Auto-reload</a></li>
-    <li><a id="toc-API-1" href="API.html#API">3.2 API</a></li>
-  </ul></li>
-  <li><a id="toc-Variables-1" href="Variables.html#Variables">4 Variables</a>
-  <ul class="no-bullet">
-    <li><a id="toc-Default-template-variables-1" href="Default-template-variables.html#Default-template-variables">4.1 Default template variables</a></li>
-  </ul></li>
-  <li><a id="toc-Tags-1" href="Tags.html#Tags">5 Tags</a>
-  <ul class="no-bullet">
-    <li><a id="toc-Overview-1" href="Overview.html#Overview">5.1 Overview</a></li>
-    <li><a id="toc-List-of-tags-1" href="List-of-tags.html#List-of-tags">5.2 List of tags</a>
-    <ul class="no-bullet">
-      <li><a id="toc-block-1" href="block.html#block">5.2.1 block</a></li>
-      <li><a id="toc-extends-1" href="extends.html#extends">5.2.2 extends</a></li>
-      <li><a id="toc-super-1" href="super.html#super">5.2.3 super</a></li>
-      <li><a id="toc-comment-1" href="comment.html#comment">5.2.4 comment</a></li>
-      <li><a id="toc-cycle-1" href="cycle.html#cycle">5.2.5 cycle</a></li>
-      <li><a id="toc-debug-1" href="debug.html#debug">5.2.6 debug</a></li>
-      <li><a id="toc-filter-1" href="filter.html#filter">5.2.7 filter</a></li>
-      <li><a id="toc-firstof-1" href="firstof.html#firstof">5.2.8 firstof</a></li>
-      <li><a id="toc-for-1" href="for.html#for">5.2.9 for</a></li>
-      <li><a id="toc-if-1" href="if.html#if">5.2.10 if</a></li>
-      <li><a id="toc-Boolean-operators-1" href="Boolean-operators.html#Boolean-operators">5.2.11 Boolean operators</a></li>
-      <li><a id="toc-ifchanged-1" href="ifchanged.html#ifchanged">5.2.12 ifchanged</a></li>
-      <li><a id="toc-ifequal-1" href="ifequal.html#ifequal">5.2.13 ifequal</a></li>
-      <li><a id="toc-ifnotequal-1" href="ifnotequal.html#ifnotequal">5.2.14 ifnotequal</a></li>
-      <li><a id="toc-include-1" href="include.html#include">5.2.15 include</a></li>
-    </ul></li>
-    <li><a id="toc-Custom-tags-1" href="Custom-tags.html#Custom-tags">5.3 Custom tags</a></li>
-  </ul></li>
-  <li><a id="toc-Comments-1" href="Comments.html#Comments">6 Comments</a></li>
-  <li><a id="toc-Verbatim-1" href="Verbatim.html#Verbatim">7 Verbatim</a></li>
-  <li><a id="toc-Filters-1" href="Filters.html#Filters">8 Filters</a>
-  <ul class="no-bullet">
-    <li><a id="toc-Overview-2" href="Overview_003c2_003e.html#Overview_003c2_003e">8.1 Overview</a></li>
-    <li><a id="toc-List-of-filters-1" href="List-of-filters.html#List-of-filters">8.2 List of filters</a>
-    <ul class="no-bullet">
-      <li><a id="toc-add-1" href="add.html#add">8.2.1 add</a></li>
-      <li><a id="toc-addslashes-1" href="addslashes.html#addslashes">8.2.2 addslashes</a></li>
-      <li><a id="toc-capfirst-1" href="capfirst.html#capfirst">8.2.3 capfirst</a></li>
-      <li><a id="toc-cut-1" href="cut.html#cut">8.2.4 cut</a></li>
-      <li><a id="toc-date-1" href="date.html#date">8.2.5 date</a></li>
-      <li><a id="toc-time-1" href="time.html#time">8.2.6 time</a></li>
-      <li><a id="toc-datetime-1" href="datetime.html#datetime">8.2.7 datetime</a></li>
-      <li><a id="toc-default-1" href="default.html#default">8.2.8 default</a></li>
-      <li><a id="toc-reverse-1" href="reverse.html#reverse">8.2.9 reverse</a></li>
-      <li><a id="toc-divisibleby-1" href="divisibleby.html#divisibleby">8.2.10 divisibleby</a></li>
-      <li><a id="toc-sort-1" href="sort.html#sort">8.2.11 sort</a></li>
-      <li><a id="toc-first-1" href="first.html#first">8.2.12 first</a></li>
-      <li><a id="toc-join-1" href="join.html#join">8.2.13 join</a></li>
-      <li><a id="toc-last-1" href="last.html#last">8.2.14 last</a></li>
-      <li><a id="toc-length-1" href="length.html#length">8.2.15 length</a></li>
-      <li><a id="toc-length_005fis-1" href="length_005fis.html#length_005fis">8.2.16 length_is</a></li>
-      <li><a id="toc-linebreaks-1" href="linebreaks.html#linebreaks">8.2.17 linebreaks</a></li>
-      <li><a id="toc-linebreaksbr-1" href="linebreaksbr.html#linebreaksbr">8.2.18 linebreaksbr</a></li>
-      <li><a id="toc-lower-1" href="lower.html#lower">8.2.19 lower</a></li>
-      <li><a id="toc-make_005flist-1" href="make_005flist.html#make_005flist">8.2.20 make_list</a></li>
-      <li><a id="toc-safe_002c-escape" href="safe-escape.html#safe-escape">8.2.21 safe, escape</a></li>
-      <li><a id="toc-slice-1" href="slice.html#slice">8.2.22 slice</a></li>
-      <li><a id="toc-force_002descape-1" href="force_002descape.html#force_002descape">8.2.23 force-escape</a></li>
-      <li><a id="toc-format-1" href="format.html#format">8.2.24 format</a></li>
-      <li><a id="toc-replace-_2026-with-1" href="replace-_2026-with.html#replace-_2026-with">8.2.25 replace … with</a></li>
-      <li><a id="toc-rest-1" href="rest.html#rest">8.2.26 rest</a></li>
-      <li><a id="toc-scan-1" href="scan.html#scan">8.2.27 scan</a></li>
-      <li><a id="toc-time-2" href="time_003c2_003e.html#time_003c2_003e">8.2.28 time</a></li>
-      <li><a id="toc-truncatechars-1" href="truncatechars.html#truncatechars">8.2.29 truncatechars</a></li>
-      <li><a id="toc-upper-1" href="upper.html#upper">8.2.30 upper</a></li>
-      <li><a id="toc-urlencode-1" href="urlencode.html#urlencode">8.2.31 urlencode</a></li>
-    </ul></li>
-    <li><a id="toc-Custom-filters-1" href="Custom-filters.html#Custom-filters">8.3 Custom filters</a></li>
-  </ul></li>
-  <li><a id="toc-Templates-composition-1" href="Templates-composition.html#Templates-composition">9 Templates composition</a>
-  <ul class="no-bullet">
-    <li><a id="toc-Template-inheritance-1" href="Template-inheritance.html#Template-inheritance">9.1 Template inheritance</a></li>
-    <li><a id="toc-Including-other-templates" href="Include.html#Include">9.2 Including other templates</a></li>
-  </ul></li>
-  <li><a id="toc-Internationalization-1" href="Internationalization.html#Internationalization">10 Internationalization</a>
-  <ul class="no-bullet">
-    <li><a id="toc-Syntax-1" href="Syntax.html#Syntax">10.1 Syntax</a></li>
-    <li><a id="toc-Tags-2" href="Tags_003c2_003e.html#Tags_003c2_003e">10.2 Tags</a>
-    <ul class="no-bullet">
-      <li><a id="toc-trans-1" href="trans.html#trans">10.2.1 trans</a></li>
-    </ul></li>
-    <li><a id="toc-Filters-2" href="Filters_003c2_003e.html#Filters_003c2_003e">10.3 Filters</a>
-    <ul class="no-bullet">
-      <li><a id="toc-trans-2" href="trans_003c2_003e.html#trans_003c2_003e">10.3.1 trans</a></li>
-    </ul></li>
-    <li><a id="toc-Choosing-language-1" href="Choosing-language.html#Choosing-language">10.4 Choosing language</a></li>
-    <li><a id="toc-Backends-1" href="Backends.html#Backends">10.5 Backends</a></li>
-  </ul></li>
-  <li><a id="toc-Error-handling-1" href="Error-handling.html#Error-handling">11 Error handling</a>
-  <ul class="no-bullet">
-    <li><a id="toc-API-2" href="API_003c2_003e.html#API_003c2_003e">11.1 API</a></li>
-  </ul></li>
-  <li><a id="toc-API-3" href="API_003c3_003e.html#API_003c3_003e">12 API</a></li>
-  <li><a id="toc-Indices-and-tables-1" href="Indices-and-tables.html#Indices-and-tables">Indices and tables</a></li>
-  <li><a id="toc-Index-1" href="Index.html#Index" rel="index">Index</a></li>
-</ul>
-</div>
 
 
 
-
-<span id="Top"></span><div class="header">
+<div class="top" id="Top">
+<div class="header">
 <p>
-Next: <a href="Introduction.html" accesskey="n" rel="next">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<hr>
 <span id="Djula-HTML-templating-system"></span><h1 class="top">Djula HTML templating system</h1>
 <blockquote>
 <p>Djula HTML templating system 0.2, Oct 21, 2021
@@ -264,227 +153,125 @@ Next: <a href="Introduction.html" accesskey="n" rel="next">Introduction</a> &nbs
 </p>
 <p>Contents:
 </p>
-<table class="menu" border="0" cellspacing="0">
-<tr><td align="left" valign="top">&bull; <a href="Introduction.html" accesskey="1">Introduction</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Basics.html" accesskey="2">Basics</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Usage.html" accesskey="3">Usage</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Variables.html" accesskey="4">Variables</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Tags.html" accesskey="5">Tags</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Comments.html" accesskey="6">Comments</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Verbatim.html" accesskey="7">Verbatim</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Filters.html" accesskey="8">Filters</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Templates-composition.html" accesskey="9">Templates composition</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Internationalization.html">Internationalization</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Error-handling.html">Error handling</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="API_003c3_003e.html">API</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Indices-and-tables.html">Indices and tables</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Index.html" rel="index">Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
 
-</pre></th></tr><tr><th colspan="3" align="left" valign="top"><pre class="menu-comment"> &mdash; The Detailed Node Listing &mdash;
+<div class="Contents_element" id="SEC_Contents">
+<h2 class="contents-heading">Table of Contents</h2>
 
-Introduction
+<div class="contents">
 
-</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Prerequisites.html">Prerequisites</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Installation.html">Installation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
-
-Usage
-
-</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Auto_002dreload.html">Auto-reload</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="API.html">API</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
-
-Variables
-
-</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Default-template-variables.html">Default template variables</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
-
-Tags
-
-</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Overview.html">Overview</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="List-of-tags.html">List of tags</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Custom-tags.html">Custom tags</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
-
-List of tags
-
-</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="block.html">block</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="extends.html">extends</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="super.html">super</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="comment.html">comment</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="cycle.html">cycle</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="debug.html">debug</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="filter.html">filter</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="firstof.html">firstof</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="for.html">for</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="if.html">if</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Boolean-operators.html">Boolean operators</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="ifchanged.html">ifchanged</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="ifequal.html">ifequal</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="ifnotequal.html">ifnotequal</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="include.html">include</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
-
-Filters
-
-</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Overview_003c2_003e.html">Overview</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="List-of-filters.html">List of filters</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Custom-filters.html">Custom filters</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
-
-List of filters
-
-</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="add.html">add</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="addslashes.html">addslashes</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="capfirst.html">capfirst</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="cut.html">cut</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="date.html">date</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="time.html">time</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="datetime.html">datetime</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="default.html">default</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="reverse.html">reverse</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="divisibleby.html">divisibleby</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="sort.html">sort</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="first.html">first</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="join.html">join</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="last.html">last</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="length.html">length</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="length_005fis.html">length_is</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="linebreaks.html">linebreaks</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="linebreaksbr.html">linebreaksbr</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="lower.html">lower</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="make_005flist.html">make_list</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="safe-escape.html">safe, escape</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="slice.html">slice</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="force_002descape.html">force-escape</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="format.html">format</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="replace-_2026-with.html">replace … with</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="rest.html">rest</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="scan.html">scan</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="time_003c2_003e.html">time</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="truncatechars.html">truncatechars</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="upper.html">upper</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="urlencode.html">urlencode</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
-
-Templates composition
-
-</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Template-inheritance.html">Template inheritance</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Include.html">Include</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
-
-Internationalization
-
-</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Syntax.html">Syntax</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Tags_003c2_003e.html">Tags</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Filters_003c2_003e.html">Filters</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Choosing-language.html">Choosing language</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Backends.html">Backends</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
-
-Tags
-
-</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="trans.html">trans</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
-
-Filters
-
-</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="trans_003c2_003e.html">trans</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
-
-Error handling
-
-</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="API_003c2_003e.html">API</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
-
-</pre></th></tr></table>
-
+<ul class="no-bullet">
+  <li><a id="toc-Introduction-1" href="Introduction.html#Introduction">1 Introduction</a>
+  <ul class="no-bullet">
+    <li><a id="toc-Prerequisites-1" href="Introduction.html#Prerequisites">1.1 Prerequisites</a></li>
+    <li><a id="toc-Installation-1" href="Introduction.html#Installation">1.2 Installation</a></li>
+  </ul></li>
+  <li><a id="toc-Basics-1" href="Basics.html">2 Basics</a></li>
+  <li><a id="toc-Usage-1" href="Usage.html#Usage">3 Usage</a>
+  <ul class="no-bullet">
+    <li><a id="toc-Auto_002dreload-1" href="Usage.html#Auto_002dreload">3.1 Auto-reload</a></li>
+    <li><a id="toc-API-1" href="Usage.html#API">3.2 API</a></li>
+  </ul></li>
+  <li><a id="toc-Variables-1" href="Variables.html#Variables">4 Variables</a>
+  <ul class="no-bullet">
+    <li><a id="toc-Default-template-variables-1" href="Variables.html#Default-template-variables">4.1 Default template variables</a></li>
+  </ul></li>
+  <li><a id="toc-Tags-1" href="Tags.html#Tags">5 Tags</a>
+  <ul class="no-bullet">
+    <li><a id="toc-Overview-1" href="Tags.html#Overview">5.1 Overview</a></li>
+    <li><a id="toc-List-of-tags-1" href="Tags.html#List-of-tags">5.2 List of tags</a>
+    <ul class="no-bullet">
+      <li><a id="toc-block-1" href="Tags.html#block">5.2.1 block</a></li>
+      <li><a id="toc-extends-1" href="Tags.html#extends">5.2.2 extends</a></li>
+      <li><a id="toc-super-1" href="Tags.html#super">5.2.3 super</a></li>
+      <li><a id="toc-comment-1" href="Tags.html#comment">5.2.4 comment</a></li>
+      <li><a id="toc-cycle-1" href="Tags.html#cycle">5.2.5 cycle</a></li>
+      <li><a id="toc-debug-1" href="Tags.html#debug">5.2.6 debug</a></li>
+      <li><a id="toc-filter-1" href="Tags.html#filter">5.2.7 filter</a></li>
+      <li><a id="toc-firstof-1" href="Tags.html#firstof">5.2.8 firstof</a></li>
+      <li><a id="toc-for-1" href="Tags.html#for">5.2.9 for</a></li>
+      <li><a id="toc-if-1" href="Tags.html#if">5.2.10 if</a></li>
+      <li><a id="toc-Boolean-operators-1" href="Tags.html#Boolean-operators">5.2.11 Boolean operators</a></li>
+      <li><a id="toc-ifchanged-1" href="Tags.html#ifchanged">5.2.12 ifchanged</a></li>
+      <li><a id="toc-ifequal-1" href="Tags.html#ifequal">5.2.13 ifequal</a></li>
+      <li><a id="toc-ifnotequal-1" href="Tags.html#ifnotequal">5.2.14 ifnotequal</a></li>
+      <li><a id="toc-include-1" href="Tags.html#include">5.2.15 include</a></li>
+    </ul></li>
+    <li><a id="toc-Custom-tags-1" href="Tags.html#Custom-tags">5.3 Custom tags</a></li>
+  </ul></li>
+  <li><a id="toc-Comments-1" href="Comments.html">6 Comments</a></li>
+  <li><a id="toc-Verbatim-1" href="Verbatim.html">7 Verbatim</a></li>
+  <li><a id="toc-Filters-1" href="Filters.html#Filters">8 Filters</a>
+  <ul class="no-bullet">
+    <li><a id="toc-Overview-2" href="Filters.html#Overview_003c2_003e">8.1 Overview</a></li>
+    <li><a id="toc-List-of-filters-1" href="Filters.html#List-of-filters">8.2 List of filters</a>
+    <ul class="no-bullet">
+      <li><a id="toc-add-1" href="Filters.html#add">8.2.1 add</a></li>
+      <li><a id="toc-addslashes-1" href="Filters.html#addslashes">8.2.2 addslashes</a></li>
+      <li><a id="toc-capfirst-1" href="Filters.html#capfirst">8.2.3 capfirst</a></li>
+      <li><a id="toc-cut-1" href="Filters.html#cut">8.2.4 cut</a></li>
+      <li><a id="toc-date-1" href="Filters.html#date">8.2.5 date</a></li>
+      <li><a id="toc-time-1" href="Filters.html#time">8.2.6 time</a></li>
+      <li><a id="toc-datetime-1" href="Filters.html#datetime">8.2.7 datetime</a></li>
+      <li><a id="toc-default-1" href="Filters.html#default">8.2.8 default</a></li>
+      <li><a id="toc-reverse-1" href="Filters.html#reverse">8.2.9 reverse</a></li>
+      <li><a id="toc-divisibleby-1" href="Filters.html#divisibleby">8.2.10 divisibleby</a></li>
+      <li><a id="toc-sort-1" href="Filters.html#sort">8.2.11 sort</a></li>
+      <li><a id="toc-first-1" href="Filters.html#first">8.2.12 first</a></li>
+      <li><a id="toc-join-1" href="Filters.html#join">8.2.13 join</a></li>
+      <li><a id="toc-last-1" href="Filters.html#last">8.2.14 last</a></li>
+      <li><a id="toc-length-1" href="Filters.html#length">8.2.15 length</a></li>
+      <li><a id="toc-length_005fis-1" href="Filters.html#length_005fis">8.2.16 length_is</a></li>
+      <li><a id="toc-linebreaks-1" href="Filters.html#linebreaks">8.2.17 linebreaks</a></li>
+      <li><a id="toc-linebreaksbr-1" href="Filters.html#linebreaksbr">8.2.18 linebreaksbr</a></li>
+      <li><a id="toc-lower-1" href="Filters.html#lower">8.2.19 lower</a></li>
+      <li><a id="toc-make_005flist-1" href="Filters.html#make_005flist">8.2.20 make_list</a></li>
+      <li><a id="toc-safe_002c-escape" href="Filters.html#safe-escape">8.2.21 safe, escape</a></li>
+      <li><a id="toc-slice-1" href="Filters.html#slice">8.2.22 slice</a></li>
+      <li><a id="toc-force_002descape-1" href="Filters.html#force_002descape">8.2.23 force-escape</a></li>
+      <li><a id="toc-format-1" href="Filters.html#format">8.2.24 format</a></li>
+      <li><a id="toc-replace-_2026-with-1" href="Filters.html#replace-_2026-with">8.2.25 replace … with</a></li>
+      <li><a id="toc-rest-1" href="Filters.html#rest">8.2.26 rest</a></li>
+      <li><a id="toc-scan-1" href="Filters.html#scan">8.2.27 scan</a></li>
+      <li><a id="toc-time-2" href="Filters.html#time_003c2_003e">8.2.28 time</a></li>
+      <li><a id="toc-truncatechars-1" href="Filters.html#truncatechars">8.2.29 truncatechars</a></li>
+      <li><a id="toc-upper-1" href="Filters.html#upper">8.2.30 upper</a></li>
+      <li><a id="toc-urlencode-1" href="Filters.html#urlencode">8.2.31 urlencode</a></li>
+    </ul></li>
+    <li><a id="toc-Custom-filters-1" href="Filters.html#Custom-filters">8.3 Custom filters</a></li>
+  </ul></li>
+  <li><a id="toc-Templates-composition-1" href="Templates-composition.html#Templates-composition">9 Templates composition</a>
+  <ul class="no-bullet">
+    <li><a id="toc-Template-inheritance-1" href="Templates-composition.html#Template-inheritance">9.1 Template inheritance</a></li>
+    <li><a id="toc-Including-other-templates" href="Templates-composition.html#Template-includes">9.2 Including other templates</a></li>
+  </ul></li>
+  <li><a id="toc-Internationalization-1" href="Internationalization.html#Internationalization">10 Internationalization</a>
+  <ul class="no-bullet">
+    <li><a id="toc-Syntax-1" href="Internationalization.html#Syntax">10.1 Syntax</a></li>
+    <li><a id="toc-Tags-2" href="Internationalization.html#Tags_003c2_003e">10.2 Tags</a>
+    <ul class="no-bullet">
+      <li><a id="toc-trans-1" href="Internationalization.html#trans">10.2.1 trans</a></li>
+    </ul></li>
+    <li><a id="toc-Filters-2" href="Internationalization.html#Filters_003c2_003e">10.3 Filters</a>
+    <ul class="no-bullet">
+      <li><a id="toc-trans-2" href="Internationalization.html#trans_003c2_003e">10.3.1 trans</a></li>
+    </ul></li>
+    <li><a id="toc-Choosing-language-1" href="Internationalization.html#Choosing-language">10.4 Choosing language</a></li>
+    <li><a id="toc-Backends-1" href="Internationalization.html#Backends">10.5 Backends</a></li>
+  </ul></li>
+  <li><a id="toc-Error-handling-1" href="Error-handling.html#Error-handling">11 Error handling</a>
+  <ul class="no-bullet">
+    <li><a id="toc-API-2" href="Error-handling.html#API_003c2_003e">11.1 API</a></li>
+  </ul></li>
+  <li><a id="toc-API-3" href="API_003c3_003e.html">12 API</a></li>
+  <li><a id="toc-Symbol-Index-1" href="Symbol-Index.html" rel="index">Symbol Index</a></li>
+</ul>
+</div>
+</div>
+</div>
 <hr>
 <div class="header">
 <p>
-Next: <a href="Introduction.html" accesskey="n" rel="next">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

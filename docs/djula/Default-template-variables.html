@@ -1,5 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<!-- This file redirects to the location of a node or anchor -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
@@ -9,22 +13,13 @@ Copyright (C) 2014, Nick Allen.
 Maintained by Mariano Montone.
 
  -->
-<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Default template variables (Djula HTML templating system)</title>
 
 <meta name="description" content="Default template variables (Djula HTML templating system)">
 <meta name="keywords" content="Default template variables (Djula HTML templating system)">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
-<meta name="Generator" content="texi2any">
-<link href="index.html" rel="start" title="Top">
-<link href="Index.html" rel="index" title="Index">
-<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
-<link href="Variables.html" rel="up" title="Variables">
-<link href="Tags.html" rel="next" title="Tags">
-<link href="Variables.html" rel="prev" title="Variables">
+<meta name="Generator" content="makeinfo">
 <style type="text/css">
 <!--
 /* Style-sheet to use for manuals (copied from Emacs) */
@@ -33,11 +28,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
-div.lisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
@@ -46,6 +41,7 @@ pre.menu-preformatted {font-family: serif}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
 ul.no-bullet {list-style: none}
 blockquote {
     font-style: normal;
@@ -118,37 +114,12 @@ body {
 -->
 </style>
 
+<meta http-equiv="Refresh" content="0; url=Variables.html#Default-template-variables">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 </head>
 
 <body lang="en">
-<span id="Default-template-variables"></span><div class="header">
-<p>
-Up: <a href="Variables.html" accesskey="u" rel="up">Variables</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html" title="Index" rel="index">Index</a>]</p>
-</div>
-<hr>
-<span id="variables-default_002dtemplate_002dvariables"></span><span id="g_t16"></span><span id="Default-template-variables-1"></span><h3 class="section">4.1 Default template variables</h3>
 
-
-<p>You can use the <code>*default-template-arguments*</code> variable to store arguments that will be available for all templates. It is a plist, so use getf to add arguments, like this:
-</p>
-<div class="example">
-<pre class="example">(setf (getf djula:*default-template-arguments* :foo) 'some-value)
-</pre></div>
-
-<p>And now, you can access <code>{{ foo }}</code> in your template.
-</p>
-<p>This is useful when you have many templates that rely on the same set of variables. Use this variable to refactor your code when appropriate.
-</p>
-<p>Note that you could also write a function that wraps <code>render-template*</code> and uses a default list of variables plus other ones given as arguments:
-</p>
-<div class="example">
-<pre class="example">(defun my-render-template (template stream &amp;rest args)
-  (apply #'djula:render-template* template stream (list* :foo 'some-value args)))
-</pre></div>
-
-
-
-
+<p>The node you are looking for is at <a href="Variables.html#Default-template-variables">Default template variables</a>.</p>
 </body>
-</html>

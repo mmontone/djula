@@ -1,5 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<!-- This file redirects to the location of a node or anchor -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
@@ -9,22 +13,13 @@ Copyright (C) 2014, Nick Allen.
 Maintained by Mariano Montone.
 
  -->
-<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Custom filters (Djula HTML templating system)</title>
 
 <meta name="description" content="Custom filters (Djula HTML templating system)">
 <meta name="keywords" content="Custom filters (Djula HTML templating system)">
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
-<meta name="Generator" content="texi2any">
-<link href="index.html" rel="start" title="Top">
-<link href="Index.html" rel="index" title="Index">
-<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
-<link href="Filters.html" rel="up" title="Filters">
-<link href="Templates-composition.html" rel="next" title="Templates composition">
-<link href="urlencode.html" rel="prev" title="urlencode">
+<meta name="Generator" content="makeinfo">
 <style type="text/css">
 <!--
 /* Style-sheet to use for manuals (copied from Emacs) */
@@ -33,11 +28,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
-div.lisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
@@ -46,6 +41,7 @@ pre.menu-preformatted {font-family: serif}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
 ul.no-bullet {list-style: none}
 blockquote {
     font-style: normal;
@@ -118,83 +114,12 @@ body {
 -->
 </style>
 
+<meta http-equiv="Refresh" content="0; url=Filters.html#Custom-filters">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 </head>
 
 <body lang="en">
-<span id="Custom-filters"></span><div class="header">
-<p>
-Previous: <a href="List-of-filters.html" accesskey="p" rel="prev">List of filters</a>, Up: <a href="Filters.html" accesskey="u" rel="up">Filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Index.html" title="Index" rel="index">Index</a>]</p>
-</div>
-<hr>
-<span id="filters-custom_002dfilters"></span><span id="g_t54"></span><span id="Custom-filters-1"></span><h3 class="section">8.3 Custom filters</h3>
 
-
-<p>Use the <code>def-filter</code> macro. Its general form is:
-</p>
-<div class="example">
-<pre class="example">(def-filter :myfilter-name (value arg)
-   (body))
-</pre></div>
-
-<p>It always takes the variable’s value as argument, and it can have one
-required or optional argument. For example, this is how those
-built-in filters are defined:
-</p>
-<div class="example">
-<pre class="example">(def-filter :capfirst (val)
-  (string-capitalize (princ-to-string val)))
-</pre></div>
-
-<p>This is all there is to it. Once written, you can use it in your
-templates. You can define a filter wherever you want and there is no
-need to register it or to import it in your templates.
-</p>
-<p>Here’s a filter with a required argument:
-</p>
-<div class="example">
-<pre class="example">(def-filter :add (it n)
-  (+ it (parse-integer n)))
-</pre></div>
-
-<p>and with an optional one:
-</p>
-<div class="example">
-<pre class="example">(def-filter :datetime (it &amp;optional format)
-  (let ((timestamp …))))
-</pre></div>
-
-<p>When you need to pass a second argument, make your filter return a
-lambda function and chain it with the <code>with</code> filter:
-</p>
-<div class="example">
-<pre class="example">(def-filter :replace (it regex)
-   (lambda (replace)
-     (ppcre:regex-replace-all regex it replace)))
-
-(def-filter :with (it replace)
-   (funcall it replace))
-</pre></div>
-
-<p>Now we can write:
-</p>
-<div class="example">
-<pre class="example">{{ value | replace:foo | with:bar }}
-</pre></div>
-
-<p>Errors are handled by the macro, but you can handle them and return a
-<code>template-error</code> condition:
-</p>
-<div class="example">
-<pre class="example">(def-filter :handle-error-filter (it)
-   (handler-case
-         (do-something)
-     (condition (e)
-       (template-error &quot;There was an error executing this filter: ~A&quot; e))))
-</pre></div>
-
-
-
-
+<p>The node you are looking for is at <a href="Filters.html#Custom-filters">Custom filters</a>.</p>
 </body>
-</html>
