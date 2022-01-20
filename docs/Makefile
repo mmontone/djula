@@ -1,2 +1,7 @@
+.PHONY: html clean
+
 html:
-	texi2any --html --css-include manual.css djula.texi
+	makeinfo --html --split=chapter --css-include manual.css djula.texi
+
+clean:
+	rm -f djula/*
