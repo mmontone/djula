@@ -73,7 +73,6 @@ Contents:
 * Internationalization:: 
 * Error handling:: 
 * API: API<3>. 
-* Indices and tables:: 
 * Symbol Index::
 
 @detailmenu
@@ -2719,7 +2718,7 @@ Also, there’s a fancy page to display errors, which can be disabled if desired
 @deffn {Common Lisp Variable} *verbose@w{-}errors@w{-}p*
 @end deffn
 
-@node API<3>,Indices and tables,Error handling,Top
+@node API<3>,Symbol Index,Error handling,Top
 @anchor{api doc}@anchor{68}@anchor{api api}@anchor{69}
 @chapter API
 
@@ -2846,27 +2845,10 @@ When enabled, caught errors during the rendering of the template are written to 
 When enabled, errors are displayed more verbosely. Good for debugging
 @end deffn
 
-@node Indices and tables,Symbol Index,API<3>,Top
-@anchor{index indices-and-tables}@anchor{76}
-@unnumbered Indices and tables
-
-
-
-@itemize *
-
-@item 
-genindex
-
-@item 
-search
-@end itemize
-
-@node Symbol Index,,Indices and tables,Top
+@node Symbol Index,,API<3>,Top
 @unnumbered Symbol Index
 
-
 @printindex ge
-
 
 @c %**end of body
 @bye
