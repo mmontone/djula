@@ -77,12 +77,12 @@ form that returns some debugging info."
 (defun remove-first (item sequence &key (test #'eql) (key #'identity))
   "Removes the first ocurrence of item in sequence"
   (loop
-     :with removed-p = nil
-     :for x :in sequence
-     :when (or removed-p (not (funcall test (funcall key x) item)))
-     :collect x
-     :when (funcall test (funcall key x) item)
-     :do (setf removed-p t)))
+    :with removed-p = nil
+    :for x :in sequence
+    :when (or removed-p (not (funcall test (funcall key x) item)))
+      :collect x
+    :when (funcall test (funcall key x) item)
+      :do (setf removed-p t)))
 
 (def-tag-compiler :super (&optional name)
   (let* ((super-block-name (or name *current-block*
@@ -373,16 +373,16 @@ Returns a :parsed-if clause."
   (let (body else)
     (dolist (token (reverse clause-tokens))
       (cond
-	((eql (second token) :else)
-	 (setf else body)
-	 (setf body nil))
-	((eql (second token) :elif)
-	 (setf else (list (list :parsed-if (cddr token)
-				body
-				else)))
-	 (setf body nil))
-	(t
-	 (push token body))))
+        ((eql (second token) :else)
+         (setf else body)
+         (setf body nil))
+        ((eql (second token) :elif)
+         (setf else (list (list :parsed-if (cddr token)
+                                body
+                                else)))
+         (setf body nil))
+        (t
+         (push token body))))
     (list :parsed-if args body else)))
 
 (def-token-processor :semi-parsed-if (args . clause) unprocessed
@@ -390,7 +390,7 @@ Returns a :parsed-if clause."
 ike a traditional IF statement [a test, an \"if\" branch, and an \"else\" branch], so
 :SEMI-PARSED-IF has to look for the :ELSE token to split up `CLAUSE'"
   (cons (parse-if-clause args clause)
-	(process-tokens unprocessed)))
+        (process-tokens unprocessed)))
 
 (defun compile-logical-statement (statement)
   "takes a \"logical statement\" like you would give {% if %} that has been parsed
