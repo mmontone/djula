@@ -3,9 +3,13 @@
 (in-suite djula-test)
 
 (defun tag (name &rest args)
-  (let ((fn (apply (or (djula::find-tag-compiler name)
-                       (djula::find-token-compiler name))
-                   args))
+  (let ((fn (apply (djula::find-tag-compiler name) args))
+        (djula::*template-arguments* nil))
+    (with-output-to-string (s)
+      (funcall fn s))))
+
+(defun token (name &rest args)
+  (let ((fn (apply (djula::find-token-compiler name) args))
         (djula::*template-arguments* nil))
     (with-output-to-string (s)
       (funcall fn s))))
@@ -52,7 +56,7 @@
 
 (def-test js (:compile-at :definition-time)
   (let ((djula::*accumulated-javascript-strings* nil))
-    (is (string= "" (tag :parsed-js "http://cdn.sockjs.org/sockjs-0.3.min.js")))
+    (is (string= "" (token :parsed-js "http://cdn.sockjs.org/sockjs-0.3.min.js")))
     (is (string= "
 <script type='text/javascript' src=\"http://cdn.sockjs.org/sockjs-0.3.min.js\"></script>"
                  (tag :emit-js)))))

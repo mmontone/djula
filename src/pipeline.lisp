@@ -120,7 +120,8 @@
 
 (defun find-token-compiler (name)
   "Return the token processor by the name of NAME."
-  (find-symbol (symbol-name name) (find-package "DJULA.TOKEN-COMPILERS")))
+  (or (find-symbol (symbol-name name) (find-package "DJULA.TOKEN-COMPILERS"))
+      (error "Token compiler not found: ~a" name)))
 
 (defmacro def-tag-compiler (name args &body body)
   "Define a Djula tag compiler.
@@ -144,7 +145,8 @@ BODY is the tag compilation implementation."
 
 (defun find-tag-compiler (name)
   "Return the tag compiler by the name of NAME."
-  (find-symbol (symbol-name name) (find-package "DJULA.TAG-COMPILERS")))
+  (or (find-symbol (symbol-name name) (find-package "DJULA.TAG-COMPILERS"))
+      (error "Tag compiler not found: ~a" name)))
 
 (defmacro def-filter (name args &body body)
   "Define a Djula filter.
