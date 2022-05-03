@@ -203,7 +203,10 @@
     (djula::compile-string "{%if foo bar %}foo{% else %}bar{% endif %}"))
 
   (signals error
-    (djula::compile-string "{%if foo bar %}foo = bar{% else %}bar{% endif %}")))
+    (djula::compile-string "{%if foo bar %}foo = bar{% else %}bar{% endif %}"))
+
+  (signals error ;; no endif
+    (djula::compile-string "{%if foo %}foo{% else %}bar")))
 
 (def-test elif-test (:compile-at :definition-time)
   (let ((template (djula::compile-string "{% if x > 20 %}more than 20{% elif x < 0 %}less than zero{% else %}greater than zero{% endif %}")))
