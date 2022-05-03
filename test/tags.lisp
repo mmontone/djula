@@ -23,8 +23,8 @@
 
   ;; Do not error on non existing vars
   (is (string= "fallback"
-       (let ((template (djula::compile-string "{% firstof foo bar \"fallback\" %}")))
-         (djula:render-template* template nil :foobar "<b>Hello</b>"))))
+               (let ((template (djula::compile-string "{% firstof foo bar \"fallback\" %}")))
+                 (djula:render-template* template nil :foobar "<b>Hello</b>"))))
 
   ;; Choice first non nil var
   (is (string= "bar"
@@ -103,14 +103,14 @@
   (let ((template (djula::compile-string "{%if foo.value and bar.length %}foo and bar{% else %}not foo and bar{% endif %}")))
     (is (equalp
          (djula:render-template* template nil :foo (list :value t)
-                                 :bar (list :length 2))
+                                              :bar (list :length 2))
          "foo and bar")))
 
   ;; subexpressions
   (let ((template (djula::compile-string "{%if foo and (bar or baz) %}true{% else %}false{% endif %}")))
     (is (equalp
          (djula:render-template* template nil :foo t
-                                 :bar t)
+                                              :bar t)
          "true")))
 
   ;; equality
@@ -205,6 +205,12 @@
   (signals error
     (djula::compile-string "{%if foo bar %}foo = bar{% else %}bar{% endif %}")))
 
+(def-test elif-test (:compile-at :definition-time)
+  (let ((template (djula::compile-string "{% if x > 20 %}more than 20{% elif x < 0 %}less than zero{% else %}greater than zero{% endif %}")))
+    (is (equalp (djula::render-template* template nil :x 21) "more than 20"))
+    (is (equalp (djula::render-template* template nil :x 1) "greater than zero"))
+    (is (equalp (djula::render-template* template nil :x -1) "less than zero"))))
+
 (def-test loop-test (:compile-at :definition-time)
   (let ((template (djula::compile-string "<ul>{% for elem in list %}<li>{{elem}}</li>{% endfor %}</ul>")))
     (is (equalp
@@ -269,7 +275,7 @@
                                          (setf (gethash 'a table) 'foo)
                                          table))
          `(,(format nil "<ul><li>~a->~a</li><li>~a->~a</li></ul>" 'a 'foo 'b 'bar)
-            ,(format nil"<ul><li>~a->~a</li><li>~a->~a</li></ul>" 'b 'bar 'a 'foo))
+           ,(format nil"<ul><li>~a->~a</li><li>~a->~a</li></ul>" 'b 'bar 'a 'foo))
          :test #'string=))))
 
 (def-test nested-loop-test (:compile-at :definition-time)
@@ -390,9 +396,9 @@
          (djula:render-template* template nil :foo '(:x 4) :bar '(:y 4))
          "yes")))
   (let ((template (djula::compile-string "{% ifequal foo.x 22 %}yes{% else %}no{% endifequal %}")))
-	(is (equalp
-		 (djula:render-template* template nil :foo '(:x 22))
-		 "yes"))))
+    (is (equalp
+         (djula:render-template* template nil :foo '(:x 22))
+         "yes"))))
 
 (def-test ifnotequal-test (:compile-at :definition-time)
   (let ((template (djula::compile-string "{% ifnotequal foo bar %}yes{% else %}no{% endifnotequal %}")))

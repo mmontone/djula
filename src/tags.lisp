@@ -367,14 +367,30 @@ Library user can extend this generic function, add methods for types to iterate 
 
 (def-delimited-tag :if :endif :semi-parsed-if)
 
+(defun parse-if-clause (args clause-tokens)
+  "Parse if clause taking into account else and elif tokens in body.
+Returns a :parsed-if clause."
+  (let (body else)
+    (dolist (token (reverse clause-tokens))
+      (cond
+	((eql (second token) :else)
+	 (setf else body)
+	 (setf body nil))
+	((eql (second token) :elif)
+	 (setf else (list (list :parsed-if (cddr token)
+				body
+				else)))
+	 (setf body nil))
+	(t
+	 (push token body))))
+    (list :parsed-if args body else)))
+
 (def-token-processor :semi-parsed-if (args . clause) unprocessed
   ":SEMI-PARSED-IF tags are parsed into :PARSED-IF tags. a :PARSED-IF tag looks more
 ike a traditional IF statement [a test, an \"if\" branch, and an \"else\" branch], so
 :SEMI-PARSED-IF has to look for the :ELSE token to split up `CLAUSE'"
-  (multiple-value-bind (before-else after-else)
-      (split-if-clause clause)
-    (cons (list :parsed-if args before-else after-else)
-          (process-tokens unprocessed))))
+  (cons (parse-if-clause args clause)
+	(process-tokens unprocessed)))
 
 (defun compile-logical-statement (statement)
   "takes a \"logical statement\" like you would give {% if %} that has been parsed

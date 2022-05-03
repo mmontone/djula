@@ -2,7 +2,7 @@
 
 (defun semi-parse-tag (string)
   (let ((*package* (find-package :keyword))
-	(*read-eval* nil))
+        (*read-eval* nil))
     (read-from-string string)))
 
 (defun parse-rest-of-tag (string start)
@@ -17,7 +17,9 @@
   (multiple-value-bind (tag-name start-rest)
       (semi-parse-tag unparsed-string)
     (if-let ((f (find-unparsed-tag-processor tag-name)))
+      ;; if there's an unparsed tag parser, use it
       (funcall f rest (subseq unparsed-string start-rest))
+      ;; otherwise, just create a :tag token and process it
       (let ((ret (parse-rest-of-tag unparsed-string start-rest)))
         (process-tokens (cons (list* :tag tag-name ret) rest))))))
 
@@ -58,8 +60,37 @@ Otherwise returns three values:
                               x
                             (and (eql token-name :tag)
                                  (eql (first args) tag-name))))
-			tokens)))
-    (if n
-	(values (subseq tokens 0 n)
-		(subseq tokens (1+ n))
-		t))))
+                        tokens)))
+    (when n
+      (values (subseq tokens 0 n)
+              (subseq tokens (1+ n))
+              t))))
+
+(defun find-end-tag-nested (endtag tag tokens)
+  "Find end tag ENDTAG taking into account possible nested tags of type TAG.
+
+Like FIND-END-TAG, but taking into account control structures nesting.
+
+Returns NIL if a :TAG token with the name `TAG-NAME' can't be found in `TOKENS'.
+Otherwise returns three values:
+
+   1. a list of all the tokens up to that token
+   2. a list of all tokens after that token
+   3. T, indicating that `TAG-NAME' was found"
+
+  (let ((pos
+          (iter
+            (with nest-count = 0)
+            (with pos = -1)
+            (for token in tokens)
+            (incf pos)
+            (when (eql (second token) tag)
+              (incf nest-count))
+            (when (eql (second token) endtag)
+              (when (zerop nest-count)
+                (return pos))
+              (decf nest-count)))))
+    (when pos
+      (let ((unprocessed (subseq tokens (1+ pos)))
+            (to-process (subseq tokens 0 pos)))
+        (values to-process unprocessed t)))))
