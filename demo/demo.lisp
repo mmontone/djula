@@ -98,7 +98,13 @@
       ("{% ifequal foo bar %}yes{% else %}no{% endifequal %}"
        :foo ,"foo" :bar ,"bar")
       ("{% ifequal foo bar %}yes{% else %}no{% endifequal %}"
-       :foo ,"foo" :bar ,"foo"))
+       :foo ,"foo" :bar ,"foo")
+      ("{% if x > 20 %}more than 20{% elif x < 0 %}less than zero{% else %}greater than zero{% endif %}"
+       :x 21)
+      ("{% if x > 20 %}more than 20{% elif x < 0 %}less than zero{% else %}greater than zero{% endif %}"
+       :x 1)
+      ("{% if x > 20 %}more than 20{% elif x < 0 %}less than zero{% else %}greater than zero{% endif %}"
+       :x -1))
      ("for"
       ("<ul>{% for x in list %}<li>{{x}}</li>{% endfor %}</ul>"
        :list ,(list 1 2 3))
