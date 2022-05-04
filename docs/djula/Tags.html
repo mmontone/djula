@@ -530,6 +530,18 @@ block are output:
 <p>In the above, if <code>athlete-list</code> is not empty, the number of athletes will be
 displayed by the <code>{{ athlete-list|length }}</code> variable.
 </p>
+<p>For multiple branches, <code>elif</code> and <code>else</code> can be used:
+</p>
+<div class="example">
+<pre class="example">{% if kenny.sick %}
+    Kenny is sick.
+{% elif kenny.dead %}
+    You killed Kenny!  You bastard!!!
+{% else %}
+    Kenny looks okay --- so far
+{% endif %}
+</pre></div>
+
 <hr>
 <span id="Boolean-operators"></span><div class="header">
 <p>

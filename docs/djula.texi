@@ -846,6 +846,18 @@ block are output:
 In the above, if @code{athlete-list} is not empty, the number of athletes will be
 displayed by the @code{@{@{ athlete-list|length @}@}} variable.
 
+For multiple branches, @code{elif} and @code{else} can be used:
+
+@example
+@{% if kenny.sick %@}
+    Kenny is sick.
+@{% elif kenny.dead %@}
+    You killed Kenny!  You bastard!!!
+@{% else %@}
+    Kenny looks okay --- so far
+@{% endif %@}
+@end example
+
 @node Boolean operators
 @anchor{tags boolean-operators}
 @subsection Boolean operators
