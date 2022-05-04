@@ -1,8 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
@@ -12,6 +9,9 @@ Copyright (C) 2014, Nick Allen.
 Maintained by Mariano Montone.
 
  -->
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Templates composition (Djula HTML templating system)</title>
 
 <meta name="description" content="Templates composition (Djula HTML templating system)">
@@ -19,14 +19,12 @@ Maintained by Mariano Montone.
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
 <link href="index.html" rel="start" title="Top">
 <link href="Symbol-Index.html" rel="index" title="Symbol Index">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="index.html" rel="up" title="Top">
 <link href="Internationalization.html#Internationalization" rel="next" title="Internationalization">
-<link href="Filters.html#Filters" rel="prev" title="Filters">
+<link href="Filters.html#Custom-filters" rel="prev" title="Custom filters">
 <style type="text/css">
 <!--
 /* Style-sheet to use for manuals (copied from Emacs) */
@@ -35,11 +33,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
@@ -48,7 +46,6 @@ pre.menu-preformatted {font-family: serif}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
 ul.no-bullet {list-style: none}
 blockquote {
     font-style: normal;
@@ -125,23 +122,23 @@ body {
 </head>
 
 <body lang="en">
-<div class="chapter" id="Templates-composition">
-<div class="header">
+<span id="Templates-composition"></span><div class="header">
 <p>
-Next: <a href="Internationalization.html#Internationalization" accesskey="n" rel="next">Internationalization</a>, Previous: <a href="Filters.html#Filters" accesskey="p" rel="prev">Filters</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Internationalization.html#Internationalization" accesskey="n" rel="next">Internationalization</a>, Previous: <a href="Filters.html#Filters" accesskey="p" rel="prev">Filters</a>, Up: <a href="index.html" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="Templates-composition-1"></span><h2 class="chapter">9 Templates composition</h2>
 
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="#Template-inheritance" accesskey="1">Template inheritance</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Template-includes" accesskey="2">Template includes</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
 
-<ul class="section-toc">
-<li><a href="#Template-inheritance" accesskey="1">Template inheritance</a></li>
-<li><a href="#Template-includes" accesskey="2">Including other templates</a></li>
-</ul>
 <hr>
-<div class="section" id="Template-inheritance">
-<div class="header">
+<span id="Template-inheritance"></span><div class="header">
 <p>
-Next: <a href="#Template-includes" accesskey="n" rel="next">Including other templates</a>, Up: <a href="#Templates-composition" accesskey="u" rel="up">Templates composition</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Template-includes" accesskey="n" rel="next">Template includes</a>, Up: <a href="#Templates-composition" accesskey="u" rel="up">Templates composition</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="inheritance-doc"></span><span id="inheritance-template_002dinheritance"></span><span id="Template-inheritance-1"></span><h3 class="section">9.1 Template inheritance</h3>
 
@@ -308,9 +305,7 @@ two similarly-named <code>block</code> tags in a template, that template’s par
 wouldn’t know which one of the blocks’ content to use.
 </p>
 <hr>
-</div>
-<div class="section" id="Template-includes">
-<div class="header">
+<span id="Template-includes"></span><div class="header">
 <p>
 Previous: <a href="#Template-inheritance" accesskey="p" rel="prev">Template inheritance</a>, Up: <a href="#Templates-composition" accesskey="u" rel="up">Templates composition</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -344,12 +339,10 @@ rendering a blog entry on another part of the site, so we want to
 
 <p>See also the <code>ssi</code> tag for Server-Side Includes.
 </p>
-</div>
-</div>
 <hr>
 <div class="header">
 <p>
-Next: <a href="Internationalization.html#Internationalization" accesskey="n" rel="next">Internationalization</a>, Previous: <a href="Filters.html#Filters" accesskey="p" rel="prev">Filters</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="#Template-inheritance" accesskey="p" rel="prev">Template inheritance</a>, Up: <a href="#Templates-composition" accesskey="u" rel="up">Templates composition</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

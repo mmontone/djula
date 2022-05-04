@@ -1,8 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
@@ -12,6 +9,9 @@ Copyright (C) 2014, Nick Allen.
 Maintained by Mariano Montone.
 
  -->
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Internationalization (Djula HTML templating system)</title>
 
 <meta name="description" content="Internationalization (Djula HTML templating system)">
@@ -19,14 +19,12 @@ Maintained by Mariano Montone.
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
 <link href="index.html" rel="start" title="Top">
 <link href="Symbol-Index.html" rel="index" title="Symbol Index">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="index.html" rel="up" title="Top">
 <link href="Error-handling.html#Error-handling" rel="next" title="Error handling">
-<link href="Templates-composition.html#Templates-composition" rel="prev" title="Templates composition">
+<link href="Templates-composition.html#Template-includes" rel="prev" title="Template includes">
 <style type="text/css">
 <!--
 /* Style-sheet to use for manuals (copied from Emacs) */
@@ -35,11 +33,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
@@ -48,7 +46,6 @@ pre.menu-preformatted {font-family: serif}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
 ul.no-bullet {list-style: none}
 blockquote {
     font-style: normal;
@@ -125,27 +122,32 @@ body {
 </head>
 
 <body lang="en">
-<div class="chapter" id="Internationalization">
-<div class="header">
+<span id="Internationalization"></span><div class="header">
 <p>
-Next: <a href="Error-handling.html#Error-handling" accesskey="n" rel="next">Error handling</a>, Previous: <a href="Templates-composition.html#Templates-composition" accesskey="p" rel="prev">Templates composition</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Error-handling.html#Error-handling" accesskey="n" rel="next">Error handling</a>, Previous: <a href="Templates-composition.html#Templates-composition" accesskey="p" rel="prev">Templates composition</a>, Up: <a href="index.html" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="internationalization-doc"></span><span id="internationalization-internationalization"></span><span id="Internationalization-1"></span><h2 class="chapter">10 Internationalization</h2>
 
 
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="#Syntax" accesskey="1">Syntax</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Tags_003c2_003e" accesskey="2">Tags</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Filters_003c2_003e" accesskey="3">Filters</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Choosing-language" accesskey="4">Choosing language</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Backends" accesskey="5">Backends</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
 
-<ul class="section-toc">
-<li><a href="#Syntax" accesskey="1">Syntax</a></li>
-<li><a href="#Tags_003c2_003e" accesskey="2">Tags</a></li>
-<li><a href="#Filters_003c2_003e" accesskey="3">Filters</a></li>
-<li><a href="#Choosing-language" accesskey="4">Choosing language</a></li>
-<li><a href="#Backends" accesskey="5">Backends</a></li>
-</ul>
+</pre></th></tr></table>
+
 <hr>
-<div class="section" id="Syntax">
-<div class="header">
+<span id="Syntax"></span><div class="header">
 <p>
-Next: <a href="#Tags_003c2_003e" accesskey="n" rel="next">Tags</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Tags_003c2_003e" accesskey="n" rel="next">Tags&lt;2&gt;</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="internationalization-syntax"></span><span id="Syntax-1"></span><h3 class="section">10.1 Syntax</h3>
 
@@ -158,24 +160,24 @@ Next: <a href="#Tags_003c2_003e" accesskey="n" rel="next">Tags</a>, Up: <a href=
 </pre></div>
 
 <hr>
-</div>
-<div class="section" id="Tags_003c2_003e">
-<div class="header">
+<span id="Tags_003c2_003e"></span><div class="header">
 <p>
-Next: <a href="#Filters_003c2_003e" accesskey="n" rel="next">Filters</a>, Previous: <a href="#Syntax" accesskey="p" rel="prev">Syntax</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Filters_003c2_003e" accesskey="n" rel="next">Filters&lt;2&gt;</a>, Previous: <a href="#Syntax" accesskey="p" rel="prev">Syntax</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="internationalization-tags"></span><span id="Tags-2"></span><h3 class="section">10.2 Tags</h3>
 
 
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="#trans" accesskey="1">trans</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
 
-<ul class="section-toc">
-<li><a href="#trans" accesskey="1">trans</a></li>
-</ul>
+</pre></th></tr></table>
+
 <hr>
-<div class="subsection" id="trans">
-<div class="header">
+<span id="trans"></span><div class="header">
 <p>
-Up: <a href="#Tags_003c2_003e" accesskey="u" rel="up">Tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Up: <a href="#Tags_003c2_003e" accesskey="u" rel="up">Tags&lt;2&gt;</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="internationalization-trans"></span><span id="trans-1"></span><h4 class="subsection">10.2.1 trans</h4>
 
@@ -190,25 +192,24 @@ Up: <a href="#Tags_003c2_003e" accesskey="u" rel="up">Tags</a> &nbsp; [<a href="
 </pre></div>
 
 <hr>
-</div>
-</div>
-<div class="section" id="Filters_003c2_003e">
-<div class="header">
+<span id="Filters_003c2_003e"></span><div class="header">
 <p>
-Next: <a href="#Choosing-language" accesskey="n" rel="next">Choosing language</a>, Previous: <a href="#Tags_003c2_003e" accesskey="p" rel="prev">Tags</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Choosing-language" accesskey="n" rel="next">Choosing language</a>, Previous: <a href="#Tags_003c2_003e" accesskey="p" rel="prev">Tags&lt;2&gt;</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="internationalization-filters"></span><span id="Filters-2"></span><h3 class="section">10.3 Filters</h3>
 
 
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="#trans_003c2_003e" accesskey="1">trans</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
 
-<ul class="section-toc">
-<li><a href="#trans_003c2_003e" accesskey="1">trans</a></li>
-</ul>
+</pre></th></tr></table>
+
 <hr>
-<div class="subsection" id="trans_003c2_003e">
-<div class="header">
+<span id="trans_003c2_003e"></span><div class="header">
 <p>
-Up: <a href="#Filters_003c2_003e" accesskey="u" rel="up">Filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Up: <a href="#Filters_003c2_003e" accesskey="u" rel="up">Filters&lt;2&gt;</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="internationalization-id1"></span><span id="trans-2"></span><h4 class="subsection">10.3.1 trans</h4>
 
@@ -223,12 +224,9 @@ Up: <a href="#Filters_003c2_003e" accesskey="u" rel="up">Filters</a> &nbsp; [<a 
 </pre></div>
 
 <hr>
-</div>
-</div>
-<div class="section" id="Choosing-language">
-<div class="header">
+<span id="Choosing-language"></span><div class="header">
 <p>
-Next: <a href="#Backends" accesskey="n" rel="next">Backends</a>, Previous: <a href="#Filters_003c2_003e" accesskey="p" rel="prev">Filters</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Backends" accesskey="n" rel="next">Backends</a>, Previous: <a href="#Filters_003c2_003e" accesskey="p" rel="prev">Filters&lt;2&gt;</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="internationalization-choosing_002dlanguage"></span><span id="Choosing-language-1"></span><h3 class="section">10.4 Choosing language</h3>
 
@@ -243,9 +241,7 @@ Next: <a href="#Backends" accesskey="n" rel="next">Backends</a>, Previous: <a hr
 </pre></div>
 
 <hr>
-</div>
-<div class="section" id="Backends">
-<div class="header">
+<span id="Backends"></span><div class="header">
 <p>
 Previous: <a href="#Choosing-language" accesskey="p" rel="prev">Choosing language</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -256,21 +252,19 @@ Previous: <a href="#Choosing-language" accesskey="p" rel="prev">Choosing languag
 </p>
 <p>Please have a look at the demo and the documentation of those packages to figure out how to use them.
 </p>
-</div>
-</div>
 <div class="footnote">
 <hr>
 <h4 class="footnotes-heading">Footnotes</h4>
 
-<h5><a id="FOOT1" href="#DOCF1">(1)</a></h5>
+<h5><a id="FOOT1" href="#DOCF1">(1)</a></h3>
 <p>https://github.com/arielnetworks/cl-locale</p>
-<h5><a id="FOOT2" href="#DOCF2">(2)</a></h5>
+<h5><a id="FOOT2" href="#DOCF2">(2)</a></h3>
 <p>https://github.com/copyleft/gettext</p>
 </div>
 <hr>
 <div class="header">
 <p>
-Next: <a href="Error-handling.html#Error-handling" accesskey="n" rel="next">Error handling</a>, Previous: <a href="Templates-composition.html#Templates-composition" accesskey="p" rel="prev">Templates composition</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="#Choosing-language" accesskey="p" rel="prev">Choosing language</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

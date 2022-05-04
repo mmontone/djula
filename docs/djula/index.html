@@ -1,8 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
@@ -12,6 +9,9 @@ Copyright (C) 2014, Nick Allen.
 Maintained by Mariano Montone.
 
  -->
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Top (Djula HTML templating system)</title>
 
 <meta name="description" content="Top (Djula HTML templating system)">
@@ -19,8 +19,6 @@ Maintained by Mariano Montone.
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
 <link href="#Top" rel="start" title="Top">
 <link href="Symbol-Index.html" rel="index" title="Symbol Index">
 <link href="#SEC_Contents" rel="contents" title="Table of Contents">
@@ -33,11 +31,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
@@ -46,7 +44,6 @@ pre.menu-preformatted {font-family: serif}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
 ul.no-bullet {list-style: none}
 blockquote {
     font-style: normal;
@@ -127,34 +124,7 @@ body {
 
 
 
-
-
-
-<div class="top" id="Top">
-<div class="header">
-<p>
-Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
-</div>
-<span id="Djula-HTML-templating-system"></span><h1 class="top">Djula HTML templating system</h1>
-<blockquote>
-<p>Djula HTML templating system 0.2, Oct 21, 2021
-</p>
-<p>Nick Allen
-</p>
-<p>Copyright &copy; 2014, Nick Allen.
-</p>
-<p>Maintained by Mariano Montone.
-</p>
-</blockquote>
-
-
-<span id="index-doc"></span><span id="g_t0"></span>
-<p>Djula is an HTML templating system similar to Django templates for Common Lisp.
-</p>
-<p>Contents:
-</p>
-
-<div class="Contents_element" id="SEC_Contents">
+<span id="SEC_Contents"></span>
 <h2 class="contents-heading">Table of Contents</h2>
 
 <div class="contents">
@@ -165,7 +135,7 @@ Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduc
     <li><a id="toc-Prerequisites-1" href="Introduction.html#Prerequisites">1.1 Prerequisites</a></li>
     <li><a id="toc-Installation-1" href="Introduction.html#Installation">1.2 Installation</a></li>
   </ul></li>
-  <li><a id="toc-Basics-1" href="Basics.html">2 Basics</a></li>
+  <li><a id="toc-Basics-1" href="Basics.html#Basics">2 Basics</a></li>
   <li><a id="toc-Usage-1" href="Usage.html#Usage">3 Usage</a>
   <ul class="no-bullet">
     <li><a id="toc-Auto_002dreload-1" href="Usage.html#Auto_002dreload">3.1 Auto-reload</a></li>
@@ -198,8 +168,8 @@ Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduc
     </ul></li>
     <li><a id="toc-Custom-tags-1" href="Tags.html#Custom-tags">5.3 Custom tags</a></li>
   </ul></li>
-  <li><a id="toc-Comments-1" href="Comments.html">6 Comments</a></li>
-  <li><a id="toc-Verbatim-1" href="Verbatim.html">7 Verbatim</a></li>
+  <li><a id="toc-Comments-1" href="Comments.html#Comments">6 Comments</a></li>
+  <li><a id="toc-Verbatim-1" href="Verbatim.html#Verbatim">7 Verbatim</a></li>
   <li><a id="toc-Filters-1" href="Filters.html#Filters">8 Filters</a>
   <ul class="no-bullet">
     <li><a id="toc-Overview-2" href="Filters.html#Overview_003c2_003e">8.1 Overview</a></li>
@@ -262,12 +232,251 @@ Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduc
   <ul class="no-bullet">
     <li><a id="toc-API-2" href="Error-handling.html#API_003c2_003e">11.1 API</a></li>
   </ul></li>
-  <li><a id="toc-API-3" href="API_003c3_003e.html">12 API</a></li>
-  <li><a id="toc-Symbol-Index-1" href="Symbol-Index.html" rel="index">Symbol Index</a></li>
+  <li><a id="toc-API-3" href="API_003c3_003e.html#API_003c3_003e">12 API</a></li>
+  <li><a id="toc-Symbol-Index-1" href="Symbol-Index.html#Symbol-Index" rel="index">Symbol Index</a></li>
 </ul>
 </div>
+
+
+
+
+<span id="Top"></span><div class="header">
+<p>
+Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-</div>
+<span id="Djula-HTML-templating-system"></span><h1 class="top">Djula HTML templating system</h1>
+<blockquote>
+<p>Djula HTML templating system 0.2, Oct 21, 2021
+</p>
+<p>Nick Allen
+</p>
+<p>Copyright &copy; 2014, Nick Allen.
+</p>
+<p>Maintained by Mariano Montone.
+</p>
+</blockquote>
+
+
+<span id="index-doc"></span><span id="g_t0"></span>
+<p>Djula is an HTML templating system similar to Django templates for Common Lisp.
+</p>
+<p>Contents:
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="Introduction.html#Introduction" accesskey="1">Introduction</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Basics.html" accesskey="2">Basics</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Usage.html#Usage" accesskey="3">Usage</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Variables.html#Variables" accesskey="4">Variables</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#Tags" accesskey="5">Tags</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Comments.html" accesskey="6">Comments</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Verbatim.html" accesskey="7">Verbatim</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#Filters" accesskey="8">Filters</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Templates-composition.html#Templates-composition" accesskey="9">Templates composition</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Internationalization.html#Internationalization">Internationalization</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Error-handling.html#Error-handling">Error handling</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="API_003c3_003e.html">API</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Symbol-Index.html" rel="index">Symbol Index</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+
+</pre></th></tr><tr><th colspan="3" align="left" valign="top"><pre class="menu-comment"> &mdash; The Detailed Node Listing &mdash;
+
+Introduction
+
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Introduction.html#Prerequisites">Prerequisites</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Introduction.html#Installation">Installation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+
+Usage
+
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Usage.html#Auto_002dreload">Auto-reload</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Usage.html#API">API</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+
+Variables
+
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Variables.html#Default-template-variables">Default template variables</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+
+Tags
+
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Tags.html#Overview">Overview</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#List-of-tags">List of tags</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#Custom-tags">Custom tags</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+
+List of tags
+
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Tags.html#block">block</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#extends">extends</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#super">super</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#comment">comment</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#cycle">cycle</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#debug">debug</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#filter">filter</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#firstof">firstof</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#for">for</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#if">if</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#Boolean-operators">Boolean operators</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#ifchanged">ifchanged</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#ifequal">ifequal</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#ifnotequal">ifnotequal</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Tags.html#include">include</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+
+Filters
+
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Filters.html#Overview_003c2_003e">Overview</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#List-of-filters">List of filters</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#Custom-filters">Custom filters</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+
+List of filters
+
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Filters.html#add">add</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#addslashes">addslashes</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#capfirst">capfirst</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#cut">cut</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#date">date</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#time">time</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#datetime">datetime</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#default">default</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#reverse">reverse</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#divisibleby">divisibleby</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#sort">sort</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#first">first</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#join">join</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#last">last</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#length">length</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#length_005fis">length_is</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#linebreaks">linebreaks</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#linebreaksbr">linebreaksbr</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#lower">lower</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#make_005flist">make_list</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#safe-escape">safe, escape</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#slice">slice</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#force_002descape">force-escape</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#format">format</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#replace-_2026-with">replace … with</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#rest">rest</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#scan">scan</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#time_003c2_003e">time</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#truncatechars">truncatechars</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#upper">upper</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Filters.html#urlencode">urlencode</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+
+Templates composition
+
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Templates-composition.html#Template-inheritance">Template inheritance</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Templates-composition.html#Template-includes">Template includes</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+
+Internationalization
+
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Internationalization.html#Syntax">Syntax</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Internationalization.html#Tags_003c2_003e">Tags</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Internationalization.html#Filters_003c2_003e">Filters</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Internationalization.html#Choosing-language">Choosing language</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Internationalization.html#Backends">Backends</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+
+Tags
+
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Internationalization.html#trans">trans</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+
+Filters
+
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Internationalization.html#trans_003c2_003e">trans</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+
+Error handling
+
+</pre></th></tr><tr><td align="left" valign="top">&bull; <a href="Error-handling.html#API_003c2_003e">API</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+
+</pre></th></tr></table>
+
 <hr>
 <div class="header">
 <p>

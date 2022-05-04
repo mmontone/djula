@@ -324,16 +324,16 @@ If you want to disable this, use the @cite{:djula-prod} @emph{feature}:
 @section API
 
 
-@geindex add-template-directory (Lisp function)
+@geindex add-template-directory (function)
 @anchor{usage function djula add-template-directory}
-@deffn {Common Lisp Function}  (add@w{-}template@w{-}directorydirectory &optional (template-store *current-store*))
+@deffn {Function}  (add@w{-}template@w{-}directorydirectory &optional (template-store *current-store*))
 
 Adds @code{DIRECTORY} to the search path of the @code{TEMPLATE-STORE}
 @end deffn
 
-@geindex compile-template (Lisp generic)
+@geindex compile-template (generic)
 @anchor{usage generic djula compile-template}
-@deffn {Common Lisp Generic}  (compile@w{-}templatecompiler name &optional error-p)
+@deffn {Generic Function}  (compile@w{-}templatecompiler name &optional error-p)
 
 Provides a hook to customize template compilation.
 
@@ -350,16 +350,16 @@ Provides a hook to customize template compilation.
 
 @end deffn
 
-@geindex compile-template* (Lisp function)
+@geindex compile-template* (function)
 @anchor{usage function djula compile-template*}
-@deffn {Common Lisp Function}  (compile@w{-}template*name)
+@deffn {Function}  (compile@w{-}template*name)
 
 Compiles template @code{NAME} with compiler in @emph{CURRENT-COMPILER}
 @end deffn
 
-@geindex render-template* (Lisp function)
+@geindex render-template* (function)
 @anchor{usage function djula render-template*}
-@deffn {Common Lisp Function}  (render@w{-}template*template &optional stream &rest *template-arguments*)
+@deffn {Function}  (render@w{-}template*template &optional stream &rest *template-arguments*)
 
 Render @code{TEMPLATE} into @code{STREAM} passing @emph{TEMPLATE-ARGUMENTS}
 @end deffn
@@ -2718,15 +2718,15 @@ desired. That is controlled via the variable @code{*FANCY-ERROR-TEMPLATE-P*}
 
 
 
-@deffn {Common Lisp Variable} *catch@w{-}template@w{-}errors@w{-}p*
+@deffn {Variable} *catch@w{-}template@w{-}errors@w{-}p*
 @end deffn
 
 
-@deffn {Common Lisp Variable} *fancy@w{-}error@w{-}template@w{-}p*
+@deffn {Variable} *fancy@w{-}error@w{-}template@w{-}p*
 @end deffn
 
 
-@deffn {Common Lisp Variable} *verbose@w{-}errors@w{-}p*
+@deffn {Variable} *verbose@w{-}errors@w{-}p*
 @end deffn
 
 @node API<3>
@@ -2736,122 +2736,122 @@ desired. That is controlled via the variable @code{*FANCY-ERROR-TEMPLATE-P*}
 
 Djula external symbols documentation
 
-@geindex compile-template* (Lisp function)
+@geindex compile-template* (function)
 @anchor{api function djula compile-template*}
-@deffn {Common Lisp Function}  (compile@w{-}template*name)
+@deffn {Function}  (compile@w{-}template*name)
 
 Compiles template @code{NAME} with compiler in @emph{CURRENT-COMPILER}
 @end deffn
 
-@geindex url-encode (Lisp function)
+@geindex url-encode (function)
 @anchor{api function djula url-encode}
-@deffn {Common Lisp Function}  (url@w{-}encodestring)
+@deffn {Function}  (url@w{-}encodestring)
 
 URL-encodes a string using the external format EXTERNAL-FORMAT.
 @end deffn
 
-@geindex *current-store* (Lisp variable)
+@geindex *current-store* (variable)
 @anchor{api variable djula *current-store*}
-@deffn {Common Lisp Variable} *current@w{-}store*
+@deffn {Variable} *current@w{-}store*
 
 The currently in-use template store.  Defaults to a @code{FILE-STORE}.
 @end deffn
 
-@geindex *allow-include-roots* (Lisp variable)
+@geindex *allow-include-roots* (variable)
 @anchor{api variable djula *allow-include-roots*}
-@deffn {Common Lisp Variable} *allow@w{-}include@w{-}roots*
+@deffn {Variable} *allow@w{-}include@w{-}roots*
 @end deffn
 
-@geindex *current-compiler* (Lisp variable)
+@geindex *current-compiler* (variable)
 @anchor{api variable djula *current-compiler*}
-@deffn {Common Lisp Variable} *current@w{-}compiler*
+@deffn {Variable} *current@w{-}compiler*
 @end deffn
 
-@geindex *fancy-debug-p* (Lisp variable)
+@geindex *fancy-debug-p* (variable)
 @anchor{api variable djula *fancy-debug-p*}
-@deffn {Common Lisp Variable} *fancy@w{-}debug@w{-}p*
+@deffn {Variable} *fancy@w{-}debug@w{-}p*
 
 When enabled, displays fancy html based debugging information for the @{% debug %@} tag
 @end deffn
 
-@geindex *djula-execute-package* (Lisp variable)
+@geindex *djula-execute-package* (variable)
 @anchor{api variable djula *djula-execute-package*}
-@deffn {Common Lisp Variable} *djula@w{-}execute@w{-}package*
+@deffn {Variable} *djula@w{-}execute@w{-}package*
 @end deffn
 
-@geindex fetch-template* (Lisp function)
+@geindex fetch-template* (function)
 @anchor{api function djula fetch-template*}
-@deffn {Common Lisp Function}  (fetch@w{-}template*key)
+@deffn {Function}  (fetch@w{-}template*key)
 
 Return the text of a template fetched from the @emph{CURRENT-STORE}.
 @end deffn
 
-@geindex url-encode-path (Lisp function)
+@geindex url-encode-path (function)
 @anchor{api function djula url-encode-path}
-@deffn {Common Lisp Function}  (url@w{-}encode@w{-}pathpath)
+@deffn {Function}  (url@w{-}encode@w{-}pathpath)
 @end deffn
 
-@geindex url-decode (Lisp function)
+@geindex url-decode (function)
 @anchor{api function djula url-decode}
-@deffn {Common Lisp Function}  (url@w{-}decode)
+@deffn {Function}  (url@w{-}decode)
 @end deffn
 
-@geindex def-tag-compiler (Lisp macro)
+@geindex def-tag-compiler (macro)
 @anchor{api macro djula def-tag-compiler}
-@deffn {Common Lisp Macro}  (def@w{-}tag@w{-}compilername args &body body)
+@deffn {Macro}  (def@w{-}tag@w{-}compilername args &body body)
 @end deffn
 
-@geindex find-template* (Lisp function)
+@geindex find-template* (function)
 @anchor{api function djula find-template*}
-@deffn {Common Lisp Function}  (find@w{-}template*name &optional (error-p t))
+@deffn {Function}  (find@w{-}template*name &optional (error-p t))
 @end deffn
 
-@geindex *fancy-error-template-p* (Lisp variable)
+@geindex *fancy-error-template-p* (variable)
 @anchor{api variable djula *fancy-error-template-p*}
-@deffn {Common Lisp Variable} *fancy@w{-}error@w{-}template@w{-}p*
+@deffn {Variable} *fancy@w{-}error@w{-}template@w{-}p*
 
 When enabled, show a fancy template when an error ocurrs
 @end deffn
 
-@geindex *default-language* (Lisp variable)
+@geindex *default-language* (variable)
 @anchor{api variable djula *default-language*}
-@deffn {Common Lisp Variable} *default@w{-}language*
+@deffn {Variable} *default@w{-}language*
 @end deffn
 
-@geindex render-template* (Lisp function)
+@geindex render-template* (function)
 @anchor{api function djula render-template*}
-@deffn {Common Lisp Function}  (render@w{-}template*template &optional stream &rest *template-arguments*)
+@deffn {Function}  (render@w{-}template*template &optional stream &rest *template-arguments*)
 
 Render @code{TEMPLATE} into @code{STREAM} passing @emph{TEMPLATE-ARGUMENTS}
 @end deffn
 
-@geindex *default-template-arguments* (Lisp variable)
+@geindex *default-template-arguments* (variable)
 @anchor{api variable djula *default-template-arguments*}
-@deffn {Common Lisp Variable} *default@w{-}template@w{-}arguments*
+@deffn {Variable} *default@w{-}template@w{-}arguments*
 @end deffn
 
-@geindex add-template-directory (Lisp function)
+@geindex add-template-directory (function)
 @anchor{api function djula add-template-directory}
-@deffn {Common Lisp Function}  (add@w{-}template@w{-}directorydirectory &optional (template-store *current-store*))
+@deffn {Function}  (add@w{-}template@w{-}directorydirectory &optional (template-store *current-store*))
 
 Adds @code{DIRECTORY} to the search path of the @code{TEMPLATE-STORE}
 @end deffn
 
-@geindex *catch-template-errors-p* (Lisp variable)
+@geindex *catch-template-errors-p* (variable)
 @anchor{api variable djula *catch-template-errors-p*}
-@deffn {Common Lisp Variable} *catch@w{-}template@w{-}errors@w{-}p*
+@deffn {Variable} *catch@w{-}template@w{-}errors@w{-}p*
 
 When enabled, caught errors during the rendering of the template are written to the output instead of being handled by the lisp listener
 @end deffn
 
-@geindex *current-language* (Lisp variable)
+@geindex *current-language* (variable)
 @anchor{api variable djula *current-language*}
-@deffn {Common Lisp Variable} *current@w{-}language*
+@deffn {Variable} *current@w{-}language*
 @end deffn
 
-@geindex *verbose-errors-p* (Lisp variable)
+@geindex *verbose-errors-p* (variable)
 @anchor{api variable djula *verbose-errors-p*}
-@deffn {Common Lisp Variable} *verbose@w{-}errors@w{-}p*
+@deffn {Variable} *verbose@w{-}errors@w{-}p*
 
 When enabled, errors are displayed more verbosely. Good for debugging
 @end deffn

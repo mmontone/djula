@@ -1,8 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
@@ -12,6 +9,9 @@ Copyright (C) 2014, Nick Allen.
 Maintained by Mariano Montone.
 
  -->
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Filters (Djula HTML templating system)</title>
 
 <meta name="description" content="Filters (Djula HTML templating system)">
@@ -19,8 +19,6 @@ Maintained by Mariano Montone.
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
 <link href="index.html" rel="start" title="Top">
 <link href="Symbol-Index.html" rel="index" title="Symbol Index">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
@@ -35,11 +33,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
@@ -48,7 +46,6 @@ pre.menu-preformatted {font-family: serif}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
 ul.no-bullet {list-style: none}
 blockquote {
     font-style: normal;
@@ -125,23 +122,26 @@ body {
 </head>
 
 <body lang="en">
-<div class="chapter" id="Filters">
-<div class="header">
+<span id="Filters"></span><div class="header">
 <p>
-Next: <a href="Templates-composition.html#Templates-composition" accesskey="n" rel="next">Templates composition</a>, Previous: <a href="Verbatim.html" accesskey="p" rel="prev">Verbatim</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Templates-composition.html#Templates-composition" accesskey="n" rel="next">Templates composition</a>, Previous: <a href="Verbatim.html" accesskey="p" rel="prev">Verbatim</a>, Up: <a href="index.html" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="filters-doc"></span><span id="filters-filters"></span><span id="Filters-1"></span><h2 class="chapter">8 Filters</h2>
 
 
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="#Overview_003c2_003e" accesskey="1">Overview</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#List-of-filters" accesskey="2">List of filters</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Custom-filters" accesskey="3">Custom filters</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
 
-<ul class="section-toc">
-<li><a href="#Overview_003c2_003e" accesskey="1">Overview</a></li>
-<li><a href="#List-of-filters" accesskey="2">List of filters</a></li>
-<li><a href="#Custom-filters" accesskey="3">Custom filters</a></li>
-</ul>
+</pre></th></tr></table>
+
 <hr>
-<div class="section" id="Overview_003c2_003e">
-<div class="header">
+<span id="Overview_003c2_003e"></span><div class="header">
 <p>
 Next: <a href="#List-of-filters" accesskey="n" rel="next">List of filters</a>, Up: <a href="#Filters" accesskey="u" rel="up">Filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -171,52 +171,82 @@ To give you a taste of what’s available, here are some of the more commonly
 used template filters:
 </p>
 <hr>
-</div>
-<div class="section" id="List-of-filters">
-<div class="header">
+<span id="List-of-filters"></span><div class="header">
 <p>
-Next: <a href="#Custom-filters" accesskey="n" rel="next">Custom filters</a>, Previous: <a href="#Overview_003c2_003e" accesskey="p" rel="prev">Overview</a>, Up: <a href="#Filters" accesskey="u" rel="up">Filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Custom-filters" accesskey="n" rel="next">Custom filters</a>, Previous: <a href="#Overview_003c2_003e" accesskey="p" rel="prev">Overview&lt;2&gt;</a>, Up: <a href="#Filters" accesskey="u" rel="up">Filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="filters-list_002dof_002dfilters"></span><span id="List-of-filters-1"></span><h3 class="section">8.2 List of filters</h3>
 
 
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="#add" accesskey="1">add</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#addslashes" accesskey="2">addslashes</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#capfirst" accesskey="3">capfirst</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#cut" accesskey="4">cut</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#date" accesskey="5">date</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#time" accesskey="6">time</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#datetime" accesskey="7">datetime</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#default" accesskey="8">default</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#reverse" accesskey="9">reverse</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#divisibleby">divisibleby</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#sort">sort</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#first">first</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#join">join</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#last">last</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#length">length</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#length_005fis">length_is</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#linebreaks">linebreaks</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#linebreaksbr">linebreaksbr</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#lower">lower</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#make_005flist">make_list</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#safe-escape">safe, escape</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#slice">slice</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#force_002descape">force-escape</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#format">format</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#replace-_2026-with">replace … with</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#rest">rest</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#scan">scan</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#time_003c2_003e">time</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#truncatechars">truncatechars</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#upper">upper</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#urlencode">urlencode</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
 
-<ul class="section-toc">
-<li><a href="#add" accesskey="1">add</a></li>
-<li><a href="#addslashes" accesskey="2">addslashes</a></li>
-<li><a href="#capfirst" accesskey="3">capfirst</a></li>
-<li><a href="#cut" accesskey="4">cut</a></li>
-<li><a href="#date" accesskey="5">date</a></li>
-<li><a href="#time" accesskey="6">time</a></li>
-<li><a href="#datetime" accesskey="7">datetime</a></li>
-<li><a href="#default" accesskey="8">default</a></li>
-<li><a href="#reverse" accesskey="9">reverse</a></li>
-<li><a href="#divisibleby">divisibleby</a></li>
-<li><a href="#sort">sort</a></li>
-<li><a href="#first">first</a></li>
-<li><a href="#join">join</a></li>
-<li><a href="#last">last</a></li>
-<li><a href="#length">length</a></li>
-<li><a href="#length_005fis">length_is</a></li>
-<li><a href="#linebreaks">linebreaks</a></li>
-<li><a href="#linebreaksbr">linebreaksbr</a></li>
-<li><a href="#lower">lower</a></li>
-<li><a href="#make_005flist">make_list</a></li>
-<li><a href="#safe-escape">safe, escape</a></li>
-<li><a href="#slice">slice</a></li>
-<li><a href="#force_002descape">force-escape</a></li>
-<li><a href="#format">format</a></li>
-<li><a href="#replace-_2026-with">replace … with</a></li>
-<li><a href="#rest">rest</a></li>
-<li><a href="#scan">scan</a></li>
-<li><a href="#time_003c2_003e">time</a></li>
-<li><a href="#truncatechars">truncatechars</a></li>
-<li><a href="#upper">upper</a></li>
-<li><a href="#urlencode">urlencode</a></li>
-</ul>
+</pre></th></tr></table>
+
 <hr>
-<div class="subsection" id="add">
-<div class="header">
+<span id="add"></span><div class="header">
 <p>
 Next: <a href="#addslashes" accesskey="n" rel="next">addslashes</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -234,9 +264,7 @@ Next: <a href="#addslashes" accesskey="n" rel="next">addslashes</a>, Up: <a href
 <p>If <code>value</code> is <code>4</code>, then the output will be <code>6</code>.
 </p>
 <hr>
-</div>
-<div class="subsection" id="addslashes">
-<div class="header">
+<span id="addslashes"></span><div class="header">
 <p>
 Next: <a href="#capfirst" accesskey="n" rel="next">capfirst</a>, Previous: <a href="#add" accesskey="p" rel="prev">add</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -255,9 +283,7 @@ Next: <a href="#capfirst" accesskey="n" rel="next">capfirst</a>, Previous: <a hr
 <code>&quot;I\'m using Djula&quot;</code>.
 </p>
 <hr>
-</div>
-<div class="subsection" id="capfirst">
-<div class="header">
+<span id="capfirst"></span><div class="header">
 <p>
 Next: <a href="#cut" accesskey="n" rel="next">cut</a>, Previous: <a href="#addslashes" accesskey="p" rel="prev">addslashes</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -277,9 +303,7 @@ a letter, this filter has no effect.
 </p>
 
 <hr>
-</div>
-<div class="subsection" id="cut">
-<div class="header">
+<span id="cut"></span><div class="header">
 <p>
 Next: <a href="#date" accesskey="n" rel="next">date</a>, Previous: <a href="#capfirst" accesskey="p" rel="prev">capfirst</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -298,9 +322,7 @@ Next: <a href="#date" accesskey="n" rel="next">date</a>, Previous: <a href="#cap
 <code>&quot;Stringwithspaces&quot;</code>.
 </p>
 <hr>
-</div>
-<div class="subsection" id="date">
-<div class="header">
+<span id="date"></span><div class="header">
 <p>
 Next: <a href="#time" accesskey="n" rel="next">time</a>, Previous: <a href="#cut" accesskey="p" rel="prev">cut</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -311,7 +333,7 @@ Next: <a href="#time" accesskey="n" rel="next">time</a>, Previous: <a href="#cut
 </p>
 
 <dl compact="compact">
-<dt><span>Example::</span></dt>
+<dt>Example::</dt>
 <dd>
 <p>{{ date-today | date }}
 </p></dd>
@@ -325,9 +347,7 @@ Next: <a href="#time" accesskey="n" rel="next">time</a>, Previous: <a href="#cut
 </pre></div>
 
 <hr>
-</div>
-<div class="subsection" id="time">
-<div class="header">
+<span id="time"></span><div class="header">
 <p>
 Next: <a href="#datetime" accesskey="n" rel="next">datetime</a>, Previous: <a href="#date" accesskey="p" rel="prev">date</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -343,9 +363,7 @@ Next: <a href="#datetime" accesskey="n" rel="next">datetime</a>, Previous: <a hr
 </pre></div>
 
 <hr>
-</div>
-<div class="subsection" id="datetime">
-<div class="header">
+<span id="datetime"></span><div class="header">
 <p>
 Next: <a href="#default" accesskey="n" rel="next">default</a>, Previous: <a href="#time" accesskey="p" rel="prev">time</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -361,9 +379,7 @@ Next: <a href="#default" accesskey="n" rel="next">default</a>, Previous: <a href
 </pre></div>
 
 <hr>
-</div>
-<div class="subsection" id="default">
-<div class="header">
+<span id="default"></span><div class="header">
 <p>
 Next: <a href="#reverse" accesskey="n" rel="next">reverse</a>, Previous: <a href="#datetime" accesskey="p" rel="prev">datetime</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -382,9 +398,7 @@ value.
 <p>If <code>value</code> is <code>&quot;&quot;</code> (the empty string), the output will be <code>nothing</code>.
 </p>
 <hr>
-</div>
-<div class="subsection" id="reverse">
-<div class="header">
+<span id="reverse"></span><div class="header">
 <p>
 Next: <a href="#divisibleby" accesskey="n" rel="next">divisibleby</a>, Previous: <a href="#default" accesskey="p" rel="prev">default</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -400,9 +414,7 @@ Next: <a href="#divisibleby" accesskey="n" rel="next">divisibleby</a>, Previous:
 </pre></div>
 
 <hr>
-</div>
-<div class="subsection" id="divisibleby">
-<div class="header">
+<span id="divisibleby"></span><div class="header">
 <p>
 Next: <a href="#sort" accesskey="n" rel="next">sort</a>, Previous: <a href="#reverse" accesskey="p" rel="prev">reverse</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -421,9 +433,7 @@ Next: <a href="#sort" accesskey="n" rel="next">sort</a>, Previous: <a href="#rev
 </p>
 
 <hr>
-</div>
-<div class="subsection" id="sort">
-<div class="header">
+<span id="sort"></span><div class="header">
 <p>
 Next: <a href="#first" accesskey="n" rel="next">first</a>, Previous: <a href="#divisibleby" accesskey="p" rel="prev">divisibleby</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -439,9 +449,7 @@ Next: <a href="#first" accesskey="n" rel="next">first</a>, Previous: <a href="#d
 </pre></div>
 
 <hr>
-</div>
-<div class="subsection" id="first">
-<div class="header">
+<span id="first"></span><div class="header">
 <p>
 Next: <a href="#join" accesskey="n" rel="next">join</a>, Previous: <a href="#sort" accesskey="p" rel="prev">sort</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -459,9 +467,7 @@ Next: <a href="#join" accesskey="n" rel="next">join</a>, Previous: <a href="#sor
 <p>If <code>value</code> is the list <code>(&quot;a&quot; &quot;b&quot; &quot;c&quot;)</code>, the output will be <code>&quot;a&quot;</code>.
 </p>
 <hr>
-</div>
-<div class="subsection" id="join">
-<div class="header">
+<span id="join"></span><div class="header">
 <p>
 Next: <a href="#last" accesskey="n" rel="next">last</a>, Previous: <a href="#first" accesskey="p" rel="prev">first</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -480,9 +486,7 @@ Next: <a href="#last" accesskey="n" rel="next">last</a>, Previous: <a href="#fir
 <code>&quot;a // b // c&quot;</code>.
 </p>
 <hr>
-</div>
-<div class="subsection" id="last">
-<div class="header">
+<span id="last"></span><div class="header">
 <p>
 Next: <a href="#length" accesskey="n" rel="next">length</a>, Previous: <a href="#join" accesskey="p" rel="prev">join</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -501,9 +505,7 @@ Next: <a href="#length" accesskey="n" rel="next">length</a>, Previous: <a href="
 string <code>&quot;d&quot;</code>.
 </p>
 <hr>
-</div>
-<div class="subsection" id="length">
-<div class="header">
+<span id="length"></span><div class="header">
 <p>
 Next: <a href="#length_005fis" accesskey="n" rel="next">length_is</a>, Previous: <a href="#last" accesskey="p" rel="prev">last</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -522,9 +524,7 @@ Next: <a href="#length_005fis" accesskey="n" rel="next">length_is</a>, Previous:
 <code>4</code>.
 </p>
 <hr>
-</div>
-<div class="subsection" id="length_005fis">
-<div class="header">
+<span id="length_005fis"></span><div class="header">
 <p>
 Next: <a href="#linebreaks" accesskey="n" rel="next">linebreaks</a>, Previous: <a href="#length" accesskey="p" rel="prev">length</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -546,9 +546,7 @@ Next: <a href="#linebreaks" accesskey="n" rel="next">linebreaks</a>, Previous: <
 </blockquote>
 
 <hr>
-</div>
-<div class="subsection" id="linebreaks">
-<div class="header">
+<span id="linebreaks"></span><div class="header">
 <p>
 Next: <a href="#linebreaksbr" accesskey="n" rel="next">linebreaksbr</a>, Previous: <a href="#length_005fis" accesskey="p" rel="prev">length_is</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -569,9 +567,7 @@ followed by a blank line becomes a paragraph break (<code>&lt;/p&gt;</code>).
 slug&lt;/p&gt;</code>.
 </p>
 <hr>
-</div>
-<div class="subsection" id="linebreaksbr">
-<div class="header">
+<span id="linebreaksbr"></span><div class="header">
 <p>
 Next: <a href="#lower" accesskey="n" rel="next">lower</a>, Previous: <a href="#linebreaks" accesskey="p" rel="prev">linebreaks</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -592,9 +588,7 @@ slug</code>.
 </p>
 
 <hr>
-</div>
-<div class="subsection" id="lower">
-<div class="header">
+<span id="lower"></span><div class="header">
 <p>
 Next: <a href="#make_005flist" accesskey="n" rel="next">make_list</a>, Previous: <a href="#linebreaksbr" accesskey="p" rel="prev">linebreaksbr</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -613,11 +607,9 @@ Next: <a href="#make_005flist" accesskey="n" rel="next">make_list</a>, Previous:
 <code>still mad at yoko</code>.
 </p>
 <hr>
-</div>
-<div class="subsection" id="make_005flist">
-<div class="header">
+<span id="make_005flist"></span><div class="header">
 <p>
-Next: <a href="#safe-escape" accesskey="n" rel="next">safe, escape</a>, Previous: <a href="#lower" accesskey="p" rel="prev">lower</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#safe-escape" accesskey="n" rel="next">safe escape</a>, Previous: <a href="#lower" accesskey="p" rel="prev">lower</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="filters-make_002dlist"></span><span id="make_005flist-1"></span><h4 class="subsection">8.2.20 make_list</h4>
 
@@ -638,9 +630,7 @@ list <code>['1', '2', '3']</code>.
 </p>
 
 <hr>
-</div>
-<div class="subsection" id="safe-escape">
-<div class="header">
+<span id="safe-escape"></span><div class="header">
 <p>
 Next: <a href="#slice" accesskey="n" rel="next">slice</a>, Previous: <a href="#make_005flist" accesskey="p" rel="prev">make_list</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -664,11 +654,9 @@ prints the variable as is, unescaped:
 
 
 <hr>
-</div>
-<div class="subsection" id="slice">
-<div class="header">
+<span id="slice"></span><div class="header">
 <p>
-Next: <a href="#force_002descape" accesskey="n" rel="next">force-escape</a>, Previous: <a href="#safe-escape" accesskey="p" rel="prev">safe, escape</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#force_002descape" accesskey="n" rel="next">force-escape</a>, Previous: <a href="#safe-escape" accesskey="p" rel="prev">safe escape</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="filters-slice"></span><span id="slice-1"></span><h4 class="subsection">8.2.22 slice</h4>
 
@@ -712,9 +700,7 @@ Next: <a href="#force_002descape" accesskey="n" rel="next">force-escape</a>, Pre
 </p>
 
 <hr>
-</div>
-<div class="subsection" id="force_002descape">
-<div class="header">
+<span id="force_002descape"></span><div class="header">
 <p>
 Next: <a href="#format" accesskey="n" rel="next">format</a>, Previous: <a href="#slice" accesskey="p" rel="prev">slice</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -730,9 +716,7 @@ Next: <a href="#format" accesskey="n" rel="next">format</a>, Previous: <a href="
 <p>It calls <code>djula::escape-for-html</code>.
 </p>
 <hr>
-</div>
-<div class="subsection" id="format">
-<div class="header">
+<span id="format"></span><div class="header">
 <p>
 Next: <a href="#replace-_2026-with" accesskey="n" rel="next">replace … with</a>, Previous: <a href="#force_002descape" accesskey="p" rel="prev">force-escape</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -752,9 +736,7 @@ This specifier uses Common Lisp string formatting syntax
 </p>
 
 <hr>
-</div>
-<div class="subsection" id="replace-_2026-with">
-<div class="header">
+<span id="replace-_2026-with"></span><div class="header">
 <p>
 Next: <a href="#rest" accesskey="n" rel="next">rest</a>, Previous: <a href="#format" accesskey="p" rel="prev">format</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -771,9 +753,7 @@ Next: <a href="#rest" accesskey="n" rel="next">rest</a>, Previous: <a href="#for
 string, using <code>ppcre:regex-replace-all</code>.
 </p>
 <hr>
-</div>
-<div class="subsection" id="rest">
-<div class="header">
+<span id="rest"></span><div class="header">
 <p>
 Next: <a href="#scan" accesskey="n" rel="next">scan</a>, Previous: <a href="#replace-_2026-with" accesskey="p" rel="prev">replace … with</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -791,11 +771,9 @@ Next: <a href="#scan" accesskey="n" rel="next">scan</a>, Previous: <a href="#rep
 <p>If <code>values</code> is the list <code>(&quot;a&quot; &quot;b&quot; &quot;c&quot;)</code>, the output will be <code>(&quot;b&quot; &quot;c&quot;)</code>.
 </p>
 <hr>
-</div>
-<div class="subsection" id="scan">
-<div class="header">
+<span id="scan"></span><div class="header">
 <p>
-Next: <a href="#time_003c2_003e" accesskey="n" rel="next">time</a>, Previous: <a href="#rest" accesskey="p" rel="prev">rest</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#time_003c2_003e" accesskey="n" rel="next">time&lt;2&gt;</a>, Previous: <a href="#rest" accesskey="p" rel="prev">rest</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="filters-scan"></span><span id="scan-1"></span><h4 class="subsection">8.2.27 scan</h4>
 
@@ -809,9 +787,7 @@ Next: <a href="#time_003c2_003e" accesskey="n" rel="next">time</a>, Previous: <a
 <p>This will display only the text that matches the regexp (using <code>ppcre:scan-to-strings</code>).
 </p>
 <hr>
-</div>
-<div class="subsection" id="time_003c2_003e">
-<div class="header">
+<span id="time_003c2_003e"></span><div class="header">
 <p>
 Next: <a href="#truncatechars" accesskey="n" rel="next">truncatechars</a>, Previous: <a href="#scan" accesskey="p" rel="prev">scan</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -828,11 +804,9 @@ Next: <a href="#truncatechars" accesskey="n" rel="next">truncatechars</a>, Previ
 
 
 <hr>
-</div>
-<div class="subsection" id="truncatechars">
-<div class="header">
+<span id="truncatechars"></span><div class="header">
 <p>
-Next: <a href="#upper" accesskey="n" rel="next">upper</a>, Previous: <a href="#time_003c2_003e" accesskey="p" rel="prev">time</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#upper" accesskey="n" rel="next">upper</a>, Previous: <a href="#time_003c2_003e" accesskey="p" rel="prev">time&lt;2&gt;</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="filters-truncatechars"></span><span id="truncatechars-1"></span><h4 class="subsection">8.2.29 truncatechars</h4>
 
@@ -852,9 +826,7 @@ Truncated strings will end with the :cl:symbol:<em>ELLISION-STRING</em>, which d
 </p>
 
 <hr>
-</div>
-<div class="subsection" id="upper">
-<div class="header">
+<span id="upper"></span><div class="header">
 <p>
 Next: <a href="#urlencode" accesskey="n" rel="next">urlencode</a>, Previous: <a href="#truncatechars" accesskey="p" rel="prev">truncatechars</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -872,9 +844,7 @@ Next: <a href="#urlencode" accesskey="n" rel="next">urlencode</a>, Previous: <a 
 <p>If <code>value</code> is <code>&quot;Joel is a slug&quot;</code>, the output will be <code>&quot;JOEL IS A SLUG&quot;</code>.
 </p>
 <hr>
-</div>
-<div class="subsection" id="urlencode">
-<div class="header">
+<span id="urlencode"></span><div class="header">
 <p>
 Previous: <a href="#upper" accesskey="p" rel="prev">upper</a>, Up: <a href="#List-of-filters" accesskey="u" rel="up">List of filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -907,10 +877,7 @@ provided when <em>all</em> characters should be escaped. For example:
 </p>
 
 <hr>
-</div>
-</div>
-<div class="section" id="Custom-filters">
-<div class="header">
+<span id="Custom-filters"></span><div class="header">
 <p>
 Previous: <a href="#List-of-filters" accesskey="p" rel="prev">List of filters</a>, Up: <a href="#Filters" accesskey="u" rel="up">Filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -980,12 +947,10 @@ lambda function and chain it with the <code>with</code> filter:
        (template-error &quot;There was an error executing this filter: ~A&quot; e))))
 </pre></div>
 
-</div>
-</div>
 <hr>
 <div class="header">
 <p>
-Next: <a href="Templates-composition.html#Templates-composition" accesskey="n" rel="next">Templates composition</a>, Previous: <a href="Verbatim.html" accesskey="p" rel="prev">Verbatim</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="#List-of-filters" accesskey="p" rel="prev">List of filters</a>, Up: <a href="#Filters" accesskey="u" rel="up">Filters</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 
 
