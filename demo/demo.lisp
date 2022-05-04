@@ -22,7 +22,7 @@
    hunchentoot:*dispatch-table*)
   uri)
 
-(defparameter *demo-acceptor* (make-instance 'hunchentoot:easy-acceptor :port 9090))
+(defvar *demo-acceptor*)
 
 (define-static-resource "/simplegrid.css"
     "demo/static/simplegrid.css")
@@ -39,11 +39,17 @@
 (define-static-resource "/prettify.css"
     "demo/static/prettify/prettify.css")
 
-(defun start-demo ()
-  (hunchentoot:start *demo-acceptor*))
-
 (defun stop-demo ()
-  (hunchentoot:stop *demo-acceptor*))
+  (when (and (boundp '*demo-acceptor*)
+	     (not (null *demo-acceptor*)))
+    (hunchentoot:stop *demo-acceptor*)
+    (setf *demo-acceptor* nil)))
+
+(defun start-demo ()
+  (stop-demo)
+  (setf *demo-acceptor*
+	(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor
+					  :port 0))))
 
 (defparameter +demo.html+ (djula:compile-template* "demo.html"))
 (defparameter +error.html+ (djula:compile-template* "error.html"))
