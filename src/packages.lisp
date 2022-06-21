@@ -23,9 +23,13 @@
            #:*template-search-path*
            #:*djula-execute-package*
            #:*djula-emptyp*
+	   #:*recompile-templates-on-change*
            #:compile-template
            #:compile-template*
            #:compiler
+	   #:template-store
+	   #:filesystem-template-store
+	   #:memory-template-store
            #:def-tag-compiler
            #:def-filter
            #:fetch-template
@@ -37,6 +41,7 @@
            #:render-template*
            #:toplevel-compiler
            #:template-print-object
+	   #:list-asdf-system-templates
            #:url-encode
            #:url-encode-path
            #:add-template-directory

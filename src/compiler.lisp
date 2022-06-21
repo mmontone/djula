@@ -1,5 +1,9 @@
 (in-package #:djula)
 
+(defvar *recompile-templates-on-change* t
+  "When enabled, templates are recompiled if they have changed on disk, before they are rendered.
+This is the default and convenient for development. For production, this can be turned off and the filesystem check is bypassed.")
+
 (defgeneric compile-template (compiler name &optional error-p)
   (:documentation "Provides a hook to customize template compilation."))
 
@@ -54,8 +58,7 @@
 
   (closer-mop:set-funcallable-instance-function
    compiled-template
-   (if (not (uiop:featurep :djula-prod))
-       ;; If :djula-prod is not enabled, recompile templates when they change on disk
+   (if *recompile-templates-on-change*
        (lambda (stream)
          ;; Recompile the template if the template-file has changed
          (let ((template-file-write-date (template-file-write-date compiled-template)))
@@ -65,7 +68,7 @@
                              thereis (template-changed linked-template)))
              (compile-template-file compiled-template)))
          (funcall (compiled-template compiled-template) stream))
-       ;; If :djula-prod is enabled, avoid the automatic template file checking and recompilation
+       ;; else, avoid the automatic template file checking and recompilation
        (compiled-template compiled-template))))
 
 (defmethod compile-template ((compiler compiler) name &optional (error-p t))
