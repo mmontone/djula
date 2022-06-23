@@ -313,10 +313,10 @@ Then we can render our compiled templates using the @code{RENDER-TEMPLATE*} func
 
 By default, Djula automatically recompiles the templates when they change.
 
-If you want to disable this, use the @cite{:djula-prod} @emph{feature}:
+If you want to disable this, use the @cite{*recompile-templates-on-change*} variable:
 
 @example
-(push :djula-prod *features*)
+(setf djula:*recompile-templates-on-change* nil)
 @end example
 
 @node API
