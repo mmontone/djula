@@ -69,7 +69,8 @@ Contents:
 * Filters:: 
 * Templates composition:: 
 * Internationalization:: 
-* Error handling:: 
+* Error handling::
+* Deployment::
 * API: API<3>. 
 * Symbol Index::
 
