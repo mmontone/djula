@@ -96,7 +96,9 @@ See the section on building standalong binaries in Djula manual."))
 A list of template PATHNAMEs is returned."
 
   (let* ((sys (asdf:find-system asdf-system))
-         (module (find component (asdf:component-children sys) :key #'asdf:component-name :test #'equal))
+         (children (asdf:component-children sys))
+         (module (or (find component children :key #'asdf:component-name :test #'equal)
+                     (error "Component ~S not found in system named ~S.~&Available components are: ~S" component asdf-system (mapcar #'asdf:component-name children))))
          (alltemplates (remove-if-not (lambda (x) (typep x 'asdf:static-file))
                                       (asdf:module-components module))))
     (mapcar (lambda (it) (asdf:component-pathname it))
