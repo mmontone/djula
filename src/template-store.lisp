@@ -62,6 +62,7 @@
   (:documentation "A template store with a memory cache.
 This store works like FILESYSTEM-TEMPLATE-STORE, but when a template is compiled it saves the template contents in memory and templates are rendered from memory after.
 This is useful for building standalone binaries, as there's no need to ship template files once they have been compiled (they are stored in the lisp image memory).
+You need to set Djula's *current-store* to a MEMORY-TEMPLATE-STORE instance before compiling templates.
 See the section on building standalong binaries in Djula manual."))
 
 (defmethod fetch-template ((store memory-template-store) name)
