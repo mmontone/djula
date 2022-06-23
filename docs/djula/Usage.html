@@ -178,10 +178,10 @@ Next: <a href="#API" accesskey="n" rel="next">API</a>, Up: <a href="#Usage" acce
 
 <p>By default, Djula automatically recompiles the templates when they change.
 </p>
-<p>If you want to disable this, use the <cite>:djula-prod</cite> <em>feature</em>:
+<p>If you want to disable this, use the <cite>*recompile-templates-on-change*</cite> variable:
 </p>
 <div class="example">
-<pre class="example">(push :djula-prod *features*)
+<pre class="example">(setf djula:*recompile-templates-on-change* nil)
 </pre></div>
 
 <hr>

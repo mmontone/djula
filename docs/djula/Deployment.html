@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<!-- Djula HTML templating system 0.2, Oct 21, 2021
+
+Nick Allen
+
+Copyright (C) 2014, Nick Allen.
+
+Maintained by Mariano Montone.
+
+ -->
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Deployment (Djula HTML templating system)</title>
+
+<meta name="description" content="Deployment (Djula HTML templating system)">
+<meta name="keywords" content="Deployment (Djula HTML templating system)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<link href="index.html" rel="start" title="Top">
+<link href="Symbol-Index.html" rel="index" title="Symbol Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="API_003c3_003e.html" rel="next" title="API&lt;3&gt;">
+<link href="Error-handling.html" rel="prev" title="Error handling">
+<style type="text/css">
+<!--
+/* Style-sheet to use for manuals (copied from Emacs) */
+
+@import url('../style.css');
+
+/* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
+
+a.summary-letter {text-decoration: none}
+blockquote.indentedblock {margin-right: 0em}
+div.display {margin-left: 3.2em}
+div.example {margin-left: 3.2em}
+div.lisp {margin-left: 3.2em}
+kbd {font-style: oblique}
+pre.display {font-family: inherit}
+pre.format {font-family: inherit}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
+ul.no-bullet {list-style: none}
+blockquote {
+    font-style: normal;
+    border-left: solid 10px red;
+    padding-left: 2.5%;
+    margin-left: 0px;
+}
+
+/* Increase inter-line spacing to improve readability.  */
+p, pre, li, dt, dd, table, code, address { line-height: 1.5em; }
+
+var { font-style: italic; }
+
+/* Lay out @lisp just like @example.  Copied from what /style.css
+   does for the 'example' class.  */
+div.lisp { padding: .8em 1.2em .4em; }
+pre.lisp { padding: .8em 1.2em; }
+div.lisp, pre.lisp {
+   margin: 1em 0 1em 3% ;
+   -webkit-border-radius: .3em;
+   -moz-border-radius: .3em;
+   border-radius: .3em;
+   border: 1px solid #d4cbb6;
+   background-color: #f2efe4;
+}
+div.lisp > pre.lisp {
+   padding: 0 0 .4em;
+   margin: 0;
+   border: none;
+}
+
+/* makeinfo 6.7 uses <div class="header"> for navigation links above node
+   titles.  Make those links less prominent.  */
+.header {
+    line-height: 2em;
+    font-size: 87.5%;
+    color: #433;
+}
+
+/* In title and node titles, use Fira Sans if available as it is more
+   pleasant and more compact than Helvetica.  */
+.settitle, .top, .chapter, .section, .subsection, .subsubsection {
+    font-family: Fira Sans, sans;
+}
+
+/* ----- coreutils specific styling ----- */
+
+/* layout.css indents "body p" when it should probably only indent "body > p"?
+   In any case, disable indenting of p in these sub elements.  */
+dd p,li p {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* underlined links are distracting, especially within outlined tables.  */
+a { /*add :link for external links*/
+    text-decoration: none; /* don't underline links by default */
+    outline-style: none;   /* don't put dotted box around clicked links */
+}
+a:hover {
+    text-decoration: underline;
+}
+
+body {
+    /* Make sure the body doesn't become to wide: long lines are hard to
+       read.  */
+    max-width: 45em;
+}
+
+-->
+</style>
+
+
+</head>
+
+<body lang="en">
+<span id="Deployment"></span><div class="header">
+<p>
+Next: <a href="API_003c3_003e.html" accesskey="n" rel="next">API&lt;3&gt;</a>, Previous: <a href="Error-handling.html" accesskey="p" rel="prev">Error handling</a>, Up: <a href="index.html" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="deployment-doc"></span><span id="deployment-error_002dhandling"></span><span id="Deployment-_002d-Building-standalone-binaries"></span><h2 class="chapter">12 Deployment - Building standalone binaries</h2>
+
+<p>By default, when asked to compile a template, Djula searches the file
+system, in the directories you told it to look into. When you render a
+template that <code>extends</code> or <code>includes</code> another one, Djula
+searches for that one too. Moreover, Djula will try to re-compile a
+template at each access, whenever you reload a web page. This is very
+convenient for development, it doesn&rsquo;t bother us to deploy our
+application from sources (although you may want to disable
+auto-reloading), but it prevents us from building a standalone binary
+that will run on another machine, when the search path&rsquo;s directories
+don&rsquo;t exist anymore.
+</p>
+<p>To build a standalone binary, we will need to:
+</p>
+<ul class="no-bullet">
+<li>* list all our templates (we can do that in our .asd system declaration)
+
+</li><li>* instantiate <code>djula:*current-store*</code> as an instance of <code>memory-template-store</code>,
+
+</li><li>* compile our templates: they get compiled into memory.
+
+</li><li>* disable the auto-reload: <code>setf djula:*recompile-templates-on-change* nil)</code>.
+
+</li></ul>
+
+<p>Below is a simple ASDF system declaration that declares two templates
+as static files located in the &ldquo;src/templates&rdquo; directory:
+</p>
+<div class="example">
+<pre class="example">(asdf:defsystem &quot;djula-binary&quot;
+  :depends-on (:hunchentoot
+               :djula)
+  :components ((:module &quot;src&quot;
+                        :components
+                        ((:file &quot;web&quot;)))
+               (:module &quot;src/templates&quot;
+                        :components
+                        ;; Order is important: the ones that extend base.html
+                        ;; must be declared after it, because we compile all of them
+                        ;; at build time one after the other.
+                        ((:static-file &quot;base.html&quot;)
+                         (:static-file &quot;search.html&quot;)))
+               (:static-file &quot;README.md&quot;))
+
+  :build-operation &quot;program-op&quot;
+  :build-pathname &quot;djula-binary&quot;
+  :entry-point &quot;djula-binary::main&quot;
+
+  :description &quot;How to embed Djula templates in a self-contained binary.&quot;)
+</pre></div>
+
+<p>At the top level of &ldquo;src/web.lisp&rdquo;, we set Djula&rsquo;s store to a memory
+store, and we disable the autoreload feature. This code would be
+called when we <code>load</code> the .lisp file, so it will be called when
+we create the binary with <code>(asdf:make :djula-binary)</code>.
+</p>
+<div class="example">
+<pre class="example">(setf djula:*current-store* (make-instance 'djula:memory-template-store
+					   :search-path (list (asdf:system-relative-pathname &quot;djula-binary&quot;
+                                                             &quot;src/templates/&quot;))) ;; meaningful trailing /
+      djula:*recompile-templates-on-change* nil)
+</pre></div>
+
+<p>Now, we compile all those declared templates. We use the
+<code>djula:list-asdf-system-templates</code> utility that will return a
+list of pathnames to our templates.
+</p>
+<div class="example">
+<pre class="example">(mapcar #'djula:compile-template* (djula:list-asdf-system-templates :demo-djula-in-binaries &quot;src/templates&quot;))
+</pre></div>
+
+<p>Finally, you can declare templates as usual in your application:
+</p>
+<div class="example">
+<pre class="example">(defparameter +base.html+ (djula:compile-template* &quot;base.html&quot;))
+</pre></div>
+
+<p>and render a template that <code>extends</code> another one, it will work
+(and that was actually the main difficulty: the default store always
+looks for this inherited template on the filesystem).
+</p>
+<p>You can now send to your web server your self-contained, one file
+binary that you built on your machine or on a CI server.
+</p>
+<blockquote>
+<p><b>Note:</b> For a real-world web application you&rsquo;ll likely need
+<a href="https://github.com/Shinmera/deploy">Deploy</a> to ship foreign
+libraries in your binary.
+</p></blockquote>
+
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="#API_003c2_003e" accesskey="1">API</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
+
+<hr>
+<span id="API_003c2_003e"></span><div class="header">
+<p>
+Up: <a href="#Deployment" accesskey="u" rel="up">Deployment</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="error_002dhandling-api"></span><span id="API-2"></span><h3 class="section">12.1 API</h3>
+
+
+
+<dl>
+<dt id="index-_002acatch_002dtemplate_002derrors_002dp_002a">Variable: <strong>*catch<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->errors<span class="nolinebreak">-</span><!-- /@w -->p*</strong></dt>
+</dl>
+
+
+<dl>
+<dt id="index-_002afancy_002derror_002dtemplate_002dp_002a">Variable: <strong>*fancy<span class="nolinebreak">-</span><!-- /@w -->error<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->p*</strong></dt>
+</dl>
+
+
+<dl>
+<dt id="index-_002averbose_002derrors_002dp_002a">Variable: <strong>*verbose<span class="nolinebreak">-</span><!-- /@w -->errors<span class="nolinebreak">-</span><!-- /@w -->p*</strong></dt>
+</dl>
+
+<hr>
+<div class="header">
+<p>
+Up: <a href="#Deployment" accesskey="u" rel="up">Deployment</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>
