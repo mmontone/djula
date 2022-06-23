@@ -313,10 +313,10 @@ Then we can render our compiled templates using the @code{RENDER-TEMPLATE*} func
 
 By default, Djula automatically recompiles the templates when they change.
 
-If you want to disable this, use the @cite{:djula-prod} @emph{feature}:
+If you want to disable this, use the @cite{*recompile-templates-on-change*} variable:
 
 @example
-(push :djula-prod *features*)
+(setf djula:*recompile-templates-on-change* nil)
 @end example
 
 @node API
@@ -2723,6 +2723,104 @@ desired. That is controlled via the variable @code{*FANCY-ERROR-TEMPLATE-P*}
 * API: API<2>. 
 
 @end menu
+
+@node Deployment
+@anchor{deployment doc}@anchor{deployment error-handling}
+@chapter Deployment - Building standalone binaries
+
+By default, when asked to compile a template, Djula searches the file
+system, in the directories you told it to look into. When you render a
+template that @code{extends} or @code{includes} another one, Djula
+searches for that one too. Moreover, Djula will try to re-compile a
+template at each access, whenever you reload a web page. This is very
+convenient for development, it doesn't bother us to deploy our
+application from sources (although you may want to disable
+auto-reloading), but it prevents us from building a standalone binary
+that will run on another machine, when the search path's directories
+don't exist anymore.
+
+To build a standalone binary, we will need to:
+
+@itemize *
+@item
+list all our templates (we can do that in our .asd system declaration)
+
+@item
+instantiate @code{djula:*current-store*} as an instance of @code{memory-template-store},
+
+@item
+compile our templates: they get compiled into memory.
+
+@item
+disable the auto-reload: @code{setf djula:*recompile-templates-on-change* nil)}.
+
+@end itemize
+
+Below is a simple ASDF system declaration that declares two templates
+as static files located in the ``src/templates'' directory:
+
+@example lisp
+(asdf:defsystem "djula-binary"
+  :depends-on (:hunchentoot
+               :djula)
+  :components ((:module "src"
+                        :components
+                        ((:file "web")))
+               (:module "src/templates"
+                        :components
+                        ;; Order is important: the ones that extend base.html
+                        ;; must be declared after it, because we compile all of them
+                        ;; at build time one after the other.
+                        ((:static-file "base.html")
+                         (:static-file "search.html")))
+               (:static-file "README.md"))
+
+  :build-operation "program-op"
+  :build-pathname "djula-binary"
+  :entry-point "djula-binary::main"
+
+  :description "How to embed Djula templates in a self-contained binary.")
+@end example
+
+At the top level of ``src/web.lisp'', we set Djula's store to a memory
+store, and we disable the autoreload feature. This code would be
+called when we @code{load} the .lisp file, so it will be called when
+we create the binary with @code{(asdf:make :djula-binary)}.
+
+@example lisp
+(setf djula:*current-store* (make-instance 'djula:memory-template-store
+					   :search-path (list (asdf:system-relative-pathname "djula-binary"
+                                                             "src/templates/"))) ;; meaningful trailing /
+      djula:*recompile-templates-on-change* nil)
+@end example
+
+Now, we compile all those declared templates. We use the
+@code{djula:list-asdf-system-templates} utility that will return a
+list of pathnames to our templates.
+
+@example lisp
+(mapcar #'djula:compile-template* (djula:list-asdf-system-templates :demo-djula-in-binaries "src/templates"))
+@end example
+
+Finally, you can declare templates as usual in your application:
+
+@example lisp
+(defparameter +base.html+ (djula:compile-template* "base.html"))
+@end example
+
+and render a template that @code{extends} another one, it will work
+(and that was actually the main difficulty: the default store always
+looks for this inherited template on the filesystem).
+
+You can now send to your web server your self-contained, one file
+binary that you built on your machine or on a CI server.
+
+@quotation Note
+For a real-world web application you'll likely need
+@url{https://github.com/Shinmera/deploy, Deploy} to ship foreign
+libraries in your binary.
+@end quotation
+
 
 @node API<2>
 @anchor{error-handling api}
