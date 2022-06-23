@@ -2729,10 +2729,12 @@ desired. That is controlled via the variable @code{*FANCY-ERROR-TEMPLATE-P*}
 @chapter Deployment - Building standalone binaries
 
 By default, when asked to compile a template, Djula searches the file
-system, in the directories you told it to look into. Moreover, it will
-try to re-compile a template at each access, whenever you reload a web
-page. This is very convenient for development, it doesn't bother us to
-deploy our application from sources (although you may want to disable
+system, in the directories you told it to look into. When you render a
+template that @code{extends} or @code{includes} another one, Djula
+searches for that one too. Moreover, Djula will try to re-compile a
+template at each access, whenever you reload a web page. This is very
+convenient for development, it doesn't bother us to deploy our
+application from sources (although you may want to disable
 auto-reloading), but it prevents us from building a standalone binary
 that will run on another machine, when the search path's directories
 don't exist anymore.
@@ -2806,7 +2808,9 @@ Finally, you can declare templates as usual in your application:
 (defparameter +base.html+ (djula:compile-template* "base.html"))
 @end example
 
-or search them by name, it will work.
+and render a template that @code{extends} another one, it will work
+(and that was actually the main difficulty: the default store always
+looks for this inherited template on the filesystem).
 
 You can now send to your web server your self-contained, one file
 binary that you built on your machine or on a CI server.
