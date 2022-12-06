@@ -33,13 +33,15 @@ asdf")))
   (is (string= (filter :addslashes "I'm using Djula")
 	       "I\\'m using Djula"))
   (is (string=
-       (filter :date (encode-universal-time 0 0 0 1 1 2014))
+       (let ((local-time:*default-timezone* local-time:+utc-zone+))
+         (filter :date (encode-universal-time 0 0 0 1 1 2014 0)))
        "2014-01-01"))
   (is (string=
-       (filter :time (encode-universal-time 17 17 18 1 1 2014))
+       (let ((local-time:*default-timezone* local-time:+utc-zone+))
+         (filter :time (encode-universal-time 17 17 18 1 1 2014 0)))
        "18:17:17"))
   #+nil(is (string=
-       (filter :datetime (encode-universal-time 17 17 18 1 1 2014))
+       (filter :datetime (encode-universal-time 17 17 18 1 1 2014 0))
        "2014-01-01T18:17:17.000000-03:00"))
   (is (equalp (filter :join (list "1" "2" "3") ",")
               "1,2,3"))
