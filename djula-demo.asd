@@ -3,7 +3,8 @@
   :description "Demo of the Djula template system"
   :author "Mariano Montone <marianomontone@gmail.com>"
   :depends-on (#:djula
-               #:hunchentoot)
+               #:hunchentoot
+	       #:trivial-open-browser)
   :components
   ((:module :demo
 	    :components

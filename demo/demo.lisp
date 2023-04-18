@@ -1,7 +1,7 @@
 (defpackage :djula-demo
   (:use :cl)
   (:export #:start-demo
-	   #:stop-demo))
+           #:stop-demo))
 
 (in-package :djula-demo)
 
@@ -25,31 +25,35 @@
 (defvar *demo-acceptor*)
 
 (define-static-resource "/simplegrid.css"
-    "demo/static/simplegrid.css")
+  "demo/static/simplegrid.css")
 
 (define-static-resource "/styles.css"
-    "demo/static/styles.css")
+  "demo/static/styles.css")
 
 (define-static-resource "/prettify.js"
-    "demo/static/prettify/prettify.js")
+  "demo/static/prettify/prettify.js")
 
 (define-static-resource "/lang-lisp.js"
-    "demo/static/prettify/lang-lisp.js")
+  "demo/static/prettify/lang-lisp.js")
 
 (define-static-resource "/prettify.css"
-    "demo/static/prettify/prettify.css")
+  "demo/static/prettify/prettify.css")
 
 (defun stop-demo ()
   (when (and (boundp '*demo-acceptor*)
-	     (not (null *demo-acceptor*)))
+             (not (null *demo-acceptor*)))
     (hunchentoot:stop *demo-acceptor*)
     (setf *demo-acceptor* nil)))
 
-(defun start-demo ()
+(defun start-demo (&key (open-browser t))
   (stop-demo)
   (setf *demo-acceptor*
-	(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor
-					  :port 0))))
+        (hunchentoot:start (make-instance 'hunchentoot:easy-acceptor
+                                          :port 0)))
+  (when open-browser
+    (trivial-open-browser:open-browser
+     (format nil "http://localhost:~a"
+             (hunchentoot:acceptor-port *demo-acceptor*)))))
 
 (defparameter +demo.html+ (djula:compile-template* "demo.html"))
 (defparameter +error.html+ (djula:compile-template* "error.html"))
@@ -57,18 +61,18 @@
 
 (defun render-demos (demos)
   (loop for demo in demos
-     collect (list :title (first demo)
-		   :examples
-		   (loop for example in (cdr demo)
-		      collect
-			(destructuring-bind (source &rest args) example
-			  (list :source source
-				:args (format nil "~S" args)
-				:output (apply
-					 #'djula:render-template*
-					 (djula::compile-string source)
-					 nil
-					 args)))))))
+        collect (list :title (first demo)
+                      :examples
+                      (loop for example in (cdr demo)
+                            collect
+                            (destructuring-bind (source &rest args) example
+                              (list :source source
+                                    :args (format nil "~S" args)
+                                    :output (apply
+                                             #'djula:render-template*
+                                             (djula::compile-string source)
+                                             nil
+                                             args)))))))
 
 (defparameter +custom-date-format+ '((:YEAR 4) #\/ (:MONTH 2) #\/ (:DAY 2)))
 
@@ -81,8 +85,8 @@
 
 (gettext:setup-gettext #:djula-demo "demo")
 (gettext:preload-catalogs #.(asdf:system-relative-pathname :djula-demo "demo/locale/"))
-;(setf (gettext:textdomaindir "demo")
-;      (asdf:system-relative-pathname :djula-demo "demo/locale/"))
+                                        ;(setf (gettext:textdomaindir "demo")
+                                        ;      (asdf:system-relative-pathname :djula-demo "demo/locale/"))
 (setf djula::*gettext-domain* "demo")
 
 (defparameter *demos*
@@ -113,12 +117,12 @@
      ("cycle"
       ("{% for x in list %}
         <tr class=\"{% cycle \"row1\" \"row2\" %}\">
-           <td>{{x}}</td> 
+           <td>{{x}}</td>
         </tr>
         {% endfor %}" :list ,(list 1 2 3))
       ("{% for x in list %}
         <tr class=\"{% cycle row1 row2 %}\">
-           <td>{{x}}</td> 
+           <td>{{x}}</td>
         </tr>
         {% endfor %}" :list ,(list 1 2 3) :row1 "r1" :row2 "r2"))
      ("filter"
@@ -176,7 +180,7 @@
      ("add"
       ("{{ n | add: 4 }}" :n ,1))
      ("truncatechars"
-      ("{{ text | truncatechars: 10 }}" :text "This is a long text")) 
+      ("{{ text | truncatechars: 10 }}" :text "This is a long text"))
      ("lisp filter"
       ("{{ text | lisp: string-upcase }}" :text ,"hello")
       ("{{ num | lisp: 1+}}" :num ,0))
@@ -211,24 +215,24 @@
 
 (hunchentoot:define-easy-handler (demo :uri "/") ()
   (let ((djula:*catch-template-errors-p* nil)
-	(djula:*fancy-error-template-p* nil))
-  (djula:render-template* +demo.html+
-			  nil
-			  :demos *demos*)))
+        (djula:*fancy-error-template-p* nil))
+    (djula:render-template* +demo.html+
+                            nil
+                            :demos *demos*)))
 
 (hunchentoot:define-easy-handler (default-error :uri "/error") ()
   (let ((djula:*catch-template-errors-p* t)
-	(djula:*fancy-error-template-p* nil))
+        (djula:*fancy-error-template-p* nil))
     (djula:render-template* +error.html+)))
 
 (hunchentoot:define-easy-handler (error-not-catched :uri "/error-uncatched") ()
   (let ((djula:*catch-template-errors-p* nil)
-	(djula::*fancy-error-template-p* nil))
+        (djula::*fancy-error-template-p* nil))
     (djula:render-template* +error.html+)))
 
 (hunchentoot:define-easy-handler (fancy-error :uri "/fancy-error") ()
   (let ((djula:*catch-template-errors-p* t)
-	(djula::*fancy-error-template-p* t))
+        (djula::*fancy-error-template-p* t))
     (djula:render-template* +error.html+)))
 
 (hunchentoot:define-easy-handler (debug-demo :uri "/debug") ()
@@ -246,7 +250,7 @@
     (lang)
   (let ((lang-key (intern (string-upcase lang) :keyword)))
     (let ((djula:*current-language* lang-key)
-	  (djula::*translation-backend* :locale))
+          (djula::*translation-backend* :locale))
       (djula:render-template* +translation.html+ nil
                               :user (list :name "Martin")))))
 
