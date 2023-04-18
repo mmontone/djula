@@ -53,7 +53,7 @@ BACKEND is the translation backend to use. Default is *TRANSLATION-BACKEND*."
 
 (defmethod backend-translate ((backend (eql :gettext)) string language &rest args)
   (apply #'format-translation
-         (gettext:gettext* string *gettext-domain* nil (string-downcase (string language)))
+         (gettext:gettext* string *gettext-domain* nil (string language))
          args))
 
 ;; reading :UNPARSED-TRANSLATION-VARIABLE TOKENS created by {_ translation _}
