@@ -90,20 +90,20 @@ BACKEND is the translation backend to use. Default is *TRANSLATION-BACKEND*."
 
 (defun resolve-plist (plist)
   (loop
-     :for key :in plist :by #'cddr
-     :for val :in (cdr plist) :by #'cddr
-     :collect key
-     :collect (if (symbolp val)
-                  (resolve-variable-phrase
-                   (parse-variable-phrase (princ-to-string val)))
-                  (princ-to-string val))))
+    :for key :in plist :by #'cddr
+    :for val :in (cdr plist) :by #'cddr
+    :collect key
+    :collect (if (symbolp val)
+                 (resolve-variable-phrase
+                  (parse-variable-phrase (princ-to-string val)))
+                 (princ-to-string val))))
 
 (def-token-compiler :translation (key &rest args)
   (lambda (stream)
     (let ((key-val
-           (if (stringp key)
-               key
-               (resolve-variable-phrase key))))
+            (if (stringp key)
+                key
+                (resolve-variable-phrase key))))
       (princ (translate key-val (resolve-plist args)) stream))))
 
 (def-filter :trans (it &rest args)
