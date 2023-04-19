@@ -140,6 +140,8 @@ Next: <a href="Error-handling.html" accesskey="n" rel="next">Error handling</a>,
 </td></tr>
 <tr><td align="left" valign="top">&bull; <a href="#Backends" accesskey="5">Backends</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Gettext" accesskey="6">Gettext</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
 <tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
 
 </pre></th></tr></table>
@@ -243,7 +245,7 @@ Next: <a href="#Backends" accesskey="n" rel="next">Backends</a>, Previous: <a hr
 <hr>
 <span id="Backends"></span><div class="header">
 <p>
-Previous: <a href="#Choosing-language" accesskey="p" rel="prev">Choosing language</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Gettext" accesskey="n" rel="next">Gettext</a>, Previous: <a href="#Choosing-language" accesskey="p" rel="prev">Choosing language</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="internationalization-backends"></span><span id="Backends-1"></span><h3 class="section">10.5 Backends</h3>
 
@@ -251,6 +253,45 @@ Previous: <a href="#Choosing-language" accesskey="p" rel="prev">Choosing languag
 <p>Djula supports two backends for doing translations: cl-locale<a id="DOCF1" href="#FOOT1"><sup>1</sup></a> and gettext<a id="DOCF2" href="#FOOT2"><sup>2</sup></a>
 </p>
 <p>Please have a look at the demo and the documentation of those packages to figure out how to use them.
+</p>
+<hr>
+<span id="Gettext"></span><div class="header">
+<p>
+Previous: <a href="#Backends" accesskey="p" rel="prev">Backends</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Gettext-1"></span><h3 class="section">10.6 Gettext</h3>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top">&bull; <a href="#Gettext-message-extraction" accesskey="1">Gettext message extraction</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
+
+</pre></th></tr></table>
+
+<hr>
+<span id="Gettext-message-extraction"></span><div class="header">
+<p>
+Up: <a href="#Gettext" accesskey="u" rel="up">Gettext</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Gettext-message-extraction-1"></span><h4 class="subsection">10.6.1 Gettext message extraction</h4>
+
+<p>Create a Makefile similar to this:
+</p>
+<pre class="verbatim">gettext-extract: ## Extract gettext translations from source files
+        sbcl --eval '(ql:quickload :my-project)' --eval '(djula::xgettext-templates :my-project-package (asdf:system-relative-pathname :my-project &quot;i18n/xgettext.lisp&quot;))' --quit
+        find src -iname &quot;*.lisp&quot; | xargs xgettext --from-code=UTF-8 --keyword=_ --output=i18n/my-project.pot --sort-output
+
+gettext-edit: ## Edit the extracted gettext translations
+        msgmerge --update i18n/nb.po i18n/my-project.pot
+        xdg-open i18n/nb.po
+
+gettext-compile: ## Compile the edited gettext translations
+        msgfmt --output-file=i18n/nb/LC_MESSAGES/ie.mo i18n/nb.po
+
+gettext-init: ## Initialize gettext translations
+        msginit --input=i18n/my-project.pot --locale=nb --output=i18n/nb.po
+</pre>
+<p><code>make gettext-extract</code> first uses the Lisp compiler to extract translated strings from templates and then <code>xgettext</code> is used to extract the messages from the generated Lisp files.
 </p>
 <div class="footnote">
 <hr>
@@ -264,7 +305,7 @@ Previous: <a href="#Choosing-language" accesskey="p" rel="prev">Choosing languag
 <hr>
 <div class="header">
 <p>
-Previous: <a href="#Choosing-language" accesskey="p" rel="prev">Choosing language</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Up: <a href="#Gettext" accesskey="u" rel="up">Gettext</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

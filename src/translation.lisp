@@ -112,10 +112,14 @@ BACKEND is the translation backend to use. Default is *TRANSLATION-BACKEND*."
 ;; Some extra utility functions for working with gettext
 
 (defun xgettext-templates (gettext-package output-file &key templates-directories)
-  "Extract gettext entries from templates.
-GETTEXT-PACKAGE is a package initialized using GETTEXT:SETUP-GETTEXT.
-OUTPUT-FILE is a pathname where gettext entries are to be written to.
-TEMPLATES-DIRECTORIES in the list of directories where to look for templates. If is NIL, then templates are searched in the search-path of the current Djula store."
+  "
+Extract gettext entries from templates.
+Those entries can then be used with xgettext command to generate .pot files. 
+
+Arguments:
+- GETTEXT-PACKAGE is a package initialized using GETTEXT:SETUP-GETTEXT.
+- OUTPUT-FILE is a pathname where gettext entries are to be written to.
+- TEMPLATES-DIRECTORIES in the list of directories where to look for templates. If is NIL, then templates are searched in the search-path of the current Djula store."
   (let* ((templates-directories (or templates-directories
 				    (djula::search-path djula::*current-store*)))
 	 (messages
