@@ -98,7 +98,6 @@ This is the default and convenient for development. For production, this can be 
 
 (defun render-template* (template &optional stream &rest *template-arguments*)
   "Render TEMPLATE into STREAM passing *TEMPLATE-ARGUMENTS*."
-  (check-type stream (or null stream))
   (cond
     ((or (pathnamep template)
          (stringp template))

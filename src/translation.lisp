@@ -42,10 +42,10 @@ BACKEND is the translation backend to use. Default is *TRANSLATION-BACKEND*."
 
 (defgeneric backend-translate (backend string language &rest args)
   (:method ((backend null) string language &rest args)
-    (declare (ignore args))
+    (declare (ignore string language args))
     (error "Translation backend has not been setup"))
   (:method ((backend t) string language &rest args)
-    (declare (ignore args))
+    (declare (ignore string language args))
     (error "Invalid translation backend: ~A" backend)))
 
 ;;---- Djula tags ---------------------------------------------------------------
