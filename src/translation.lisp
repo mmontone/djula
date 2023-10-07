@@ -27,14 +27,23 @@
 
 ;; --- Generic interface -------------------------------------------------------
 
-(defvar *translation-backend* nil "The translation backend. One of :locale, :gettext")
+(defvar *translation-backends* '()
+  "List of available translation backends.")
+
+(defvar *translation-backend* nil
+  "The translation backend. One of :locale, :gettext, :translate.
+Loading the correspondent Djula ASDF translation backend system is required.")
 
 (defvar *warn-on-untranslated-messages* t)
 (defvar *untranslated-messages* nil)
 
+(defun current-translation-backend ()
+  (or *translation-backend*
+      (car *translation-backends*)))      
+
 (defun translate (string &optional args
                            (language (or *current-language* *default-language*))
-                           (backend *translation-backend*))
+                           (backend (current-translation-backend)))
   "Translate STRING using Djula transaltion backend.
 LANGUAGE is the language to translate to. The default is to use either *CURRENT-LANGUAGE* or *DEFAULT-LANGUAGE*, in that order.
 BACKEND is the translation backend to use. Default is *TRANSLATION-BACKEND*."
@@ -43,7 +52,7 @@ BACKEND is the translation backend to use. Default is *TRANSLATION-BACKEND*."
 (defgeneric backend-translate (backend string language &rest args)
   (:method ((backend null) string language &rest args)
     (declare (ignore string language args))
-    (error "Translation backend has not been setup"))
+    (error "Translation backend has not been setup. ~%Load one of Djula's translation backend AASDF systems and set *translation-backend*."))
   (:method ((backend t) string language &rest args)
     (declare (ignore string language args))
     (error "Invalid translation backend: ~A" backend)))

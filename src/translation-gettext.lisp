@@ -1,5 +1,7 @@
 (in-package :djula)
 
+(pushnew :gettext *translation-backends*)
+
 (defvar *gettext-domain* nil)
 
 (defmethod backend-translate ((backend (eql :gettext)) string language &rest args)

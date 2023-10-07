@@ -1,5 +1,7 @@
 (in-package :djula)
 
+(pushnew :locale *translation-backends*)
+
 (defmethod backend-translate ((backend (eql :locale)) string language &rest args)
   (let ((dictionary (locale:current-dictionary)))
     (when (not (arnesi:aand (not (eq language locale:*default-locale*))
