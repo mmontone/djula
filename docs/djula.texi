@@ -162,8 +162,10 @@ Internationalization
 * Tags: Tags<2>. 
 * Filters: Filters<2>. 
 * Choosing language:: 
-* Backends:: 
-* Gettext:: 
+* Backends::
+* Translate backend::
+* Locale backend::
+* Gettext backend:: 
 
 Tags
 
@@ -2612,7 +2614,9 @@ See also the @code{ssi} tag for Server-Side Includes.
 * Filters: Filters<2>. 
 * Choosing language:: 
 * Backends::
-* Gettext::
+* Translate backend::
+* Locale backend::
+* Gettext backend::
 
 @end menu
 
@@ -2694,13 +2698,26 @@ For example:
 @anchor{internationalization backends}
 @section Backends
 
+Djula supports several backends for doing translations: cl-locale@footnote{https://github.com/arielnetworks/cl-locale}, gettext@footnote{https://github.com/copyleft/gettext}, translate@footnote{https://gitlab.common-lisp.net/dkochmanski/translate}.
 
-Djula supports two backends for doing translations: cl-locale@footnote{https://github.com/arielnetworks/cl-locale} and gettext@footnote{https://github.com/copyleft/gettext}
+For translations to work, one of the translation backend systems need to be loaded and configured. Otherwise @code{translate} function will signal an error.
+
+The ASDF systems are: djula-gettext, djula-locale and djula-translate.
 
 Please have a look at the demo and the documentation of those packages to figure out how to use them.
 
-@node Gettext
-@section Gettext
+@node Translate backend
+@section Translate backend
+
+TBD
+
+@node Locale backend
+@section Locale backend
+
+TBD
+
+@node Gettext backend
+@section Gettext backend
 
 @menu
 * Gettext message extraction::

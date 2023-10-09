@@ -140,7 +140,11 @@ Next: <a href="Error-handling.html" accesskey="n" rel="next">Error handling</a>,
 </td></tr>
 <tr><td align="left" valign="top">&bull; <a href="#Backends" accesskey="5">Backends</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#Gettext" accesskey="6">Gettext</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+<tr><td align="left" valign="top">&bull; <a href="#Translate-backend" accesskey="6">Translate backend</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Locale-backend" accesskey="7">Locale backend</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="#Gettext-backend" accesskey="8">Gettext backend</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
 <tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
 
@@ -245,21 +249,42 @@ Next: <a href="#Backends" accesskey="n" rel="next">Backends</a>, Previous: <a hr
 <hr>
 <span id="Backends"></span><div class="header">
 <p>
-Next: <a href="#Gettext" accesskey="n" rel="next">Gettext</a>, Previous: <a href="#Choosing-language" accesskey="p" rel="prev">Choosing language</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Translate-backend" accesskey="n" rel="next">Translate backend</a>, Previous: <a href="#Choosing-language" accesskey="p" rel="prev">Choosing language</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="internationalization-backends"></span><span id="Backends-1"></span><h3 class="section">10.5 Backends</h3>
 
-
-<p>Djula supports two backends for doing translations: cl-locale<a id="DOCF1" href="#FOOT1"><sup>1</sup></a> and gettext<a id="DOCF2" href="#FOOT2"><sup>2</sup></a>
+<p>Djula supports several backends for doing translations: cl-locale<a id="DOCF1" href="#FOOT1"><sup>1</sup></a>, gettext<a id="DOCF2" href="#FOOT2"><sup>2</sup></a>, translate<a id="DOCF3" href="#FOOT3"><sup>3</sup></a>.
+</p>
+<p>For translations to work, one of the translation backend systems need to be loaded and configured. Otherwise <code>translate</code> function will signal an error.
+</p>
+<p>The ASDF systems are: djula-gettext, djula-locale and djula-translate.
 </p>
 <p>Please have a look at the demo and the documentation of those packages to figure out how to use them.
 </p>
 <hr>
-<span id="Gettext"></span><div class="header">
+<span id="Translate-backend"></span><div class="header">
 <p>
-Previous: <a href="#Backends" accesskey="p" rel="prev">Backends</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Locale-backend" accesskey="n" rel="next">Locale backend</a>, Previous: <a href="#Backends" accesskey="p" rel="prev">Backends</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="Gettext-1"></span><h3 class="section">10.6 Gettext</h3>
+<span id="Translate-backend-1"></span><h3 class="section">10.6 Translate backend</h3>
+
+<p>TBD
+</p>
+<hr>
+<span id="Locale-backend"></span><div class="header">
+<p>
+Next: <a href="#Gettext-backend" accesskey="n" rel="next">Gettext backend</a>, Previous: <a href="#Translate-backend" accesskey="p" rel="prev">Translate backend</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Locale-backend-1"></span><h3 class="section">10.7 Locale backend</h3>
+
+<p>TBD
+</p>
+<hr>
+<span id="Gettext-backend"></span><div class="header">
+<p>
+Previous: <a href="#Locale-backend" accesskey="p" rel="prev">Locale backend</a>, Up: <a href="#Internationalization" accesskey="u" rel="up">Internationalization</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="Gettext-backend-1"></span><h3 class="section">10.8 Gettext backend</h3>
 
 <table class="menu" border="0" cellspacing="0">
 <tr><td align="left" valign="top">&bull; <a href="#Gettext-message-extraction" accesskey="1">Gettext message extraction</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
@@ -273,9 +298,9 @@ Previous: <a href="#Backends" accesskey="p" rel="prev">Backends</a>, Up: <a href
 <hr>
 <span id="Gettext-message-extraction"></span><div class="header">
 <p>
-Next: <a href="#Gettext-utilities" accesskey="n" rel="next">Gettext utilities</a>, Up: <a href="#Gettext" accesskey="u" rel="up">Gettext</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Gettext-utilities" accesskey="n" rel="next">Gettext utilities</a>, Up: <a href="#Gettext-backend" accesskey="u" rel="up">Gettext backend</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="Gettext-message-extraction-1"></span><h4 class="subsection">10.6.1 Gettext message extraction</h4>
+<span id="Gettext-message-extraction-1"></span><h4 class="subsection">10.8.1 Gettext message extraction</h4>
 
 <p>For working with <code>gettext</code> library, messages to be translated first need to be extracted from Djula templates, generate a Lisp file with Gettext entries from it,  and then extracted again from that file with <code>xgettext</code> library.
 </p>
@@ -317,9 +342,9 @@ gettext-init: ## Initialize gettext translations
 <hr>
 <span id="Gettext-utilities"></span><div class="header">
 <p>
-Previous: <a href="#Gettext-message-extraction" accesskey="p" rel="prev">Gettext message extraction</a>, Up: <a href="#Gettext" accesskey="u" rel="up">Gettext</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="#Gettext-message-extraction" accesskey="p" rel="prev">Gettext message extraction</a>, Up: <a href="#Gettext-backend" accesskey="u" rel="up">Gettext backend</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="Gettext-utilities-1"></span><h4 class="subsection">10.6.2 Gettext utilities</h4>
+<span id="Gettext-utilities-1"></span><h4 class="subsection">10.8.2 Gettext utilities</h4>
 
 <p>Use <code>GETTEXT:PRELOAD-CATALOGS</code> to inspect current gettext settings:
 </p>
@@ -372,11 +397,13 @@ Previous: <a href="#Gettext-message-extraction" accesskey="p" rel="prev">Gettext
 <p>https://github.com/arielnetworks/cl-locale</p>
 <h5><a id="FOOT2" href="#DOCF2">(2)</a></h3>
 <p>https://github.com/copyleft/gettext</p>
+<h5><a id="FOOT3" href="#DOCF3">(3)</a></h3>
+<p>https://gitlab.common-lisp.net/dkochmanski/translate</p>
 </div>
 <hr>
 <div class="header">
 <p>
-Previous: <a href="#Gettext-message-extraction" accesskey="p" rel="prev">Gettext message extraction</a>, Up: <a href="#Gettext" accesskey="u" rel="up">Gettext</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Previous: <a href="#Gettext-message-extraction" accesskey="p" rel="prev">Gettext message extraction</a>, Up: <a href="#Gettext-backend" accesskey="u" rel="up">Gettext backend</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 
 
