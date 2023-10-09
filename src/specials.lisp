@@ -58,4 +58,4 @@ This is a plist, so use getf to add arguments, like: (setf (getf djula:*default-
  (ftype (function (string) string) url-encode)
  (ftype (function (string &optional list symbol symbol) (or string null)) translate)
  (ftype (function ((or string pathname) &optional boolean) string) find-template*)
- (ftype (function (symbol asdf:component) list) list-asdf-system-templates))
+ (ftype (function ((or symbol string) asdf:component) list) list-asdf-system-templates))
