@@ -57,5 +57,4 @@ This is a plist, so use getf to add arguments, like: (setf (getf djula:*default-
  (ftype (function ((or pathname function string) &optional (or null stream) &rest t) *) render-template*)
  (ftype (function (string) string) url-encode)
  (ftype (function (string &optional list symbol symbol) (or string null)) translate)
- (ftype (function ((or string pathname) &optional boolean) string) find-template*)
- (ftype (function ((or symbol string) asdf:component) list) list-asdf-system-templates))
+ (ftype (function ((or string pathname) &optional boolean) string) find-template*))
