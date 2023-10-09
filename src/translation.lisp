@@ -27,7 +27,7 @@
 
 ;; --- Generic interface -------------------------------------------------------
 
-(defvar *translation-backend* nil "The translation backend. One of :locale, :gettext")
+(defvar *translation-backend* nil "The translation backend. One of :locale, :gettext, :translate. Its corresponding system must be loaded: either :djula-locale, :djula-gettext or :djula-translate.")
 
 (defvar *warn-on-untranslated-messages* t)
 (defvar *untranslated-messages* nil)
@@ -43,10 +43,10 @@ BACKEND is the translation backend to use. Default is *TRANSLATION-BACKEND*."
 (defgeneric backend-translate (backend string language &rest args)
   (:method ((backend null) string language &rest args)
     (declare (ignore args))
-    (error "Translation backend has not been setup"))
+    (error "Translation backend has not been setup. Please see `*translation-backend*'."))
   (:method ((backend t) string language &rest args)
     (declare (ignore args))
-    (error "Invalid translation backend: ~A" backend)))
+    (error "Invalid translation backend: ~A. Did you load the corresponding system, such as :djula-gettext ?" backend)))
 
 ;;---- Djula tags ---------------------------------------------------------------
 
