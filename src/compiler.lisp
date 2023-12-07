@@ -176,4 +176,4 @@ Returns a funcallable template."
 (def-token-compiler :string (string)
   ":STRING tokens compile into a function that simply returns the string"
   (lambda (stream)
-    (princ string stream)))
+    (write-string string stream)))
