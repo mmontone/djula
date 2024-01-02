@@ -31,9 +31,14 @@
       store
     (or
      (cond
-       ;; If it is a pathname, just check that the file exists
+       ;; If it is a pathname, check that the file exists
        ((pathnamep name)
-        (uiop:file-exists-p name))
+        (let ((filepath
+                (if (and (path:relative-p name)
+                         current-path)
+                    (merge-pathnames name current-path)
+                    name)))
+          (uiop:file-exists-p filepath)))
        ;; If first character is a '/', then treat it as an absolute path first, then relative to template store search paths.
        ((char= (char name 0) #\/)
         (or
@@ -41,6 +46,12 @@
          (loop
            for dir in search-path
              thereis (uiop:file-exists-p (merge-pathnames (subseq (string name) 1) dir)))))
+       ;; If path contains '/', then treat it as a relative path
+       ((find #\/ name)
+        (if current-path
+            (or (uiop:file-exists-p (merge-pathnames name current-path))
+                (error "File does not exist: ~s" (merge-pathnames name current-path)))
+            (error "No current path for relative pathname: ~s" name)))
        ;; Otherwise, search in search paths or relative to current path
        (t (loop
             with path = (if current-path
@@ -57,7 +68,7 @@
 
 (defclass memory-template-store (filesystem-template-store)
   ((templates-contents :initform (make-hash-table :test 'equalp)
-		       :documentation "A hash-table cache that maps pathnames and template names to template sources.")
+                       :documentation "A hash-table cache that maps pathnames and template names to template sources.")
    (templates :initform (make-hash-table :test 'equalp)))
   (:documentation "A template store with a memory cache.
 This store works like FILESYSTEM-TEMPLATE-STORE, but when a template is compiled it saves the template contents in memory and templates are rendered from memory after.
@@ -68,9 +79,9 @@ See the section on building standalong binaries in Djula manual."))
 (defmethod fetch-template ((store memory-template-store) name)
   (with-slots (templates-contents) store
     (or (gethash name templates-contents)
-    (let ((template-content (call-next-method)))
-      (setf (gethash name templates-contents) template-content)
-      template-content))))
+        (let ((template-content (call-next-method)))
+          (setf (gethash name templates-contents) template-content)
+          template-content))))
 
 (defmethod find-template ((store memory-template-store) name &optional (error-p t))
   (declare (ignorable error-p))
