@@ -18,9 +18,6 @@
            #:*default-template-arguments*
            #:*error-template*
            #:*elision-string*
-           #:*template-eval*
-           #:*template-root-folder*
-           #:*template-search-path*
            #:*djula-execute-package*
            #:*djula-emptyp*
 	   #:*recompile-templates-on-change*
