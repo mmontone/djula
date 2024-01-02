@@ -41,10 +41,10 @@
          (loop
            for dir in search-path
              thereis (uiop:file-exists-p (merge-pathnames (subseq (string name) 1) dir)))))
-       ;; Otherwise, search relative to either current path or search paths
+       ;; Otherwise, search in search paths or relative to current path
        (t (loop
             with path = (if current-path
-                            (cons (directory-namestring current-path) search-path)
+                            (append search-path (list (directory-namestring current-path)))
                             search-path)
             for dir in path
               thereis (uiop:file-exists-p (merge-pathnames name dir)))))
