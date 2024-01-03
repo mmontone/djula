@@ -21,7 +21,8 @@
                #:cl-locale
                #:gettext
                #:parser-combinators
-               #:iterate)
+               #:iterate
+               #:uiop)
   :components
   ((:module :src
             :components

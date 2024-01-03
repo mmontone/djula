@@ -34,7 +34,7 @@
        ;; If it is a pathname, check that the file exists
        ((pathnamep name)
         (let ((filepath
-                (if (and (path:relative-p name)
+                (if (and (uiop/pathname:relative-pathname-p name)
                          current-path)
                     (merge-pathnames name current-path)
                     name)))
