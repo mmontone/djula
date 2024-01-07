@@ -46,8 +46,8 @@
          (loop
            for dir in search-path
              thereis (uiop:file-exists-p (merge-pathnames (subseq (string name) 1) dir)))))
-       ;; If path contains '/', then treat it as a relative path
-       ((find #\/ name)
+       ;; If path starts with dot and contains '/', then treat it as relative to current template
+       ((and (char= (char name 0) #\.) (find #\/ name))
         (if current-path
             (or (uiop:file-exists-p (merge-pathnames name current-path))
                 (error "File does not exist: ~s" (merge-pathnames name current-path)))
