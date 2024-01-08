@@ -128,3 +128,19 @@
   (let ((t9-output (djula:render-template* +t9+ nil))
         (t16-output (djula:render-template* +t16+ nil)))
     (is (equalp t9-output t16-output))))
+
+(defun set-current-path (path)
+  (with-slots (djula::current-path) djula:*current-store*
+    (setf djula::current-path path)))
+
+(def-test find-template-test (:compile-at :definition-time)
+  (set-current-path nil)
+  (is (equalp (djula:find-template* "t1.djula" nil)
+              (asdf:system-relative-pathname :djula "test/templates/t1.djula")))
+  (set-current-path nil)
+  (is (null (djula:find-template* "../t1.djula" nil)))
+  (set-current-path (asdf:system-relative-pathname :djula "test/templates/subdir/"))
+  (is (equalp (djula:find-template* "t1.djula" nil)
+              (asdf:system-relative-pathname :djula "test/templates/t1.djula")))
+  (is (equalp (djula:find-template* "../t1.djula" nil)
+              (asdf:system-relative-pathname :djula "test/templates/t1.djula"))))
