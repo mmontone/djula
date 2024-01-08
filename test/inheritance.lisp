@@ -16,7 +16,8 @@
   (defparameter +t9+ (djula:compile-template* "t9.djula"))
   (defparameter +t10+ (djula:compile-template* "t10.djula"))
   (defparameter +t11+ (djula:compile-template* "t11.djula"))
-  (defparameter +t12+ (djula:compile-template* "t12.djula")))
+  (defparameter +t12+ (djula:compile-template* "t12.djula"))
+  (defparameter +t13+ (djula:compile-template* "t13.djula")))
 
 (def-test simple-block-test (:compile-at :definition-time)
   (let ((output (djula:render-template* +t1+ nil)))
@@ -85,9 +86,9 @@
 (def-test multiple-levels-block-inheritance-test (:compile-at :definition-time)
   (let ((output (djula:render-template* +t9+ nil)))
     (is (equalp (remove-if (lambda (char)
-			     (member char (list #\  #\Newline)))
-			   output)
-		"beforeHelloafterafter2after3"))))
+                             (member char (list #\  #\Newline)))
+                           output)
+                "beforeHelloafterafter2after3"))))
 
 (def-test parameterized-include-test (:compile-at :definition-time)
   (let ((djula:*catch-template-errors-p* nil))
@@ -105,3 +106,8 @@
                                                     :t10 "t10.djula"
                                                     :name "World"))
                 "Hello,123Hello,World"))))
+
+(def-test relative-extends-1-test (:compile-at :definition-time)
+  (let ((t8-output (djula:render-template* +t8+ nil))
+        (t13-output (djula:render-template* +t13+ nil)))
+    (is (equalp t8-output t13-output))))
