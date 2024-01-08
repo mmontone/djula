@@ -17,7 +17,8 @@
   (defparameter +t10+ (djula:compile-template* "t10.djula"))
   (defparameter +t11+ (djula:compile-template* "t11.djula"))
   (defparameter +t12+ (djula:compile-template* "t12.djula"))
-  (defparameter +t13+ (djula:compile-template* "t13.djula")))
+  (defparameter +t13+ (djula:compile-template* "t13.djula"))
+  (defparameter +t14+ (djula:compile-template* "subdir/t14.djula")))
 
 (def-test simple-block-test (:compile-at :definition-time)
   (let ((output (djula:render-template* +t1+ nil)))
@@ -111,3 +112,8 @@
   (let ((t8-output (djula:render-template* +t8+ nil))
         (t13-output (djula:render-template* +t13+ nil)))
     (is (equalp t8-output t13-output))))
+
+(def-test relative-extends-2-test (:compile-at :definition-time)
+  (let ((t8-output (djula:render-template* +t8+ nil))
+        (t14-output (djula:render-template* +t14+ nil)))
+    (is (equalp t8-output t14-output))))
