@@ -27,9 +27,12 @@
 
 (defmethod find-template ((store filesystem-template-store) name &optional (error-p t))
   "Algorithm that finds a template in a filesystem-template-store."
-  (with-slots (current-path search-path)
-      store
-    (or
+  (with-slots (current-path search-path) store
+    (funcall
+     (lambda (res)
+       (if (and (null res) error-p)
+           (error "Template not found: ~s" name)
+           res))
      (cond
        ;; If it is a pathname, check that the file exists
        ((pathnamep name)
@@ -48,19 +51,15 @@
              thereis (uiop:file-exists-p (merge-pathnames (subseq (string name) 1) dir)))))
        ;; If path starts with dot and contains '/', then treat it as relative to current template
        ((and (char= (char name 0) #\.) (find #\/ name))
-        (if current-path
-            (or (uiop:file-exists-p (merge-pathnames name current-path))
-                (error "File does not exist: ~s" (merge-pathnames name current-path)))
-            (error "No current path for relative pathname: ~s" name)))
+        (and current-path
+             (uiop:file-exists-p (merge-pathnames name current-path))))
        ;; Otherwise, search in search paths or relative to current path
        (t (loop
             with path = (if current-path
                             (append search-path (list (directory-namestring current-path)))
                             search-path)
             for dir in path
-              thereis (uiop:file-exists-p (merge-pathnames name dir)))))
-     (when error-p
-       (error "Template not found: ~s" name)))))
+              thereis (uiop:file-exists-p (merge-pathnames name dir))))))))
 
 ;;------- memory-template-store ------------------------------------
 
