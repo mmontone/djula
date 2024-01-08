@@ -146,4 +146,5 @@
               (asdf:system-relative-pathname :djula "test/templates/t1.djula")))
   (is (equalp (djula:find-template* "../t1.djula" nil)
               (asdf:system-relative-pathname :djula "test/templates/t1.djula")))
-  )
+  (is (equalp (djula:find-template* "t14.djula" nil)
+              (asdf:system-relative-pathname :djula "test/templates/subdir/t14.djula"))))
