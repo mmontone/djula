@@ -144,6 +144,8 @@
   (set-current-path (asdf:system-relative-pathname :djula "test/templates/subdir/"))
   (is (equalp (djula:find-template* "t1.djula" nil)
               (asdf:system-relative-pathname :djula "test/templates/t1.djula")))
+  (is (equalp (djula:find-template* "./t1.djula" nil)
+              (asdf:system-relative-pathname :djula "test/templates/subdir/t1.djula")))
   (is (equalp (djula:find-template* "../t1.djula" nil)
               (asdf:system-relative-pathname :djula "test/templates/t1.djula")))
   (is (equalp (djula:find-template* "t14.djula" nil)
