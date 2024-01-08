@@ -25,7 +25,10 @@
     :documentation "User-provided list of template locations."))
   (:documentation "Searches for template files on disk according to the given search path."))
 
-(defmethod find-template ((store filesystem-template-store) name &optional (error-p t))
+(defmethod find-template ((store filesystem-template-store) (name string) &optional (error-p t))
+  (find-template store (pathname name) error-p))
+
+(defmethod find-template ((store filesystem-template-store) (name pathname) &optional (error-p t))
   "Algorithm that finds a template in a filesystem-template-store."
   (with-slots (current-path search-path) store
     (funcall
@@ -34,23 +37,17 @@
            (error "Template not found: ~s" name)
            res))
      (cond
-       ;; If it is a pathname, check that the file exists
-       ((pathnamep name)
-        (let ((filepath
-                (if (and (uiop/pathname:relative-pathname-p name)
-                         current-path)
-                    (merge-pathnames name current-path)
-                    name)))
-          (uiop:file-exists-p filepath)))
-       ;; If first character is a '/', then treat it as an absolute path first, then relative to template store search paths.
-       ((char= (char name 0) #\/)
+       ;; If pathname is absolute, then treat it as an absolute path first, then relative to template store search paths.
+       ((uiop/pathname:absolute-pathname-p name)
         (or
          (uiop:file-exists-p name)
          (loop
+           with path = (subseq (namestring name) 1)
            for dir in search-path
-             thereis (uiop:file-exists-p (merge-pathnames (subseq (string name) 1) dir)))))
-       ;; If path starts with dot and contains '/', then treat it as relative to current template
-       ((and (char= (char name 0) #\.) (find #\/ name))
+             thereis (uiop:file-exists-p (merge-pathnames path dir)))))
+       ;; If path is relative to "." or :UP, then treat it as relative to current template
+       ((and (uiop/pathname:relative-pathname-p name)
+             (member (second (pathname-directory name)) '("." :UP) :test #'equalp))
         (and current-path
              (uiop:file-exists-p (merge-pathnames name current-path))))
        ;; Otherwise, search in search paths or relative to current path
