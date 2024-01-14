@@ -28,6 +28,7 @@
 (defmethod find-template ((store filesystem-template-store) (name string) &optional (error-p t))
   (find-template store (pathname name) error-p))
 
+;; FIXME: the following algorithm fails for ABCL, because (equalp #p"foo" #p"./foo") => T
 (defmethod find-template ((store filesystem-template-store) (name pathname) &optional (error-p t))
   "Algorithm that finds a template in a filesystem-template-store."
   (with-slots (current-path search-path) store
