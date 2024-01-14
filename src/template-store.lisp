@@ -47,7 +47,11 @@
              thereis (uiop:file-exists-p (merge-pathnames path dir)))))
        ;; If path is relative to "." or :UP, then treat it as relative to current template
        ((and (uiop/pathname:relative-pathname-p name)
-             (member (second (pathname-directory name)) '("." :UP) :test #'equalp))
+             (member (pathname-directory name)
+                     '((:relative ".")
+                       (:relative :up)
+                       (:relative))
+                     :test #'equalp))
         (and current-path
              (uiop:file-exists-p (merge-pathnames name current-path))))
        ;; Otherwise, search in search paths or relative to current path
