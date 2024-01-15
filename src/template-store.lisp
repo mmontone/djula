@@ -25,8 +25,14 @@
     :documentation "User-provided list of template locations."))
   (:documentation "Searches for template files on disk according to the given search path."))
 
+(defun portable-parse-namestring (namestring)
+  #+(and abcl unix)
+  (portable-pathnames:parse-unix-namestring namestring)
+  #-(and abcl unix)
+  (parse-namestring namestring))
+
 (defmethod find-template ((store filesystem-template-store) (name string) &optional (error-p t))
-  (find-template store (pathname name) error-p))
+  (find-template store (portable-parse-namestring name) error-p))
 
 ;; FIXME: the following algorithm fails for ABCL, because (equalp #p"foo" #p"./foo") => T
 (defmethod find-template ((store filesystem-template-store) (name pathname) &optional (error-p t))
