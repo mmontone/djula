@@ -50,7 +50,7 @@ This is a plist, so use getf to add arguments, like: (setf (getf djula:*default-
  (ftype (function ((or string pathname)) string) fetch-template*)
  (ftype (function (compiler (or string pathname) &optional boolean) *) compile-template)
  (ftype (function ((or string pathname)) *) compile-template*)
- (ftype (function (template-store (or string pathname) &optional boolean) (or null string)) find-template)
+ (ftype (function (template-store (or string pathname) &optional boolean) (or null string pathname)) find-template)
  (ftype (function (pathname &optional template-store) *) add-template-directory)
  (ftype (function (template-store (or string pathname)) (or string null)) fetch-template)
  (ftype (function (pathname) string) url-encode-path)
