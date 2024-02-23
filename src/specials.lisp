@@ -46,15 +46,15 @@ This is a plist, so use getf to add arguments, like: (setf (getf djula:*default-
 
 ;; Type declarations
 
-(declaim
- (ftype (function ((or string pathname)) string) fetch-template*)
- (ftype (function (compiler (or string pathname) &optional boolean) *) compile-template)
- (ftype (function ((or string pathname)) *) compile-template*)
- (ftype (function (template-store (or string pathname) &optional boolean) (or null string pathname)) find-template)
- (ftype (function (pathname &optional template-store) *) add-template-directory)
- (ftype (function (template-store (or string pathname)) (or string null)) fetch-template)
- (ftype (function (pathname) string) url-encode-path)
- (ftype (function ((or pathname function string) &optional (or null stream) &rest t) *) render-template*)
- (ftype (function (string) string) url-encode)
- (ftype (function (string &optional list symbol symbol) (or string null)) translate)
- (ftype (function ((or string pathname) &optional boolean) (or string null)) find-template*))
+;; (declaim
+;;  (ftype (function ((or string pathname)) string) fetch-template*)
+;;  (ftype (function (compiler (or string pathname) &optional boolean) *) compile-template)
+;;  (ftype (function ((or string pathname)) *) compile-template*)
+;;  (ftype (function (template-store (or string pathname) &optional boolean) (or null string pathname)) find-template)
+;;  (ftype (function (pathname &optional template-store) *) add-template-directory)
+;;  (ftype (function (template-store (or string pathname)) (or string null)) fetch-template)
+;;  (ftype (function (pathname) string) url-encode-path)
+;;  (ftype (function ((or pathname function string) &optional (or null stream) &rest t) *) render-template*)
+;;  (ftype (function (string) string) url-encode)
+;;  (ftype (function (string &optional list symbol symbol) (or string null)) translate)
+;;  (ftype (function ((or string pathname) &optional boolean) (or string null)) find-template*))
