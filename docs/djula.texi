@@ -2400,7 +2400,7 @@ Errors are handled by the macro, but you can handle them and return a
 @node Template execution package
 @section Template execution package
 
-Templates evaluations ocurr in `CL-USER` package by default. It is likely that your templates need evaluations to happen in some of your application packages instead. There are two ways to control that:
+Templates evaluations occur in `CL-USER` package by default. It is likely that your templates need evaluations to happen in some of your application packages instead. There are two ways to control that:
 
 @itemize
 @item Set the @code{*template-execute-package*} global variable.
@@ -3043,7 +3043,7 @@ Return the text of a template fetched from the @emph{CURRENT-STORE}.
 @anchor{api variable djula *fancy-error-template-p*}
 @deffn {Variable} *fancy@w{-}error@w{-}template@w{-}p*
 
-When enabled, show a fancy template when an error ocurrs
+When enabled, show a fancy template when an error occurs.
 @end deffn
 
 @geindex *default-language* (variable)
