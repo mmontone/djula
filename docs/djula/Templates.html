@@ -147,8 +147,8 @@ Next: <a href="#Template-inheritance" accesskey="n" rel="next">Template inherita
 <p>Templates evaluations occur in &lsquo;CL-USER&lsquo; package by default. It is likely that your templates need evaluations to happen in some of your application packages instead. There are two ways to control that:
 </p>
 <ul>
-<li> Set the <code>*template-execute-package*</code> global variable.
-</li><li> Start your template with a <code>set-package</code> tag. Note that as of now, this sets the <code>*template-execute-package*</code> globally, not just for that template. So you may want to make sure to start all of your templates with a <code>set-package</code> tag to set the correct execution package for each template.
+<li> Set the <code>*template-package*</code> global variable.
+</li><li> Start your template with a <code>set-package</code> tag. Note that as of now, this sets the <code>*template-package*</code> globally, not just for that template. So you may want to make sure to start all of your templates with a <code>set-package</code> tag to set the correct execution package for each template.
 </li></ul>
 
 <hr>

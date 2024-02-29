@@ -10,7 +10,7 @@
   (error "Error!!"))
 
 (def-test catch-errors-test (:compile-at :definition-time)
-  (let ((djula:*template-execute-package* :djula-test))
+  (let ((djula:*template-package* :djula-test))
 
     (let ((djula:*catch-template-errors-p* t))
       (let ((template (djula::compile-string "{% lisp (throw-error) %}")))

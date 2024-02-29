@@ -153,7 +153,7 @@ form that returns some debugging info."
         (% "Current language: ~A" (or *current-language* "none")))
 
       (with-safe "the current lisp execution package"
-        (% "Lisp execution package: ~A" (or *template-execute-package* "none")))
+        (% "Lisp execution package: ~A" (or *template-package* "none")))
 
       (with-safe "whether or not template errors are printing to the browser"
         (% "~A" (if *catch-template-errors-p*
@@ -204,7 +204,7 @@ form that returns some debugging info."
 
     (with-safe "the current lisp execution package"
       (format stream "<li><b>Lisp execution package:</b> ~A</li>"
-              (escape-for-html (princ-to-string (or *template-execute-package* "none")))))
+              (escape-for-html (princ-to-string (or *template-package* "none")))))
 
     (with-safe "whether or not template errors are printing to the browser"
       (format stream "<li><b>Print errors in browser:</b> ~A</li>"
@@ -261,8 +261,8 @@ is useful to determine the package in which :LISP tags are executed"
     (declare (ignore stream))
     (let ((temp-package (find-package package-name)))
       (if (packagep temp-package)
-          (setf *template-execute-package* temp-package)
-          (setf *template-execute-package* (find-package :common-lisp-user))))))
+          (setf *template-package* temp-package)
+          (setf *template-package* (find-package :common-lisp-user))))))
 
 (def-tag-compiler :show-language ()
   ":SHOW-LANGUAGE tags are compiled into a function that just shows the values of
@@ -652,7 +652,7 @@ are prepended to *TEMPLATE-ARGUMENTS*"
   (handler-case
       (process-tokens
        (cons (list :parsed-lisp
-                   (let ((*package* (find-package *template-execute-package*)))
+                   (let ((*package* (find-package *template-package*)))
                      (read-from-string unparsed-string)))
              rest))
     (error (e)
@@ -679,7 +679,7 @@ are prepended to *TEMPLATE-ARGUMENTS*"
         (process-tokens
          (cons (list :parsed-set
                      (make-keyword (string-upcase (string-trim (list #\space ) var-str)))
-                     (let ((*package* (find-package *template-execute-package*)))
+                     (let ((*package* (find-package *template-package*)))
                        (read-from-string value-str)))
                rest)))
     (error ()
