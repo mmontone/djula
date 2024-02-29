@@ -153,7 +153,7 @@ List of filters
 
 Templates
 
-* Template execution package::
+* The template package::
 * Template inheritance::
 * Template includes::
 
@@ -2392,19 +2392,19 @@ Errors are handled by the macro, but you can handle them and return a
 @chapter Templates
 
 @menu
-* Template execution package::
+* The template package::
 * Template inheritance::
 * Template includes::
 @end menu
 
-@node Template execution package
-@section Template execution package
+@node The template package
+@section The template package
 
 Templates evaluations occur in `CL-USER` package by default. It is likely that your templates need evaluations to happen in some of your application packages instead. There are two ways to control that:
 
 @itemize
-@item Set the @code{*template-package*} global variable.
-@item Start your template with a @code{set-package} tag. Note that as of now, this sets the @code{*template-package*} globally, not just for that template. So you may want to make sure to start all of your templates with a @code{set-package} tag to set the correct execution package for each template.
+@item Set the @code{*template-package*} global variable to a package of yours.
+@item Start your template with a @code{set-package} tag. Note that as of now, this sets the @code{*template-package*} globally, not just for that template. So you may want to make sure to start all of your templates with a @code{set-package} tag to set the correct package for each template.
 @end itemize
 
 @node Template inheritance

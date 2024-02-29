@@ -129,7 +129,7 @@ Next: <a href="Internationalization.html#Internationalization" accesskey="n" rel
 <span id="Templates-1"></span><h2 class="chapter">9 Templates</h2>
 
 <table class="menu" border="0" cellspacing="0">
-<tr><td align="left" valign="top">&bull; <a href="#Template-execution-package" accesskey="1">Template execution package</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+<tr><td align="left" valign="top">&bull; <a href="#The-template-package" accesskey="1">The template package</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
 <tr><td align="left" valign="top">&bull; <a href="#Template-inheritance" accesskey="2">Template inheritance</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
@@ -138,23 +138,23 @@ Next: <a href="Internationalization.html#Internationalization" accesskey="n" rel
 </table>
 
 <hr>
-<span id="Template-execution-package"></span><div class="header">
+<span id="The-template-package"></span><div class="header">
 <p>
 Next: <a href="#Template-inheritance" accesskey="n" rel="next">Template inheritance</a>, Up: <a href="#Templates" accesskey="u" rel="up">Templates</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="Template-execution-package-1"></span><h3 class="section">9.1 Template execution package</h3>
+<span id="The-template-package-1"></span><h3 class="section">9.1 The template package</h3>
 
 <p>Templates evaluations occur in &lsquo;CL-USER&lsquo; package by default. It is likely that your templates need evaluations to happen in some of your application packages instead. There are two ways to control that:
 </p>
 <ul>
-<li> Set the <code>*template-package*</code> global variable.
-</li><li> Start your template with a <code>set-package</code> tag. Note that as of now, this sets the <code>*template-package*</code> globally, not just for that template. So you may want to make sure to start all of your templates with a <code>set-package</code> tag to set the correct execution package for each template.
+<li> Set the <code>*template-package*</code> global variable to a package of yours.
+</li><li> Start your template with a <code>set-package</code> tag. Note that as of now, this sets the <code>*template-package*</code> globally, not just for that template. So you may want to make sure to start all of your templates with a <code>set-package</code> tag to set the correct package for each template.
 </li></ul>
 
 <hr>
 <span id="Template-inheritance"></span><div class="header">
 <p>
-Next: <a href="#Template-includes" accesskey="n" rel="next">Template includes</a>, Previous: <a href="#Template-execution-package" accesskey="p" rel="prev">Template execution package</a>, Up: <a href="#Templates" accesskey="u" rel="up">Templates</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Template-includes" accesskey="n" rel="next">Template includes</a>, Previous: <a href="#The-template-package" accesskey="p" rel="prev">The template package</a>, Up: <a href="#Templates" accesskey="u" rel="up">Templates</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="inheritance-doc"></span><span id="inheritance-template_002dinheritance"></span><span id="Template-inheritance-1"></span><h3 class="section">9.2 Template inheritance</h3>
 
