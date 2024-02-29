@@ -59,7 +59,7 @@ keyword."
         (process-tokens rest)))
 
 (defun apply-keys/indexes (thing keys/indexes)
-  (let ((*package* (find-package *djula-execute-package*)))
+  (let ((*package* (find-package *template-package*)))
     (reduce (lambda (thing key)
               (handler-case
                   (cond

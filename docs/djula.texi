@@ -63,7 +63,7 @@ Contents:
 * Comments:: 
 * Verbatim:: 
 * Filters:: 
-* Templates composition:: 
+* Templates::
 * Internationalization:: 
 * Error handling::
 * Deployment::
@@ -151,8 +151,9 @@ List of filters
 * upper:: 
 * urlencode:: 
 
-Templates composition
+Templates
 
+* The template package::
 * Template inheritance::
 * Template includes::
 
@@ -2387,13 +2388,32 @@ Errors are handled by the macro, but you can handle them and return a
        (template-error "There was an error executing this filter: ~A" e))))
 @end example
 
-@node Templates composition
-@chapter Templates composition
+@node Templates
+@chapter Templates
 
 @menu
+* The template package::
 * Template inheritance::
 * Template includes::
 @end menu
+
+@node The template package
+@section The template package
+
+Templates evaluations occur in @emph{CL-USER} package by default. It is likely that your templates need evaluations to happen in some of your application packages instead. This need typically arises when trying to evaluate @code{ @{@{ object.method @}@} } where @emph{method} is a generic function (accessing slots works fine).
+
+These are the ways to control the template package:
+
+@itemize
+@item Globally set @code{*template-package*} to a package of yours.
+@item Dynamically bind @code{*template-package*} before rendering the template.
+Like:
+@example
+(let ((djula:*template-package* (find-package :app-package)))
+   (djula:render-template* "app-template.html"))
+@end example
+@item Start your template with a @code{set-package} tag. Note that as of now, this sets the @code{*template-package*} globally, not just for that template. So you may want to make sure to start all of your templates with a @code{set-package} tag to set the correct package for each template.
+@end itemize
 
 @node Template inheritance
 @anchor{inheritance doc}@anchor{inheritance template-inheritance}
@@ -2995,8 +3015,8 @@ The currently in-use template store.  Defaults to a @code{FILE-STORE}.
 When enabled, displays fancy html based debugging information for the @{% debug %@} tag
 @end deffn
 
-@geindex *djula-execute-package* (variable)
-@anchor{api variable djula *djula-execute-package*}
+@geindex *template-package* (variable)
+@anchor{api variable djula *template-package*}
 @deffn {Variable} *djula@w{-}execute@w{-}package*
 @end deffn
 
@@ -3031,7 +3051,7 @@ Return the text of a template fetched from the @emph{CURRENT-STORE}.
 @anchor{api variable djula *fancy-error-template-p*}
 @deffn {Variable} *fancy@w{-}error@w{-}template@w{-}p*
 
-When enabled, show a fancy template when an error ocurrs
+When enabled, show a fancy template when an error occurs.
 @end deffn
 
 @geindex *default-language* (variable)

@@ -153,7 +153,7 @@ form that returns some debugging info."
         (% "Current language: ~A" (or *current-language* "none")))
 
       (with-safe "the current lisp execution package"
-        (% "Lisp execution package: ~A" (or *djula-execute-package* "none")))
+        (% "Lisp execution package: ~A" (or *template-package* "none")))
 
       (with-safe "whether or not template errors are printing to the browser"
         (% "~A" (if *catch-template-errors-p*
@@ -204,7 +204,7 @@ form that returns some debugging info."
 
     (with-safe "the current lisp execution package"
       (format stream "<li><b>Lisp execution package:</b> ~A</li>"
-              (escape-for-html (princ-to-string (or *djula-execute-package* "none")))))
+              (escape-for-html (princ-to-string (or *template-package* "none")))))
 
     (with-safe "whether or not template errors are printing to the browser"
       (format stream "<li><b>Print errors in browser:</b> ~A</li>"
@@ -253,16 +253,16 @@ keyword version of `NAME' [or NIL if `NAME' is not supplied]"
     (setf *current-language* name)))
 
 (def-tag-compiler :set-package (package-name)
-  ":SET-PACKAGE tags are compiled into a function that set *DJULA-EXECUTE-PACKAGE*
+  ":SET-PACKAGE tags are compiled into a function that set *TEMPLATE-PACKAGE*
 to the the package value of find package on the keyword `PACKAGE-NAME' or the
 package `common-lisp-user' if the package for `PACKAGE-NAME' is not found. This
-is useful to determine the package in which :LISP tags are executed"
+is useful to determine the package in which :LISP tags are executed."
   (lambda (stream)
     (declare (ignore stream))
     (let ((temp-package (find-package package-name)))
       (if (packagep temp-package)
-          (setf *djula-execute-package* temp-package)
-          (setf *djula-execute-package* (find-package :common-lisp-user))))))
+          (setf *template-package* temp-package)
+          (setf *template-package* (find-package :common-lisp-user))))))
 
 (def-tag-compiler :show-language ()
   ":SHOW-LANGUAGE tags are compiled into a function that just shows the values of
@@ -652,7 +652,7 @@ are prepended to *TEMPLATE-ARGUMENTS*"
   (handler-case
       (process-tokens
        (cons (list :parsed-lisp
-                   (let ((*package* (find-package *djula-execute-package*)))
+                   (let ((*package* (find-package *template-package*)))
                      (read-from-string unparsed-string)))
              rest))
     (error (e)
@@ -679,7 +679,7 @@ are prepended to *TEMPLATE-ARGUMENTS*"
         (process-tokens
          (cons (list :parsed-set
                      (make-keyword (string-upcase (string-trim (list #\space ) var-str)))
-                     (let ((*package* (find-package *djula-execute-package*)))
+                     (let ((*package* (find-package *template-package*)))
                        (read-from-string value-str)))
                rest)))
     (error ()
