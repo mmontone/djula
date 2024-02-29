@@ -91,21 +91,21 @@
     
     ;; Slot accessing
     (is (equalp
-	 (let ((djula:*djula-execute-package* :djula-test))
+	 (let ((djula:*template-execute-package* :djula-test))
 	   (let ((template (djula::compile-string "{{obj.name}}")))
 	     (djula:render-template* template nil :obj (make-instance 'my-obj))))
 	 "my-obj"))
     
     ;; Method accessing
     (is (equalp
-	 (let ((djula:*djula-execute-package* :djula-test))
+	 (let ((djula:*template-execute-package* :djula-test))
 	   (let ((template (djula::compile-string "{{obj.id}}")))
 	     (djula:render-template* template nil :obj (make-instance 'my-obj))))
 	 "22"))
 
     ;; Function accessing
     (is (equalp
-	 (let ((djula:*djula-execute-package* :djula-test))
+	 (let ((djula:*template-execute-package* :djula-test))
 	   (let ((template (djula::compile-string "{{obj.fid}}")))
 	     (djula:render-template* template nil :obj (make-instance 'my-obj))))
 	 "33"))))

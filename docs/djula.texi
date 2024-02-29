@@ -2995,8 +2995,8 @@ The currently in-use template store.  Defaults to a @code{FILE-STORE}.
 When enabled, displays fancy html based debugging information for the @{% debug %@} tag
 @end deffn
 
-@geindex *djula-execute-package* (variable)
-@anchor{api variable djula *djula-execute-package*}
+@geindex *template-execute-package* (variable)
+@anchor{api variable djula *template-execute-package*}
 @deffn {Variable} *djula@w{-}execute@w{-}package*
 @end deffn
 

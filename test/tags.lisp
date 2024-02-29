@@ -350,7 +350,7 @@
            "77")))
     ;; Function not in the correct package
     (signals djula::template-error
-      (let ((djula:*djula-execute-package* :cl-user))
+      (let ((djula:*template-execute-package* :cl-user))
         (let ((template (djula::compile-string "{% lisp (print-hello)%}")))
           (is (equalp
                (djula:render-template* template nil)
