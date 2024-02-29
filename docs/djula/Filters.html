@@ -674,8 +674,8 @@ Next: <a href="#force_002descape" accesskey="n" rel="next">force-escape</a>, Pre
 <p>Each <code>slice</code> selects a subset of subscripts along the corresponding axis.
 </p>
 
-<ul class="no-bullet">
-<li>* A nonnegative integer selects the corresponding index, while a negative integer selects an index counting backwards from the last index:
+<ul>
+<li> A nonnegative integer selects the corresponding index, while a negative integer selects an index counting backwards from the last index:
 
 <div class="example">
 <pre class="example">{{ list | slice: 4 }}
@@ -685,8 +685,8 @@ Next: <a href="#force_002descape" accesskey="n" rel="next">force-escape</a>, Pre
 <p>if the list is <code>(1 2 3 4 5 6)</code> it will output <code>(5)</code>
 </p>
 
-<ul class="no-bullet">
-<li>* <code>(start . end)</code> to select a range.  When <code>end</code> is <code>NIL</code>, the last index is included.
+<ul>
+<li> <code>(start . end)</code> to select a range.  When <code>end</code> is <code>NIL</code>, the last index is included.
 </li></ul>
 
 <p>Each boundary is resolved according to the other rules if applicable, so you can use negative integers:

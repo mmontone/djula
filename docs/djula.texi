@@ -338,7 +338,7 @@ Provides a hook to customize template compilation.
 
 @*Specializers: 
 
-@itemize *
+@itemize
 
 @item 
 @code{(toplevel-compiler common-lisp:t)}
@@ -1843,7 +1843,7 @@ Syntax:
 Each @code{slice} selects a subset of subscripts along the corresponding axis.
 
 
-@itemize *
+@itemize
 
 @item 
 A nonnegative integer selects the corresponding index, while a negative integer selects an index counting backwards from the last index:
@@ -1856,7 +1856,7 @@ A nonnegative integer selects the corresponding index, while a negative integer 
 if the list is @code{(1 2 3 4 5 6)} it will output @code{(5)}
 
 
-@itemize *
+@itemize
 
 @item 
 @code{(start . end)} to select a range.  When @code{end} is @code{NIL}, the last index is included.
@@ -2521,7 +2521,7 @@ You can use as many levels of inheritance as needed. One common way of using
 inheritance is the following three-level approach:
 
 
-@itemize *
+@itemize
 
 @item 
 Create a @code{base.html} template that holds the main look-and-feel of your
@@ -2545,7 +2545,7 @@ content areas, such as section-wide navigation.
 Here are some tips for working with inheritance:
 
 
-@itemize *
+@itemize
 
 @item 
 If you use @code{@{% extends %@}} in a template, it must be the first template
@@ -2872,7 +2872,7 @@ don't exist anymore.
 
 To build a standalone binary, we will need to:
 
-@itemize *
+@itemize
 @item
 list all our templates (we can do that in our .asd system declaration)
 

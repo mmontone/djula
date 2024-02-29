@@ -141,14 +141,14 @@ don&rsquo;t exist anymore.
 </p>
 <p>To build a standalone binary, we will need to:
 </p>
-<ul class="no-bullet">
-<li>* list all our templates (we can do that in our .asd system declaration)
+<ul>
+<li> list all our templates (we can do that in our .asd system declaration)
 
-</li><li>* instantiate <code>djula:*current-store*</code> as an instance of <code>memory-template-store</code>,
+</li><li> instantiate <code>djula:*current-store*</code> as an instance of <code>memory-template-store</code>,
 
-</li><li>* compile our templates: they get compiled into memory.
+</li><li> compile our templates: they get compiled into memory.
 
-</li><li>* disable the auto-reload: <code>setf djula:*recompile-templates-on-change* nil)</code>.
+</li><li> disable the auto-reload: <code>setf djula:*recompile-templates-on-change* nil)</code>.
 
 </li></ul>
 

@@ -268,16 +268,16 @@ tag in a parent template is always used as a fallback.
 inheritance is the following three-level approach:
 </p>
 
-<ul class="no-bullet">
-<li>* Create a <code>base.html</code> template that holds the main look-and-feel of your
+<ul>
+<li> Create a <code>base.html</code> template that holds the main look-and-feel of your
 site.
 
-</li><li>* Create a <code>base_SECTIONNAME.html</code> template for each “section” of your
+</li><li> Create a <code>base_SECTIONNAME.html</code> template for each “section” of your
 site. For example, <code>base_news.html</code>, <code>base_sports.html</code>. These
 templates all extend <code>base.html</code> and include section-specific
 styles/design.
 
-</li><li>* Create individual templates for each type of page, such as a news
+</li><li> Create individual templates for each type of page, such as a news
 article or blog entry. These templates extend the appropriate section
 template.
 </li></ul>
@@ -288,27 +288,27 @@ content areas, such as section-wide navigation.
 <p>Here are some tips for working with inheritance:
 </p>
 
-<ul class="no-bullet">
-<li>* If you use <code>{% extends %}</code> in a template, it must be the first template
+<ul>
+<li> If you use <code>{% extends %}</code> in a template, it must be the first template
 tag in that template. Template inheritance won’t work, otherwise.
 
-</li><li>* More <code>{% block %}</code> tags in your base templates are better. Remember,
+</li><li> More <code>{% block %}</code> tags in your base templates are better. Remember,
 child templates don’t have to define all parent blocks, so you can fill
 in reasonable defaults in a number of blocks, then only define the ones
 you need later. It’s better to have more hooks than fewer hooks.
 
-</li><li>* If you find yourself duplicating content in a number of templates, it
+</li><li> If you find yourself duplicating content in a number of templates, it
 probably means you should move that content to a <code>{% block %}</code> in a
 parent template.
 
-</li><li>* If you need to get the content of the block from the parent template,
+</li><li> If you need to get the content of the block from the parent template,
 the <code>{{ block.super }}</code> variable will do the trick. This is
 useful if you want to add to the contents of a parent block instead of
 completely overriding it. Data inserted using <code>{{ block.super
 }}</code> will not be automatically escaped (see the next section), since
 it was already escaped, if necessary, in the parent template.
 
-</li><li>* For extra readability, you can optionally give a <em>name</em> to your
+</li><li> For extra readability, you can optionally give a <em>name</em> to your
 <code>{% endblock %}</code> tag. For example:
 
 <div class="example">
