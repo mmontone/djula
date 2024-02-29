@@ -2400,10 +2400,18 @@ Errors are handled by the macro, but you can handle them and return a
 @node The template package
 @section The template package
 
-Templates evaluations occur in `CL-USER` package by default. It is likely that your templates need evaluations to happen in some of your application packages instead. There are two ways to control that:
+Templates evaluations occur in @emph{CL-USER} package by default. It is likely that your templates need evaluations to happen in some of your application packages instead. This need typically arises when trying to evaluate @code{ @{@{ object.method @}@} } where @emph{method} is a generic function (accessing slots works fine).
+
+These are the ways to control the template package:
 
 @itemize
-@item Set the @code{*template-package*} global variable to a package of yours.
+@item Globally set @code{*template-package*} to a package of yours.
+@item Dynamically bind @code{*template-package*} before rendering the template.
+Like:
+@example
+(let ((djula:*template-package* (find-package :app-package)))
+   (djula:render-template* "app-template.html"))
+@end example
 @item Start your template with a @code{set-package} tag. Note that as of now, this sets the @code{*template-package*} globally, not just for that template. So you may want to make sure to start all of your templates with a @code{set-package} tag to set the correct package for each template.
 @end itemize
 

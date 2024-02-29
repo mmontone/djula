@@ -144,10 +144,18 @@ Next: <a href="#Template-inheritance" accesskey="n" rel="next">Template inherita
 </div>
 <span id="The-template-package-1"></span><h3 class="section">9.1 The template package</h3>
 
-<p>Templates evaluations occur in &lsquo;CL-USER&lsquo; package by default. It is likely that your templates need evaluations to happen in some of your application packages instead. There are two ways to control that:
+<p>Templates evaluations occur in <em>CL-USER</em> package by default. It is likely that your templates need evaluations to happen in some of your application packages instead. This need typically arises when trying to evaluate <code> {{ object.method }} </code> where <em>method</em> is a generic function (accessing slots works fine).
+</p>
+<p>These are the ways to control the template package:
 </p>
 <ul>
-<li> Set the <code>*template-package*</code> global variable to a package of yours.
+<li> Globally set <code>*template-package*</code> to a package of yours.
+</li><li> Dynamically bind <code>*template-package*</code> before rendering the template.
+Like:
+<div class="example">
+<pre class="example">(let ((djula:*template-package* (find-package :app-package)))
+   (djula:render-template* &quot;app-template.html&quot;))
+</pre></div>
 </li><li> Start your template with a <code>set-package</code> tag. Note that as of now, this sets the <code>*template-package*</code> globally, not just for that template. So you may want to make sure to start all of your templates with a <code>set-package</code> tag to set the correct package for each template.
 </li></ul>
 
