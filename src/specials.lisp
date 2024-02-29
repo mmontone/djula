@@ -8,7 +8,7 @@ This is a plist, so use getf to add arguments, like: (setf (getf djula:*default-
 
 (defvar *current-language* nil)
 
-(defvar *djula-execute-package* (find-package :common-lisp-user)
+(defvar *template-execute-package* (find-package :common-lisp-user)
   "The package in which template expressions are evaluated.")
 
 (defvar *default-language* :en

@@ -18,7 +18,7 @@
            #:*default-template-arguments*
            #:*error-template*
            #:*elision-string*
-           #:*djula-execute-package*
+           #:*template-execute-package*
            #:*djula-emptyp*
 	   #:*recompile-templates-on-change*
            #:compile-template
