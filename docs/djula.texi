@@ -227,9 +227,9 @@ TODO: list of Common Lisp compilers Djula works on.
 
 Djula is available on Quicklisp:
 
-@example
+@lisp
 (ql:quickload :djula)
-@end example
+@end lisp
 
 @node Basics
 @anchor{basics doc}@anchor{basics basics}
@@ -280,7 +280,7 @@ templates store. We can do that with the
 
 Here is an example:
 
-@example
+@lisp
 (add-template-directory (asdf:system-relative-pathname "webapp" "templates/"))
 
 (defparameter +base.html+ (djula:compile-template* "base.html"))
@@ -288,16 +288,16 @@ Here is an example:
 (defparameter +welcome.html+ (djula:compile-template* "welcome.html"))
 
 (defparameter +contact.html+ (djula:compile-template* "contact.html"))
-@end example
+@end lisp
 
 Then we can render our compiled templates using the @code{RENDER-TEMPLATE*} function:
 
-@example
+@lisp
 (djula:render-template* +welcome.html+ s
                         :title "Ukeleles"
                         :project-name "Ukeleles"
                         :mode "welcome")
-@end example
+@end lisp
 
 @menu
 * Auto-reload:: 
@@ -314,9 +314,9 @@ By default, Djula automatically recompiles the templates when they change.
 
 If you want to disable this, use the @cite{*recompile-templates-on-change*} variable:
 
-@example
+@lisp
 (setf djula:*recompile-templates-on-change* nil)
-@end example
+@end lisp
 
 @node API
 @anchor{usage api}
@@ -405,9 +405,9 @@ You can use the @code{*DEFAULT-TEMPLATE-ARGUMENTS*} variable to store
 arguments that will be available for all templates. It is a plist, so
 use getf to add arguments, like this:
 
-@example
+@lisp
 (setf (getf djula:*default-template-arguments* :foo) 'some-value)
-@end example
+@end lisp
 
 And now, you can access @code{@{@{ foo @}@}} in your template.
 
@@ -419,10 +419,10 @@ Note that you could also write a function that wraps
 @code{RENDER-TEMPLATE*} and uses a default list of variables plus
 other ones given as arguments:
 
-@example
+@lisp
 (defun my-render-template (template stream &rest args)
   (apply #'djula:render-template* template stream (list* :foo 'some-value args)))
-@end example
+@end lisp
 
 @node Tags
 @anchor{tags doc}@anchor{tags tags}
@@ -898,9 +898,9 @@ Use of both @code{and} and @code{or} clauses within the same tag is allowed, wit
 
 will be interpreted like:
 
-@example
+@lisp
 (if (or (athlete-list and coach-list) cheerleader-list) ..)
-@end example
+@end lisp
 
 Use of actual parentheses in the @code{if} tag is invalid syntax. If you need
 them to indicate precedence, you should use nested @code{if} tags.
@@ -2327,19 +2327,19 @@ If @code{value} is @code{"http://www.example.org/"}, the output will be
 
 Use the @code{def-filter} macro. Its general form is:
 
-@example
+@lisp
 (def-filter :myfilter-name (value arg)
    (body))
-@end example
+@end lisp
 
 It always takes the variable’s value as argument, and it can have one
 required or optional argument. For example, this is how those
 built-in filters are defined:
 
-@example
+@lisp
 (def-filter :capfirst (val)
   (string-capitalize (princ-to-string val)))
-@end example
+@end lisp
 
 This is all there is to it. Once written, you can use it in your
 templates. You can define a filter wherever you want and there is no
@@ -2347,29 +2347,29 @@ need to register it or to import it in your templates.
 
 Here’s a filter with a required argument:
 
-@example
+@lisp
 (def-filter :add (it n)
   (+ it (parse-integer n)))
-@end example
+@end lisp
 
 and with an optional one:
 
-@example
+@lisp
 (def-filter :datetime (it &optional format)
   (let ((timestamp …))))
-@end example
+@end lisp
 
 When you need to pass a second argument, make your filter return a
 lambda function and chain it with the @code{with} filter:
 
-@example
+@lisp
 (def-filter :replace (it regex)
    (lambda (replace)
      (ppcre:regex-replace-all regex it replace)))
 
 (def-filter :with (it replace)
    (funcall it replace))
-@end example
+@end lisp
 
 Now we can write:
 
@@ -2380,13 +2380,13 @@ Now we can write:
 Errors are handled by the macro, but you can handle them and return a
 @code{template-error} condition:
 
-@example
+@lisp
 (def-filter :handle-error-filter (it)
    (handler-case
          (do-something)
      (condition (e)
        (template-error "There was an error executing this filter: ~A" e))))
-@end example
+@end lisp
 
 @node Templates
 @chapter Templates
@@ -2408,10 +2408,10 @@ These are the ways to control the template package:
 @item Globally set @code{*template-package*} to a package of yours.
 @item Dynamically bind @code{*template-package*} before rendering the template.
 Like:
-@example
+@lisp
 (let ((djula:*template-package* (find-package :app-package)))
    (djula:render-template* "app-template.html"))
-@end example
+@end lisp
 @item Start your template with a @code{set-package} tag. Note that as of now, this sets the @code{*template-package*} globally, not just for that template. So you may want to make sure to start all of your templates with a @code{set-package} tag to set the correct package for each template.
 @end itemize
 
@@ -2709,10 +2709,10 @@ To choose the language to use, set the @code{*CURRENT-LANGUAGE*} variable.
 
 For example:
 
-@example
+@lisp
 (let ((djula:*current-language* :es))
    (djula:render-template* +translation.html+))
-@end example
+@end lisp
 
 @node Backends
 @anchor{internationalization backends}
@@ -2790,12 +2790,12 @@ Then @code{xgettext} can be used to extract the messages from that file.
 
 Use @code{GETTEXT:PRELOAD-CATALOGS} to inspect current gettext settings:
 
-@example
+@lisp
 (gettext:preload-catalogs
    ;; Tell gettext where to find the .mo files
    #.(asdf:system-relative-pathname :my-project "locale/"))
 
-@end example
+@end lisp
 
 And that returns Gettext information:
 
@@ -2824,14 +2824,14 @@ And that returns Gettext information:
 
 Run the following function to reload the translations when developing:
 
-@example
+@lisp
 (defun reload-translations ()
   ;; Clear gettext's cache
   (clrhash gettext::*catalog-cache*)
   (gettext:preload-catalogs
    ;; Tell gettext where to find the .mo files
    #.(asdf:system-relative-pathname :my-project "locale/")))
-@end example
+@end lisp
 
 @node Error handling
 @anchor{error-handling doc}@anchor{error-handling error-handling}
@@ -2890,7 +2890,7 @@ disable the auto-reload: @code{setf djula:*recompile-templates-on-change* nil)}.
 Below is a simple ASDF system declaration that declares two templates
 as static files located in the ``src/templates'' directory:
 
-@example lisp
+@lisp
 (asdf:defsystem "djula-binary"
   :depends-on (:hunchentoot
                :djula)
@@ -2911,33 +2911,33 @@ as static files located in the ``src/templates'' directory:
   :entry-point "djula-binary::main"
 
   :description "How to embed Djula templates in a self-contained binary.")
-@end example
+@end lisp
 
 At the top level of ``src/web.lisp'', we set Djula's store to a memory
 store, and we disable the autoreload feature. This code would be
 called when we @code{load} the .lisp file, so it will be called when
 we create the binary with @code{(asdf:make :djula-binary)}.
 
-@example lisp
+@lisp
 (setf djula:*current-store* (make-instance 'djula:memory-template-store
 					   :search-path (list (asdf:system-relative-pathname "djula-binary"
                                                              "src/templates/"))) ;; meaningful trailing /
       djula:*recompile-templates-on-change* nil)
-@end example
+@end lisp
 
 Now, we compile all those declared templates. We use the
 @code{djula:list-asdf-system-templates} utility that will return a
 list of pathnames to our templates.
 
-@example lisp
+@lisp
 (mapcar #'djula:compile-template* (djula:list-asdf-system-templates :demo-djula-in-binaries "src/templates"))
-@end example
+@end lisp
 
 Finally, you can declare templates as usual in your application:
 
-@example lisp
+@lisp
 (defparameter +base.html+ (djula:compile-template* "base.html"))
-@end example
+@end lisp
 
 and render a template that @code{extends} another one, it will work
 (and that was actually the main difficulty: the default store always

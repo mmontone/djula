@@ -886,8 +886,8 @@ Previous: <a href="#List-of-filters" accesskey="p" rel="prev">List of filters</a
 
 <p>Use the <code>def-filter</code> macro. Its general form is:
 </p>
-<div class="example">
-<pre class="example">(def-filter :myfilter-name (value arg)
+<div class="lisp">
+<pre class="lisp">(def-filter :myfilter-name (value arg)
    (body))
 </pre></div>
 
@@ -895,8 +895,8 @@ Previous: <a href="#List-of-filters" accesskey="p" rel="prev">List of filters</a
 required or optional argument. For example, this is how those
 built-in filters are defined:
 </p>
-<div class="example">
-<pre class="example">(def-filter :capfirst (val)
+<div class="lisp">
+<pre class="lisp">(def-filter :capfirst (val)
   (string-capitalize (princ-to-string val)))
 </pre></div>
 
@@ -906,23 +906,23 @@ need to register it or to import it in your templates.
 </p>
 <p>Here’s a filter with a required argument:
 </p>
-<div class="example">
-<pre class="example">(def-filter :add (it n)
+<div class="lisp">
+<pre class="lisp">(def-filter :add (it n)
   (+ it (parse-integer n)))
 </pre></div>
 
 <p>and with an optional one:
 </p>
-<div class="example">
-<pre class="example">(def-filter :datetime (it &amp;optional format)
+<div class="lisp">
+<pre class="lisp">(def-filter :datetime (it &amp;optional format)
   (let ((timestamp …))))
 </pre></div>
 
 <p>When you need to pass a second argument, make your filter return a
 lambda function and chain it with the <code>with</code> filter:
 </p>
-<div class="example">
-<pre class="example">(def-filter :replace (it regex)
+<div class="lisp">
+<pre class="lisp">(def-filter :replace (it regex)
    (lambda (replace)
      (ppcre:regex-replace-all regex it replace)))
 
@@ -939,8 +939,8 @@ lambda function and chain it with the <code>with</code> filter:
 <p>Errors are handled by the macro, but you can handle them and return a
 <code>template-error</code> condition:
 </p>
-<div class="example">
-<pre class="example">(def-filter :handle-error-filter (it)
+<div class="lisp">
+<pre class="lisp">(def-filter :handle-error-filter (it)
    (handler-case
          (do-something)
      (condition (e)

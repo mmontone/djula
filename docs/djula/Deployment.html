@@ -155,8 +155,8 @@ don&rsquo;t exist anymore.
 <p>Below is a simple ASDF system declaration that declares two templates
 as static files located in the &ldquo;src/templates&rdquo; directory:
 </p>
-<div class="example">
-<pre class="example">(asdf:defsystem &quot;djula-binary&quot;
+<div class="lisp">
+<pre class="lisp">(asdf:defsystem &quot;djula-binary&quot;
   :depends-on (:hunchentoot
                :djula)
   :components ((:module &quot;src&quot;
@@ -183,8 +183,8 @@ store, and we disable the autoreload feature. This code would be
 called when we <code>load</code> the .lisp file, so it will be called when
 we create the binary with <code>(asdf:make :djula-binary)</code>.
 </p>
-<div class="example">
-<pre class="example">(setf djula:*current-store* (make-instance 'djula:memory-template-store
+<div class="lisp">
+<pre class="lisp">(setf djula:*current-store* (make-instance 'djula:memory-template-store
 					   :search-path (list (asdf:system-relative-pathname &quot;djula-binary&quot;
                                                              &quot;src/templates/&quot;))) ;; meaningful trailing /
       djula:*recompile-templates-on-change* nil)
@@ -194,14 +194,14 @@ we create the binary with <code>(asdf:make :djula-binary)</code>.
 <code>djula:list-asdf-system-templates</code> utility that will return a
 list of pathnames to our templates.
 </p>
-<div class="example">
-<pre class="example">(mapcar #'djula:compile-template* (djula:list-asdf-system-templates :demo-djula-in-binaries &quot;src/templates&quot;))
+<div class="lisp">
+<pre class="lisp">(mapcar #'djula:compile-template* (djula:list-asdf-system-templates :demo-djula-in-binaries &quot;src/templates&quot;))
 </pre></div>
 
 <p>Finally, you can declare templates as usual in your application:
 </p>
-<div class="example">
-<pre class="example">(defparameter +base.html+ (djula:compile-template* &quot;base.html&quot;))
+<div class="lisp">
+<pre class="lisp">(defparameter +base.html+ (djula:compile-template* &quot;base.html&quot;))
 </pre></div>
 
 <p>and render a template that <code>extends</code> another one, it will work

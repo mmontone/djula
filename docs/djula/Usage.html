@@ -140,8 +140,8 @@ templates store. We can do that with the
 </p>
 <p>Here is an example:
 </p>
-<div class="example">
-<pre class="example">(add-template-directory (asdf:system-relative-pathname &quot;webapp&quot; &quot;templates/&quot;))
+<div class="lisp">
+<pre class="lisp">(add-template-directory (asdf:system-relative-pathname &quot;webapp&quot; &quot;templates/&quot;))
 
 (defparameter +base.html+ (djula:compile-template* &quot;base.html&quot;))
 
@@ -152,8 +152,8 @@ templates store. We can do that with the
 
 <p>Then we can render our compiled templates using the <code>RENDER-TEMPLATE*</code> function:
 </p>
-<div class="example">
-<pre class="example">(djula:render-template* +welcome.html+ s
+<div class="lisp">
+<pre class="lisp">(djula:render-template* +welcome.html+ s
                         :title &quot;Ukeleles&quot;
                         :project-name &quot;Ukeleles&quot;
                         :mode &quot;welcome&quot;)
@@ -180,8 +180,8 @@ Next: <a href="#API" accesskey="n" rel="next">API</a>, Up: <a href="#Usage" acce
 </p>
 <p>If you want to disable this, use the <cite>*recompile-templates-on-change*</cite> variable:
 </p>
-<div class="example">
-<pre class="example">(setf djula:*recompile-templates-on-change* nil)
+<div class="lisp">
+<pre class="lisp">(setf djula:*recompile-templates-on-change* nil)
 </pre></div>
 
 <hr>

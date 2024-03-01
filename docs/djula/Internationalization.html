@@ -241,8 +241,8 @@ Next: <a href="#Backends" accesskey="n" rel="next">Backends</a>, Previous: <a hr
 </p>
 <p>For example:
 </p>
-<div class="example">
-<pre class="example">(let ((djula:*current-language* :es))
+<div class="lisp">
+<pre class="lisp">(let ((djula:*current-language* :es))
    (djula:render-template* +translation.html+))
 </pre></div>
 
@@ -348,8 +348,8 @@ Previous: <a href="#Gettext-message-extraction" accesskey="p" rel="prev">Gettext
 
 <p>Use <code>GETTEXT:PRELOAD-CATALOGS</code> to inspect current gettext settings:
 </p>
-<div class="example">
-<pre class="example">(gettext:preload-catalogs
+<div class="lisp">
+<pre class="lisp">(gettext:preload-catalogs
    ;; Tell gettext where to find the .mo files
    #.(asdf:system-relative-pathname :my-project &quot;locale/&quot;))
 
@@ -380,8 +380,8 @@ Previous: <a href="#Gettext-message-extraction" accesskey="p" rel="prev">Gettext
 </pre>
 <p>Run the following function to reload the translations when developing:
 </p>
-<div class="example">
-<pre class="example">(defun reload-translations ()
+<div class="lisp">
+<pre class="lisp">(defun reload-translations ()
   ;; Clear gettext's cache
   (clrhash gettext::*catalog-cache*)
   (gettext:preload-catalogs
