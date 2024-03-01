@@ -37,11 +37,9 @@ Maintained by Mariano Montone.
 
 @c %** end of user preamble
 
-@ifnottex
 @node Top
 @top Djula HTML templating system
 @insertcopying
-@end ifnottex
 
 @c %**start of body
 @anchor{index doc}@anchor{0}
