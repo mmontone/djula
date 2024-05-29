@@ -234,7 +234,9 @@ form that returns some debugging info."
             (labels ((rfn (plist)
                        (when plist
                          (destructuring-bind (k v . rest) plist
-                           (format stream "<li>~a. ~a = ~s</li>" (incf n) k (escape-for-html (truncate-characters (princ-to-string v) 100 "...")))
+                           (format stream "<li>~a. ~a = " n k)
+                           (write-string (escape-for-html (write-to-string v :pretty nil :length 30)) stream)
+                           (write-string "</li>" stream)
                            (rfn rest)))))
               (rfn *template-arguments*))
             (format stream "</ul>"))))
