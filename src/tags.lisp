@@ -196,6 +196,18 @@ form that returns some debugging info."
     (format stream "<div class=\"debug\" style=\"position:fixed;bottom:0;font-size:12px;height:150px;width:100vw;overflow-y:auto;background-color:lightyellow;border-top:1px solid gray;\">")
     (format stream "<ul style=\"list-style-type:none;\">")
 
+    (with-safe "the arguments given to the template"
+      (format stream "<li><b>Template arguments:</b> ")
+      (if (null *template-arguments*)
+          (format stream "There were no arguments given to the template")
+          (progn
+            (format stream "<ol>")
+            (alexandria:doplist (key val *template-arguments*)
+              (format stream "<li>~a = " key)
+              (write-string (escape-for-html (write-to-string val :pretty nil :length 30)) stream)
+              (write-string "</li>" stream))
+            (format stream "</ol>"))))
+
     (with-safe "the default language"
       (format stream "<li><b>Default language:</b> ~A </li>" (or *default-language* "none")))
 
@@ -224,18 +236,7 @@ form that returns some debugging info."
 
     (with-safe "*ALLOW-INCLUDE-ROOTS*"
       (format stream "<li><b>Allow include-roots:</b> ~A</li>" *allow-include-roots*))
-
-    (with-safe "the arguments given to the template"
-      (format stream "<li><b>Template arguments:</b> ")
-      (if (null *template-arguments*)
-          (format stream "There were no arguments given to the template")
-          (progn
-            (format stream "<ol>")
-            (alexandria:doplist (key val *template-arguments*)
-              (format stream "<li>~a = " key)
-              (write-string (escape-for-html (write-to-string val :pretty nil :length 30)) stream)
-              (write-string "</li>" stream))
-            (format stream "</ol>"))))
+    
     (format stream "</ul>")
     (format stream "</div>")))
 
