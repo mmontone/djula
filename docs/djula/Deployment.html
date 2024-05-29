@@ -1,5 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
@@ -9,9 +12,6 @@ Copyright (C) 2014, Nick Allen.
 Maintained by Mariano Montone.
 
  -->
-<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Deployment (Djula HTML templating system)</title>
 
 <meta name="description" content="Deployment (Djula HTML templating system)">
@@ -19,6 +19,8 @@ Maintained by Mariano Montone.
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
 <link href="index.html" rel="start" title="Top">
 <link href="Symbol-Index.html" rel="index" title="Symbol Index">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
@@ -33,11 +35,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
-div.lisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
@@ -46,6 +48,7 @@ pre.menu-preformatted {font-family: serif}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
 ul.no-bullet {list-style: none}
 blockquote {
     font-style: normal;
@@ -122,9 +125,10 @@ body {
 </head>
 
 <body lang="en">
-<span id="Deployment"></span><div class="header">
+<div class="chapter" id="Deployment">
+<div class="header">
 <p>
-Next: <a href="API_003c3_003e.html" accesskey="n" rel="next">API&lt;3&gt;</a>, Previous: <a href="Error-handling.html" accesskey="p" rel="prev">Error handling</a>, Up: <a href="index.html" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="API_003c3_003e.html" accesskey="n" rel="next">API</a>, Previous: <a href="Error-handling.html" accesskey="p" rel="prev">Error handling</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="deployment-doc"></span><span id="deployment-error_002dhandling"></span><span id="Deployment-_002d-Building-standalone-binaries"></span><h2 class="chapter">12 Deployment - Building standalone binaries</h2>
 
@@ -155,7 +159,7 @@ don&rsquo;t exist anymore.
 <p>Below is a simple ASDF system declaration that declares two templates
 as static files located in the &ldquo;src/templates&rdquo; directory:
 </p>
-<div class="lisp">
+<div class="example lisp">
 <pre class="lisp">(asdf:defsystem &quot;djula-binary&quot;
   :depends-on (:hunchentoot
                :djula)
@@ -183,7 +187,7 @@ store, and we disable the autoreload feature. This code would be
 called when we <code>load</code> the .lisp file, so it will be called when
 we create the binary with <code>(asdf:make :djula-binary)</code>.
 </p>
-<div class="lisp">
+<div class="example lisp">
 <pre class="lisp">(setf djula:*current-store* (make-instance 'djula:memory-template-store
 					   :search-path (list (asdf:system-relative-pathname &quot;djula-binary&quot;
                                                              &quot;src/templates/&quot;))) ;; meaningful trailing /
@@ -194,13 +198,13 @@ we create the binary with <code>(asdf:make :djula-binary)</code>.
 <code>djula:list-asdf-system-templates</code> utility that will return a
 list of pathnames to our templates.
 </p>
-<div class="lisp">
+<div class="example lisp">
 <pre class="lisp">(mapcar #'djula:compile-template* (djula:list-asdf-system-templates :demo-djula-in-binaries &quot;src/templates&quot;))
 </pre></div>
 
 <p>Finally, you can declare templates as usual in your application:
 </p>
-<div class="lisp">
+<div class="example lisp">
 <pre class="lisp">(defparameter +base.html+ (djula:compile-template* &quot;base.html&quot;))
 </pre></div>
 
@@ -218,38 +222,39 @@ libraries in your binary.
 </p></blockquote>
 
 
-<table class="menu" border="0" cellspacing="0">
-<tr><td align="left" valign="top">&bull; <a href="#API_003c2_003e" accesskey="1">API</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-</table>
-
+<ul class="section-toc">
+<li><a href="#API_003c2_003e" accesskey="1">API</a></li>
+</ul>
 <hr>
-<span id="API_003c2_003e"></span><div class="header">
+<div class="section" id="API_003c2_003e">
+<div class="header">
 <p>
-Up: <a href="#Deployment" accesskey="u" rel="up">Deployment</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Up: <a href="#Deployment" accesskey="u" rel="up">Deployment - Building standalone binaries</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="error_002dhandling-api"></span><span id="API-2"></span><h3 class="section">12.1 API</h3>
 
 
 
-<dl>
-<dt id="index-_002acatch_002dtemplate_002derrors_002dp_002a">Variable: <strong>*catch<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->errors<span class="nolinebreak">-</span><!-- /@w -->p*</strong></dt>
+<dl class="def">
+<dt id="index-_002acatch_002dtemplate_002derrors_002dp_002a"><span class="category">Variable: </span><span><strong>*catch<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->errors<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002acatch_002dtemplate_002derrors_002dp_002a' class='copiable-anchor'> &para;</a></span></dt>
 </dl>
 
 
-<dl>
-<dt id="index-_002afancy_002derror_002dtemplate_002dp_002a">Variable: <strong>*fancy<span class="nolinebreak">-</span><!-- /@w -->error<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->p*</strong></dt>
+<dl class="def">
+<dt id="index-_002afancy_002derror_002dtemplate_002dp_002a"><span class="category">Variable: </span><span><strong>*fancy<span class="nolinebreak">-</span><!-- /@w -->error<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002afancy_002derror_002dtemplate_002dp_002a' class='copiable-anchor'> &para;</a></span></dt>
 </dl>
 
 
-<dl>
-<dt id="index-_002averbose_002derrors_002dp_002a">Variable: <strong>*verbose<span class="nolinebreak">-</span><!-- /@w -->errors<span class="nolinebreak">-</span><!-- /@w -->p*</strong></dt>
+<dl class="def">
+<dt id="index-_002averbose_002derrors_002dp_002a"><span class="category">Variable: </span><span><strong>*verbose<span class="nolinebreak">-</span><!-- /@w -->errors<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002averbose_002derrors_002dp_002a' class='copiable-anchor'> &para;</a></span></dt>
 </dl>
 
+</div>
+</div>
 <hr>
 <div class="header">
 <p>
-Up: <a href="#Deployment" accesskey="u" rel="up">Deployment</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="API_003c3_003e.html" accesskey="n" rel="next">API</a>, Previous: <a href="Error-handling.html" accesskey="p" rel="prev">Error handling</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 
 

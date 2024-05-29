@@ -1,5 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
@@ -9,9 +12,6 @@ Copyright (C) 2014, Nick Allen.
 Maintained by Mariano Montone.
 
  -->
-<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Tags (Djula HTML templating system)</title>
 
 <meta name="description" content="Tags (Djula HTML templating system)">
@@ -19,12 +19,14 @@ Maintained by Mariano Montone.
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
 <link href="index.html" rel="start" title="Top">
 <link href="Symbol-Index.html" rel="index" title="Symbol Index">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="index.html" rel="up" title="Top">
 <link href="Comments.html" rel="next" title="Comments">
-<link href="Variables.html#Default-template-variables" rel="prev" title="Default template variables">
+<link href="Variables.html#Variables" rel="prev" title="Variables">
 <style type="text/css">
 <!--
 /* Style-sheet to use for manuals (copied from Emacs) */
@@ -33,11 +35,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
+a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter {text-decoration: none}
 blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
-div.lisp {margin-left: 3.2em}
 kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
@@ -46,6 +48,7 @@ pre.menu-preformatted {font-family: serif}
 span.nolinebreak {white-space: nowrap}
 span.roman {font-family: initial; font-weight: normal}
 span.sansserif {font-family: sans-serif; font-weight: normal}
+span:hover a.copiable-anchor {visibility: visible}
 ul.no-bullet {list-style: none}
 blockquote {
     font-style: normal;
@@ -122,26 +125,23 @@ body {
 </head>
 
 <body lang="en">
-<span id="Tags"></span><div class="header">
+<div class="chapter" id="Tags">
+<div class="header">
 <p>
-Next: <a href="Comments.html" accesskey="n" rel="next">Comments</a>, Previous: <a href="Variables.html#Variables" accesskey="p" rel="prev">Variables</a>, Up: <a href="index.html" accesskey="u" rel="up">Top</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Comments.html" accesskey="n" rel="next">Comments</a>, Previous: <a href="Variables.html#Variables" accesskey="p" rel="prev">Variables</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="tags-doc"></span><span id="tags-tags"></span><span id="Tags-1"></span><h2 class="chapter">5 Tags</h2>
 
 
-<table class="menu" border="0" cellspacing="0">
-<tr><td align="left" valign="top">&bull; <a href="#Overview" accesskey="1">Overview</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#List-of-tags" accesskey="2">List of tags</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#Custom-tags" accesskey="3">Custom tags</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
 
-</pre></th></tr></table>
-
+<ul class="section-toc">
+<li><a href="#Overview" accesskey="1">Overview</a></li>
+<li><a href="#List-of-tags" accesskey="2">List of tags</a></li>
+<li><a href="#Custom-tags" accesskey="3">Custom tags</a></li>
+</ul>
 <hr>
-<span id="Overview"></span><div class="header">
+<div class="section" id="Overview">
+<div class="header">
 <p>
 Next: <a href="#List-of-tags" accesskey="n" rel="next">List of tags</a>, Up: <a href="#Tags" accesskey="u" rel="up">Tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -160,7 +160,7 @@ tags:
 </p>
 
 <dl compact="compact">
-<dt><code>for</code></dt>
+<dt><span><code>for</code></span></dt>
 <dd>
 <p>Loop over each item in an array. For example, to display a list of athletes
 provided in <code>athlete-list</code>:
@@ -174,7 +174,7 @@ provided in <code>athlete-list</code>:
 </pre></div>
 
 </dd>
-<dt><code>if</code>, <code>else</code></dt>
+<dt><span><code>if</code>, <code>else</code></span></dt>
 <dd>
 <p>Evaluates a variable, and if that variable is “true” the contents of the
 block are displayed:
@@ -188,7 +188,7 @@ block are displayed:
 </pre></div>
 
 </dd>
-<dt><code>block</code> and <code>extends</code></dt>
+<dt><span><code>block</code> and <code>extends</code></span></dt>
 <dd>
 <p>Set up template inheritance (see below), a powerful way of cutting down on “boilerplate”
 in templates.
@@ -196,50 +196,36 @@ in templates.
 </dl>
 
 <hr>
-<span id="List-of-tags"></span><div class="header">
+</div>
+<div class="section" id="List-of-tags">
+<div class="header">
 <p>
 Next: <a href="#Custom-tags" accesskey="n" rel="next">Custom tags</a>, Previous: <a href="#Overview" accesskey="p" rel="prev">Overview</a>, Up: <a href="#Tags" accesskey="u" rel="up">Tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="tags-list_002dof_002dtags"></span><span id="List-of-tags-1"></span><h3 class="section">5.2 List of tags</h3>
 
 
-<table class="menu" border="0" cellspacing="0">
-<tr><td align="left" valign="top">&bull; <a href="#block" accesskey="1">block</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#extends" accesskey="2">extends</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#super" accesskey="3">super</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#comment" accesskey="4">comment</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#cycle" accesskey="5">cycle</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#debug" accesskey="6">debug</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#filter" accesskey="7">filter</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#firstof" accesskey="8">firstof</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#for" accesskey="9">for</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#if">if</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#Boolean-operators">Boolean operators</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#ifchanged">ifchanged</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#ifequal">ifequal</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#ifnotequal">ifnotequal</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#include">include</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><th colspan="3" align="left" valign="top"><pre class="menu-comment">
 
-</pre></th></tr></table>
-
+<ul class="section-toc">
+<li><a href="#block" accesskey="1">block</a></li>
+<li><a href="#extends" accesskey="2">extends</a></li>
+<li><a href="#super" accesskey="3">super</a></li>
+<li><a href="#comment" accesskey="4">comment</a></li>
+<li><a href="#cycle" accesskey="5">cycle</a></li>
+<li><a href="#debug" accesskey="6">debug</a></li>
+<li><a href="#filter" accesskey="7">filter</a></li>
+<li><a href="#firstof" accesskey="8">firstof</a></li>
+<li><a href="#for" accesskey="9">for</a></li>
+<li><a href="#if">if</a></li>
+<li><a href="#Boolean-operators">Boolean operators</a></li>
+<li><a href="#ifchanged">ifchanged</a></li>
+<li><a href="#ifequal">ifequal</a></li>
+<li><a href="#ifnotequal">ifnotequal</a></li>
+<li><a href="#include">include</a></li>
+</ul>
 <hr>
-<span id="block"></span><div class="header">
+<div class="subsection" id="block">
+<div class="header">
 <p>
 Next: <a href="#extends" accesskey="n" rel="next">extends</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -259,7 +245,9 @@ Next: <a href="#extends" accesskey="n" rel="next">extends</a>, Up: <a href="#Lis
 <p>See <a href="Templates.html#Template-inheritance">Template inheritance</a> for more information.
 </p>
 <hr>
-<span id="extends"></span><div class="header">
+</div>
+<div class="subsection" id="extends">
+<div class="header">
 <p>
 Next: <a href="#super" accesskey="n" rel="next">super</a>, Previous: <a href="#block" accesskey="p" rel="prev">block</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -275,7 +263,9 @@ Next: <a href="#super" accesskey="n" rel="next">super</a>, Previous: <a href="#b
 </pre></div>
 
 <hr>
-<span id="super"></span><div class="header">
+</div>
+<div class="subsection" id="super">
+<div class="header">
 <p>
 Next: <a href="#comment" accesskey="n" rel="next">comment</a>, Previous: <a href="#extends" accesskey="p" rel="prev">extends</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -295,7 +285,9 @@ Next: <a href="#comment" accesskey="n" rel="next">comment</a>, Previous: <a href
 </pre></div>
 
 <hr>
-<span id="comment"></span><div class="header">
+</div>
+<div class="subsection" id="comment">
+<div class="header">
 <p>
 Next: <a href="#cycle" accesskey="n" rel="next">cycle</a>, Previous: <a href="#super" accesskey="p" rel="prev">super</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -318,7 +310,9 @@ useful when commenting out code for documenting why the code was disabled.
 <p><code>comment</code> tags cannot be nested.
 </p>
 <hr>
-<span id="cycle"></span><div class="header">
+</div>
+<div class="subsection" id="cycle">
+<div class="header">
 <p>
 Next: <a href="#debug" accesskey="n" rel="next">debug</a>, Previous: <a href="#comment" accesskey="p" rel="prev">comment</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -373,7 +367,9 @@ as string literals, while values without quotes are treated as template
 variables.
 </p>
 <hr>
-<span id="debug"></span><div class="header">
+</div>
+<div class="subsection" id="debug">
+<div class="header">
 <p>
 Next: <a href="#filter" accesskey="n" rel="next">filter</a>, Previous: <a href="#cycle" accesskey="p" rel="prev">cycle</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -383,7 +379,9 @@ Next: <a href="#filter" accesskey="n" rel="next">filter</a>, Previous: <a href="
 <p>Outputs a whole load of debugging information
 </p>
 <hr>
-<span id="filter"></span><div class="header">
+</div>
+<div class="subsection" id="filter">
+<div class="header">
 <p>
 Next: <a href="#firstof" accesskey="n" rel="next">firstof</a>, Previous: <a href="#debug" accesskey="p" rel="prev">debug</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -414,7 +412,9 @@ for blocks of template code.
 </td></tr></table>
 
 <hr>
-<span id="firstof"></span><div class="header">
+</div>
+<div class="subsection" id="firstof">
+<div class="header">
 <p>
 Next: <a href="#for" accesskey="n" rel="next">for</a>, Previous: <a href="#filter" accesskey="p" rel="prev">filter</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -439,7 +439,9 @@ passed variables are False:
 
 
 <hr>
-<span id="for"></span><div class="header">
+</div>
+<div class="subsection" id="for">
+<div class="header">
 <p>
 Next: <a href="#if" accesskey="n" rel="next">if</a>, Previous: <a href="#firstof" accesskey="p" rel="prev">firstof</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -508,7 +510,9 @@ the current one</td></tr>
 
 
 <hr>
-<span id="if"></span><div class="header">
+</div>
+<div class="subsection" id="if">
+<div class="header">
 <p>
 Next: <a href="#Boolean-operators" accesskey="n" rel="next">Boolean operators</a>, Previous: <a href="#for" accesskey="p" rel="prev">for</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -543,7 +547,9 @@ displayed by the <code>{{ athlete-list|length }}</code> variable.
 </pre></div>
 
 <hr>
-<span id="Boolean-operators"></span><div class="header">
+</div>
+<div class="subsection" id="Boolean-operators">
+<div class="header">
 <p>
 Next: <a href="#ifchanged" accesskey="n" rel="next">ifchanged</a>, Previous: <a href="#if" accesskey="p" rel="prev">if</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -586,7 +592,7 @@ variables or to negate a given variable:
 
 <p>will be interpreted like:
 </p>
-<div class="lisp">
+<div class="example lisp">
 <pre class="lisp">(if (or (athlete-list and coach-list) cheerleader-list) ..)
 </pre></div>
 
@@ -596,7 +602,9 @@ them to indicate precedence, you should use nested <code>if</code> tags.
 
 
 <hr>
-<span id="ifchanged"></span><div class="header">
+</div>
+<div class="subsection" id="ifchanged">
+<div class="header">
 <p>
 Next: <a href="#ifequal" accesskey="n" rel="next">ifequal</a>, Previous: <a href="#Boolean-operators" accesskey="p" rel="prev">Boolean operators</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -637,7 +645,9 @@ will be displayed if the value has not changed:
 </pre></div>
 
 <hr>
-<span id="ifequal"></span><div class="header">
+</div>
+<div class="subsection" id="ifequal">
+<div class="header">
 <p>
 Next: <a href="#ifnotequal" accesskey="n" rel="next">ifnotequal</a>, Previous: <a href="#ifchanged" accesskey="p" rel="prev">ifchanged</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -668,7 +678,9 @@ Next: <a href="#ifnotequal" accesskey="n" rel="next">ifnotequal</a>, Previous: <
 <code>==</code> operator.
 </p>
 <hr>
-<span id="ifnotequal"></span><div class="header">
+</div>
+<div class="subsection" id="ifnotequal">
+<div class="header">
 <p>
 Next: <a href="#include" accesskey="n" rel="next">include</a>, Previous: <a href="#ifequal" accesskey="p" rel="prev">ifequal</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -682,7 +694,9 @@ equal.
 the <code>!=</code> operator.
 </p>
 <hr>
-<span id="include"></span><div class="header">
+</div>
+<div class="subsection" id="include">
+<div class="header">
 <p>
 Previous: <a href="#ifnotequal" accesskey="p" rel="prev">ifnotequal</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -710,7 +724,10 @@ variables when the included template is rendered:
 
 
 <hr>
-<span id="Custom-tags"></span><div class="header">
+</div>
+</div>
+<div class="section" id="Custom-tags">
+<div class="header">
 <p>
 Previous: <a href="#List-of-tags" accesskey="p" rel="prev">List of tags</a>, Up: <a href="#Tags" accesskey="u" rel="up">Tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
@@ -719,10 +736,12 @@ Previous: <a href="#List-of-tags" accesskey="p" rel="prev">List of tags</a>, Up:
 
 <p>TODO
 </p>
+</div>
+</div>
 <hr>
 <div class="header">
 <p>
-Previous: <a href="#List-of-tags" accesskey="p" rel="prev">List of tags</a>, Up: <a href="#Tags" accesskey="u" rel="up">Tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Comments.html" accesskey="n" rel="next">Comments</a>, Previous: <a href="Variables.html#Variables" accesskey="p" rel="prev">Variables</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 
 
