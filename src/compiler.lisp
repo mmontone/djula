@@ -93,7 +93,9 @@
   (compile-template *current-compiler* name))
 
 (defun render-template* (template &optional destination &rest *template-arguments*)
-  "Render TEMPLATE into DESTINATION passing *TEMPLATE-ARGUMENTS*."
+  "Render TEMPLATE into DESTINATION passing *TEMPLATE-ARGUMENTS*.
+DESTINATION is the same as FORMAT destination.
+TEMPLATE-ARGUMENTS is a property-list. "
   (cond
     ((or (pathnamep template)
          (stringp template))
