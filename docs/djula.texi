@@ -2849,9 +2849,32 @@ Also, there’s a fancy page to display errors, which can be disabled if
 desired. That is controlled via the variable @code{*FANCY-ERROR-TEMPLATE-P*}
 
 @menu
-* API: API<2>. 
+* API: API<2>.
 
 @end menu
+
+@node API<2>
+@anchor{error-handling api}
+@section API
+
+@deffn {Variable} *catch@w{-}template@w{-}errors@w{-}p*
+
+When enabled, caught errors during the rendering of the template are written to the output instead of being handled by the lisp listener.
+This is enabled by default.
+@end deffn
+
+@deffn {Variable} *fancy@w{-}error@w{-}template@w{-}p*
+
+When enabled, show a fancy template when an error ocurrs.
+This is enabled by default.
+@end deffn
+
+@deffn {Variable} *verbose@w{-}errors@w{-}p*
+
+When enabled, errors are displayed more verbosely. Good for debugging.
+This is enabled by default.
+
+@end deffn
 
 @node Deployment
 @anchor{deployment doc}@anchor{deployment error-handling}
@@ -2949,24 +2972,6 @@ For a real-world web application you'll likely need
 @url{https://github.com/Shinmera/deploy, Deploy} to ship foreign
 libraries in your binary.
 @end quotation
-
-
-@node API<2>
-@anchor{error-handling api}
-@section API
-
-
-
-@deffn {Variable} *catch@w{-}template@w{-}errors@w{-}p*
-@end deffn
-
-
-@deffn {Variable} *fancy@w{-}error@w{-}template@w{-}p*
-@end deffn
-
-
-@deffn {Variable} *verbose@w{-}errors@w{-}p*
-@end deffn
 
 @node API<3>
 @anchor{api doc}@anchor{api api}

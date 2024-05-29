@@ -25,7 +25,7 @@ Maintained by Mariano Montone.
 <link href="Symbol-Index.html" rel="index" title="Symbol Index">
 <link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="index.html" rel="up" title="Top">
-<link href="Deployment.html#Deployment" rel="next" title="Deployment">
+<link href="Deployment.html" rel="next" title="Deployment">
 <link href="Internationalization.html#Internationalization" rel="prev" title="Internationalization">
 <style type="text/css">
 <!--
@@ -128,7 +128,7 @@ body {
 <div class="chapter" id="Error-handling">
 <div class="header">
 <p>
-Next: <a href="Deployment.html#Deployment" accesskey="n" rel="next">Deployment - Building standalone binaries</a>, Previous: <a href="Internationalization.html#Internationalization" accesskey="p" rel="prev">Internationalization</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Deployment.html" accesskey="n" rel="next">Deployment - Building standalone binaries</a>, Previous: <a href="Internationalization.html#Internationalization" accesskey="p" rel="prev">Internationalization</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <span id="error_002dhandling-doc"></span><span id="error_002dhandling-error_002dhandling"></span><span id="Error-handling-1"></span><h2 class="chapter">11 Error handling</h2>
 
@@ -146,11 +146,45 @@ controlled via the variable <code>*VERBOSE-ERRORS-P*</code>.
 desired. That is controlled via the variable <code>*FANCY-ERROR-TEMPLATE-P*</code>
 </p>
 
+<ul class="section-toc">
+<li><a href="#API_003c2_003e" accesskey="1">API</a></li>
+</ul>
+<hr>
+<div class="section" id="API_003c2_003e">
+<div class="header">
+<p>
+Up: <a href="#Error-handling" accesskey="u" rel="up">Error handling</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<span id="error_002dhandling-api"></span><span id="API-2"></span><h3 class="section">11.1 API</h3>
+
+<dl class="def">
+<dt id="index-_002acatch_002dtemplate_002derrors_002dp_002a"><span class="category">Variable: </span><span><strong>*catch<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->errors<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002acatch_002dtemplate_002derrors_002dp_002a' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>When enabled, caught errors during the rendering of the template are written to the output instead of being handled by the lisp listener.
+This is enabled by default.
+</p></dd></dl>
+
+<dl class="def">
+<dt id="index-_002afancy_002derror_002dtemplate_002dp_002a"><span class="category">Variable: </span><span><strong>*fancy<span class="nolinebreak">-</span><!-- /@w -->error<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002afancy_002derror_002dtemplate_002dp_002a' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>When enabled, show a fancy template when an error ocurrs.
+This is enabled by default.
+</p></dd></dl>
+
+<dl class="def">
+<dt id="index-_002averbose_002derrors_002dp_002a"><span class="category">Variable: </span><span><strong>*verbose<span class="nolinebreak">-</span><!-- /@w -->errors<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002averbose_002derrors_002dp_002a' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>When enabled, errors are displayed more verbosely. Good for debugging.
+This is enabled by default.
+</p>
+</dd></dl>
+
+</div>
 </div>
 <hr>
 <div class="header">
 <p>
-Next: <a href="Deployment.html#Deployment" accesskey="n" rel="next">Deployment - Building standalone binaries</a>, Previous: <a href="Internationalization.html#Internationalization" accesskey="p" rel="prev">Internationalization</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="Deployment.html" accesskey="n" rel="next">Deployment - Building standalone binaries</a>, Previous: <a href="Internationalization.html#Internationalization" accesskey="p" rel="prev">Internationalization</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 
 
