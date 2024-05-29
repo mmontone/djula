@@ -229,17 +229,13 @@ form that returns some debugging info."
       (format stream "<li><b>Template arguments:</b> ")
       (if (null *template-arguments*)
           (format stream "There were no arguments given to the template")
-          (let ((n 0))
-            (format stream "<ul>")
-            (labels ((rfn (plist)
-                       (when plist
-                         (destructuring-bind (k v . rest) plist
-                           (format stream "<li>~a. ~a = " n k)
-                           (write-string (escape-for-html (write-to-string v :pretty nil :length 30)) stream)
-                           (write-string "</li>" stream)
-                           (rfn rest)))))
-              (rfn *template-arguments*))
-            (format stream "</ul>"))))
+          (progn
+            (format stream "<ol>")
+            (alexandria:doplist (key val *template-arguments*)
+              (format stream "<li>~a = " key)
+              (write-string (escape-for-html (write-to-string val :pretty nil :length 30)) stream)
+              (write-string "</li>" stream))
+            (format stream "</ol>"))))
     (format stream "</ul>")
     (format stream "</div>")))
 
