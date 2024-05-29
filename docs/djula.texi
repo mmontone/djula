@@ -2831,10 +2831,11 @@ Run the following function to reload the translations when developing:
    #.(asdf:system-relative-pathname :my-project "locale/")))
 @end lisp
 
-@node Error handling
+@node Errors and debugging
 @anchor{error-handling doc}@anchor{error-handling error-handling}
-@chapter Error handling
+@chapter Errors and debugging
 
+@section Error handling
 
 Djula catches errors and barfs them to the template output by default.
 
@@ -2847,6 +2848,12 @@ controlled via the variable @code{*VERBOSE-ERRORS-P*}.
 
 Also, there’s a fancy page to display errors, which can be disabled if
 desired. That is controlled via the variable @code{*FANCY-ERROR-TEMPLATE-P*}
+
+@section Displaying template information
+
+Use the @code{debug} tag in your templates to display the arguments being passed to templates together with other debugging information.
+
+Enable the @code{*debug-mode*} for displaying debug information for all rendered templates.
 
 @menu
 * API: API<2>.
@@ -2873,6 +2880,12 @@ This is enabled by default.
 
 When enabled, errors are displayed more verbosely. Good for debugging.
 This is enabled by default.
+
+@end deffn
+
+@deffn {Variable} *debug@w{-}mode*
+
+When in debug mode, debugging information is attached to rendered templates.
 
 @end deffn
 
