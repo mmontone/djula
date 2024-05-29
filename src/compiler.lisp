@@ -108,6 +108,10 @@ TEMPLATE-ARGUMENTS is a property-list. "
            (*current-template* template))
        (handler-case
            (uiop:with-output (stream destination)
+             (when *debug-mode*
+               (if *fancy-debug-p*
+                   (print-fancy-debugging-information stream)
+                   (print-debugging-information stream)))
              (funcall template stream))
          (error (e)
            (if (and *catch-template-errors-p*

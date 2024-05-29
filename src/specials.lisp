@@ -22,6 +22,8 @@ This is a plist, so use getf to add arguments, like: (setf (getf djula:*default-
 
 (defvar *fancy-debug-p* t "When enabled, displays fancy html based debugging information for the {% debug %} tag.")
 
+(defvar *debug-mode* nil "When in debug mode, debugging information is attached to rendered templates.")
+
 (defvar *allow-include-roots* ()
   "A list of folder names that are allowed to be included by SSI.")
 

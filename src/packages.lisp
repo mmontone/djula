@@ -11,6 +11,7 @@
            #:*verbose-errors-p*
            #:*fancy-error-template-p*
            #:*fancy-debug-p*
+           #:*debug-mode*
            #:*current-compiler*
            #:*current-language*
            #:*current-store*
