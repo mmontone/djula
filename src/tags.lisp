@@ -193,7 +193,7 @@ form that returns some debugging info."
   (macrolet ((with-safe (about &body body)
                `(with-template-error (format stream "<<<There was an error gathering debug information about ~A>>>" ,about)
                   ,@body)))
-    (format stream "<div class=\"debug\" style=\"position:fixed;bottom:0;font-size:12px;height:100px;width:100vw;overflow-y:auto;background-color:white;border-top:1px solid gray;\">")
+    (format stream "<div class=\"debug\" style=\"position:fixed;bottom:0;font-size:12px;height:150px;width:100vw;overflow-y:auto;background-color:lightyellow;border-top:1px solid gray;\">")
     (format stream "<ul style=\"list-style-type:none;\">")
 
     (with-safe "the default language"
