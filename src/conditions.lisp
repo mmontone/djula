@@ -36,11 +36,12 @@
              ,recovery-form
              (error ,e))))))
 
-(defun render-error-template (error backtrace &optional template stream)
+(defun render-error-template (error destination &key backtrace template context)
   "Render the *ERROR-TEMPLATE* with the ERROR, the BACKTRACE and the TEMPLATE
 where the error ocurred."
   (let ((error-template (compile-template* *error-template*)))
-    (djula:render-template* error-template stream
+    (djula:render-template* error-template destination
                             :error error
                             :error-backtrace backtrace
-                            :template template)))
+                            :template template
+                            :context context)))

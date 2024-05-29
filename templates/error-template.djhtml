@@ -53,6 +53,17 @@
                width: 100%;
                border-top: 5px solid #cdcdcd;
                border-bottom: 5px solid #cdcdcd;
+               padding: 10px;
+           }
+           #error-context {
+               float: left;
+               width: 100%;
+               border-top: 5px solid #cdcdcd;
+               border-bottom: 5px solid #cdcdcd;
+               padding:10px;
+           }
+           h4 {
+               margin-top:5px;
            }
       </style>
   </head>
@@ -67,7 +78,12 @@
       <div id='file-wrap'>
         <div id='file'>In {{template}}{% if line %} on line {{line}}{% endif %}.</div>
       </div>
+      <div id='error-context'>
+        <h4>Template context:</h4>
+        {{context | prin1}}
+      </div>
       <div id='error-content'>
+        <h4>Backtrace:</h4>
         {{error-backtrace | linebreaksbr | safe }}
       </div>
     {% endif %}

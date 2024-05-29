@@ -116,9 +116,11 @@ TEMPLATE-ARGUMENTS is a property-list. "
          (error (e)
            (if (and *catch-template-errors-p*
                     *fancy-error-template-p*)
-               (render-error-template e
-                                      (trivial-backtrace:print-backtrace e :output nil)
-                                      template destination)
+               (render-error-template e destination
+                                      :backtrace (trivial-backtrace:print-backtrace e :output nil)
+                                      :template template
+                                      :context (list :arguments *template-arguments*
+                                                     :language *current-language*))
                (error e))))))
     (t (error 'simple-error
               :format-control "~A is not a valid template"
