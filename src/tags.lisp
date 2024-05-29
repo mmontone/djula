@@ -196,7 +196,8 @@ form that returns some debugging info."
   (macrolet ((with-safe (about &body body)
                `(with-template-error (format stream "<<<There was an error gathering debug information about ~A>>>" ,about)
                   ,@body)))
-    (format stream "<div class=\"debug\" style=\"position:fixed;bottom:0;font-size:12px;height:150px;width:100vw;overflow-y:auto;background-color:lightyellow;border-top:1px solid gray;\">")
+    (format stream "<div id=\"djula-debug\" class=\"debug\" style=\"position:fixed;bottom:0;font-size:12px;height:150px;width:100vw;overflow-y:auto;background-color:lightyellow;border-top:1px solid gray;\">")
+    (format stream "<a style=\"float:left\" title=\"Close this debug panel\" href=\"#\" onclick=\"javascript:document.getElementById('djula-debug').outerHTML=''\">[x]</a>")
     (format stream "<ul style=\"list-style-type:none;\">")
 
     (with-safe "current template"
