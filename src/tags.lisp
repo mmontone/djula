@@ -230,12 +230,14 @@ form that returns some debugging info."
       (if (null *template-arguments*)
           (format stream "There were no arguments given to the template")
           (let ((n 0))
+            (format stream "<ul>")
             (labels ((rfn (plist)
                        (when plist
                          (destructuring-bind (k v . rest) plist
-                           (format stream "   ~a. ~a = ~s" (incf n) k (escape-for-html (truncate-characters (princ-to-string v) 25 "...")))
+                           (format stream "<li>~a. ~a = ~s</li>" (incf n) k (escape-for-html (truncate-characters (princ-to-string v) 100 "...")))
                            (rfn rest)))))
-              (rfn *template-arguments*)))))
+              (rfn *template-arguments*))
+            (format stream "</ul>"))))
     (format stream "</ul>")
     (format stream "</div>")))
 
