@@ -152,8 +152,8 @@ form that returns some debugging info."
       (with-safe "the current language"
         (% "Current language: ~A" (or *current-language* "none")))
 
-      (with-safe "the current lisp execution package"
-        (% "Lisp execution package: ~A" (or *template-package* "none")))
+      (with-safe "the template package"
+        (% "Template package: ~A" (or *template-package* "none")))
 
       (with-safe "whether or not template errors are printing to the browser"
         (% "~A" (if *catch-template-errors-p*
@@ -183,7 +183,7 @@ form that returns some debugging info."
                 (labels ((rfn (plist)
                            (when plist
                              (destructuring-bind (k v . rest) plist
-                               (% "   ~A. ~A = ~A" (incf n) k (truncate-characters v 25 "..."))
+                               (% "   ~a. ~a = ~s" (incf n) k (truncate-characters v 25 "..."))
                                (rfn rest)))))
                   (rfn *template-arguments*))))))
 
@@ -193,7 +193,7 @@ form that returns some debugging info."
   (macrolet ((with-safe (about &body body)
                `(with-template-error (format stream "<<<There was an error gathering debug information about ~A>>>" ,about)
                   ,@body)))
-    (format stream "<div class=\"debug\" style=\"position:fixed;bottom:0;font-size:12px;height:100px;overflow-y:auto;background-color:white;\">")
+    (format stream "<div class=\"debug\" style=\"position:fixed;bottom:0;font-size:12px;height:100px;width:100vw;overflow-y:auto;background-color:white;border-top:1px solid gray;\">")
     (format stream "<ul style=\"list-style-type:none;\">")
 
     (with-safe "the default language"
@@ -202,8 +202,8 @@ form that returns some debugging info."
     (with-safe "the current language"
       (format stream "<li><b>Current language:</b> ~A</li>" (or *current-language* "none")))
 
-    (with-safe "the current lisp execution package"
-      (format stream "<li><b>Lisp execution package:</b> ~A</li>"
+    (with-safe "the template package"
+      (format stream "<li><b>Template package:</b> ~A</li>"
               (escape-for-html (princ-to-string (or *template-package* "none")))))
 
     (with-safe "whether or not template errors are printing to the browser"
@@ -233,7 +233,7 @@ form that returns some debugging info."
             (labels ((rfn (plist)
                        (when plist
                          (destructuring-bind (k v . rest) plist
-                           (format stream "   ~A. ~A = ~A" (incf n) k (escape-for-html (truncate-characters v 25 "...")))
+                           (format stream "   ~a. ~a = ~s" (incf n) k (escape-for-html (truncate-characters (princ-to-string v) 25 "...")))
                            (rfn rest)))))
               (rfn *template-arguments*)))))
     (format stream "</ul>")
