@@ -28,6 +28,10 @@ This is a plist, so use getf to add arguments, like: (setf (getf djula:*default-
 (defvar *eval-lisp-tags* t
   "Enable/disable Lisp evaluation in templates.")
 
+(defvar *recompile-templates-on-change* t
+  "When enabled, templates are recompiled if they have changed on disk, before they are rendered.
+This is the default and convenient for development. For production, this can be turned off and the filesystem check is bypassed.")
+
 (defvar *block-alist* nil)
 
 (defvar *current-block* nil)

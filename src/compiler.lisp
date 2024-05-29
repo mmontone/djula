@@ -1,9 +1,5 @@
 (in-package #:djula)
 
-(defvar *recompile-templates-on-change* t
-  "When enabled, templates are recompiled if they have changed on disk, before they are rendered.
-This is the default and convenient for development. For production, this can be turned off and the filesystem check is bypassed.")
-
 (defgeneric compile-template (compiler name &optional error-p)
   (:documentation "Provides a hook to customize template compilation."))
 
