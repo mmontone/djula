@@ -92,29 +92,27 @@
   "Compiles template NAME with compiler in *CURRENT-COMPILER*."
   (compile-template *current-compiler* name))
 
-(defun render-template* (template &optional stream &rest *template-arguments*)
-  "Render TEMPLATE into STREAM passing *TEMPLATE-ARGUMENTS*."
+(defun render-template* (template &optional destination &rest *template-arguments*)
+  "Render TEMPLATE into DESTINATION passing *TEMPLATE-ARGUMENTS*."
   (cond
     ((or (pathnamep template)
          (stringp template))
      ;; Accept strings and pathnames as template designators.
-     (apply #'render-template* (compile-template* template) stream *template-arguments*))
+     (apply #'render-template* (compile-template* template) destination *template-arguments*))
     ((functionp template)
      (let ((*template-arguments* (append *template-arguments* *default-template-arguments*))
            (*accumulated-javascript-strings* nil)
            (*current-language* *current-language*)
            (*current-template* template))
        (handler-case
-           (if stream
-               (funcall template stream)
-               (with-output-to-string (s)
-                 (funcall template s)))
+           (uiop:with-output (stream destination)
+             (funcall template stream))
          (error (e)
            (if (and *catch-template-errors-p*
                     *fancy-error-template-p*)
                (render-error-template e
                                       (trivial-backtrace:print-backtrace e :output nil)
-                                      template stream)
+                                      template destination)
                (error e))))))
     (t (error 'simple-error
               :format-control "~A is not a valid template"
