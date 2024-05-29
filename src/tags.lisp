@@ -146,6 +146,9 @@ form that returns some debugging info."
                     ,@body)))
       (% "<<<START DEBUG INFO>>>")
 
+      (with-safe "current template"
+        (% "Template: ~a" *current-template*))
+
       (with-safe "the default language"
         (% "Default language: ~A" (or *default-language* "none")))
 
@@ -183,7 +186,7 @@ form that returns some debugging info."
                 (labels ((rfn (plist)
                            (when plist
                              (destructuring-bind (k v . rest) plist
-                               (% "   ~a. ~a = ~s" (incf n) k (truncate-characters v 25 "..."))
+                               (% "   ~a. ~a = ~a" (incf n) k (write-to-string v :pretty nil :length 30))
                                (rfn rest)))))
                   (rfn *template-arguments*))))))
 
@@ -195,6 +198,9 @@ form that returns some debugging info."
                   ,@body)))
     (format stream "<div class=\"debug\" style=\"position:fixed;bottom:0;font-size:12px;height:150px;width:100vw;overflow-y:auto;background-color:lightyellow;border-top:1px solid gray;\">")
     (format stream "<ul style=\"list-style-type:none;\">")
+
+    (with-safe "current template"
+      (format stream "<li><b>Template:</b> ~a </li>" (escape-for-html (princ-to-string *current-template*))))
 
     (with-safe "the arguments given to the template"
       (format stream "<li><b>Template arguments:</b> ")
@@ -236,7 +242,7 @@ form that returns some debugging info."
 
     (with-safe "*ALLOW-INCLUDE-ROOTS*"
       (format stream "<li><b>Allow include-roots:</b> ~A</li>" *allow-include-roots*))
-    
+
     (format stream "</ul>")
     (format stream "</div>")))
 
