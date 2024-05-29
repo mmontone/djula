@@ -77,6 +77,9 @@
     (condition (e)
       (template-error "There was an error executing the lisp tag ~S: ~A" lisp-string e))))
 
+(def-filter :prin1 (it)
+  (prin1-to-string it))
+
 (def-filter :add (it n)
   (+ it (parse-integer n)))
 
