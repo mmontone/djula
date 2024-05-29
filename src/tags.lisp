@@ -210,7 +210,7 @@ form that returns some debugging info."
           (progn
             (format stream "<ol>")
             (alexandria:doplist (key val *template-arguments*)
-              (format stream "<li>~a = " key)
+              (format stream "<li><em>~a</em> = " key)
               (write-string (escape-for-html (write-to-string val :pretty nil :length 30)) stream)
               (write-string "</li>" stream))
             (format stream "</ol>"))))
