@@ -58,7 +58,7 @@
   </head>
   <body>
     <div id='header'>
-      <h1>Template Compilation Error</h1>
+      <h1>Template Error</h1>
     </div>
     <div id='error-wrap'>
       <div id='error-message'>{{error}}.</div>

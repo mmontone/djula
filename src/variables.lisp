@@ -29,12 +29,12 @@ keyword."
   (let (escaped
         quoted)
     (flet ((escaped-char (delimiter char)
-	     (when (not escaped)
-	       (cond ((and quoted (eql char quoted))
-		      (setf quoted nil))
-		     ((and (not quoted) (member char quotes))
-		      (setf quoted char))))
-	     (prog1
+             (when (not escaped)
+               (cond ((and quoted (eql char quoted))
+                      (setf quoted nil))
+                     ((and (not quoted) (member char quotes))
+                      (setf quoted char))))
+             (prog1
                  (and (not escaped)
                       (not quoted)
                       (eql delimiter char))
@@ -72,7 +72,7 @@ keyword."
                            (access:access thing (intern (symbol-name key))))))
                     (t (access:access thing key)))
                 (error (e)
-                  (template-error
+                  (error
                    "There was an error while accessing the ~A ~S of the object ~S: ~a"
                    (if (numberp key)
                        "index"
@@ -104,10 +104,10 @@ the result probably shouldn't be considered useful."
   ;; check to see if the "dont-escape" filter is used
   ;; "safe" takes precedence before "escape"
   (let ((dont-escape
-         (or
-          (find '(:safe) filters :test #'equal) ; safe filter used
-          (and (not *auto-escape*)              ; autoescape off and no escape filter used
-               (not (find '(:escape) filters :test #'equal))))))
+          (or
+           (find '(:safe) filters :test #'equal) ; safe filter used
+           (and (not *auto-escape*)              ; autoescape off and no escape filter used
+                (not (find '(:escape) filters :test #'equal))))))
     ;; return a function that resolves the variable-phase and applies the filters
     (lambda (stream)
       (multiple-value-bind (ret error-string)
@@ -116,11 +116,11 @@ the result probably shouldn't be considered useful."
             (with-template-error error-string
               (error error-string))
             (let ((filtered-ret
-                   (template-print-object
-                    (or
-                     (apply-filters
-                      ret filters)
-                     ""))))
+                    (template-print-object
+                     (or
+                      (apply-filters
+                       ret filters)
+                      ""))))
               (princ (if dont-escape
                          filtered-ret
                          (escape-for-html filtered-ret))
