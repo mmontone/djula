@@ -149,6 +149,19 @@ form that returns some debugging info."
       (with-safe "current template"
         (% "Template: ~a" *current-template*))
 
+      (with-safe "the arguments given to the template"
+        (if (null *template-arguments*)
+            (% "There were no arguments given to the template")
+            (progn
+              (% "Template arguments:")
+              (let ((n 0))
+                (labels ((rfn (plist)
+                           (when plist
+                             (destructuring-bind (k v . rest) plist
+                               (% "   ~a. ~a = ~a" (incf n) k (write-to-string v :pretty nil :length 30))
+                               (rfn rest)))))
+                  (rfn *template-arguments*))))))
+
       (with-safe "the default language"
         (% "Default language: ~A" (or *default-language* "none")))
 
@@ -176,19 +189,6 @@ form that returns some debugging info."
 
       (with-safe "*ALLOW-INCLUDE-ROOTS*"
         (% "Allow include-roots: ~A" *allow-include-roots*))
-
-      (with-safe "the arguments given to the template"
-        (if (null *template-arguments*)
-            (% "There were no arguments given to the template")
-            (progn
-              (% "Template arguments:")
-              (let ((n 0))
-                (labels ((rfn (plist)
-                           (when plist
-                             (destructuring-bind (k v . rest) plist
-                               (% "   ~a. ~a = ~a" (incf n) k (write-to-string v :pretty nil :length 30))
-                               (rfn rest)))))
-                  (rfn *template-arguments*))))))
 
       (% "<<<END DEBUG INFO>>>"))))
 
