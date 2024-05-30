@@ -135,7 +135,8 @@ Next: <a href="Deployment.html" accesskey="n" rel="next">Deployment - Building s
 <ul class="section-toc">
 <li><a href="#Error-handling" accesskey="1">Error handling</a></li>
 <li><a href="#Displaying-template-information" accesskey="2">Displaying template information</a></li>
-<li><a href="#API_003c2_003e" accesskey="3">API</a></li>
+<li><a href="#Strict-mode" accesskey="3">Strict mode</a></li>
+<li><a href="#API_003c2_003e" accesskey="4">API</a></li>
 </ul>
 <div class="section" id="Error-handling">
 <h3 class="section">11.1 Error handling</h3>
@@ -160,7 +161,14 @@ desired. That is controlled via the variable <code>*FANCY-ERROR-TEMPLATE-P*</cod
 </p>
 <p>Enable the <code>*debug-mode*</code> for displaying debug information for all rendered templates.
 </p>
+</div>
+<div class="section" id="Strict-mode">
+<h3 class="section">11.3 Strict mode</h3>
 
+<p>When <code>*strict-mode*</code> is enabled, access to variables not bound in templates signals an error.
+</p>
+<p>For instance, trying to render <code>{{foo}}</code> without passing a <code>:foo</code> argument to <code>render-template*</code> will signal an error. Whereas if strict mode is disabled, the variable access is bypassed and nothing is rendered.
+</p>
 <hr>
 </div>
 <div class="section" id="API_003c2_003e">
@@ -168,7 +176,7 @@ desired. That is controlled via the variable <code>*FANCY-ERROR-TEMPLATE-P*</cod
 <p>
 Up: <a href="#Errors-and-debugging" accesskey="u" rel="up">Errors and debugging</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="error_002dhandling-api"></span><span id="API-2"></span><h3 class="section">11.3 API</h3>
+<span id="error_002dhandling-api"></span><span id="API-2"></span><h3 class="section">11.4 API</h3>
 
 <dl class="def">
 <dt id="index-_002acatch_002dtemplate_002derrors_002dp_002a"><span class="category">Variable: </span><span><strong>*catch<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->errors<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002acatch_002dtemplate_002derrors_002dp_002a' class='copiable-anchor'> &para;</a></span></dt>
@@ -196,6 +204,13 @@ This is enabled by default.
 <dt id="index-_002adebug_002dmode_002a"><span class="category">Variable: </span><span><strong>*debug<span class="nolinebreak">-</span><!-- /@w -->mode*</strong><a href='#index-_002adebug_002dmode_002a' class='copiable-anchor'> &para;</a></span></dt>
 <dd>
 <p>When in debug mode, debugging information is attached to rendered templates.
+</p>
+</dd></dl>
+
+<dl class="def">
+<dt id="index-_002astrict_002dmode_002a"><span class="category">Variable: </span><span><strong>*strict<span class="nolinebreak">-</span><!-- /@w -->mode*</strong><a href='#index-_002astrict_002dmode_002a' class='copiable-anchor'> &para;</a></span></dt>
+<dd>
+<p>When enabled, unbound template variables access signals an error.
 </p>
 </dd></dl>
 

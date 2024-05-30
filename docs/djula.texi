@@ -2855,6 +2855,11 @@ Use the @code{debug} tag in your templates to display the arguments being passed
 
 Enable the @code{*debug-mode*} for displaying debug information for all rendered templates.
 
+@section Strict mode
+
+When @code{*strict-mode*} is enabled, access to variables not bound in templates signals an error.
+
+For instance, trying to render @code{@{@{foo@}@}} without passing a @code{:foo} argument to @code{render-template*} will signal an error. Whereas if strict mode is disabled, the variable access is bypassed and nothing is rendered.
 @menu
 * API: API<2>.
 
@@ -2886,6 +2891,12 @@ This is enabled by default.
 @deffn {Variable} *debug@w{-}mode*
 
 When in debug mode, debugging information is attached to rendered templates.
+
+@end deffn
+
+@deffn {Variable} *strict@w{-}mode*
+
+When enabled, unbound template variables access signals an error.
 
 @end deffn
 
