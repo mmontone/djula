@@ -63,6 +63,10 @@ keyword."
     (not (eq (getf *template-arguments* varname var-not-bound)
              var-not-bound))))
 
+(defun check-template-variable-boundp (varname)
+  (unless (template-var-boundp varname)
+    (error "Variable not bound: ~a" varname)))
+
 (defun apply-keys/indexes (thing keys/indexes)
   (let ((*package* (find-package *template-package*)))
     (reduce (lambda (thing key)
@@ -117,8 +121,7 @@ the result probably shouldn't be considered useful."
     ;; return a function that resolves the variable-phase and applies the filters
     (lambda (stream)
       ;; if the variable is not bound, signal error
-      (when (not (template-var-boundp (first variable-phrase)))
-        (error "Unbound variable: ~a" (first variable-phrase)))
+      (check-template-variable-boundp (first variable-phrase))
       (multiple-value-bind (ret error-string)
           (resolve-variable-phrase variable-phrase)
         (cond

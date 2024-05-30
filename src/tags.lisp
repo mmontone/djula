@@ -322,6 +322,7 @@ Library user can extend this generic function, add methods for types to iterate 
       (let ((fs (mapcar #'compile-token clause))
             (phrase (parse-variable-phrase (string %listvar%))))
         (lambda (stream)
+          (check-template-variable-boundp (first phrase)) 
           (multiple-value-bind (iterable error-string)
               (resolve-variable-phrase phrase)
             (if error-string
