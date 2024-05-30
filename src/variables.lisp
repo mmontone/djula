@@ -100,7 +100,10 @@ the result probably shouldn't be considered useful."
   (when-let (v (get-variable (first list)))
     (apply-keys/indexes v (rest list))))
 
+(defparameter *var-not-found* (gensym "VAR-NOT-FOUND-"))
+
 (def-token-compiler :variable (variable-phrase &rest filters)
+  ;; Output the value of a variable access.
   ;; check to see if the "dont-escape" filter is used
   ;; "safe" takes precedence before "escape"
   (let ((dont-escape
@@ -110,18 +113,24 @@ the result probably shouldn't be considered useful."
                 (not (find '(:escape) filters :test #'equal))))))
     ;; return a function that resolves the variable-phase and applies the filters
     (lambda (stream)
+      ;; if the variable is not bound, signal error
+      (when (eq (getf *template-arguments* (first variable-phrase) *var-not-found*)
+                *var-not-found*)
+        (error "Unbound variable: ~a" (first variable-phrase)))
       (multiple-value-bind (ret error-string)
           (resolve-variable-phrase variable-phrase)
-        (if error-string
-            (with-template-error error-string
-              (error error-string))
-            (let ((filtered-ret
-                    (template-print-object
-                     (or
-                      (apply-filters
-                       ret filters)
-                      ""))))
-              (princ (if dont-escape
-                         filtered-ret
-                         (escape-for-html filtered-ret))
-                     stream)))))))
+        (cond
+          (error-string
+           (with-template-error error-string
+             (error error-string)))
+          (t
+           (let ((filtered-ret
+                   (template-print-object
+                    (or
+                     (apply-filters
+                      ret filters)
+                     ""))))
+             (princ (if dont-escape
+                        filtered-ret
+                        (escape-for-html filtered-ret))
+                    stream))))))))

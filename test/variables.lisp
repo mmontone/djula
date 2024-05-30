@@ -20,7 +20,7 @@
 
 (defclass my-obj ()
   ((name :accessor name
-	 :initform "my-obj")))
+         :initform "my-obj")))
 
 (defmethod id ((my-obj my-obj))
   (declare (ignore my-obj))
@@ -32,130 +32,151 @@
 
 (def-test variables-accessing-test (:compile-at :definition-time)
   (let ((djula:*catch-template-errors-p* nil))
-    
     (let ((template (djula::compile-string "{{foo}}")))
+      (signals error
+        (djula::render-template*
+         template nil))
       (is (equalp
-	   (djula::render-template* 
-	    template nil)
-	   ""))
+           (djula::render-template*
+            (djula::compile-string "{% if foo %}{{foo}}{% endif %}")
+            nil)
+           ""))
       (is (equalp
-	   (djula::render-template* 
-	    template nil :foo nil)
-	   ""))
+           (djula::render-template*
+            template nil :foo nil)
+           ""))
       (is (equalp
-	   (djula::render-template*
-	    template
-	    nil
-	    :foo "foo")
-	   "foo"))
+           (djula::render-template*
+            template
+            nil
+            :foo "foo")
+           "foo"))
       (is (equalp
-	   (djula::render-template*
-	    template
-	    nil
-	    :foo 2)
-	   "2")))
+           (djula::render-template*
+            template
+            nil
+            :foo 2)
+           "2")))
 
     (let ((template (djula::compile-string "{{foo}}{{bar}}")))
+      (signals error
+        (djula::render-template*
+         template nil))
+      (signals error
+        (djula::render-template*
+         template nil
+         :foo "foo"))
+      (signals error
+        (djula::render-template*
+         template nil
+         :bar "bar"))
       (is (equalp
-	   (djula::render-template* 
-	    template nil)
-	   ""))
+           (djula::render-template*
+            template nil
+            :foo "foo" :bar "bar")
+           "foobar")))
+
+    (let ((template (djula::compile-string "{% if foo %}{{foo}}{% endif %}{% if bar %}{{bar}}{% endif %}")))
+      (equalp
+       (djula::render-template*
+        template nil)
+       "")
+      (equalp
+       (djula::render-template*
+        template nil
+        :foo "foo")
+       "foo")
+      (equalp
+       (djula::render-template*
+        template nil
+        :bar "bar")
+       "bar")
       (is (equalp
-	   (djula::render-template* 
-	    template nil
-	    :foo "foo")
-	   "foo"))
-      (is (equalp
-	   (djula::render-template* 
-	    template nil
-	    :bar "bar")
-	   "bar"))
-      (is (equalp
-	   (djula::render-template* 
-	    template nil
-	    :foo "foo" :bar "bar")
-	   "foobar")))  
+           (djula::render-template*
+            template nil
+            :foo "foo" :bar "bar")
+           "foobar")))
 
     (let ((template (djula::compile-string "{{foo.bar}}")))
+      (signals error
+        (djula::render-template*
+         template
+         nil))
       (is (equalp
-	   (djula::render-template*
-	    template
-	    nil)
-	   ""))
-      (is (equalp
-	   (djula::render-template*
-	    template
-	    nil
-	    :foo (list :bar "bar"))
-	   "bar")))
-    
+           (djula::render-template*
+            template
+            nil
+            :foo (list :bar "bar"))
+           "bar")))
+
     ;; Slot accessing
     (is (equalp
-	 (let ((djula:*template-package* :djula-test))
-	   (let ((template (djula::compile-string "{{obj.name}}")))
-	     (djula:render-template* template nil :obj (make-instance 'my-obj))))
-	 "my-obj"))
-    
+         (let ((djula:*template-package* :djula-test))
+           (let ((template (djula::compile-string "{{obj.name}}")))
+             (djula:render-template* template nil :obj (make-instance 'my-obj))))
+         "my-obj"))
+
     ;; Method accessing
     (is (equalp
-	 (let ((djula:*template-package* :djula-test))
-	   (let ((template (djula::compile-string "{{obj.id}}")))
-	     (djula:render-template* template nil :obj (make-instance 'my-obj))))
-	 "22"))
+         (let ((djula:*template-package* :djula-test))
+           (let ((template (djula::compile-string "{{obj.id}}")))
+             (djula:render-template* template nil :obj (make-instance 'my-obj))))
+         "22"))
 
     ;; Function accessing
     (is (equalp
-	 (let ((djula:*template-package* :djula-test))
-	   (let ((template (djula::compile-string "{{obj.fid}}")))
-	     (djula:render-template* template nil :obj (make-instance 'my-obj))))
-	 "33"))))
+         (let ((djula:*template-package* :djula-test))
+           (let ((template (djula::compile-string "{{obj.fid}}")))
+             (djula:render-template* template nil :obj (make-instance 'my-obj))))
+         "33"))))
 
 (def-test escaping-test (:compile-at :definition-time)
   (let ((djula:*catch-template-errors-p* nil))
     ;; Test defaults
     (is (equalp
-	 (let ((template (djula::compile-string "{{foo}}")))
-	   (djula:render-template* template nil :foo "<b>Hello</b>"))
-	 "&lt;b&gt;Hello&lt;/b&gt;"))
+         (let ((template (djula::compile-string "{{foo}}")))
+           (djula:render-template* template nil :foo "<b>Hello</b>"))
+         "&lt;b&gt;Hello&lt;/b&gt;"))
     (is (equalp
-	 (let ((template (djula::compile-string "{{foo | safe}}")))
-	   (djula:render-template* template nil :foo "<b>Hello</b>"))
-	 "<b>Hello</b>"))
+         (let ((template (djula::compile-string "{{foo | safe}}")))
+           (djula:render-template* template nil :foo "<b>Hello</b>"))
+         "<b>Hello</b>"))
     ;; Auto escape setting
     (let ((djula:*auto-escape* t))
       (is (equalp
-	   (let ((template (djula::compile-string "{{foo}}")))
-	     (djula:render-template* template nil :foo "<b>Hello</b>"))
-	   "&lt;b&gt;Hello&lt;/b&gt;")))
+           (let ((template (djula::compile-string "{{foo}}")))
+             (djula:render-template* template nil :foo "<b>Hello</b>"))
+           "&lt;b&gt;Hello&lt;/b&gt;")))
     (let ((djula:*auto-escape* nil))
       (is (equalp
-	   (let ((template (djula::compile-string "{{foo}}")))
-	     (djula:render-template* template nil :foo "<b>Hello</b>"))
-	   "<b>Hello</b>")))
+           (let ((template (djula::compile-string "{{foo}}")))
+             (djula:render-template* template nil :foo "<b>Hello</b>"))
+           "<b>Hello</b>")))
     ;; Safe and auto-escape priorities
     (let ((djula:*auto-escape* t))
       (is (equalp
-	   (let ((template (djula::compile-string "{{foo | safe}}")))
-	     (djula:render-template* template nil :foo "<b>Hello</b>"))
-	   "<b>Hello</b>")))
+           (let ((template (djula::compile-string "{{foo | safe}}")))
+             (djula:render-template* template nil :foo "<b>Hello</b>"))
+           "<b>Hello</b>")))
     (let ((djula:*auto-escape* nil))
       (is (equalp
-	   (let ((template (djula::compile-string "{{foo | escape}}")))
-	     (djula:render-template* template nil :foo "<b>Hello</b>"))
-	   "&lt;b&gt;Hello&lt;/b&gt;")))))
+           (let ((template (djula::compile-string "{{foo | escape}}")))
+             (djula:render-template* template nil :foo "<b>Hello</b>"))
+           "&lt;b&gt;Hello&lt;/b&gt;")))))
 
 (def-test default-template-arguments (:compile-at :definition-time)
-  (let ((fn (djula::compile-string
-             "{{foo}}")))
-    (is (string= ""
-                 (djula::render-template* fn nil)))
-    (is (string= "foo"
-                 (djula::render-template* fn nil :foo "foo")))
-    (setf (getf djula:*default-template-arguments* :foo) "foo")
-    (is (string= "foo"
-                 (djula::render-template* fn nil))
-        "Default arguments are rendered")
-    (is (string= "bar"
-                 (djula::render-template* fn nil :foo "bar"))
-        "Passed arguments have priority over default arguments")
-    (setf djula:*default-template-arguments* nil)))
+  (let ((djula:*catch-template-errors-p* nil))
+    (let ((fn (djula::compile-string
+               "{{foo}}")))
+      (signals error
+        (djula::render-template* fn nil))
+      (is (string= "foo"
+                   (djula::render-template* fn nil :foo "foo")))
+      (setf (getf djula:*default-template-arguments* :foo) "foo")
+      (is (string= "foo"
+                   (djula::render-template* fn nil))
+          "Default arguments are rendered")
+      (is (string= "bar"
+                   (djula::render-template* fn nil :foo "bar"))
+          "Passed arguments have priority over default arguments")
+      (setf djula:*default-template-arguments* nil))))
