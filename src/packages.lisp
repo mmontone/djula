@@ -25,8 +25,10 @@
 	   #:*recompile-templates-on-change*
            #:compile-template
            #:compile-template*
+           #:compile-string
            #:compiler
 	   #:template-store
+           #:template-error
 	   #:filesystem-template-store
 	   #:memory-template-store
            #:def-tag-compiler

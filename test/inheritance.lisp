@@ -45,7 +45,7 @@
 (def-test extends-error-test (:compile-at :definition-time)
   (signals djula::template-error
     (let ((djula:*catch-template-errors-p* nil))
-      (djula::compile-string "{% extends \"foo.djula\" %}"))))
+      (compile-string "{% extends \"foo.djula\" %}"))))
 
 (def-test simple-super-test (:compile-at :definition-time)
   (let ((output (djula:render-template* +t4+ nil)))
@@ -64,23 +64,23 @@
 (def-test super-error (:compile-at :definition-time)
   (signals djula::template-error
     (let ((djula:*catch-template-errors-p* nil))
-      (djula::compile-string "{% super %}")))
+      (compile-string "{% super %}")))
   (signals djula::template-error
     (let ((djula:*catch-template-errors-p* nil))
-      (djula::compile-string "{% super foo %}"))))
+      (compile-string "{% super foo %}"))))
 
 (def-test include-test (:compile-at :definition-time)
   (let ((djula:*catch-template-errors-p* nil))
     (is (equalp (remove-if (lambda (char)
                              (member char (list #\  #\Newline)))
-                           (djula::render-template* +t6+))
+                           (render-template* +t6+))
                 "beforeHelloafterbeforeByeafter"))))
 
 (def-test include-with-vars-test (:compile-at :definition-time)
   (let ((djula:*catch-template-errors-p* nil))
     (is (equalp (remove-if (lambda (char)
                              (member char (list #\  #\Newline)))
-                           (djula::render-template* +t7+ nil
+                           (render-template* +t7+ nil
                                                     :t1 "t1.djula"
                                                     :t2 "t2.djula"))
                 "beforeHelloafterbeforeByeafter"))))
@@ -96,7 +96,7 @@
   (let ((djula:*catch-template-errors-p* nil))
     (is (equalp (remove-if (lambda (char)
                              (member char (list #\  #\Newline)))
-                           (djula::render-template* +t11+ nil
+                           (render-template* +t11+ nil
                                                     :name "World"))
                 "Hello,123Hello,World"))))
 
@@ -104,7 +104,7 @@
   (let ((djula:*catch-template-errors-p* nil))
     (is (equalp (remove-if (lambda (char)
                              (member char (list #\  #\Newline)))
-                           (djula::render-template* +t12+ nil
+                           (render-template* +t12+ nil
                                                     :t10 "t10.djula"
                                                     :name "World"))
                 "Hello,123Hello,World"))))

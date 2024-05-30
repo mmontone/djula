@@ -13,17 +13,17 @@
   (let ((djula:*template-package* :djula-test))
 
     (let ((djula:*catch-template-errors-p* t))
-      (let ((template (djula::compile-string "{% lisp (throw-error) %}")))
+      (let ((template (compile-string "{% lisp (throw-error) %}")))
         (finishes (djula:render-template* template nil))))
 
     (let ((djula:*catch-template-errors-p* nil))
-      (let ((template (djula::compile-string "{% lisp (throw-error) %}")))
+      (let ((template (compile-string "{% lisp (throw-error) %}")))
         (signals error (djula:render-template* template nil))))
 
     (let ((djula:*catch-template-errors-p* t))
-      (let ((template (djula::compile-string "{{ obj.access-error }}")))
+      (let ((template (compile-string "{{ obj.access-error }}")))
         (finishes (djula:render-template* template nil :obj 'foo))))
 
     (let ((djula:*catch-template-errors-p* nil))
-      (let ((template (djula::compile-string "{{ obj.access-error }}")))
+      (let ((template (compile-string "{{ obj.access-error }}")))
         (signals error (djula:render-template* template nil :obj 'foo))))))
