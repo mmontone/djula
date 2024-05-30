@@ -3044,7 +3044,7 @@ When enabled, displays fancy html based debugging information for the @{% debug 
 
 @geindex *template-package* (variable)
 @anchor{api variable djula *template-package*}
-@deffn {Variable} *djula@w{-}execute@w{-}package*
+@deffn {Variable} *template@w{-}package*
 @end deffn
 
 @geindex fetch-template* (function)
