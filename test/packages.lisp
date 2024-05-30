@@ -11,4 +11,5 @@
 (def-suite djula-test)
 
 (defun run-djula-tests ()
-  (debug! 'djula-test))
+  (let ((*strict-mode* nil))
+    (debug! 'djula-test)))

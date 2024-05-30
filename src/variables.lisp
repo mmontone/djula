@@ -64,8 +64,9 @@ keyword."
              var-not-bound))))
 
 (defun check-template-variable-boundp (varname)
-  (unless (template-var-boundp varname)
-    (error "Variable not bound: ~a" varname)))
+  (when *strict-mode*
+    (unless (template-var-boundp varname)
+      (error "Variable not bound: ~a" varname))))
 
 (defun apply-keys/indexes (thing keys/indexes)
   (let ((*package* (find-package *template-package*)))

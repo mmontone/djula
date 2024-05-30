@@ -24,6 +24,8 @@ This is a plist, so use getf to add arguments, like: (setf (getf djula:*default-
 
 (defvar *debug-mode* nil "When in debug mode, debugging information is attached to rendered templates.")
 
+(defvar *strict-mode* nil "When enabled, unbound template variables access signals an error.")
+
 (defvar *allow-include-roots* ()
   "A list of folder names that are allowed to be included by SSI.")
 

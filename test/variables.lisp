@@ -33,9 +33,13 @@
 (def-test variables-accessing-test (:compile-at :definition-time)
   (let ((djula:*catch-template-errors-p* nil))
     (let ((template (djula::compile-string "{{foo}}")))
-      (signals error
-        (djula::render-template*
-         template nil))
+      (let ((*strict-mode* t))
+        (signals error
+          (djula::render-template*
+           template nil)))
+      (let ((*strict-mode* nil))
+        (is (equalp (render-template* template nil)
+                    "")))
       (is (equalp
            (djula::render-template*
             (djula::compile-string "{% if foo %}{{foo}}{% endif %}")
@@ -58,7 +62,9 @@
             :foo 2)
            "2")))
 
-    (let ((template (djula::compile-string "{{foo}}{{bar}}")))
+
+    (let ((template (djula::compile-string "{{foo}}{{bar}}"))
+          (*strict-mode* t))
       (signals error
         (djula::render-template*
          template nil))
@@ -97,7 +103,8 @@
             :foo "foo" :bar "bar")
            "foobar")))
 
-    (let ((template (djula::compile-string "{{foo.bar}}")))
+    (let ((template (djula::compile-string "{{foo.bar}}"))
+          (*strict-mode* t))
       (signals error
         (djula::render-template*
          template
@@ -165,18 +172,20 @@
            "&lt;b&gt;Hello&lt;/b&gt;")))))
 
 (def-test default-template-arguments (:compile-at :definition-time)
-  (let ((djula:*catch-template-errors-p* nil))
-    (let ((fn (djula::compile-string
-               "{{foo}}")))
+  (let ((djula:*catch-template-errors-p* nil)
+        (fn (djula::compile-string "{{foo}}")))
+    (let ((*strict-mode* t))
       (signals error
-        (djula::render-template* fn nil))
-      (is (string= "foo"
-                   (djula::render-template* fn nil :foo "foo")))
-      (setf (getf djula:*default-template-arguments* :foo) "foo")
-      (is (string= "foo"
-                   (djula::render-template* fn nil))
-          "Default arguments are rendered")
-      (is (string= "bar"
-                   (djula::render-template* fn nil :foo "bar"))
-          "Passed arguments have priority over default arguments")
-      (setf djula:*default-template-arguments* nil))))
+        (djula::render-template* fn nil)))
+    (let ((*strict-mode* nil))
+      (is (string= (render-template* fn nil) "")))
+    (is (string= "foo"
+                 (djula::render-template* fn nil :foo "foo")))
+    (setf (getf djula:*default-template-arguments* :foo) "foo")
+    (is (string= "foo"
+                 (djula::render-template* fn nil))
+        "Default arguments are rendered")
+    (is (string= "bar"
+                 (djula::render-template* fn nil :foo "bar"))
+        "Passed arguments have priority over default arguments")
+    (setf djula:*default-template-arguments* nil)))

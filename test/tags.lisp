@@ -217,8 +217,12 @@
 (def-test loop-test (:compile-at :definition-time)
   (let ((djula:*catch-template-errors-p* nil)
         (template (djula::compile-string "<ul>{% for elem in list %}<li>{{elem}}</li>{% endfor %}</ul>")))
-    (signals error
-      (djula:render-template* template nil))
+    (let ((*strict-mode* t))
+      (signals error
+        (djula:render-template* template nil)))
+    (let ((*strict-mode* nil))
+      (is (equalp (render-template* template nil)
+                  "<ul></ul>")))
     (is (equalp
          (djula:render-template* template nil :list ())
          "<ul></ul>"))
