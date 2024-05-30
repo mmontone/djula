@@ -58,6 +58,11 @@ keyword."
   (cons (list* :variable (parse-variable-clause unparsed-string))
         (process-tokens rest)))
 
+(let ((var-not-bound (gensym "VAR-NOT-BOUND-")))
+  (defun template-var-boundp (varname)
+    (not (eq (getf *template-arguments* varname var-not-bound)
+             var-not-bound))))
+
 (defun apply-keys/indexes (thing keys/indexes)
   (let ((*package* (find-package *template-package*)))
     (reduce (lambda (thing key)
@@ -100,8 +105,6 @@ the result probably shouldn't be considered useful."
   (when-let (v (get-variable (first list)))
     (apply-keys/indexes v (rest list))))
 
-(defparameter *var-not-found* (gensym "VAR-NOT-FOUND-"))
-
 (def-token-compiler :variable (variable-phrase &rest filters)
   ;; Output the value of a variable access.
   ;; check to see if the "dont-escape" filter is used
@@ -114,8 +117,7 @@ the result probably shouldn't be considered useful."
     ;; return a function that resolves the variable-phase and applies the filters
     (lambda (stream)
       ;; if the variable is not bound, signal error
-      (when (eq (getf *template-arguments* (first variable-phrase) *var-not-found*)
-                *var-not-found*)
+      (when (not (template-var-boundp (first variable-phrase)))
         (error "Unbound variable: ~a" (first variable-phrase)))
       (multiple-value-bind (ret error-string)
           (resolve-variable-phrase variable-phrase)
