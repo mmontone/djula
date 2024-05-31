@@ -449,7 +449,9 @@ The {% if %} tag evaluates a variable, and if that variable is “true” (i.e. 
               (else (mapcar #'compile-token else)))
           (lambda (stream)
             (multiple-value-bind (ret error-string)
-                (funcall test)
+                ;; suspend strict-mode when evaluating IF tests
+                (let ((*strict-mode* nil))
+                  (funcall test))
               (if error-string
                   (with-template-error error-string
                     (error error-string))
@@ -485,8 +487,7 @@ The {% if %} tag evaluates a variable, and if that variable is “true” (i.e. 
             (dolist (f fs)
               (funcall f stream))
             (setf (cdr (assoc :if-changed (getf *template-arguments* :forloop)))
-                  new)
-            ))))))
+                  new)))))))
 
 (defun process-ifequal-args (unparsed-string)
   (flet ((% (start)

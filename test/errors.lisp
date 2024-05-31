@@ -24,6 +24,7 @@
       (let ((template (compile-string "{{ obj.access-error }}")))
         (finishes (djula:render-template* template nil :obj 'foo))))
 
-    (let ((djula:*catch-template-errors-p* nil))
+    (let ((djula:*catch-template-errors-p* nil)
+          (*strict-mode* t))
       (let ((template (compile-string "{{ obj.access-error }}")))
         (signals error (djula:render-template* template nil :obj 'foo))))))

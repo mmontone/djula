@@ -38,83 +38,59 @@
           (render-template*
            template nil)))
       (let ((*strict-mode* nil))
-        (is (equalp (render-template* template nil)
-                    "")))
+        (is (equalp (render-template* template nil) "")))
       (is (equalp
            (render-template*
             (compile-string "{% if foo %}{{foo}}{% endif %}")
             nil)
            ""))
       (is (equalp
-           (render-template*
-            template nil :foo nil)
+           (render-template* template nil :foo nil)
            ""))
       (is (equalp
-           (render-template*
-            template
-            nil
-            :foo "foo")
+           (render-template* template nil :foo "foo")
            "foo"))
       (is (equalp
-           (render-template*
-            template
-            nil
-            :foo 2)
+           (render-template* template nil :foo 2)
            "2")))
-
 
     (let ((template (compile-string "{{foo}}{{bar}}"))
           (*strict-mode* t))
       (signals error
-        (render-template*
-         template nil))
+        (render-template* template nil))
       (signals error
-        (render-template*
-         template nil
-         :foo "foo"))
+        (render-template* template nil :foo "foo"))
       (signals error
-        (render-template*
-         template nil
-         :bar "bar"))
+        (render-template* template nil :bar "bar"))
       (is (equalp
-           (render-template*
-            template nil
-            :foo "foo" :bar "bar")
+           (render-template* template nil :foo "foo" :bar "bar")
            "foobar")))
 
     (let ((template (compile-string "{% if foo %}{{foo}}{% endif %}{% if bar %}{{bar}}{% endif %}")))
       (equalp
-       (render-template*
-        template nil)
+       (render-template* template nil)
        "")
       (equalp
-       (render-template*
-        template nil
-        :foo "foo")
+       (render-template* template nil :foo "foo")
        "foo")
       (equalp
-       (render-template*
-        template nil
-        :bar "bar")
+       (render-template* template nil :bar "bar")
        "bar")
       (is (equalp
-           (render-template*
-            template nil
-            :foo "foo" :bar "bar")
+           (render-template* template nil :foo "foo" :bar "bar")
            "foobar")))
 
     (let ((template (compile-string "{{foo.bar}}"))
           (*strict-mode* t))
       (signals error
-        (render-template*
-         template
-         nil))
+        (render-template* template nil))
       (is (equalp
-           (render-template*
-            template
-            nil
-            :foo (list :bar "bar"))
+           (render-template* template nil :foo (list :bar "bar"))
            "bar")))
+
+    (let ((template (compile-string "{% if foo.bar %}{{foo.bar}}{% endif %}"))
+          (*strict-mode* t))
+      (is (equalp (render-template* template nil) "")))
 
     ;; Slot accessing
     (is (equalp
@@ -135,7 +111,31 @@
          (let ((djula:*template-package* :djula-test))
            (let ((template (compile-string "{{obj.fid}}")))
              (djula:render-template* template nil :obj (make-instance 'my-obj))))
-         "33"))))
+         "33"))
+
+    ;; Hash-table accessing
+    (let ((obj (make-hash-table :test 'equalp)))
+      (setf (gethash "id" obj) 22)
+      (let ((djula:*template-package* :djula-test))
+        (let ((template (compile-string "{{obj.id}}")))
+          (is (string= (djula:render-template* template nil :obj obj)
+                       "22")))))
+
+    ;; alist accessing
+    (let ((obj (list (cons "id" 22))))
+      (let ((djula:*template-package* :djula-test))
+        (let ((template (compile-string "{{obj.id}}")))
+          (is (string= (djula:render-template* template nil :obj obj)
+                       "22")))))
+
+    ;; plist accessing
+    (let ((obj (list :id 22)))
+      (let ((djula:*template-package* :djula-test))
+        (let ((template (compile-string "{{obj.id}}")))
+          (is (string= (djula:render-template* template nil :obj obj)
+                       "22")))))
+
+    ))
 
 (def-test escaping-test (:compile-at :definition-time)
   (let ((djula:*catch-template-errors-p* nil))
