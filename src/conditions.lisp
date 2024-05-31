@@ -8,9 +8,8 @@
 
 (defun template-error-string* (error fmt &rest args)
   (if *verbose-errors-p*
-      (format nil "{# Error: ~A : ~A #}"
-              (apply #'format nil fmt args)
-              error)
+      (format nil "{# Error: ~A - ~A #}"
+              error (apply #'format nil fmt args))
       (apply #'template-error-string fmt args)))
 
 (defun template-error (msg &rest args)
@@ -39,7 +38,8 @@
 (defun render-error-template (error destination &key backtrace template context)
   "Render the *ERROR-TEMPLATE* with the ERROR, the BACKTRACE and the TEMPLATE
 where the error ocurred."
-  (let ((error-template (compile-template* *error-template*)))
+  (let ((error-template (compile-template* *error-template*))
+        (*template-package* (find-package :djula)))
     (djula:render-template* error-template destination
                             :error error
                             :error-backtrace backtrace
