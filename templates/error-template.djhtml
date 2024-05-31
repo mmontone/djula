@@ -79,7 +79,11 @@
       </div>
       <div id='error-context'>
         <h4>Template context:</h4>
-        {{context | prin1}}
+        <ul>
+          <li><em>Template package:</em> {{context.template-package | prin1}}</li>
+          <li><em>Language:</em> {{context.language | prin1}}</li>
+          <li><em>Arguments:</em> {{context.arguments | prin1}}</li>
+        </ul>
       </div>
       <div id='error-content'>
         <h4>Backtrace:</h4>
