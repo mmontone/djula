@@ -101,10 +101,17 @@
 
     ;; Method accessing
     (is (equalp
-         (let ((djula:*template-package* :djula-test))
-           (let ((template (compile-string "{{obj.id}}")))
-             (djula:render-template* template nil :obj (make-instance 'my-obj))))
+         (let ((djula:*template-package* :djula-test)
+               (template (compile-string "{{obj.id}}")))
+           (djula:render-template* template nil :obj (make-instance 'my-obj)))
          "22"))
+    
+    ;; signal error if method not found because of wrong template-package
+    (let ((djula:*template-package* :cl)
+          (djula:*strict-mode* t)
+          (template (compile-string "{{obj.id}}")))
+      (signals error
+        (djula:render-template* template nil :obj (make-instance 'my-obj))))
 
     ;; Function accessing
     (is (equalp
