@@ -121,7 +121,8 @@ TEMPLATE-ARGUMENTS is a property-list. "
                                                    (trivial-backtrace:print-backtrace-to-stream s))
                                       :template template
                                       :context (list :arguments *template-arguments*
-                                                     :language *current-language*))
+                                                     :language *current-language*
+                                                     :template-package *template-package*))
                (error e))))))
     (t (error 'simple-error
               :format-control "~A is not a valid template"
