@@ -31,7 +31,6 @@
                color: white;
                background: #333333;
                padding: 10px;
-               padding-left: 20px;
                text-shadow: 1px 1px #555555;
                border-top: 1px solid #444444;
            }
