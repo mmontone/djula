@@ -117,7 +117,8 @@ TEMPLATE-ARGUMENTS is a property-list. "
            (if (and *catch-template-errors-p*
                     *fancy-error-template-p*)
                (render-error-template e destination
-                                      :backtrace (trivial-backtrace:print-backtrace e :output nil)
+                                      :backtrace (with-output-to-string (s)
+                                                   (trivial-backtrace:print-backtrace-to-stream s))
                                       :template template
                                       :context (list :arguments *template-arguments*
                                                      :language *current-language*))
@@ -139,7 +140,7 @@ Returns a funcallable template."
     (let ((compiler (find-token-compiler name)))
       (if (null compiler)
           (lambda (stream)
-            (princ (template-error-string "Unknown token ~A" name) stream))
+            (princ (template-error-string "unknown token ~A" name) stream))
           (handler-case
               ;; Handle compile-time errors.
               (let ((f (apply compiler args)))
@@ -156,7 +157,7 @@ Returns a funcallable template."
                           (princ e1 stream)
                           (error e1)))
                     (error (e2)
-                      (let ((msg (template-error-string* e2 "There was an error rendering the token ~A" token)))
+                      (let ((msg (template-error-string* e2 "rendering the token ~A" (write-to-string token :length 10))))
                         (if (and *catch-template-errors-p*
                                  (not *fancy-error-template-p*))
                             (princ msg stream)
@@ -168,7 +169,7 @@ Returns a funcallable template."
                     (princ e1 stream))
                   (error e1)))
             (error (e2)
-              (let ((msg (template-error-string* e2 "There was an error compiling the token ~A" token)))
+              (let ((msg (template-error-string* e2 "compiling the token ~A" token)))
                 (if (and *catch-template-errors-p*
                          (not *fancy-error-template-p*))
                     (lambda (stream)
