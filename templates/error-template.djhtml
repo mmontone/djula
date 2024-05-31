@@ -75,7 +75,7 @@
     </div>
     {% if template %}
       <div id='file-wrap'>
-        <div id='file'>In {{template}}{% if line %} on line {{line}}{% endif %}.</div>
+        <div id='file'>In {{template}}{% if line %} on line {{line}}{% endif %}</div>
       </div>
       <div id='error-context'>
         <h4>Template context:</h4>
