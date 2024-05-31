@@ -72,7 +72,7 @@
       <h1>Template Error</h1>
     </div>
     <div id='error-wrap'>
-      <div id='error-message'>{{error}}.</div>
+      <div id='error-message'>{{error}}</div>
     </div>
     {% if template %}
       <div id='file-wrap'>
