@@ -336,7 +336,7 @@ Library user can extend this generic function, add methods for types to iterate 
                                       (cons :revcounter0 (1- length))
                                       (cons :first t)
                                       (cons :last (= length 1))
-                                      (cons :parentloop (get-variable :forloop))))
+                                      (cons :parentloop (get-variable :forloop nil))))
                        (*template-arguments*
                          ;; NIL is a placeholder for the value of the loop variable.
                          (if (consp var)
