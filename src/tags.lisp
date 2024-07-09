@@ -677,7 +677,7 @@ are prepended to *TEMPLATE-ARGUMENTS*"
               (handler-case
                   (princ (funcall fn) stream)
                 (error (e)
-                  (template-error* e "There was an error executing the lisp form ~A" sexp))))))
+                  (template-error* e "There was an error executing the lisp form: ~A" sexp))))))
     (error (e)
       (template-error* e "There was an error executing the lisp form ~A" sexp))))
 

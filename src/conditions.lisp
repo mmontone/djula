@@ -20,8 +20,8 @@
 (defun template-error* (error msg &rest args)
   (if *verbose-errors-p*
       (error 'template-error
-             :format-control "~A: ~A"
-             :format-arguments (list* error args))
+             :format-control "~a: ~a"
+             :format-arguments (list (apply #'format nil msg args) error))
       (apply #'template-error msg args)))
 
 (defmacro with-template-error (recovery-form &body body)
