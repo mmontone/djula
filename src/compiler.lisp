@@ -137,6 +137,11 @@ Returns a funcallable template."
         (funcall f stream)))))
 
 (defun compile-token (token)
+  "Compiles TOKEN.
+The compilation of a TOKEN creates a LAMBDA that given a stream renders the token."
+  ;; Note that given that the compilation of a token is also in charge
+  ;; of determining how to render the token, there are both error handlers for
+  ;; compile-time and also run-time here.
   (destructuring-bind (name . args) token
     (let ((compiler (find-token-compiler name)))
       (if (null compiler)
@@ -150,12 +155,14 @@ Returns a funcallable template."
                         "Compiling the token ~A did not return a function"
                         name)
                 (lambda (stream)
+                  ;; This is the rendering lambda, so handle run-time errors here.
                   (handler-case
-                      ;; Handle run-time errors.
                       (funcall f stream)
                     (template-error (e1)
-                      (if *catch-template-errors-p*
+                      (if (and *catch-template-errors-p*
+                               (not *fancy-error-template-p*))
                           (princ e1 stream)
+                          ;; If fancy-errors are enabled, then resignal the condition. Fancy errors are handled higher in the condition handlers, in RENDER-TEMPLATE*.
                           (error e1)))
                     (error (e2)
                       (let ((msg (template-error-string* e2 "rendering the token ~A" (write-to-string token :length 10))))
