@@ -1,13 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 7.1, https://www.gnu.org/software/texinfo/ -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
 
-Copyright (C) 2014, Nick Allen.
+Copyright © 2014, Nick Allen.
 
 Maintained by Mariano Montone.
 
@@ -35,21 +35,11 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
 div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
 blockquote {
     font-style: normal;
     border-left: solid 10px red;
@@ -125,27 +115,27 @@ body {
 </head>
 
 <body lang="en">
-<div class="chapter" id="Usage">
-<div class="header">
+<div class="chapter-level-extent" id="Usage">
+<div class="nav-panel">
 <p>
 Next: <a href="Variables.html#Variables" accesskey="n" rel="next">Variables</a>, Previous: <a href="Basics.html" accesskey="p" rel="prev">Basics</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="usage-doc"></span><span id="usage-usage"></span><span id="Usage-1"></span><h2 class="chapter">3 Usage</h2>
+<a class="anchor" id="usage-doc"></a><a class="anchor" id="usage-usage"></a><h2 class="chapter" id="Usage-1"><span>3 Usage<a class="copiable-link" href="#Usage-1"> &para;</a></span></h2>
 
 <p>To render our templates, they need be compiled first. We do that with
-the <code>COMPILE-TEMPLATE*</code> function. For inheritance to work, we
+the <code class="code">COMPILE-TEMPLATE*</code> function. For inheritance to work, we
 need to put all the templates in the same directory so that Djula can
 find them when resolving templates inheritance.
 </p>
-<p>Djula looks for templates in the <code>*CURRENT-STORE*</code>. For our
+<p>Djula looks for templates in the <code class="code">*CURRENT-STORE*</code>. For our
 templates to be found, we have to add the template folder path the
 templates store. We can do that with the
-<code>ADD-TEMPLATE-DIRECTORY</code> function.
+<code class="code">ADD-TEMPLATE-DIRECTORY</code> function.
 </p>
 <p>Here is an example:
 </p>
 <div class="example lisp">
-<pre class="lisp">(add-template-directory (asdf:system-relative-pathname &quot;webapp&quot; &quot;templates/&quot;))
+<pre class="lisp-preformatted">(add-template-directory (asdf:system-relative-pathname &quot;webapp&quot; &quot;templates/&quot;))
 
 (defparameter +base.html+ (djula:compile-template* &quot;base.html&quot;))
 
@@ -154,88 +144,88 @@ templates store. We can do that with the
 (defparameter +contact.html+ (djula:compile-template* &quot;contact.html&quot;))
 </pre></div>
 
-<p>Then we can render our compiled templates using the <code>RENDER-TEMPLATE*</code> function:
+<p>Then we can render our compiled templates using the <code class="code">RENDER-TEMPLATE*</code> function:
 </p>
 <div class="example lisp">
-<pre class="lisp">(djula:render-template* +welcome.html+ s
+<pre class="lisp-preformatted">(djula:render-template* +welcome.html+ s
                         :title &quot;Ukeleles&quot;
                         :project-name &quot;Ukeleles&quot;
                         :mode &quot;welcome&quot;)
 </pre></div>
 
 
-<ul class="section-toc">
+<ul class="mini-toc">
 <li><a href="#Auto_002dreload" accesskey="1">Auto-reload</a></li>
 <li><a href="#API" accesskey="2">API</a></li>
 </ul>
 <hr>
-<div class="section" id="Auto_002dreload">
-<div class="header">
+<div class="section-level-extent" id="Auto_002dreload">
+<div class="nav-panel">
 <p>
 Next: <a href="#API" accesskey="n" rel="next">API</a>, Up: <a href="#Usage" accesskey="u" rel="up">Usage</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="usage-auto_002dreload"></span><span id="Auto_002dreload-1"></span><h3 class="section">3.1 Auto-reload</h3>
+<a class="anchor" id="usage-auto_002dreload"></a><h3 class="section" id="Auto_002dreload-1"><span>3.1 Auto-reload<a class="copiable-link" href="#Auto_002dreload-1"> &para;</a></span></h3>
 
 
 <p>By default, Djula automatically recompiles the templates when they change.
 </p>
-<p>If you want to disable this, use the <cite>*recompile-templates-on-change*</cite> variable:
+<p>If you want to disable this, use the <cite class="cite">*recompile-templates-on-change*</cite> variable:
 </p>
 <div class="example lisp">
-<pre class="lisp">(setf djula:*recompile-templates-on-change* nil)
+<pre class="lisp-preformatted">(setf djula:*recompile-templates-on-change* nil)
 </pre></div>
 
 <hr>
 </div>
-<div class="section" id="API">
-<div class="header">
+<div class="section-level-extent" id="API">
+<div class="nav-panel">
 <p>
 Previous: <a href="#Auto_002dreload" accesskey="p" rel="prev">Auto-reload</a>, Up: <a href="#Usage" accesskey="u" rel="up">Usage</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="usage-api"></span><span id="API-1"></span><h3 class="section">3.2 API</h3>
+<a class="anchor" id="usage-api"></a><h3 class="section" id="API-1"><span>3.2 API<a class="copiable-link" href="#API-1"> &para;</a></span></h3>
 
 
-<span id="index-add_002dtemplate_002ddirectory-_0028function_0029"></span>
-<span id="usage-function-djula-add_002dtemplate_002ddirectory"></span><dl class="def">
-<dt id="index-_0028add_002dtemplate_002ddirectorydirectory"><span class="category">Function: </span><span><strong>(add<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->directorydirectory</strong> <em>&amp;optional (template-store *current-store*))</em><a href='#index-_0028add_002dtemplate_002ddirectorydirectory' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-add_002dtemplate_002ddirectory-_0028function_0029"></a>
+<a class="anchor" id="usage-function-djula-add_002dtemplate_002ddirectory"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0028add_002dtemplate_002ddirectorydirectory"><span class="category-def">Function: </span><span><strong class="def-name">(add-<!-- /@w -->template-<!-- /@w -->directorydirectory</strong> <var class="def-var-arguments">&amp;optional (template-store *current-store*))</var><a class="copiable-link" href="#index-_0028add_002dtemplate_002ddirectorydirectory"> &para;</a></span></dt>
 <dd>
-<p>Adds <code>DIRECTORY</code> to the search path of the <code>TEMPLATE-STORE</code>
+<p>Adds <code class="code">DIRECTORY</code> to the search path of the <code class="code">TEMPLATE-STORE</code>
 </p></dd></dl>
 
-<span id="index-compile_002dtemplate-_0028generic_0029"></span>
-<span id="usage-generic-djula-compile_002dtemplate"></span><dl class="def">
-<dt id="index-_0028compile_002dtemplatecompiler"><span class="category">Generic Function: </span><span><strong>(compile<span class="nolinebreak">-</span><!-- /@w -->templatecompiler</strong> <em>name &amp;optional error-p)</em><a href='#index-_0028compile_002dtemplatecompiler' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-compile_002dtemplate-_0028generic_0029"></a>
+<a class="anchor" id="usage-generic-djula-compile_002dtemplate"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0028compile_002dtemplatecompiler"><span class="category-def">Generic Function: </span><span><strong class="def-name">(compile-<!-- /@w -->templatecompiler</strong> <var class="def-var-arguments">name &amp;optional error-p)</var><a class="copiable-link" href="#index-_0028compile_002dtemplatecompiler"> &para;</a></span></dt>
 <dd>
 <p>Provides a hook to customize template compilation.
 </p>
 <br><p>Specializers: 
 </p>
-<ul>
-<li> <code>(toplevel-compiler common-lisp:t)</code>
+<ul class="itemize mark-bullet">
+<li><code class="code">(toplevel-compiler common-lisp:t)</code>
 
-</li><li> <code>(compiler common-lisp:t)</code>
+</li><li><code class="code">(compiler common-lisp:t)</code>
 </li></ul>
 
 </dd></dl>
 
-<span id="index-compile_002dtemplate_002a-_0028function_0029"></span>
-<span id="usage-function-djula-compile_002dtemplate_002a"></span><dl class="def">
-<dt id="index-_0028compile_002dtemplate_002aname_0029"><span class="category">Function: </span><span><strong>(compile<span class="nolinebreak">-</span><!-- /@w -->template*name)</strong><a href='#index-_0028compile_002dtemplate_002aname_0029' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-compile_002dtemplate_002a-_0028function_0029"></a>
+<a class="anchor" id="usage-function-djula-compile_002dtemplate_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0028compile_002dtemplate_002aname_0029"><span class="category-def">Function: </span><span><strong class="def-name">(compile-<!-- /@w -->template*name)</strong><a class="copiable-link" href="#index-_0028compile_002dtemplate_002aname_0029"> &para;</a></span></dt>
 <dd>
-<p>Compiles template <code>NAME</code> with compiler in <em>CURRENT-COMPILER</em>
+<p>Compiles template <code class="code">NAME</code> with compiler in <em class="emph">CURRENT-COMPILER</em>
 </p></dd></dl>
 
-<span id="index-render_002dtemplate_002a-_0028function_0029"></span>
-<span id="usage-function-djula-render_002dtemplate_002a"></span><dl class="def">
-<dt id="index-_0028render_002dtemplate_002atemplate"><span class="category">Function: </span><span><strong>(render<span class="nolinebreak">-</span><!-- /@w -->template*template</strong> <em>&amp;optional stream &amp;rest *template-arguments*)</em><a href='#index-_0028render_002dtemplate_002atemplate' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-render_002dtemplate_002a-_0028function_0029"></a>
+<a class="anchor" id="usage-function-djula-render_002dtemplate_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0028render_002dtemplate_002atemplate"><span class="category-def">Function: </span><span><strong class="def-name">(render-<!-- /@w -->template*template</strong> <var class="def-var-arguments">&amp;optional stream &amp;rest *template-arguments*)</var><a class="copiable-link" href="#index-_0028render_002dtemplate_002atemplate"> &para;</a></span></dt>
 <dd>
-<p>Render <code>TEMPLATE</code> into <code>STREAM</code> passing <em>TEMPLATE-ARGUMENTS</em>
+<p>Render <code class="code">TEMPLATE</code> into <code class="code">STREAM</code> passing <em class="emph">TEMPLATE-ARGUMENTS</em>
 </p></dd></dl>
 
 </div>
 </div>
 <hr>
-<div class="header">
+<div class="nav-panel">
 <p>
 Next: <a href="Variables.html#Variables" accesskey="n" rel="next">Variables</a>, Previous: <a href="Basics.html" accesskey="p" rel="prev">Basics</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>

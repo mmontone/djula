@@ -1,13 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 7.1, https://www.gnu.org/software/texinfo/ -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
 
-Copyright (C) 2014, Nick Allen.
+Copyright © 2014, Nick Allen.
 
 Maintained by Mariano Montone.
 
@@ -35,21 +35,9 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
 div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
+span:hover a.copiable-link {visibility: visible}
 blockquote {
     font-style: normal;
     border-left: solid 10px red;
@@ -125,25 +113,25 @@ body {
 </head>
 
 <body lang="en">
-<div class="chapter" id="Basics">
-<div class="header">
+<div class="chapter-level-extent" id="Basics">
+<div class="nav-panel">
 <p>
 Next: <a href="Usage.html#Usage" accesskey="n" rel="next">Usage</a>, Previous: <a href="Introduction.html#Introduction" accesskey="p" rel="prev">Introduction</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="basics-doc"></span><span id="basics-basics"></span><span id="Basics-1"></span><h2 class="chapter">2 Basics</h2>
+<a class="anchor" id="basics-doc"></a><a class="anchor" id="basics-basics"></a><h2 class="chapter" id="Basics-1"><span>2 Basics<a class="copiable-link" href="#Basics-1"> &para;</a></span></h2>
 
 
 <p>A template is simply a text file. It can generate any text-based format (HTML,
 XML, CSV, etc.).
 </p>
-<p>A template contains <strong>variables</strong>, which get replaced with values when the
-template is evaluated, and <strong>tags</strong>, which control the logic of the template.
+<p>A template contains <strong class="strong">variables</strong>, which get replaced with values when the
+template is evaluated, and <strong class="strong">tags</strong>, which control the logic of the template.
 </p>
 <p>Below is a minimal template that illustrates a few basics. Each element will be
 explained later in this document.
 </p>
 <div class="example">
-<pre class="example">{% extends &quot;base.html&quot; %}
+<pre class="example-preformatted">{% extends &quot;base.html&quot; %}
 
 {% block title %}{{ section.title }}{% endblock %}
 
@@ -163,7 +151,7 @@ explained later in this document.
 
 </div>
 <hr>
-<div class="header">
+<div class="nav-panel">
 <p>
 Next: <a href="Usage.html#Usage" accesskey="n" rel="next">Usage</a>, Previous: <a href="Introduction.html#Introduction" accesskey="p" rel="prev">Introduction</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>

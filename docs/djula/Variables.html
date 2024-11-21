@@ -1,13 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 7.1, https://www.gnu.org/software/texinfo/ -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
 
-Copyright (C) 2014, Nick Allen.
+Copyright © 2014, Nick Allen.
 
 Maintained by Mariano Montone.
 
@@ -35,21 +35,9 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
 div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
+span:hover a.copiable-link {visibility: visible}
 blockquote {
     font-style: normal;
     border-left: solid 10px red;
@@ -125,77 +113,77 @@ body {
 </head>
 
 <body lang="en">
-<div class="chapter" id="Variables">
-<div class="header">
+<div class="chapter-level-extent" id="Variables">
+<div class="nav-panel">
 <p>
 Next: <a href="Tags.html#Tags" accesskey="n" rel="next">Tags</a>, Previous: <a href="Usage.html#Usage" accesskey="p" rel="prev">Usage</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="variables-doc"></span><span id="variables-variables"></span><span id="Variables-1"></span><h2 class="chapter">4 Variables</h2>
+<a class="anchor" id="variables-doc"></a><a class="anchor" id="variables-variables"></a><h2 class="chapter" id="Variables-1"><span>4 Variables<a class="copiable-link" href="#Variables-1"> &para;</a></span></h2>
 
 
-<p>Variables look like this: <code>{{ variable }}</code>. When the template engine
+<p>Variables look like this: <code class="code">{{ variable }}</code>. When the template engine
 encounters a variable, it evaluates that variable and replaces it with the
 result. Variable names consist of any combination of alphanumeric characters
-and the underscore (<code>&quot;_&quot;</code>). The dot (<code>&quot;.&quot;</code>) also appears in variable
+and the underscore (<code class="code">&quot;_&quot;</code>). The dot (<code class="code">&quot;.&quot;</code>) also appears in variable
 sections, although that has a special meaning, as indicated below.
-Importantly, <em>you cannot have spaces or punctuation characters in variable
+Importantly, <em class="emph">you cannot have spaces or punctuation characters in variable
 names.</em>
 </p>
-<p>Use a dot (<code>.</code>) to access attributes of a variable.
+<p>Use a dot (<code class="code">.</code>) to access attributes of a variable.
 </p>
 <table class="cartouche" border="1"><tr><td>
-<blockquote>
-<p><b>Behind the scenes:</b> For accessing variables the <code>ACCESS</code> Common Lisp library is used: &lsquo;<code>https://github.com/AccelerationNet/access</code>&rsquo;
+<blockquote class="quotation">
+<p><b class="b">Behind the scenes:</b> For accessing variables the <code class="code">ACCESS</code> Common Lisp library is used: &lsquo;<code class="indicateurl">https://github.com/AccelerationNet/access</code>&rsquo;
 </p></blockquote>
 </td></tr></table>
 
-<p>In the above example, <code>{{ section.title }}</code> will be replaced with the
-<code>title</code> attribute of the <code>section</code> object.
+<p>In the above example, <code class="code">{{ section.title }}</code> will be replaced with the
+<code class="code">title</code> attribute of the <code class="code">section</code> object.
 </p>
-<p>Note that “bar” in a template expression like <code>{{ foo.bar }}</code> will be
+<p>Note that “bar” in a template expression like <code class="code">{{ foo.bar }}</code> will be
 interpreted as a literal string and not using the value of the variable “bar”,
 if one exists in the template context.
 </p>
 
-<ul class="section-toc">
+<ul class="mini-toc">
 <li><a href="#Default-template-variables" accesskey="1">Default template variables</a></li>
 </ul>
 <hr>
-<div class="section" id="Default-template-variables">
-<div class="header">
+<div class="section-level-extent" id="Default-template-variables">
+<div class="nav-panel">
 <p>
 Up: <a href="#Variables" accesskey="u" rel="up">Variables</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="variables-default_002dtemplate_002dvariables"></span><span id="Default-template-variables-1"></span><h3 class="section">4.1 Default template variables</h3>
+<a class="anchor" id="variables-default_002dtemplate_002dvariables"></a><h3 class="section" id="Default-template-variables-1"><span>4.1 Default template variables<a class="copiable-link" href="#Default-template-variables-1"> &para;</a></span></h3>
 
 
-<p>You can use the <code>*DEFAULT-TEMPLATE-ARGUMENTS*</code> variable to store
+<p>You can use the <code class="code">*DEFAULT-TEMPLATE-ARGUMENTS*</code> variable to store
 arguments that will be available for all templates. It is a plist, so
 use getf to add arguments, like this:
 </p>
 <div class="example lisp">
-<pre class="lisp">(setf (getf djula:*default-template-arguments* :foo) 'some-value)
+<pre class="lisp-preformatted">(setf (getf djula:*default-template-arguments* :foo) 'some-value)
 </pre></div>
 
-<p>And now, you can access <code>{{ foo }}</code> in your template.
+<p>And now, you can access <code class="code">{{ foo }}</code> in your template.
 </p>
 <p>This is useful when you have many templates that rely on the same set
 of variables. Use this variable to refactor your code when
 appropriate.
 </p>
 <p>Note that you could also write a function that wraps
-<code>RENDER-TEMPLATE*</code> and uses a default list of variables plus
+<code class="code">RENDER-TEMPLATE*</code> and uses a default list of variables plus
 other ones given as arguments:
 </p>
 <div class="example lisp">
-<pre class="lisp">(defun my-render-template (template stream &amp;rest args)
+<pre class="lisp-preformatted">(defun my-render-template (template stream &amp;rest args)
   (apply #'djula:render-template* template stream (list* :foo 'some-value args)))
 </pre></div>
 
 </div>
 </div>
 <hr>
-<div class="header">
+<div class="nav-panel">
 <p>
 Next: <a href="Tags.html#Tags" accesskey="n" rel="next">Tags</a>, Previous: <a href="Usage.html#Usage" accesskey="p" rel="prev">Usage</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>

@@ -1,13 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 7.1, https://www.gnu.org/software/texinfo/ -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
 
-Copyright (C) 2014, Nick Allen.
+Copyright © 2014, Nick Allen.
 
 Maintained by Mariano Montone.
 
@@ -35,21 +35,10 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
 div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
+span:hover a.copiable-link {visibility: visible}
+ul.mark-bullet {list-style-type: disc}
 blockquote {
     font-style: normal;
     border-left: solid 10px red;
@@ -125,16 +114,16 @@ body {
 </head>
 
 <body lang="en">
-<div class="chapter" id="Deployment">
-<div class="header">
+<div class="chapter-level-extent" id="Deployment">
+<div class="nav-panel">
 <p>
 Next: <a href="Internationalization.html#Internationalization" accesskey="n" rel="next">Internationalization</a>, Previous: <a href="Errors-and-debugging.html#Errors-and-debugging" accesskey="p" rel="prev">Errors and debugging</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="deployment-doc"></span><span id="deployment-error_002dhandling"></span><span id="Deployment-_002d-Building-standalone-binaries"></span><h2 class="chapter">11 Deployment - Building standalone binaries</h2>
+<a class="anchor" id="deployment-doc"></a><a class="anchor" id="deployment-error_002dhandling"></a><h2 class="chapter" id="Deployment-_002d-Building-standalone-binaries"><span>11 Deployment - Building standalone binaries<a class="copiable-link" href="#Deployment-_002d-Building-standalone-binaries"> &para;</a></span></h2>
 
 <p>By default, when asked to compile a template, Djula searches the file
 system, in the directories you told it to look into. When you render a
-template that <code>extends</code> or <code>includes</code> another one, Djula
+template that <code class="code">extends</code> or <code class="code">includes</code> another one, Djula
 searches for that one too. Moreover, Djula will try to re-compile a
 template at each access, whenever you reload a web page. This is very
 convenient for development, it doesn&rsquo;t bother us to deploy our
@@ -145,14 +134,14 @@ don&rsquo;t exist anymore.
 </p>
 <p>To build a standalone binary, we will need to:
 </p>
-<ul>
-<li> list all our templates (we can do that in our .asd system declaration)
+<ul class="itemize mark-bullet">
+<li>list all our templates (we can do that in our .asd system declaration)
 
-</li><li> instantiate <code>djula:*current-store*</code> as an instance of <code>memory-template-store</code>,
+</li><li>instantiate <code class="code">djula:*current-store*</code> as an instance of <code class="code">memory-template-store</code>,
 
-</li><li> compile our templates: they get compiled into memory.
+</li><li>compile our templates: they get compiled into memory.
 
-</li><li> disable the auto-reload: <code>setf djula:*recompile-templates-on-change* nil)</code>.
+</li><li>disable the auto-reload: <code class="code">setf djula:*recompile-templates-on-change* nil)</code>.
 
 </li></ul>
 
@@ -160,7 +149,7 @@ don&rsquo;t exist anymore.
 as static files located in the &ldquo;src/templates&rdquo; directory:
 </p>
 <div class="example lisp">
-<pre class="lisp">(asdf:defsystem &quot;djula-binary&quot;
+<pre class="lisp-preformatted">(asdf:defsystem &quot;djula-binary&quot;
   :depends-on (:hunchentoot
                :djula)
   :components ((:module &quot;src&quot;
@@ -184,46 +173,46 @@ as static files located in the &ldquo;src/templates&rdquo; directory:
 
 <p>At the top level of &ldquo;src/web.lisp&rdquo;, we set Djula&rsquo;s store to a memory
 store, and we disable the autoreload feature. This code would be
-called when we <code>load</code> the .lisp file, so it will be called when
-we create the binary with <code>(asdf:make :djula-binary)</code>.
+called when we <code class="code">load</code> the .lisp file, so it will be called when
+we create the binary with <code class="code">(asdf:make :djula-binary)</code>.
 </p>
 <div class="example lisp">
-<pre class="lisp">(setf djula:*current-store* (make-instance 'djula:memory-template-store
+<pre class="lisp-preformatted">(setf djula:*current-store* (make-instance 'djula:memory-template-store
 					   :search-path (list (asdf:system-relative-pathname &quot;djula-binary&quot;
                                                              &quot;src/templates/&quot;))) ;; meaningful trailing /
       djula:*recompile-templates-on-change* nil)
 </pre></div>
 
 <p>Now, we compile all those declared templates. We use the
-<code>djula:list-asdf-system-templates</code> utility that will return a
+<code class="code">djula:list-asdf-system-templates</code> utility that will return a
 list of pathnames to our templates.
 </p>
 <div class="example lisp">
-<pre class="lisp">(mapcar #'djula:compile-template* (djula:list-asdf-system-templates :demo-djula-in-binaries &quot;src/templates&quot;))
+<pre class="lisp-preformatted">(mapcar #'djula:compile-template* (djula:list-asdf-system-templates :demo-djula-in-binaries &quot;src/templates&quot;))
 </pre></div>
 
 <p>Finally, you can declare templates as usual in your application:
 </p>
 <div class="example lisp">
-<pre class="lisp">(defparameter +base.html+ (djula:compile-template* &quot;base.html&quot;))
+<pre class="lisp-preformatted">(defparameter +base.html+ (djula:compile-template* &quot;base.html&quot;))
 </pre></div>
 
-<p>and render a template that <code>extends</code> another one, it will work
+<p>and render a template that <code class="code">extends</code> another one, it will work
 (and that was actually the main difficulty: the default store always
 looks for this inherited template on the filesystem).
 </p>
 <p>You can now send to your web server your self-contained, one file
 binary that you built on your machine or on a CI server.
 </p>
-<blockquote>
-<p><b>Note:</b> For a real-world web application you&rsquo;ll likely need
-<a href="https://github.com/Shinmera/deploy">Deploy</a> to ship foreign
+<blockquote class="quotation">
+<p><b class="b">Note:</b> For a real-world web application you&rsquo;ll likely need
+<a class="url" href="https://github.com/Shinmera/deploy">Deploy</a> to ship foreign
 libraries in your binary.
 </p></blockquote>
 
 </div>
 <hr>
-<div class="header">
+<div class="nav-panel">
 <p>
 Next: <a href="Internationalization.html#Internationalization" accesskey="n" rel="next">Internationalization</a>, Previous: <a href="Errors-and-debugging.html#Errors-and-debugging" accesskey="p" rel="prev">Errors and debugging</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>

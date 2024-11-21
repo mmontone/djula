@@ -1,13 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 7.1, https://www.gnu.org/software/texinfo/ -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
 
-Copyright (C) 2014, Nick Allen.
+Copyright © 2014, Nick Allen.
 
 Maintained by Mariano Montone.
 
@@ -33,21 +33,9 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
-div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+span:hover a.copiable-link {visibility: visible}
+ul.toc-numbered-mark {list-style: none}
 blockquote {
     font-style: normal;
     border-left: solid 10px red;
@@ -123,20 +111,19 @@ body {
 </head>
 
 <body lang="en">
-<h1 class="settitle" align="center">Djula HTML templating system</h1>
 
 
 
 
 
 
-<div class="top" id="Top">
-<div class="header">
+<div class="top-level-extent" id="Top">
+<div class="nav-panel">
 <p>
 Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="Djula-HTML-templating-system"></span><h1 class="top">Djula HTML templating system</h1>
-<blockquote>
+<h1 class="top" id="Djula-HTML-templating-system"><span>Djula HTML templating system<a class="copiable-link" href="#Djula-HTML-templating-system"> &para;</a></span></h1>
+<blockquote class="quotation">
 <p>Djula HTML templating system 0.2, Oct 21, 2021
 </p>
 <p>Nick Allen
@@ -148,38 +135,38 @@ Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduc
 </blockquote>
 
 
-<span id="index-doc"></span><span id="g_t0"></span>
+<a class="anchor" id="index-doc"></a><a class="anchor" id="g_t0"></a>
 <p>Djula is an HTML templating system similar to Django templates for Common Lisp.
 </p>
 <p>Contents:
 </p>
 
-<div class="Contents_element" id="SEC_Contents">
+<div class="element-contents" id="SEC_Contents">
 <h2 class="contents-heading">Table of Contents</h2>
 
 <div class="contents">
 
-<ul class="no-bullet">
+<ul class="toc-numbered-mark">
   <li><a id="toc-Introduction-1" href="Introduction.html#Introduction">1 Introduction</a>
-  <ul class="no-bullet">
+  <ul class="toc-numbered-mark">
     <li><a id="toc-Prerequisites-1" href="Introduction.html#Prerequisites">1.1 Prerequisites</a></li>
     <li><a id="toc-Installation-1" href="Introduction.html#Installation">1.2 Installation</a></li>
   </ul></li>
   <li><a id="toc-Basics-1" href="Basics.html">2 Basics</a></li>
   <li><a id="toc-Usage-1" href="Usage.html#Usage">3 Usage</a>
-  <ul class="no-bullet">
+  <ul class="toc-numbered-mark">
     <li><a id="toc-Auto_002dreload-1" href="Usage.html#Auto_002dreload">3.1 Auto-reload</a></li>
     <li><a id="toc-API-1" href="Usage.html#API">3.2 API</a></li>
   </ul></li>
   <li><a id="toc-Variables-1" href="Variables.html#Variables">4 Variables</a>
-  <ul class="no-bullet">
+  <ul class="toc-numbered-mark">
     <li><a id="toc-Default-template-variables-1" href="Variables.html#Default-template-variables">4.1 Default template variables</a></li>
   </ul></li>
   <li><a id="toc-Tags-1" href="Tags.html#Tags">5 Tags</a>
-  <ul class="no-bullet">
+  <ul class="toc-numbered-mark">
     <li><a id="toc-Overview-1" href="Tags.html#Overview">5.1 Overview</a></li>
     <li><a id="toc-List-of-tags-1" href="Tags.html#List-of-tags">5.2 List of tags</a>
-    <ul class="no-bullet">
+    <ul class="toc-numbered-mark">
       <li><a id="toc-block-1" href="Tags.html#block">5.2.1 block</a></li>
       <li><a id="toc-extends-1" href="Tags.html#extends">5.2.2 extends</a></li>
       <li><a id="toc-super-1" href="Tags.html#super">5.2.3 super</a></li>
@@ -201,10 +188,10 @@ Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduc
   <li><a id="toc-Comments-1" href="Comments.html">6 Comments</a></li>
   <li><a id="toc-Verbatim-1" href="Verbatim.html">7 Verbatim</a></li>
   <li><a id="toc-Filters-1" href="Filters.html#Filters">8 Filters</a>
-  <ul class="no-bullet">
+  <ul class="toc-numbered-mark">
     <li><a id="toc-Overview-2" href="Filters.html#Overview_003c2_003e">8.1 Overview</a></li>
     <li><a id="toc-List-of-filters-1" href="Filters.html#List-of-filters">8.2 List of filters</a>
-    <ul class="no-bullet">
+    <ul class="toc-numbered-mark">
       <li><a id="toc-add-1" href="Filters.html#add">8.2.1 add</a></li>
       <li><a id="toc-addslashes-1" href="Filters.html#addslashes">8.2.2 addslashes</a></li>
       <li><a id="toc-capfirst-1" href="Filters.html#capfirst">8.2.3 capfirst</a></li>
@@ -240,13 +227,13 @@ Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduc
     <li><a id="toc-Custom-filters-1" href="Filters.html#Custom-filters">8.3 Custom filters</a></li>
   </ul></li>
   <li><a id="toc-Templates-1" href="Templates.html#Templates">9 Templates</a>
-  <ul class="no-bullet">
+  <ul class="toc-numbered-mark">
     <li><a id="toc-The-template-package-1" href="Templates.html#The-template-package">9.1 The template package</a></li>
     <li><a id="toc-Template-inheritance-1" href="Templates.html#Template-inheritance">9.2 Template inheritance</a></li>
     <li><a id="toc-Including-other-templates" href="Templates.html#Template-includes">9.3 Including other templates</a></li>
   </ul></li>
   <li><a id="toc-Errors-and-debugging-1" href="Errors-and-debugging.html#Errors-and-debugging">10 Errors and debugging</a>
-  <ul class="no-bullet">
+  <ul class="toc-numbered-mark">
     <li><a id="toc-Error-handling" href="Errors-and-debugging.html#Error-handling">10.1 Error handling</a></li>
     <li><a id="toc-Displaying-template-information" href="Errors-and-debugging.html#Displaying-template-information">10.2 Displaying template information</a></li>
     <li><a id="toc-Strict-mode" href="Errors-and-debugging.html#Strict-mode">10.3 Strict mode</a></li>
@@ -254,14 +241,14 @@ Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduc
   </ul></li>
   <li><a id="toc-Deployment-_002d-Building-standalone-binaries" href="Deployment.html">11 Deployment - Building standalone binaries</a></li>
   <li><a id="toc-Internationalization-1" href="Internationalization.html#Internationalization">12 Internationalization</a>
-  <ul class="no-bullet">
+  <ul class="toc-numbered-mark">
     <li><a id="toc-Syntax-1" href="Internationalization.html#Syntax">12.1 Syntax</a></li>
     <li><a id="toc-Tags-2" href="Internationalization.html#Tags_003c2_003e">12.2 Tags</a>
-    <ul class="no-bullet">
+    <ul class="toc-numbered-mark">
       <li><a id="toc-trans-1" href="Internationalization.html#trans">12.2.1 trans</a></li>
     </ul></li>
     <li><a id="toc-Filters-2" href="Internationalization.html#Filters_003c2_003e">12.3 Filters</a>
-    <ul class="no-bullet">
+    <ul class="toc-numbered-mark">
       <li><a id="toc-trans-2" href="Internationalization.html#trans_003c2_003e">12.3.1 trans</a></li>
     </ul></li>
     <li><a id="toc-Choosing-language-1" href="Internationalization.html#Choosing-language">12.4 Choosing language</a></li>
@@ -269,7 +256,7 @@ Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduc
     <li><a id="toc-Translate-backend-1" href="Internationalization.html#Translate-backend">12.6 Translate backend</a></li>
     <li><a id="toc-Locale-backend-1" href="Internationalization.html#Locale-backend">12.7 Locale backend</a></li>
     <li><a id="toc-Gettext-backend-1" href="Internationalization.html#Gettext-backend">12.8 Gettext backend</a>
-    <ul class="no-bullet">
+    <ul class="toc-numbered-mark">
       <li><a id="toc-Gettext-message-extraction-1" href="Internationalization.html#Gettext-message-extraction">12.8.1 Gettext message extraction</a></li>
       <li><a id="toc-Gettext-utilities-1" href="Internationalization.html#Gettext-utilities">12.8.2 Gettext utilities</a></li>
     </ul></li>
@@ -281,7 +268,7 @@ Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduc
 </div>
 </div>
 <hr>
-<div class="header">
+<div class="nav-panel">
 <p>
 Next: <a href="Introduction.html#Introduction" accesskey="n" rel="next">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>

@@ -3,7 +3,7 @@
 all: html djula.pdf djula.info
 
 html:
-	makeinfo --html --split=chapter --css-include manual.css djula.texi
+	makeinfo --html --split=chapter --css-include manual.css -o djula/ djula.texi
 
 djula.pdf:
 	makeinfo --pdf djula.texi

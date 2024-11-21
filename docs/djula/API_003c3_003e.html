@@ -1,13 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 7.1, https://www.gnu.org/software/texinfo/ -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
 
-Copyright (C) 2014, Nick Allen.
+Copyright © 2014, Nick Allen.
 
 Maintained by Mariano Montone.
 
@@ -35,21 +35,9 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
-div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
 blockquote {
     font-style: normal;
     border-left: solid 10px red;
@@ -125,139 +113,139 @@ body {
 </head>
 
 <body lang="en">
-<div class="chapter" id="API_003c3_003e">
-<div class="header">
+<div class="chapter-level-extent" id="API_003c3_003e">
+<div class="nav-panel">
 <p>
 Next: <a href="Symbol-Index.html" accesskey="n" rel="next">Symbol Index</a>, Previous: <a href="Internationalization.html#Internationalization" accesskey="p" rel="prev">Internationalization</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="api-doc"></span><span id="api-api"></span><span id="API-3"></span><h2 class="chapter">13 API</h2>
+<a class="anchor" id="api-doc"></a><a class="anchor" id="api-api"></a><h2 class="chapter" id="API-3"><span>13 API<a class="copiable-link" href="#API-3"> &para;</a></span></h2>
 
 
 <p>Djula external symbols documentation
 </p>
-<span id="index-compile_002dtemplate_002a-_0028function_0029-1"></span>
-<span id="api-function-djula-compile_002dtemplate_002a"></span><dl class="def">
-<dt id="index-_0028compile_002dtemplate_002aname_0029-1"><span class="category">Function: </span><span><strong>(compile<span class="nolinebreak">-</span><!-- /@w -->template*name)</strong><a href='#index-_0028compile_002dtemplate_002aname_0029-1' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-compile_002dtemplate_002a-_0028function_0029-1"></a>
+<a class="anchor" id="api-function-djula-compile_002dtemplate_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0028compile_002dtemplate_002aname_0029-1"><span class="category-def">Function: </span><span><strong class="def-name">(compile-<!-- /@w -->template*name)</strong><a class="copiable-link" href="#index-_0028compile_002dtemplate_002aname_0029-1"> &para;</a></span></dt>
 <dd>
-<p>Compiles template <code>NAME</code> with compiler in <em>CURRENT-COMPILER</em>
+<p>Compiles template <code class="code">NAME</code> with compiler in <em class="emph">CURRENT-COMPILER</em>
 </p></dd></dl>
 
-<span id="index-url_002dencode-_0028function_0029"></span>
-<span id="api-function-djula-url_002dencode"></span><dl class="def">
-<dt id="index-_0028url_002dencodestring_0029"><span class="category">Function: </span><span><strong>(url<span class="nolinebreak">-</span><!-- /@w -->encodestring)</strong><a href='#index-_0028url_002dencodestring_0029' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-url_002dencode-_0028function_0029"></a>
+<a class="anchor" id="api-function-djula-url_002dencode"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0028url_002dencodestring_0029"><span class="category-def">Function: </span><span><strong class="def-name">(url-<!-- /@w -->encodestring)</strong><a class="copiable-link" href="#index-_0028url_002dencodestring_0029"> &para;</a></span></dt>
 <dd>
 <p>URL-encodes a string using the external format EXTERNAL-FORMAT.
 </p></dd></dl>
 
-<span id="index-_002acurrent_002dstore_002a-_0028variable_0029"></span>
-<span id="api-variable-djula-_002acurrent_002dstore_002a"></span><dl class="def">
-<dt id="index-_002acurrent_002dstore_002a"><span class="category">Variable: </span><span><strong>*current<span class="nolinebreak">-</span><!-- /@w -->store*</strong><a href='#index-_002acurrent_002dstore_002a' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-_002acurrent_002dstore_002a-_0028variable_0029"></a>
+<a class="anchor" id="api-variable-djula-_002acurrent_002dstore_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_002acurrent_002dstore_002a"><span class="category-def">Variable: </span><span><strong class="def-name">*current-<!-- /@w -->store*</strong><a class="copiable-link" href="#index-_002acurrent_002dstore_002a"> &para;</a></span></dt>
 <dd>
-<p>The currently in-use template store.  Defaults to a <code>FILE-STORE</code>.
+<p>The currently in-use template store.  Defaults to a <code class="code">FILE-STORE</code>.
 </p></dd></dl>
 
-<span id="index-_002aallow_002dinclude_002droots_002a-_0028variable_0029"></span>
-<span id="api-variable-djula-_002aallow_002dinclude_002droots_002a"></span><dl class="def">
-<dt id="index-_002aallow_002dinclude_002droots_002a"><span class="category">Variable: </span><span><strong>*allow<span class="nolinebreak">-</span><!-- /@w -->include<span class="nolinebreak">-</span><!-- /@w -->roots*</strong><a href='#index-_002aallow_002dinclude_002droots_002a' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-_002aallow_002dinclude_002droots_002a-_0028variable_0029"></a>
+<a class="anchor" id="api-variable-djula-_002aallow_002dinclude_002droots_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_002aallow_002dinclude_002droots_002a"><span class="category-def">Variable: </span><span><strong class="def-name">*allow-<!-- /@w -->include-<!-- /@w -->roots*</strong><a class="copiable-link" href="#index-_002aallow_002dinclude_002droots_002a"> &para;</a></span></dt>
 </dl>
 
-<span id="index-_002acurrent_002dcompiler_002a-_0028variable_0029"></span>
-<span id="api-variable-djula-_002acurrent_002dcompiler_002a"></span><dl class="def">
-<dt id="index-_002acurrent_002dcompiler_002a"><span class="category">Variable: </span><span><strong>*current<span class="nolinebreak">-</span><!-- /@w -->compiler*</strong><a href='#index-_002acurrent_002dcompiler_002a' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-_002acurrent_002dcompiler_002a-_0028variable_0029"></a>
+<a class="anchor" id="api-variable-djula-_002acurrent_002dcompiler_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_002acurrent_002dcompiler_002a"><span class="category-def">Variable: </span><span><strong class="def-name">*current-<!-- /@w -->compiler*</strong><a class="copiable-link" href="#index-_002acurrent_002dcompiler_002a"> &para;</a></span></dt>
 </dl>
 
-<span id="index-_002afancy_002ddebug_002dp_002a-_0028variable_0029"></span>
-<span id="api-variable-djula-_002afancy_002ddebug_002dp_002a"></span><dl class="def">
-<dt id="index-_002afancy_002ddebug_002dp_002a"><span class="category">Variable: </span><span><strong>*fancy<span class="nolinebreak">-</span><!-- /@w -->debug<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002afancy_002ddebug_002dp_002a' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-_002afancy_002ddebug_002dp_002a-_0028variable_0029"></a>
+<a class="anchor" id="api-variable-djula-_002afancy_002ddebug_002dp_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_002afancy_002ddebug_002dp_002a"><span class="category-def">Variable: </span><span><strong class="def-name">*fancy-<!-- /@w -->debug-<!-- /@w -->p*</strong><a class="copiable-link" href="#index-_002afancy_002ddebug_002dp_002a"> &para;</a></span></dt>
 <dd>
 <p>When enabled, displays fancy html based debugging information for the {% debug %} tag
 </p></dd></dl>
 
-<span id="index-_002atemplate_002dpackage_002a-_0028variable_0029"></span>
-<span id="api-variable-djula-_002atemplate_002dpackage_002a"></span><dl class="def">
-<dt id="index-_002atemplate_002dpackage_002a"><span class="category">Variable: </span><span><strong>*template<span class="nolinebreak">-</span><!-- /@w -->package*</strong><a href='#index-_002atemplate_002dpackage_002a' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-_002atemplate_002dpackage_002a-_0028variable_0029"></a>
+<a class="anchor" id="api-variable-djula-_002atemplate_002dpackage_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_002atemplate_002dpackage_002a"><span class="category-def">Variable: </span><span><strong class="def-name">*template-<!-- /@w -->package*</strong><a class="copiable-link" href="#index-_002atemplate_002dpackage_002a"> &para;</a></span></dt>
 </dl>
 
-<span id="index-fetch_002dtemplate_002a-_0028function_0029"></span>
-<span id="api-function-djula-fetch_002dtemplate_002a"></span><dl class="def">
-<dt id="index-_0028fetch_002dtemplate_002akey_0029"><span class="category">Function: </span><span><strong>(fetch<span class="nolinebreak">-</span><!-- /@w -->template*key)</strong><a href='#index-_0028fetch_002dtemplate_002akey_0029' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-fetch_002dtemplate_002a-_0028function_0029"></a>
+<a class="anchor" id="api-function-djula-fetch_002dtemplate_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0028fetch_002dtemplate_002akey_0029"><span class="category-def">Function: </span><span><strong class="def-name">(fetch-<!-- /@w -->template*key)</strong><a class="copiable-link" href="#index-_0028fetch_002dtemplate_002akey_0029"> &para;</a></span></dt>
 <dd>
-<p>Return the text of a template fetched from the <em>CURRENT-STORE</em>.
+<p>Return the text of a template fetched from the <em class="emph">CURRENT-STORE</em>.
 </p></dd></dl>
 
-<span id="index-url_002dencode_002dpath-_0028function_0029"></span>
-<span id="api-function-djula-url_002dencode_002dpath"></span><dl class="def">
-<dt id="index-_0028url_002dencode_002dpathpath_0029"><span class="category">Function: </span><span><strong>(url<span class="nolinebreak">-</span><!-- /@w -->encode<span class="nolinebreak">-</span><!-- /@w -->pathpath)</strong><a href='#index-_0028url_002dencode_002dpathpath_0029' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-url_002dencode_002dpath-_0028function_0029"></a>
+<a class="anchor" id="api-function-djula-url_002dencode_002dpath"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0028url_002dencode_002dpathpath_0029"><span class="category-def">Function: </span><span><strong class="def-name">(url-<!-- /@w -->encode-<!-- /@w -->pathpath)</strong><a class="copiable-link" href="#index-_0028url_002dencode_002dpathpath_0029"> &para;</a></span></dt>
 </dl>
 
-<span id="index-url_002ddecode-_0028function_0029"></span>
-<span id="api-function-djula-url_002ddecode"></span><dl class="def">
-<dt id="index-_0028url_002ddecode_0029"><span class="category">Function: </span><span><strong>(url<span class="nolinebreak">-</span><!-- /@w -->decode)</strong><a href='#index-_0028url_002ddecode_0029' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-url_002ddecode-_0028function_0029"></a>
+<a class="anchor" id="api-function-djula-url_002ddecode"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0028url_002ddecode_0029"><span class="category-def">Function: </span><span><strong class="def-name">(url-<!-- /@w -->decode)</strong><a class="copiable-link" href="#index-_0028url_002ddecode_0029"> &para;</a></span></dt>
 </dl>
 
-<span id="index-def_002dtag_002dcompiler-_0028macro_0029"></span>
-<span id="api-macro-djula-def_002dtag_002dcompiler"></span><dl class="def">
-<dt id="index-_0028def_002dtag_002dcompilername"><span class="category">Macro: </span><span><strong>(def<span class="nolinebreak">-</span><!-- /@w -->tag<span class="nolinebreak">-</span><!-- /@w -->compilername</strong> <em>args &amp;body body)</em><a href='#index-_0028def_002dtag_002dcompilername' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-def_002dtag_002dcompiler-_0028macro_0029"></a>
+<a class="anchor" id="api-macro-djula-def_002dtag_002dcompiler"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0028def_002dtag_002dcompilername"><span class="category-def">Macro: </span><span><strong class="def-name">(def-<!-- /@w -->tag-<!-- /@w -->compilername</strong> <var class="def-var-arguments">args &amp;body body)</var><a class="copiable-link" href="#index-_0028def_002dtag_002dcompilername"> &para;</a></span></dt>
 </dl>
 
-<span id="index-find_002dtemplate_002a-_0028function_0029"></span>
-<span id="api-function-djula-find_002dtemplate_002a"></span><dl class="def">
-<dt id="index-_0028find_002dtemplate_002aname"><span class="category">Function: </span><span><strong>(find<span class="nolinebreak">-</span><!-- /@w -->template*name</strong> <em>&amp;optional (error-p t))</em><a href='#index-_0028find_002dtemplate_002aname' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-find_002dtemplate_002a-_0028function_0029"></a>
+<a class="anchor" id="api-function-djula-find_002dtemplate_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0028find_002dtemplate_002aname"><span class="category-def">Function: </span><span><strong class="def-name">(find-<!-- /@w -->template*name</strong> <var class="def-var-arguments">&amp;optional (error-p t))</var><a class="copiable-link" href="#index-_0028find_002dtemplate_002aname"> &para;</a></span></dt>
 </dl>
 
-<span id="index-_002afancy_002derror_002dtemplate_002dp_002a-_0028variable_0029"></span>
-<span id="api-variable-djula-_002afancy_002derror_002dtemplate_002dp_002a"></span><dl class="def">
-<dt id="index-_002afancy_002derror_002dtemplate_002dp_002a-1"><span class="category">Variable: </span><span><strong>*fancy<span class="nolinebreak">-</span><!-- /@w -->error<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002afancy_002derror_002dtemplate_002dp_002a-1' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-_002afancy_002derror_002dtemplate_002dp_002a-_0028variable_0029"></a>
+<a class="anchor" id="api-variable-djula-_002afancy_002derror_002dtemplate_002dp_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_002afancy_002derror_002dtemplate_002dp_002a-1"><span class="category-def">Variable: </span><span><strong class="def-name">*fancy-<!-- /@w -->error-<!-- /@w -->template-<!-- /@w -->p*</strong><a class="copiable-link" href="#index-_002afancy_002derror_002dtemplate_002dp_002a-1"> &para;</a></span></dt>
 <dd>
 <p>When enabled, show a fancy template when an error occurs.
 </p></dd></dl>
 
-<span id="index-_002adefault_002dlanguage_002a-_0028variable_0029"></span>
-<span id="api-variable-djula-_002adefault_002dlanguage_002a"></span><dl class="def">
-<dt id="index-_002adefault_002dlanguage_002a"><span class="category">Variable: </span><span><strong>*default<span class="nolinebreak">-</span><!-- /@w -->language*</strong><a href='#index-_002adefault_002dlanguage_002a' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-_002adefault_002dlanguage_002a-_0028variable_0029"></a>
+<a class="anchor" id="api-variable-djula-_002adefault_002dlanguage_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_002adefault_002dlanguage_002a"><span class="category-def">Variable: </span><span><strong class="def-name">*default-<!-- /@w -->language*</strong><a class="copiable-link" href="#index-_002adefault_002dlanguage_002a"> &para;</a></span></dt>
 </dl>
 
-<span id="index-render_002dtemplate_002a-_0028function_0029-1"></span>
-<span id="api-function-djula-render_002dtemplate_002a"></span><dl class="def">
-<dt id="index-_0028render_002dtemplate_002atemplate-1"><span class="category">Function: </span><span><strong>(render<span class="nolinebreak">-</span><!-- /@w -->template*template</strong> <em>&amp;optional stream &amp;rest *template-arguments*)</em><a href='#index-_0028render_002dtemplate_002atemplate-1' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-render_002dtemplate_002a-_0028function_0029-1"></a>
+<a class="anchor" id="api-function-djula-render_002dtemplate_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0028render_002dtemplate_002atemplate-1"><span class="category-def">Function: </span><span><strong class="def-name">(render-<!-- /@w -->template*template</strong> <var class="def-var-arguments">&amp;optional stream &amp;rest *template-arguments*)</var><a class="copiable-link" href="#index-_0028render_002dtemplate_002atemplate-1"> &para;</a></span></dt>
 <dd>
-<p>Render <code>TEMPLATE</code> into <code>STREAM</code> passing <em>TEMPLATE-ARGUMENTS</em>
+<p>Render <code class="code">TEMPLATE</code> into <code class="code">STREAM</code> passing <em class="emph">TEMPLATE-ARGUMENTS</em>
 </p></dd></dl>
 
-<span id="index-_002adefault_002dtemplate_002darguments_002a-_0028variable_0029"></span>
-<span id="api-variable-djula-_002adefault_002dtemplate_002darguments_002a"></span><dl class="def">
-<dt id="index-_002adefault_002dtemplate_002darguments_002a"><span class="category">Variable: </span><span><strong>*default<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->arguments*</strong><a href='#index-_002adefault_002dtemplate_002darguments_002a' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-_002adefault_002dtemplate_002darguments_002a-_0028variable_0029"></a>
+<a class="anchor" id="api-variable-djula-_002adefault_002dtemplate_002darguments_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_002adefault_002dtemplate_002darguments_002a"><span class="category-def">Variable: </span><span><strong class="def-name">*default-<!-- /@w -->template-<!-- /@w -->arguments*</strong><a class="copiable-link" href="#index-_002adefault_002dtemplate_002darguments_002a"> &para;</a></span></dt>
 </dl>
 
-<span id="index-add_002dtemplate_002ddirectory-_0028function_0029-1"></span>
-<span id="api-function-djula-add_002dtemplate_002ddirectory"></span><dl class="def">
-<dt id="index-_0028add_002dtemplate_002ddirectorydirectory-1"><span class="category">Function: </span><span><strong>(add<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->directorydirectory</strong> <em>&amp;optional (template-store *current-store*))</em><a href='#index-_0028add_002dtemplate_002ddirectorydirectory-1' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-add_002dtemplate_002ddirectory-_0028function_0029-1"></a>
+<a class="anchor" id="api-function-djula-add_002dtemplate_002ddirectory"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_0028add_002dtemplate_002ddirectorydirectory-1"><span class="category-def">Function: </span><span><strong class="def-name">(add-<!-- /@w -->template-<!-- /@w -->directorydirectory</strong> <var class="def-var-arguments">&amp;optional (template-store *current-store*))</var><a class="copiable-link" href="#index-_0028add_002dtemplate_002ddirectorydirectory-1"> &para;</a></span></dt>
 <dd>
-<p>Adds <code>DIRECTORY</code> to the search path of the <code>TEMPLATE-STORE</code>
+<p>Adds <code class="code">DIRECTORY</code> to the search path of the <code class="code">TEMPLATE-STORE</code>
 </p></dd></dl>
 
-<span id="index-_002acatch_002dtemplate_002derrors_002dp_002a-_0028variable_0029"></span>
-<span id="api-variable-djula-_002acatch_002dtemplate_002derrors_002dp_002a"></span><dl class="def">
-<dt id="index-_002acatch_002dtemplate_002derrors_002dp_002a-1"><span class="category">Variable: </span><span><strong>*catch<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->errors<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002acatch_002dtemplate_002derrors_002dp_002a-1' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-_002acatch_002dtemplate_002derrors_002dp_002a-_0028variable_0029"></a>
+<a class="anchor" id="api-variable-djula-_002acatch_002dtemplate_002derrors_002dp_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_002acatch_002dtemplate_002derrors_002dp_002a-1"><span class="category-def">Variable: </span><span><strong class="def-name">*catch-<!-- /@w -->template-<!-- /@w -->errors-<!-- /@w -->p*</strong><a class="copiable-link" href="#index-_002acatch_002dtemplate_002derrors_002dp_002a-1"> &para;</a></span></dt>
 <dd>
 <p>When enabled, caught errors during the rendering of the template are written to the output instead of being handled by the lisp listener
 </p></dd></dl>
 
-<span id="index-_002acurrent_002dlanguage_002a-_0028variable_0029"></span>
-<span id="api-variable-djula-_002acurrent_002dlanguage_002a"></span><dl class="def">
-<dt id="index-_002acurrent_002dlanguage_002a"><span class="category">Variable: </span><span><strong>*current<span class="nolinebreak">-</span><!-- /@w -->language*</strong><a href='#index-_002acurrent_002dlanguage_002a' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-_002acurrent_002dlanguage_002a-_0028variable_0029"></a>
+<a class="anchor" id="api-variable-djula-_002acurrent_002dlanguage_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_002acurrent_002dlanguage_002a"><span class="category-def">Variable: </span><span><strong class="def-name">*current-<!-- /@w -->language*</strong><a class="copiable-link" href="#index-_002acurrent_002dlanguage_002a"> &para;</a></span></dt>
 </dl>
 
-<span id="index-_002averbose_002derrors_002dp_002a-_0028variable_0029"></span>
-<span id="api-variable-djula-_002averbose_002derrors_002dp_002a"></span><dl class="def">
-<dt id="index-_002averbose_002derrors_002dp_002a-1"><span class="category">Variable: </span><span><strong>*verbose<span class="nolinebreak">-</span><!-- /@w -->errors<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002averbose_002derrors_002dp_002a-1' class='copiable-anchor'> &para;</a></span></dt>
+<a class="index-entry-id" id="index-_002averbose_002derrors_002dp_002a-_0028variable_0029"></a>
+<a class="anchor" id="api-variable-djula-_002averbose_002derrors_002dp_002a"></a><dl class="first-deffn">
+<dt class="deffn" id="index-_002averbose_002derrors_002dp_002a-1"><span class="category-def">Variable: </span><span><strong class="def-name">*verbose-<!-- /@w -->errors-<!-- /@w -->p*</strong><a class="copiable-link" href="#index-_002averbose_002derrors_002dp_002a-1"> &para;</a></span></dt>
 <dd>
 <p>When enabled, errors are displayed more verbosely. Good for debugging
 </p></dd></dl>
 
 </div>
 <hr>
-<div class="header">
+<div class="nav-panel">
 <p>
 Next: <a href="Symbol-Index.html" accesskey="n" rel="next">Symbol Index</a>, Previous: <a href="Internationalization.html#Internationalization" accesskey="p" rel="prev">Internationalization</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>

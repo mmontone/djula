@@ -1,13 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 7.1, https://www.gnu.org/software/texinfo/ -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
 
-Copyright (C) 2014, Nick Allen.
+Copyright © 2014, Nick Allen.
 
 Maintained by Mariano Montone.
 
@@ -35,21 +35,9 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
-div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
 blockquote {
     font-style: normal;
     border-left: solid 10px red;
@@ -125,90 +113,90 @@ body {
 </head>
 
 <body lang="en">
-<div class="chapter" id="Errors-and-debugging">
-<div class="header">
+<div class="chapter-level-extent" id="Errors-and-debugging">
+<div class="nav-panel">
 <p>
 Next: <a href="Deployment.html" accesskey="n" rel="next">Deployment - Building standalone binaries</a>, Previous: <a href="Templates.html#Templates" accesskey="p" rel="prev">Templates</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="error_002dhandling-doc"></span><span id="error_002dhandling-error_002dhandling"></span><span id="Errors-and-debugging-1"></span><h2 class="chapter">10 Errors and debugging</h2>
+<a class="anchor" id="error_002dhandling-doc"></a><a class="anchor" id="error_002dhandling-error_002dhandling"></a><h2 class="chapter" id="Errors-and-debugging-1"><span>10 Errors and debugging<a class="copiable-link" href="#Errors-and-debugging-1"> &para;</a></span></h2>
 
-<ul class="section-toc">
+<ul class="mini-toc">
 <li><a href="#Error-handling" accesskey="1">Error handling</a></li>
 <li><a href="#Displaying-template-information" accesskey="2">Displaying template information</a></li>
 <li><a href="#Strict-mode" accesskey="3">Strict mode</a></li>
 <li><a href="#API_003c2_003e" accesskey="4">API</a></li>
 </ul>
-<div class="section" id="Error-handling">
-<h3 class="section">10.1 Error handling</h3>
+<div class="section-level-extent" id="Error-handling">
+<h3 class="section"><span>10.1 Error handling<a class="copiable-link" href="#Error-handling"> &para;</a></span></h3>
 
 <p>Djula catches errors and barfs them to the template output by default.
 </p>
-<p>That is controlled via the <code>*CATCH-TEMPLATE-ERRORS-P*</code> variable.
-If changed to <code>NIL</code>, then errors are not caught anymore and are
+<p>That is controlled via the <code class="code">*CATCH-TEMPLATE-ERRORS-P*</code> variable.
+If changed to <code class="code">NIL</code>, then errors are not caught anymore and are
 debuggable from the lisp listener.
 </p>
 <p>Djula provides more or less verbosity in template errors. Verbosity is
-controlled via the variable <code>*VERBOSE-ERRORS-P*</code>.
+controlled via the variable <code class="code">*VERBOSE-ERRORS-P*</code>.
 </p>
 <p>Also, there’s a fancy page to display errors, which can be disabled if
-desired. That is controlled via the variable <code>*FANCY-ERROR-TEMPLATE-P*</code>
+desired. That is controlled via the variable <code class="code">*FANCY-ERROR-TEMPLATE-P*</code>
 </p>
 </div>
-<div class="section" id="Displaying-template-information">
-<h3 class="section">10.2 Displaying template information</h3>
+<div class="section-level-extent" id="Displaying-template-information">
+<h3 class="section"><span>10.2 Displaying template information<a class="copiable-link" href="#Displaying-template-information"> &para;</a></span></h3>
 
-<p>Use the <code>debug</code> tag in your templates to display the arguments being passed to templates together with other debugging information.
+<p>Use the <code class="code">debug</code> tag in your templates to display the arguments being passed to templates together with other debugging information.
 </p>
-<p>Enable the <code>*debug-mode*</code> for displaying debug information for all rendered templates.
+<p>Enable the <code class="code">*debug-mode*</code> for displaying debug information for all rendered templates.
 </p>
 </div>
-<div class="section" id="Strict-mode">
-<h3 class="section">10.3 Strict mode</h3>
+<div class="section-level-extent" id="Strict-mode">
+<h3 class="section"><span>10.3 Strict mode<a class="copiable-link" href="#Strict-mode"> &para;</a></span></h3>
 
-<p>When <code>*strict-mode*</code> is enabled, access to variables not bound in templates signals an error.
+<p>When <code class="code">*strict-mode*</code> is enabled, access to variables not bound in templates signals an error.
 </p>
-<p>For instance, trying to render <code>{{foo}}</code> without passing a <code>:foo</code> argument to <code>render-template*</code> will signal an error. Whereas if strict mode is disabled, the variable access is bypassed and nothing is rendered.
+<p>For instance, trying to render <code class="code">{{foo}}</code> without passing a <code class="code">:foo</code> argument to <code class="code">render-template*</code> will signal an error. Whereas if strict mode is disabled, the variable access is bypassed and nothing is rendered.
 </p>
 <hr>
 </div>
-<div class="section" id="API_003c2_003e">
-<div class="header">
+<div class="section-level-extent" id="API_003c2_003e">
+<div class="nav-panel">
 <p>
 Up: <a href="#Errors-and-debugging" accesskey="u" rel="up">Errors and debugging</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="error_002dhandling-api"></span><span id="API-2"></span><h3 class="section">10.4 API</h3>
+<a class="anchor" id="error_002dhandling-api"></a><h3 class="section" id="API-2"><span>10.4 API<a class="copiable-link" href="#API-2"> &para;</a></span></h3>
 
-<dl class="def">
-<dt id="index-_002acatch_002dtemplate_002derrors_002dp_002a"><span class="category">Variable: </span><span><strong>*catch<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->errors<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002acatch_002dtemplate_002derrors_002dp_002a' class='copiable-anchor'> &para;</a></span></dt>
+<dl class="first-deffn">
+<dt class="deffn" id="index-_002acatch_002dtemplate_002derrors_002dp_002a"><span class="category-def">Variable: </span><span><strong class="def-name">*catch-<!-- /@w -->template-<!-- /@w -->errors-<!-- /@w -->p*</strong><a class="copiable-link" href="#index-_002acatch_002dtemplate_002derrors_002dp_002a"> &para;</a></span></dt>
 <dd>
 <p>When enabled, caught errors during the rendering of the template are written to the output instead of being handled by the lisp listener.
 This is enabled by default.
 </p></dd></dl>
 
-<dl class="def">
-<dt id="index-_002afancy_002derror_002dtemplate_002dp_002a"><span class="category">Variable: </span><span><strong>*fancy<span class="nolinebreak">-</span><!-- /@w -->error<span class="nolinebreak">-</span><!-- /@w -->template<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002afancy_002derror_002dtemplate_002dp_002a' class='copiable-anchor'> &para;</a></span></dt>
+<dl class="first-deffn">
+<dt class="deffn" id="index-_002afancy_002derror_002dtemplate_002dp_002a"><span class="category-def">Variable: </span><span><strong class="def-name">*fancy-<!-- /@w -->error-<!-- /@w -->template-<!-- /@w -->p*</strong><a class="copiable-link" href="#index-_002afancy_002derror_002dtemplate_002dp_002a"> &para;</a></span></dt>
 <dd>
 <p>When enabled, show a fancy template when an error ocurrs.
 This is enabled by default.
 </p></dd></dl>
 
-<dl class="def">
-<dt id="index-_002averbose_002derrors_002dp_002a"><span class="category">Variable: </span><span><strong>*verbose<span class="nolinebreak">-</span><!-- /@w -->errors<span class="nolinebreak">-</span><!-- /@w -->p*</strong><a href='#index-_002averbose_002derrors_002dp_002a' class='copiable-anchor'> &para;</a></span></dt>
+<dl class="first-deffn">
+<dt class="deffn" id="index-_002averbose_002derrors_002dp_002a"><span class="category-def">Variable: </span><span><strong class="def-name">*verbose-<!-- /@w -->errors-<!-- /@w -->p*</strong><a class="copiable-link" href="#index-_002averbose_002derrors_002dp_002a"> &para;</a></span></dt>
 <dd>
 <p>When enabled, errors are displayed more verbosely. Good for debugging.
 This is enabled by default.
 </p>
 </dd></dl>
 
-<dl class="def">
-<dt id="index-_002adebug_002dmode_002a"><span class="category">Variable: </span><span><strong>*debug<span class="nolinebreak">-</span><!-- /@w -->mode*</strong><a href='#index-_002adebug_002dmode_002a' class='copiable-anchor'> &para;</a></span></dt>
+<dl class="first-deffn">
+<dt class="deffn" id="index-_002adebug_002dmode_002a"><span class="category-def">Variable: </span><span><strong class="def-name">*debug-<!-- /@w -->mode*</strong><a class="copiable-link" href="#index-_002adebug_002dmode_002a"> &para;</a></span></dt>
 <dd>
 <p>When in debug mode, debugging information is attached to rendered templates.
 </p>
 </dd></dl>
 
-<dl class="def">
-<dt id="index-_002astrict_002dmode_002a"><span class="category">Variable: </span><span><strong>*strict<span class="nolinebreak">-</span><!-- /@w -->mode*</strong><a href='#index-_002astrict_002dmode_002a' class='copiable-anchor'> &para;</a></span></dt>
+<dl class="first-deffn">
+<dt class="deffn" id="index-_002astrict_002dmode_002a"><span class="category-def">Variable: </span><span><strong class="def-name">*strict-<!-- /@w -->mode*</strong><a class="copiable-link" href="#index-_002astrict_002dmode_002a"> &para;</a></span></dt>
 <dd>
 <p>When enabled, unbound template variables access signals an error.
 </p>
@@ -217,7 +205,7 @@ This is enabled by default.
 </div>
 </div>
 <hr>
-<div class="header">
+<div class="nav-panel">
 <p>
 Next: <a href="Deployment.html" accesskey="n" rel="next">Deployment - Building standalone binaries</a>, Previous: <a href="Templates.html#Templates" accesskey="p" rel="prev">Templates</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>

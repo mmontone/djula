@@ -1,13 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 7.1, https://www.gnu.org/software/texinfo/ -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
 
-Copyright (C) 2014, Nick Allen.
+Copyright © 2014, Nick Allen.
 
 Maintained by Mariano Montone.
 
@@ -35,21 +35,9 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
 div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
+span:hover a.copiable-link {visibility: visible}
 blockquote {
     font-style: normal;
     border-left: solid 10px red;
@@ -125,12 +113,12 @@ body {
 </head>
 
 <body lang="en">
-<div class="chapter" id="Introduction">
-<div class="header">
+<div class="chapter-level-extent" id="Introduction">
+<div class="nav-panel">
 <p>
 Next: <a href="Basics.html" accesskey="n" rel="next">Basics</a>, Previous: <a href="index.html" accesskey="p" rel="prev">Djula HTML templating system</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="intro-doc"></span><span id="intro-introduction"></span><span id="intro-welcome_002dto_002ddjula_002dhtml_002dtemplating_002dsystem_002ds_002ddocumentation"></span><span id="Introduction-1"></span><h2 class="chapter">1 Introduction</h2>
+<a class="anchor" id="intro-doc"></a><a class="anchor" id="intro-introduction"></a><a class="anchor" id="intro-welcome_002dto_002ddjula_002dhtml_002dtemplating_002dsystem_002ds_002ddocumentation"></a><h2 class="chapter" id="Introduction-1"><span>1 Introduction<a class="copiable-link" href="#Introduction-1"> &para;</a></span></h2>
 
 
 <p>Djula is an HTML templating system similar to Django templates for Common Lisp.
@@ -138,14 +126,14 @@ Next: <a href="Basics.html" accesskey="n" rel="next">Basics</a>, Previous: <a hr
 <p>Djula’s template language is designed to strike a balance between power and
 ease. It’s designed to feel comfortable to those used to working with HTML.
 </p>
-<blockquote>
-<p><b>Philosophy:</b> If you have a background in programming, or if you’re used to languages which mix
+<blockquote class="quotation">
+<p><b class="b">Philosophy:</b> If you have a background in programming, or if you’re used to languages which mix
 programming code directly into HTML, you’ll want to bear in mind that the Djula template
 system is not simply Common Lisp code embedded into HTML. This is by design: the template
 system is meant to express presentation, not program logic.
 </p>
 <p>The Djula template system provides tags which function similarly to some programming
-constructs – an <code>if</code> tag for boolean tests, a <code>for</code> tag for looping, etc. – but
+constructs – an <code class="code">if</code> tag for boolean tests, a <code class="code">for</code> tag for looping, etc. – but
 these are not simply executed as the corresponding Lisp code, and the template system will
 not execute arbitrary Lisp expressions. Only the tags, filters and syntax listed below are
 supported by default (although you can add your own extensions to the template language as
@@ -153,41 +141,41 @@ needed).
 </p></blockquote>
 
 
-<ul class="section-toc">
+<ul class="mini-toc">
 <li><a href="#Prerequisites" accesskey="1">Prerequisites</a></li>
 <li><a href="#Installation" accesskey="2">Installation</a></li>
 </ul>
 <hr>
-<div class="section" id="Prerequisites">
-<div class="header">
+<div class="section-level-extent" id="Prerequisites">
+<div class="nav-panel">
 <p>
 Next: <a href="#Installation" accesskey="n" rel="next">Installation</a>, Up: <a href="#Introduction" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="intro-prerequisites"></span><span id="Prerequisites-1"></span><h3 class="section">1.1 Prerequisites</h3>
+<a class="anchor" id="intro-prerequisites"></a><h3 class="section" id="Prerequisites-1"><span>1.1 Prerequisites<a class="copiable-link" href="#Prerequisites-1"> &para;</a></span></h3>
 
 
 <p>TODO: list of Common Lisp compilers Djula works on.
 </p>
 <hr>
 </div>
-<div class="section" id="Installation">
-<div class="header">
+<div class="section-level-extent" id="Installation">
+<div class="nav-panel">
 <p>
 Previous: <a href="#Prerequisites" accesskey="p" rel="prev">Prerequisites</a>, Up: <a href="#Introduction" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="intro-installation"></span><span id="Installation-1"></span><h3 class="section">1.2 Installation</h3>
+<a class="anchor" id="intro-installation"></a><h3 class="section" id="Installation-1"><span>1.2 Installation<a class="copiable-link" href="#Installation-1"> &para;</a></span></h3>
 
 
 <p>Djula is available on Quicklisp:
 </p>
 <div class="example lisp">
-<pre class="lisp">(ql:quickload :djula)
+<pre class="lisp-preformatted">(ql:quickload :djula)
 </pre></div>
 
 </div>
 </div>
 <hr>
-<div class="header">
+<div class="nav-panel">
 <p>
 Next: <a href="Basics.html" accesskey="n" rel="next">Basics</a>, Previous: <a href="index.html" accesskey="p" rel="prev">Djula HTML templating system</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>

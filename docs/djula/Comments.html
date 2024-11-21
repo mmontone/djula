@@ -1,13 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 7.1, https://www.gnu.org/software/texinfo/ -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
 
-Copyright (C) 2014, Nick Allen.
+Copyright © 2014, Nick Allen.
 
 Maintained by Mariano Montone.
 
@@ -35,21 +35,9 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
 div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
+span:hover a.copiable-link {visibility: visible}
 blockquote {
     font-style: normal;
     border-left: solid 10px red;
@@ -125,33 +113,33 @@ body {
 </head>
 
 <body lang="en">
-<div class="chapter" id="Comments">
-<div class="header">
+<div class="chapter-level-extent" id="Comments">
+<div class="nav-panel">
 <p>
 Next: <a href="Verbatim.html" accesskey="n" rel="next">Verbatim</a>, Previous: <a href="Tags.html#Tags" accesskey="p" rel="prev">Tags</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="comments-doc"></span><span id="comments-comments"></span><span id="comments-template_002dcomments"></span><span id="Comments-1"></span><h2 class="chapter">6 Comments</h2>
+<a class="anchor" id="comments-doc"></a><a class="anchor" id="comments-comments"></a><a class="anchor" id="comments-template_002dcomments"></a><h2 class="chapter" id="Comments-1"><span>6 Comments<a class="copiable-link" href="#Comments-1"> &para;</a></span></h2>
 
 
-<p>To comment-out part of a line in a template, use the comment syntax: <code>{# #}</code>.
+<p>To comment-out part of a line in a template, use the comment syntax: <code class="code">{# #}</code>.
 </p>
-<p>For example, this template would render as <code>'hello'</code>:
+<p>For example, this template would render as <code class="code">'hello'</code>:
 </p>
 <div class="example">
-<pre class="example">{# greeting #}hello
+<pre class="example-preformatted">{# greeting #}hello
 </pre></div>
 
 <p>A comment can contain any template code, invalid or not. For example:
 </p>
 <div class="example">
-<pre class="example">{# {% if foo %}bar{% else %} #}
+<pre class="example-preformatted">{# {% if foo %}bar{% else %} #}
 </pre></div>
 
-<p>If you need to comment out a multiline portion of the template, see the <code>comment</code> tag.
+<p>If you need to comment out a multiline portion of the template, see the <code class="code">comment</code> tag.
 </p>
 </div>
 <hr>
-<div class="header">
+<div class="nav-panel">
 <p>
 Next: <a href="Verbatim.html" accesskey="n" rel="next">Verbatim</a>, Previous: <a href="Tags.html#Tags" accesskey="p" rel="prev">Tags</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>

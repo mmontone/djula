@@ -1,13 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<!-- Created by GNU Texinfo 6.8, https://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 7.1, https://www.gnu.org/software/texinfo/ -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Djula HTML templating system 0.2, Oct 21, 2021
 
 Nick Allen
 
-Copyright (C) 2014, Nick Allen.
+Copyright © 2014, Nick Allen.
 
 Maintained by Mariano Montone.
 
@@ -35,21 +35,9 @@ Maintained by Mariano Montone.
 
 /* makeinfo 6.5 converts @quotation to <blockquote>.  Highlight them.  */
 
-a.copiable-anchor {visibility: hidden; text-decoration: none; line-height: 0em}
-a.summary-letter {text-decoration: none}
-blockquote.indentedblock {margin-right: 0em}
-div.display {margin-left: 3.2em}
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
 div.example {margin-left: 3.2em}
-kbd {font-style: oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-span.nolinebreak {white-space: nowrap}
-span.roman {font-family: initial; font-weight: normal}
-span.sansserif {font-family: sans-serif; font-weight: normal}
-span:hover a.copiable-anchor {visibility: visible}
-ul.no-bullet {list-style: none}
+span:hover a.copiable-link {visibility: visible}
 blockquote {
     font-style: normal;
     border-left: solid 10px red;
@@ -125,48 +113,48 @@ body {
 </head>
 
 <body lang="en">
-<div class="chapter" id="Tags">
-<div class="header">
+<div class="chapter-level-extent" id="Tags">
+<div class="nav-panel">
 <p>
 Next: <a href="Comments.html" accesskey="n" rel="next">Comments</a>, Previous: <a href="Variables.html#Variables" accesskey="p" rel="prev">Variables</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-doc"></span><span id="tags-tags"></span><span id="Tags-1"></span><h2 class="chapter">5 Tags</h2>
+<a class="anchor" id="tags-doc"></a><a class="anchor" id="tags-tags"></a><h2 class="chapter" id="Tags-1"><span>5 Tags<a class="copiable-link" href="#Tags-1"> &para;</a></span></h2>
 
 
 
-<ul class="section-toc">
+<ul class="mini-toc">
 <li><a href="#Overview" accesskey="1">Overview</a></li>
 <li><a href="#List-of-tags" accesskey="2">List of tags</a></li>
 <li><a href="#Custom-tags" accesskey="3">Custom tags</a></li>
 </ul>
 <hr>
-<div class="section" id="Overview">
-<div class="header">
+<div class="section-level-extent" id="Overview">
+<div class="nav-panel">
 <p>
 Next: <a href="#List-of-tags" accesskey="n" rel="next">List of tags</a>, Up: <a href="#Tags" accesskey="u" rel="up">Tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-overview"></span><span id="Overview-1"></span><h3 class="section">5.1 Overview</h3>
+<a class="anchor" id="tags-overview"></a><h3 class="section" id="Overview-1"><span>5.1 Overview<a class="copiable-link" href="#Overview-1"> &para;</a></span></h3>
 
 
-<p>Tags look like this: <code>{% tag %}</code>. Tags are more complex than variables: Some
+<p>Tags look like this: <code class="code">{% tag %}</code>. Tags are more complex than variables: Some
 create text in the output, some control flow by performing loops or logic, and
 some load external information into the template to be used by later variables.
 </p>
-<p>Some tags require beginning and ending tags (i.e. <code>{% tag %} ... tag contents
+<p>Some tags require beginning and ending tags (i.e. <code class="code">{% tag %} ... tag contents
 ... {% endtag %}</code>).
 </p>
 <p>Here are some of the more commonly used
 tags:
 </p>
 
-<dl compact="compact">
-<dt><span><code>for</code></span></dt>
+<dl class="table">
+<dt><code class="code">for</code></dt>
 <dd>
 <p>Loop over each item in an array. For example, to display a list of athletes
-provided in <code>athlete-list</code>:
+provided in <code class="code">athlete-list</code>:
 </p>
 <div class="example">
-<pre class="example">&lt;ul&gt;
+<pre class="example-preformatted">&lt;ul&gt;
 {% for athlete in athlete-list %}
     &lt;li&gt;{{ athlete.name }}&lt;/li&gt;
 {% endfor %}
@@ -174,13 +162,13 @@ provided in <code>athlete-list</code>:
 </pre></div>
 
 </dd>
-<dt><span><code>if</code>, <code>else</code></span></dt>
+<dt><code class="code">if</code>, <code class="code">else</code></dt>
 <dd>
 <p>Evaluates a variable, and if that variable is “true” the contents of the
 block are displayed:
 </p>
 <div class="example">
-<pre class="example">{% if athlete-list %}
+<pre class="example-preformatted">{% if athlete-list %}
     Number of athletes: {{ athlete-list|length }}
 {% else %}
     No athletes.
@@ -188,7 +176,7 @@ block are displayed:
 </pre></div>
 
 </dd>
-<dt><span><code>block</code> and <code>extends</code></span></dt>
+<dt><code class="code">block</code> and <code class="code">extends</code></dt>
 <dd>
 <p>Set up template inheritance (see below), a powerful way of cutting down on “boilerplate”
 in templates.
@@ -197,16 +185,16 @@ in templates.
 
 <hr>
 </div>
-<div class="section" id="List-of-tags">
-<div class="header">
+<div class="section-level-extent" id="List-of-tags">
+<div class="nav-panel">
 <p>
 Next: <a href="#Custom-tags" accesskey="n" rel="next">Custom tags</a>, Previous: <a href="#Overview" accesskey="p" rel="prev">Overview</a>, Up: <a href="#Tags" accesskey="u" rel="up">Tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-list_002dof_002dtags"></span><span id="List-of-tags-1"></span><h3 class="section">5.2 List of tags</h3>
+<a class="anchor" id="tags-list_002dof_002dtags"></a><h3 class="section" id="List-of-tags-1"><span>5.2 List of tags<a class="copiable-link" href="#List-of-tags-1"> &para;</a></span></h3>
 
 
 
-<ul class="section-toc">
+<ul class="mini-toc">
 <li><a href="#block" accesskey="1">block</a></li>
 <li><a href="#extends" accesskey="2">extends</a></li>
 <li><a href="#super" accesskey="3">super</a></li>
@@ -224,12 +212,12 @@ Next: <a href="#Custom-tags" accesskey="n" rel="next">Custom tags</a>, Previous:
 <li><a href="#include">include</a></li>
 </ul>
 <hr>
-<div class="subsection" id="block">
-<div class="header">
+<div class="subsection-level-extent" id="block">
+<div class="nav-panel">
 <p>
 Next: <a href="#extends" accesskey="n" rel="next">extends</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-block"></span><span id="block-1"></span><h4 class="subsection">5.2.1 block</h4>
+<a class="anchor" id="tags-block"></a><h4 class="subsection" id="block-1"><span>5.2.1 block<a class="copiable-link" href="#block-1"> &para;</a></span></h4>
 
 
 <p>Defines a block that can be overridden by child templates.
@@ -237,21 +225,21 @@ Next: <a href="#extends" accesskey="n" rel="next">extends</a>, Up: <a href="#Lis
 <p>Sample usage:
 </p>
 <div class="example">
-<pre class="example">{% block stylesheets %}
+<pre class="example-preformatted">{% block stylesheets %}
    ...
 {% endblock %}
 </pre></div>
 
-<p>See <a href="Templates.html#Template-inheritance">Template inheritance</a> for more information.
+<p>See <a class="xref" href="Templates.html#Template-inheritance">Template inheritance</a> for more information.
 </p>
 <hr>
 </div>
-<div class="subsection" id="extends">
-<div class="header">
+<div class="subsection-level-extent" id="extends">
+<div class="nav-panel">
 <p>
 Next: <a href="#super" accesskey="n" rel="next">super</a>, Previous: <a href="#block" accesskey="p" rel="prev">block</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-extends"></span><span id="extends-1"></span><h4 class="subsection">5.2.2 extends</h4>
+<a class="anchor" id="tags-extends"></a><h4 class="subsection" id="extends-1"><span>5.2.2 extends<a class="copiable-link" href="#extends-1"> &para;</a></span></h4>
 
 
 <p>Extends a template
@@ -259,17 +247,17 @@ Next: <a href="#super" accesskey="n" rel="next">super</a>, Previous: <a href="#b
 <p>Sample usage:
 </p>
 <div class="example">
-<pre class="example">{% extends &quot;base.html&quot; %}
+<pre class="example-preformatted">{% extends &quot;base.html&quot; %}
 </pre></div>
 
 <hr>
 </div>
-<div class="subsection" id="super">
-<div class="header">
+<div class="subsection-level-extent" id="super">
+<div class="nav-panel">
 <p>
 Next: <a href="#comment" accesskey="n" rel="next">comment</a>, Previous: <a href="#extends" accesskey="p" rel="prev">extends</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-super"></span><span id="super-1"></span><h4 class="subsection">5.2.3 super</h4>
+<a class="anchor" id="tags-super"></a><h4 class="subsection" id="super-1"><span>5.2.3 super<a class="copiable-link" href="#super-1"> &para;</a></span></h4>
 
 
 <p>Gets the content of the block from the parent template. You can pass the name of the block of the parent block you want to access. If no name is passed, then the current block’s parent is used.
@@ -277,7 +265,7 @@ Next: <a href="#comment" accesskey="n" rel="next">comment</a>, Previous: <a href
 <p>Sample usage:
 </p>
 <div class="example">
-<pre class="example">{% super &quot;stylesheets&quot; %}
+<pre class="example-preformatted">{% super &quot;stylesheets&quot; %}
 
 {% block stylesheets %}
   {% super %}
@@ -286,37 +274,37 @@ Next: <a href="#comment" accesskey="n" rel="next">comment</a>, Previous: <a href
 
 <hr>
 </div>
-<div class="subsection" id="comment">
-<div class="header">
+<div class="subsection-level-extent" id="comment">
+<div class="nav-panel">
 <p>
 Next: <a href="#cycle" accesskey="n" rel="next">cycle</a>, Previous: <a href="#super" accesskey="p" rel="prev">super</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-comment"></span><span id="comment-1"></span><h4 class="subsection">5.2.4 comment</h4>
+<a class="anchor" id="tags-comment"></a><h4 class="subsection" id="comment-1"><span>5.2.4 comment<a class="copiable-link" href="#comment-1"> &para;</a></span></h4>
 
 
-<p>Ignores everything between <code>{% comment %}</code> and <code>{% endcomment %}</code>.
+<p>Ignores everything between <code class="code">{% comment %}</code> and <code class="code">{% endcomment %}</code>.
 An optional note may be inserted in the first tag. For example, this is
 useful when commenting out code for documenting why the code was disabled.
 </p>
 <p>Sample usage:
 </p>
 <div class="example">
-<pre class="example">&lt;p&gt;Rendered text with {{ pub-date|date }}&lt;/p&gt;
+<pre class="example-preformatted">&lt;p&gt;Rendered text with {{ pub-date|date }}&lt;/p&gt;
 {% comment &quot;Optional note&quot; %}
     &lt;p&gt;Commented out text with {{ create-date|date }}&lt;/p&gt;
 {% endcomment %}
 </pre></div>
 
-<p><code>comment</code> tags cannot be nested.
+<p><code class="code">comment</code> tags cannot be nested.
 </p>
 <hr>
 </div>
-<div class="subsection" id="cycle">
-<div class="header">
+<div class="subsection-level-extent" id="cycle">
+<div class="nav-panel">
 <p>
 Next: <a href="#debug" accesskey="n" rel="next">debug</a>, Previous: <a href="#comment" accesskey="p" rel="prev">comment</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-cycle"></span><span id="cycle-1"></span><h4 class="subsection">5.2.5 cycle</h4>
+<a class="anchor" id="tags-cycle"></a><h4 class="subsection" id="cycle-1"><span>5.2.5 cycle<a class="copiable-link" href="#cycle-1"> &para;</a></span></h4>
 
 
 <p>Produces one of its arguments each time this tag is encountered. The first
@@ -327,23 +315,23 @@ the first argument and produces it again.
 <p>This tag is particularly useful in a loop:
 </p>
 <div class="example">
-<pre class="example">{% for o in some-list %}
+<pre class="example-preformatted">{% for o in some-list %}
     &lt;tr class=&quot;{% cycle &quot;row1&quot; &quot;row2&quot; %}&quot;&gt;
         ...
     &lt;/tr&gt;
 {% endfor %}
 </pre></div>
 
-<p>The first iteration produces HTML that refers to class <code>row1</code>, the second to
-<code>row2</code>, the third to <code>row1</code> again, and so on for each iteration of the
+<p>The first iteration produces HTML that refers to class <code class="code">row1</code>, the second to
+<code class="code">row2</code>, the third to <code class="code">row1</code> again, and so on for each iteration of the
 loop.
 </p>
 <p>You can use variables, too. For example, if you have two template variables,
-<code>rowvalue1</code> and <code>rowvalue2</code>, you can alternate between their values like
+<code class="code">rowvalue1</code> and <code class="code">rowvalue2</code>, you can alternate between their values like
 this:
 </p>
 <div class="example">
-<pre class="example">{% for o in some-list %}
+<pre class="example-preformatted">{% for o in some-list %}
     &lt;tr class=&quot;{% cycle rowvalue1 rowvalue2 %}&quot;&gt;
         ...
     &lt;/tr&gt;
@@ -354,106 +342,106 @@ this:
 <p>You can mix variables and strings:
 </p>
 <div class="example">
-<pre class="example">{% for o in some-list %}
+<pre class="example-preformatted">{% for o in some-list %}
     &lt;tr class=&quot;{% cycle &quot;row1&quot; rowvalue2 &quot;row3&quot; %}&quot;&gt;
         ...
     &lt;/tr&gt;
 {% endfor %}
 </pre></div>
 
-<p>You can use any number of values in a <code>cycle</code> tag, separated by spaces.
-Values enclosed in double quotes (<code>&quot;</code>) are treated
+<p>You can use any number of values in a <code class="code">cycle</code> tag, separated by spaces.
+Values enclosed in double quotes (<code class="code">&quot;</code>) are treated
 as string literals, while values without quotes are treated as template
 variables.
 </p>
 <hr>
 </div>
-<div class="subsection" id="debug">
-<div class="header">
+<div class="subsection-level-extent" id="debug">
+<div class="nav-panel">
 <p>
 Next: <a href="#filter" accesskey="n" rel="next">filter</a>, Previous: <a href="#cycle" accesskey="p" rel="prev">cycle</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-debug"></span><span id="debug-1"></span><h4 class="subsection">5.2.6 debug</h4>
+<a class="anchor" id="tags-debug"></a><h4 class="subsection" id="debug-1"><span>5.2.6 debug<a class="copiable-link" href="#debug-1"> &para;</a></span></h4>
 
 
 <p>Outputs a whole load of debugging information
 </p>
 <hr>
 </div>
-<div class="subsection" id="filter">
-<div class="header">
+<div class="subsection-level-extent" id="filter">
+<div class="nav-panel">
 <p>
 Next: <a href="#firstof" accesskey="n" rel="next">firstof</a>, Previous: <a href="#debug" accesskey="p" rel="prev">debug</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-filter"></span><span id="filter-1"></span><h4 class="subsection">5.2.7 filter</h4>
+<a class="anchor" id="tags-filter"></a><h4 class="subsection" id="filter-1"><span>5.2.7 filter<a class="copiable-link" href="#filter-1"> &para;</a></span></h4>
 
 
 <p>Filters the contents of the block through one or more filters. Multiple
 filters can be specified with pipes and filters can have arguments, just as
 in variable syntax.
 </p>
-<p>Note that the block includes <em>all</em> the text between the <code>filter</code> and
-<code>endfilter</code> tags.
+<p>Note that the block includes <em class="emph">all</em> the text between the <code class="code">filter</code> and
+<code class="code">endfilter</code> tags.
 </p>
 <p>Sample usage:
 </p>
 <div class="example">
-<pre class="example">{% filter force-escape|lower %}
+<pre class="example-preformatted">{% filter force-escape|lower %}
     This text will be HTML-escaped, and will appear in all lowercase.
 {% endfilter %}
 </pre></div>
 
 <table class="cartouche" border="1"><tr><td>
-<blockquote>
-<p><b>Note:</b> The &gt;&gt;:tfilter:&lsquo;escape&lsquo;&lt;&lt; and &gt;&gt;:tfilter:&lsquo;safe&lsquo;&lt;&lt; filters are not acceptable
-arguments. Instead, use the <code>autoescape</code> tag to manage autoescaping
+<blockquote class="quotation">
+<p><b class="b">Note:</b> The &gt;&gt;:tfilter:&lsquo;escape&lsquo;&lt;&lt; and &gt;&gt;:tfilter:&lsquo;safe&lsquo;&lt;&lt; filters are not acceptable
+arguments. Instead, use the <code class="code">autoescape</code> tag to manage autoescaping
 for blocks of template code.
 </p></blockquote>
 </td></tr></table>
 
 <hr>
 </div>
-<div class="subsection" id="firstof">
-<div class="header">
+<div class="subsection-level-extent" id="firstof">
+<div class="nav-panel">
 <p>
 Next: <a href="#for" accesskey="n" rel="next">for</a>, Previous: <a href="#filter" accesskey="p" rel="prev">filter</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-firstof"></span><span id="firstof-1"></span><h4 class="subsection">5.2.8 firstof</h4>
+<a class="anchor" id="tags-firstof"></a><h4 class="subsection" id="firstof-1"><span>5.2.8 firstof<a class="copiable-link" href="#firstof-1"> &para;</a></span></h4>
 
 
-<p>Outputs the first argument variable that is not <code>False</code>. Outputs nothing if
-all the passed variables are <code>False</code>.
+<p>Outputs the first argument variable that is not <code class="code">False</code>. Outputs nothing if
+all the passed variables are <code class="code">False</code>.
 </p>
 <p>Sample usage:
 </p>
 <div class="example">
-<pre class="example">{% firstof var1 var2 var3 %}
+<pre class="example-preformatted">{% firstof var1 var2 var3 %}
 </pre></div>
 
 <p>You can also use a literal string as a fallback value in case all
 passed variables are False:
 </p>
 <div class="example">
-<pre class="example">{% firstof var1 var2 var3 &quot;fallback value&quot; %}
+<pre class="example-preformatted">{% firstof var1 var2 var3 &quot;fallback value&quot; %}
 </pre></div>
 
 
 <hr>
 </div>
-<div class="subsection" id="for">
-<div class="header">
+<div class="subsection-level-extent" id="for">
+<div class="nav-panel">
 <p>
 Next: <a href="#if" accesskey="n" rel="next">if</a>, Previous: <a href="#firstof" accesskey="p" rel="prev">firstof</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-for"></span><span id="for-1"></span><h4 class="subsection">5.2.9 for</h4>
+<a class="anchor" id="tags-for"></a><h4 class="subsection" id="for-1"><span>5.2.9 for<a class="copiable-link" href="#for-1"> &para;</a></span></h4>
 
 
 <p>Loops over each item in an array, making the item available in a context
 variable. For example, to display a list of athletes provided in
-<code>athlete-list</code>:
+<code class="code">athlete-list</code>:
 </p>
 <div class="example">
-<pre class="example">&lt;ul&gt;
+<pre class="example-preformatted">&lt;ul&gt;
 {% for athlete in athlete-list %}
     &lt;li&gt;{{ athlete.name }}&lt;/li&gt;
 {% endfor %}
@@ -462,82 +450,83 @@ variable. For example, to display a list of athletes provided in
 
 <p>If you need to loop over an association list, you can unpack the values
 in each sublist into individual variables. For example, if your context
-contains a list of (x . y) coordinates called <code>points</code>, you could use the
+contains a list of (x . y) coordinates called <code class="code">points</code>, you could use the
 following to output the list of points:
 </p>
 <div class="example">
-<pre class="example">{% for (x . y) in points %}
+<pre class="example-preformatted">{% for (x . y) in points %}
     There is a point at {{ x }},{{ y }}
 {% endfor %}
 </pre></div>
 
 <p>This can also be useful if you need to access the items in a hash-table.
-For example, if your context contained a hash-table named <code>data</code>, the following
+For example, if your context contained a hash-table named <code class="code">data</code>, the following
 would display the keys and values of the hash-table:
 </p>
 <div class="example">
-<pre class="example">{% for (key . value) in data.items %}
+<pre class="example-preformatted">{% for (key . value) in data.items %}
     {{ key }}: {{ value }}
 {% endfor %}
 </pre></div>
 
-<p>If you need to loop a fixed number of times, you can use the following trick, where <code>data.nb</code> resolves to an integer:
+<p>If you need to loop a fixed number of times, you can use the following trick, where <code class="code">data.nb</code> resolves to an integer:
 </p>
 <div class="example">
-<pre class="example">{% for _ in data.nb.make-list %}
+<pre class="example-preformatted">{% for _ in data.nb.make-list %}
    index: {{ forloop.counter }}
 {% endfor %}
 </pre></div>
 
-<p>The <code>_</code> is not meaningful, it is only a placeholder for a value that we can’t reuse (it’s nil). See also the <code>djula::iterable-list</code> generic method.
+<p>The <code class="code">_</code> is not meaningful, it is only a placeholder for a value that we can’t reuse (it’s nil). See also the <code class="code">djula::iterable-list</code> generic method.
 </p>
 <p>The for loop sets a number of variables available within the loop:
 </p>
 
-<table>
+<table class="multitable">
 <thead><tr><th>Variable</th><th>Description</th></tr></thead>
-<tr><td><code>forloop.counter</code></td><td>The current iteration of the loop (1-indexed)</td></tr>
-<tr><td><code>forloop.counter0</code></td><td>The current iteration of the loop (0-indexed)</td></tr>
-<tr><td><code>forloop.revcounter</code></td><td>The number of iterations from the end of the
+<tbody><tr><td><code class="code">forloop.counter</code></td><td>The current iteration of the loop (1-indexed)</td></tr>
+<tr><td><code class="code">forloop.counter0</code></td><td>The current iteration of the loop (0-indexed)</td></tr>
+<tr><td><code class="code">forloop.revcounter</code></td><td>The number of iterations from the end of the
 loop (1-indexed)</td></tr>
-<tr><td><code>forloop.revcounter0</code></td><td>The number of iterations from the end of the
+<tr><td><code class="code">forloop.revcounter0</code></td><td>The number of iterations from the end of the
 loop (0-indexed)</td></tr>
-<tr><td><code>forloop.first</code></td><td>True if this is the first time through the loop</td></tr>
-<tr><td><code>forloop.last</code></td><td>True if this is the last time through the loop</td></tr>
-<tr><td><code>forloop.parentloop</code></td><td>For nested loops, this is the loop surrounding
+<tr><td><code class="code">forloop.first</code></td><td>True if this is the first time through the loop</td></tr>
+<tr><td><code class="code">forloop.last</code></td><td>True if this is the last time through the loop</td></tr>
+<tr><td><code class="code">forloop.parentloop</code></td><td>For nested loops, this is the loop surrounding
 the current one</td></tr>
+</tbody>
 </table>
 
 
 <hr>
 </div>
-<div class="subsection" id="if">
-<div class="header">
+<div class="subsection-level-extent" id="if">
+<div class="nav-panel">
 <p>
 Next: <a href="#Boolean-operators" accesskey="n" rel="next">Boolean operators</a>, Previous: <a href="#for" accesskey="p" rel="prev">for</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-if"></span><span id="if-1"></span><h4 class="subsection">5.2.10 if</h4>
+<a class="anchor" id="tags-if"></a><h4 class="subsection" id="if-1"><span>5.2.10 if<a class="copiable-link" href="#if-1"> &para;</a></span></h4>
 
 
-<p>The <code>{% if %}</code> tag evaluates a variable, and if that variable is “true” (i.e.
+<p>The <code class="code">{% if %}</code> tag evaluates a variable, and if that variable is “true” (i.e.
 exists, is not empty, and is not a false boolean value) the contents of the
 block are output:
 </p>
 <div class="example">
-<pre class="example">{% if athlete-list %}
+<pre class="example-preformatted">{% if athlete-list %}
     Number of athletes: {{ athlete-list|length }}
 {% else %}
     No athletes.
 {% endif %}
 </pre></div>
 
-<p>In the above, if <code>athlete-list</code> is not empty, the number of athletes will be
-displayed by the <code>{{ athlete-list|length }}</code> variable.
+<p>In the above, if <code class="code">athlete-list</code> is not empty, the number of athletes will be
+displayed by the <code class="code">{{ athlete-list|length }}</code> variable.
 </p>
-<p>For multiple branches, <code>elif</code> and <code>else</code> can be used:
+<p>For multiple branches, <code class="code">elif</code> and <code class="code">else</code> can be used:
 </p>
 <div class="example">
-<pre class="example">{% if kenny.sick %}
+<pre class="example-preformatted">{% if kenny.sick %}
     Kenny is sick.
 {% elif kenny.dead %}
     You killed Kenny!  You bastard!!!
@@ -548,19 +537,19 @@ displayed by the <code>{{ athlete-list|length }}</code> variable.
 
 <hr>
 </div>
-<div class="subsection" id="Boolean-operators">
-<div class="header">
+<div class="subsection-level-extent" id="Boolean-operators">
+<div class="nav-panel">
 <p>
 Next: <a href="#ifchanged" accesskey="n" rel="next">ifchanged</a>, Previous: <a href="#if" accesskey="p" rel="prev">if</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-boolean_002doperators"></span><span id="Boolean-operators-1"></span><h4 class="subsection">5.2.11 Boolean operators</h4>
+<a class="anchor" id="tags-boolean_002doperators"></a><h4 class="subsection" id="Boolean-operators-1"><span>5.2.11 Boolean operators<a class="copiable-link" href="#Boolean-operators-1"> &para;</a></span></h4>
 
 
-<p><code>if</code> tags may use <code>and</code>, <code>or</code> or <code>not</code> to test a number of
+<p><code class="code">if</code> tags may use <code class="code">and</code>, <code class="code">or</code> or <code class="code">not</code> to test a number of
 variables or to negate a given variable:
 </p>
 <div class="example">
-<pre class="example">{% if athlete-list and coach-list %}
+<pre class="example-preformatted">{% if athlete-list and coach-list %}
     Both athletes and coaches are available.
 {% endif %}
 
@@ -583,37 +572,37 @@ variables or to negate a given variable:
 {% endif %}
 </pre></div>
 
-<p>Use of both <code>and</code> and <code>or</code> clauses within the same tag is allowed, with
-<code>and</code> having higher precedence than <code>or</code> e.g.:
+<p>Use of both <code class="code">and</code> and <code class="code">or</code> clauses within the same tag is allowed, with
+<code class="code">and</code> having higher precedence than <code class="code">or</code> e.g.:
 </p>
 <div class="example">
-<pre class="example">{% if athlete-list and coach-list or cheerleader-list %}
+<pre class="example-preformatted">{% if athlete-list and coach-list or cheerleader-list %}
 </pre></div>
 
 <p>will be interpreted like:
 </p>
 <div class="example lisp">
-<pre class="lisp">(if (or (athlete-list and coach-list) cheerleader-list) ..)
+<pre class="lisp-preformatted">(if (or (and athlete-list coach-list) cheerleader-list) ..)
 </pre></div>
 
-<p>Use of actual parentheses in the <code>if</code> tag is invalid syntax. If you need
-them to indicate precedence, you should use nested <code>if</code> tags.
+<p>Use of actual parentheses in the <code class="code">if</code> tag is invalid syntax. If you need
+them to indicate precedence, you should use nested <code class="code">if</code> tags.
 </p>
 
 
 <hr>
 </div>
-<div class="subsection" id="ifchanged">
-<div class="header">
+<div class="subsection-level-extent" id="ifchanged">
+<div class="nav-panel">
 <p>
 Next: <a href="#ifequal" accesskey="n" rel="next">ifequal</a>, Previous: <a href="#Boolean-operators" accesskey="p" rel="prev">Boolean operators</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-ifchanged"></span><span id="ifchanged-1"></span><h4 class="subsection">5.2.12 ifchanged</h4>
+<a class="anchor" id="tags-ifchanged"></a><h4 class="subsection" id="ifchanged-1"><span>5.2.12 ifchanged<a class="copiable-link" href="#ifchanged-1"> &para;</a></span></h4>
 
 
 <p>Check if a value has changed from the last iteration of a loop.
 </p>
-<p>The <code>{% ifchanged %}</code> block tag is used within a loop.
+<p>The <code class="code">{% ifchanged %}</code> block tag is used within a loop.
 </p>
 <p>If given one or more variables, check whether any variable has changed.
 </p>
@@ -621,7 +610,7 @@ Next: <a href="#ifequal" accesskey="n" rel="next">ifequal</a>, Previous: <a href
 showing the hour if either the hour or the date has changed:
 </p>
 <div class="example">
-<pre class="example">{% for date in days %}
+<pre class="example-preformatted">{% for date in days %}
     {% ifchanged date.date %} {{ date.date }} {% endifchanged %}
     {% ifchanged date.hour date.date %}
         {{ date.hour }}
@@ -629,11 +618,11 @@ showing the hour if either the hour or the date has changed:
 {% endfor %}
 </pre></div>
 
-<p>The <code>ifchanged</code> tag can also take an optional <code>{% else %}</code> clause that
+<p>The <code class="code">ifchanged</code> tag can also take an optional <code class="code">{% else %}</code> clause that
 will be displayed if the value has not changed:
 </p>
 <div class="example">
-<pre class="example">{% for match in matches %}
+<pre class="example-preformatted">{% for match in matches %}
     &lt;div style=&quot;background-color:
         {% ifchanged match.ballot-id %}
             {% cycle &quot;red&quot; &quot;blue&quot; %}
@@ -646,12 +635,12 @@ will be displayed if the value has not changed:
 
 <hr>
 </div>
-<div class="subsection" id="ifequal">
-<div class="header">
+<div class="subsection-level-extent" id="ifequal">
+<div class="nav-panel">
 <p>
 Next: <a href="#ifnotequal" accesskey="n" rel="next">ifnotequal</a>, Previous: <a href="#ifchanged" accesskey="p" rel="prev">ifchanged</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-ifequal"></span><span id="ifequal-1"></span><h4 class="subsection">5.2.13 ifequal</h4>
+<a class="anchor" id="tags-ifequal"></a><h4 class="subsection" id="ifequal-1"><span>5.2.13 ifequal<a class="copiable-link" href="#ifequal-1"> &para;</a></span></h4>
 
 
 <p>Output the contents of the block if the two arguments equal each other.
@@ -659,48 +648,48 @@ Next: <a href="#ifnotequal" accesskey="n" rel="next">ifnotequal</a>, Previous: <
 <p>Example:
 </p>
 <div class="example">
-<pre class="example">{% ifequal user.pk comment.user-id %}
+<pre class="example-preformatted">{% ifequal user.pk comment.user-id %}
     ...
 {% endifequal %}
 </pre></div>
 
-<p>As in the <code>if</code> tag, an <code>{% else %}</code> clause is optional.
+<p>As in the <code class="code">if</code> tag, an <code class="code">{% else %}</code> clause is optional.
 </p>
 <p>The arguments can be hard-coded strings, so the following is valid:
 </p>
 <div class="example">
-<pre class="example">{% ifequal user.username &quot;adrian&quot; %}
+<pre class="example-preformatted">{% ifequal user.username &quot;adrian&quot; %}
     ...
 {% endifequal %}
 </pre></div>
 
-<p>An alternative to the <code>ifequal</code> tag is to use the <code>if</code> tag and the
-<code>==</code> operator.
+<p>An alternative to the <code class="code">ifequal</code> tag is to use the <code class="code">if</code> tag and the
+<code class="code">==</code> operator.
 </p>
 <hr>
 </div>
-<div class="subsection" id="ifnotequal">
-<div class="header">
+<div class="subsection-level-extent" id="ifnotequal">
+<div class="nav-panel">
 <p>
 Next: <a href="#include" accesskey="n" rel="next">include</a>, Previous: <a href="#ifequal" accesskey="p" rel="prev">ifequal</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-ifnotequal"></span><span id="ifnotequal-1"></span><h4 class="subsection">5.2.14 ifnotequal</h4>
+<a class="anchor" id="tags-ifnotequal"></a><h4 class="subsection" id="ifnotequal-1"><span>5.2.14 ifnotequal<a class="copiable-link" href="#ifnotequal-1"> &para;</a></span></h4>
 
 
-<p>Just like <code>ifequal</code>, except it tests that the two arguments are not
+<p>Just like <code class="code">ifequal</code>, except it tests that the two arguments are not
 equal.
 </p>
-<p>An alternative to the <code>ifnotequal</code> tag is to use the <code>if</code> and
-the <code>!=</code> operator.
+<p>An alternative to the <code class="code">ifnotequal</code> tag is to use the <code class="code">if</code> and
+the <code class="code">!=</code> operator.
 </p>
 <hr>
 </div>
-<div class="subsection" id="include">
-<div class="header">
+<div class="subsection-level-extent" id="include">
+<div class="nav-panel">
 <p>
 Previous: <a href="#ifnotequal" accesskey="p" rel="prev">ifnotequal</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-include"></span><span id="include-1"></span><h4 class="subsection">5.2.15 include</h4>
+<a class="anchor" id="tags-include"></a><h4 class="subsection" id="include-1"><span>5.2.15 include<a class="copiable-link" href="#include-1"> &para;</a></span></h4>
 
 <p>Loads a template and renders it with the current context. This is a way of
 “including” other templates within a template.
@@ -708,17 +697,17 @@ Previous: <a href="#ifnotequal" accesskey="p" rel="prev">ifnotequal</a>, Up: <a 
 <p>The template name can either be a variable or a hard-coded (quoted) string,
 in either single or double quotes.
 </p>
-<p>This example includes the contents of the template <code>&quot;foo/bar.html&quot;</code>:
+<p>This example includes the contents of the template <code class="code">&quot;foo/bar.html&quot;</code>:
 </p>
 <div class="example">
-<pre class="example">{% include &quot;foo/bar.html&quot; %}
+<pre class="example-preformatted">{% include &quot;foo/bar.html&quot; %}
 </pre></div>
 
 <p>A set of parameters can also be added, which become available as context
 variables when the included template is rendered:
 </p>
 <div class="example">
-<pre class="example">{% include &quot;user.html&quot; :user record.creator %}
+<pre class="example-preformatted">{% include &quot;user.html&quot; :user record.creator %}
 {% include &quot;user.html&quot; :user record.updater %}
 </pre></div>
 
@@ -726,12 +715,12 @@ variables when the included template is rendered:
 <hr>
 </div>
 </div>
-<div class="section" id="Custom-tags">
-<div class="header">
+<div class="section-level-extent" id="Custom-tags">
+<div class="nav-panel">
 <p>
 Previous: <a href="#List-of-tags" accesskey="p" rel="prev">List of tags</a>, Up: <a href="#Tags" accesskey="u" rel="up">Tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<span id="tags-custom_002dtags"></span><span id="Custom-tags-1"></span><h3 class="section">5.3 Custom tags</h3>
+<a class="anchor" id="tags-custom_002dtags"></a><h3 class="section" id="Custom-tags-1"><span>5.3 Custom tags<a class="copiable-link" href="#Custom-tags-1"> &para;</a></span></h3>
 
 
 <p>TODO
@@ -739,7 +728,7 @@ Previous: <a href="#List-of-tags" accesskey="p" rel="prev">List of tags</a>, Up:
 </div>
 </div>
 <hr>
-<div class="header">
+<div class="nav-panel">
 <p>
 Next: <a href="Comments.html" accesskey="n" rel="next">Comments</a>, Previous: <a href="Variables.html#Variables" accesskey="p" rel="prev">Variables</a>, Up: <a href="index.html" accesskey="u" rel="up">Djula HTML templating system</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
