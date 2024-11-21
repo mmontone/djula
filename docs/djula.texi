@@ -897,7 +897,7 @@ Use of both @code{and} and @code{or} clauses within the same tag is allowed, wit
 will be interpreted like:
 
 @lisp
-(if (or (athlete-list and coach-list) cheerleader-list) ..)
+(if (or (and athlete-list coach-list) cheerleader-list) ..)
 @end lisp
 
 Use of actual parentheses in the @code{if} tag is invalid syntax. If you need
