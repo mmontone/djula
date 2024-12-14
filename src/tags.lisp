@@ -322,7 +322,7 @@ Library user can extend this generic function, add methods for types to iterate 
       (let ((fs (mapcar #'compile-token clause))
             (phrase (parse-variable-phrase (string %listvar%))))
         (lambda (stream)
-          (check-template-variable-boundp (first phrase)) 
+          (check-template-variable-boundp (first phrase))
           (multiple-value-bind (iterable error-string)
               (resolve-variable-phrase phrase)
             (if error-string
@@ -461,10 +461,16 @@ The {% if %} tag evaluates a variable, and if that variable is “true” (i.e. 
                                  else))
                     (funcall f stream)))))))))
 
-(def-delimited-tag :ifchanged :endifchanged :parsed-ifchanged)
+(def-delimited-tag :ifchanged :endifchanged :semi-parsed-ifchanged)
 
-(def-token-compiler :parsed-ifchanged (%keywords% . clause)
-  (let ((fs (mapcar #'compile-token clause))
+(def-token-processor :semi-parsed-ifchanged (%keywords% . clauses) unprocessed
+  (multiple-value-bind (before-else after-else)
+      (split-if-clause clauses)
+    (process-tokens `((:parsed-ifchanged ,%keywords% ,before-else ,after-else) ,@unprocessed))))
+
+(def-token-compiler :parsed-ifchanged (%keywords% then else)
+  (let ((fs-then (mapcar #'compile-token then))
+        (fs-else (mapcar #'compile-token else))
         (phrases (mapcar #'parse-variable-phrase (mapcar 'string %keywords%))))
     (lambda (stream)
       (block <f0>
@@ -483,11 +489,16 @@ The {% if %} tag evaluates a variable, and if that variable is “true” (i.e. 
                                       (error error-string))
                                     ret)))
                             phrases)))
-          (unless (every #'equalp memory new)
-            (dolist (f fs)
-              (funcall f stream))
-            (setf (cdr (assoc :if-changed (getf *template-arguments* :forloop)))
-                  new)))))))
+          (if (not (every #'equalp memory new))
+              (progn
+                (dolist (f fs-then)
+                  (funcall f stream))
+                (setf (cdr (assoc :if-changed (getf *template-arguments* :forloop)))
+                      new))
+              ;; else
+              (dolist (f fs-else)
+                (funcall f stream))
+              ))))))
 
 (defun process-ifequal-args (unparsed-string)
   (flet ((% (start)
