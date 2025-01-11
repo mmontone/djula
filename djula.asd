@@ -36,6 +36,7 @@
      (:file "parser"         :depends-on ("pipeline"))
      (:file "pipeline"       :depends-on ("conditions"))
      (:file "specials"       :depends-on ("packages"))
+     (:file "static"         :depends-on ("packages"))
      (:file "tags"           :depends-on ("tag" "variables"))
      (:file "tag"            :depends-on ("pipeline"))
      (:file "template-store" :depends-on ("specials"))

@@ -14,6 +14,14 @@
     (with-output-to-string (s)
       (funcall fn s))))
 
+(def-test static (:compile-at :definition-time)
+  (is (string= "/public/js/app.js"
+               (progn
+                (djula::set-static-url "/public/")
+                (let ((fn (apply (djula::find-tag-compiler :static) '("js/app.js"))))
+                    (with-output-to-string (stream)
+                        (funcall fn stream)))))))
+
 (def-test firstof (:compile-at :definition-time)
   ;; Choice first string found
   (is (string= "first"

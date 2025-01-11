@@ -64,6 +64,7 @@ form that returns some debugging info."
         (condition (e)
           (template-error* "Cannot extend the template ~A because there was an error parsing the template file ~A" e template-path real-path))))))
 
+
 (def-delimited-tag :block :endblock :parsed-block)
 
 (def-token-compiler :parsed-block ((name) . block-tokens)
@@ -83,6 +84,10 @@ form that returns some debugging info."
       :collect x
     :when (funcall test (funcall key x) item)
       :do (setf removed-p t)))
+
+(def-tag-compiler :static (static-file)
+    (lambda (stream)
+        (princ (find-static-file static-file) stream)))
 
 (def-tag-compiler :super (&optional name)
   (let* ((super-block-name (or name *current-block*
