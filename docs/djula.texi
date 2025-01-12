@@ -499,7 +499,8 @@ in templates.
 
 @menu
 * block:: 
-* extends:: 
+* extends::
+* static::
 * super:: 
 * comment:: 
 * cycle:: 
@@ -548,7 +549,7 @@ Sample usage:
 
 @node static
 @anchor{tags static}
-@subsection
+@subsection static
 
 Gets the path to the given static file.
 
