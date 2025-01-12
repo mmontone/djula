@@ -546,6 +546,16 @@ Sample usage:
 @{% extends "base.html" %@}
 @end example
 
+@node static
+@anchor{tags static}
+@subsection
+
+Gets the path to the given static file.
+
+@example
+@{% static "js/app.js" %@}
+@end example
+
 @node super
 @anchor{tags super}
 @subsection super
