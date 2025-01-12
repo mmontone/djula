@@ -94,7 +94,8 @@ Tags
 List of tags
 
 * block:: 
-* extends:: 
+* extends::
+* static::
 * super:: 
 * comment:: 
 * cycle:: 
@@ -361,6 +362,13 @@ Compiles template @code{NAME} with compiler in @emph{CURRENT-COMPILER}
 Render @code{TEMPLATE} into @code{STREAM} passing @emph{TEMPLATE-ARGUMENTS}
 @end deffn
 
+@geindex set-static-url (function)
+@anchor{usage function djula set-static-url}
+@deffn {Function}  (set@w{-}static@w{-}url url (template-store *current-store*))
+
+Sets @code {djula::*static-path*} to be @code{url}, this allows the @code{static} tag to serve static files from the static url.
+@end deffn
+
 @node Variables
 @anchor{variables doc}@anchor{variables variables}
 @chapter Variables
@@ -491,7 +499,8 @@ in templates.
 
 @menu
 * block:: 
-* extends:: 
+* extends::
+* static::
 * super:: 
 * comment:: 
 * cycle:: 
@@ -536,6 +545,16 @@ Sample usage:
 
 @example
 @{% extends "base.html" %@}
+@end example
+
+@node static
+@anchor{tags static}
+@subsection static
+
+Gets the path to the given static file.
+
+@example
+@{% static "js/app.js" %@}
 @end example
 
 @node super

@@ -46,6 +46,7 @@
            #:url-encode
            #:url-encode-path
            #:add-template-directory
+           #:set-static-url
            #:translate
            #:*translation-backend*))
 
@@ -129,6 +130,7 @@
                #:endcomment
                #:endfor
                #:set-language
+               #:static
                #:emit-js
                #:endifequal
                #:templatetag
