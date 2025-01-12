@@ -557,6 +557,11 @@ Gets the path to the given static file.
 @{% static "js/app.js" %@}
 @end example
 
+Websites generally need to serve additional files such as images, JavaScript, or CSS. We refer to these files as “static files”.
+The @code{static} tag allows the decoupling of an static asset url from its url base. The static base url path is configured via @code{set-static-url}, then the @code{static} tags appends that url to the given url.
+
+For instance, setting @code{@{% set-static-url "/static" %@}}, then @code{@{% static "image.png" %@}} will result in @code{/static/image.png} url being rendered.
+
 @node super
 @anchor{tags super}
 @subsection super

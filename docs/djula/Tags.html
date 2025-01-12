@@ -197,13 +197,14 @@ Next: <a href="#Custom-tags" accesskey="n" rel="next">Custom tags</a>, Previous:
 <ul class="mini-toc">
 <li><a href="#block" accesskey="1">block</a></li>
 <li><a href="#extends" accesskey="2">extends</a></li>
-<li><a href="#super" accesskey="3">super</a></li>
-<li><a href="#comment" accesskey="4">comment</a></li>
-<li><a href="#cycle" accesskey="5">cycle</a></li>
-<li><a href="#debug" accesskey="6">debug</a></li>
-<li><a href="#filter" accesskey="7">filter</a></li>
-<li><a href="#firstof" accesskey="8">firstof</a></li>
-<li><a href="#for" accesskey="9">for</a></li>
+<li><a href="#static" accesskey="3">static</a></li>
+<li><a href="#super" accesskey="4">super</a></li>
+<li><a href="#comment" accesskey="5">comment</a></li>
+<li><a href="#cycle" accesskey="6">cycle</a></li>
+<li><a href="#debug" accesskey="7">debug</a></li>
+<li><a href="#filter" accesskey="8">filter</a></li>
+<li><a href="#firstof" accesskey="9">firstof</a></li>
+<li><a href="#for">for</a></li>
 <li><a href="#if">if</a></li>
 <li><a href="#Boolean-operators">Boolean operators</a></li>
 <li><a href="#ifchanged">ifchanged</a></li>
@@ -237,7 +238,7 @@ Next: <a href="#extends" accesskey="n" rel="next">extends</a>, Up: <a href="#Lis
 <div class="subsection-level-extent" id="extends">
 <div class="nav-panel">
 <p>
-Next: <a href="#super" accesskey="n" rel="next">super</a>, Previous: <a href="#block" accesskey="p" rel="prev">block</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#static" accesskey="n" rel="next">static</a>, Previous: <a href="#block" accesskey="p" rel="prev">block</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
 <a class="anchor" id="tags-extends"></a><h4 class="subsection" id="extends-1"><span>5.2.2 extends<a class="copiable-link" href="#extends-1"> &para;</a></span></h4>
 
@@ -252,12 +253,32 @@ Next: <a href="#super" accesskey="n" rel="next">super</a>, Previous: <a href="#b
 
 <hr>
 </div>
+<div class="subsection-level-extent" id="static">
+<div class="nav-panel">
+<p>
+Next: <a href="#super" accesskey="n" rel="next">super</a>, Previous: <a href="#extends" accesskey="p" rel="prev">extends</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<a class="anchor" id="tags-static"></a><h4 class="subsection" id="static-1"><span>5.2.3 static<a class="copiable-link" href="#static-1"> &para;</a></span></h4>
+
+<p>Gets the path to the given static file.
+</p>
+<div class="example">
+<pre class="example-preformatted">{% static &quot;js/app.js&quot; %}
+</pre></div>
+
+<p>Websites generally need to serve additional files such as images, JavaScript, or CSS. We refer to these files as “static files”.
+The <code class="code">static</code> tag allows the decoupling of an static asset url from its url base. The static base url path is configured via <code class="code">set-static-url</code>, then the <code class="code">static</code> tags appends that url to the given url.
+</p>
+<p>For instance, setting <code class="code">{% set-static-url &quot;/static&quot; %}</code>, then <code class="code">{% static &quot;image.png&quot; %}</code> will result in <code class="code">/static/image.png</code> url being rendered.
+</p>
+<hr>
+</div>
 <div class="subsection-level-extent" id="super">
 <div class="nav-panel">
 <p>
-Next: <a href="#comment" accesskey="n" rel="next">comment</a>, Previous: <a href="#extends" accesskey="p" rel="prev">extends</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#comment" accesskey="n" rel="next">comment</a>, Previous: <a href="#static" accesskey="p" rel="prev">static</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<a class="anchor" id="tags-super"></a><h4 class="subsection" id="super-1"><span>5.2.3 super<a class="copiable-link" href="#super-1"> &para;</a></span></h4>
+<a class="anchor" id="tags-super"></a><h4 class="subsection" id="super-1"><span>5.2.4 super<a class="copiable-link" href="#super-1"> &para;</a></span></h4>
 
 
 <p>Gets the content of the block from the parent template. You can pass the name of the block of the parent block you want to access. If no name is passed, then the current block’s parent is used.
@@ -279,7 +300,7 @@ Next: <a href="#comment" accesskey="n" rel="next">comment</a>, Previous: <a href
 <p>
 Next: <a href="#cycle" accesskey="n" rel="next">cycle</a>, Previous: <a href="#super" accesskey="p" rel="prev">super</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<a class="anchor" id="tags-comment"></a><h4 class="subsection" id="comment-1"><span>5.2.4 comment<a class="copiable-link" href="#comment-1"> &para;</a></span></h4>
+<a class="anchor" id="tags-comment"></a><h4 class="subsection" id="comment-1"><span>5.2.5 comment<a class="copiable-link" href="#comment-1"> &para;</a></span></h4>
 
 
 <p>Ignores everything between <code class="code">{% comment %}</code> and <code class="code">{% endcomment %}</code>.
@@ -304,7 +325,7 @@ useful when commenting out code for documenting why the code was disabled.
 <p>
 Next: <a href="#debug" accesskey="n" rel="next">debug</a>, Previous: <a href="#comment" accesskey="p" rel="prev">comment</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<a class="anchor" id="tags-cycle"></a><h4 class="subsection" id="cycle-1"><span>5.2.5 cycle<a class="copiable-link" href="#cycle-1"> &para;</a></span></h4>
+<a class="anchor" id="tags-cycle"></a><h4 class="subsection" id="cycle-1"><span>5.2.6 cycle<a class="copiable-link" href="#cycle-1"> &para;</a></span></h4>
 
 
 <p>Produces one of its arguments each time this tag is encountered. The first
@@ -361,7 +382,7 @@ variables.
 <p>
 Next: <a href="#filter" accesskey="n" rel="next">filter</a>, Previous: <a href="#cycle" accesskey="p" rel="prev">cycle</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<a class="anchor" id="tags-debug"></a><h4 class="subsection" id="debug-1"><span>5.2.6 debug<a class="copiable-link" href="#debug-1"> &para;</a></span></h4>
+<a class="anchor" id="tags-debug"></a><h4 class="subsection" id="debug-1"><span>5.2.7 debug<a class="copiable-link" href="#debug-1"> &para;</a></span></h4>
 
 
 <p>Outputs a whole load of debugging information
@@ -373,7 +394,7 @@ Next: <a href="#filter" accesskey="n" rel="next">filter</a>, Previous: <a href="
 <p>
 Next: <a href="#firstof" accesskey="n" rel="next">firstof</a>, Previous: <a href="#debug" accesskey="p" rel="prev">debug</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<a class="anchor" id="tags-filter"></a><h4 class="subsection" id="filter-1"><span>5.2.7 filter<a class="copiable-link" href="#filter-1"> &para;</a></span></h4>
+<a class="anchor" id="tags-filter"></a><h4 class="subsection" id="filter-1"><span>5.2.8 filter<a class="copiable-link" href="#filter-1"> &para;</a></span></h4>
 
 
 <p>Filters the contents of the block through one or more filters. Multiple
@@ -406,7 +427,7 @@ for blocks of template code.
 <p>
 Next: <a href="#for" accesskey="n" rel="next">for</a>, Previous: <a href="#filter" accesskey="p" rel="prev">filter</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<a class="anchor" id="tags-firstof"></a><h4 class="subsection" id="firstof-1"><span>5.2.8 firstof<a class="copiable-link" href="#firstof-1"> &para;</a></span></h4>
+<a class="anchor" id="tags-firstof"></a><h4 class="subsection" id="firstof-1"><span>5.2.9 firstof<a class="copiable-link" href="#firstof-1"> &para;</a></span></h4>
 
 
 <p>Outputs the first argument variable that is not <code class="code">False</code>. Outputs nothing if
@@ -433,7 +454,7 @@ passed variables are False:
 <p>
 Next: <a href="#if" accesskey="n" rel="next">if</a>, Previous: <a href="#firstof" accesskey="p" rel="prev">firstof</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<a class="anchor" id="tags-for"></a><h4 class="subsection" id="for-1"><span>5.2.9 for<a class="copiable-link" href="#for-1"> &para;</a></span></h4>
+<a class="anchor" id="tags-for"></a><h4 class="subsection" id="for-1"><span>5.2.10 for<a class="copiable-link" href="#for-1"> &para;</a></span></h4>
 
 
 <p>Loops over each item in an array, making the item available in a context
@@ -505,7 +526,7 @@ the current one</td></tr>
 <p>
 Next: <a href="#Boolean-operators" accesskey="n" rel="next">Boolean operators</a>, Previous: <a href="#for" accesskey="p" rel="prev">for</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<a class="anchor" id="tags-if"></a><h4 class="subsection" id="if-1"><span>5.2.10 if<a class="copiable-link" href="#if-1"> &para;</a></span></h4>
+<a class="anchor" id="tags-if"></a><h4 class="subsection" id="if-1"><span>5.2.11 if<a class="copiable-link" href="#if-1"> &para;</a></span></h4>
 
 
 <p>The <code class="code">{% if %}</code> tag evaluates a variable, and if that variable is “true” (i.e.
@@ -542,7 +563,7 @@ displayed by the <code class="code">{{ athlete-list|length }}</code> variable.
 <p>
 Next: <a href="#ifchanged" accesskey="n" rel="next">ifchanged</a>, Previous: <a href="#if" accesskey="p" rel="prev">if</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<a class="anchor" id="tags-boolean_002doperators"></a><h4 class="subsection" id="Boolean-operators-1"><span>5.2.11 Boolean operators<a class="copiable-link" href="#Boolean-operators-1"> &para;</a></span></h4>
+<a class="anchor" id="tags-boolean_002doperators"></a><h4 class="subsection" id="Boolean-operators-1"><span>5.2.12 Boolean operators<a class="copiable-link" href="#Boolean-operators-1"> &para;</a></span></h4>
 
 
 <p><code class="code">if</code> tags may use <code class="code">and</code>, <code class="code">or</code> or <code class="code">not</code> to test a number of
@@ -597,7 +618,7 @@ them to indicate precedence, you should use nested <code class="code">if</code> 
 <p>
 Next: <a href="#ifequal" accesskey="n" rel="next">ifequal</a>, Previous: <a href="#Boolean-operators" accesskey="p" rel="prev">Boolean operators</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<a class="anchor" id="tags-ifchanged"></a><h4 class="subsection" id="ifchanged-1"><span>5.2.12 ifchanged<a class="copiable-link" href="#ifchanged-1"> &para;</a></span></h4>
+<a class="anchor" id="tags-ifchanged"></a><h4 class="subsection" id="ifchanged-1"><span>5.2.13 ifchanged<a class="copiable-link" href="#ifchanged-1"> &para;</a></span></h4>
 
 
 <p>Check if a value has changed from the last iteration of a loop.
@@ -640,7 +661,7 @@ will be displayed if the value has not changed:
 <p>
 Next: <a href="#ifnotequal" accesskey="n" rel="next">ifnotequal</a>, Previous: <a href="#ifchanged" accesskey="p" rel="prev">ifchanged</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<a class="anchor" id="tags-ifequal"></a><h4 class="subsection" id="ifequal-1"><span>5.2.13 ifequal<a class="copiable-link" href="#ifequal-1"> &para;</a></span></h4>
+<a class="anchor" id="tags-ifequal"></a><h4 class="subsection" id="ifequal-1"><span>5.2.14 ifequal<a class="copiable-link" href="#ifequal-1"> &para;</a></span></h4>
 
 
 <p>Output the contents of the block if the two arguments equal each other.
@@ -673,7 +694,7 @@ Next: <a href="#ifnotequal" accesskey="n" rel="next">ifnotequal</a>, Previous: <
 <p>
 Next: <a href="#include" accesskey="n" rel="next">include</a>, Previous: <a href="#ifequal" accesskey="p" rel="prev">ifequal</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<a class="anchor" id="tags-ifnotequal"></a><h4 class="subsection" id="ifnotequal-1"><span>5.2.14 ifnotequal<a class="copiable-link" href="#ifnotequal-1"> &para;</a></span></h4>
+<a class="anchor" id="tags-ifnotequal"></a><h4 class="subsection" id="ifnotequal-1"><span>5.2.15 ifnotequal<a class="copiable-link" href="#ifnotequal-1"> &para;</a></span></h4>
 
 
 <p>Just like <code class="code">ifequal</code>, except it tests that the two arguments are not
@@ -689,7 +710,7 @@ the <code class="code">!=</code> operator.
 <p>
 Previous: <a href="#ifnotequal" accesskey="p" rel="prev">ifnotequal</a>, Up: <a href="#List-of-tags" accesskey="u" rel="up">List of tags</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Symbol-Index.html" title="Index" rel="index">Index</a>]</p>
 </div>
-<a class="anchor" id="tags-include"></a><h4 class="subsection" id="include-1"><span>5.2.15 include<a class="copiable-link" href="#include-1"> &para;</a></span></h4>
+<a class="anchor" id="tags-include"></a><h4 class="subsection" id="include-1"><span>5.2.16 include<a class="copiable-link" href="#include-1"> &para;</a></span></h4>
 
 <p>Loads a template and renders it with the current context. This is a way of
 “including” other templates within a template.
