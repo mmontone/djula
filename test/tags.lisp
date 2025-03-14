@@ -304,6 +304,34 @@
                                               (list "baz")))
          "<ul><li>foo</li><li>bar</li></ul><ul><li>baz</li></ul>"))))
 
+(def-test empty-loop-test (:compile-at :definition-time)
+  (let ((template (compile-string "<ul>{% for item in items %}<li>{{item}}</li>{% empty %}<li>No items found</li>{% endfor %}</ul>")))
+    ;; Test with non-empty list
+    (is (equalp
+         (djula:render-template* template nil :items (list "foo" "bar"))
+         "<ul><li>foo</li><li>bar</li></ul>"))
+    ;; Test with empty list
+    (is (equalp
+         (djula:render-template* template nil :items '())
+         "<ul><li>No items found</li></ul>"))
+    ;; Test with nil (should show empty content)
+    (is (equalp
+         (djula:render-template* template nil)
+         "<ul><li>No items found</li></ul>")))
+  
+  ;; Test with nested loops and empty
+  (let ((template (compile-string "{% for list in lists %}<ul>{% for item in list %}<li>{{item}}</li>{% empty %}<li>Empty inner list</li>{% endfor %}</ul>{% empty %}<p>No lists found</p>{% endfor %}")))
+    ;; Test with non-empty outer list, mixed inner lists
+    (is (equalp
+         (djula:render-template* template nil
+                                 :lists (list (list "foo" "bar")
+                                              '()))
+         "<ul><li>foo</li><li>bar</li></ul><ul><li>Empty inner list</li></ul>"))
+    ;; Test with empty outer list
+    (is (equalp
+         (djula:render-template* template nil :lists '())
+         "<p>No lists found</p>"))))
+
 (def-test logical-statements-test (:compile-at :definition-time)
   (let ((template (compile-string "{% if foo and baz %}yes{% else %}no{% endif %}")))
     (is (equalp
@@ -493,9 +521,3 @@
                 "start [changed] 1 1 end"))
     (is (equalp (djula:render-template* template nil :data '(1 1))
                 "start [changed] 1 1 end"))))
-
-#+nil(test translation-test
-       (let ((template (compile-string "{% translation hello %}")))
-         (djula:render-template* template))
-       (let ((template (compile-string "{_hello_}")))
-         (djula:render-template* template)))

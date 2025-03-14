@@ -324,45 +324,54 @@ Library user can extend this generic function, add methods for types to iterate 
   (if (not (eql in :in))
       (list
        (list :string (template-error-string "error parsing {% for %}, it doesn't look like {% for X in XS %}...")))
-      (let ((fs (mapcar #'compile-token clause))
-            (phrase (parse-variable-phrase (string %listvar%))))
-        (lambda (stream)
-          (check-template-variable-boundp (first phrase))
-          (multiple-value-bind (iterable error-string)
-              (resolve-variable-phrase phrase)
-            (if error-string
-                (with-template-error error-string
-                  (error error-string))
-                (let* ((list (iterable-list iterable))
-                       (length (length list))
-                       (loopfor (list (cons :counter 1)
-                                      (cons :counter0 0)
-                                      (cons :revcounter length)
-                                      (cons :revcounter0 (1- length))
-                                      (cons :first t)
-                                      (cons :last (= length 1))
-                                      (cons :parentloop (get-variable :forloop nil))))
-                       (*template-arguments*
-                         ;; NIL is a placeholder for the value of the loop variable.
-                         (if (consp var)
-                             (list* (car var) nil (cdr var) nil :forloop loopfor *template-arguments*)
-                             (list* var nil :forloop loopfor *template-arguments*))))
-                  (dolist (x (if reversed (reverse list) list))
-                    ;; Update the value of the loop variable.
-                    (if (consp var)
-                        (progn
-                          (setf (getf *template-arguments* (car var)) (car x))
-                          (setf (getf *template-arguments* (cdr var)) (cdr x)))
-                        (setf (getf *template-arguments* var) x))
-                    (dolist (f fs)
-                      (funcall f stream))
-                    (incf (cdr (assoc :counter loopfor)))
-                    (incf (cdr (assoc :counter0 loopfor)))
-                    (decf (cdr (assoc :revcounter loopfor)))
-                    (decf (cdr (assoc :revcounter0 loopfor)))
-                    (setf (cdr (assoc :first loopfor)) nil
-                          (cdr (assoc :last loopfor))
-                          (zerop (cdr (assoc :revcounter0 loopfor))))))))))))
+      (multiple-value-bind (loop-clause empty-clause)
+          (split-for-clause clause)
+        (let ((fs (mapcar #'compile-token loop-clause))
+              (empty-fs (mapcar #'compile-token empty-clause))
+              (phrase (parse-variable-phrase (string %listvar%))))
+          (lambda (stream)
+            (check-template-variable-boundp (first phrase))
+            (multiple-value-bind (iterable error-string)
+                (resolve-variable-phrase phrase)
+              (if error-string
+                  (with-template-error error-string
+                    (error error-string))
+                  (let* ((lst (iterable-list iterable))
+                         (lst-length (length lst)))
+                    (if (zerop lst-length)
+                        ;; If the list is empty and we have an empty clause, execute it
+                        (when empty-fs
+                          (dolist (f empty-fs)
+                            (funcall f stream)))
+                        ;; Otherwise, execute the loop
+                        (let* ((loopfor (list (cons :counter 1)
+                                              (cons :counter0 0)
+                                              (cons :revcounter lst-length)
+                                              (cons :revcounter0 (1- lst-length))
+                                              (cons :first t)
+                                              (cons :last (= lst-length 1))
+                                              (cons :parentloop (get-variable :forloop nil))))
+                               (*template-arguments*
+                                 ;; NIL is a placeholder for the value of the loop variable.
+                                 (if (consp var)
+                                     (list* (car var) nil (cdr var) nil :forloop loopfor *template-arguments*)
+                                     (list* var nil :forloop loopfor *template-arguments*))))
+                          (dolist (x (if reversed (reverse lst) lst))
+                            ;; Update the value of the loop variable.
+                            (if (consp var)
+                                (progn
+                                  (setf (getf *template-arguments* (car var)) (car x))
+                                  (setf (getf *template-arguments* (cdr var)) (cdr x)))
+                                (setf (getf *template-arguments* var) x))
+                            (dolist (f fs)
+                              (funcall f stream))
+                            (incf (cdr (assoc :counter loopfor)))
+                            (incf (cdr (assoc :counter0 loopfor)))
+                            (decf (cdr (assoc :revcounter loopfor)))
+                            (decf (cdr (assoc :revcounter0 loopfor)))
+                            (setf (cdr (assoc :first loopfor)) nil
+                                  (cdr (assoc :last loopfor))
+                                  (zerop (cdr (assoc :revcounter0 loopfor)))))))))))))))
 
 (defun split-if-clause (clause-tokens)
   "returns two values:
@@ -378,6 +387,21 @@ Library user can extend this generic function, add methods for types to iterate 
         (values (subseq clause-tokens 0 else)
                 (subseq clause-tokens (1+ else)))
         clause-tokens)))
+
+(defun split-for-clause (clause-tokens)
+  "returns two values:
+
+   1. all clause tokens that appear _before_ the first :EMPTY token
+   2. all clause tokens that appear _after_ the first :EMPTY token"
+  (let ((empty (position-if
+                (lambda (x)
+                  (and (eql (first x) :tag)
+                       (eql (second x) :empty)))
+                clause-tokens)))
+    (if empty
+        (values (subseq clause-tokens 0 empty)
+                (subseq clause-tokens (1+ empty)))
+        (values clause-tokens nil))))
 
 (def-delimited-tag :if :endif :semi-parsed-if)
 
@@ -431,7 +455,7 @@ conditional branching of the {% if %} tag. when called, the function returns two
 
 This is Django documentation for if expressions:
 
-The {% if %} tag evaluates a variable, and if that variable is “true” (i.e. exists, is not empty, and is not a false boolean value)"
+The {% if %} tag evaluates a variable, and if that variable is "true" (i.e. exists, is not empty, and is not a false boolean value)"
   (and (typep val 'sequence)
        (zerop (length val))))
 
@@ -908,3 +932,6 @@ the file pointed to by the template-path `PATH'"
        (:/= (not (equalp (compile-boolexp (second bexp))
                          (compile-boolexp (third bexp)))))))
     (t (error "Cannot compile boolean expression"))))
+
+(def-tag-compiler :empty ()
+  (constantly nil))
