@@ -86,8 +86,8 @@ form that returns some debugging info."
       :do (setf removed-p t)))
 
 (def-tag-compiler :static (static-file)
-    (lambda (stream)
-        (princ (find-static-file static-file) stream)))
+  (lambda (stream)
+    (princ (find-static-file static-file) stream)))
 
 (def-tag-compiler :super (&optional name)
   (let* ((super-block-name (or name *current-block*
@@ -300,6 +300,9 @@ is useful to determine the package in which :LISP tags are executed."
             (funcall f s)))
         filters)
        stream))))
+
+(def-tag-compiler :empty ()
+  (constantly nil))
 
 (def-delimited-tag :for :endfor :parsed-for)
 
@@ -918,11 +921,11 @@ the file pointed to by the template-path `PATH'"
        (:< (< (compile-boolexp (second bexp))
               (compile-boolexp (third bexp))))
        (:<= (<= (compile-boolexp (second bexp))
-                (compile-boolexp (third bexp))))
+               (compile-boolexp (third bexp))))
        (:> (> (compile-boolexp (second bexp))
               (compile-boolexp (third bexp))))
        (:>= (>= (compile-boolexp (second bexp))
-                (compile-boolexp (third bexp))))
+               (compile-boolexp (third bexp))))
        (:== (equalp (compile-boolexp (second bexp))
                     (compile-boolexp (third bexp))))
        (:!= (not (equalp (compile-boolexp (second bexp))
@@ -932,6 +935,3 @@ the file pointed to by the template-path `PATH'"
        (:/= (not (equalp (compile-boolexp (second bexp))
                          (compile-boolexp (third bexp)))))))
     (t (error "Cannot compile boolean expression"))))
-
-(def-tag-compiler :empty ()
-  (constantly nil))

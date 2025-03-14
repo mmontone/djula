@@ -17,10 +17,10 @@
 (def-test static (:compile-at :definition-time)
   (is (string= "/public/js/app.js"
                (progn
-                (djula::set-static-url "/public/")
-                (let ((fn (apply (djula::find-tag-compiler :static) '("js/app.js"))))
-                    (with-output-to-string (stream)
-                        (funcall fn stream)))))))
+                 (djula::set-static-url "/public/")
+                 (let ((fn (apply (djula::find-tag-compiler :static) '("js/app.js"))))
+                   (with-output-to-string (stream)
+                     (funcall fn stream)))))))
 
 (def-test firstof (:compile-at :definition-time)
   ;; Choice first string found
@@ -318,7 +318,7 @@
     (is (equalp
          (djula:render-template* template nil)
          "<ul><li>No items found</li></ul>")))
-  
+
   ;; Test with nested loops and empty
   (let ((template (compile-string "{% for list in lists %}<ul>{% for item in list %}<li>{{item}}</li>{% empty %}<li>Empty inner list</li>{% endfor %}</ul>{% empty %}<p>No lists found</p>{% endfor %}")))
     ;; Test with non-empty outer list, mixed inner lists
