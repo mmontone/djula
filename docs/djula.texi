@@ -473,6 +473,16 @@ provided in @code{athlete-list}:
 </ul>
 @end example
 
+@code{for} loops also support an @code{@{% empty %@}} tag:
+
+@example
+@{% for athlete in athlete_list %@}
+    <li>@{@{ athlete.name @}@}</li>
+@{% empty %@}
+    <li>Sorry, no athletes in this list.</li>
+@{% endfor %@}
+@end example
+
 @item @code{if}, @code{else}
 
 Evaluates a variable, and if that variable is “true” the contents of the

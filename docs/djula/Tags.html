@@ -161,6 +161,16 @@ provided in <code class="code">athlete-list</code>:
 &lt;/ul&gt;
 </pre></div>
 
+<p><code class="code">for</code> loops also support an <code class="code">{% empty %}</code> tag:
+</p>
+<div class="example">
+<pre class="example-preformatted">{% for athlete in athlete_list %}
+    &lt;li&gt;{{ athlete.name }}&lt;/li&gt;
+{% empty %}
+    &lt;li&gt;Sorry, no athletes in this list.&lt;/li&gt;
+{% endfor %}
+</pre></div>
+
 </dd>
 <dt><code class="code">if</code>, <code class="code">else</code></dt>
 <dd>
