@@ -856,6 +856,15 @@ the current one
 
 @end multitable
 
+@code{for} loops also support an @code{@{% empty %@}} tag:
+
+@example
+@{% for athlete in athlete_list %@}
+    <li>@{@{ athlete.name @}@}</li>
+@{% empty %@}
+    <li>Sorry, no athletes in this list.</li>
+@{% endfor %@}
+@end example
 
 @node if
 @anchor{tags if}
