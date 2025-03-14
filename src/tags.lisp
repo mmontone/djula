@@ -455,7 +455,7 @@ conditional branching of the {% if %} tag. when called, the function returns two
 
 This is Django documentation for if expressions:
 
-The {% if %} tag evaluates a variable, and if that variable is "true" (i.e. exists, is not empty, and is not a false boolean value)"
+The {% if %} tag evaluates a variable, and if that variable is \"true\" (i.e. exists, is not empty, and is not a false boolean value)"
   (and (typep val 'sequence)
        (zerop (length val))))
 
