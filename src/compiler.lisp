@@ -98,35 +98,45 @@ DESTINATION is the same as FORMAT destination.
 TEMPLATE-ARGUMENTS is a property-list. "
   (cond
     ((or (pathnamep template)
-         (stringp template))
-     ;; Accept strings and pathnames as template designators.
-     (apply #'render-template* (compile-template* template) destination *template-arguments*))
+       (stringp template))
+      ;; Accept strings and pathnames as template designators.
+      (apply #'render-template* (compile-template* template) destination *template-arguments*))
     ((functionp template)
-     (let ((*template-arguments* (append *template-arguments* *default-template-arguments*))
-           (*accumulated-javascript-strings* nil)
-           (*current-language* *current-language*)
-           (*current-template* template))
-       (handler-case
-           (uiop:with-output (stream destination)
-             (when *debug-mode*
-               (if *fancy-debug-p*
-                   (print-fancy-debugging-information stream)
-                   (print-debugging-information stream)))
-             (funcall template stream))
-         (error (e)
-           (if (and *catch-template-errors-p*
-                    *fancy-error-template-p*)
-               (render-error-template e destination
-                                      :backtrace (with-output-to-string (s)
-                                                   (trivial-backtrace:print-backtrace-to-stream s))
-                                      :template template
-                                      :context (list :arguments *template-arguments*
-                                                     :language *current-language*
-                                                     :template-package *template-package*))
-               (error e))))))
+      (let ((*template-arguments* (append *template-arguments* *default-template-arguments*))
+             (*accumulated-javascript-strings* nil)
+             (*current-language* *current-language*)
+             (*current-template* template))
+        (handler-case
+          (uiop:with-output (stream destination)
+            ;; if debugging mode is enabled, append debugging information to the template output
+            (when *debug-mode*
+              (if *fancy-debug-p*
+                (print-fancy-debugging-information stream)
+                (print-debugging-information stream)))
+            ;; render the template
+            (funcall template stream))
+          (error (e)
+            ;; template rendering error handling
+            (if *catch-template-errors-p*
+              (if *fancy-error-template-p*
+                ;; disable error templates when rendering error templates
+                ;; to prevent infinite recursion
+                (let ((*fancy-error-template-p* nil))
+                  (render-error-template e destination
+                    :backtrace (with-output-to-string (s)
+                                 (trivial-backtrace:print-backtrace-to-stream s))
+                    :template template
+                    :context (list :arguments *template-arguments*
+                               :language *current-language*
+                               :template-package *template-package*)))
+                ;; else, print the error plainly
+                (uiop:with-output (stream destination)
+                  (princ e stream)))
+              ;; if no catch-template-errors, then resignal the error
+              (error e))))))
     (t (error 'simple-error
-              :format-control "~A is not a valid template"
-              :format-arguments (list template)))))
+         :format-control "~A is not a valid template"
+         :format-arguments (list template)))))
 
 (defun compile-string (string)
   "Compile the template in STRING.
