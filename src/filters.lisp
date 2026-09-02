@@ -6,7 +6,7 @@
                 filter
               (handler-case
                   (if-let ((fn (find-filter name)))
-                    (apply fn value args)
+                    (apply fn value (mapcar (lambda (a) (get-variable a a)) args))
                     (template-error-string "Unknown filter ~A" name))
                 (template-error (e1)
                   (princ-to-string e1))
