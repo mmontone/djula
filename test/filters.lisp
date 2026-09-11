@@ -28,10 +28,10 @@
 asdf")))
   (is (string= "LALA" (filter :lisp "lala" "string-upcase")))
   (is (string= (filter :urlencode "http://www.google.com")
-	       "http%3A%2F%2Fwww.google.com"))
+               "http%3A%2F%2Fwww.google.com"))
   (is (= (filter :add 2 "2") 4))
   (is (string= (filter :addslashes "I'm using Djula")
-	       "I\\'m using Djula"))
+               "I\\'m using Djula"))
   (is (string=
        (let ((local-time:*default-timezone* local-time:+utc-zone+))
          (filter :date (encode-universal-time 0 0 0 1 1 2014 0)))
@@ -41,8 +41,8 @@ asdf")))
          (filter :time (encode-universal-time 17 17 18 1 1 2014 0)))
        "18:17:17"))
   #+nil(is (string=
-       (filter :datetime (encode-universal-time 17 17 18 1 1 2014 0))
-       "2014-01-01T18:17:17.000000-03:00"))
+            (filter :datetime (encode-universal-time 17 17 18 1 1 2014 0))
+            "2014-01-01T18:17:17.000000-03:00"))
   (is (equalp (filter :join (list "1" "2" "3") ",")
               "1,2,3"))
   (is (equalp (filter :join (list "1" "2" "3") ",,")
@@ -53,25 +53,26 @@ asdf")))
               "d")))
 
 (def-test apply-filters (:compile-at :definition-time)
-  (is (string= "SH..."
-               (djula::apply-filters "short message" '((:truncatechars 5) (:upper))))))
+  (let ((djula::*template-arguments* nil))
+    (is (string= "SH..."
+                 (djula::apply-filters "short message" '((:truncatechars 5) (:upper)))))))
 
 (def-test regex-filters (:compile-at :definition-time)
   (let ((template
-         ;; Extract the date month
-         (compile-string  "{{ date | scan:\"(?<=-)[0-9]*\" }}")))
+          ;; Extract the date month
+          (compile-string  "{{ date | scan:\"(?<=-)[0-9]*\" }}")))
     (is (string= (djula:render-template* template nil :date "2050-10-03")
                  "10")))
 
   (let ((template
-         ;; First word with >= 5 letters
-         (compile-string "{{ subject | scan:\"[a-zA-Z]{5,}\"}}")))
-    (is (string= 
+          ;; First word with >= 5 letters
+          (compile-string "{{ subject | scan:\"[a-zA-Z]{5,}\"}}")))
+    (is (string=
          (djula:render-template* template nil :subject "foo world")
          "world")))
 
   (let ((template
-         ;; Replace regex
-         (compile-string "{{ data | replace:\"hello\" | with:\"bye cruel\"}}")))
+          ;; Replace regex
+          (compile-string "{{ data | replace:\"hello\" | with:\"bye cruel\"}}")))
     (is (string= (djula:render-template* template nil :data "hello world")
                  "bye cruel world"))))
